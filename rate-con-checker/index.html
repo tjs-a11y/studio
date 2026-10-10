@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rate Con Checker: catch costly fine print before you sign</title>
+<meta name="description" content="Paste a broker rate confirmation. Get a grade, every red flag (fines, missing detention or TONU, lumper, setoff, net-45) and a ready-to-send fix request. Runs in your browser; nothing is uploaded.">
+<style>
+  :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --red:#c2341f; --amber:#a86b00; --green:#1d7a46; --chip:#f0f2f6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101215; --ink:#eef0f3; --muted:#9aa3b2; --card:#181b21; --line:#2a2f38; --accent:#79a3ff; --red:#ff7b66; --amber:#f0b43c; --green:#5fd38d; --chip:#20242c; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:900px; margin:0 auto; padding:28px 16px 64px; }
+  h1 { font-size:clamp(1.6rem,4.6vw,2.3rem); margin:0 0 6px; letter-spacing:-.02em; } .lede { color:var(--muted); margin:0 0 18px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:14px 0; }
+  textarea { width:100%; min-height:190px; font:14px/1.45 ui-monospace,Menlo,Consolas,monospace; padding:12px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); resize:vertical; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; } .row label { display:flex; flex-direction:column; font-size:.85rem; color:var(--muted); gap:4px; }
+  input[type=number] { width:8.5em; padding:8px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font:inherit; }
+  button { font:inherit; padding:10px 16px; border-radius:9px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; } button.ghost { background:transparent; color:var(--accent); } button.small { padding:6px 10px; font-size:.9rem; } button:disabled { opacity:.5; cursor:not-allowed; }
+  .drop { border:2px dashed var(--line); border-radius:10px; padding:14px; text-align:center; color:var(--muted); margin-top:10px; } .drop.on { border-color:var(--accent); color:var(--accent); }
+  .grade { display:flex; gap:18px; align-items:center; flex-wrap:wrap; } .big { font-size:3.2rem; font-weight:800; line-height:1; width:84px; height:84px; border-radius:16px; display:grid; place-items:center; color:#fff; }
+  .g-A,.g-B { background:var(--green); } .g-C { background:var(--amber); } .g-D,.g-F { background:var(--red); }
+  .counts span { display:inline-block; margin-right:12px; font-weight:600; } .c-red { color:var(--red); } .c-amb { color:var(--amber); } .c-grn { color:var(--green); }
+  ul.items { list-style:none; padding:0; margin:0; } ul.items li { border-top:1px solid var(--line); padding:10px 0; } ul.items li:first-child { border-top:0; }
+  .tag { display:inline-block; min-width:74px; text-align:center; font-size:.75rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-right:8px; background:var(--chip); }
+  .t-red { color:#fff; background:var(--red); } .t-flag { color:#1b1300; background:var(--amber); } .t-pass { color:#fff; background:var(--green); } .t-info, .t-missing { color:var(--muted); }
+  .why { color:var(--muted); font-size:.92rem; margin:4px 0 0; } .snip { font:12.5px/1.4 ui-monospace,Menlo,monospace; background:var(--chip); padding:4px 6px; border-radius:6px; display:inline-block; margin-top:4px; max-width:100%; overflow-wrap:anywhere; }
+  .locked { filter:blur(4px); user-select:none; pointer-events:none; }
+  .pro { border-color:var(--accent); } .muted { color:var(--muted); } .note { font-size:.88rem; color:var(--muted); }
+  pre.msg { white-space:pre-wrap; font:14px/1.5 ui-monospace,Menlo,monospace; background:var(--chip); padding:12px; border-radius:8px; }
+  details { border-top:1px solid var(--line); padding:10px 0; } summary { cursor:pointer; font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; } td, th { text-align:left; padding:6px; border-top:1px solid var(--line); }
+  footer { margin-top:36px; font-size:.88rem; color:var(--muted); } footer a, a { color:var(--accent); }
+  [hidden] { display:none !important; }
+  @media print { body { background:#fff; color:#000; } .noprint { display:none !important; } .card { border-color:#999; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Rate Con Checker</h1>
+  <p class="lede">Paste a broker's rate confirmation before you sign. Get a grade, every costly clause flagged (fines, missing detention or TONU, lumper, setoff, net-45), and a ready-to-send fix request. <b>Runs in your browser: nothing you paste is uploaded.</b></p>
+
+  <section class="card noprint">
+    <textarea id="text" placeholder="Paste the rate confirmation text here (open the PDF, select all, copy, paste)…" aria-label="Rate confirmation text"></textarea>
+    <div class="drop" id="drop">Pro: drop the rate con PDF here instead of pasting</div>
+    <div class="row" style="margin-top:12px">
+      <label>Loaded miles <input type="number" id="loaded" min="0" inputmode="decimal"></label>
+      <label>Deadhead miles <input type="number" id="deadhead" min="0" inputmode="decimal"></label>
+      <label>Rate agreed on the phone ($) <input type="number" id="agreed" min="0" inputmode="decimal"></label>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button id="check">Check this rate con</button>
+      <button class="ghost" id="sample">Try a sample</button>
+      <span class="note" id="quota"></span>
+    </div>
+  </section>
+
+  <section class="card pro noprint" id="limits" hidden>
+    <b>Your minimums (Pro)</b> <span class="note">Saved on this device only.</span>
+    <div class="row" style="margin-top:10px">
+      <label>Min $/mile <input type="number" step="0.01" id="minRpm"></label>
+      <label>Min detention $/hr <input type="number" id="minDet"></label>
+      <label>Max free hours <input type="number" id="maxFree"></label>
+      <label>Max pay terms (days) <input type="number" id="maxDays"></label>
+      <label>Max fine you accept ($) <input type="number" id="maxFine"></label>
+    </div>
+  </section>
+
+  <section id="result" hidden>
+    <div class="card">
+      <div class="grade"><div class="big" id="gradeBox">A</div>
+        <div><div class="counts" id="counts"></div><div id="money" class="muted"></div><div class="note" id="broker"></div></div>
+      </div>
+    </div>
+    <div class="card"><b>What we found</b><ul class="items" id="items"></ul>
+      <p class="note noprint" id="moreLocked" hidden>Unlock every explanation, the fix-request message, PDF drop, your own minimums and saved history with <b>Pro</b>.</p>
+    </div>
+    <div class="card" id="msgCard"><div class="row" style="justify-content:space-between"><b>Fix request for the broker</b>
+      <span class="noprint"><button class="small ghost" id="copy">Copy</button> <button class="small ghost" id="print">Print report</button></span></div>
+      <div id="msgWrap"><pre class="msg" id="msg"></pre></div>
+    </div>
+  </section>
+
+  <section class="card pro noprint" id="upsell">
+    <b>Pro: $9/month</b> or $79/year. One avoided $250 fine pays for more than two years.
+    <ul class="note" style="margin:8px 0 12px; padding-left:18px">
+      <li>Unlimited checks, and drop the PDF instead of pasting</li><li>Every flag explained, with the exact wording to ask for</li>
+      <li>One-tap fix-request message to send the broker</li><li>Your own minimums: $/mile, detention, free time, pay terms, max fine</li><li>Saved history on this device, CSV export and a printable report</li></ul>
+    <div class="row"><button id="buyM">Get Pro monthly</button> <button class="ghost" id="buyY">Yearly: $79</button> <span class="note" id="buyNote"></span></div>
+  </section>
+  <section class="card noprint" id="proOn" hidden>Pro is on. <button class="small ghost" id="manage">Manage subscription</button> <button class="small ghost" id="exportCsv">Export history (CSV)</button>
+    <div id="history" class="note" style="margin-top:10px"></div></section>
+
+  <section class="card">
+    <h2 style="margin-top:0;font-size:1.2rem">Rate con red flags, in plain English</h2>
+    <details><summary>Detention</summary><p>Pay for waiting at a shipper or receiver past the free time (usually 2 hours). If the rate con has no detention rate, you may wait for free. Ask for a written hourly rate, when the clock starts, and how arrival is proven.</p></details>
+    <details><summary>TONU (truck ordered, not used)</summary><p>A flat fee when a broker cancels after you're dispatched or at the dock. "At broker discretion" means you may never see it. Ask for a fixed dollar amount.</p></details>
+    <details><summary>Lumper fees</summary><p>Fees paid to unloaders at the dock. Make sure the rate con says the broker reimburses them with a receipt, and how fast.</p></details>
+    <details><summary>Fines, deductions and chargebacks</summary><p>Penalties for late check calls, tracking gaps, missing paperwork or late delivery are often buried in the fine print and taken out of your pay. Know every dollar amount before you sign.</p></details>
+    <details><summary>Setoff (offset) clauses</summary><p>Lets a broker take money owed on one load from your pay on another, including disputed claims. It's a common way carriers lose pay they already earned.</p></details>
+    <details><summary>Payment terms</summary><p>Net 30 means you're paid 30 days after paperwork is received. Net 45 or longer squeezes cash flow, and quick-pay fees eat into the rate.</p></details>
+    <details><summary>Broker identity and fraud</summary><p>Check the MC/DOT number on FMCSA's public record before you haul. A broker emailing from a free address (Gmail, Yahoo) is a common fraud warning sign.</p></details>
+  </section>
+
+  <footer>A checklist, not legal advice: read the full contract before signing. Nothing you paste leaves your browser. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<script src="/js/pro.js"></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const TOOL = 'rate-con-checker';
+  let PRO = false;
+  const ls = { get(k, d) { try { const v = localStorage.getItem('rcc:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+               set(k, v) { try { localStorage.setItem('rcc:' + k, JSON.stringify(v)); } catch (e) { /* private mode */ } } };
+  const DEF = { minRpm: 0, minDet: 50, maxFree: 2, maxDays: 30, maxFine: 500 };
+  const limits = () => Object.assign({}, DEF, PRO ? ls.get('limits', {}) : {});
+  const money = (x) => '$' + Number(x).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  const num = (s) => Number(String(s).replace(/[,$\s]/g, ''));
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // ---------- the rule engine ----------
+  // Each rule returns { status: 'red' | 'flag' | 'pass' | 'missing' | 'info', detail, snip }.
+  function snipAt(t, i, len = 120) { const a = Math.max(0, i - 40), b = Math.min(t.length, i + len); return (a ? '…' : '') + t.slice(a, b).replace(/\s+/g, ' ').trim() + (b < t.length ? '…' : ''); }
+  function near(t, re, re2, span = 140) { const g = new RegExp(re.source, 'gi'); let m; while ((m = g.exec(t))) { const w = t.slice(Math.max(0, m.index - span), m.index + span); if (re2.test(w)) return m; } return null; }
+  const RULES = [
+    { id: 'detention', title: 'Detention pay', why: 'Without a written detention rate you can wait hours for free.', ask: 'Please add detention of $LIMIT_DET/hr after LIMIT_FREE hours free, starting at check-in, paid in 15-minute increments.',
+      run(t, L) { const m = /detention/i.exec(t); if (!m) return { status: 'red', detail: 'No detention terms found.' };
+        const rate = /detention[^.\n]{0,90}?\$\s?(\d+(?:\.\d{1,2})?)\s*(?:\/|per)\s*(?:hr|hour)/i.exec(t) || /\$\s?(\d+(?:\.\d{1,2})?)\s*(?:\/|per)\s*(?:hr|hour)[^.\n]{0,60}?detention/i.exec(t);
+        const free = /(\d+(?:\.\d)?)\s*(?:hrs?|hours?)\s*(?:of\s*)?free/i.exec(t) || /free\s*time[^.\n]{0,40}?(\d+(?:\.\d)?)\s*(?:hrs?|hours?)/i.exec(t);
+        const snip = snipAt(t, m.index);
+        if (!rate) return { status: 'flag', detail: 'Detention is mentioned, but no hourly rate is written.', snip };
+        const r = num(rate[1]), f = free ? num(free[1]) : null;
+        if (r < L.minDet) return { status: 'flag', detail: `Detention is ${money(r)}/hr, below your ${money(L.minDet)}/hr minimum.`, snip };
+        if (f != null && f > L.maxFree) return { status: 'flag', detail: `${f} free hours before detention starts (you accept ${L.maxFree}).`, snip };
+        return { status: 'pass', detail: `${money(r)}/hr${f != null ? ` after ${f} free hours` : ''}.`, snip }; } },
+    { id: 'tonu', title: 'TONU (truck ordered, not used)', why: 'If the load is cancelled after dispatch, TONU is your only pay for the trip.', ask: 'Please add a TONU of $250 if the load is cancelled after dispatch.',
+      run(t) { const m = /\btonu\b|truck ordered,? not used/i.exec(t); if (!m) return { status: 'flag', detail: 'No TONU terms found.' };
+        const snip = snipAt(t, m.index); if (near(t, /\btonu\b|truck ordered/, /discretion|may be paid|if approved/i)) return { status: 'flag', detail: 'TONU is at the broker\'s discretion, so it may never be paid.', snip };
+        const amt = /(?:tonu|truck ordered,? not used)[^.\n]{0,60}?\$\s?([\d,]+)/i.exec(t); return { status: 'pass', detail: amt ? `TONU ${money(num(amt[1]))}.` : 'TONU is mentioned.', snip }; } },
+    { id: 'layover', title: 'Layover pay', why: 'If you\'re held overnight, layover pays for the lost day.', ask: 'Please add layover of $250/day if the truck is held overnight.',
+      run(t) { const m = /layover/i.exec(t); return m ? { status: 'pass', detail: 'Layover is addressed.', snip: snipAt(t, m.index) } : { status: 'missing', detail: 'No layover terms found.' }; } },
+    { id: 'lumper', title: 'Lumper reimbursement', why: 'Unloading fees can run $100–$400. Make sure the broker pays them back.', ask: 'Please confirm lumper fees are reimbursed in full within 24 hours of receiving the receipt.',
+      run(t) { const m = /lumper/i.exec(t); if (!m) return { status: 'info', detail: 'Lumper isn\'t mentioned. Ask before you go if the receiver uses lumpers.' };
+        const snip = snipAt(t, m.index);
+        if (near(t, /lumper/, /carrier (?:is |shall be )?responsible|at carrier'?s? (?:own )?(?:cost|expense)|not reimburs/i)) return { status: 'red', detail: 'Lumper fees appear to be the carrier\'s cost.', snip };
+        if (!near(t, /lumper/, /reimburs|paid by broker|broker (?:will )?pay|advance|comchek|efs/i)) return { status: 'flag', detail: 'Lumper is mentioned, but reimbursement isn\'t written.', snip };
+        return { status: 'pass', detail: 'Lumper reimbursement is written.', snip }; } },
+    { id: 'fines', title: 'Fines and deductions', why: 'Buried penalties are taken straight out of your pay.', ask: 'Please remove or cap the fines listed above. I can\'t agree to deductions that aren\'t tied to an actual documented loss.',
+      run(t, L) { const re = /(fine|penalt\w*|deduct\w*|charge ?back|withh[oe]ld\w*)[^.\n$]{0,70}?\$\s?([\d,]+(?:\.\d{2})?)|\$\s?([\d,]+(?:\.\d{2})?)[^.\n$]{0,50}?(fine|penalt\w*|deduct\w*|charge ?back)/gi; let m; const hits = [];
+        while ((m = re.exec(t))) { const amt = num(m[2] || m[3]); if (amt > 0) hits.push({ amt, snip: snipAt(t, m.index) }); }
+        if (!hits.length) return /\b(fine|penalt|deduct|charge ?back)/i.test(t) ? { status: 'flag', detail: 'Penalty language found without a dollar amount: ask what it costs.', snip: snipAt(t, /\b(fine|penalt|deduct|charge ?back)/i.exec(t).index) } : { status: 'pass', detail: 'No fines or deductions found.' };
+        const max = Math.max(...hits.map((h) => h.amt)), total = hits.reduce((s, h) => s + h.amt, 0);
+        return { status: max >= L.maxFine ? 'red' : 'flag', detail: `${hits.length} fine${hits.length > 1 ? 's' : ''} found, up to ${money(max)} (${money(total)} if all applied).`, snip: hits.map((h) => h.snip).slice(0, 3).join('  |  ') }; } },
+    { id: 'tracking', title: 'Tracking app requirement', why: 'Tracking apps tied to fines can cost you even when the load is on time.', ask: 'Please remove the fine tied to tracking. I\'ll provide check calls on request.',
+      run(t) { const m = /(macropoint|trucker ?tools|fourkites|project ?44|\bp44\b|tracking (?:app|link)|must (?:remain )?track)/i.exec(t); if (!m) return { status: 'info', detail: 'No tracking-app requirement found.' };
+        const snip = snipAt(t, m.index); return near(t, /macropoint|trucker ?tools|fourkites|project ?44|tracking/, /fine|penalt|deduct|\$\s?\d/i) ? { status: 'flag', detail: 'A tracking requirement is tied to a fine or deduction.', snip } : { status: 'info', detail: 'Tracking is required (no fine found).', snip }; } },
+    { id: 'checkcalls', title: 'Check-call penalties', why: 'Missed check calls are a common excuse to deduct pay.', ask: 'Please remove penalties for check calls.',
+      run(t) { const m = near(t, /check[- ]?calls?/, /fine|penalt|deduct|\$\s?\d/i); return m ? { status: 'flag', detail: 'Check calls are tied to a penalty.', snip: snipAt(t, m.index) } : { status: 'info', detail: 'No check-call penalty found.' }; } },
+    { id: 'setoff', title: 'Setoff (offset) clause', why: 'Lets the broker take money from your pay on other loads.', ask: 'Please strike the setoff/offset language. Any claim should be handled separately, not taken from freight pay.',
+      run(t) { const m = /\bset[- ]?off\b|\boffset\b/i.exec(t); return m ? { status: 'red', detail: 'Setoff/offset language found.', snip: snipAt(t, m.index) } : { status: 'pass', detail: 'No setoff clause found.' }; } },
+    { id: 'indemnity', title: 'One-way indemnity', why: 'One-sided indemnity can make you pay for the broker\'s mistakes.', ask: 'Please make the indemnity mutual.',
+      run(t) { const m = /indemnif/i.exec(t); if (!m) return { status: 'info', detail: 'No indemnity clause found.' }; const mutual = /mutual|each party|both parties|the parties shall/i.test(t);
+        return mutual ? { status: 'pass', detail: 'Indemnity appears mutual.', snip: snipAt(t, m.index) } : { status: 'flag', detail: 'Indemnity appears one-way (carrier only).', snip: snipAt(t, m.index) }; } },
+    { id: 'terms', title: 'Payment terms', why: 'Long terms squeeze your cash flow.', ask: 'Please confirm payment within LIMIT_DAYS days of receiving POD/BOL, with no quick-pay fee.',
+      run(t, L) { const m = /\bnet\s?-?\s?(\d{1,3})\b/i.exec(t) || /(?:pay(?:ment)?|paid|remit\w*)[^.\n]{0,40}?(\d{1,3})\s*(?:calendar |business )?days/i.exec(t);
+        if (!m) return { status: 'missing', detail: 'No payment terms found.' }; const d = num(m[1]); const snip = snipAt(t, m.index);
+        const qp = /quick ?pay[^.\n]{0,50}?(\d+(?:\.\d+)?)\s?%/i.exec(t); const qpTxt = qp ? ` Quick pay costs ${qp[1]}%.` : '';
+        if (d >= 45) return { status: 'red', detail: `Paid in ${d} days.${qpTxt}`, snip }; if (d > L.maxDays) return { status: 'flag', detail: `Paid in ${d} days (you accept ${L.maxDays}).${qpTxt}`, snip };
+        return { status: qp && num(qp[1]) > 3 ? 'flag' : 'pass', detail: `Paid in ${d} days.${qpTxt}`, snip }; } },
+    { id: 'venue', title: 'Arbitration or out-of-state venue', why: 'Disputes may have to be fought far from home, or without a court.', ask: 'Please allow disputes to be handled in my home state, without mandatory arbitration.',
+      run(t) { const a = /arbitrat/i.exec(t), v = /(?:governed by|laws of the state of|venue|jurisdiction)[^.\n]{0,60}/i.exec(t);
+        if (a) return { status: 'flag', detail: 'Mandatory arbitration language found.', snip: snipAt(t, a.index) }; return v ? { status: 'info', detail: 'Governing law/venue is set.', snip: snipAt(t, v.index) } : { status: 'info', detail: 'No venue clause found.' }; } },
+    { id: 'rerate', title: 'Rate can change after signing', why: 'A rate that "may be adjusted" isn\'t a fixed rate.', ask: 'Please confirm the rate is fixed and cannot be adjusted after signing.',
+      run(t) { const m = /rate[^.\n]{0,30}(?:subject to change|may be (?:adjusted|reduced|changed))|reserves? the right to (?:adjust|reduce|change)/i.exec(t); return m ? { status: 'red', detail: 'The broker can change the rate after you sign.', snip: snipAt(t, m.index) } : { status: 'pass', detail: 'No rate-change clause found.' }; } },
+    { id: 'claims', title: 'Claims deducted from pay', why: 'Claims taken from freight pay leave you paying before anything is proven.', ask: 'Please remove language allowing claims to be deducted from freight charges.',
+      run(t) { const m = near(t, /claims?/, /deduct|withh|offset|from freight/i, 80); const cv = /cargo value[^.\n]{0,30}?\$\s?([\d,]+)/i.exec(t);
+        if (m) return { status: 'red', detail: 'Claims can be deducted from your pay.', snip: snipAt(t, m.index) };
+        if (cv && num(cv[1]) > 100000) return { status: 'flag', detail: `Cargo value ${money(num(cv[1]))}: check that your cargo insurance covers it.`, snip: snipAt(t, cv.index) };
+        return { status: 'pass', detail: 'No claims-deduction language found.' }; } },
+    { id: 'labor', title: 'Unpaid driver labor', why: 'Loading, unloading or counting freight is work and should be paid.', ask: 'Please add pay for driver assist/unload, or confirm no driver labor is required.',
+      run(t) { const m = /driver (?:assist|unload|load|count)|tailgate|hand ?unload|driver (?:must|to) (?:load|unload|count)/i.exec(t);
+        if (!m) return { status: 'pass', detail: 'No driver labor required.' }; return near(t, /driver (?:assist|unload|load|count)|tailgate|hand ?unload/, /\$\s?\d/) ? { status: 'info', detail: 'Driver labor is required and appears to be paid.', snip: snipAt(t, m.index) } : { status: 'flag', detail: 'Driver labor is required with no pay listed.', snip: snipAt(t, m.index) }; } },
+    { id: 'temp', title: 'Reefer temperature', why: 'Without a written temperature, a rejected load becomes your problem.', ask: 'Please write the required temperature and whether it\'s continuous or cycle.',
+      run(t) { if (!/reefer|refrigerat|frozen|temp(?:erature)? controlled/i.test(t)) return { status: 'info', detail: 'Not a reefer load.' };
+        const m = /(-?\d{1,2})\s*°?\s*(?:f\b|degrees)/i.exec(t); return m ? { status: 'pass', detail: `Temperature set at ${m[1]}°F.`, snip: snipAt(t, m.index) } : { status: 'flag', detail: 'Reefer load with no temperature written.' }; } },
+    { id: 'fcfs', title: 'Appointment vs. first-come', why: 'Mixed scheduling terms lead to missed appointments and fines.', ask: 'Please confirm whether pickup/delivery is a set appointment or FCFS, and the hours.',
+      run(t) { const f = /\bfcfs\b|first come,? first served/i.exec(t), a = /\bappt\b|appointment/i.exec(t); return f && a ? { status: 'flag', detail: 'Both FCFS and an appointment are mentioned.', snip: snipAt(t, f.index) } : { status: 'info', detail: f ? 'FCFS.' : a ? 'Set appointment.' : 'No scheduling terms found.' }; } },
+    { id: 'fuel', title: 'Fuel surcharge', why: 'A separate fuel line protects you when diesel jumps.', ask: '',
+      run(t) { const m = /fuel\s*(?:surcharge|sc\b|fsc\b)/i.exec(t); if (!m) return { status: 'info', detail: 'All-in rate (no separate fuel line).' };
+        const line = t.slice(m.index, m.index + 60); return /\$\s?\d/.test(line) && !/included|incl\b|all[- ]in/i.test(line) ? { status: 'pass', detail: 'Fuel surcharge is listed separately.', snip: snipAt(t, m.index) } : { status: 'info', detail: 'Fuel is included in the rate (all-in).', snip: snipAt(t, m.index) }; } },
+    { id: 'signby', title: 'Sign-by pressure', why: 'Short signing deadlines push you to sign without reading.', ask: '',
+      run(t) { const m = /(?:must be signed|sign and return|signed (?:copy )?(?:within|by)|return signed)[^.\n]{0,50}?(\d+)\s*(min|minute|hour)/i.exec(t); return m ? { status: 'flag', detail: `Must be signed within ${m[1]} ${m[2].startsWith('h') ? 'hour(s)' : 'minutes'}. Read it all first.`, snip: snipAt(t, m.index) } : { status: 'info', detail: 'No sign-by deadline found.' }; } },
+    { id: 'broker', title: 'Broker identity check', why: 'Verify every broker on FMCSA\'s public record. Free email addresses are a common fraud sign.', ask: '',
+      run(t, L, ctx) { const mc = /\bMC[\s#:-]*0*(\d{5,7})\b/i.exec(t), dot = /\b(?:US)?DOT[\s#:-]*(\d{5,8})\b/i.exec(t), mail = /[\w.+-]+@([\w-]+)\.(?:com|net|org)/i.exec(t);
+        ctx.mc = mc && mc[1]; ctx.dot = dot && dot[1];
+        if (mail && /^(gmail|yahoo|hotmail|outlook|aol|icloud|proton|protonmail|live|msn)$/i.test(mail[1])) return { status: 'red', detail: `Broker email uses a free domain (@${mail[1]}). Verify by phone using the number on FMCSA's record.`, snip: snipAt(t, mail.index) };
+        if (!mc && !dot) return { status: 'flag', detail: 'No MC or DOT number found for the broker.' };
+        return { status: 'info', detail: `Broker ${mc ? 'MC ' + mc[1] : ''}${mc && dot ? ', ' : ''}${dot ? 'DOT ' + dot[1] : ''}: check it on FMCSA's public record (link above).` }; } },
+    { id: 'rate', title: 'Rate matches what you agreed', why: 'The signed paper is what gets paid, not the phone call.', ask: 'The rate we agreed on was AGREED. Please correct the rate confirmation.',
+      run(t, L, ctx) { const re = /(?:total(?: carrier)?(?: pay| rate| amount| charges?)?|line ?haul|agreed rate|rate)\s*[:\-]?\s*(?:usd\s*)?\$\s?([\d,]+(?:\.\d{2})?)/gi; let m, best = 0, at = 0;
+        while ((m = re.exec(t))) { const v = num(m[1]); if (v > best && v < 100000) { best = v; at = m.index; } } ctx.total = best || null;
+        if (!best) return { status: 'missing', detail: 'Couldn\'t find the total rate.' };
+        if (ctx.agreed && Math.abs(ctx.agreed - best) > 0.5) return { status: 'red', detail: `Rate con shows ${money(best)}, but you agreed to ${money(ctx.agreed)}.`, snip: snipAt(t, at) };
+        return { status: 'pass', detail: `Total rate ${money(best)}.`, snip: snipAt(t, at) }; } },
+  ];
+  const WEIGHT = { red: 15, flag: 6, missing: 4, pass: 0, info: 0 };
+  function analyze(text, extra) {
+    const L = limits(), ctx = Object.assign({}, extra), t = text.replace(/\r/g, '');
+    const items = RULES.map((r) => Object.assign({ id: r.id, title: r.title, why: r.why, ask: r.ask }, r.run(t, L, ctx)));
+    const score = Math.max(0, 100 - items.reduce((s, i) => s + WEIGHT[i.status], 0));
+    const grade = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'F';
+    if (ctx.total && L.minRpm && ctx.loaded) { const rpm = ctx.total / (ctx.loaded + (ctx.deadhead || 0)); if (rpm < L.minRpm) items.unshift({ id: 'rpm', title: 'Below your $/mile', status: 'red', why: 'This load pays less than your minimum.', ask: '', detail: `${money(rpm.toFixed(2))}/mi all-in vs your ${money(L.minRpm)}/mi minimum.` }); }
+    return { items, score, grade, ctx, L };
+  }
+  const ORDER = { red: 0, flag: 1, missing: 2, pass: 3, info: 4 };
+  const LABEL = { red: 'RED FLAG', flag: 'FLAG', missing: 'NOT FOUND', pass: 'OK', info: 'NOTE' };
+  function render(r) {
+    const items = r.items.slice().sort((a, b) => ORDER[a.status] - ORDER[b.status]);
+    const bad = items.filter((i) => i.status === 'red' || i.status === 'flag' || i.status === 'missing');
+    $('gradeBox').textContent = r.grade; $('gradeBox').className = 'big g-' + r.grade;
+    const c = (s) => items.filter((i) => i.status === s).length;
+    $('counts').innerHTML = `<span class="c-red">${c('red')} red flags</span><span class="c-amb">${c('flag') + c('missing')} to check</span><span class="c-grn">${c('pass')} OK</span>`;
+    const { total, loaded, deadhead } = r.ctx;
+    $('money').textContent = total && loaded ? `All-in: ${money(total)} · ${money((total / loaded).toFixed(2))}/loaded mi${deadhead ? ` · ${money((total / (loaded + deadhead)).toFixed(2))}/total mi` : ''}` : total ? `Total rate ${money(total)}. Add miles to see $/mile.` : '';
+    const safer = (type, n) => `https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=${type}&query_string=${n}`;
+    $('broker').innerHTML = r.ctx.mc || r.ctx.dot ? `Check the broker: ${r.ctx.mc ? `<a target="_blank" rel="noopener" href="${safer('MC_MX', r.ctx.mc)}">MC ${esc(r.ctx.mc)} on FMCSA</a>` : ''} ${r.ctx.dot ? `<a target="_blank" rel="noopener" href="${safer('USDOT', r.ctx.dot)}">DOT ${esc(r.ctx.dot)} on FMCSA</a>` : ''}` : '';
+    let shownDetail = 0;
+    $('items').innerHTML = items.map((i) => {
+      const detailed = PRO || ((i.status === 'red' || i.status === 'flag') && shownDetail++ < 3) || i.status === 'pass' || i.status === 'info';
+      return `<li><span class="tag t-${i.status}">${LABEL[i.status]}</span><b>${esc(i.title)}</b>
+        <div class="${detailed ? '' : 'locked'}"><div>${esc(i.detail)}</div>${(i.status !== 'pass' && i.status !== 'info') ? `<p class="why">${esc(i.why)}</p>` : ''}${i.snip ? `<span class="snip">${esc(i.snip)}</span>` : ''}</div></li>`;
+    }).join('');
+    $('moreLocked').hidden = PRO || bad.length <= 3;
+    const L = r.L, asks = bad.filter((i) => i.ask).map((i) => '• ' + i.ask.replace('LIMIT_DET', L.minDet).replace('LIMIT_FREE', L.maxFree).replace('LIMIT_DAYS', L.maxDays).replace('AGREED', money(r.ctx.agreed || 0)));
+    $('msg').textContent = asks.length ? `Hi, thanks for the load. Before I sign, can you update the rate con:\n\n${asks.join('\n')}\n\nSend the revised copy and I'll sign right away. Thank you!` : 'Nothing to fix: this rate con looks clean.';
+    $('msgWrap').className = PRO ? '' : 'locked'; $('copy').disabled = !PRO; $('print').disabled = !PRO;
+    $('result').hidden = false;
+    if (PRO) { const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), grade: r.grade, total: total || '', reds: c('red'), flags: c('flag') + c('missing'), mc: r.ctx.mc || '' }); ls.set('history', h.slice(0, 100)); showHistory(); }
+  }
+
+  // ---------- free-tier quota (3 checks a day; Pro is unlimited) ----------
+  const today = () => new Date().toISOString().slice(0, 10);
+  function quota() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
+  function showQuota() { $('quota').textContent = PRO ? 'Pro: unlimited checks' : `${Math.max(0, 3 - quota().n)} free checks left today`; }
+
+  function run() {
+    const text = $('text').value.trim();
+    if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
+    if (!PRO) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Get Pro for unlimited.'; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
+    const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
+    render(analyze(text, extra)); showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  $('check').onclick = run;
+  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(); };
+  $('copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('msg').textContent).then(() => { $('copy').textContent = 'Copied'; setTimeout(() => { $('copy').textContent = 'Copy'; }, 1500); }); };
+  $('print').onclick = () => window.print();
+
+  // ---------- Pro: PDF drop (pdf.js loaded only when used), minimums, history ----------
+  const drop = $('drop');
+  ['dragenter', 'dragover'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.add('on'); }));
+  ['dragleave', 'drop'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.remove('on'); }));
+  drop.addEventListener('drop', async (ev) => {
+    if (!PRO) { drop.textContent = 'PDF drop is a Pro feature. Paste the text for free.'; return; }
+    const f = ev.dataTransfer.files[0]; if (!f) return; drop.textContent = 'Reading PDF…';
+    try { const text = await pdfText(f); if (text.trim().length < 40) drop.textContent = 'This looks like a scanned PDF with no text. Please paste the text instead.'; else { $('text').value = text; drop.textContent = `Loaded ${f.name}`; run(); } }
+    catch (e) { drop.textContent = 'Couldn\'t read that PDF. Please paste the text instead.'; }
+  });
+  function loadScript(src) { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+  async function pdfText(file) {
+    const V = '3.11.174', base = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${V}/`;
+    if (!window.pdfjsLib) await loadScript(base + 'pdf.min.js');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.js';
+    const pdf = await window.pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; let out = '';
+    for (let p = 1; p <= Math.min(pdf.numPages, 12); p++) { const c = await (await pdf.getPage(p)).getTextContent(); out += c.items.map((i) => i.str).join(' ') + '\n'; }
+    return out;
+  }
+  const LIMIT_IDS = ['minRpm', 'minDet', 'maxFree', 'maxDays', 'maxFine'];
+  function loadLimits() { const v = Object.assign({}, DEF, ls.get('limits', {})); LIMIT_IDS.forEach((k) => { $(k).value = v[k] || ''; }); }
+  LIMIT_IDS.forEach((k) => $(k).addEventListener('change', () => { const v = ls.get('limits', {}); v[k] = num($(k).value) || 0; ls.set('limits', v); }));
+  function showHistory() { const h = ls.get('history', []); $('history').innerHTML = h.length ? `<table><tr><th>When</th><th>Grade</th><th>Total</th><th>Red</th><th>To check</th><th>MC</th></tr>${h.slice(0, 10).map((x) => `<tr><td>${esc(x.at.slice(0, 16).replace('T', ' '))}</td><td>${esc(x.grade)}</td><td>${x.total ? money(x.total) : ''}</td><td>${x.reds}</td><td>${x.flags}</td><td>${esc(x.mc)}</td></tr>`).join('')}</table>` : 'Your checks will be saved here, on this device only.'; }
+  $('exportCsv').onclick = () => { const h = ls.get('history', []); const csv = 'when,grade,total,red_flags,to_check,broker_mc\n' + h.map((x) => [x.at, x.grade, x.total, x.reds, x.flags, x.mc].join(',')).join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'rate-con-checks.csv'; a.click(); };
+
+  // ---------- subscription (shared Quickwell billing) ----------
+  function setPro(s) { PRO = !!s.pro; $('upsell').hidden = PRO; $('proOn').hidden = !PRO; $('limits').hidden = !PRO; drop.textContent = PRO ? 'Drop the rate con PDF here instead of pasting' : 'Pro: drop the rate con PDF here instead of pasting'; if (PRO) { loadLimits(); showHistory(); } showQuota(); if (!$('result').hidden && $('text').value.trim().length >= 40) render(analyze($('text').value, { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 })); if (s.welcome) $('quota').textContent = 'Welcome to Pro. Everything is unlocked.'; }
+  const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; window.Studio.upgrade('pro', interval).catch((e) => { $('buyNote').textContent = /not switched on|not on sale/i.test(e.message) ? 'Pro opens very soon. Check back shortly.' : e.message; }); };
+  $('buyM').onclick = () => buy('month'); $('buyY').onclick = () => buy('year');
+  $('manage').onclick = () => window.Studio.manage().catch((e) => alert(e.message));
+  if (window.Studio) window.Studio.init({ tool: TOOL, onChange: setPro }); else setPro({ pro: false });
+  showQuota();
+
+  const SAMPLE = `CARRIER RATE CONFIRMATION — Load #48213
+Broker: Lakeshore Freight Solutions LLC   MC# 123456   DOT 7654321
+Dispatch contact: ops.lakeshorefreight@gmail.com
+Pickup: Joliet, IL — 10/14 0800 appointment. FCFS 0700-1500.
+Delivery: Atlanta, GA — 10/15 by 1600.
+Equipment: 53' Reefer. Commodity: frozen poultry. Cargo value $185,000.
+Line haul: $2,250.00   Fuel surcharge: included   Total carrier pay: $2,250.00
+Detention: $35/hr after 3 hours free, with broker approval.
+TONU: at broker discretion.
+Lumper: carrier is responsible for lumper fees at receiver.
+Tracking: carrier must remain on MacroPoint for the entire load. Failure to track will result in a $250 fine.
+Late delivery penalty: $150 per hour late. Missing BOL/POD: $100 deduction.
+Payment terms: Net 45 days from receipt of clean POD. Quick pay available at 5%.
+Broker may offset any amounts owed to broker against freight charges, including cargo claims.
+Carrier shall indemnify and hold broker harmless from any and all claims.
+Any dispute shall be resolved by binding arbitration in Cook County, Illinois.
+Rate confirmation must be signed and returned within 30 minutes.`;
+})();
+</script>
+</body>
+</html>

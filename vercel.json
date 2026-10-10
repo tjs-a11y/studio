@@ -1,10 +1,26 @@
 {
-  "functions": { "api/**/*.js": { "includeFiles": "catalog/**" } },
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "catalog/**"
+    }
+  },
   "headers": [
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-src https://*.stripe.com; form-action 'self' https://*.stripe.com; base-uri 'self'" }
-    ] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com; frame-src https://*.stripe.com; form-action 'self' https://*.stripe.com; base-uri 'self'"
+        }
+      ]
+    }
   ]
 }

@@ -1,3 +1,15 @@
 {
-  "tools": []
+  "tools": [
+    {
+      "id": "rate-con-checker",
+      "name": "Rate Con Checker",
+      "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",
+      "plans": [
+        {
+          "id": "pro",
+          "trialDays": 0
+        }
+      ]
+    }
+  ]
 }
