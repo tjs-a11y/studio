@@ -1,4 +1,4 @@
-# Studio
+# Quickwell (studio)
 
 Small web tools, each solving one problem well, with one shared billing server on Stripe.
 
