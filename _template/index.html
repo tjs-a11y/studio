@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOOL NAME</title>
+<meta name="description" content="ONE-LINE PROMISE">
+<style>
+  :root { --bg: #f7f7f4; --ink: #15171a; --muted: #5d6470; --card: #fff; --line: #e3e3dd; --accent: #2457d6; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #111317; --ink: #eef0f3; --muted: #9aa3b2; --card: #191c22; --line: #2a2f38; --accent: #7aa2ff; } }
+  * { box-sizing: border-box; } body { margin: 0; font: 16px/1.55 system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
+  .pro { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 16px; margin-top: 24px; }
+  button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--accent); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>TOOL NAME</h1>
+  <p>ONE-LINE PROMISE</p>
+  <!-- the free tool goes here -->
+  <section class="pro" id="pro-upsell">
+    <b>Pro</b>: WHAT PRO ADDS. <span id="price">$X/month</span>
+    <div style="margin-top:10px"><button id="buy-month">Get Pro, monthly</button> <button class="ghost" id="buy-year">Yearly (save)</button></div>
+  </section>
+  <section class="pro" id="pro-on" hidden>Pro is on. <button class="ghost" id="manage">Manage subscription</button></section>
+  <p style="margin-top:40px;color:var(--muted);font-size:.9rem"><a href="/">More tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</main>
+<script src="/js/pro.js"></script>
+<script>
+  const TOOL = 'TOOL-ID';
+  Studio.init({ tool: TOOL, onChange: (s) => {
+    document.getElementById('pro-upsell').hidden = s.pro;
+    document.getElementById('pro-on').hidden = !s.pro;
+    // turn Pro features on or off here
+  } });
+  const go = (interval) => Studio.upgrade('pro', interval).catch((e) => alert(e.message));
+  document.getElementById('buy-month').onclick = () => go('month');
+  document.getElementById('buy-year').onclick = () => go('year');
+  document.getElementById('manage').onclick = () => Studio.manage().catch((e) => alert(e.message));
+</script>
+</body>
+</html>
