@@ -1,0 +1,4 @@
+{
+  "origin": "https://quickwell.example",
+  "note": "The public address of the site. Placeholder until the real domain is chosen. Change it with: node scripts/set-domain.mjs https://your-domain.com"
+}
