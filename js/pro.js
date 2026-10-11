@@ -10,6 +10,14 @@
     clear(t) { try { localStorage.removeItem(KEY(t)); } catch (e) { /* ignore */ } },
   };
   let tool = null, onChange = () => {}, state = { pro: false, plan: null };
+  // Where did this visitor come from? Links we share carry ?ref=<channel>; it rides along to checkout so
+  // we learn which channels bring buyers. A short label only: no cookies, no tracking across sites.
+  const REF = 'studio-ref';
+  try {
+    const r = new URL(location.href).searchParams.get('ref');
+    if (r && /^[a-z0-9_-]{1,40}$/i.test(r)) sessionStorage.setItem(REF, r.toLowerCase());
+  } catch (e) { /* storage blocked: no attribution */ }
+  const ref = () => { try { return sessionStorage.getItem(REF) || ''; } catch (e) { return ''; } };
   const set = (s) => { state = s; onChange(state); };
   async function check() {
     const url = new URL(location.href);
@@ -35,7 +43,7 @@
   }
   window.Studio = {
     init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
-    upgrade(plan, interval) { return post('/api/checkout', { tool, plan, interval }); },
+    upgrade(plan, interval) { return post('/api/checkout', { tool, plan, interval, ref: ref() }); },
     manage() { const s = store.get(tool); return post('/api/portal', { tool, token: s && s.token }); },
     get state() { return state; },
   };

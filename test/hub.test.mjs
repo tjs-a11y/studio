@@ -118,3 +118,10 @@ test('free tools refuse checkout cleanly', async () => {
   core.tools.push({ id: 'freebie', name: 'Free', tagline: 'x', plans: [] });
   assert.equal((await checkout(post('/api/checkout', { tool: 'freebie' }))).status, 409);
 });
+
+test('checkout carries a clean marketing ref label and drops junk', async () => {
+  await checkout(post('/api/checkout', { tool: 'demo', plan: 'pro', interval: 'month', ref: 'reddit-owneroperators' }));
+  assert.equal(calls.filter((c) => c[0] === 'create').at(-1)[1].metadata.ref, 'reddit-owneroperators');
+  await checkout(post('/api/checkout', { tool: 'demo', plan: 'pro', interval: 'month', ref: '<script>x' }));
+  assert.equal(calls.filter((c) => c[0] === 'create').at(-1)[1].metadata.ref, undefined);
+});

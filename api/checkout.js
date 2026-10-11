@@ -17,6 +17,8 @@ export async function POST(request) {
   const price = prices.data[0];
   if (!price) return fail(409, 'This plan is not on sale yet.');
   const base = originOf(request);
+  // Marketing attribution: a short channel label from ?ref= links (e.g. 'reddit-owneroperators'), never personal data.
+  const ref = /^[a-z0-9_-]{1,40}$/.test(String(body.ref || '')) ? String(body.ref) : '';
   const session = await s.checkout.sessions.create({
     mode: once ? 'payment' : 'subscription',
     // payment_method_types is deliberately omitted: Stripe shows the best payment methods for each customer.
@@ -24,7 +26,7 @@ export async function POST(request) {
     success_url: `${base}/${tool.id}/?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/${tool.id}/?checkout=cancelled`,
     client_reference_id: tool.id,
-    metadata: { tool: tool.id, plan: plan.id },
+    metadata: { tool: tool.id, plan: plan.id, ...(ref ? { ref } : {}) },
     ...(once
       ? { customer_creation: 'always', payment_intent_data: { metadata: { tool: tool.id, plan: plan.id } } }
       : { subscription_data: { metadata: { tool: tool.id, plan: plan.id }, ...(plan.trialDays ? { trial_period_days: plan.trialDays } : {}) } }),
