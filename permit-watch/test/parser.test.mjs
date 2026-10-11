@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { deflateRawSync } from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseDaily, mergeWindow, buildOutputs, rssFeed, unzip, ymd, coordsFrom } from '../scripts/update.mjs';
+import { parseDaily, mergeWindow, buildOutputs, rssFeed, unzip, ymd, coordsFrom, godriveRequest, DISTRICTS } from '../scripts/update.mjs';
 import { COUNTIES, slugify } from '../scripts/counties.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -29,7 +29,7 @@ test('parses root, permit, field and GIS records', async () => {
   const a = ps.find((p) => p.permit === '0990001');
   assert.deepEqual(
     { county: a.county, district: a.district, operator: a.operator, lease: a.lease, well: a.well, issued: a.issued, received: a.received, api: a.api, survey: a.survey, abstract: a.abstract, lat: a.lat, lon: a.lon, horizontal: a.horizontal, status: a.status, type: a.type, depth: a.depth },
-    { county: 'Midland', district: '08', operator: 'TEST OPERATOR ONE LLC', lease: 'TEST FIXTURE LEASE ALPHA', well: '1H', issued: '2026-10-08', received: '2026-10-01', api: '42-329-99901', survey: 'T&P RR CO / TEST SURVEY', abstract: 'A-0999', lat: 31.912345, lon: -102.012345, horizontal: true, status: 'Approved', type: 'Drill', depth: 11250 });
+    { county: 'Midland', district: '08' /* internal code 10 in the file */, operator: 'TEST OPERATOR ONE LLC', lease: 'TEST FIXTURE LEASE ALPHA', well: '1H', issued: '2026-10-08', received: '2026-10-01', api: '42-329-99901', survey: 'T&P RR CO / TEST SURVEY', abstract: 'A-0999', lat: 31.912345, lon: -102.012345, horizontal: true, status: 'Approved', type: 'Drill', depth: 11250 });
 });
 
 test('drops fields that fail validation', async () => {
@@ -41,6 +41,9 @@ test('drops fields that fail validation', async () => {
   assert.equal(e.issued, undefined); assert.equal(e.depth, undefined); assert.equal(e.lat, undefined); assert.equal(e.status, 'Pending');
   assert.equal(ymd('00000000'), null); assert.equal(ymd('20261332'), null);
   assert.equal(coordsFrom('14 1.5 2.5'), null, 'coordinates outside Texas are ignored');
+  assert.deepEqual(coordsFrom('14 102.0123456 31.9123456'), { lat: 31.912346, lon: -102.012346 }, 'unsigned longitude');
+  assert.deepEqual(coordsFrom('14001020123456000319123456'), { lat: 31.912346, lon: -102.012346 }, 'implied decimal point');
+  assert.equal(DISTRICTS['07'], '6E'); assert.equal(DISTRICTS['10'], '08'); assert.equal(DISTRICTS['14'], '10'); assert.equal(DISTRICTS['12'], undefined);
   assert.equal(parseDaily('garbage\n01ABCDEFG\n').length, 0);
 });
 
@@ -108,4 +111,16 @@ test('no test fixture data in the published data or feeds', async () => {
 test('rssFeed escapes XML', () => {
   const x = rssFeed('Test', 'test', [{ permit: '0000001', issued: '2026-10-01', operator: 'A&B <x>', lease: '"Q"' }], '');
   assert.match(x, /A&amp;B &lt;x&gt;/); assert.match(x, /&quot;Q&quot;/);
+});
+
+test('finds the daf420.dat download request on a Public GoDrive page', () => {
+  // Trimmed copy of the structure of the RRC page (2026-10-11): file names are command links.
+  const row = (i, name) => `<tr data-ri="${i}" data-rk="${8187 + i}"><td><a id="fileTable:${i}:j_id_2f" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('fileList',{'fileTable:${i}:j_id_2f':'fileTable:${i}:j_id_2f'}).submit('fileList');return false;">${name}</a></td></tr>`;
+  const html = `<form id="SimpleHeaderForm" name="SimpleHeaderForm" method="post" action="/x"><input type="hidden" name="javax.faces.ViewState" value="HDR" /></form>
+<form id="fileList" name="fileList" method="post" action="/webclient/godrive/PublicGoDrive.xhtml"><table>${row(0, 'daf420.dat.01-01-2018')}${row(1, 'daf420.dat')}</table>
+<input type="hidden" id="fileTable_selection" name="fileTable_selection" value="" /><input type="hidden" name="fileList_SUBMIT" value="1" /><input type="hidden" name="javax.faces.ViewState" id="v:4" value="VS+1/=" /></form>`;
+  const r = godriveRequest(html, 'https://mft.rrc.texas.gov/link/abc');
+  assert.equal(r.action, 'https://mft.rrc.texas.gov/webclient/godrive/PublicGoDrive.xhtml');
+  assert.deepEqual(r.fields, { fileTable_selection: '', fileList_SUBMIT: '1', 'javax.faces.ViewState': 'VS+1/=', fileList: 'fileList', 'fileTable:1:j_id_2f': 'fileTable:1:j_id_2f' });
+  assert.throws(() => godriveRequest('<html></html>', 'https://x/'), /no file named daf420.dat/);
 });

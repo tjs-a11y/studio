@@ -31,21 +31,30 @@ export const RRC_QUERY_URL = 'https://webapps2.rrc.texas.gov/EWA/drillingPermits
 const UA = 'PermitWatchTexas/1.0 (daily download of a public RRC data set; once per day)';
 
 // ---------------------------------------------------------------- parsing
-// Layout: RRC publication OGA049M, "Drilling Permit Master Plus Latitudes and Longitudes".
+// Layout: RRC publication OGA049M, "Drilling Permit Master Plus Latitudes and Longitudes"
+// (https://www.rrc.texas.gov/media/zgccdjpi/drillingpermitmasterpluslatitudeslongitudes_oga049m_july1.pdf,
+// the manual the RRC data-sets page links for this file; checked 2026-10-11). Records are 510 bytes.
 // Each permit starts with a record "01" (root) followed by its trailer records ("02" permit
 // master, "03" field, "14" GIS surface location, "15" GIS bottom-hole location, ...).
-// Positions below are 0-based slices. Records 01 and the 02 fields marked "checked" match a
-// public parser that was calibrated against real daily files (record 02 sits 2 bytes earlier
-// than the printed guide). Fields marked "guide" come from the guide only, so each is
-// validated before use and dropped if it doesn't look right.
+// Positions below are 0-based slices = the guide's 1-based POS minus 1. Exception: the guide's
+// record-02 listing prints the record id twice (POS 1 and POS 3), so every printed 02 position is
+// 2 too high; 02 slices are POS minus 3 (well # POS 51 -> 48, API # POS 505 -> 502, which ends
+// exactly at byte 510). A public parser calibrated on real files uses the same 02 offsets.
+// Not yet checked against a real file: each guide-only value is validated before use and dropped
+// if it doesn't look right, so a wrong offset hides a field instead of showing garbage.
 const F = {
-  r01: { permit: [2, 9], county: [11, 14], lease: [14, 46], district: [46, 48], operatorNo: [48, 54], received: [58, 66], operator: [66, 98], status: [100, 101] /* guide */ },
-  r02: { well: [48, 54], depth: [54, 59], issued: [129, 137], spud: [153, 161], // checked
-         appType: [65, 67], locFormat: [242, 243], section: [243, 251], block: [251, 261], survey: [261, 316], abstract: [316, 322], horizontal: [493, 494], api: [502, 510] }, // guide
-  r03: { fieldNo: [2, 10] }, // guide, uncalibrated: kept only if it is 8 digits
+  // 01: permit POS 3, county 12, lease 15, district 47, operator # 49, received 59, operator name 67, status 101
+  r01: { permit: [2, 9], county: [11, 14], lease: [14, 46], district: [46, 48], operatorNo: [48, 54], received: [58, 66], operator: [66, 98], status: [100, 101] },
+  // 02 (printed POS): well 51, depth 57, application type 68, issued 132, spud 156, location format 245,
+  // section 246, block 254, survey 264, abstract 319, horizontal flag 496, API # 505
+  r02: { well: [48, 54], depth: [54, 59], issued: [129, 137], spud: [153, 161],
+         appType: [65, 67], locFormat: [242, 243], section: [243, 251], block: [251, 261], survey: [261, 316], abstract: [316, 322], horizontal: [493, 494], api: [502, 510] },
+  r03: { fieldNo: [2, 10] }, // 03: field # POS 3, 8 digits
 };
-const DISTRICTS = new Set(['01', '02', '03', '04', '05', '06', '6E', '7B', '7C', '08', '8A', '09', '10']);
-const STATUS = { P: 'Pending', A: 'Approved', W: 'Withdrawn', D: 'Dismissed', E: 'Denied', C: 'Closed', X: 'Deleted', Z: 'Cancelled' };
+// The district field is numeric (PIC 9(02)) and holds the RRC's internal code, not the district
+// name (OGA049M, DA-DISTRICT): 07 = 6E, 08 = 7B, 09 = 7C, 10 = 08, 11 = 8A, 12 = 8B (unused), 13 = 09, 14 = 10.
+export const DISTRICTS = { '01': '01', '02': '02', '03': '03', '04': '04', '05': '05', '06': '06', '07': '6E', '08': '7B', '09': '7C', '10': '08', '11': '8A', '13': '09', '14': '10' };
+const STATUS = { P: 'Pending', A: 'Approved', W: 'Withdrawn', D: 'Dismissed', E: 'Denied', C: 'Closed', O: 'Other', X: 'Deleted', Z: 'Cancelled' };
 const APP_TYPE = { '01': 'Drill', '05': 'Other', '07': 'Re-enter', '09': 'Field transfer', '14': 'Recompletion', '15': 'Reclass' };
 
 const cut = (line, [a, b]) => line.slice(a, b).replace(/\s+/g, ' ').trim();
@@ -55,11 +64,15 @@ export function ymd(s) {
   if (y < 1990 || y > 2100 || m < 1 || m > 12 || d < 1 || d > 31) return null;
   return `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`;
 }
-// GIS records carry decimal degrees; accept the pair only if it lands inside Texas.
+// GIS records (14 surface, 15 bottom hole): longitude then latitude, 12 columns each with 7 decimal
+// places, NAD27 (OGA049M II.75-II.77). The guide's picture is unsigned (PIC 9(5)V9(7)), so accept a
+// longitude with or without its minus sign and, if the decimal point is implied, the raw 12 digits.
+// Keep the pair only if it lands inside Texas.
 export function coordsFrom(line) {
-  const nums = (line.slice(2).match(/-?\d{1,3}\.\d+/g) || []).map(Number);
-  const lat = nums.find((n) => n >= 25.5 && n <= 36.6), lon = nums.find((n) => n <= -93.4 && n >= -106.7);
-  return lat != null && lon != null ? { lat: +lat.toFixed(6), lon: +lon.toFixed(6) } : null;
+  let nums = (line.slice(2).match(/-?\d{1,3}\.\d+/g) || []).map(Number);
+  if (!nums.length) nums = [line.slice(2, 14), line.slice(14, 26)].map((f) => f.trim()).filter((f) => /^\d{8,12}$/.test(f)).map((f) => +f / 1e7);
+  const lat = nums.find((n) => n >= 25.5 && n <= 36.6), lonAbs = nums.map(Math.abs).find((n) => n >= 93.4 && n <= 106.7);
+  return lat != null && lonAbs != null ? { lat: +lat.toFixed(6), lon: +(-lonAbs).toFixed(6) } : null;
 }
 const printable = (s) => s && /^[\x20-\x7E]+$/.test(s) ? s : null;
 
@@ -73,10 +86,10 @@ export function parseDaily(text) {
       const permit = cut(line, F.r01.permit);
       if (!/^\d{5,7}$/.test(permit)) { cur = null; continue; }
       const cc = cut(line, F.r01.county).padStart(3, '0');
-      const district = cut(line, F.r01.district).toUpperCase();
+      const district = cut(line, F.r01.district);
       const st = STATUS[cut(line, F.r01.status)];
       cur = { permit: permit.padStart(7, '0'), countyCode: cc, county: COUNTIES[cc] || null,
-        district: DISTRICTS.has(district) ? district : null,
+        district: DISTRICTS[district] || null,
         operator: printable(cut(line, F.r01.operator)), operatorNo: cut(line, F.r01.operatorNo) || null,
         lease: printable(cut(line, F.r01.lease)), received: ymd(cut(line, F.r01.received)) };
       if (st) cur.status = st;
@@ -189,9 +202,31 @@ function fileFromBytes(buf) {
   throw new Error('downloaded file is neither a zip nor a daf420 text file');
 }
 
-// The MFT link opens a small file-browser page (PrimeFaces/JSF). Getting the file means:
-// keep the session cookie, select the newest row (row 0), then submit the page's Download button.
-async function download(url) {
+// The MFT link opens a small "Public GoDrive" file-browser page (PrimeFaces/JSF) that lists
+// daf420.dat (the current file) plus dated archive copies (daf420.dat.MM-DD-YYYY). Each file
+// name is a command link; clicking it submits the table's form with that link's id, and the
+// response is the file itself. Checked against the live page on 2026-10-11.
+export const DAILY_NAME = 'daf420.dat';
+/** Find what to POST to download one file from a Public GoDrive listing page. */
+export function godriveRequest(html, base, fileName = DAILY_NAME) {
+  const attr = (tag, a) => (new RegExp(`\\b${a}="([^"]*)"`).exec(tag) || [])[1];
+  const unesc = (s) => s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+  const link = [...html.matchAll(/<a\b([^>]*)>([^<]*)<\/a>/g)].find((m) => m[2].trim() === fileName);
+  if (!link) throw new Error(`RRC download page has no file named ${fileName}`);
+  const click = /addSubmitParam\('([^']+)',\{'([^']+)':'([^']+)'\}\)/.exec(unesc(attr(link[0], 'onclick') || ''));
+  if (!click) throw new Error('RRC download page layout not recognized (file link has no submit action)');
+  const [, formId, key, val] = click;
+  const fStart = html.indexOf(`<form id="${formId}"`), fEnd = html.indexOf('</form>', fStart);
+  if (fStart < 0 || fEnd < 0) throw new Error(`RRC download page layout not recognized (form ${formId} missing)`);
+  const form = html.slice(fStart, fEnd), formTag = (/<form\b[^>]*>/.exec(form) || [])[0];
+  const fields = {};
+  for (const m of form.matchAll(/<input\b[^>]*type="hidden"[^>]*>/g)) { const n = attr(m[0], 'name'); if (n) fields[n] = unesc(attr(m[0], 'value') || ''); }
+  if (!fields['javax.faces.ViewState']) throw new Error('RRC download page layout not recognized (no ViewState)');
+  fields[formId] = formId; fields[key] = val;
+  return { action: new URL(unesc(attr(formTag, 'action') || base), base).toString(), fields };
+}
+
+export async function download(url) {
   const jar = new Map();
   const req = async (u, opts = {}) => {
     const headers = { 'user-agent': UA, ...(opts.headers || {}) };
@@ -204,30 +239,9 @@ async function download(url) {
   const first = await req(url);
   const firstBuf = Buffer.from(await first.arrayBuffer());
   if (isZip(firstBuf) || looksLikeDaily(firstBuf)) return fileFromBytes(firstBuf);
-
-  const html = firstBuf.toString('utf8'), base = first.url;
-  const attr = (tag, a) => (new RegExp(`\\b${a}="([^"]*)"`).exec(tag) || [])[1];
-  const viewState = (/name="javax\.faces\.ViewState"[^>]*value="([^"]+)"/.exec(html) || /value="([^"]+)"[^>]*name="javax\.faces\.ViewState"/.exec(html) || [])[1];
-  const formTag = (/<form\b[^>]*>/.exec(html) || [])[0];
-  const tableId = (/<div[^>]*id="([^"]+)"[^>]*class="[^"]*ui-datatable[^"]*"/.exec(html) || /<div[^>]*class="[^"]*ui-datatable[^"]*"[^>]*id="([^"]+)"/.exec(html) || [])[1];
-  const row0 = (/<tr[^>]*data-ri="0"[^>]*>/.exec(html) || [])[0];
-  const rowKey = row0 && attr(row0, 'data-rk');
-  const btn = [...html.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)].map((m) => m[0]).find((b) => /download/i.test(b.replace(/<[^>]+>/g, ' ')) || /download/i.test(attr(b, 'id') || ''));
-  const btnId = btn && (attr(btn, 'name') || attr(btn, 'id'));
-  if (!viewState || !formTag || !tableId || rowKey == null || !btnId) {
-    throw new Error(`RRC download page layout not recognized (viewState:${!!viewState} form:${!!formTag} table:${!!tableId} row:${rowKey != null} button:${!!btnId})`);
-  }
-  const formId = attr(formTag, 'id') || attr(formTag, 'name');
-  const action = new URL(attr(formTag, 'action') || base, base).toString();
-  const post = (fields, extra = {}) => req(action, { method: 'POST', body: new URLSearchParams(fields).toString(), headers: { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', ...extra } });
-  // 1) register the row selection the way the page's checkbox click does (best effort)
-  try {
-    await post({ 'javax.faces.partial.ajax': 'true', 'javax.faces.source': tableId, 'javax.faces.partial.execute': tableId,
-      'javax.faces.behavior.event': 'rowSelectCheckbox', 'javax.faces.partial.event': 'rowSelectCheckbox', [`${tableId}_instantSelection`]: rowKey,
-      [formId]: formId, [`${tableId}_selection`]: rowKey, 'javax.faces.ViewState': viewState }, { 'faces-request': 'partial/ajax', 'x-requested-with': 'XMLHttpRequest' });
-  } catch (e) { console.warn('row-select step failed, trying download anyway:', e.message); }
-  // 2) submit the Download button
-  const r = await post({ [formId]: formId, [`${tableId}_selection`]: rowKey, [btnId]: btnId, 'javax.faces.ViewState': viewState });
+  const { action, fields } = godriveRequest(firstBuf.toString('utf8'), first.url);
+  const r = await req(action, { method: 'POST', body: new URLSearchParams(fields).toString(),
+    headers: { 'content-type': 'application/x-www-form-urlencoded', referer: first.url } });
   return fileFromBytes(Buffer.from(await r.arrayBuffer()));
 }
 
