@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Surcharge on a Rate Con: All-In Rate vs. Separate FSC Line</title>
+<meta name="description" content="What a fuel surcharge (FSC) line means on a broker rate confirmation, how it differs from an all-in rate, and how to compare loads fairly per mile when fuel is included.">
+<link rel="canonical" href="https://quickwell.example/learn/rate-con/fuel-surcharge/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"Rate con glossary","item":"https://quickwell.example/learn/rate-con/"},{"@type":"ListItem","position":4,"name":"Fuel surcharge (FSC)","item":"https://quickwell.example/learn/rate-con/fuel-surcharge/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"Fuel surcharge (FSC)","description":"What a fuel surcharge (FSC) line means on a broker rate confirmation, how it differs from an all-in rate, and how to compare loads fairly per mile when fuel is included.","url":"https://quickwell.example/learn/rate-con/fuel-surcharge/","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Rate con glossary","url":"https://quickwell.example/learn/rate-con/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Fuel surcharge (FSC)","description":"What a fuel surcharge (FSC) line means on a broker rate confirmation, how it differs from an all-in rate, and how to compare loads fairly per mile when fuel is included.","inLanguage":"en","url":"https://quickwell.example/learn/rate-con/fuel-surcharge/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/rate-con/">Rate con glossary</a></li><li aria-current="page">Fuel surcharge (FSC)</li></ol></nav>
+  <article>
+    <h1>Fuel surcharge (FSC)</h1>
+    <p class="lede">A fuel surcharge (FSC) is a separate line that pays for fuel on top of the line-haul rate. On many spot loads there is no separate line: the rate is "all-in", and fuel is your problem.</p>
+    
+
+<h2>Two ways to pay for fuel</h2>
+<p><b>Separate fuel line.</b> The rate con shows line haul and fuel surcharge as two amounts. When the surcharge follows a published schedule tied to diesel prices, the carrier is protected if fuel rises between booking and delivery. On a single spot load the surcharge is often just a fixed number, which mostly matters for how the total is presented and taxed in your books.</p>
+<p><b>All-in rate.</b> The rate con says "fuel included", "all-in" or shows fuel as $0. Everything is in one number. That isn't wrong, but you have to do the fuel math yourself before you accept.</p>
+
+<h2>How to compare loads fairly</h2>
+<p>Compare every load on the same basis: total pay divided by total miles, including deadhead. A load at a high line-haul rate plus a small fuel line and a load at a slightly higher all-in rate can pay the same. The Rate Con Checker does this for you when you type loaded and deadhead miles: it shows the all-in rate per loaded mile and per total mile, and Pro users can set a minimum rate per mile that turns a cheap load into a red flag.</p>
+
+<h2>Wording to look for</h2>
+<ul>
+<li><b>"FSC: $X"</b> or <b>"Fuel: $X"</b> next to the line haul: a separate fuel line.</li>
+<li><b>"Fuel surcharge: included"</b>, <b>"all-in"</b>: no separate fuel money.</li>
+<li><b>"FSC per [schedule]"</b> or a percentage: ask which schedule and which week's diesel price it uses.</li>
+<li><b>Fuel advances</b>: a different thing. An advance is a loan against your pay, usually with a fee, not extra money.</li>
+</ul>
+
+<h2>What the Rate Con Checker flags</h2>
+<p>Fuel never costs points. If the checker finds "fuel surcharge", "fuel SC" or "FSC" followed by a dollar amount and not followed by "included", "incl" or "all-in", it marks the fuel line OK. If it finds fuel marked as included, or no fuel line at all, it adds a <b>note</b> saying the rate is all-in, so you remember to compare per mile. It doesn't suggest a fix-request line for fuel, because an all-in rate is a pricing choice, not a contract defect.</p>
+
+<h2>The total is what gets paid</h2>
+<p>Whatever the split, the number that matters is the total carrier pay on the signed rate con. Check that the line haul plus fuel plus any listed accessorials add up to the total shown, and that the total matches what you agreed by phone. Arithmetic errors happen, and the checker's "rate matches what you agreed" rule exists for exactly that reason.</p>
+  </article>
+  <aside class="card cta"><b>Check a rate con in seconds</b>Paste a broker rate confirmation into the Rate Con Checker. It flags missing detention or TONU, fines, setoff, long payment terms and more, and drafts a fix request. Three free checks a day; nothing is uploaded.<br><a class="btn" href="/rate-con-checker/">Open the Rate Con Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/rate-con/rate-confirmation/"><b>Rate confirmation (rate con)</b><span>The load-level contract you sign with a broker.</span></a><a class="tile" href="/learn/rate-con/accessorial/"><b>Accessorial charges</b><span>Everything paid on top of line haul: detention, layover, TONU, lumper, stops.</span></a><a class="tile" href="/learn/rate-con/quick-pay/"><b>Quick pay</b><span>Faster payment in exchange for a fee.</span></a><a class="tile" href="/learn/rate-con/payment-terms/"><b>Payment terms (net 30, net 45)</b><span>How many days after paperwork you get paid.</span></a><a class="tile" href="/learn/rate-con/"><b>All of the rate con glossary</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>Quickwell Rate Con Checker, rule list (the 20 checks this glossary describes): <a href="/rate-con-checker/" rel="noopener">/rate-con-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. This page explains public rules and common contract terms in plain English; it is not a substitute for reading your own documents or asking a qualified professional. Rules change, so check the official source.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

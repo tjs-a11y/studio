@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FCFS vs. Appointment on a Rate Con: Scheduling Terms Explained</title>
+<meta name="description" content="FCFS (first come, first served) means arrive any time within a window; an appointment is a set time. Why mixed scheduling terms on a rate con cause missed loads, fines and unpaid waiting.">
+<link rel="canonical" href="https://quickwell.example/learn/rate-con/fcfs-vs-appointment/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"Rate con glossary","item":"https://quickwell.example/learn/rate-con/"},{"@type":"ListItem","position":4,"name":"FCFS vs. appointment","item":"https://quickwell.example/learn/rate-con/fcfs-vs-appointment/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"FCFS vs. appointment","description":"FCFS (first come, first served) means arrive any time within a window; an appointment is a set time. Why mixed scheduling terms on a rate con cause missed loads, fines and unpaid waiting.","url":"https://quickwell.example/learn/rate-con/fcfs-vs-appointment/","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Rate con glossary","url":"https://quickwell.example/learn/rate-con/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"FCFS vs. appointment","description":"FCFS (first come, first served) means arrive any time within a window; an appointment is a set time. Why mixed scheduling terms on a rate con cause missed loads, fines and unpaid waiting.","inLanguage":"en","url":"https://quickwell.example/learn/rate-con/fcfs-vs-appointment/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/rate-con/">Rate con glossary</a></li><li aria-current="page">FCFS vs. appointment</li></ol></nav>
+  <article>
+    <h1>FCFS vs. appointment</h1>
+    <p class="lede">FCFS means "first come, first served": the facility loads or unloads trucks in arrival order during set hours. An appointment is a fixed time slot. Each works; a rate con that mixes both for the same stop invites trouble.</p>
+    
+
+<h2>The two scheduling types</h2>
+<p><b>FCFS (first come, first served).</b> The rate con gives a window, such as "FCFS 0700–1500". You can arrive any time in that window and wait your turn. There's no late fine for arriving at 1400, but there's also no promise of when you'll be done, and detention may only start after a long free period, or not at all.</p>
+<p><b>Appointment.</b> The rate con gives a time, such as "Appt 10/14 0800". You must be there on time, often checked in some minutes early. If you're late you can be refused or rescheduled, and a late fine may apply. In return, detention usually starts from the appointment time if the facility is slow.</p>
+
+<h2>Why mixed terms are a red flag for planning</h2>
+<p>The checker's sample rate con says "10/14 0800 appointment. FCFS 0700-1500." Which is it? If the driver plans for the window and arrives at 1000, the broker can say the 0800 appointment was missed. If the driver plans for 0800 and waits until 1400, the broker can say it was FCFS, so no detention. Ask which one governs before you plan the trip.</p>
+
+<h2>Scheduling and hours of service</h2>
+<p>Time waiting at a facility to be loaded, or attending a truck being loaded or unloaded, counts as on-duty time (<a href="https://www.ecfr.gov/current/title-49/section-395.2" rel="noopener">on-duty time, 49 CFR 395.2</a>), and a property-carrying driver may not drive after the 14th hour following 10 hours off duty (<a href="https://www.ecfr.gov/current/title-49/section-395.3" rel="noopener">49 CFR 395.3</a>). A long FCFS wait early in the day can leave too few hours to make the next appointment legally. That's worth pricing in.</p>
+
+<h2>What the Rate Con Checker flags</h2>
+<p>If the text contains both "FCFS" (or "first come, first served") and "appointment" (or "appt"), the checker marks a <b>flag</b>: mixed scheduling terms. If only one appears, it shows a <b>note</b> saying which. The checker can't tell which stop each term belongs to, so on a multi-stop load with an FCFS pickup and an appointment delivery, the flag is a prompt to confirm, not proof of a problem.</p>
+
+<h2>What to ask for</h2>
+<blockquote>Please confirm whether pickup/delivery is a set appointment or FCFS, and the hours.</blockquote>
+<p>Also ask: when does detention start for this stop (appointment time, or check-in for FCFS)? And who makes or changes the appointment: the broker, the shipper, or you through the facility's scheduling system?</p>
+  </article>
+  <aside class="card cta"><b>Check a rate con in seconds</b>Paste a broker rate confirmation into the Rate Con Checker. It flags missing detention or TONU, fines, setoff, long payment terms and more, and drafts a fix request. Three free checks a day; nothing is uploaded.<br><a class="btn" href="/rate-con-checker/">Open the Rate Con Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/rate-con/detention/"><b>Detention</b><span>Pay for waiting past the free time at a shipper or receiver.</span></a><a class="tile" href="/learn/rate-con/layover/"><b>Layover</b><span>Pay when the truck is held overnight or into the next day.</span></a><a class="tile" href="/learn/rate-con/check-calls/"><b>Check calls</b><span>Status updates the broker requires during the load.</span></a><a class="tile" href="/learn/rate-con/fines-deductions/"><b>Fines, deductions and chargebacks</b><span>Penalties taken out of your pay.</span></a><a class="tile" href="/learn/rate-con/"><b>All of the rate con glossary</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>49 CFR 395.2 (on-duty time), eCFR text up to date as of Oct 7, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.2" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.2</a></li><li>49 CFR 395.3 (14-hour limit), eCFR text up to date as of Oct 7, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.3" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.3</a></li><li>Quickwell Rate Con Checker, rule list (the 20 checks this glossary describes): <a href="/rate-con-checker/" rel="noopener">/rate-con-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. This page explains public rules and common contract terms in plain English; it is not a substitute for reading your own documents or asking a qualified professional. Rules change, so check the official source.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
