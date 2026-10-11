@@ -2,8 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EUDR Plot File Checker: check and fix farm plot GeoJSON in your browser</title>
-<meta name="description" content="Free EUDR plot file checker for cocoa and coffee exporters and cooperatives. Drop a GeoJSON, KML or CSV file, see every format problem in English or French, and download a fixed GeoJSON. Runs in your browser; nothing is uploaded.">
+<!-- seo -->
+<title>EUDR GeoJSON Checker: check and fix farm plot files</title>
+<meta name="description" content="Free EUDR plot file checker in English and French. Drop GeoJSON, KML or CSV, see every geolocation error, download a fixed GeoJSON. Nothing is uploaded.">
+<link rel="canonical" href="https://quickwell.example/plot-file-checker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="EUDR GeoJSON Checker: check and fix farm plot files">
+<meta property="og:description" content="Free EUDR plot file checker in English and French. Drop GeoJSON, KML or CSV, see every geolocation error, download a fixed GeoJSON. Nothing is uploaded.">
+<meta property="og:url" content="https://quickwell.example/plot-file-checker/">
+<meta property="og:image" content="https://quickwell.example/plot-file-checker/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="EUDR Plot File Checker: check and fix farm plot GeoJSON">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EUDR GeoJSON Checker: check and fix farm plot files">
+<meta name="twitter:description" content="Free EUDR plot file checker in English and French. Drop GeoJSON, KML or CSV, see every geolocation error, download a fixed GeoJSON. Nothing is uploaded.">
+<meta name="twitter:image" content="https://quickwell.example/plot-file-checker/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.example/#org"},"name":"EUDR Plot File Checker","alternateName":"Vérificateur de fichiers de parcelles EUDR","url":"https://quickwell.example/plot-file-checker/","applicationCategory":"UtilitiesApplication","description":"Checks and fixes farm plot geolocation files (GeoJSON, KML, CSV, WKT) for the EU Deforestation Regulation, in English or French. Runs in the browser.","image":"https://quickwell.example/plot-file-checker/og.png","inLanguage":["en","fr"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my plot file uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Your file is read, checked and fixed in your browser. No coordinates, names or properties are sent anywhere. When you check your own file, only an anonymous count of plots is recorded."}},{"@type":"Question","name":"Which file formats can I check?","acceptedAnswer":{"@type":"Answer","text":"GeoJSON, KML, CSV (latitude and longitude columns, one row per corner, a WKT column or a KoBo/ODK geoshape column) and WKT text. Shapefiles (.zip or .shp), KMZ and Excel files are not read: export them to GeoJSON, KML or CSV first."}},{"@type":"Question","name":"If my file passes, will the EU Information System accept it?","acceptedAnswer":{"@type":"Answer","text":"Not guaranteed. The checks follow the EU Information System's published GeoJSON rules, but rules change and the system checks things this tool cannot see. Confirm with the official EU guidance and your buyer."}},{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Checking and fixing files is free. A paid version for bulk files is planned; you can join the waitlist above."}}]},{"@type":"Organization","@id":"https://quickwell.example/#org","name":"Quickwell","url":"https://quickwell.example/"}]}</script>
+<!-- /seo -->
 <link rel="icon" href="data:,">
 <style>
   :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --red:#c2341f; --amber:#a86b00; --green:#1d7a46; --chip:#f0f2f6; --hl:#fff4d6; --on-accent:#fff; }
@@ -41,6 +59,7 @@
   pre.out { white-space:pre-wrap; overflow-wrap:anywhere; font:12px/1.4 ui-monospace,Menlo,monospace; background:var(--chip); padding:10px; border-radius:8px; max-height:220px; overflow:auto; }
   footer { margin-top:36px; font-size:.88rem; color:var(--muted); } a { color:var(--accent); }
   [hidden] { display:none !important; }
+  html[lang="fr"] .faq-en, html:not([lang="fr"]) .faq-fr { display:none; }
 </style>
 </head>
 <body>
@@ -132,6 +151,25 @@
     <h2 data-i18n="disclTitle"></h2>
     <p style="margin:0" data-i18n="discl"></p>
     <p class="note" style="margin:8px 0 0" data-i18n="deadline"></p>
+  </section>
+
+  <section class="card" id="faq">
+    <div class="faq-en" lang="en">
+      <h2>Questions</h2>
+      <details><summary>Is my plot file uploaded?</summary><p>No. Your file is read, checked and fixed in your browser. No coordinates, names or properties are sent anywhere. When you check your own file, only an anonymous count of plots is recorded.</p></details>
+      <details><summary>Which file formats can I check?</summary><p>GeoJSON, KML, CSV (latitude and longitude columns, one row per corner, a WKT column or a KoBo/ODK geoshape column) and WKT text. Shapefiles (.zip or .shp), KMZ and Excel files are not read: export them to GeoJSON, KML or CSV first.</p></details>
+      <details><summary>If my file passes, will the EU Information System accept it?</summary><p>Not guaranteed. The checks follow the EU Information System's published GeoJSON rules, but rules change and the system checks things this tool cannot see. Confirm with the official EU guidance and your buyer.</p></details>
+      <details><summary>Is it free?</summary><p>Yes. Checking and fixing files is free. A paid version for bulk files is planned; you can join the waitlist above.</p></details>
+      <p class="note" style="margin-bottom:0">Guides: <a href="/guides/eudr-geolocation-geojson/">What the EUDR GeoJSON file must contain</a> · <a href="/guides/eudr-plot-file-rejected/">Common reasons plot files get rejected</a></p>
+    </div>
+    <div class="faq-fr" lang="fr">
+      <h2>Questions fréquentes</h2>
+      <details><summary>Mon fichier de parcelles est-il envoyé quelque part ?</summary><p>Non. Votre fichier est lu, contrôlé et corrigé dans votre navigateur. Aucune coordonnée, aucun nom ni aucune propriété n’est envoyé. Quand vous contrôlez votre propre fichier, seul un nombre anonyme de parcelles est enregistré.</p></details>
+      <details><summary>Quels formats de fichier puis-je contrôler ?</summary><p>GeoJSON, KML, CSV (colonnes latitude et longitude, une ligne par sommet, une colonne WKT ou une colonne geoshape KoBo/ODK) et texte WKT. Les shapefiles (.zip ou .shp), KMZ et fichiers Excel ne sont pas lus : exportez-les d’abord en GeoJSON, KML ou CSV.</p></details>
+      <details><summary>Si mon fichier passe, le système d’information de l’UE l’acceptera-t-il ?</summary><p>Ce n’est pas garanti. Les contrôles suivent les règles GeoJSON publiées par le système d’information de l’UE, mais les règles changent et le système vérifie des points que cet outil ne voit pas. Vérifiez auprès des sources officielles de l’UE et de votre acheteur.</p></details>
+      <details><summary>Est-ce gratuit ?</summary><p>Oui. Le contrôle et la correction des fichiers sont gratuits. Une version payante pour les gros volumes est prévue ; vous pouvez vous inscrire sur la liste d’attente plus haut.</p></details>
+      <p class="note" style="margin-bottom:0">Guide : <a href="/guides/eudr-geolocalisation-geojson/">Ce que doit contenir le fichier GeoJSON EUDR</a></p>
+    </div>
   </section>
 
   <footer><span data-i18n="footNote"></span> · <a href="/" data-i18n="footMore">More Quickwell tools</a> · <a href="/privacy.html" data-i18n="footPrivacy">Privacy</a> · <a href="/terms.html" data-i18n="footTerms">Terms</a></footer>
@@ -972,7 +1010,7 @@
   }
   function applyLang() {
     document.documentElement.lang = LANG;
-    document.title = LANG === 'fr' ? 'Vérificateur de fichiers de parcelles EUDR : contrôlez et corrigez vos GeoJSON dans le navigateur' : 'EUDR Plot File Checker: check and fix farm plot GeoJSON in your browser';
+    document.title = LANG === 'fr' ? 'Vérificateur EUDR : contrôlez et corrigez vos GeoJSON' : 'EUDR GeoJSON Checker: check and fix farm plot files';
     document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
     document.querySelectorAll('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === LANG)); });

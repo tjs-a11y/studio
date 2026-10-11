@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR Geolocation: What the GeoJSON File Must Contain</title>
+<meta name="description" content="What an EUDR plot GeoJSON file must contain, from the EU Information System docs: WGS 84, 6 decimals, allowed shapes, the 4 ha rule, properties, limits.">
+<link rel="canonical" href="https://quickwell.example/guides/eudr-geolocation-geojson/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/guides/eudr-geolocation-geojson/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/guides/eudr-geolocalisation-geojson/">
+<link rel="alternate" hreflang="x-default" href="https://quickwell.example/guides/eudr-geolocation-geojson/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="EUDR Geolocation: What the GeoJSON File Must Contain">
+<meta property="og:description" content="What an EUDR plot GeoJSON file must contain, from the EU Information System docs: WGS 84, 6 decimals, allowed shapes, the 4 ha rule, properties, limits.">
+<meta property="og:url" content="https://quickwell.example/guides/eudr-geolocation-geojson/">
+<meta property="og:image" content="https://quickwell.example/plot-file-checker/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EUDR Geolocation: What the GeoJSON File Must Contain">
+<meta name="twitter:description" content="What an EUDR plot GeoJSON file must contain, from the EU Information System docs: WGS 84, 6 decimals, allowed shapes, the 4 ha rule, properties, limits.">
+<meta name="twitter:image" content="https://quickwell.example/plot-file-checker/og.png">
+<link rel="stylesheet" href="/guides/guide.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"EUDR geolocation: what the GeoJSON file must contain","description":"What an EUDR plot GeoJSON file must contain, from the EU Information System docs: WGS 84, 6 decimals, allowed shapes, the 4 ha rule, properties, limits.","inLanguage":"en","datePublished":"2026-10-11","dateModified":"2026-10-11","url":"https://quickwell.example/guides/eudr-geolocation-geojson/","mainEntityOfPage":"https://quickwell.example/guides/eudr-geolocation-geojson/","image":"https://quickwell.example/plot-file-checker/og.png","wordCount":889,"author":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.example/"},"publisher":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.example/"},"citation":["https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quickwell.example/guides/"},{"@type":"ListItem","position":3,"name":"EUDR geolocation: what the GeoJSON file must contain","item":"https://quickwell.example/guides/eudr-geolocation-geojson/"}]}]}</script>
+</head>
+<body>
+<main>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Quickwell</a> / <a href="/guides/">Guides</a></nav>
+<article>
+<h1>EUDR geolocation: what the GeoJSON file must contain</h1>
+<p class="meta">Updated 11 October 2026 · 4 min read</p>
+<p class="lede">Under the EU Deforestation Regulation (EUDR), operators declare where commodities such as cocoa and coffee were produced, using plot coordinates in a GeoJSON file uploaded to the EU Information System. This guide sets out what that file must contain, based on the EU Information System's own documentation, in plain English.</p>
+
+<h2>Who this is for</h2>
+<p>Exporters, cooperatives and consultants who prepare plot maps for an EU buyer or for a due diligence statement (DDS). The EUDR covers cattle, cocoa, coffee, oil palm, rubber, soya and wood. Products must be deforestation-free, meaning produced on land not deforested after 31 December 2020.</p>
+
+<h2>The format: GeoJSON in WGS 84, longitude first</h2>
+<ul>
+  <li><b>Coordinate system:</b> WGS 84 (EPSG:4326), in decimal degrees. If your coordinates are in another system, such as UTM metres, convert them before upload.</li>
+  <li><b>Order:</b> each position is <code>[longitude, latitude]</code>. Longitude comes first. This is the opposite of how many phones and spreadsheets show coordinates, and it's a common source of swapped points.</li>
+  <li><b>Precision:</b> the EU Information System FAQ defines geolocation as coordinates with at least 6 decimal digits. The system truncates coordinates to 6 decimals before storing them, so sending more is wasted space. Six decimals of a degree is roughly 0.1 m on the ground at the equator <span class="est">(estimate: one degree of latitude is about 111 km, so 0.000001° ≈ 0.11 m)</span>.</li>
+</ul>
+
+<h2>Which shapes are allowed</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Geometry</th><th>Accepted?</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Point</td><td>Yes</td><td>One coordinate pair. Use for small plots (see the 4-hectare rule below).</td></tr>
+    <tr><td>MultiPoint</td><td>Yes</td><td>Two or more points.</td></tr>
+    <tr><td>Polygon</td><td>Yes</td><td>At least four coordinate pairs, and the first and last pair must be the same to close the shape.</td></tr>
+    <tr><td>MultiPolygon</td><td>Yes</td><td>Two or more polygons.</td></tr>
+    <tr><td>GeometryCollection</td><td>Yes</td><td>Two or more geometries. Listed as supported in the DDS API reference.</td></tr>
+    <tr><td>LineString, MultiLineString</td><td>No</td><td>Lines don't describe a production place and won't be processed.</td></tr>
+  </tbody>
+</table></div>
+<p>Two shape rules catch many files:</p>
+<ul>
+  <li><b>No holes.</b> Polygons with holes ("doughnuts") are not supported. The EU's documented workaround is to draw two half-doughnut polygons instead.</li>
+  <li><b>No crossing lines.</b> A boundary that crosses itself, like a figure eight, is not processed. Neither are shapes whose sides overlap or fold inward, or "shapes" that are really a straight line.</li>
+</ul>
+<p>The EU description sets no rule about whether corners run clockwise or anticlockwise.</p>
+
+<h2>The 4-hectare rule: point or polygon?</h2>
+<p>The FAQ says polygons are required for plots of land larger than 4 hectares, except for cattle. For a point, the <code>Area</code> property (in hectares) is what tells the system how big the plot is:</p>
+<ul>
+  <li>If a point has no Area, the system sets it to <b>4 ha</b> by default.</li>
+  <li>A point with an Area above 4 ha is an <b>error</b> unless the commodity is cattle.</li>
+  <li>When Area is given, it must be at least <b>0.0001 ha</b>.</li>
+</ul>
+
+<h2>Properties the system reads</h2>
+<p>Each feature can carry these optional properties. The names are case-sensitive: <code>productionplace</code> is not the same as <code>ProductionPlace</code>. Any other properties are ignored.</p>
+<div class="tbl"><table>
+  <thead><tr><th>Property</th><th>What it holds</th></tr></thead>
+  <tbody>
+    <tr><td><code>ProducerName</code></td><td>The producer's name.</td></tr>
+    <tr><td><code>ProducerCountry</code></td><td>The country of production as a 2-letter ISO code, such as <code>CI</code> or <code>GH</code>, not "Côte d'Ivoire" or "CIV".</td></tr>
+    <tr><td><code>ProductionPlace</code></td><td>A name for the place. The EU recommends including it.</td></tr>
+    <tr><td><code>Area</code></td><td>Area in hectares, for points. It must be a number: <code>"Area": "3"</code> (in quotes) is read as 0.</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Type I and Type II files</h2>
+<p>The structure is the same; the properties differ.</p>
+<ul>
+  <li><b>Type I</b> is used through the API and the UI import at producer level. It contains the geometries and may include any of the optional properties.</li>
+  <li><b>Type II</b> is used through the UI import at commodity level and groups several producers by <code>ProducerName</code> and <code>ProducerCountry</code>. Every feature must include <code>ProducerCountry</code>.</li>
+</ul>
+
+<h2>Size and count limits</h2>
+<ul>
+  <li>All geolocation data in one DDS together may not exceed <b>25 MB</b>. The EU suggests removing unnecessary points along straight boundaries, and using single points for plots under 4 ha, to keep files small.</li>
+  <li>No more than <b>1,000 producers</b> per commodity and <b>10,000</b> per DDS.</li>
+</ul>
+
+<h2>A minimal valid example</h2>
+<p>This is a fictional two-plot file: one small plot as a point with its area, one polygon.</p>
+<pre><code>{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "properties": { "ProducerName": "Example Farmer", "ProducerCountry": "CI",
+                      "ProductionPlace": "Plot A", "Area": 1.8 },
+      "geometry": { "type": "Point", "coordinates": [-5.547312, 6.821947] } },
+    { "type": "Feature",
+      "properties": { "ProducerName": "Example Farmer", "ProducerCountry": "CI",
+                      "ProductionPlace": "Plot B" },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [-5.551204, 6.818113], [-5.548871, 6.818402], [-5.548530, 6.815990],
+        [-5.550962, 6.815731], [-5.551204, 6.818113] ]] } }
+  ]
+}</code></pre>
+<p>Note: longitude first, six decimals, the polygon's last corner repeats its first, the country is a 2-letter code, and Area is a number.</p>
+
+<h2>Simplified declarations</h2>
+<p>The Information System documentation notes that the EUDR was amended by Regulation (EU) 2025/2650. Micro or small primary operators in low-risk countries can file a one-time simplified declaration, and may give a postal address instead of geolocation. Check whether that applies to you before mapping every plot.</p>
+
+<h2>Before you upload</h2>
+<ol>
+  <li>Open the file in a GIS tool or checker and look at it on a map: are the plots where they should be?</li>
+  <li>Check for swapped coordinates, open rings, self-crossing boundaries and holes.</li>
+  <li>Check property names, country codes and number formats.</li>
+  <li>Check the total file size against the 25 MB limit.</li>
+</ol>
+<p>For the problems that most often get files refused, see <a href="/guides/eudr-plot-file-rejected/">common reasons EUDR plot files get rejected</a>. <a href="/guides/eudr-geolocalisation-geojson/" hreflang="fr" lang="fr">Lire ce guide en français</a>.</p>
+
+<div class="cta">
+  <p><b>Check your file in the browser.</b> The free <a href="/plot-file-checker/">EUDR Plot File Checker</a> reads GeoJSON, KML, CSV and WKT, flags every issue above, fixes the safe ones (closing rings, six decimals, country codes, property names, obvious swaps) and gives you a corrected GeoJSON to download. It works in English and French, and your file never leaves your device.</p>
+</div>
+<section class="legal">
+<p><b>Not legal advice.</b> This guide is general information, checked against the sources below on 11 October 2026. Rules change: confirm with the official source and a qualified professional before you act. Quickwell is not affiliated with the European Union.</p>
+</section>
+<section class="sources">
+<h2>Sources</h2>
+<ul>
+<li>EU Information System, "GeoJSON File Description" (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li>
+<li>EU Information System, "Validation Rules": <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li>
+<li>EU Information System, FAQ: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html</a></li>
+<li>EU Information System, Due Diligence Statement V3 API reference: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html</a></li>
+<li>EU Information System, Operator API Reference home page (EUDR overview and amendment note): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html</a></li>
+</ul>
+</section>
+</article>
+<footer><a href="/">Quickwell</a> · <a href="/guides/">All guides</a> · <a href="/plot-file-checker/">EUDR Plot File Checker</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
