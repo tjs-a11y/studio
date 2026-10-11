@@ -1,0 +1,25 @@
+/* Shared look for /guides/: same palette as the tools, light/dark from the system, phone-first. */
+:root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --chip:#f0f2f6; --on-accent:#fff; }
+@media (prefers-color-scheme: dark) { :root { --bg:#101215; --ink:#eef0f3; --muted:#9aa3b2; --card:#181b21; --line:#2a2f38; --accent:#79a3ff; --chip:#20242c; --on-accent:#0b1020; } }
+* { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+main { max-width:760px; margin:0 auto; padding:22px 16px 56px; }
+a { color:var(--accent); }
+nav.crumbs { font-size:.88rem; color:var(--muted); margin:0 0 18px; } nav.crumbs a { color:var(--muted); }
+h1 { font-size:clamp(1.6rem,5vw,2.25rem); line-height:1.2; margin:0 0 8px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.06rem; margin:22px 0 6px; }
+.meta { font-size:.86rem; color:var(--muted); margin:0 0 18px; }
+.lede { font-size:1.1rem; color:var(--muted); margin:0 0 18px; }
+article ul, article ol { padding-left:22px; } article li { margin:5px 0; }
+code { font:.88em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+pre { background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; } pre code { background:none; padding:0; font-size:13px; white-space:pre; overflow-wrap:normal; }
+blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+.tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+.note { font-size:.9rem; color:var(--muted); } .est { color:var(--muted); font-size:.92em; }
+.cta { background:var(--card); border:1px solid var(--accent); border-radius:12px; padding:16px; margin:28px 0; } .cta p { margin:0; }
+.legal { font-size:.92rem; border-top:1px solid var(--line); margin-top:30px; padding-top:14px; }
+.sources ul { padding-left:20px; font-size:.88rem; overflow-wrap:anywhere; } .sources li { margin:4px 0; }
+.list { list-style:none; padding:0; margin:0; } .list li { border:1px solid var(--line); background:var(--card); border-radius:12px; padding:14px 16px; margin:10px 0; }
+.list a { font-weight:600; text-decoration:none; } .list a:hover { text-decoration:underline; } .list span { display:block; color:var(--muted); font-size:.93rem; margin-top:2px; }
+footer { margin-top:30px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
