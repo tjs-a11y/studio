@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR GeoJSON LineString Error: Lines Are Not Valid Plot Shapes</title>
+<meta name="description" content="The EU Information System does not accept LineString or MultiLineString geometries for production places. Why GPS apps export lines, and how to turn a walked boundary into a valid polygon.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/linestring-not-accepted/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/linestring-not-accepted/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/linestring-not-accepted/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"LineString and MultiLineString are not accepted for plots","item":"https://quickwell.example/learn/eudr/linestring-not-accepted/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"LineString and MultiLineString are not accepted for plots","description":"The EU Information System does not accept LineString or MultiLineString geometries for production places. Why GPS apps export lines, and how to turn a walked boundary into a valid polygon.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/linestring-not-accepted/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">LineString and MultiLineString are not accepted for plots</li></ol></nav>
+  <article>
+    <h1>LineString and MultiLineString are not accepted for plots</h1>
+    <p class="lede">A LineString is a path, not an area. The EU Information System does not accept LineString or MultiLineString geometries as production places.</p>
+    <p class="meta"><a href="/fr/learn/eudr/linestring-not-accepted/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<p>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> lists the geometry types used for production places (Point, MultiPoint, Polygon, MultiPolygon, and collections of them) and then states: "geometry types of 'LineString' and 'MultiLineString' do not represent valid geocoordinate shapes for declaring production places and will not be accepted/processed." Its common-errors list repeats it: "Invalid geometry types (i.e. LineString)". The DDS API reference lists the supported types as Point, MultiPoint, Polygon, MultiPolygon and GeometryCollection.</p>
+<h2>Why files contain lines</h2>
+<ul>
+<li><b>Track recording.</b> Many GPS and field apps record a walk as a track (a line). Walking around a field produces a line that follows the boundary, but it's still a line.</li>
+<li><b>KML exports.</b> KML files from mapping tools often store boundaries as LineStrings or paths.</li>
+<li><b>Roads and rivers.</b> A file may contain lines that were never meant to be plots: access roads, streams or the edge of a forest drawn for reference.</li>
+</ul>
+<h2>How to fix it</h2>
+<p><b>If the line is a walked boundary</b> and its end comes back to its start, it can become a polygon: use the same coordinates as the outer ring, and make sure the last point equals the first. In QGIS, "Lines to polygons" (Vector, Geometry Tools) does this for a whole layer. Then look at each result on a map to confirm it's really the plot.</p>
+<p><b>If the line doesn't close</b>, the boundary walk was incomplete. Closing it with a straight line may cut through the field or across another edge; re-map instead. See <a href="/learn/eudr/unclosed-polygon/">unclosed polygon</a>.</p>
+<p><b>If the line is a road or river</b>, delete it from the upload file. Reference features belong in your own GIS project, not in the DDS geolocation.</p>
+<h2>What the Plot File Checker does</h2>
+<ul>
+<li>LineString or MultiLineString: an error.</li>
+<li>A closed line (its last point is identical to its first, with at least four points) is converted to a Polygon in the fixed file and marked "check this", because the checker can't know whether it was meant to be a boundary.</li>
+<li>A GeometryCollection that contains a line is an error; see <a href="/learn/eudr/geometrycollection/">GeometryCollection</a>.</li>
+<li>KML Placemarks with LineStrings are read and reported the same way.</li>
+</ul>
+<h2>For next season</h2>
+<p>Set your field app to record plots as polygons (or "areas") rather than tracks, if it allows. If it only records tracks, add a step to your process that converts and checks them before the data reaches the exporter.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/unclosed-polygon/"><b>Unclosed polygon: the first and last point must be the same</b><span>Open rings and polygons with too few corners.</span></a><a class="tile" href="/learn/eudr/geometrycollection/"><b>GeometryCollection in EUDR files: accepted, but check what's inside</b><span>Mixed or line-containing collections cause problems.</span></a><a class="tile" href="/learn/eudr/self-intersecting-polygon/"><b>Self-intersecting polygon: crossing lines, figure-eights and spikes</b><span>Figure-8 shapes, overlapping sides and spikes are rejected.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>EU Information System, Due Diligence Statement V3 API reference: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

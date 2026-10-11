@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR GeoJSON File Size Limit (25 MB) and Producer Limits</title>
+<meta name="description" content="The EU Information System limits geolocation data to 25 MB per due diligence statement, and producers to 1,000 per commodity and 10,000 per statement. How to shrink a plot file without losing accuracy.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/file-size-limit/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/file-size-limit/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/file-size-limit/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"File size and volume limits: 25 MB per statement, 1,000 producers per commodity","item":"https://quickwell.example/learn/eudr/file-size-limit/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"File size and volume limits: 25 MB per statement, 1,000 producers per commodity","description":"The EU Information System limits geolocation data to 25 MB per due diligence statement, and producers to 1,000 per commodity and 10,000 per statement. How to shrink a plot file without losing accuracy.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/file-size-limit/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">File size and volume limits: 25 MB per statement, 1,000 producers per commodity</li></ol></nav>
+  <article>
+    <h1>File size and volume limits: 25 MB per statement, 1,000 producers per commodity</h1>
+    <p class="lede">The EU Information System caps the geolocation data in one due diligence statement at 25 MB, all GeoJSON files together. It also limits how many producers one statement can list.</p>
+    <p class="meta"><a href="/fr/learn/eudr/file-size-limit/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<ul>
+<li>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a>: "The system has a file size limit of 25 Mb for individual DDS submissions, which includes the total size of uploaded GeoJSON files." Files over the limit are on its list of common errors.</li>
+<li>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">Validation Rules</a>: the total size of geolocation data per DDS "cannot exceed a certain amount (presently set to 25Mb)". The total number of producers per commodity cannot exceed 1,000, and per DDS cannot exceed 10,000.</li>
+<li>Other common errors the page lists for files in general: invalid file format (for example PDF or plain text), syntax errors such as a missing bracket, and password-protected files.</li>
+</ul>
+<h2>The EU's own advice for large files</h2>
+<p>The GeoJSON page recommends two workarounds, while noting that operators must obtain geolocation data that is as granular as possible:</p>
+<ol>
+<li><b>Fewer points on straight edges.</b> Use two points to define a straight line instead of logging coordinates every 5 to 10 metres along it.</li>
+<li><b>Points for small plots.</b> Use a single geolocation point for plots under 4 hectares rather than a polygon.</li>
+</ol>
+<h2>Other ways files get too big</h2>
+<ul>
+<li><b>Excess decimals.</b> The system keeps only 6 decimals, so 15-decimal coordinates waste space; see <a href="/learn/eudr/six-decimal-places/">decimal places</a>.</li>
+<li><b>Altitude and extra values.</b> A third number (altitude) in every position. The EU format allows more than two values in a position, but only longitude and latitude are used.</li>
+<li><b>Pretty-printing.</b> Indentation and line breaks can double a file's size. Compact JSON is just as valid.</li>
+<li><b>Unused properties.</b> Every property not on the official list is ignored by the system but still counts toward size.</li>
+<li><b>GPS track logs.</b> A boundary walked with a point every second can have thousands of near-identical corners.</li>
+</ul>
+<h2>Simplifying safely</h2>
+<p>GIS tools can simplify polygons (remove points that barely change the shape). Use a small tolerance and check the result: simplification that moves the boundary by several metres changes what land is declared, and can create self-intersections in narrow plots.</p>
+<h2>What the Plot File Checker does</h2>
+<ul>
+<li>File over 25 MB (read as 25,000,000 bytes): an error. Over 20 MB: a warning.</li>
+<li>More than 1,000 distinct producers (ProducerName plus ProducerCountry), or more than 10,000 plots: a warning, as a prompt to check how the file will be split across statements.</li>
+<li>The fixed file is written compactly with 6 decimals, without altitude, one feature per line, which usually makes it much smaller.</li>
+</ul>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/six-decimal-places/"><b>Decimal places: at least 6, and what truncation does to your polygons</b><span>Too few decimals, and duplicates created by truncation.</span></a><a class="tile" href="/learn/eudr/point-area-over-4-hectares/"><b>Points and the 4-hectare rule: when a plot needs a polygon</b><span>A point with Area over 4 ha is an error (except cattle).</span></a><a class="tile" href="/learn/eudr/property-names/"><b>Property names: ProducerName, ProducerCountry, ProductionPlace, Area</b><span>Case-sensitive names and 2-letter country codes.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>EU Information System, &quot;API and UI Validation Rules&quot;: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDUE GeoJSON : propriétés ProducerName, ProducerCountry, ProductionPlace et Area</title>
+<meta name="description" content="Le Système d'information de l'UE lit quatre propriétés GeoJSON facultatives, dont les noms sont sensibles à la casse : ProducerName, ProducerCountry (code ISO à 2 lettres), ProductionPlace et Area. Erreurs fréquentes et corrections.">
+<link rel="canonical" href="https://quickwell.example/fr/learn/eudr/property-names/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/property-names/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/property-names/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Erreurs de fichiers RDUE","item":"https://quickwell.example/fr/learn/eudr/"},{"@type":"ListItem","position":3,"name":"Noms de propriétés","item":"https://quickwell.example/fr/learn/eudr/property-names/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Noms de propriétés : ProducerName, ProducerCountry, ProductionPlace, Area","description":"Le Système d'information de l'UE lit quatre propriétés GeoJSON facultatives, dont les noms sont sensibles à la casse : ProducerName, ProducerCountry (code ISO à 2 lettres), ProductionPlace et Area. Erreurs fréquentes et corrections.","inLanguage":"fr","url":"https://quickwell.example/fr/learn/eudr/property-names/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Quickwell</a></li><li><a href="/fr/learn/eudr/">Erreurs de fichiers RDUE</a></li><li aria-current="page">Noms de propriétés</li></ol></nav>
+  <article>
+    <h1>Noms de propriétés : ProducerName, ProducerCountry, ProductionPlace, Area</h1>
+    <p class="lede">Le Système d'information de l'UE lit quatre propriétés facultatives sur chaque parcelle. Leurs noms sont sensibles à la casse et tout le reste est ignoré : « pays » ou « productionplace » ne transmettent donc rien.</p>
+    <p class="meta"><a href="/learn/eudr/property-names/" hreflang="en" lang="en">English version</a></p>
+
+<h2>Ce que dit la documentation de l'UE</h2>
+<p>La page <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener" hreflang="en">GeoJSON File Description</a> liste les propriétés facultatives traitées par le système :</p>
+<div class="tbl"><table>
+<tr><th>Propriété</th><th>Signification</th></tr>
+<tr><td><code>ProducerName</code></td><td>Nom facultatif du producteur pour la géométrie</td></tr>
+<tr><td><code>ProducerCountry</code></td><td>Pays de production, en code ISO à 2 lettres</td></tr>
+<tr><td><code>ProductionPlace</code></td><td>Nom facultatif du lieu de production (recommandé)</td></tr>
+<tr><td><code>Area</code></td><td>Surface en hectares, pour les géométries Point</td></tr>
+</table></div>
+<p>Toute autre propriété valide sur le plan syntaxique est ignorée. La page cite parmi les erreurs courantes les « noms de propriétés invalides (par exemple casse incorrecte : 'productionplace' au lieu de 'ProductionPlace') » et les « codes pays ISO2 invalides ». Elle rappelle aussi que <code>"Area": "3"</code> entre guillemets est lu comme 0.</p>
+<h2>Fichiers de type I et de type II</h2>
+<p>L'UE décrit deux variantes de même structure. Un fichier de <b>type I</b> s'utilise via l'API et au niveau du producteur dans l'interface web. Un fichier de <b>type II</b>, importé au niveau de la marchandise dans l'interface web, contient plusieurs producteurs regroupés par ProducerName et ProducerCountry, et doit comporter <b>ProducerCountry sur chaque entité</b>. Le système recommande aussi de toujours indiquer ProductionPlace.</p>
+<h2>Erreurs fréquentes</h2>
+<ul>
+<li><b>Noms traduits ou locaux</b> : <code>pays</code>, <code>superficie</code>, <code>nom_producteur</code>, <code>country</code>.</li>
+<li><b>Mauvaise casse</b> : <code>producerCountry</code>, <code>PRODUCERNAME</code>, <code>area</code>.</li>
+<li><b>Noms de pays au lieu de codes</b> : <code>"Côte d'Ivoire"</code>, <code>"Ghana"</code>, ou des codes à 3 lettres comme <code>CIV</code>. La valeur doit être le code à 2 lettres, par exemple <code>CI</code>, <code>GH</code>, <code>CM</code>, <code>ET</code>, <code>BR</code>.</li>
+<li><b>Codes en minuscules</b> : <code>ci</code> au lieu de <code>CI</code>.</li>
+<li><b>Area en texte ou dans une autre unité</b> : voir <a href="/fr/learn/eudr/point-area-over-4-hectares/">la règle des 4 ha</a>.</li>
+</ul>
+<h2>Comment corriger</h2>
+<p>Renommez les colonnes de votre tableur source avec les noms exacts ci-dessus avant la conversion, ou renommez les champs dans QGIS (propriétés de la couche, Champs). Remplacez les noms de pays par les codes à 2 lettres. Ouvrez ensuite le GeoJSON dans un éditeur de texte et vérifiez une entité à l'œil.</p>
+<h2>Ce que fait le vérificateur</h2>
+<ul>
+<li>Alias reconnus et mauvaise casse (<code>pays</code>, <code>superficie</code>, <code>producer_name</code>, <code>productionplace</code> et d'autres) : avertissement, renommés avec les noms officiels dans le fichier corrigé.</li>
+<li>ProducerCountry qui n'est pas un code à 2 lettres : erreur, converti en code ISO à 2 lettres quand le pays est reconnaissable.</li>
+<li>ProducerCountry absent sur certaines parcelles seulement : avertissement.</li>
+<li>Parcelle située hors de son pays ProducerCountry : avertissement, qui révèle souvent des <a href="/fr/learn/eudr/swapped-coordinates/">coordonnées inversées</a>.</li>
+</ul>
+<h2>Une entité minimale correcte</h2>
+<pre>{"type":"Feature",
+ "properties":{"ProducerName":"Coop Exemple","ProducerCountry":"CI",
+               "ProductionPlace":"Parcelle 12","Area":2.5},
+ "geometry":{"type":"Point","coordinates":[-4.012345,5.312345]}}</pre>
+<p>Cet exemple est fictif. Notez la casse exacte de chaque nom, le code pays à 2 lettres, le nombre sans guillemets pour Area et la longitude avant la latitude. Les autres propriétés peuvent rester dans vos propres archives : le système les ignore, elles ne font qu'alourdir le fichier.</p>
+  </article>
+  <aside class="card cta"><b>Vérifiez un fichier de parcelles gratuitement</b>Déposez un fichier GeoJSON, KML ou CSV dans le vérificateur de fichiers de parcelles RDUE. Il signale chaque problème de cette liste, corrige ceux qui peuvent l'être sans risque (fermeture des contours, décimales, noms de propriétés, inversions évidentes) et fournit un GeoJSON corrigé. En français ou en anglais ; rien n'est envoyé.<br><a class="btn" href="/plot-file-checker/">Ouvrir le vérificateur</a></aside>
+  <section><h2>Voir aussi</h2><div class="grid"><a class="tile" href="/fr/learn/eudr/point-area-over-4-hectares/"><b>Points et règle des 4 hectares : quand une parcelle exige un polygone</b><span>Un point avec Area supérieure à 4 ha est une erreur (sauf bovins).</span></a><a class="tile" href="/fr/learn/eudr/swapped-coordinates/"><b>Coordonnées inversées : latitude et longitude dans le mauvais ordre</b><span>Le GeoJSON veut la longitude d'abord ; les tableurs mettent souvent la latitude d'abord.</span></a><a class="tile" href="/fr/learn/eudr/file-size-limit/"><b>Limites de taille et de volume : 25 Mo par déclaration, 1 000 producteurs par marchandise</b><span>La limite de 25 Mo et les limites de nombre de producteurs.</span></a><a class="tile" href="/fr/learn/eudr/"><b>Toutes les pages : Erreurs de fichiers RDUE</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>Système d'information RDUE, « GeoJSON File Description » (mise à jour du 17 août 2026, en anglais): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Vérificateur de fichiers de parcelles RDUE de Quickwell, tableau des règles: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources ouvertes et vérifiées le 11 octobre 2026.</p></section>
+  <p class="disclaimer">Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour.</p>
+  <footer><a href="/">Accueil Quickwell</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a></footer>
+</main>
+</body>
+</html>

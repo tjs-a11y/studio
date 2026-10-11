@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDUE GeoJSON : coordonnées inversées, la longitude vient en premier</title>
+<meta name="description" content="En GeoJSON, chaque position s'écrit [longitude, latitude]. Les fichiers issus de tableurs inversent souvent l'ordre et placent les parcelles dans un autre pays ou en mer. Comment repérer et corriger sans risque.">
+<link rel="canonical" href="https://quickwell.example/fr/learn/eudr/swapped-coordinates/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/swapped-coordinates/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/swapped-coordinates/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Erreurs de fichiers RDUE","item":"https://quickwell.example/fr/learn/eudr/"},{"@type":"ListItem","position":3,"name":"Coordonnées inversées","item":"https://quickwell.example/fr/learn/eudr/swapped-coordinates/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Coordonnées inversées : latitude et longitude dans le mauvais ordre","description":"En GeoJSON, chaque position s'écrit [longitude, latitude]. Les fichiers issus de tableurs inversent souvent l'ordre et placent les parcelles dans un autre pays ou en mer. Comment repérer et corriger sans risque.","inLanguage":"fr","url":"https://quickwell.example/fr/learn/eudr/swapped-coordinates/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Quickwell</a></li><li><a href="/fr/learn/eudr/">Erreurs de fichiers RDUE</a></li><li aria-current="page">Coordonnées inversées</li></ol></nav>
+  <article>
+    <h1>Coordonnées inversées : latitude et longitude dans le mauvais ordre</h1>
+    <p class="lede">En GeoJSON, chaque position s'écrit longitude d'abord, puis latitude. Les fichiers construits à partir de tableurs ou d'exports GPS inversent souvent l'ordre, ce qui peut placer une cacaoyère dans l'océan ou dans un autre pays.</p>
+    <p class="meta"><a href="/learn/eudr/swapped-coordinates/" hreflang="en" lang="en">English version</a></p>
+
+<h2>La règle</h2>
+<p>La page <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener" hreflang="en">GeoJSON File Description</a> de l'UE précise qu'une position est un tableau d'au moins deux nombres, dans l'ordre <b>longitude, latitude</b> pour les coordonnées du système EPSG:4326. C'est l'inverse de la manière dont on énonce souvent des coordonnées (« 5,3° N, 4,0° O ») et de la plupart des tableurs (une colonne latitude, puis une colonne longitude).</p>
+<h2>À quoi ressemblent des coordonnées inversées</h2>
+<p>Une parcelle près d'Abidjan, en Côte d'Ivoire, se trouve vers la latitude 5,3 et la longitude -4,0. En GeoJSON, cela s'écrit <code>[-4.0, 5.3]</code>. Écrit <code>[5.3, -4.0]</code>, le système lit une longitude de 5,3 et une latitude de -4,0 : un point dans l'Atlantique, au sud du Nigeria. Les nombres sont corrects, mais au mauvais endroit.</p>
+<p>Parfois l'inversion saute aux yeux : un café éthiopien vers la latitude 7 et la longitude 38 se retrouve à la latitude 38, autour de la Méditerranée. Parfois elle est discrète : près de l'équateur et du méridien d'origine, les deux ordres peuvent tomber sur la terre ferme. Le Ghana et la Côte d'Ivoire, où beaucoup de parcelles de cacao se situent entre 5 et 8 de latitude et -8 et 0 de longitude, sont le cas typique.</p>
+<h2>Comment contrôler votre fichier</h2>
+<ol>
+<li>Ouvrez le fichier sur une carte (QGIS, geojson.io ou un autre outil SIG) et regardez où tombent les parcelles.</li>
+<li>Comparez avec la propriété ProducerCountry, si elle existe. Une parcelle notée CI qui apparaît en mer ou dans un autre pays est suspecte.</li>
+<li>Regardez les nombres : une valeur supérieure à 90 ou inférieure à -90 en deuxième position ne peut pas être une latitude.</li>
+</ol>
+<h2>Comment corriger</h2>
+<p>Si tout le fichier est inversé, exportez-le à nouveau depuis la source en associant correctement les colonnes : longitude en X, latitude en Y. Ne corrigez pas parcelle par parcelle sans savoir lesquelles sont fausses : un fichier peut mélanger des parcelles correctes et inversées quand les données viennent de plusieurs enquêteurs.</p>
+<h2>Ce que fait le vérificateur</h2>
+<p>Le vérificateur utilise des contours approximatifs des pays pour décider si une parcelle est inversée. Il ne l'inverse automatiquement que dans les cas clairs : la latitude n'est hors limites que dans l'ordre donné ; le pays ProducerCountry de la parcelle (ou le pays que vous choisissez) contient le point inversé mais pas l'original ; ou, sans pays indiqué, le point d'origine ne tombe dans aucune région de production connue et le point inversé tombe dans le principal pays producteur du fichier. Quand les deux ordres sont plausibles, il marque la parcelle « peut-être inversée » et vous demande de choisir le pays, puis corrige. Il avertit aussi pour toute parcelle située hors de son pays ProducerCountry.</p>
+<h2>Pour la prochaine campagne</h2>
+<p>En préparant un formulaire de collecte ou un modèle de tableur, nommez les colonnes <code>longitude</code> et <code>latitude</code> explicitement, pas « X/Y » ni « coord1/coord2 », et testez une parcelle connue de bout en bout avant le début de la campagne.</p>
+  </article>
+  <aside class="card cta"><b>Vérifiez un fichier de parcelles gratuitement</b>Déposez un fichier GeoJSON, KML ou CSV dans le vérificateur de fichiers de parcelles RDUE. Il signale chaque problème de cette liste, corrige ceux qui peuvent l'être sans risque (fermeture des contours, décimales, noms de propriétés, inversions évidentes) et fournit un GeoJSON corrigé. En français ou en anglais ; rien n'est envoyé.<br><a class="btn" href="/plot-file-checker/">Ouvrir le vérificateur</a></aside>
+  <section><h2>Voir aussi</h2><div class="grid"><a class="tile" href="/fr/learn/eudr/coordinate-system-wgs84/"><b>Mauvais système de coordonnées : les fichiers RDUE doivent être en WGS 84 longitude/latitude</b><span>Coordonnées projetées, membre crs ou valeurs hors limites.</span></a><a class="tile" href="/fr/learn/eudr/six-decimal-places/"><b>Décimales : au moins 6, et l'effet de la troncature sur vos polygones</b><span>Trop peu de décimales, et doublons créés par la troncature.</span></a><a class="tile" href="/fr/learn/eudr/property-names/"><b>Noms de propriétés : ProducerName, ProducerCountry, ProductionPlace, Area</b><span>Noms sensibles à la casse et codes pays à 2 lettres.</span></a><a class="tile" href="/fr/learn/eudr/"><b>Toutes les pages : Erreurs de fichiers RDUE</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>Système d'information RDUE, « GeoJSON File Description » (mise à jour du 17 août 2026, en anglais): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Vérificateur de fichiers de parcelles RDUE de Quickwell, tableau des règles: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources ouvertes et vérifiées le 11 octobre 2026.</p></section>
+  <p class="disclaimer">Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour.</p>
+  <footer><a href="/">Accueil Quickwell</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a></footer>
+</main>
+</body>
+</html>

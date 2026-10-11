@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR Coordinates: 6 Decimal Places Minimum, and Truncation Duplicates</title>
+<meta name="description" content="EUDR geolocation needs at least 6 decimal digits, and the EU Information System truncates anything beyond 6. Why too few decimals fail, how truncation can create duplicate points, and what to do.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/six-decimal-places/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/six-decimal-places/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/six-decimal-places/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"Decimal places: at least 6, and what truncation does to your polygons","item":"https://quickwell.example/learn/eudr/six-decimal-places/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Decimal places: at least 6, and what truncation does to your polygons","description":"EUDR geolocation needs at least 6 decimal digits, and the EU Information System truncates anything beyond 6. Why too few decimals fail, how truncation can create duplicate points, and what to do.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/six-decimal-places/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">Decimal places: at least 6, and what truncation does to your polygons</li></ol></nav>
+  <article>
+    <h1>Decimal places: at least 6, and what truncation does to your polygons</h1>
+    <p class="lede">EUDR geolocation must use at least 6 decimal places. The EU Information System also cuts anything beyond 6 decimals, which can quietly create duplicate points and invalid shapes.</p>
+    <p class="meta"><a href="/fr/learn/eudr/six-decimal-places/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<ul>
+<li>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">FAQ</a> defines geolocation as latitude/longitude coordinates "with a minimum of 6 decimal digits". The DDS API reference repeats it: coordinates must have a minimum of 6 decimal digits.</li>
+<li>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> says the system <b>truncates coordinate points to 6 decimal places</b> before storing, that sending more is "superfluous/wasteful", and that in extreme cases it may even produce invalid geometries where the original was valid. The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">Validation Rules</a> say the same.</li>
+<li>Its list of common errors includes "duplicate coordinates due to truncation to 6 decimals", with an example: <code>-5.8227391234, 144.2567071234</code> and <code>-5.8227394567, 144.2567074567</code> both become <code>-5.822739, 144.256707</code>.</li>
+</ul>
+<h2>Too few decimals</h2>
+<p>A coordinate like <code>-4.02, 5.31</code> has two decimals: it locates a point only to about a kilometre. Files often lose decimals when a spreadsheet column is formatted to show 2 or 4 places and then saved as CSV, or when a phone app exports rounded values. Re-exporting won't bring the lost precision back; you need the original data or a new GPS reading.</p>
+<p>One subtlety: JSON writers drop trailing zeros, so <code>-49.00683</code> may really be <code>-49.006830</code>. The EU's own sample file contains values like that. A fair test looks at the longest value in a plot, not at every single number.</p>
+<h2>Too many decimals</h2>
+<p>Sending 10 or 15 decimals is harmless by itself, but because of truncation two corners that were 0.0000003 degrees apart become the same point. A polygon with repeated corners, or with corners that collapse into a line, can then become invalid. The fix is to truncate to 6 decimals yourself and then remove consecutive duplicate points, so you can check the result before the system does.</p>
+<h2>What the Plot File Checker does</h2>
+<ul>
+<li>Fewer than 6 decimals (judged on the longest value in each plot): an error. The fixed file writes 6 decimals, but the checker still warns about low GPS precision if the data had 4 decimals or fewer, because padding with zeros doesn't add accuracy.</li>
+<li>More than 6 decimals: truncated to 6, as the EU system does. Duplicates this creates are removed and the plot is re-checked for shape problems.</li>
+<li>Repeated consecutive points: a warning, removed in the fixed file.</li>
+</ul>
+<h2>Good practice</h2>
+<p>Keep the raw GPS data with full precision in your own records, and produce the upload file from it with exactly 6 decimals. Format spreadsheet coordinate columns as text or with at least 6 decimals so nothing is rounded when saving.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/self-intersecting-polygon/"><b>Self-intersecting polygon: crossing lines, figure-eights and spikes</b><span>Figure-8 shapes, overlapping sides and spikes are rejected.</span></a><a class="tile" href="/learn/eudr/unclosed-polygon/"><b>Unclosed polygon: the first and last point must be the same</b><span>Open rings and polygons with too few corners.</span></a><a class="tile" href="/learn/eudr/coordinate-system-wgs84/"><b>Wrong coordinate system: EUDR files must be WGS 84 longitude/latitude</b><span>Projected coordinates, a crs member, or values out of range.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, operator FAQ: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html</a></li><li>EU Information System, Due Diligence Statement V3 API reference: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html</a></li><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>EU Information System, &quot;API and UI Validation Rules&quot;: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

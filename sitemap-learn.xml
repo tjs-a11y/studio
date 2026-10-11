@@ -42,5 +42,29 @@
   <url><loc>https://quickwell.example/learn/new-entrant-audit/dvir-defects/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://quickwell.example/learn/new-entrant-audit/annual-inspection/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://quickwell.example/learn/new-entrant-audit/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/coordinate-system-wgs84/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/swapped-coordinates/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/six-decimal-places/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/unclosed-polygon/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/self-intersecting-polygon/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/polygon-holes/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/point-area-over-4-hectares/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/linestring-not-accepted/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/geometrycollection/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/property-names/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/file-size-limit/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/learn/eudr/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/coordinate-system-wgs84/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/swapped-coordinates/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/six-decimal-places/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/unclosed-polygon/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/polygon-holes/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/point-area-over-4-hectares/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/linestring-not-accepted/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/geometrycollection/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/property-names/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/file-size-limit/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.example/fr/learn/eudr/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://quickwell.example/learn/</loc><lastmod>2026-10-11</lastmod></url>
 </urlset>

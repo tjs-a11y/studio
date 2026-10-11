@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDUE : erreur de polygone avec trou (forme en anneau) et solution officielle</title>
+<meta name="description" content="Le Système d'information de l'UE n'accepte pas les polygones avec trous (formes en anneau). Pourquoi des parcelles ont des trous et la solution officielle : décrire la parcelle par deux demi-anneaux.">
+<link rel="canonical" href="https://quickwell.example/fr/learn/eudr/polygon-holes/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/polygon-holes/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/polygon-holes/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Erreurs de fichiers RDUE","item":"https://quickwell.example/fr/learn/eudr/"},{"@type":"ListItem","position":3,"name":"Polygones avec trous","item":"https://quickwell.example/fr/learn/eudr/polygon-holes/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Polygones avec trous refusés : la solution des deux moitiés","description":"Le Système d'information de l'UE n'accepte pas les polygones avec trous (formes en anneau). Pourquoi des parcelles ont des trous et la solution officielle : décrire la parcelle par deux demi-anneaux.","inLanguage":"fr","url":"https://quickwell.example/fr/learn/eudr/polygon-holes/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Quickwell</a></li><li><a href="/fr/learn/eudr/">Erreurs de fichiers RDUE</a></li><li aria-current="page">Polygones avec trous</li></ol></nav>
+  <article>
+    <h1>Polygones avec trous refusés : la solution des deux moitiés</h1>
+    <p class="lede">Un polygone GeoJSON peut décrire un trou, par exemple une exploitation qui entoure une habitation ou une zone protégée. Le Système d'information de l'UE n'accepte pas les polygones avec trous.</p>
+    <p class="meta"><a href="/learn/eudr/polygon-holes/" hreflang="en" lang="en">English version</a></p>
+
+<h2>Ce que dit la documentation de l'UE</h2>
+<p>La page <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener" hreflang="en">GeoJSON File Description</a> précise que les polygones avec trous (formes en anneau, « doughnut ») ne sont pas pris en charge et ne seront pas traités, et que si une forme en anneau est nécessaire, elle peut être définie en combinant deux polygones en forme de demi-anneau. Sa liste d'erreurs courantes cite les formes avec trous, avec la solution « deux formes en demi-lune », puis à nouveau les « polygones avec trous à l'intérieur », pour lesquels l'utilisateur reçoit un message d'erreur.</p>
+<h2>À quoi ressemble un trou en GeoJSON</h2>
+<p>Un Polygon GeoJSON est une liste de contours. Le premier est la limite extérieure ; les suivants sont des trous. Voici donc un polygone avec un trou :</p>
+<pre>{"type":"Polygon","coordinates":[
+  [[-4.010,5.300],[-4.000,5.300],[-4.000,5.310],[-4.010,5.310],[-4.010,5.300]],
+  [[-4.006,5.304],[-4.004,5.304],[-4.004,5.306],[-4.006,5.306],[-4.006,5.304]]
+]}</pre>
+<p>(Affiché avec 3 décimales pour la lisibilité ; un vrai fichier en demande au moins 6.) Beaucoup d'outils SIG créent des trous automatiquement quand on soustrait une zone d'une autre, par exemple un village ou une rivière retirés d'un champ.</p>
+<h2>Comment corriger</h2>
+<p><b>Option 1 : deux moitiés.</b> Coupez la forme selon une ligne qui traverse le trou, pour obtenir deux polygones sans trou, et placez-les dans un MultiPolygon (ou deux entités avec les mêmes informations de producteur). Ensemble, ils couvrent la même surface que l'anneau. Dans QGIS, l'outil « Séparer les entités » sur une couche en édition le fait : tracez la ligne de coupe à travers toute la forme, en passant par le trou.</p>
+<p><b>Option 2 : le trou compte-t-il ?</b> Si la zone exclue est minuscule, ou a été retirée par commodité, demandez au responsable de la déclaration si la parcelle doit simplement être décrite par sa limite extérieure. C'est un choix de fond sur les terres déclarées, pas une question de format : ne le faites pas sans le dire.</p>
+<h2>Ce que fait le vérificateur</h2>
+<p>Un polygone avec trous est signalé comme une <b>erreur</b> et n'est pas modifié. Couper la forme demande de décider où couper, et supprimer le trou change la surface déclarée : ni l'un ni l'autre n'est fait automatiquement.</p>
+<h2>Contrôles après la découpe</h2>
+<ul>
+<li>Chaque moitié doit être un polygone valide et fermé : voir <a href="/fr/learn/eudr/unclosed-polygon/">polygone non fermé</a>.</li>
+<li>Les deux moitiés partagent un côté. Le vérificateur signale les parcelles qui se chevauchent par des avertissements ; se toucher le long d'un côté est normal pour une parcelle découpée, mais un vrai chevauchement doit être examiné.</li>
+<li>Si vous indiquez une propriété Area, elle doit correspondre au total des deux moitiés.</li>
+</ul>
+  </article>
+  <aside class="card cta"><b>Vérifiez un fichier de parcelles gratuitement</b>Déposez un fichier GeoJSON, KML ou CSV dans le vérificateur de fichiers de parcelles RDUE. Il signale chaque problème de cette liste, corrige ceux qui peuvent l'être sans risque (fermeture des contours, décimales, noms de propriétés, inversions évidentes) et fournit un GeoJSON corrigé. En français ou en anglais ; rien n'est envoyé.<br><a class="btn" href="/plot-file-checker/">Ouvrir le vérificateur</a></aside>
+  <section><h2>Voir aussi</h2><div class="grid"><a class="tile" href="/fr/learn/eudr/self-intersecting-polygon/"><b>Polygone auto-sécant : lignes qui se croisent, formes en huit et pointes</b><span>Formes en huit, côtés qui se chevauchent et pointes sont refusés.</span></a><a class="tile" href="/fr/learn/eudr/unclosed-polygon/"><b>Polygone non fermé : le premier et le dernier point doivent être identiques</b><span>Contours ouverts et polygones avec trop peu de sommets.</span></a><a class="tile" href="/fr/learn/eudr/geometrycollection/"><b>GeometryCollection dans les fichiers RDUE : acceptée, mais vérifiez son contenu</b><span>Les collections mixtes ou contenant des lignes posent problème.</span></a><a class="tile" href="/fr/learn/eudr/"><b>Toutes les pages : Erreurs de fichiers RDUE</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>Système d'information RDUE, « GeoJSON File Description » (mise à jour du 17 août 2026, en anglais): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Vérificateur de fichiers de parcelles RDUE de Quickwell, tableau des règles: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources ouvertes et vérifiées le 11 octobre 2026.</p></section>
+  <p class="disclaimer">Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour.</p>
+  <footer><a href="/">Accueil Quickwell</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a></footer>
+</main>
+</body>
+</html>

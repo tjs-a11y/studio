@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR GeoJSON Coordinate System: WGS 84 (EPSG:4326) Only, and What to Do If Yours Isn't</title>
+<meta name="description" content="The EU Information System accepts plot coordinates only in WGS 84 (EPSG:4326), in decimal degrees, longitude first. How to spot projected (metre) coordinates, out-of-range values and 0,0 points, and how to convert.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/coordinate-system-wgs84/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/coordinate-system-wgs84/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/coordinate-system-wgs84/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"Wrong coordinate system: EUDR files must be WGS 84 longitude/latitude","item":"https://quickwell.example/learn/eudr/coordinate-system-wgs84/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Wrong coordinate system: EUDR files must be WGS 84 longitude/latitude","description":"The EU Information System accepts plot coordinates only in WGS 84 (EPSG:4326), in decimal degrees, longitude first. How to spot projected (metre) coordinates, out-of-range values and 0,0 points, and how to convert.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/coordinate-system-wgs84/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">Wrong coordinate system: EUDR files must be WGS 84 longitude/latitude</li></ol></nav>
+  <article>
+    <h1>Wrong coordinate system: EUDR files must be WGS 84 longitude/latitude</h1>
+    <p class="lede">The EU Information System reads plot coordinates in one coordinate system only: WGS 84 (EPSG:4326), in decimal degrees. Coordinates in metres, or from a national grid, are not converted for you.</p>
+    <p class="meta"><a href="/fr/learn/eudr/coordinate-system-wgs84/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<p>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> says GeoJSON uses the World Geodetic System 1984 (WGS 84) datum with longitude and latitude in decimal degrees, and that the first production version of the system supports that standard exclusively. If your coordinates are in another system, they must be converted to WGS 84 (EPSG:4326) before upload. Support for other systems is "deferred for future versions". The same rules apply to the web interface and to the API.</p>
+<p>Coordinates must also be in range: latitude between -90 and 90, longitude between -180 and 180. An "invalid coordinate range" is one of the common errors the EU page lists, and the <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">Validation Rules</a> require latitude and longitude values to be in range.</p>
+<h2>How to recognize the problem</h2>
+<ul>
+<li><b>Large numbers</b>, like <code>[512340.25, 732118.90]</code>. These are projected coordinates in metres (for example a UTM zone or a national grid), not degrees.</li>
+<li><b>A <code>crs</code> member</b> at the top of the file naming something other than WGS 84, often left by GIS software.</li>
+<li><b>Points at 0,0</b>, in the Gulf of Guinea. That usually means a GPS fix that failed and wrote zeros, not a real plot.</li>
+<li><b>Values over 90</b> in the latitude position. Sometimes that's a projection problem; sometimes it's <a href="/learn/eudr/swapped-coordinates/">swapped coordinates</a>.</li>
+</ul>
+<h2>How to fix it</h2>
+<ol>
+<li>Find out which coordinate system the data was collected or stored in. Your mapping app or GIS project settings will say.</li>
+<li>In QGIS (free), open the layer, then use "Export, Save Features As", choose GeoJSON and set the CRS to <b>EPSG:4326 - WGS 84</b>. The export reprojects the coordinates.</li>
+<li>Check a few plots on a map after export: they should land on the farms, not in the sea.</li>
+<li>Remove points at 0,0 and any plot with missing coordinates, and re-collect those plots.</li>
+</ol>
+<h2>What the Plot File Checker does</h2>
+<p>The checker treats a <code>crs</code> member that declares WGS 84 as a warning and removes it in the fixed file; a <code>crs</code> naming any other system is an error, because reprojection needs GIS software. Coordinates that look like metres, or are out of range, are errors. Points at 0,0, NaN or missing values are errors, and unreadable ones are left out of the fixed file. The checker doesn't reproject, by design: guessing the source system could move every plot to the wrong place.</p>
+<h2>Why accuracy matters here</h2>
+<p>The EU FAQ defines geolocation for EUDR as latitude/longitude coordinates with at least 6 decimal digits (<a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">FAQ</a>). Six decimals of a degree is about 0.11 m on the ground at the equator (<b>estimate</b>: roughly 111 km per degree × 0.000001), so a datum or projection error of tens of metres is far larger than the precision the file claims. Convert once, carefully, from the original data.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/swapped-coordinates/"><b>Swapped coordinates: latitude and longitude in the wrong order</b><span>GeoJSON wants longitude first; spreadsheets often put latitude first.</span></a><a class="tile" href="/learn/eudr/six-decimal-places/"><b>Decimal places: at least 6, and what truncation does to your polygons</b><span>Too few decimals, and duplicates created by truncation.</span></a><a class="tile" href="/learn/eudr/property-names/"><b>Property names: ProducerName, ProducerCountry, ProductionPlace, Area</b><span>Case-sensitive names and 2-letter country codes.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>EU Information System, &quot;API and UI Validation Rules&quot;: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li><li>EU Information System, operator FAQ: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

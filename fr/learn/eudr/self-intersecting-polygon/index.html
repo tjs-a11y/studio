@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDUE : erreur de polygone auto-sécant (forme en huit, lignes croisées, pointes)</title>
+<meta name="description" content="Le Système d'information de l'UE refuse les polygones de parcelle dont les côtés se croisent (forme en huit), se replient sur eux-mêmes ou forment des pointes. Pourquoi, pourquoi ne pas corriger automatiquement, et comment relever à nouveau.">
+<link rel="canonical" href="https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/self-intersecting-polygon/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Erreurs de fichiers RDUE","item":"https://quickwell.example/fr/learn/eudr/"},{"@type":"ListItem","position":3,"name":"Polygone auto-sécant","item":"https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Polygone auto-sécant : lignes qui se croisent, formes en huit et pointes","description":"Le Système d'information de l'UE refuse les polygones de parcelle dont les côtés se croisent (forme en huit), se replient sur eux-mêmes ou forment des pointes. Pourquoi, pourquoi ne pas corriger automatiquement, et comment relever à nouveau.","inLanguage":"fr","url":"https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Quickwell</a></li><li><a href="/fr/learn/eudr/">Erreurs de fichiers RDUE</a></li><li aria-current="page">Polygone auto-sécant</li></ol></nav>
+  <article>
+    <h1>Polygone auto-sécant : lignes qui se croisent, formes en huit et pointes</h1>
+    <p class="lede">Un polygone de parcelle dont le contour se croise lui-même, comme un huit, n'est pas accepté par le Système d'information de l'UE. Pas plus que les formes dont les côtés se chevauchent ou se replient en pointe.</p>
+    <p class="meta"><a href="/learn/eudr/self-intersecting-polygon/" hreflang="en" lang="en">English version</a></p>
+
+<h2>Ce que dit la documentation de l'UE</h2>
+<p>La page <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener" hreflang="en">GeoJSON File Description</a> indique que les formes avec des lignes qui se croisent (comme un huit) ne sont pas prises en charge et ne seront pas traitées. Sa liste d'erreurs courantes commence par les « lignes de coordonnées qui se croisent (formes en huit ou côtés de polygone qui se coupent) » et les « côtés qui se chevauchent : chevauchement interne ou trous lorsqu'une partie du polygone se replie vers l'intérieur ». Les <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener" hreflang="en">Validation Rules</a> ajoutent, plus généralement, que les données de géolocalisation ne peuvent pas contenir de géométrie invalide, comme des polygones invalides.</p>
+<h2>D'où viennent ces formes</h2>
+<ul>
+<li><b>Sommets dans le désordre.</b> Des points relevés dans le sens des aiguilles d'une montre pour une moitié du champ et dans l'autre sens pour le reste, ou triés par numéro au lieu de l'ordre de passage, font se croiser les côtés.</li>
+<li><b>Instabilité du GPS.</b> Rester immobile pendant que le GPS enregistre plusieurs points peut créer une petite boucle ou une pointe aller-retour.</li>
+<li><b>Fermeture d'un contour inachevé.</b> Une ligne de fermeture droite à travers une parcelle à moitié relevée peut couper un autre côté.</li>
+<li><b>Troncature.</b> Plus rarement, couper les coordonnées à 6 décimales fait se rejoindre deux sommets proches : voir <a href="/fr/learn/eudr/six-decimal-places/">les décimales</a>.</li>
+</ul>
+<h2>Pourquoi ne pas corriger automatiquement</h2>
+<p>Un logiciel peut « réparer » un polygone qui se croise, par exemple en le coupant en deux ou en le reconstruisant selon son contour extérieur. Mais chaque réparation est une supposition sur la vraie limite, et le résultat peut inclure des terres hors de l'exploitation ou en exclure qui en font partie. Pour une déclaration sur la déforestation, une limite plausible mais fausse est pire qu'un message d'erreur. La correction sûre : rétablir l'ordre des points d'après les notes de terrain, ou relever la parcelle à nouveau.</p>
+<h2>Comment trouver et corriger</h2>
+<ol>
+<li>Ouvrez le fichier dans QGIS et lancez « Vérifier la validité » (Vecteur, Outils de géométrie). L'outil indique l'emplacement de chaque auto-intersection.</li>
+<li>Zoomez sur cet endroit. Si deux sommets sont simplement inversés, remettez-les dans l'ordre ; si une pointe vient de l'instabilité du GPS à un coin, supprimez les points en trop.</li>
+<li>Si vous ne savez pas où passe la limite, marquez la parcelle pour un nouveau relevé.</li>
+<li>Relancez le contrôle avant l'export.</li>
+</ol>
+<h2>Ce que fait le vérificateur</h2>
+<p>Les auto-intersections, pincements en huit et pointes sont signalés comme des erreurs et ne sont <b>jamais corrigés</b> par le vérificateur ; la parcelle est signalée pour un nouveau relevé. Un contour qui se croise n'est jamais réorienté ni reconstruit. Vous pouvez télécharger le fichier corrigé sans les parcelles encore en erreur, pour que les parcelles propres ne soient pas bloquées pendant que les autres sont relevées à nouveau.</p>
+  </article>
+  <aside class="card cta"><b>Vérifiez un fichier de parcelles gratuitement</b>Déposez un fichier GeoJSON, KML ou CSV dans le vérificateur de fichiers de parcelles RDUE. Il signale chaque problème de cette liste, corrige ceux qui peuvent l'être sans risque (fermeture des contours, décimales, noms de propriétés, inversions évidentes) et fournit un GeoJSON corrigé. En français ou en anglais ; rien n'est envoyé.<br><a class="btn" href="/plot-file-checker/">Ouvrir le vérificateur</a></aside>
+  <section><h2>Voir aussi</h2><div class="grid"><a class="tile" href="/fr/learn/eudr/unclosed-polygon/"><b>Polygone non fermé : le premier et le dernier point doivent être identiques</b><span>Contours ouverts et polygones avec trop peu de sommets.</span></a><a class="tile" href="/fr/learn/eudr/polygon-holes/"><b>Polygones avec trous refusés : la solution des deux moitiés</b><span>Une forme en anneau doit être découpée en deux polygones.</span></a><a class="tile" href="/fr/learn/eudr/six-decimal-places/"><b>Décimales : au moins 6, et l'effet de la troncature sur vos polygones</b><span>Trop peu de décimales, et doublons créés par la troncature.</span></a><a class="tile" href="/fr/learn/eudr/"><b>Toutes les pages : Erreurs de fichiers RDUE</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>Système d'information RDUE, « GeoJSON File Description » (mise à jour du 17 août 2026, en anglais): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Système d'information RDUE, « API and UI Validation Rules » (en anglais): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li><li>Vérificateur de fichiers de parcelles RDUE de Quickwell, tableau des règles: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources ouvertes et vérifiées le 11 octobre 2026.</p></section>
+  <p class="disclaimer">Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour.</p>
+  <footer><a href="/">Accueil Quickwell</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a></footer>
+</main>
+</body>
+</html>

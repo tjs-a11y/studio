@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR Self-Intersecting Polygon Error: Figure-Eights, Crossing Lines and Spikes</title>
+<meta name="description" content="The EU Information System rejects plot polygons whose edges cross (figure-eight shapes), fold back over themselves or form spikes. Why these shapes happen, why they can't be auto-fixed, and how to re-map them.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/self-intersecting-polygon/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/self-intersecting-polygon/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/self-intersecting-polygon/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"Self-intersecting polygon: crossing lines, figure-eights and spikes","item":"https://quickwell.example/learn/eudr/self-intersecting-polygon/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Self-intersecting polygon: crossing lines, figure-eights and spikes","description":"The EU Information System rejects plot polygons whose edges cross (figure-eight shapes), fold back over themselves or form spikes. Why these shapes happen, why they can't be auto-fixed, and how to re-map them.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/self-intersecting-polygon/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">Self-intersecting polygon: crossing lines, figure-eights and spikes</li></ol></nav>
+  <article>
+    <h1>Self-intersecting polygon: crossing lines, figure-eights and spikes</h1>
+    <p class="lede">A plot polygon whose boundary crosses itself, like a figure eight, is not accepted by the EU Information System. Neither are shapes whose sides overlap or fold back into a spike.</p>
+    <p class="meta"><a href="/fr/learn/eudr/self-intersecting-polygon/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<p>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> says that "shapes with crossing lines (like a figure eight for example) are not supported and will not be processed". Its list of common errors starts with "coordinate lines crossing (i.e. figure eight shapes or intersecting polygon lines)" and "overlapping sides: internal overlap or holes where part of the polygon folds inward ... are not accepted by the system". The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">Validation Rules</a> add, more generally, that geolocation data cannot contain invalid geometry such as invalid polygons.</p>
+<h2>How these shapes happen</h2>
+<ul>
+<li><b>Corners out of order.</b> Points recorded clockwise for half the field and counter-clockwise for the rest, or sorted by ID instead of walking order, make edges cross.</li>
+<li><b>GPS jitter.</b> Standing still while the GPS logs several points can produce a tiny loop or a spike where the boundary goes out and back on itself.</li>
+<li><b>Closing an unfinished boundary.</b> A straight closing line across a half-walked plot can cut through another edge.</li>
+<li><b>Truncation.</b> Rarely, cutting coordinates to 6 decimals makes two nearby corners collide; see <a href="/learn/eudr/six-decimal-places/">decimal places</a>.</li>
+</ul>
+<h2>Why it shouldn't be fixed automatically</h2>
+<p>Software can "repair" a self-crossing polygon, for example by splitting it into two pieces or rebuilding it around its outer edge. But each repair is a guess about where the real boundary is, and the result may include land that isn't part of the farm or leave out land that is. For a deforestation declaration, a plausible-looking wrong boundary is worse than an error message. The safe fix is to correct the point order from the field notes, or re-map the plot.</p>
+<h2>How to find and fix it</h2>
+<ol>
+<li>Open the file in QGIS and run "Check validity" (Vector, Geometry Tools). It lists the location of each self-intersection.</li>
+<li>Zoom to the location. If two corners are simply in the wrong order, reorder them; if a spike comes from GPS jitter at one corner, delete the extra points.</li>
+<li>If you can't tell what the boundary should be, mark the plot for re-mapping.</li>
+<li>Run the check again before exporting.</li>
+</ol>
+<h2>What the Plot File Checker does</h2>
+<p>Self-intersections, figure-eight pinches and spikes are reported as errors and are <b>never fixed</b> by the checker; the plot is flagged for re-mapping. A self-crossing ring is never rewound or rebuilt. You can download the fixed file with plots that still have errors left out, so the clean plots aren't held up while the problem ones are re-mapped.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/unclosed-polygon/"><b>Unclosed polygon: the first and last point must be the same</b><span>Open rings and polygons with too few corners.</span></a><a class="tile" href="/learn/eudr/polygon-holes/"><b>Polygons with holes are not accepted: the two-halves workaround</b><span>Doughnut shapes must be split into two polygons.</span></a><a class="tile" href="/learn/eudr/six-decimal-places/"><b>Decimal places: at least 6, and what truncation does to your polygons</b><span>Too few decimals, and duplicates created by truncation.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>EU Information System, &quot;API and UI Validation Rules&quot;: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

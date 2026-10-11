@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR GeoJSON &quot;Open&quot; Polygon Error: Closing the Ring</title>
+<meta name="description" content="Every EUDR plot polygon must be closed: the first and last coordinate pair must be identical, and a polygon needs at least four positions. Why polygons come out open and how to close them.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/unclosed-polygon/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/unclosed-polygon/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/unclosed-polygon/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"Unclosed polygon: the first and last point must be the same","item":"https://quickwell.example/learn/eudr/unclosed-polygon/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Unclosed polygon: the first and last point must be the same","description":"Every EUDR plot polygon must be closed: the first and last coordinate pair must be identical, and a polygon needs at least four positions. Why polygons come out open and how to close them.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/unclosed-polygon/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">Unclosed polygon: the first and last point must be the same</li></ol></nav>
+  <article>
+    <h1>Unclosed polygon: the first and last point must be the same</h1>
+    <p class="lede">A polygon in an EUDR plot file must be a closed shape: its last coordinate pair must repeat the first. "Open" polygons are on the EU's list of common GeoJSON errors.</p>
+    <p class="meta"><a href="/fr/learn/eudr/unclosed-polygon/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<p>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> defines a Polygon as at least four pairs of coordinates representing an enclosed area, and notes that "the first and last point's coordinates of polygons are the same (they coincide geographically to close the shape)". Its list of common errors includes "Open polygons. All polygons must represent closed shapes (i.e. the 1st coordinate pair same as the last)".</p>
+<p>So a triangle needs four positions (three corners plus the first one again), and a four-cornered field needs five.</p>
+<h2>Why polygons come out open</h2>
+<ul>
+<li><b>Walked boundaries.</b> A field agent walks the plot with a GPS app and stops a few metres before the starting point. The app saves the corners as recorded.</li>
+<li><b>Spreadsheet conversion.</b> One row per corner, converted to GeoJSON by a script that doesn't add the closing point.</li>
+<li><b>Lines instead of polygons.</b> Some apps save a walked boundary as a LineString. That's a different error; see <a href="/learn/eudr/linestring-not-accepted/">LineString not accepted</a>.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Closing a ring is safe when the plot is otherwise sound: copy the first coordinate pair to the end of the ring. In QGIS, the "Fix geometries" tool or simply re-saving a polygon layer as GeoJSON closes rings. If you edit the file by hand, the closing pair must match the first pair exactly, to every decimal.</p>
+<p>Before closing, look at the gap. If the last point is far from the first, closing it draws a straight line across the field and may cut off part of the plot, or cross another edge and create a <a href="/learn/eudr/self-intersecting-polygon/">self-intersection</a>. A large gap usually means the boundary wasn't finished and should be re-mapped.</p>
+<h2>Too few corners</h2>
+<p>A ring with fewer than three distinct corners can't enclose an area; neither can corners that all lie on one line. The EU page lists "coordinate shapes representing straight lines" among the common errors. These can't be fixed by editing; the plot needs to be mapped again, or submitted as a point if it is 4 hectares or less (see <a href="/learn/eudr/point-area-over-4-hectares/">points and the 4 ha rule</a>).</p>
+<h2>What the Plot File Checker does</h2>
+<ul>
+<li>Ring not closed: an error, closed automatically in the fixed file.</li>
+<li>Fewer than 3 distinct corners, or a flat shape: an error, not fixable automatically.</li>
+<li>A closed LineString: turned into a Polygon and marked "check this", because the checker can't know whether the line was meant as a boundary.</li>
+</ul>
+<p>After closing, the checker re-runs the shape tests, so a ring that becomes self-crossing when closed is still reported.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/self-intersecting-polygon/"><b>Self-intersecting polygon: crossing lines, figure-eights and spikes</b><span>Figure-8 shapes, overlapping sides and spikes are rejected.</span></a><a class="tile" href="/learn/eudr/linestring-not-accepted/"><b>LineString and MultiLineString are not accepted for plots</b><span>Lines don't describe a production place.</span></a><a class="tile" href="/learn/eudr/polygon-holes/"><b>Polygons with holes are not accepted: the two-halves workaround</b><span>Doughnut shapes must be split into two polygons.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

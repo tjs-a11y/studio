@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR GeoJSON Properties: ProducerName, ProducerCountry, ProductionPlace and Area</title>
+<meta name="description" content="The EU Information System reads four optional GeoJSON properties, with case-sensitive names: ProducerName, ProducerCountry (ISO 2-letter code), ProductionPlace and Area. Common naming mistakes and how to fix them.">
+<link rel="canonical" href="https://quickwell.example/learn/eudr/property-names/">
+<link rel="alternate" hreflang="en" href="https://quickwell.example/learn/eudr/property-names/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.example/fr/learn/eudr/property-names/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"EUDR plot file errors","item":"https://quickwell.example/learn/eudr/"},{"@type":"ListItem","position":4,"name":"Property names: ProducerName, ProducerCountry, ProductionPlace, Area","item":"https://quickwell.example/learn/eudr/property-names/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Property names: ProducerName, ProducerCountry, ProductionPlace, Area","description":"The EU Information System reads four optional GeoJSON properties, with case-sensitive names: ProducerName, ProducerCountry (ISO 2-letter code), ProductionPlace and Area. Common naming mistakes and how to fix them.","inLanguage":"en","url":"https://quickwell.example/learn/eudr/property-names/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/eudr/">EUDR plot file errors</a></li><li aria-current="page">Property names: ProducerName, ProducerCountry, ProductionPlace, Area</li></ol></nav>
+  <article>
+    <h1>Property names: ProducerName, ProducerCountry, ProductionPlace, Area</h1>
+    <p class="lede">The EU Information System reads four optional properties on each plot. Their names are case-sensitive, and anything else is ignored, so "pays" or "productionplace" silently carries no information.</p>
+    <p class="meta"><a href="/fr/learn/eudr/property-names/" hreflang="fr" lang="fr">Version française</a></p>
+
+<h2>What the EU documentation says</h2>
+<p>The <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">GeoJSON File Description</a> lists the optional properties the system processes:</p>
+<div class="tbl"><table>
+<tr><th>Property</th><th>Meaning</th></tr>
+<tr><td><code>ProducerName</code></td><td>Optional producer name for the geometry</td></tr>
+<tr><td><code>ProducerCountry</code></td><td>Country of production, as an ISO 2-letter code</td></tr>
+<tr><td><code>ProductionPlace</code></td><td>Optional name of the production place (recommended)</td></tr>
+<tr><td><code>Area</code></td><td>Area in hectares, for Point geometries</td></tr>
+</table></div>
+<p>Any other syntactically valid property is ignored. The page lists "invalid property names (e.g. ... incorrect property keyword case: 'productionplace' instead of 'ProductionPlace')" and "invalid producer country ISO2 code" among the common errors. It also notes that <code>"Area": "3"</code> in quotes is read as 0.</p>
+<h2>Type I and Type II files</h2>
+<p>The EU describes two variants with the same structure. A <b>Type I</b> file is used through the API and at producer level in the web interface. A <b>Type II</b> file, imported at commodity level in the web interface, contains several producers grouped by ProducerName and ProducerCountry, and must include <b>ProducerCountry on every feature</b>. The system also recommends always including ProductionPlace.</p>
+<h2>Common mistakes</h2>
+<ul>
+<li><b>Translated or local names</b>: <code>pays</code>, <code>superficie</code>, <code>nom_producteur</code>, <code>country</code>.</li>
+<li><b>Wrong case</b>: <code>producerCountry</code>, <code>PRODUCERNAME</code>, <code>area</code>.</li>
+<li><b>Country names instead of codes</b>: <code>"Côte d'Ivoire"</code>, <code>"Ghana"</code>, or 3-letter codes like <code>CIV</code>. The value should be the 2-letter code, for example <code>CI</code>, <code>GH</code>, <code>CM</code>, <code>ET</code>, <code>BR</code>.</li>
+<li><b>Lower-case codes</b>: <code>ci</code> instead of <code>CI</code>.</li>
+<li><b>Area as text or in the wrong unit</b>; see <a href="/learn/eudr/point-area-over-4-hectares/">the 4 ha rule</a>.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Rename the columns in your source spreadsheet to the exact names above before converting, or rename the fields in QGIS (layer properties, Fields). Replace country names with 2-letter codes. Then open the GeoJSON in a text editor and check one feature by eye.</p>
+<h2>What the Plot File Checker does</h2>
+<ul>
+<li>Recognized aliases and wrong case (<code>pays</code>, <code>superficie</code>, <code>producer_name</code>, <code>productionplace</code> and others): a warning, renamed to the official names in the fixed file.</li>
+<li>ProducerCountry that isn't a 2-letter code: an error, converted to the ISO 2-letter code when the country is recognizable.</li>
+<li>ProducerCountry missing on some plots only: a warning.</li>
+<li>A plot that lies outside its stated ProducerCountry: a warning, which often reveals <a href="/learn/eudr/swapped-coordinates/">swapped coordinates</a>.</li>
+</ul>
+<h2>A minimal correct feature</h2>
+<pre>{"type":"Feature",
+ "properties":{"ProducerName":"Coop Example","ProducerCountry":"CI",
+               "ProductionPlace":"Plot 12","Area":2.5},
+ "geometry":{"type":"Point","coordinates":[-4.012345,5.312345]}}</pre>
+<p>This example is fictional. Note the exact capitalization of each name, the 2-letter country code, the number without quotes for Area, and longitude before latitude. Properties beyond these four can stay in your own records; the system ignores them, so they only add to file size.</p>
+  </article>
+  <aside class="card cta"><b>Check a plot file for free</b>Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.<br><a class="btn" href="/plot-file-checker/">Open the Plot File Checker</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/eudr/point-area-over-4-hectares/"><b>Points and the 4-hectare rule: when a plot needs a polygon</b><span>A point with Area over 4 ha is an error (except cattle).</span></a><a class="tile" href="/learn/eudr/swapped-coordinates/"><b>Swapped coordinates: latitude and longitude in the wrong order</b><span>GeoJSON wants longitude first; spreadsheets often put latitude first.</span></a><a class="tile" href="/learn/eudr/file-size-limit/"><b>File size and volume limits: 25 MB per statement, 1,000 producers per commodity</b><span>The 25 MB limit and producer-count limits.</span></a><a class="tile" href="/learn/eudr/"><b>All of the eudr plot file errors</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>EU Information System, &quot;GeoJSON File Description&quot; (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li><li>Quickwell EUDR Plot File Checker, rule table and documentation: <a href="/plot-file-checker/" rel="noopener">/plot-file-checker/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
