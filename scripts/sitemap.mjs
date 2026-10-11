@@ -1,0 +1,38 @@
+// Writes sitemap-main.xml (home, tools, guides, privacy, terms) and sitemap.xml, a sitemap index that lists
+// sitemap-main.xml plus every other sitemap-*.xml at the repo root (e.g. sitemap-learn.xml).
+// Each page's URL is read from its own <link rel="canonical">, and EN/FR pairs from its hreflang links,
+// so the sitemap always matches the pages. Origin comes from site.config.json.
+//   node scripts/sitemap.mjs
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const origin = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin;
+const today = process.env.SITEMAP_DATE || new Date().toISOString().slice(0, 10);
+const tools = JSON.parse(readFileSync(join(root, 'catalog', 'tools.json'), 'utf8')).tools.map((t) => `${t.id}/index.html`);
+const guides = existsSync(join(root, 'guides'))
+  ? ['guides/index.html', ...readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, 'guides', d.name, 'index.html'))).map((d) => `guides/${d.name}/index.html`).sort()]
+  : [];
+export const MAIN_PAGES = ['index.html', ...tools, ...guides, 'privacy.html', 'terms.html'];
+
+const xml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const entries = MAIN_PAGES.map((f) => {
+  const html = readFileSync(join(root, f), 'utf8');
+  const canon = /<link rel="canonical" href="([^"]+)">/.exec(html);
+  if (!canon) throw new Error(`${f} has no canonical link`);
+  const alts = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)];
+  return `  <url><loc>${xml(canon[1])}</loc><lastmod>${today}</lastmod>${alts.map((a) => `\n    <xhtml:link rel="alternate" hreflang="${a[1]}" href="${xml(a[2])}"/>`).join('')}</url>`;
+});
+writeFileSync(join(root, 'sitemap-main.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${entries.join('\n')}
+</urlset>
+`);
+const parts = ['sitemap-main.xml', ...readdirSync(root).filter((n) => /^sitemap-.+\.xml$/.test(n) && n !== 'sitemap-main.xml').sort()];
+writeFileSync(join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${parts.map((p) => `  <sitemap><loc>${origin}/${p}</loc><lastmod>${today}</lastmod></sitemap>`).join('\n')}
+</sitemapindex>
+`);
+console.log(`sitemap-main.xml: ${entries.length} pages; sitemap.xml indexes ${parts.join(', ')}`);
