@@ -184,15 +184,16 @@
 
   <section class="card noprint">
     <h2>The new entrant audit, in plain English</h2>
-    <details><summary>What is it, and when does it happen?</summary><p>New US carriers with a USDOT number are "new entrants" and are monitored for 18 months (49 CFR 385.307). FMCSA aims to do a safety audit within the first 12 months of operation for property carriers (49 CFR 385.308). Exact timing varies, so get ready from day one.</p></details>
-    <details><summary>What happens if I fail?</summary><p>FMCSA sends a written notice. You get a limited time to send proof that you fixed the problems (a corrective action plan). If you don't, your new entrant registration is revoked and you must stop interstate operations (49 CFR 385.319, 385.325). The deadline is in the notice. Read it the day it arrives.</p></details>
-    <details><summary>Why do some rules say "51% of records"?</summary><p>For hours-of-service records (395.8(a)) and periodic inspections (396.17(a)), FMCSA's 2008 rule says a fail needs a pattern: violations in 51% or more of the records checked. Every other rule on the list fails on a single occurrence. Don't aim for 50%. Every record should be right.</p></details>
+    <details><summary>What is it, and when does it happen?</summary><p>New carriers are "new entrants" and are monitored for 18 months (49 CFR 385.307). The safety audit comes once you have enough records to review, generally after at least 3 months of operation (385.307(b)). FMCSA generally aims to finish it within your first 12 months (sooner for passenger carriers); that target is not in the regulation text, so exact timing varies. Some events, like a roadside out-of-service order or a positive drug test, can trigger an expedited audit (385.308). Get ready from day one.</p></details>
+    <details><summary>What happens if I fail?</summary><p>FMCSA sends a written notice within 45 days of the audit. You then have 60 days from the notice date to fix the problems and send proof (45 days for passenger carriers and certain hazmat carriers). If you don't, your new entrant registration is revoked and an out-of-service order takes effect on day 61 (or day 46), and you must stop interstate operations (49 CFR 385.319(c), 385.325). Read the notice the day it arrives.</p></details>
+    <details><summary>Why do some rules say "51% of records"?</summary><p>For hours-of-service records (395.8(a)) and periodic inspections (396.17(a)), the 385.321(b) table says a fail needs a pattern: violations in 51% or more of the records examined. Every other rule on the list fails on a single occurrence. Don't aim for 50%. Every record should be right.</p></details>
     <details><summary>My trucks don't need a CDL. What applies?</summary><p>Drug and alcohol testing (Part 382) and the CDL rules (Part 383) apply to drivers of vehicles that need a CDL: generally 26,001 lbs or more, 16 or more passengers, or placarded hazmat (see 49 CFR 383.5). Medical cards, hours of service, inspections and insurance still apply to most interstate carriers with vehicles of 10,001 lbs or more. Check the definitions before you skip anything.</p></details>
     <details><summary>Sources</summary><ul class="note">
       <li>49 CFR 385.321 (automatic-fail list): <a href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-385/subpart-D/section-385.321" rel="noopener">ecfr.gov</a></li>
       <li>49 CFR Part 385 Subpart D (new entrant program): <a href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-385/subpart-D" rel="noopener">ecfr.gov</a></li>
       <li>FMCSA: what would cause a carrier to fail a new entrant safety audit: <a href="https://www.fmcsa.dot.gov/faq/what-would-cause-motor-carrier-fail-new-entrant-safety-audit-ss-385321" rel="noopener">fmcsa.dot.gov</a></li>
-      <li>2008 final rule (51% threshold for 395.8(a) and 396.17(a)): <a href="https://www.federalregister.gov/documents/2008/12/16/E8-29253/new-entrant-safety-assurance-process" rel="noopener">federalregister.gov</a></li>
+      <li>2008 final rule that created the automatic-fail table (73 FR 76489, Dec. 16, 2008, as cited in the eCFR): <a href="https://www.federalregister.gov/documents/2008/12/16/E8-29253/new-entrant-safety-assurance-process" rel="noopener">federalregister.gov</a></li>
+      <li>Regulation text checked against the eCFR (up to date as of Oct 7, 2026). Rules change, so recheck before relying on it.</li>
       <li>Drug &amp; Alcohol Clearinghouse: <a href="https://clearinghouse.fmcsa.dot.gov/" rel="noopener">clearinghouse.fmcsa.dot.gov</a></li>
     </ul></details>
   </section>
@@ -234,56 +235,60 @@
     return '<span class="okd">OK</span>';
   }
 
-  // ---------- the 16 automatic-fail rules: 49 CFR 385.321(b) ----------
+  // ---------- the 16 automatic-fail rules: 49 CFR 385.321(b), checked against eCFR up to date as of Oct 7, 2026 ----------
+  // n = row number in the official table. Row 1 covers 382.115(a) (domestic) and (b) (foreign); only one applies to a carrier, so at most 16 apply.
   // applies(ctx): ctx = { cdl: 'yes'|'no'|'unsure', haul: 'freight'|'passengers'|'both', foreign: 'yes'|'no' }
   const needsCdl = (c) => c.cdl !== 'no';
   const RULES = [
-    { id: 'r1', cite: '§382.115(a)', title: 'Drug & alcohol testing program (US carriers)', applies: (c) => needsCdl(c) && c.foreign !== 'yes',
+    { id: 'r1', n: 1, cite: '§382.115(a)', title: 'Drug & alcohol testing program (US carriers)', applies: (c) => needsCdl(c) && c.foreign !== 'yes',
       q: 'Do you have a DOT drug and alcohol testing program in place (your own, or through a consortium/third-party administrator), set up before any CDL driver started work?',
       fix: 'Join a consortium/TPA (owner-operators must, to be in a random pool), adopt a written policy, and register in the FMCSA Drug & Alcohol Clearinghouse. Keep the enrollment certificate.' },
-    { id: 'r2', cite: '§382.115(b)', title: 'Drug & alcohol testing program (Canada/Mexico-domiciled carriers)', applies: (c) => needsCdl(c) && c.foreign === 'yes',
+    { id: 'r2', n: 1, cite: '§382.115(b)', title: 'Drug & alcohol testing program (foreign-domiciled carriers)', applies: (c) => needsCdl(c) && c.foreign === 'yes',
       q: 'As a foreign-domiciled carrier, do you have a DOT drug and alcohol testing program in place before operating in the US?',
       fix: 'Set up a Part 382 program (consortium/TPA, written policy, Clearinghouse registration) before operating in the US. Keep proof.' },
-    { id: 'r3', cite: '§382.201', title: 'Alcohol 0.04 or higher', applies: needsCdl,
+    { id: 'r3', n: 2, cite: '§382.201', title: 'Alcohol 0.04 or higher', applies: needsCdl,
       q: 'Can you say no driver has ever done safety-sensitive work for you while known to have an alcohol concentration of 0.04 or higher?',
       fix: 'A driver at 0.04 or higher must be removed from safety-sensitive work at once and cannot return until the return-to-duty process is done (substance abuse professional evaluation and a negative return-to-duty test: §382.503, 49 CFR Part 40 Subpart O).' },
-    { id: 'r4', cite: '§382.211', title: 'Driver who refused a test', applies: needsCdl,
+    { id: 'r4', n: 3, cite: '§382.211', title: 'Driver who refused a test', applies: needsCdl,
       q: 'Can you say no driver who refused a required drug or alcohol test has kept doing safety-sensitive work for you?',
       fix: 'A refusal counts like a positive test. Remove the driver from safety-sensitive work until the return-to-duty process is complete. Know what counts as a refusal (49 CFR 40.191 and 40.261).' },
-    { id: 'r5', cite: '§382.215', title: 'Driver who tested positive for drugs', applies: needsCdl,
+    { id: 'r5', n: 4, cite: '§382.215', title: 'Driver who tested positive for drugs', applies: needsCdl,
       q: 'Can you say no driver known to have tested positive for drugs has kept doing safety-sensitive work for you?',
       fix: 'Remove the driver right away. They can return only after the substance abuse professional process and a negative return-to-duty test. Check the Clearinghouse before every hire.' },
-    { id: 'r6', cite: '§382.305', title: 'Random testing program', applies: needsCdl,
+    { id: 'r6', n: 5, cite: '§382.305', title: 'Random testing program', applies: needsCdl,
       q: 'Is every CDL driver, including you if you drive, in a random drug and alcohol testing pool right now?',
       fix: 'Enroll every CDL driver in a random pool. Owner-operators must use a consortium/TPA. Keep the selection records and the consortium\'s annual summary.' },
-    { id: 'r7', cite: '§383.3(a) / §383.23(a)', title: 'Driver without a valid CDL', applies: needsCdl,
+    { id: 'r7', n: 6, cite: '§383.3(a) / §383.23(a)', title: 'Driver without a valid CDL', applies: needsCdl,
       q: 'Does every driver of a CDL-required vehicle hold a valid CDL of the right class, with the endorsements the load needs?',
       fix: 'Check the class and endorsements against each vehicle and load. Keep a copy of each CDL in the driver file and track expiry dates.' },
-    { id: 'r8', cite: '§383.37', title: 'Suspended, revoked, canceled or disqualified CDL', applies: needsCdl,
-      q: 'Do you check each driver\'s license status (driving record) so no one with a suspended, revoked, canceled or disqualified CDL drives for you?',
+    { id: 'r8', n: 7, cite: '§383.37(b)', title: 'CDL disqualified, or right to drive a CMV lost in a State', applies: needsCdl,
+      q: 'Do you check each driver\'s license status (driving record) so no one whose CDL or learner\'s permit is disqualified, or who has lost the right to drive a CMV in any State, drives for you?',
       fix: 'Pull a driving record (MVR) before hire and at least every 12 months, and act on any change at once. Many states offer license-status alerts.' },
-    { id: 'r9', cite: '§387.7(a)', title: 'Insurance at the required level (property carriers)', applies: (c) => c.haul !== 'passengers',
+    { id: 'r17', n: 8, cite: '§383.51(a)', title: 'Driver disqualified under the CDL rules', applies: needsCdl,
+      q: 'Can you say you have never knowingly let a driver who is disqualified under the CDL rules (for example after a DUI or serious traffic convictions) drive a CDL vehicle for you?',
+      fix: 'Check each driver\'s driving record before hire and at least every 12 months, ask drivers to tell you about any conviction or disqualification, and take a disqualified driver off CDL work at once. §383.51 lists the offenses and disqualification periods.' },
+    { id: 'r9', n: 9, cite: '§387.7(a)', title: 'Insurance at the required level (property carriers)', applies: (c) => c.haul !== 'passengers',
       q: 'Do you carry liability insurance at or above the federal minimum for what you haul (§387.9), and keep the MCS-90 endorsement or other accepted proof at your office?',
-      fix: 'Confirm your limit against the table in §387.9 (for example $750,000 for most general freight in vehicles of 10,001 lbs or more; higher for some hazmat). Keep the MCS-90 at your principal place of business (§387.7(d)) and never let the policy lapse.' },
-    { id: 'r10', cite: '§387.31(a)', title: 'Insurance at the required level (passenger carriers)', applies: (c) => c.haul !== 'freight',
+      fix: 'Confirm your limit against the table in §387.9 (for example $750,000 for for-hire, non-hazardous freight in interstate commerce in vehicles of 10,001 lbs GVWR or more; $1,000,000 or $5,000,000 for hazmat, depending on the material). Keep the MCS-90 at your principal place of business (§387.7(d)) and never let the policy lapse.' },
+    { id: 'r10', n: 10, cite: '§387.31(a)', title: 'Insurance at the required level (passenger carriers)', applies: (c) => c.haul !== 'freight',
       q: 'For passenger service, do you carry liability insurance at or above the federal minimum for your vehicle seating (§387.33), with the MCS-90B endorsement or accepted proof?',
       fix: 'Check your limit against §387.33 for your vehicles\' seating capacity and keep the MCS-90B at your principal place of business.' },
-    { id: 'r11', cite: '§391.15(a)', title: 'Disqualified driver', applies: () => true,
+    { id: 'r11', n: 11, cite: '§391.15(a)', title: 'Disqualified driver', applies: () => true,
       q: 'Do you check that no driver is disqualified from driving a commercial motor vehicle, before hiring and while they drive for you?',
       fix: 'Review each driver\'s driving record and past-employer history before hire, and the driving record at least every 12 months. Remove any disqualified driver at once.' },
-    { id: 'r12', cite: '§391.11(b)(4)', title: 'Driver without a valid medical certificate', applies: () => true,
+    { id: 'r12', n: 12, cite: '§391.11(b)(4)', title: 'Driver without a valid medical certificate', applies: () => true,
       q: 'Does every driver have a current DOT medical certificate from an examiner on the National Registry, with proof in the driver\'s file?',
-      fix: 'Get each driver examined by an examiner listed on the National Registry. Keep the certificate (or, for CDL drivers, the state record showing medical certification) and verify the examiner (§391.51(b)(7), (9)). Track expiry dates.' },
-    { id: 'r13', cite: '§395.8(a)', title: 'No hours-of-service records', applies: () => true, threshold: true,
+      fix: 'Get each driver examined by an examiner listed on the National Registry. Keep the certificate (or, for CDL drivers, the state record showing medical certification) and for non-CDL drivers note that you verified the examiner is on the Registry (§391.51(b)(6), (b)(8)). Track expiry dates.' },
+    { id: 'r13', n: 13, cite: '§395.8(a)', title: 'No hours-of-service records', applies: () => true, threshold: true,
       q: 'Does every driver record hours of service every day, on a registered ELD (or a paper log or short-haul time record only where the rules allow)?',
       fix: 'Use an ELD on FMCSA\'s registered list unless an exception applies (for example short-haul under §395.1(e)). Keep logs and supporting documents for 6 months (§395.8(k)).' },
-    { id: 'r14', cite: '§396.9(c)(2)', title: 'Operating an out-of-service vehicle', applies: () => true,
+    { id: 'r14', n: 14, cite: '§396.9(c)(2)', title: 'Operating an out-of-service vehicle', applies: () => true,
       q: 'Can you say no vehicle placed out of service at a roadside inspection has been driven before the repairs were made?',
-      fix: 'Never move an out-of-service vehicle until it is repaired. Certify the repairs on the inspection report and return it as the report directs (§396.9(d)). Keep the paperwork in the vehicle file.' },
-    { id: 'r15', cite: '§396.11(a)(3)', title: 'Out-of-service defects on a driver report not fixed', applies: () => true,
+      fix: 'Never move an out-of-service vehicle until it is repaired. Within 15 days of the inspection, certify the repairs on the inspection report, return it to the issuing State if asked, and keep a copy for 12 months (§396.9(d)(3)). Keep the paperwork in the vehicle file.' },
+    { id: 'r15', n: 15, cite: '§396.11(a)(3)', title: 'Out-of-service defects on a driver report not fixed', applies: () => true,
       q: 'When a driver reports a defect that would put the vehicle out of service, is it fixed, and the fix certified on the report, before the vehicle runs again?',
       fix: 'Repair reported defects before the next trip, sign the repair certification on the DVIR, and keep DVIRs for 3 months (§396.11(a)(4)).' },
-    { id: 'r16', cite: '§396.17(a)', title: 'No periodic (annual) inspection', applies: () => true, threshold: true,
+    { id: 'r16', n: 16, cite: '§396.17(a)', title: 'No periodic (annual) inspection', applies: () => true, threshold: true,
       q: 'Has every truck and trailer you run passed a periodic (annual) inspection in the last 12 months, with the report or decal as proof?',
       fix: 'Get an annual inspection by a qualified inspector (§396.19) for every unit, including trailers. Keep the report for 14 months (§396.21) and carry proof on the vehicle.' },
   ];
@@ -300,9 +305,9 @@
   const segHtml = (name, opts, val) => `<div class="seg" role="radiogroup">${opts.map(([v, l]) => `<label><input type="radio" name="${name}" value="${v}"${val === v ? ' checked' : ''}><span>${l}</span></label>`).join('')}</div>`;
   function drawSetup() { $('setup').innerHTML = SETUP.map((s) => `<div><p>${esc(s.q)}</p>${segHtml('s_' + s.k, s.opts, ctx[s.k])}</div>`).join(''); }
   function drawQuestions() {
-    $('questions').innerHTML = RULES.map((r, i) => {
+    $('questions').innerHTML = RULES.map((r) => {
       const ok = r.applies(ctx);
-      return `<div class="q${ok ? '' : ' na'}" data-id="${r.id}"><p><span class="num">${i + 1}</span>${esc(r.q)} <span class="cite">${esc(r.cite)}</span>${r.threshold ? '<span class="chip">51% of records</span>' : ''}${ok ? '' : '<span class="chip">Doesn\'t apply to you</span>'}</p>${segHtml('q_' + r.id, [['yes', 'Yes'], ['no', 'No'], ['unsure', 'Not sure']], answers[r.id])}</div>`;
+      return `<div class="q${ok ? '' : ' na'}" data-id="${r.id}"><p><span class="num">${r.n}</span>${esc(r.q)} <span class="cite">${esc(r.cite)}</span>${r.threshold ? '<span class="chip">51% of records</span>' : ''}${ok ? '' : '<span class="chip">Doesn\'t apply to you</span>'}</p>${segHtml('q_' + r.id, [['yes', 'Yes'], ['no', 'No'], ['unsure', 'Not sure']], answers[r.id])}</div>`;
     }).join('');
   }
   $('setup').addEventListener('change', (e) => { const k = e.target.name.slice(2); ctx[k] = e.target.value; ls.set('ctx', ctx); drawQuestions(); if (!$('result').hidden) score(false); });
@@ -349,10 +354,10 @@
       ['Driving record (MVR) from every state where the driver held a license in the past 3 years, requested within 30 days of hire', '§391.23(a)(1)'],
       ['Safety performance history from DOT-regulated employers in the past 3 years, including drug & alcohol history, requested within 30 days of hire', '§391.23(a)(2), (c)–(e)'],
       ['Road test certificate, or an accepted equivalent such as a copy of a valid CDL', '§391.31, §391.33'],
-      ['Medical examiner\'s certificate, or for CDL drivers the state record showing medical certification', '§391.43, §391.51(b)(7)'],
-      ['Note verifying the medical examiner is on the National Registry', '§391.51(b)(9)'],
+      ['Medical examiner\'s certificate (or a legible copy); for CDL drivers, the CDLIS driving record from the current licensing State showing medical certification', '§391.43(g), §391.51(b)(6)'],
+      ['Non-CDL drivers: note verifying the medical examiner is on the National Registry', '§391.23(m)(1), §391.51(b)(8)'],
       ['Annual driving record (MVR) from each state, at least every 12 months', '§391.25(a)'],
-      ['Annual review of the driving record, signed and dated by the reviewer', '§391.25(b)–(c)'],
+      ['Note of the annual driving-record review, with the reviewer\'s name and the date', '§391.25(b), (c)(2)'],
       ['Copy of the CDL / license (class, endorsements, expiry checked against vehicles and loads)', '§383.23'],
       ['Clearinghouse: pre-employment full query before first safety-sensitive work; limited query at least once a year (CDL drivers; may be kept in the drug & alcohol file)', '§382.701'],
       ['Pre-employment drug test with a verified negative result before first safety-sensitive work (CDL drivers; keep in the drug & alcohol file)', '§382.301'],
@@ -411,10 +416,10 @@
       ])}`);
     const drv = P.drivers.length ? P.drivers : [];
     const preRows = drv.map((d, i) => `<tr><td>${esc(driverName(d, i))}</td><td>${d.hire ? fmt(parseD(d.hire)) : ''}</td><td></td><td></td><td></td><td></td></tr>`).join('') + blanks(Math.max(3, 8 - drv.length), 6);
-    const preLog = page(P, 'Pre-Employment Test Log', `<h2>Pre-Employment Drug Test Log</h2><p>A verified negative result is required before a driver's first safety-sensitive work ${cite('§382.301')}. Pre-employment alcohol testing is optional.</p>
+    const preLog = page(P, 'Pre-Employment Test Log', `<h2>Pre-Employment Drug Test Log</h2><p>A verified negative drug test result is required before a driver's first safety-sensitive work, unless the narrow exception for drivers already in a testing program applies ${cite('§382.301(a)–(c)')}. Pre-employment alcohol testing is optional ${cite('§382.301(d)')}.</p>
       ${tbl(['Driver', 'Hire date', 'Collection date', 'Result (MRO verified)', 'Date result received', 'First day driving'], preRows)}`);
     const chRows = drv.map((d, i) => `<tr><td>${esc(driverName(d, i))}</td><td>Full (pre-employment)</td><td></td><td></td><td></td></tr><tr><td>${esc(driverName(d, i))}</td><td>Limited (annual)</td><td></td><td></td><td></td></tr>`).join('') + blanks(Math.max(3, 8 - 2 * drv.length), 5);
-    const chLog = page(P, 'Clearinghouse Query Log', `<h2>Clearinghouse Query Log</h2><p>Full query before a driver's first safety-sensitive work; limited query (with the driver's consent) at least once every 12 months; keep records of each query for 3 years ${cite('§382.701, §382.703, §382.401')}.</p>
+    const chLog = page(P, 'Clearinghouse Query Log', `<h2>Clearinghouse Query Log</h2><p>Full query before a driver's first safety-sensitive work; limited query (with the driver's consent) at least once a year; if a limited query shows information, run a full query within 24 hours; keep a record of each query for 3 years ${cite('§382.701(a), (b), (e); §382.703')}.</p>
       ${tbl(['Driver', 'Query type', 'Date run', 'Result', 'Run by'], chRows)}`);
     return policy + enroll + preLog + chLog;
   }
@@ -446,7 +451,7 @@
     vs.forEach((v, i) => {
       const ann = parseD(v.annual); const due = ann ? addMonths(ann, 12) : null;
       html += page(P, 'Vehicle Maintenance File', `<h2>Maintenance File: Unit ${v.unit ? esc(v.unit) : '#' + (i + 1)}</h2>
-        <p>Keep for each vehicle you control for 30 days or more, for 1 year while you have it and 6 months after it leaves ${cite('§396.3(b)–(c)')}.</p>
+        <p>Required for each vehicle you control for 30 days in a row. Keep the records where the vehicle is housed or maintained, for 1 year and for 6 months after the vehicle leaves your control ${cite('§396.3(b)–(c)')}.</p>
         ${tbl(['Field', 'Value'], [
           ['Unit number', val(v.unit)], ['Type', val(v.type)], ['Year / make', val(v.ymm)], ['VIN / serial number', val(v.vin)],
           ['Tire size', blank], ['Owner (if not the carrier)', blank],
@@ -473,12 +478,12 @@
     return page(P, 'Insurance & Registration Checklist', `<h2>Insurance &amp; Registration Checklist</h2>
       <p>Policy expires: <b>${ins ? fmt(ins) : blank}</b> ${ins ? status(ins) : ''}</p>
       ${check([
-        ['Liability insurance at or above the federal minimum for what you haul (e.g. $750,000 for most general freight, 10,001+ lbs; more for some hazmat)', '§387.7(a), §387.9'],
+        ['Liability insurance at or above the federal minimum for what you haul (e.g. $750,000 for for-hire, non-hazardous freight in vehicles of 10,001+ lbs GVWR; $1M or $5M for hazmat)', '§387.7(a), §387.9'],
         ['MCS-90 endorsement (or other accepted proof) kept at your principal place of business', '§387.7(d), §387.15'],
         ['Insurer\'s filing (BMC-91 or BMC-91X) shows active on FMCSA\'s public record (for-hire authority)', '49 CFR 387 Subpart C'],
         ['Process agents designated in every state on Form BOC-3, filed with FMCSA', '49 CFR Part 366'],
         ['Unified Carrier Registration (UCR) paid for the current year, receipt on file (ucr.gov)', 'UCR Act'],
-        ['MCS-150 (USDOT registration) updated every 2 years on your scheduled month, and whenever details change', '§390.19'],
+        ['MCS-150 (USDOT registration) updated every 2 years on your scheduled month, and whenever details change', '§390.19T'],
         ['Accident register kept for 3 years, even if it is empty', '§390.15(b)'],
         ['IRP apportioned plates and IFTA fuel-tax license, if your vehicles qualify (state programs)', 'State rules'],
         ['Heavy Vehicle Use Tax (IRS Form 2290) Schedule 1, for vehicles of 55,000 lbs or more', 'IRS'],
@@ -509,10 +514,10 @@
     });
     P.vehicles.forEach((v, i) => { const a = parseD(v.annual); if (a) ev.push({ d: addMonths(a, 12), t: `Unit ${v.unit || '#' + (i + 1)}: annual inspection due`, c: '§396.17' }); });
     const ins = parseD(P.ins); if (ins) ev.push({ d: ins, t: 'Insurance policy expires: renew before this date', c: '§387.7' });
-    const m = mcs150(P.dot); if (m) ev.push({ d: m, t: 'MCS-150 biennial update due by end of this month (check FMCSA schedule)', c: '§390.19' });
+    const m = mcs150(P.dot); if (m) ev.push({ d: m, t: 'MCS-150 biennial update due by end of this month (check FMCSA schedule)', c: '§390.19T' });
     const ucr = new Date(today.getFullYear(), 11, 1); ev.push({ d: ucr, t: `UCR registration for ${today.getFullYear() + 1}: pay before Jan 1 (confirm at ucr.gov)`, c: 'UCR' });
     const g = parseD(P.grant);
-    if (g) { const a = addMonths(g, 12); if (a >= today) ev.push({ d: a, t: 'About 12 months since authority: new entrant audit window (approx.)', c: '§385.308' }); const e = addMonths(g, 18); if (e >= today) ev.push({ d: e, t: 'About 18 months: new entrant monitoring period ends (approx.)', c: '§385.307' }); }
+    if (g) { const a = addMonths(g, 12); if (a >= today) ev.push({ d: a, t: 'About 12 months since authority: new entrant audit window (approx.)', c: '§385.307' }); const e = addMonths(g, 18); if (e >= today) ev.push({ d: e, t: 'About 18 months: new entrant monitoring period ends (approx.)', c: '§385.307' }); }
     return ev.sort((a, b) => a.d - b.d);
   }
 
@@ -564,9 +569,9 @@
         [d(30), 'Self-audit: check every DQ file against the checklist. Confirm DVIRs and supporting documents are being kept. Start the accident register.'],
         [d(60), 'Review 30 days of logs for violations and unassigned driving. Confirm random selections from your consortium are being tested. Check every expiry date in the calendar.'],
         [d(90), 'Run this self-check again. Put the audit binder together, tab by tab. Fix anything still marked "Not sure".'],
-        [dm(12), 'Approximate end of the window in which FMCSA aims to complete the safety audit for property carriers ' + cite('§385.308') + '. Timing varies.'],
+        [dm(12), 'Approximate end of the window in which FMCSA generally aims to complete the safety audit for property carriers ' + cite('§385.307') + '. Timing varies.'],
         [dm(18), 'Approximate end of the new entrant monitoring period ' + cite('§385.307') + '.'],
-        ['If you get a failure notice', 'Send your corrective action plan with proof before the deadline in the notice ' + cite('§385.319, §385.325') + '. Don\'t wait.'],
+        ['If you get a failure notice', 'Send proof of corrective action within 60 days of the notice date (45 days for passenger and certain hazmat carriers) ' + cite('§385.319(c), §385.325') + '. Don\'t wait.'],
       ].map((r) => `<tr><td style="width:30%">${r[0]}</td><td>${r[1]}</td></tr>`).join(''))}`);
     return toc + req + prep + tl;
   }
@@ -576,7 +581,7 @@
     const rows = ev.map((e) => `<tr><td>${fmt(e.d)}</td><td>${esc(e.t)}</td><td>${status(e.d).replace('Expires in', 'In').replace('EXPIRED', 'PAST')}</td><td>${cite(e.c)}</td></tr>`).join('');
     return page(P, 'Expiry Calendar', `<h2>Expiry Calendar</h2><p>Upcoming expirations and due dates from your profile. Add them to your phone with the calendar file (.ics) button above the documents.</p>
       ${tbl(['Date', 'What', 'Status', 'Rule'], rows || '<tr><td colspan="4">Add drivers, vehicles and dates to your profile to fill this in.</td></tr>')}
-      <p class="note">MCS-150 timing follows FMCSA's schedule based on the last two digits of your USDOT number; confirm on fmcsa.dot.gov. Audit-window dates are approximate.</p>`);
+      <p class="note">MCS-150 timing follows 49 CFR 390.19T(b): file every 24 months by the end of the month set by the last digit of your USDOT number (1 = January ... 9 = September, 0 = October), in odd years if the next-to-last digit is odd and even years if it is even. Audit-window dates are approximate.</p>`);
   }
 
   const DOCS = [
