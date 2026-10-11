@@ -1,0 +1,44 @@
+name: IndexNow ping
+
+# After each push to main, tell IndexNow search engines which pages exist.
+# Stays off until the repo variable SITE_URL is set (Settings > Secrets and variables > Actions > Variables),
+# e.g. https://your-domain.com. No account or secret is needed: the key file <32 hex>.txt sits at the site root.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    if: vars.SITE_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Wait for the Vercel deployment
+        run: sleep 180
+
+      - name: Check the key file is live
+        run: |
+          KEY_FILE=$(ls | grep -E '^[0-9a-f]{32}\.txt$' | head -n1)
+          curl -fsS --retry 5 --retry-delay 30 --retry-all-errors "${SITE_URL%/}/${KEY_FILE}" > /dev/null
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - name: Ping IndexNow
+        run: node scripts/indexnow.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}

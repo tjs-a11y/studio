@@ -76,6 +76,7 @@ export function render(page, SITE) {
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
 <link rel="canonical" href="${esc(abs(page.path))}">
+<link rel="icon" href="data:,">
 ${alt}<style>${CSS}</style>
 ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('\n')}
 </head>

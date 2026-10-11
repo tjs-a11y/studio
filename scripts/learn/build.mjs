@@ -87,6 +87,50 @@ ${out.map((o) => `  <url><loc>${SITE}${o.path}</loc><lastmod>${CHECKED}</lastmod
 writeFileSync(join(root, 'sitemap-learn.xml'), sitemap);
 console.log(`built ${out.length} pages (${sections.map((x) => `${x.S.path}: ${x.pages.length + 1}`).join(', ')}, hub: 1) and sitemap-learn.xml; origin ${SITE}`);
 
+// llms.txt / llms-full.txt: a plain-text map of the site for AI search assistants (https://llmstxt.org).
+const TOOLS = [
+  ['Rate Con Checker', '/rate-con-checker/', 'Paste a trucking broker rate confirmation; 20 checks (detention, TONU, layover, lumper, fines, setoff, payment terms, broker identity and more) give a grade and a ready-to-send fix request. Runs in the browser; nothing is uploaded. 3 free checks a day; Pro is $9/month or $79/year.'],
+  ['New Authority Audit Kit', '/audit-kit/', 'Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser.'],
+  ['EUDR Plot File Checker', '/plot-file-checker/', 'Free checker for farm plot geolocation files (GeoJSON, KML, CSV, WKT) under the EU Deforestation Regulation; flags the EU Information System\'s file rules and fixes the safe ones. English and French. Runs in the browser.'],
+  ['Permit Watch (Texas)', '/permit-watch/', 'Free list of new Texas drilling permits by county from the Railroad Commission of Texas daily permit file, with filters and a free RSS feed per county. First data load pending.'],
+];
+const secs = sections;
+const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
+const llms = `# Quickwell
+
+> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page.
+
+All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
+
+## Tools
+
+${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
+
+## Reference pages
+
+${secs.map(({ S, pages }) => line(S.name + (S.lang === 'fr' ? ' (French)' : ''), S.path, `${S.description} (${pages.length} pages)`)).join('\n')}
+${existsSync(join(root, 'guides', 'index.html')) ? line('Guides', '/guides/', 'Longer how-to guides for the same audiences.') + '\n' : ''}
+## Optional
+
+- [Full page list](${SITE}/llms-full.txt): every reference page with its one-line summary.
+`;
+const full = `# Quickwell: full page list
+
+> Every reference page on Quickwell with a one-line summary. See ${SITE}/llms.txt for the overview.
+
+## Tools
+
+${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
+${secs.map(({ S, pages }) => `
+## ${S.name}${S.lang === 'fr' ? ' (French)' : ''}
+
+${line(S.h1, S.path, S.description)}
+${pages.map((p) => line(p.h1 || p.term, S.path + p.slug + '/', p.description)).join('\n')}`).join('\n')}
+`;
+writeFileSync(join(root, 'llms.txt'), llms);
+writeFileSync(join(root, 'llms-full.txt'), full);
+console.log('wrote llms.txt and llms-full.txt');
+
 if (process.argv.includes('--check')) {
   let bad = 0;
   const titles = new Map(), descs = new Map();
