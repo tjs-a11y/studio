@@ -113,3 +113,8 @@ test('one-time plan: payment-mode checkout, then access re-checked from the orig
   assert.equal(demoTok, undefined);
   fake.prices.list = prev.list; fake.checkout.sessions.retrieve = prev.retrieve;
 });
+
+test('free tools refuse checkout cleanly', async () => {
+  core.tools.push({ id: 'freebie', name: 'Free', tagline: 'x', plans: [] });
+  assert.equal((await checkout(post('/api/checkout', { tool: 'freebie' }))).status, 409);
+});

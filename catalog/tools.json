@@ -21,6 +21,18 @@
           "once": true
         }
       ]
+    },
+    {
+      "id": "plot-file-checker",
+      "name": "EUDR Plot File Checker",
+      "tagline": "Check and fix farm plot maps for the EU deforestation rule, in English or French. Free.",
+      "plans": []
+    },
+    {
+      "id": "permit-watch",
+      "name": "Permit Watch — Texas",
+      "tagline": "See new drilling permits filed in your Texas county and get free alerts by RSS.",
+      "plans": []
     }
   ]
 }

@@ -9,6 +9,7 @@ export async function POST(request) {
   const tool = toolById(String(body.tool || ''));
   if (!tool) return fail(404, 'Unknown tool.');
   const plan = tool.plans.find((p) => p.id === body.plan) || tool.plans[0];
+  if (!plan) return fail(409, 'This tool is free.');
   const once = !!plan.once;
   const interval = once ? 'once' : body.interval === 'year' ? 'year' : 'month';
   const lookup = `${tool.id}__${plan.id}__${interval}`;

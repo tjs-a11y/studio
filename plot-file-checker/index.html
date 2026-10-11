@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR Plot File Checker: check and fix farm plot GeoJSON in your browser</title>
+<meta name="description" content="Free EUDR plot file checker for cocoa and coffee exporters and cooperatives. Drop a GeoJSON, KML or CSV file, see every format problem in English or French, and download a fixed GeoJSON. Runs in your browser; nothing is uploaded.">
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --red:#c2341f; --amber:#a86b00; --green:#1d7a46; --chip:#f0f2f6; --hl:#fff4d6; --on-accent:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101215; --ink:#eef0f3; --muted:#9aa3b2; --card:#181b21; --line:#2a2f38; --accent:#79a3ff; --red:#ff7b66; --amber:#f0b43c; --green:#5fd38d; --chip:#20242c; --hl:#3a3220; --on-accent:#0b1020; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:900px; margin:0 auto; padding:20px 16px 64px; }
+  .top { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:14px; } .brand { font-weight:700; color:var(--muted); letter-spacing:.02em; }
+  .lang { display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; } .lang button { border:0; border-radius:0; background:transparent; color:var(--ink); padding:6px 12px; font-size:.9rem; } .lang button[aria-pressed="true"] { background:var(--accent); color:var(--on-accent); }
+  h1 { font-size:clamp(1.55rem,4.6vw,2.3rem); margin:0 0 6px; letter-spacing:-.02em; line-height:1.2; } h2 { font-size:1.15rem; margin:0 0 8px; } .lede { color:var(--muted); margin:0 0 12px; }
+  .privacy { display:flex; gap:10px; align-items:flex-start; background:var(--chip); border-radius:10px; padding:10px 12px; margin:0 0 6px; } .privacy svg { flex:none; margin-top:3px; color:var(--green); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:14px 0; min-width:0; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  button { font:inherit; padding:10px 16px; border-radius:9px; border:1px solid var(--accent); background:var(--accent); color:var(--on-accent); cursor:pointer; } button.ghost { background:transparent; color:var(--accent); } button.small { padding:6px 10px; font-size:.9rem; } button:disabled { opacity:.5; cursor:not-allowed; }
+  button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .drop { border:2px dashed var(--line); border-radius:12px; padding:22px 14px; text-align:center; color:var(--muted); } .drop.on { border-color:var(--accent); color:var(--accent); background:var(--chip); } .drop b { color:var(--ink); display:block; font-size:1.05rem; margin-bottom:8px; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  select, input[type=email], textarea { font:inherit; padding:9px 10px; border-radius:9px; border:1px solid var(--line); background:var(--bg); color:var(--ink); max-width:100%; }
+  textarea { width:100%; min-height:130px; font:13px/1.45 ui-monospace,Menlo,Consolas,monospace; resize:vertical; }
+  label.f { display:flex; flex-direction:column; gap:4px; font-size:.88rem; color:var(--muted); }
+  .note { font-size:.88rem; color:var(--muted); } .muted { color:var(--muted); }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-top:12px; } .tile { background:var(--chip); border-radius:10px; padding:10px 12px; } .tile .v { font-size:1.6rem; font-weight:800; line-height:1.1; } .tile .k { font-size:.82rem; color:var(--muted); }
+  .verdict { font-weight:700; font-size:1.1rem; display:flex; gap:10px; align-items:flex-start; } .dot { flex:none; width:14px; height:14px; border-radius:50%; margin-top:6px; } .v-ok { background:var(--green); } .v-warn { background:var(--amber); } .v-bad { background:var(--red); }
+  ul.items { list-style:none; padding:0; margin:0; } ul.items > li { border-top:1px solid var(--line); padding:10px 0; } ul.items > li:first-child { border-top:0; }
+  .tag { display:inline-block; min-width:72px; text-align:center; font-size:.72rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-right:8px; background:var(--chip); text-transform:uppercase; vertical-align:1px; }
+  .t-err { color:var(--on-accent); background:var(--red); } .t-warn { color:#1b1300; background:var(--amber); } .t-fix { color:var(--on-accent); background:var(--accent); } .t-info { color:var(--muted); }
+  .why { color:var(--muted); font-size:.92rem; margin:4px 0 0; } ul.plots { margin:6px 0 0; padding-left:18px; font-size:.9rem; } ul.plots li { overflow-wrap:anywhere; }
+  .mapwrap { background:var(--chip); border-radius:10px; overflow:hidden; } svg.mp { display:block; width:100%; height:320px; } @media (max-width:480px) { svg.mp { height:260px; } }
+  .mp path, .mp circle { vector-effect:non-scaling-stroke; stroke-width:1.6; cursor:pointer; } .mp .ln { fill:none; stroke-dasharray:4 3; } .mp text { fill:var(--ink); paint-order:stroke; stroke:var(--chip); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; font-weight:700; }
+  .s-ok { stroke:var(--green); fill:var(--green); fill-opacity:.22; } .s-fixed { stroke:var(--accent); fill:var(--accent); fill-opacity:.22; } .s-check { stroke:var(--amber); fill:var(--amber); fill-opacity:.25; } .s-err { stroke:var(--red); fill:var(--red); fill-opacity:.25; } .mp .sel { stroke-width:3.5; fill-opacity:.5; }
+  .legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.85rem; color:var(--muted); margin-top:8px; } .legend i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  .tablewrap { overflow-x:auto; max-height:520px; overflow-y:auto; } table { width:100%; border-collapse:collapse; font-size:.9rem; } td, th { text-align:left; padding:6px; border-top:1px solid var(--line); vertical-align:top; } th { position:sticky; top:0; background:var(--card); } td.num { text-align:right; font-variant-numeric:tabular-nums; } tr.hl td { background:var(--hl); }
+  .st { font-weight:700; white-space:nowrap; } .st-ok { color:var(--green); } .st-fixed { color:var(--accent); } .st-check { color:var(--amber); } .st-err { color:var(--red); }
+  details { border-top:1px solid var(--line); padding:10px 0; } details:first-of-type { border-top:0; } summary { cursor:pointer; font-weight:600; } details p, details ul { margin:8px 0 0; }
+  .msg { font-weight:600; } .ok-msg { color:var(--green); } .bad-msg { color:var(--red); }
+  pre.out { white-space:pre-wrap; overflow-wrap:anywhere; font:12px/1.4 ui-monospace,Menlo,monospace; background:var(--chip); padding:10px; border-radius:8px; max-height:220px; overflow:auto; }
+  footer { margin-top:36px; font-size:.88rem; color:var(--muted); } a { color:var(--accent); }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><span class="brand">Quickwell</span>
+    <div class="lang" role="group" aria-label="Language / Langue"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="fr" aria-pressed="false">FR</button></div>
+  </div>
+  <h1 data-i18n="h1">EUDR Plot File Checker</h1>
+  <p class="lede" data-i18n="lede"></p>
+  <p class="privacy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span data-i18n-html="privacy"></span></p>
+
+  <section class="card" id="inputCard">
+    <div class="drop" id="drop">
+      <b data-i18n="dropTitle"></b>
+      <input type="file" id="file" class="sr" accept=".geojson,.json,.kml,.csv,.txt,.wkt,.tsv,.zip,.shp,.kmz,.xlsx,.xls" aria-labelledby="chooseBtn">
+      <div class="row" style="justify-content:center">
+        <button type="button" id="chooseBtn" data-i18n="choose"></button>
+        <button type="button" class="ghost" id="sampleMessy" data-i18n="sampleMessy"></button>
+        <button type="button" class="ghost" id="sampleClean" data-i18n="sampleClean"></button>
+      </div>
+      <p class="note" style="margin:12px 0 0" data-i18n="dropFormats"></p>
+      <p class="note" style="margin:4px 0 0" data-i18n="dropNo"></p>
+    </div>
+    <div class="row" style="margin-top:14px; align-items:flex-end">
+      <label class="f"><span data-i18n="country"></span><select id="country"></select></label>
+      <span class="note" style="flex:1 1 240px" data-i18n="countryHelp"></span>
+    </div>
+    <details style="margin-top:10px; border-top:1px solid var(--line)">
+      <summary data-i18n="paste"></summary>
+      <textarea id="pasteText" spellcheck="false" aria-label="GeoJSON / KML / CSV / WKT"></textarea>
+      <div class="row" style="margin-top:8px"><button type="button" class="ghost small" id="pasteBtn" data-i18n="pasteBtn"></button></div>
+    </details>
+    <p class="note" id="status" role="status" aria-live="polite" style="margin:8px 0 0"></p>
+  </section>
+
+  <section id="result" hidden aria-live="polite">
+    <div class="card">
+      <h2 id="resTitle"></h2>
+      <div class="verdict"><span class="dot" id="vDot"></span><span id="verdict"></span></div>
+      <p class="note" style="margin:6px 0 0" data-i18n="caveat"></p>
+      <div class="tiles" id="tiles"></div>
+    </div>
+    <div class="card" id="fileErrCard" hidden><ul class="items" id="fileErr"></ul></div>
+    <div class="card" id="mapCard">
+      <h2 data-i18n="mapTitle"></h2>
+      <div class="mapwrap" id="map"></div>
+      <div class="legend" id="legend"></div>
+      <p class="note" style="margin:6px 0 0" data-i18n="mapNote"></p>
+    </div>
+    <div class="card"><h2 data-i18n="needTitle"></h2><ul class="items" id="need"></ul></div>
+    <div class="card"><h2 data-i18n="fixedTitle"></h2><ul class="items" id="fixed"></ul></div>
+    <div class="card" id="dlCard">
+      <h2 data-i18n="dlTitle"></h2>
+      <p class="note" style="margin-top:0" data-i18n="dlNote"></p>
+      <label class="note" style="display:flex; gap:8px; align-items:center; margin-bottom:10px"><input type="checkbox" id="excludeErr"> <span data-i18n="excludeErr"></span></label>
+      <div class="row">
+        <button type="button" id="dlGeo" data-i18n="dlGeo"></button>
+        <button type="button" class="ghost" id="dlCsv" data-i18n="dlCsv"></button>
+        <button type="button" class="ghost small" id="cpGeo" data-i18n="cpGeo"></button>
+        <button type="button" class="ghost small" id="cpRep" data-i18n="cpRep"></button>
+      </div>
+      <p class="note" id="dlMsg" role="status" aria-live="polite"></p>
+      <pre class="out" id="copyOut" hidden tabindex="0"></pre>
+    </div>
+    <div class="card"><h2 data-i18n="tableTitle"></h2><div class="tablewrap"><table id="tbl"></table></div><p class="note" id="tblNote"></p></div>
+  </section>
+
+  <section class="card" id="waitlist" style="border-color:var(--accent)">
+    <h2 data-i18n="wlTitle"></h2>
+    <p style="margin:0 0 10px" data-i18n="wlBody"></p>
+    <form id="wlForm" novalidate>
+      <div class="row" style="align-items:flex-end">
+        <label class="f" style="flex:1 1 220px"><span data-i18n="wlEmail"></span><input type="email" id="wlEmail" autocomplete="email" required style="width:100%"></label>
+        <button type="submit" id="wlBtn" data-i18n="wlBtn"></button>
+      </div>
+      <label class="note" style="display:flex; gap:8px; align-items:flex-start; margin-top:10px"><input type="checkbox" id="wlConsent" style="margin-top:4px"> <span data-i18n="wlConsent"></span></label>
+      <p class="note" style="margin:6px 0 0" data-i18n="wlPrivacy"></p>
+      <p class="msg" id="wlMsg" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="card" id="rules">
+    <h2 data-i18n="rulesTitle"></h2>
+    <p class="note" style="margin-top:0" data-i18n="rulesIntro"></p>
+    <div id="rulesList"></div>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="disclTitle"></h2>
+    <p style="margin:0" data-i18n="discl"></p>
+    <p class="note" style="margin:8px 0 0" data-i18n="deadline"></p>
+  </section>
+
+  <footer><span data-i18n="footNote"></span> · <a href="/" data-i18n="footMore">More Quickwell tools</a> · <a href="/privacy.html" data-i18n="footPrivacy">Privacy</a> · <a href="/terms.html" data-i18n="footTerms">Terms</a></footer>
+</main>
+
+<script id="pfc-core">
+/* Plot file checker core: parsing, checks and safe fixes. No DOM needed except DOMParser for KML. */
+(function (G) {
+  'use strict';
+  var R = 6371008.8, D2R = Math.PI / 180;
+  // Rough bounding boxes [minLon, minLat, maxLon, maxLat] of producer countries, used only to spot swapped coordinates.
+  var TARGET = {
+    CI: [-8.6, 4.3, -2.5, 10.8], GH: [-3.3, 4.6, 1.3, 11.2], NG: [2.6, 4.2, 14.7, 13.9], CM: [8.4, 1.6, 16.2, 13.1],
+    ET: [32.9, 3.4, 48.0, 14.9], UG: [29.5, -1.5, 35.1, 4.3], KE: [33.9, -4.7, 41.9, 5.1], TZ: [29.3, -11.8, 40.5, -0.9],
+    RW: [28.8, -2.9, 30.9, -1.0], BI: [29.0, -4.5, 30.9, -2.3], LR: [-11.5, 4.3, -7.3, 8.6], SL: [-13.3, 6.9, -10.2, 10.0],
+    GN: [-15.1, 7.2, -7.6, 12.7], TG: [-0.2, 6.1, 1.8, 11.2], BJ: [0.7, 6.2, 3.9, 12.5], CD: [12.2, -13.5, 31.3, 5.4],
+    CG: [11.1, -5.1, 18.7, 3.8], GA: [8.6, -4.0, 14.6, 2.4], BR: [-74.0, -34.0, -34.7, 5.3], CO: [-79.1, -4.3, -66.8, 12.5],
+    PE: [-81.4, -18.4, -68.6, -0.03], EC: [-81.1, -5.0, -75.2, 1.7], HN: [-89.4, 12.9, -83.1, 16.5], VN: [102.1, 8.1, 109.5, 23.4],
+    ID: [95.0, -11.0, 141.0, 6.1], MY: [99.6, 0.8, 119.3, 7.4]
+  };
+  // Places where real plots also exist; a point here is never auto-swapped (only flagged as "maybe").
+  var OTHER = { EUR: [-25, 35, 45, 72], NAF: [-18, 10, 40, 29] };
+  var COUNTRIES = {
+    CI: ["Côte d'Ivoire", "Côte d’Ivoire"], GH: ['Ghana', 'Ghana'], NG: ['Nigeria', 'Nigéria'], CM: ['Cameroon', 'Cameroun'],
+    ET: ['Ethiopia', 'Éthiopie'], UG: ['Uganda', 'Ouganda'], KE: ['Kenya', 'Kenya'], TZ: ['Tanzania', 'Tanzanie'],
+    RW: ['Rwanda', 'Rwanda'], BI: ['Burundi', 'Burundi'], LR: ['Liberia', 'Libéria'], SL: ['Sierra Leone', 'Sierra Leone'],
+    GN: ['Guinea', 'Guinée'], TG: ['Togo', 'Togo'], BJ: ['Benin', 'Bénin'], CD: ['DR Congo', 'RD Congo'], CG: ['Congo', 'Congo'],
+    GA: ['Gabon', 'Gabon'], BR: ['Brazil', 'Brésil'], CO: ['Colombia', 'Colombie'], PE: ['Peru', 'Pérou'], EC: ['Ecuador', 'Équateur'],
+    HN: ['Honduras', 'Honduras'], VN: ['Vietnam', 'Viêt Nam'], ID: ['Indonesia', 'Indonésie'], MY: ['Malaysia', 'Malaisie']
+  };
+  var ISO3 = { CIV: 'CI', GHA: 'GH', NGA: 'NG', CMR: 'CM', ETH: 'ET', UGA: 'UG', KEN: 'KE', TZA: 'TZ', RWA: 'RW', BDI: 'BI', LBR: 'LR', SLE: 'SL', GIN: 'GN', TGO: 'TG', BEN: 'BJ', COD: 'CD', COG: 'CG', GAB: 'GA', BRA: 'BR', COL: 'CO', PER: 'PE', ECU: 'EC', HND: 'HN', VNM: 'VN', IDN: 'ID', MYS: 'MY' };
+  function norm(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  var NAME2CODE = { ivorycoast: 'CI', drc: 'CD', rdc: 'CD', drcongo: 'CD', democraticrepublicofthecongo: 'CD', republiquedemocratiqueducongo: 'CD', congobrazzaville: 'CG', republicofthecongo: 'CG', republiqueducongo: 'CG', vietnam: 'VN' };
+  Object.keys(COUNTRIES).forEach(function (c) { COUNTRIES[c].forEach(function (n) { NAME2CODE[norm(n)] = c; }); });
+  function countryCode(v) {
+    if (v == null) return null; var s = String(v).trim(); if (!s) return null;
+    if (/^[A-Za-z]{2}$/.test(s)) return s.toUpperCase();
+    if (/^[A-Za-z]{3}$/.test(s) && ISO3[s.toUpperCase()]) return ISO3[s.toUpperCase()];
+    return NAME2CODE[norm(s)] || null;
+  }
+  // Property names the EU system reads, and common spellings found in field files.
+  var ALIAS = {
+    ProducerName: ['producername', 'producer', 'producteur', 'nomproducteur', 'nomduproducteur', 'farmer', 'farmername', 'planteur', 'nomplanteur', 'grower', 'growername'],
+    ProducerCountry: ['producercountry', 'country', 'countrycode', 'pays', 'codepays', 'iso2', 'countryiso'],
+    ProductionPlace: ['productionplace', 'placename', 'village', 'locality', 'localite', 'lieudeproduction', 'lieu', 'plotname', 'nomparcelle', 'parcelname', 'farmname'],
+    Area: ['area', 'areaha', 'hectares', 'hectare', 'superficie', 'superficieha', 'surfaceha', 'plotarea', 'plotareaha', 'sizeha', 'tailleha']
+  };
+  function aliasRenames(props) {
+    var out = []; if (!props) return out;
+    Object.keys(ALIAS).forEach(function (off) {
+      if (Object.prototype.hasOwnProperty.call(props, off)) return;
+      var k = Object.keys(props).find(function (key) { return ALIAS[off].indexOf(norm(key)) >= 0; });
+      if (k) out.push({ from: k, to: off });
+    });
+    return out;
+  }
+  function getProp(props, off) {
+    if (!props) return null;
+    if (props[off] != null) return props[off];
+    var k = Object.keys(props).find(function (key) { return ALIAS[off].indexOf(norm(key)) >= 0; });
+    return k ? props[k] : null;
+  }
+  function toNum(v) {
+    if (typeof v === 'number') return isFinite(v) ? v : null;
+    if (v == null) return null; var s = String(v).trim().replace(/\s/g, '');
+    if (/^[-+]?\d+,\d+$/.test(s)) s = s.replace(',', '.');
+    if (!/^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s)) return null;
+    var n = Number(s); return isFinite(n) ? n : null;
+  }
+  function decimalsOfStr(s) {
+    var m = /^[-+]?\d*(?:\.(\d*))?(?:[eE]([-+]?\d+))?$/.exec(String(s).trim()); if (!m) return 0;
+    var d = (m[1] || '').length; if (m[2]) d = Math.max(0, d - parseInt(m[2], 10)); return d;
+  }
+  function perr(code, p) { var e = new Error(code); e.code = code; e.p = p || {}; return e; }
+
+  // ---------- geometry helpers ----------
+  function samePt(a, b) { return !!a && !!b && a[0] === b[0] && a[1] === b[1]; }
+  function openRing(ring) { return ring.length > 1 && samePt(ring[0], ring[ring.length - 1]) ? ring.slice(0, -1) : ring.slice(); }
+  function isPos(c) { return Array.isArray(c) && c.length >= 2 && c.every(function (x) { return typeof x === 'number'; }); }
+  function arrOf(a, f) { return Array.isArray(a) && a.every(f); }
+  function validStructure(g) {
+    if (!g || typeof g !== 'object') return false; var c = g.coordinates;
+    switch (g.type) {
+      case 'Point': return isPos(c);
+      case 'MultiPoint': case 'LineString': return arrOf(c, isPos);
+      case 'Polygon': case 'MultiLineString': return arrOf(c, function (r) { return arrOf(r, isPos); });
+      case 'MultiPolygon': return arrOf(c, function (p) { return arrOf(p, function (r) { return arrOf(r, isPos); }); });
+      case 'GeometryCollection': return arrOf(g.geometries, validStructure);
+      default: return false;
+    }
+  }
+  function positions(g) {
+    var out = [];
+    (function walk(x) { if (isPos(x)) out.push(x); else if (Array.isArray(x)) x.forEach(walk); })(g && g.type === 'GeometryCollection' ? (g.geometries || []).map(function (m) { return m.coordinates; }) : g && g.coordinates);
+    return out;
+  }
+  function mapPos(g, f) {
+    function m(x) { return isPos(x) ? f(x) : x.map(m); }
+    if (g.type === 'GeometryCollection') return { type: g.type, geometries: g.geometries.map(function (s) { return mapPos(s, f); }) };
+    return { type: g.type, coordinates: m(g.coordinates) };
+  }
+  function clone(x) { if (Array.isArray(x)) return x.map(clone); if (x && typeof x === 'object') { var o = {}; Object.keys(x).forEach(function (k) { o[k] = clone(x[k]); }); return o; } return x; }
+  function polysOf(g) { return !g ? [] : g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : []; }
+  // Planar signed area in degrees² (shoelace) of an open ring: > 0 means counter-clockwise.
+  function planarArea(open) {
+    var n = open.length; if (n < 3) return 0; var x0 = open[0][0], y0 = open[0][1], s = 0;
+    for (var i = 0; i < n; i++) { var a = open[i], b = open[(i + 1) % n]; s += (a[0] - x0) * (b[1] - y0) - (b[0] - x0) * (a[1] - y0); }
+    return s / 2;
+  }
+  function isCCW(ring) { return planarArea(openRing(ring)) > 0; }
+  // Geodesic area on a sphere (R = 6,371,008.8 m), same method as Turf.js / d3-geo for small shapes. Returns m².
+  function ringAreaM2(ring) {
+    var p = openRing(ring), n = p.length; if (n < 3) return 0; var t = 0;
+    for (var i = 0; i < n; i++) { var prev = p[(i - 1 + n) % n], next = p[(i + 1) % n]; t += (next[0] - prev[0]) * D2R * Math.sin(p[i][1] * D2R); }
+    return Math.abs(t) * R * R / 2;
+  }
+  function geomAreaHa(g) {
+    var tot = 0; polysOf(g).forEach(function (poly) { poly.forEach(function (ring, k) { var a = ringAreaM2(ring); tot += k === 0 ? a : -a; }); });
+    return Math.max(0, tot) / 10000;
+  }
+  function orient(a, b, c) { var v = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]); return v > 0 ? 1 : v < 0 ? -1 : 0; }
+  function onSeg(a, b, c) { return Math.min(a[0], b[0]) <= c[0] && c[0] <= Math.max(a[0], b[0]) && Math.min(a[1], b[1]) <= c[1] && c[1] <= Math.max(a[1], b[1]); }
+  function segsTouch(a, b, c, d) {
+    var o1 = orient(a, b, c), o2 = orient(a, b, d), o3 = orient(c, d, a), o4 = orient(c, d, b);
+    if (o1 !== o2 && o3 !== o4) return true;
+    return (o1 === 0 && onSeg(a, b, c)) || (o2 === 0 && onSeg(a, b, d)) || (o3 === 0 && onSeg(c, d, a)) || (o4 === 0 && onSeg(c, d, b));
+  }
+  function segsCross(a, b, c, d) { return orient(a, b, c) * orient(a, b, d) < 0 && orient(c, d, a) * orient(c, d, b) < 0; }
+  function crossPoint(a, b, c, d) {
+    var den = (b[0] - a[0]) * (d[1] - c[1]) - (b[1] - a[1]) * (d[0] - c[0]);
+    if (!den) return [c[0], c[1]];
+    var t = ((c[0] - a[0]) * (d[1] - c[1]) - (c[1] - a[1]) * (d[0] - c[0])) / den;
+    return [a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])];
+  }
+  // Returns the points where a ring touches or crosses itself (also spikes that fold back). Input: open or closed ring.
+  function ringSelfIntersections(ring, limit) {
+    var u = []; openRing(ring).forEach(function (p) { if (!u.length || !samePt(p, u[u.length - 1])) u.push(p); });
+    while (u.length > 1 && samePt(u[0], u[u.length - 1])) u.pop();
+    var n = u.length, out = []; limit = limit || 20; if (n < 3) return out;
+    function spike(a, m, b) { return orient(a, m, b) === 0 && ((a[0] - m[0]) * (b[0] - m[0]) + (a[1] - m[1]) * (b[1] - m[1])) > 0; }
+    for (var i = 0; i < n && out.length < limit; i++) {
+      var a = u[i], b = u[(i + 1) % n];
+      for (var j = i + 1; j < n; j++) {
+        var c = u[j], d = u[(j + 1) % n];
+        if (j === i + 1) { if (spike(a, b, d)) out.push(b.slice(0, 2)); continue; }
+        if (i === 0 && j === n - 1) { if (spike(c, a, b)) out.push(a.slice(0, 2)); continue; }
+        if (segsTouch(a, b, c, d)) { out.push(crossPoint(a, b, c, d)); if (out.length >= limit) break; }
+      }
+    }
+    return out;
+  }
+  function pointInRing(p, open) {
+    var inside = false;
+    for (var i = 0, j = open.length - 1; i < open.length; j = i++) {
+      var a = open[i], b = open[j];
+      if ((a[1] > p[1]) !== (b[1] > p[1]) && p[0] < (b[0] - a[0]) * (p[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+    }
+    return inside;
+  }
+  function onBoundary(p, open) {
+    for (var i = 0; i < open.length; i++) { var a = open[i], b = open[(i + 1) % open.length]; if (orient(a, b, p) === 0 && onSeg(a, b, p)) return true; }
+    return false;
+  }
+  function strictlyInside(p, open) { return !onBoundary(p, open) && pointInRing(p, open); }
+  function ringsOverlap(A, B) {
+    var i, j;
+    for (i = 0; i < A.length; i++) for (j = 0; j < B.length; j++) if (segsCross(A[i], A[(i + 1) % A.length], B[j], B[(j + 1) % B.length])) return true;
+    function probe(X, Y) {
+      for (var k = 0; k < X.length; k++) {
+        var a = X[k], b = X[(k + 1) % X.length];
+        if (strictlyInside(a, Y) || strictlyInside([(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], Y)) return true;
+      }
+      return false;
+    }
+    return probe(A, B) || probe(B, A);
+  }
+  function bboxOf(pos) { var b = [Infinity, Infinity, -Infinity, -Infinity]; pos.forEach(function (p) { if (p[0] < b[0]) b[0] = p[0]; if (p[1] < b[1]) b[1] = p[1]; if (p[0] > b[2]) b[2] = p[0]; if (p[1] > b[3]) b[3] = p[1]; }); return b; }
+  function inBox(bb, lon, lat, m) { m = m || 0; return lon >= bb[0] - m && lon <= bb[2] + m && lat >= bb[1] - m && lat <= bb[3] + m; }
+  function boxesAt(lon, lat, set) { return Object.keys(set).filter(function (k) { return inBox(set[k], lon, lat, 0); }); }
+  function goodPos(p) { return isFinite(p[0]) && isFinite(p[1]) && !(p[0] === 0 && p[1] === 0); }
+
+  // Decide per plot whether latitude/longitude look swapped: {state:'swap'|'maybe'|'outside', country}
+  function detectSwaps(plots, opts) {
+    opts = opts || {}; var res = plots.map(function () { return null; }); var votes = {};
+    var info = plots.map(function (pl, i) {
+      if (!pl.geom || !validStructure(pl.geom)) return null;
+      var pts = positions(pl.geom).filter(goodPos); if (!pts.length) return null;
+      var c = [0, 0]; pts.forEach(function (p) { c[0] += p[0] / pts.length; c[1] += p[1] / pts.length; });
+      var x = { pts: pts, c: c, country: opts.country || countryCode(getProp(pl.props, 'ProducerCountry')) };
+      var outRange = pts.some(function (p) { return Math.abs(p[1]) > 90 || Math.abs(p[0]) > 180; });
+      if (outRange) {
+        var ok = pts.every(function (p) { return Math.abs(p[0]) <= 90 && Math.abs(p[1]) <= 180; });
+        if (ok) res[i] = { state: 'swap', country: x.country && TARGET[x.country] ? x.country : '' };
+        x.done = true; return x;
+      }
+      var bb = x.country && TARGET[x.country];
+      if (bb) {
+        var inO = pts.every(function (p) { return inBox(bb, p[0], p[1], 0.3); });
+        var inS = pts.every(function (p) { return inBox(bb, p[1], p[0], 0.3); });
+        if (!inO && inS) res[i] = { state: 'swap', country: x.country };
+        else if (!inO) res[i] = { state: 'outside', country: x.country };
+        x.done = true; return x;
+      }
+      x.o = boxesAt(c[0], c[1], TARGET); x.oo = boxesAt(c[0], c[1], OTHER); x.s = boxesAt(c[1], c[0], TARGET);
+      (x.o.length ? x.o : x.oo.length ? [] : x.s).forEach(function (k) { votes[k] = (votes[k] || 0) + 1; });
+      return x;
+    });
+    var dom = Object.keys(votes).sort(function (a, b) { return votes[b] - votes[a]; })[0] || null;
+    info.forEach(function (x, i) {
+      if (!x || x.done || x.o.length || !x.s.length) return;
+      if (!x.oo.length && dom && x.s.indexOf(dom) >= 0) res[i] = { state: 'swap', country: dom };
+      else res[i] = { state: 'maybe', country: x.s.indexOf(dom) >= 0 ? dom : x.s[0] };
+    });
+    return res;
+  }
+
+  // ---------- parsers ----------
+  function newPlot(props, geom, st) { return { props: props || {}, geom: geom, minDec: st && st.min < 99 ? st.min : 99, maxDec: st ? st.max : 0 }; }
+  function numTok(tok, st, commaDec) {
+    var s = String(tok == null ? '' : tok).trim(); if (commaDec && /^[-+]?\d+,\d+$/.test(s)) s = s.replace(',', '.');
+    var v = /^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s) ? Number(s) : NaN;
+    if (st && isFinite(v)) { var d = decimalsOfStr(s); if (d < st.min) st.min = d; if (d > st.max) st.max = d; }
+    return v;
+  }
+  function parseGeoJSON(text) {
+    var obj; try { obj = JSON.parse(text); } catch (e) { throw perr('E_PARSE', { why: 'json' }); }
+    var decMap = new Map(), re = /-?\d+\.\d+/g, m;
+    while ((m = re.exec(text))) { var v = parseFloat(m[0]), d = m[0].length - m[0].indexOf('.') - 1; if ((decMap.get(v) || 0) < d) decMap.set(v, d); }
+    var feats;
+    if (Array.isArray(obj)) feats = obj;
+    else if (obj && obj.type === 'FeatureCollection') { if (!Array.isArray(obj.features)) throw perr('E_PARSE', { why: 'geojson' }); feats = obj.features; }
+    else if (obj && obj.type === 'Feature') feats = [obj];
+    else if (obj && /^(Multi)?(Point|LineString|Polygon)$|^GeometryCollection$/.test(obj.type)) feats = [{ type: 'Feature', properties: {}, geometry: obj }];
+    else throw perr('E_PARSE', { why: 'geojson' });
+    var plots = feats.map(function (f) {
+      var geom = f && f.type === 'Feature' ? f.geometry : (f && f.coordinates ? f : null);
+      var props = f && f.type === 'Feature' && f.properties && typeof f.properties === 'object' ? f.properties : {};
+      if (f && f.type === 'Feature' && f.id != null && props.id == null) props = Object.assign({ id: f.id }, props);
+      var st = { min: 99, max: 0 };
+      if (geom && validStructure(geom)) positions(geom).forEach(function (p) {
+        [p[0], p[1]].forEach(function (n) { if (!isFinite(n)) return; var dd = Math.max(decimalsOfStr(String(n)), decMap.get(n) || 0); if (dd < st.min) st.min = dd; if (dd > st.max) st.max = dd; });
+      });
+      return newPlot(props, geom || null, st);
+    });
+    return { format: 'geojson', plots: plots, crs: obj && obj.crs ? obj.crs : null };
+  }
+  function kmlCoords(text, st) {
+    return String(text || '').trim().split(/\s+/).filter(Boolean).map(function (t) {
+      var parts = t.split(','); var p = [numTok(parts[0], st), numTok(parts[1], st)];
+      if (parts.length > 2 && parts[2] !== '') p.push(numTok(parts[2], null)); return p;
+    });
+  }
+  function firstChild(el, name) { for (var c = el.firstElementChild; c; c = c.nextElementSibling) if (c.localName === name) return c; return null; }
+  function parseKML(text) {
+    var DP = G.DOMParser; if (!DP) throw perr('E_PARSE', { why: 'kml' });
+    var doc = new DP().parseFromString(text, 'application/xml');
+    if (doc.getElementsByTagName('parsererror').length) throw perr('E_PARSE', { why: 'kml' });
+    var pms = Array.prototype.slice.call(doc.getElementsByTagNameNS('*', 'Placemark'));
+    var plots = pms.map(function (pm) {
+      var props = {}, st = { min: 99, max: 0 }, nm = firstChild(pm, 'name');
+      if (nm && nm.textContent.trim()) props.name = nm.textContent.trim();
+      Array.prototype.forEach.call(pm.getElementsByTagNameNS('*', 'Data'), function (d) { var k = d.getAttribute('name'); var v = firstChild(d, 'value'); if (k) props[k] = (v ? v.textContent : d.textContent).trim(); });
+      Array.prototype.forEach.call(pm.getElementsByTagNameNS('*', 'SimpleData'), function (d) { var k = d.getAttribute('name'); if (k) props[k] = d.textContent.trim(); });
+      var geoms = [];
+      Array.prototype.forEach.call(pm.getElementsByTagNameNS('*', 'Polygon'), function (pg) {
+        var rings = [];
+        ['outerBoundaryIs', 'innerBoundaryIs'].forEach(function (b) {
+          Array.prototype.forEach.call(pg.getElementsByTagNameNS('*', b), function (bd) { var c = bd.getElementsByTagNameNS('*', 'coordinates')[0]; if (c) rings.push(kmlCoords(c.textContent, st)); });
+        });
+        geoms.push({ type: 'Polygon', coordinates: rings });
+      });
+      Array.prototype.forEach.call(pm.getElementsByTagNameNS('*', 'LineString'), function (ls) { var c = ls.getElementsByTagNameNS('*', 'coordinates')[0]; geoms.push({ type: 'LineString', coordinates: c ? kmlCoords(c.textContent, st) : [] }); });
+      Array.prototype.forEach.call(pm.getElementsByTagNameNS('*', 'Point'), function (pt) { var c = pt.getElementsByTagNameNS('*', 'coordinates')[0]; var cs = c ? kmlCoords(c.textContent, st) : []; geoms.push({ type: 'Point', coordinates: cs[0] || [NaN, NaN] }); });
+      var geom = geoms.length === 0 ? null : geoms.length === 1 ? geoms[0] : { type: 'GeometryCollection', geometries: geoms };
+      return newPlot(props, geom, st);
+    });
+    return { format: 'kml', plots: plots, crs: null };
+  }
+  var WKT_RE = /^\s*(SRID=\d+;\s*)?(POINT|MULTIPOINT|LINESTRING|MULTILINESTRING|POLYGON|MULTIPOLYGON)\s*(Z|M|ZM)?\s*(\(|EMPTY)/i;
+  function parseWKT(s, st) {
+    s = String(s).trim().replace(/^SRID=\d+;\s*/i, '');
+    var m = /^([A-Za-z]+)\s*(?:ZM|Z|M)?\s*(\([\s\S]*\)|EMPTY)\s*$/i.exec(s); if (!m) throw perr('E_PARSE', { why: 'wkt' });
+    var type = m[1].toUpperCase(); if (m[2].toUpperCase() === 'EMPTY') return null;
+    var str = m[2], i = 0;
+    function list() {
+      i++; var items = [], buf = '';
+      while (i < str.length) {
+        var ch = str[i];
+        if (ch === '(') { items.push(list()); }
+        else if (ch === ')') { if (buf.trim()) items.push(buf.trim()); i++; return items; }
+        else if (ch === ',') { if (buf.trim()) items.push(buf.trim()); buf = ''; i++; }
+        else { buf += ch; i++; }
+      }
+      throw perr('E_PARSE', { why: 'wkt' });
+    }
+    var nested = list();
+    function pos(x) { if (Array.isArray(x)) x = x[0]; var t = String(x).trim().split(/\s+/); var p = [numTok(t[0], st), numTok(t[1], st)]; if (t.length > 2) p.push(numTok(t[2], null)); return p; }
+    function line(arr) { return arr.map(pos); }
+    switch (type) {
+      case 'POINT': return { type: 'Point', coordinates: pos(nested[0]) };
+      case 'MULTIPOINT': return { type: 'MultiPoint', coordinates: nested.map(pos) };
+      case 'LINESTRING': return { type: 'LineString', coordinates: line(nested) };
+      case 'MULTILINESTRING': return { type: 'MultiLineString', coordinates: nested.map(line) };
+      case 'POLYGON': return { type: 'Polygon', coordinates: nested.map(line) };
+      case 'MULTIPOLYGON': return { type: 'MultiPolygon', coordinates: nested.map(function (p) { return p.map(line); }) };
+      default: throw perr('E_PARSE', { why: 'wkt' });
+    }
+  }
+  function parseWKTLines(text) {
+    var plots = text.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean).map(function (l) { var st = { min: 99, max: 0 }; return newPlot({}, parseWKT(l, st), st); });
+    return { format: 'wkt', plots: plots, crs: null };
+  }
+  function splitCSV(text) {
+    var first = text.split(/\r?\n/, 1)[0], best = -1, delim = ',';
+    [',', ';', '\t', '|'].forEach(function (c) { var n = 0, q = false; for (var k = 0; k < first.length; k++) { if (first[k] === '"') q = !q; else if (!q && first[k] === c) n++; } if (n > best) { best = n; delim = c; } });
+    var rows = [], row = [], f = '', q2 = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q2) { if (ch === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q2 = false; } else f += ch; }
+      else if (ch === '"') q2 = true;
+      else if (ch === delim) { row.push(f); f = ''; }
+      else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+      else f += ch;
+    }
+    if (f !== '' || row.length) { row.push(f); rows.push(row); }
+    return { delim: delim, rows: rows.filter(function (r) { return r.some(function (c) { return c.trim() !== ''; }); }) };
+  }
+  function parseCSV(text) {
+    var sp = splitCSV(text), rows = sp.rows, commaDec = sp.delim !== ',';
+    if (rows.length < 2) throw perr('E_PARSE', { why: 'csv' });
+    var head = rows[0].map(function (h) { return h.trim(); }), nh = head.map(norm), body = rows.slice(1);
+    function find(exact, contains) { var k = nh.findIndex(function (h) { return exact.indexOf(h) >= 0; }); if (k < 0 && contains) k = nh.findIndex(function (h) { return contains.some(function (c) { return h.indexOf(c) >= 0 && h.indexOf('precision') < 0 && h.indexOf('accuracy') < 0; }); }); return k; }
+    var iLat = find(['lat', 'y', 'latdd', 'latitud', 'latitude'], ['latitude']);
+    var iLon = find(['lon', 'lng', 'long', 'x', 'londd', 'longitud', 'longitude'], ['longitude']);
+    var iWkt = find(['wkt', 'geometry', 'geom', 'thegeom', 'wktgeom', 'geometrywkt', 'shape']);
+    if (iWkt < 0) iWkt = head.findIndex(function (h, k) { return body.slice(0, 5).some(function (r) { return WKT_RE.test(r[k] || ''); }); });
+    var SHAPE_RE = /^\s*-?\d+(\.\d+)?\s+-?\d+(\.\d+)?(\s+[-\d.]+){0,2}\s*;/;
+    var iShape = head.findIndex(function (h, k) { return body.slice(0, 5).some(function (r) { return SHAPE_RE.test(r[k] || ''); }); });
+    var skip = [iLat, iLon, iWkt, iShape];
+    function propsOf(r) { var p = {}; head.forEach(function (h, k) { if (skip.indexOf(k) < 0 && h) p[h] = (r[k] == null ? '' : String(r[k]).trim()); }); return p; }
+    var plots = [];
+    if (iWkt >= 0) {
+      body.forEach(function (r) { var st = { min: 99, max: 0 }, g = null; try { g = parseWKT(r[iWkt] || '', st); } catch (e) { g = { type: 'Point', coordinates: [NaN, NaN] }; } plots.push(newPlot(propsOf(r), g, st)); });
+      return { format: 'csv', plots: plots, crs: null };
+    }
+    if (iShape >= 0) { // KoBo / ODK geoshape: "lat lon alt acc;lat lon alt acc;..." (latitude first)
+      body.forEach(function (r) {
+        var st = { min: 99, max: 0 };
+        var pts = String(r[iShape] || '').split(';').map(function (s) { return s.trim(); }).filter(Boolean).map(function (s) { var t = s.split(/\s+/); return [numTok(t[1], st), numTok(t[0], st)]; });
+        var g = pts.length === 0 ? null : pts.length === 1 ? { type: 'Point', coordinates: pts[0] } : pts.length === 2 ? { type: 'LineString', coordinates: pts } : { type: 'Polygon', coordinates: [pts] };
+        plots.push(newPlot(propsOf(r), g, st));
+      });
+      return { format: 'csv', plots: plots, crs: null };
+    }
+    if (iLat < 0 || iLon < 0) throw perr('E_PARSE', { why: 'csv' });
+    var iId = find(['plotid', 'idparcelle', 'parcelid', 'polygonid', 'farmid', 'plotcode', 'codeparcelle', 'plot', 'parcelle', 'id']);
+    var counts = {}; if (iId >= 0) body.forEach(function (r) { var k = (r[iId] || '').trim(); counts[k] = (counts[k] || 0) + 1; });
+    var grouped = iId >= 0 && Object.keys(counts).some(function (k) { return k && counts[k] >= 3; });
+    if (grouped) { // one row per corner, grouped by plot ID, in file order
+      var order = [], groups = {};
+      body.forEach(function (r) { var k = (r[iId] || '').trim(); if (!groups[k]) { groups[k] = { st: { min: 99, max: 0 }, pts: [], props: propsOf(r) }; order.push(k); } groups[k].pts.push([numTok(r[iLon], groups[k].st, commaDec), numTok(r[iLat], groups[k].st, commaDec)]); });
+      order.forEach(function (k) { var gr = groups[k], n = gr.pts.length; var g = n === 1 ? { type: 'Point', coordinates: gr.pts[0] } : n === 2 ? { type: 'LineString', coordinates: gr.pts } : { type: 'Polygon', coordinates: [gr.pts] }; plots.push(newPlot(gr.props, g, gr.st)); });
+    } else {
+      body.forEach(function (r) { var st = { min: 99, max: 0 }; plots.push(newPlot(propsOf(r), { type: 'Point', coordinates: [numTok(r[iLon], st, commaDec), numTok(r[iLat], st, commaDec)] }, st)); });
+    }
+    return { format: 'csv', plots: plots, crs: null };
+  }
+  var UNSUPPORTED = ['zip', 'shp', 'shx', 'dbf', 'prj', 'kmz', 'xlsx', 'xls', 'ods', 'gpkg', 'gpx', 'docx', 'pdf'];
+  function parse(text, name) {
+    var ext = (String(name || '').toLowerCase().match(/\.([a-z0-9]+)$/) || [])[1] || '';
+    if (UNSUPPORTED.indexOf(ext) >= 0) throw perr('E_UNSUPPORTED', { ext: '.' + ext });
+    text = String(text == null ? '' : text).replace(/^﻿/, '');
+    if (/^PK\u0003\u0004/.test(text) || text.indexOf('\u0000') >= 0) throw perr('E_UNSUPPORTED', { ext: ext ? '.' + ext : '?' });
+    var t = text.trim(); if (!t) throw perr('E_PARSE', { why: 'empty' });
+    if (t[0] === '{' || t[0] === '[') return parseGeoJSON(t);
+    if (t[0] === '<') return parseKML(t);
+    if (WKT_RE.test(t)) return parseWKTLines(t);
+    return parseCSV(t);
+  }
+
+  // ---------- checks ----------
+  function crsIsWGS(crs) { var s = JSON.stringify(crs || ''); return /CRS84|EPSG:+4326|EPSG::4326|4326/i.test(s); }
+  function crsName(crs) { try { return String((crs.properties && (crs.properties.name || crs.properties.href)) || JSON.stringify(crs)).slice(0, 80); } catch (e) { return '?'; } }
+  function gcMerge(g) {
+    var gs = g.geometries || []; if (!gs.length) return null; if (gs.length === 1) return gs[0];
+    if (gs.every(function (x) { return x.type === 'Polygon' || x.type === 'MultiPolygon'; })) return { type: 'MultiPolygon', coordinates: [].concat.apply([], gs.map(function (x) { return x.type === 'Polygon' ? [x.coordinates] : x.coordinates; })) };
+    if (gs.every(function (x) { return x.type === 'Point' || x.type === 'MultiPoint'; })) return { type: 'MultiPoint', coordinates: [].concat.apply([], gs.map(function (x) { return x.type === 'Point' ? [x.coordinates] : x.coordinates; })) };
+    return null;
+  }
+  function closedLine(c) { return c.length >= 4 && samePt(c[0], c[c.length - 1]) && new Set(c.map(function (p) { return p[0] + ',' + p[1]; })).size >= 3; }
+  var KNOWN = { Point: 1, MultiPoint: 1, LineString: 1, MultiLineString: 1, Polygon: 1, MultiPolygon: 1, GeometryCollection: 1 };
+  function ptStr(p) { return p[0].toFixed(6) + ', ' + p[1].toFixed(6); }
+
+  function checkPlot(pl, i, sw, add) {
+    var props = pl.props || {};
+    aliasRenames(props).forEach(function (a) { add('W_PROP_ALIAS', i, a); });
+    var pc = getProp(props, 'ProducerCountry');
+    if (pc != null && String(pc).trim() !== '') {
+      var s = String(pc).trim();
+      if (!/^[A-Z]{2}$/.test(s)) { var c = countryCode(s); if (c) add('E_COUNTRY_CODE', i, { v: s, to: c }); else add('W_COUNTRY_UNKNOWN', i, { v: s }); }
+    }
+    var aRaw = getProp(props, 'Area'), aNum = null, aGiven = aRaw != null && String(aRaw).trim() !== '';
+    if (aGiven) { aNum = toNum(aRaw); if (aNum == null) add('W_AREA_BAD', i, { v: String(aRaw) }); else if (typeof aRaw !== 'number') add('W_AREA_TEXT', i, { v: String(aRaw) }); }
+    var g = pl.geom;
+    if (!g || !g.type) { add('E_NO_GEOM', i); return; }
+    if (!KNOWN[g.type]) { add('E_BAD_GEOM', i, { type: String(g.type).slice(0, 40) }); return; }
+    if (!validStructure(g)) { add('E_BAD_COORD', i); return; }
+    var pos = positions(g);
+    if (!pos.length) { add('E_NO_GEOM', i); return; }
+    if (pos.some(function (p) { return !isFinite(p[0]) || !isFinite(p[1]); })) { add('E_BAD_COORD', i); return; }
+    if (pos.some(function (p) { return p[0] === 0 && p[1] === 0; })) { add('E_ZERO', i); return; }
+    if (pos.some(function (p) { return p.length > 2; })) add('W_ALTITUDE', i);
+    var big = pos.find(function (p) { return Math.abs(p[0]) > 180 || Math.abs(p[1]) > 90; });
+    if (big) {
+      if (pos.some(function (p) { return Math.abs(p[0]) > 1000 || Math.abs(p[1]) > 1000; })) { add('E_PROJECTED', i, { x: big[0] + ', ' + big[1] }); return; }
+      if (!(sw && sw.state === 'swap')) { add('E_RANGE', i, { x: big[0] + ', ' + big[1] }); return; }
+    }
+    if (sw) {
+      if (sw.state === 'swap') add('E_SWAPPED', i, { country: sw.country || '' });
+      else if (sw.state === 'maybe') add('W_MAYBE_SWAPPED', i, { country: sw.country });
+      else if (sw.state === 'outside') add('W_OUTSIDE_COUNTRY', i, { country: sw.country });
+    }
+    if (!pl.padded && pl.minDec < 6) add('E_PRECISION', i, { d: pl.minDec });
+    if (pl.minDec <= 4) add('W_LOW_PRECISION', i, { d: pl.minDec });
+    if (g.type === 'LineString' || g.type === 'MultiLineString') add('E_LINE', i, { type: g.type });
+    if (g.type === 'GeometryCollection') add(gcMerge(g) ? 'W_GC' : 'E_GC', i);
+    var polys = polysOf(g), dupN = 0, unclosed = false, cw = false, few = false, holes = 0, xs = [];
+    polys.forEach(function (poly) {
+      if (poly.length > 1) holes += poly.length - 1;
+      if (!poly.length) few = true;
+      poly.forEach(function (ring, k) {
+        if (!ring.length) { few = true; return; }
+        if (ring.length < 2 || !samePt(ring[0], ring[ring.length - 1])) unclosed = true;
+        var open = openRing(ring), u = [];
+        open.forEach(function (p) { if (u.length && samePt(p, u[u.length - 1])) dupN++; else u.push(p); });
+        while (u.length > 1 && samePt(u[0], u[u.length - 1])) { u.pop(); dupN++; }
+        var distinct = new Set(u.map(function (p) { return p[0] + ',' + p[1]; })).size;
+        if (distinct < 3) { few = true; return; }
+        var x = ringSelfIntersections(u, 1);
+        if (x.length) { xs.push(x[0]); return; }
+        if (planarArea(u) === 0) { few = true; return; }
+        var ccw = planarArea(u) > 0; if (k === 0 ? !ccw : ccw) cw = true;
+      });
+    });
+    if (unclosed) add('E_UNCLOSED', i);
+    if (dupN) add('W_DUP_VERTEX', i, { n: dupN });
+    if (few) add('E_FEW_VERTICES', i);
+    if (xs.length) add('E_SELF_INTERSECT', i, { at: ptStr(xs[0]) });
+    if (holes) add('E_HOLES', i, { n: holes });
+    if (cw) add('W_WINDING', i);
+    var areaHa = geomAreaHa(g); pl.areaHa = areaHa;
+    if (g.type === 'Point' || g.type === 'MultiPoint') {
+      if (aNum != null && aNum > 4) add('E_POINT_OVER_4HA', i, { a: aNum });
+      else if (!aGiven) add('I_POINT_DEFAULT_AREA', i);
+    }
+    if (polys.length && areaHa > 0 && !few && !xs.length) {
+      if (areaHa < 0.01) add('W_TINY', i, { m2: Math.round(areaHa * 10000) });
+      if (areaHa > 5000) add('W_HUGE', i, { a: areaHa });
+      if (aNum != null && aNum > 0 && Math.abs(aNum - areaHa) > 0.5 && Math.abs(aNum - areaHa) / Math.max(aNum, areaHa) > 0.25) add('W_AREA_MISMATCH', i, { a: aNum, b: areaHa });
+    }
+  }
+  function keyOf(g) {
+    var pos = positions(g).map(function (p) { return p[0] + ',' + p[1]; });
+    return (g.type.indexOf('Point') >= 0 ? 'P' : 'A') + Array.from(new Set(pos)).sort().join(';');
+  }
+  function overlapIssues(plots, add, cap) {
+    var items = []; cap = cap || 400;
+    plots.forEach(function (pl, i) {
+      var g = pl.geom; if (!g || !validStructure(g) || g.type === 'GeometryCollection') return;
+      var pos = positions(g); if (!pos.length || !pos.every(function (p) { return goodPos(p) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90; })) return;
+      var polys = polysOf(g).map(function (p) { return openRing(p[0] || []); }).filter(function (r) { return r.length >= 3 && ringSelfIntersections(r, 1).length === 0; });
+      var pts = g.type === 'Point' ? [g.coordinates] : g.type === 'MultiPoint' ? g.coordinates : [];
+      if (!polys.length && !pts.length) return;
+      items.push({ i: i, bb: bboxOf(pos), polys: polys, pts: pts, key: keyOf(g) });
+    });
+    items.sort(function (a, b) { return a.bb[0] - b.bb[0]; });
+    var n = 0;
+    for (var a = 0; a < items.length && n < cap; a++) {
+      var A = items[a];
+      for (var b = a + 1; b < items.length && n < cap; b++) {
+        var B = items[b]; if (B.bb[0] > A.bb[2]) break; if (B.bb[1] > A.bb[3] || B.bb[3] < A.bb[1]) continue;
+        var kind = null;
+        if (A.key === B.key) kind = 'W_DUP_PLOT';
+        else if (A.polys.length && B.polys.length) { if (A.polys.some(function (pa) { return B.polys.some(function (pb) { return ringsOverlap(pa, pb); }); })) kind = 'W_OVERLAP'; }
+        else if (A.polys.length && B.pts.length) { if (B.pts.some(function (p) { return A.polys.some(function (r) { return strictlyInside(p, r); }); })) kind = 'W_OVERLAP'; }
+        else if (B.polys.length && A.pts.length) { if (A.pts.some(function (p) { return B.polys.some(function (r) { return strictlyInside(p, r); }); })) kind = 'W_OVERLAP'; }
+        if (kind) { add(kind, A.i, { j: B.i + 1 }); add(kind, B.i, { j: A.i + 1 }); n++; }
+      }
+    }
+  }
+  function checkAll(plots, ctx, opts, phase) {
+    var iss = []; function add(code, plot, p) { iss.push({ code: code, plot: plot, p: p || {} }); }
+    if (!plots.length) { add('E_EMPTY', -1); return iss; }
+    if (ctx.size > 10 * 1024 * 1024) add('W_FILE_SIZE', -1, { mb: (ctx.size / 1048576).toFixed(1) });
+    if (plots.length > 10000) add('W_TOO_MANY', -1, { n: plots.length });
+    if (ctx.crs) add(crsIsWGS(ctx.crs) ? 'W_CRS_MEMBER' : 'E_CRS', -1, { crs: crsName(ctx.crs) });
+    var withC = plots.filter(function (p) { var v = getProp(p.props, 'ProducerCountry'); return v != null && String(v).trim() !== ''; }).length;
+    if (withC > 0 && withC < plots.length) add('W_COUNTRY_MIXED', -1, { n: plots.length - withC, t: plots.length });
+    var sw = detectSwaps(plots, opts);
+    plots.forEach(function (pl, i) { checkPlot(pl, i, sw[i], add); });
+    if (phase === 'after') overlapIssues(plots, add);
+    return iss;
+  }
+
+  // ---------- safe fixes ----------
+  function r6(v) { return Math.round(v * 1e6) / 1e6; }
+  function fixAll(parsed, opts) {
+    var fixes = []; function add(code, plot, p) { fixes.push({ code: code, plot: plot, p: p || {} }); }
+    if (parsed.format !== 'geojson') add('F_CONVERTED', -1, { from: parsed.format.toUpperCase() });
+    var crs = parsed.crs || null; if (crs && crsIsWGS(crs)) { add('F_CRS', -1); crs = null; }
+    var sw = detectSwaps(parsed.plots, opts);
+    var plots = parsed.plots.map(function (pl, i) {
+      var out = { props: Object.assign({}, pl.props || {}), geom: pl.geom ? clone(pl.geom) : null, minDec: pl.minDec, maxDec: pl.maxDec, padded: false };
+      aliasRenames(out.props).forEach(function (a) { var v = out.props[a.from]; delete out.props[a.from]; out.props[a.to] = v; add('F_ALIAS', i, a); });
+      if (out.props.ProducerCountry != null) { var s = String(out.props.ProducerCountry).trim(); if (s && !/^[A-Z]{2}$/.test(s)) { var c = countryCode(s); if (c) { out.props.ProducerCountry = c; add('F_COUNTRY', i, { from: s, to: c }); } } }
+      if (out.props.Area != null && typeof out.props.Area !== 'number') { var n = toNum(out.props.Area); if (n != null) { add('F_AREA_TEXT', i, { from: String(out.props.Area), to: n }); out.props.Area = n; } }
+      var g = out.geom;
+      if (!g || !validStructure(g)) return out;
+      if (g.type === 'GeometryCollection') { var mg = gcMerge(g); if (mg) { g = clone(mg); add('F_GC', i, { type: g.type }); } }
+      if (g.type === 'LineString' && closedLine(g.coordinates)) { g = { type: 'Polygon', coordinates: [g.coordinates] }; add('F_LINE_TO_POLY', i); }
+      else if (g.type === 'MultiLineString' && g.coordinates.length && g.coordinates.every(closedLine)) { g = { type: 'MultiPolygon', coordinates: g.coordinates.map(function (l) { return [l]; }) }; add('F_LINE_TO_POLY', i); }
+      var pos = positions(g);
+      if (!pos.length || g.type === 'GeometryCollection' || pos.some(function (p) { return !isFinite(p[0]) || !isFinite(p[1]); })) { out.geom = g; return out; }
+      if (pos.some(function (p) { return p.length > 2; })) { g = mapPos(g, function (p) { return [p[0], p[1]]; }); add('F_ALTITUDE', i); }
+      if (sw[i] && sw[i].state === 'swap') { g = mapPos(g, function (p) { return [p[1], p[0]]; }); add('F_SWAP', i); }
+      if (pos.some(function (p) { return Math.abs(p[0]) > 1000 || Math.abs(p[1]) > 1000; })) { out.geom = g; return out; }
+      g = mapPos(g, function (p) { return [r6(p[0]), r6(p[1])]; });
+      if (pl.minDec < 6 && !pos.every(function (p) { return p[0] === 0 && p[1] === 0; })) add('F_PAD', i, { d: pl.minDec });
+      if (pl.maxDec > 6) add('F_ROUND', i);
+      out.padded = true;
+      if (g.type === 'Polygon' || g.type === 'MultiPolygon') {
+        var dup = 0, closed = 0, rew = 0;
+        var np = polysOf(g).map(function (poly) {
+          return poly.map(function (ring, k) {
+            if (!ring.length) return ring;
+            var wasClosed = ring.length > 1 && samePt(ring[0], ring[ring.length - 1]);
+            var u = [];
+            (wasClosed ? ring.slice(0, -1) : ring).forEach(function (p) { if (u.length && samePt(p, u[u.length - 1])) dup++; else u.push(p); });
+            while (u.length > 1 && samePt(u[0], u[u.length - 1])) { u.pop(); dup++; }
+            if (!wasClosed) closed++;
+            if (u.length >= 3 && ringSelfIntersections(u, 1).length === 0) {
+              var a = planarArea(u);
+              if (a !== 0 && (k === 0 ? a < 0 : a > 0)) { u = [u[0]].concat(u.slice(1).reverse()); rew++; }
+            }
+            return u.concat([u[0].slice()]);
+          });
+        });
+        g = g.type === 'Polygon' ? { type: 'Polygon', coordinates: np[0] } : { type: 'MultiPolygon', coordinates: np };
+        if (dup) add('F_DUP', i, { n: dup }); if (closed) add('F_CLOSE', i); if (rew) add('F_REWIND', i);
+      }
+      out.geom = g; return out;
+    });
+    return { plots: plots, fixes: fixes, crs: crs };
+  }
+  function analyze(parsed, opts) {
+    opts = opts || {};
+    var before = checkAll(parsed.plots, { size: opts.size || 0, crs: parsed.crs }, opts, 'before');
+    var fx = fixAll(parsed, opts);
+    var outLen = serialize(fx.plots, {}).text.length;
+    var after = checkAll(fx.plots, { size: outLen, crs: fx.crs }, opts, 'after');
+    return { before: before, after: after, fixes: fx.fixes, plots: fx.plots, format: parsed.format };
+  }
+  function serializable(pl) { return !!pl.geom && validStructure(pl.geom) && positions(pl.geom).every(function (p) { return isFinite(p[0]) && isFinite(p[1]); }); }
+  function fmt6(v) { var s = r6(v).toFixed(6); return s === '-0.000000' ? '0.000000' : s; }
+  function serGeom(g) {
+    if (g.type === 'GeometryCollection') return '{"type":"GeometryCollection","geometries":[' + g.geometries.map(serGeom).join(',') + ']}';
+    function c(x) { return isPos(x) ? '[' + x.map(fmt6).join(',') + ']' : '[' + x.map(c).join(',') + ']'; }
+    return '{"type":' + JSON.stringify(g.type) + ',"coordinates":' + c(g.coordinates) + '}';
+  }
+  // Writes a FeatureCollection; coordinates always with 6 decimals. opts.exclude: Set of plot indexes to leave out.
+  function serialize(plots, opts) {
+    opts = opts || {}; var lines = [], omitted = 0, excluded = 0;
+    plots.forEach(function (pl, i) {
+      if (!serializable(pl)) { omitted++; return; }
+      if (opts.exclude && opts.exclude.has(i)) { excluded++; return; }
+      lines.push('{"type":"Feature","properties":' + JSON.stringify(pl.props || {}) + ',"geometry":' + serGeom(pl.geom) + '}');
+    });
+    return { text: '{"type":"FeatureCollection","features":[\n' + lines.join(',\n') + '\n]}\n', count: lines.length, omitted: omitted, excluded: excluded };
+  }
+
+  // ---------- built-in samples (fictional plots) ----------
+  var SAMPLES = {
+    messy: { name: 'sample-messy-cooperative.geojson', text: '{"type":"FeatureCollection",\n "crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},\n "features":[\n' + [
+      '{"type":"Feature","properties":{"producer_name":"Producteur A","pays":"Côte d\'Ivoire","superficie":"2,1","ProductionPlace":"Parcelle 1"},"geometry":{"type":"Polygon","coordinates":[[[-6.59012,5.78034],[-6.58871,5.78029],[-6.58866,5.78152],[-6.59009,5.78160]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur B","ProducerCountry":"Côte d\'Ivoire","ProductionPlace":"Parcelle 2"},"geometry":{"type":"Polygon","coordinates":[[[5.790012,-6.580050],[5.789980,-6.578610],[5.791320,-6.578590],[5.791350,-6.580020],[5.790012,-6.580050]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur C","ProducerCountry":"CIV","ProductionPlace":"Parcelle 3"},"geometry":{"type":"Polygon","coordinates":[[[-6.595000,5.775000],[-6.595010,5.776400],[-6.593600,5.776420],[-6.593590,5.775010],[-6.593590,5.775010],[-6.595000,5.775000]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur D","ProducerCountry":"CI","ProductionPlace":"Parcelle 4"},"geometry":{"type":"Polygon","coordinates":[[[-6.600000,5.770000],[-6.598500,5.771500],[-6.598500,5.770000],[-6.600000,5.771500],[-6.600000,5.770000]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur E","ProducerCountry":"ci","ProductionPlace":"Parcelle 5","Area":"6.5"},"geometry":{"type":"Point","coordinates":[-6.585000,5.772000,212.0]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur F","ProducerCountry":"CI","ProductionPlace":"Parcelle 6"},"geometry":{"type":"Point","coordinates":[0,0]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producteur G","ProducerCountry":"CI","ProductionPlace":"Parcelle 7"},"geometry":{"type":"LineString","coordinates":[[-6.605000,5.780000],[-6.604000,5.781000],[-6.603000,5.780500]]}}',
+      '{"type":"Feature","properties":{"producer_name":"Producteur H","ProducerCountry":"CI","ProductionPlace":"Parcelle 8"},"geometry":{"type":"Polygon","coordinates":[[[-6.589400,5.780900],[-6.588000,5.780900],[-6.588000,5.782000],[-6.589400,5.782000],[-6.589400,5.780900]]]}}'
+    ].join(',\n') + '\n]}\n' },
+    clean: { name: 'sample-clean-ghana.geojson', text: '{"type":"FeatureCollection","features":[\n' + [
+      '{"type":"Feature","properties":{"ProducerName":"Producer A","ProducerCountry":"GH","ProductionPlace":"Plot A1"},"geometry":{"type":"Polygon","coordinates":[[[-1.620000,6.700000],[-1.618200,6.700150],[-1.618050,6.701500],[-1.619100,6.702200],[-1.620150,6.701400],[-1.620000,6.700000]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producer B","ProducerCountry":"GH","ProductionPlace":"Plot B1"},"geometry":{"type":"Polygon","coordinates":[[[-1.617000,6.700000],[-1.615600,6.700050],[-1.615550,6.701100],[-1.616950,6.701050],[-1.617000,6.700000]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producer C","ProducerCountry":"GH","ProductionPlace":"Plot C1"},"geometry":{"type":"Polygon","coordinates":[[[-1.619500,6.703500],[-1.617800,6.703450],[-1.617700,6.704900],[-1.618900,6.705300],[-1.619600,6.704600],[-1.619500,6.703500]]]}}',
+      '{"type":"Feature","properties":{"ProducerName":"Producer D","ProducerCountry":"GH","ProductionPlace":"Plot D1","Area":1.5},"geometry":{"type":"Point","coordinates":[-1.613200,6.702400]}}'
+    ].join(',\n') + '\n]}\n' }
+  };
+
+  G.PFC = {
+    parse: parse, analyze: analyze, serialize: serialize, detectSwaps: detectSwaps, checkAll: checkAll, fixAll: fixAll,
+    ringAreaM2: ringAreaM2, geomAreaHa: geomAreaHa, planarArea: planarArea, isCCW: isCCW, ringSelfIntersections: ringSelfIntersections,
+    ringsOverlap: ringsOverlap, validStructure: validStructure, positions: positions, polysOf: polysOf, countryCode: countryCode,
+    getProp: getProp, decimalsOfStr: decimalsOfStr, COUNTRIES: COUNTRIES, SAMPLES: SAMPLES, EARTH_RADIUS_M: R
+  };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var P = window.PFC, TOOL = 'plot-file-checker';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var store = { get: function (k) { try { return localStorage.getItem('pfc.' + k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem('pfc.' + k, v); } catch (e) { /* private mode */ } } };
+  var LANG = store.get('lang') || ((navigator.language || 'en').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  if (LANG !== 'fr' && LANG !== 'en') LANG = 'en';
+
+  var SRC = {
+    eu: 'https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html',
+    reg: 'https://eur-lex.europa.eu/eli/reg/2023/1115/oj',
+    rfc: 'https://www.rfc-editor.org/rfc/rfc7946',
+    whisp: 'https://www.fao.org/transparent-supply-chains/news---events/news/detail/supporting-eudr-compliance-with-whisp/en'
+  };
+  var UI = {
+    en: {
+      h1: 'EUDR Plot File Checker',
+      lede: 'Check and fix farm plot files (GeoJSON, KML, CSV) before you send them to your EU buyer or upload them to the EU Information System for the EU Deforestation Regulation (EUDR). Free, in English and French.',
+      privacy: '<b>Your file never leaves this device.</b> Everything runs in your browser. Nothing is uploaded: not the coordinates, not the farmer names.',
+      dropTitle: 'Drop your plot file here', choose: 'Choose a file', sampleMessy: 'Try a messy sample', sampleClean: 'Try a clean sample',
+      dropFormats: 'Reads GeoJSON, KML, CSV (latitude/longitude columns, a WKT column, or KoBo/ODK geoshape) and WKT text.',
+      dropNo: 'Not supported yet: shapefiles (.zip/.shp), KMZ and Excel. Export to GeoJSON, KML or CSV first.',
+      country: 'Country of production', countryAuto: 'Auto (from the file)',
+      countryHelp: 'Used to spot swapped latitude and longitude. Leave on Auto if the file has a ProducerCountry for each plot.',
+      paste: 'Or paste the file contents', pasteBtn: 'Check pasted text', reading: 'Reading {name}…', tooBig: 'This file is over 50 MB, too big to check in the browser. Split it first.',
+      resTitle: 'Results: {name}', caveat: 'Passing these checks does not guarantee that the EU system or your buyer will accept the file.',
+      tPlots: 'Plots', tProblems: 'Problems found', tFixed: 'Fixed automatically', tAttention: 'Plots still to fix', tCheck: 'Plots to double-check', tArea: 'Area in polygons',
+      verdictOk: 'All {n} plots pass these checks.', verdictOkFixed: 'All {n} plots pass these checks after {f} automatic fixes. Download the fixed file below.',
+      verdictBad: '{e} of {n} plots still need fixing before upload.', verdictWarn: 'No blocking problems left, but {w} of {n} plots are worth a second look.', verdictFile: 'This file could not be checked.',
+      mapTitle: 'Map preview', mapNote: 'Outline view only, no background map. Tap a shape to find it in the table.', mapNone: 'Nothing to draw: no plot has usable coordinates.',
+      lgOk: 'OK', lgFixed: 'Fixed', lgCheck: 'Check', lgErr: 'Fix needed',
+      needTitle: 'Still needs your attention', needNone: 'Nothing left to fix.', fixedTitle: 'Fixed automatically', fixedNone: 'No changes were needed.',
+      dlTitle: 'Download', dlGeo: 'Download fixed GeoJSON', dlCsv: 'Download issue report (CSV)', cpGeo: 'Copy fixed GeoJSON', cpRep: 'Copy report',
+      dlNote: 'The fixed file is a GeoJSON FeatureCollection in WGS 84, longitude first, with 6 decimals. Plots that still have errors are kept unchanged unless you leave them out. Fix them before you submit.',
+      excludeErr: 'Leave out plots that still have errors', dlDone: 'Downloaded {n} plot(s).', dlOmitted: '{n} plot(s) with unreadable coordinates were left out.', dlExcluded: '{n} plot(s) with errors were left out.',
+      copied: 'Copied to the clipboard.', copyFail: 'Copy did not work. The text is shown below: select it and copy.',
+      tableTitle: 'Plots', thN: '#', thPlot: 'Plot', thType: 'Type', thArea: 'Area (ha)', thCorners: 'Corners', thStatus: 'Status', moreRows: 'Showing the first {n} plots.',
+      plotN: 'Plot {n}', andMore: '…and {n} more', fileLevel: 'Whole file',
+      sevE: 'Error', sevW: 'Check', sevI: 'Info', sevF: 'Fixed',
+      wlTitle: 'Coming soon: the paid version', wlBody: 'Bulk files, a cooperative dashboard and TRACES-ready export packs. Join the waitlist and we will email you when it opens.',
+      wlEmail: 'Your email', wlBtn: 'Join the waitlist', wlConsent: 'I agree to be emailed about the paid version of this tool. You can unsubscribe at any time.',
+      wlPrivacy: 'We only keep your email address, for this waitlist. Your plot files are never sent anywhere. See our privacy page.',
+      wlThanks: 'Thank you! You are on the waitlist.', wlFail: "Couldn't save — please try again later.", wlBad: 'Please enter a valid email address and tick the consent box.', wlSending: 'Saving…',
+      rulesTitle: 'What this tool checks, and why',
+      rulesIntro: 'Our reading of the published EU format guidance and the GeoJSON standard, last reviewed October 2026. Always confirm with the official pages linked below.',
+      disclTitle: 'Important', discl: 'Not legal advice. This tool is not affiliated with, or endorsed by, the European Union or the EU Information System (TRACES). The rules can change. Confirm with the official EU guidance and your buyer. Passing these checks does not guarantee acceptance.',
+      deadline: 'As currently scheduled, the EUDR applies from 30 December 2026 for large and medium operators and from 30 June 2027 for micro and small operators. Check the official EU timeline for any change.',
+      footNote: 'Not legal advice. Your file stays on your device.', footMore: 'More Quickwell tools', footPrivacy: 'Privacy', footTerms: 'Terms',
+      why: { empty: 'the file is empty', json: 'it is not valid JSON/GeoJSON', geojson: 'it is not a GeoJSON Feature, FeatureCollection or geometry', kml: 'it is not valid KML', csv: 'no latitude/longitude, WKT or geoshape columns were found', wkt: 'the WKT text was not understood' },
+      types: { Point: 'Point', MultiPoint: 'Points', Polygon: 'Polygon', MultiPolygon: 'Polygons', LineString: 'Line', MultiLineString: 'Lines', GeometryCollection: 'Collection' }
+    },
+    fr: {
+      h1: 'Vérificateur de fichiers de parcelles EUDR',
+      lede: 'Vérifiez et corrigez vos fichiers de parcelles (GeoJSON, KML, CSV) avant de les envoyer à votre acheteur européen ou de les déposer dans le système d’information de l’UE pour le règlement européen sur la déforestation (RDUE, ou EUDR). Gratuit, en français et en anglais.',
+      privacy: '<b>Votre fichier ne quitte jamais cet appareil.</b> Tout se passe dans votre navigateur. Rien n’est envoyé : ni les coordonnées, ni les noms des producteurs.',
+      dropTitle: 'Déposez votre fichier de parcelles ici', choose: 'Choisir un fichier', sampleMessy: 'Essayer un exemple avec erreurs', sampleClean: 'Essayer un exemple correct',
+      dropFormats: 'Lit les fichiers GeoJSON, KML, CSV (colonnes latitude/longitude, colonne WKT ou geoshape KoBo/ODK) et le texte WKT.',
+      dropNo: 'Pas encore pris en charge : shapefile (.zip/.shp), KMZ et Excel. Exportez d’abord en GeoJSON, KML ou CSV.',
+      country: 'Pays de production', countryAuto: 'Auto (d’après le fichier)',
+      countryHelp: 'Sert à repérer une latitude et une longitude inversées. Laissez sur Auto si le fichier indique ProducerCountry pour chaque parcelle.',
+      paste: 'Ou collez le contenu du fichier', pasteBtn: 'Vérifier le texte collé', reading: 'Lecture de {name}…', tooBig: 'Ce fichier dépasse 50 Mo : trop lourd pour le navigateur. Découpez-le d’abord.',
+      resTitle: 'Résultats : {name}', caveat: 'Réussir ces contrôles ne garantit pas que le système de l’UE ou votre acheteur accepteront le fichier.',
+      tPlots: 'Parcelles', tProblems: 'Problèmes trouvés', tFixed: 'Corrections automatiques', tAttention: 'Parcelles à corriger', tCheck: 'Parcelles à revérifier', tArea: 'Surface des polygones',
+      verdictOk: 'Les {n} parcelles passent ces contrôles.', verdictOkFixed: 'Les {n} parcelles passent ces contrôles après {f} corrections automatiques. Téléchargez le fichier corrigé ci-dessous.',
+      verdictBad: '{e} parcelle(s) sur {n} doivent encore être corrigées avant le dépôt.', verdictWarn: 'Plus de problème bloquant, mais {w} parcelle(s) sur {n} méritent un second regard.', verdictFile: 'Ce fichier n’a pas pu être vérifié.',
+      mapTitle: 'Aperçu de la carte', mapNote: 'Contours seulement, sans fond de carte. Touchez une forme pour la retrouver dans le tableau.', mapNone: 'Rien à afficher : aucune parcelle n’a de coordonnées utilisables.',
+      lgOk: 'OK', lgFixed: 'Corrigée', lgCheck: 'À vérifier', lgErr: 'À corriger',
+      needTitle: 'Reste à traiter', needNone: 'Plus rien à corriger.', fixedTitle: 'Corrigé automatiquement', fixedNone: 'Aucune modification nécessaire.',
+      dlTitle: 'Télécharger', dlGeo: 'Télécharger le GeoJSON corrigé', dlCsv: 'Télécharger le rapport (CSV)', cpGeo: 'Copier le GeoJSON corrigé', cpRep: 'Copier le rapport',
+      dlNote: 'Le fichier corrigé est une FeatureCollection GeoJSON en WGS 84, longitude d’abord, avec 6 décimales. Les parcelles encore en erreur sont conservées telles quelles, sauf si vous les excluez. Corrigez-les avant le dépôt.',
+      excludeErr: 'Exclure les parcelles encore en erreur', dlDone: '{n} parcelle(s) téléchargée(s).', dlOmitted: '{n} parcelle(s) aux coordonnées illisibles ont été exclues.', dlExcluded: '{n} parcelle(s) en erreur ont été exclues.',
+      copied: 'Copié dans le presse-papiers.', copyFail: 'La copie n’a pas fonctionné. Le texte s’affiche ci-dessous : sélectionnez-le et copiez-le.',
+      tableTitle: 'Parcelles', thN: 'N°', thPlot: 'Parcelle', thType: 'Type', thArea: 'Surface (ha)', thCorners: 'Sommets', thStatus: 'Statut', moreRows: 'Affichage des {n} premières parcelles.',
+      plotN: 'Parcelle {n}', andMore: '… et {n} autre(s)', fileLevel: 'Fichier entier',
+      sevE: 'Erreur', sevW: 'À vérifier', sevI: 'Info', sevF: 'Corrigé',
+      wlTitle: 'Bientôt : la version payante', wlBody: 'Fichiers en lot, tableau de bord pour coopératives et dossiers d’export prêts pour TRACES. Inscrivez-vous sur la liste d’attente : nous vous écrirons à l’ouverture.',
+      wlEmail: 'Votre e-mail', wlBtn: 'Rejoindre la liste d’attente', wlConsent: 'J’accepte de recevoir des e-mails au sujet de la version payante de cet outil. Désinscription possible à tout moment.',
+      wlPrivacy: 'Nous ne conservons que votre adresse e-mail, pour cette liste d’attente. Vos fichiers de parcelles ne sont jamais envoyés. Voir notre page de confidentialité.',
+      wlThanks: 'Merci ! Vous êtes sur la liste d’attente.', wlFail: 'Enregistrement impossible — veuillez réessayer plus tard.', wlBad: 'Saisissez une adresse e-mail valide et cochez la case de consentement.', wlSending: 'Enregistrement…',
+      rulesTitle: 'Ce que l’outil vérifie, et pourquoi',
+      rulesIntro: 'Notre lecture des consignes de format publiées par l’UE et de la norme GeoJSON, revue en octobre 2026. Vérifiez toujours sur les pages officielles indiquées ci-dessous.',
+      disclTitle: 'Important', discl: 'Ceci n’est pas un avis juridique. Cet outil n’est ni affilié à l’Union européenne ou au système d’information de l’UE (TRACES), ni approuvé par eux. Les règles peuvent changer. Vérifiez auprès des sources officielles de l’UE et de votre acheteur. Réussir ces contrôles ne garantit pas l’acceptation.',
+      deadline: 'Selon le calendrier actuel, le RDUE s’applique à partir du 30 décembre 2026 pour les grands et moyens opérateurs, et du 30 juin 2027 pour les micro et petites entreprises. Vérifiez le calendrier officiel de l’UE en cas de changement.',
+      footNote: 'Pas un avis juridique. Votre fichier reste sur votre appareil.', footMore: 'Autres outils Quickwell', footPrivacy: 'Confidentialité', footTerms: 'Conditions',
+      why: { empty: 'le fichier est vide', json: 'ce n’est pas du JSON/GeoJSON valide', geojson: 'ce n’est ni une Feature, ni une FeatureCollection, ni une géométrie GeoJSON', kml: 'ce n’est pas du KML valide', csv: 'aucune colonne latitude/longitude, WKT ou geoshape n’a été trouvée', wkt: 'le texte WKT n’a pas été compris' },
+      types: { Point: 'Point', MultiPoint: 'Points', Polygon: 'Polygone', MultiPolygon: 'Polygones', LineString: 'Ligne', MultiLineString: 'Lignes', GeometryCollection: 'Collection' }
+    }
+  };
+  // n = group name, t = detail for one plot, h = help
+  var MSG = {
+    E_EMPTY: { en: { n: 'No plots found in this file', h: 'Check that the file is GeoJSON, KML, CSV with latitude/longitude columns, or WKT.' }, fr: { n: 'Aucune parcelle trouvée dans ce fichier', h: 'Vérifiez qu’il s’agit d’un GeoJSON, d’un KML, d’un CSV avec colonnes latitude/longitude, ou de WKT.' } },
+    E_PARSE: { en: { n: 'Could not read this file: {why}' , h: 'Open it in a text editor or QGIS to check it, or export it again.' }, fr: { n: 'Impossible de lire ce fichier : {why}', h: 'Ouvrez-le dans un éditeur de texte ou QGIS pour le vérifier, ou exportez-le à nouveau.' } },
+    E_UNSUPPORTED: { en: { n: 'This file type ({ext}) is not supported yet', h: 'Shapefiles (.zip/.shp), KMZ and Excel files are not read yet. In QGIS use Export > Save Features As > GeoJSON. In Excel use Save As > CSV. In Google Earth save as .kml.' }, fr: { n: 'Ce type de fichier ({ext}) n’est pas encore pris en charge', h: 'Les shapefiles (.zip/.shp), KMZ et fichiers Excel ne sont pas encore lus. Dans QGIS : Exporter > Sauvegarder les entités sous > GeoJSON. Dans Excel : Enregistrer sous > CSV. Dans Google Earth : enregistrer en .kml.' } },
+    W_FILE_SIZE: { en: { n: 'Large file ({mb} MB)', h: 'Upload limits reported by vendors range from about 10 MB to 25 MB. We could not confirm the current official limit. Consider splitting the file.' }, fr: { n: 'Fichier volumineux ({mb} Mo)', h: 'Les limites signalées par des prestataires vont d’environ 10 Mo à 25 Mo. Nous n’avons pas pu confirmer la limite officielle actuelle. Pensez à découper le fichier.' } },
+    W_TOO_MANY: { en: { n: '{n} plots in one file', h: 'Some platforms report a limit of 10,000 plots per batch (not confirmed officially). Consider splitting the file.' }, fr: { n: '{n} parcelles dans un seul fichier', h: 'Certaines plateformes signalent une limite de 10 000 parcelles par lot (non confirmée officiellement). Pensez à découper le fichier.' } },
+    W_CRS_MEMBER: { en: { n: 'Old-style "crs" entry in the file', h: 'GeoJSON (RFC 7946) is always WGS 84 and no longer uses "crs".' }, fr: { n: 'Ancienne entrée « crs » dans le fichier', h: 'Le GeoJSON (RFC 7946) est toujours en WGS 84 et n’utilise plus « crs ».' } },
+    E_CRS: { en: { n: 'The file declares another coordinate system ({crs})', h: 'The EU needs WGS 84 longitude/latitude in decimal degrees (EPSG:4326). Reproject the file in QGIS (Export > Save Features As, CRS EPSG:4326) and check it again.' }, fr: { n: 'Le fichier déclare un autre système de coordonnées ({crs})', h: 'L’UE exige des longitudes/latitudes WGS 84 en degrés décimaux (EPSG:4326). Reprojetez le fichier dans QGIS (Exporter > Sauvegarder les entités sous, SCR EPSG:4326) puis revérifiez.' } },
+    W_COUNTRY_MIXED: { en: { n: '{n} of {t} plots have no ProducerCountry', h: 'A file with several producers needs ProducerCountry (2-letter code, e.g. CI, GH) on every plot.' }, fr: { n: '{n} parcelle(s) sur {t} n’ont pas de ProducerCountry', h: 'Un fichier avec plusieurs producteurs doit indiquer ProducerCountry (code à 2 lettres, ex. CI, GH) pour chaque parcelle.' } },
+    E_NO_GEOM: { en: { n: 'No location for this plot', h: 'Each plot needs a point or a polygon.' }, fr: { n: 'Pas de localisation pour cette parcelle', h: 'Chaque parcelle doit avoir un point ou un polygone.' } },
+    E_BAD_GEOM: { en: { n: 'Unknown shape type', t: '"{type}"', h: 'Use Point or Polygon (or MultiPoint/MultiPolygon).' }, fr: { n: 'Type de forme inconnu', t: '« {type} »', h: 'Utilisez Point ou Polygon (ou MultiPoint/MultiPolygon).' } },
+    E_BAD_COORD: { en: { n: 'Missing or unreadable coordinates', h: 'Coordinates must be decimal numbers (e.g. -5.123456). Degrees-minutes-seconds and empty cells are not readable.' }, fr: { n: 'Coordonnées manquantes ou illisibles', h: 'Les coordonnées doivent être des nombres décimaux (ex. -5.123456). Les degrés-minutes-secondes et les cellules vides ne sont pas lisibles.' } },
+    E_ZERO: { en: { n: 'Coordinates at 0, 0 (in the ocean)', h: 'Usually a GPS without a fix or an empty cell. Measure this plot again.' }, fr: { n: 'Coordonnées à 0, 0 (en plein océan)', h: 'En général un GPS sans signal ou une cellule vide. Relevez à nouveau cette parcelle.' } },
+    W_ALTITUDE: { en: { n: 'Altitude values present' }, fr: { n: 'Valeurs d’altitude présentes' } },
+    E_PROJECTED: { en: { n: 'Coordinates look like metres, not degrees', t: '{x}', h: 'The file seems to use a projected system such as UTM. The EU needs WGS 84 decimal degrees (EPSG:4326). Reproject it in QGIS.' }, fr: { n: 'Coordonnées en mètres et non en degrés', t: '{x}', h: 'Le fichier semble utiliser une projection comme l’UTM. L’UE exige des degrés décimaux WGS 84 (EPSG:4326). Reprojetez-le dans QGIS.' } },
+    E_RANGE: { en: { n: 'Coordinates out of range', t: '{x}', h: 'Longitude must be between -180 and 180, latitude between -90 and 90.' }, fr: { n: 'Coordonnées hors limites', t: '{x}', h: 'La longitude doit être entre -180 et 180, la latitude entre -90 et 90.' } },
+    E_SWAPPED: { en: { n: 'Latitude and longitude are swapped', h: 'GeoJSON needs longitude first, then latitude.' }, fr: { n: 'Latitude et longitude inversées', h: 'Le GeoJSON exige la longitude d’abord, puis la latitude.' } },
+    W_MAYBE_SWAPPED: { en: { n: 'Latitude and longitude may be swapped', t: 'if swapped, it would fall in {country}', h: 'If the plot really is in that country, choose it under "Country of production" above and we will fix it automatically.' }, fr: { n: 'Latitude et longitude peut-être inversées', t: 'une fois inversées, les coordonnées tomberaient dans ce pays : {country}', h: 'Si la parcelle se trouve bien dans ce pays, choisissez-le dans « Pays de production » ci-dessus : nous corrigerons automatiquement.' } },
+    W_OUTSIDE_COUNTRY: { en: { n: 'Plot is not inside its stated country', t: 'expected {country}', h: 'Check the coordinates and the ProducerCountry value.' }, fr: { n: 'Parcelle hors du pays indiqué', t: 'attendu : {country}', h: 'Vérifiez les coordonnées et la valeur ProducerCountry.' } },
+    E_PRECISION: { en: { n: 'Fewer than 6 decimal places', t: '{d} decimal place(s)', h: 'The regulation asks for at least six decimal digits.' }, fr: { n: 'Moins de 6 décimales', t: '{d} décimale(s)', h: 'Le règlement demande au moins six décimales.' } },
+    W_LOW_PRECISION: { en: { n: 'Low GPS precision', t: '{d} decimal place(s), accurate to about {acc} at best', h: 'Adding zeros makes the file pass the format check but does not make the location more accurate. Consider measuring again with a GPS app that records 6 decimals.' }, fr: { n: 'Précision GPS faible', t: '{d} décimale(s), soit environ {acc} au mieux', h: 'Ajouter des zéros fait passer le contrôle de format mais ne rend pas la position plus précise. Pensez à refaire le relevé avec une application GPS qui enregistre 6 décimales.' } },
+    E_LINE: { en: { n: 'Line instead of a shape', t: '{type}', h: 'The EU system does not accept lines as a production place. Map the plot as a closed polygon, or use a single point if the plot is 4 ha or less.' }, fr: { n: 'Ligne au lieu d’une surface', t: '{type}', h: 'Le système de l’UE n’accepte pas les lignes comme lieu de production. Relevez la parcelle en polygone fermé, ou utilisez un point si elle fait 4 ha ou moins.' } },
+    E_GC: { en: { n: 'Mix of points and shapes in one plot', h: 'Split it into separate plots (one feature each).' }, fr: { n: 'Mélange de points et de surfaces dans une parcelle', h: 'Séparez-les en parcelles distinctes (une entité chacune).' } },
+    W_GC: { en: { n: 'GeometryCollection used' }, fr: { n: 'GeometryCollection utilisée' } },
+    E_UNCLOSED: { en: { n: 'Polygon not closed', h: 'The last point must repeat the first one.' }, fr: { n: 'Polygone non fermé', h: 'Le dernier point doit répéter le premier.' } },
+    W_DUP_VERTEX: { en: { n: 'Repeated points in a row', t: '{n} repeated point(s)' }, fr: { n: 'Points répétés à la suite', t: '{n} point(s) répété(s)' } },
+    E_FEW_VERTICES: { en: { n: 'Fewer than 3 distinct corners, or a flat shape', h: 'A boundary needs at least 3 different corners. Map the plot again, or use a single point if it is 4 ha or less.' }, fr: { n: 'Moins de 3 sommets distincts, ou forme plate', h: 'Un contour doit avoir au moins 3 sommets différents. Relevez à nouveau la parcelle, ou utilisez un point si elle fait 4 ha ou moins.' } },
+    E_SELF_INTERSECT: { en: { n: 'Boundary crosses itself', t: 'near {at}', h: 'Self-crossing shapes (like a figure 8) are rejected. We do not fix this automatically, because guessing the boundary could misstate the plot. Walk the boundary again in the field, or redraw it carefully.' }, fr: { n: 'Le contour se croise', t: 'près de {at}', h: 'Les formes qui se croisent (comme un 8) sont refusées. Nous ne corrigeons pas cela automatiquement : deviner le contour pourrait fausser la parcelle. Refaites le tour de la parcelle sur le terrain, ou redessinez-la avec soin.' } },
+    E_HOLES: { en: { n: 'Polygon with holes', t: '{n} hole(s)', h: 'The EU format description says polygons with holes are not processed. Split the plot into parts that go around the hole. This changes the plot, so it is your decision.' }, fr: { n: 'Polygone avec trous', t: '{n} trou(s)', h: 'La description du format de l’UE indique que les polygones avec trous ne sont pas traités. Découpez la parcelle en morceaux qui contournent le trou. Cela modifie la parcelle : c’est à vous de décider.' } },
+    W_WINDING: { en: { n: 'Corners run clockwise' }, fr: { n: 'Sommets dans le sens horaire' } },
+    W_AREA_BAD: { en: { n: 'Area is not a number', t: '"{v}"', h: 'Area must be a number of hectares, e.g. 2.5.' }, fr: { n: 'Area n’est pas un nombre', t: '« {v} »', h: 'Area doit être un nombre d’hectares, ex. 2.5.' } },
+    W_AREA_TEXT: { en: { n: 'Area written as text' }, fr: { n: 'Area écrite comme du texte' } },
+    E_POINT_OVER_4HA: { en: { n: 'Single point used for a plot over 4 ha', t: 'Area {a} ha', h: 'Plots over 4 hectares need a polygon (the boundary), not a point. The regulation exempts cattle establishments from this; for other commodities, map the boundary.' }, fr: { n: 'Point unique pour une parcelle de plus de 4 ha', t: 'Area {a} ha', h: 'Les parcelles de plus de 4 hectares exigent un polygone (le contour), pas un point. Le règlement en exempte les établissements d’élevage ; pour les autres produits, relevez le contour.' } },
+    I_POINT_DEFAULT_AREA: { en: { n: 'Point without Area: the EU system will assume 4 ha', h: 'Add an Area value in hectares if you know it.' }, fr: { n: 'Point sans Area : le système de l’UE retiendra 4 ha', h: 'Ajoutez une valeur Area en hectares si vous la connaissez.' } },
+    W_TINY: { en: { n: 'Very small polygon', t: '{m2} m²', h: 'Possibly a GPS error or points recorded in one place.' }, fr: { n: 'Polygone très petit', t: '{m2} m²', h: 'Peut-être une erreur GPS ou des points relevés au même endroit.' } },
+    W_HUGE: { en: { n: 'Very large polygon', t: '{a} ha', h: 'Check that this is one plot and that the coordinates are right.' }, fr: { n: 'Polygone très grand', t: '{a} ha', h: 'Vérifiez qu’il s’agit d’une seule parcelle et que les coordonnées sont justes.' } },
+    W_AREA_MISMATCH: { en: { n: 'Area value does not match the shape', t: 'Area says {a} ha, the shape measures {b} ha', h: 'Check the Area value or the boundary.' }, fr: { n: 'La valeur Area ne correspond pas à la forme', t: 'Area indique {a} ha, la forme mesure {b} ha', h: 'Vérifiez la valeur Area ou le contour.' } },
+    W_PROP_ALIAS: { en: { n: 'Property name the EU system does not read' }, fr: { n: 'Nom de propriété non lu par le système de l’UE' } },
+    E_COUNTRY_CODE: { en: { n: 'ProducerCountry is not a 2-letter code', t: '"{v}"' }, fr: { n: 'ProducerCountry n’est pas un code à 2 lettres', t: '« {v} »' } },
+    W_COUNTRY_UNKNOWN: { en: { n: 'ProducerCountry not recognised', t: '"{v}"', h: 'Use the 2-letter ISO code, e.g. CI for Côte d’Ivoire, GH for Ghana.' }, fr: { n: 'ProducerCountry non reconnu', t: '« {v} »', h: 'Utilisez le code ISO à 2 lettres, ex. CI pour la Côte d’Ivoire, GH pour le Ghana.' } },
+    W_OVERLAP: { en: { n: 'Overlaps another plot', t: 'overlaps plot {j}', h: 'Two plots claiming the same land is a common question from buyers and authorities. Check both boundaries.' }, fr: { n: 'Chevauche une autre parcelle', t: 'chevauche la parcelle {j}', h: 'Deux parcelles sur le même terrain est une question fréquente des acheteurs et des autorités. Vérifiez les deux contours.' } },
+    W_DUP_PLOT: { en: { n: 'Same location as another plot', t: 'same as plot {j}', h: 'Possibly entered twice. Check whether both are needed.' }, fr: { n: 'Même position qu’une autre parcelle', t: 'identique à la parcelle {j}', h: 'Peut-être saisie deux fois. Vérifiez si les deux sont nécessaires.' } },
+    F_CONVERTED: { en: { n: 'Converted {from} to a GeoJSON FeatureCollection' }, fr: { n: 'Conversion de {from} en FeatureCollection GeoJSON' } },
+    F_CRS: { en: { n: 'Removed the old "crs" entry (GeoJSON RFC 7946 is always WGS 84)' }, fr: { n: 'Suppression de l’ancienne entrée « crs » (le GeoJSON RFC 7946 est toujours en WGS 84)' } },
+    F_GC: { en: { n: 'Turned a GeometryCollection into one shape', t: '{type}' }, fr: { n: 'GeometryCollection transformée en une seule forme', t: '{type}' } },
+    F_LINE_TO_POLY: { en: { n: 'Turned a closed line into a polygon', h: 'Check that the line was the plot boundary.' }, fr: { n: 'Ligne fermée transformée en polygone', h: 'Vérifiez que la ligne était bien le contour de la parcelle.' } },
+    F_ALTITUDE: { en: { n: 'Removed altitude values (only longitude and latitude are needed)' }, fr: { n: 'Altitudes supprimées (seules longitude et latitude sont utiles)' } },
+    F_SWAP: { en: { n: 'Swapped latitude/longitude into longitude, latitude order' }, fr: { n: 'Latitude/longitude remises dans l’ordre longitude, latitude' } },
+    F_PAD: { en: { n: 'Wrote coordinates with 6 decimal places', t: 'they had {d}', h: 'Padding with zeros does not add accuracy.' }, fr: { n: 'Coordonnées écrites avec 6 décimales', t: 'elles en avaient {d}', h: 'Ajouter des zéros n’améliore pas la précision.' } },
+    F_ROUND: { en: { n: 'Rounded coordinates to 6 decimal places (about 11 cm; the EU system keeps 6)' }, fr: { n: 'Coordonnées arrondies à 6 décimales (environ 11 cm ; le système de l’UE en garde 6)' } },
+    F_DUP: { en: { n: 'Removed repeated points', t: '{n} point(s)' }, fr: { n: 'Points répétés supprimés', t: '{n} point(s)' } },
+    F_CLOSE: { en: { n: 'Closed the polygon (repeated the first point at the end)' }, fr: { n: 'Polygone fermé (premier point répété à la fin)' } },
+    F_REWIND: { en: { n: 'Put corners in counter-clockwise order (GeoJSON right-hand rule)' }, fr: { n: 'Sommets remis dans le sens antihoraire (règle de la main droite du GeoJSON)' } },
+    F_COUNTRY: { en: { n: 'Turned ProducerCountry into a 2-letter code', t: '"{from}" → {to}' }, fr: { n: 'ProducerCountry converti en code à 2 lettres', t: '« {from} » → {to}' } },
+    F_ALIAS: { en: { n: 'Renamed properties to the names the EU system reads', t: '"{from}" → {to}' }, fr: { n: 'Propriétés renommées avec les noms lus par le système de l’UE', t: '« {from} » → {to}' } },
+    F_AREA_TEXT: { en: { n: 'Stored Area as a number of hectares', t: '"{from}" → {to}' }, fr: { n: 'Area enregistrée comme nombre d’hectares', t: '« {from} » → {to}' } }
+  };
+  var RULES = {
+    en: [
+      ['Format and coordinate order', 'GeoJSON (RFC 7946) in WGS 84 decimal degrees, longitude first, then latitude. We convert KML, CSV and WKT to GeoJSON and fix swapped coordinates when the location makes it obvious.', ['eu', 'rfc']],
+      ['Shapes', 'Points and polygons (MultiPoint and MultiPolygon too). Lines are not accepted as production places. Polygons with holes and self-crossing polygons are not processed: we flag these and never redraw them for you.', ['eu']],
+      ['Six decimal places', 'Coordinates need at least six decimal digits. The EU system keeps 6 decimals. We pad shorter values with zeros, but warn you when the original GPS precision was low.', ['reg', 'eu']],
+      ['Points and the 4-hectare rule', 'Plots over 4 hectares need a polygon (cattle establishments are exempt). A point without an Area value is counted as 4 ha.', ['reg', 'eu']],
+      ['Properties', 'The EU system reads ProducerName, ProducerCountry (2-letter ISO code), ProductionPlace and Area (hectares). Other properties are ignored, so we rename common variants such as "pays" or "superficie".', ['eu']],
+      ['Clean polygons', 'Rings closed (last point = first), at least 3 distinct corners, no repeated points, outer boundary counter-clockwise (GeoJSON right-hand rule; most systems accept either).', ['rfc']],
+      ['File size and plot count', 'Vendors report limits of roughly 10 to 25 MB per file and 10,000 plots per batch. We could not confirm these officially, so we only warn.', []],
+      ['Overlaps and duplicates', 'Not a format rule, but buyers and authorities often ask about plots that overlap or repeat. We flag them.', []],
+      ['Deforestation risk', 'This tool checks the file format only, not deforestation. For a free risk screen, see Whisp.', ['whisp']]
+    ],
+    fr: [
+      ['Format et ordre des coordonnées', 'GeoJSON (RFC 7946) en degrés décimaux WGS 84, longitude d’abord, puis latitude. Nous convertissons KML, CSV et WKT en GeoJSON et corrigeons les coordonnées inversées quand la position le rend évident.', ['eu', 'rfc']],
+      ['Formes', 'Points et polygones (MultiPoint et MultiPolygon aussi). Les lignes ne sont pas acceptées comme lieu de production. Les polygones avec trous ou qui se croisent ne sont pas traités : nous les signalons sans jamais les redessiner à votre place.', ['eu']],
+      ['Six décimales', 'Les coordonnées doivent avoir au moins six décimales. Le système de l’UE en conserve 6. Nous complétons les valeurs plus courtes avec des zéros, mais vous prévenons quand la précision GPS d’origine était faible.', ['reg', 'eu']],
+      ['Points et règle des 4 hectares', 'Les parcelles de plus de 4 hectares exigent un polygone (les établissements d’élevage sont exemptés). Un point sans valeur Area compte pour 4 ha.', ['reg', 'eu']],
+      ['Propriétés', 'Le système de l’UE lit ProducerName, ProducerCountry (code ISO à 2 lettres), ProductionPlace et Area (hectares). Les autres propriétés sont ignorées : nous renommons donc les variantes courantes comme « pays » ou « superficie ».', ['eu']],
+      ['Polygones propres', 'Anneaux fermés (dernier point = premier), au moins 3 sommets distincts, pas de points répétés, contour extérieur dans le sens antihoraire (règle de la main droite du GeoJSON ; la plupart des systèmes acceptent les deux).', ['rfc']],
+      ['Taille du fichier et nombre de parcelles', 'Des prestataires signalent des limites d’environ 10 à 25 Mo par fichier et 10 000 parcelles par lot. Nous n’avons pas pu les confirmer officiellement : nous nous limitons à un avertissement.', []],
+      ['Chevauchements et doublons', 'Ce n’est pas une règle de format, mais acheteurs et autorités posent souvent la question des parcelles qui se chevauchent ou se répètent. Nous les signalons.', []],
+      ['Risque de déforestation', 'Cet outil vérifie seulement le format du fichier, pas la déforestation. Pour une analyse de risque gratuite, voir Whisp.', ['whisp']]
+    ]
+  };
+  var SRC_NAME = { en: { eu: 'EU Information System: GeoJSON file description', reg: 'Regulation (EU) 2023/1115, Article 2(28)', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO: Supporting EUDR compliance with Whisp' }, fr: { eu: 'Système d’information de l’UE : description du fichier GeoJSON', reg: 'Règlement (UE) 2023/1115, article 2, point 28', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO : Whisp et la conformité RDUE' } };
+
+  function t(k, p) { var s = UI[LANG][k]; if (s == null) s = UI.en[k]; if (s == null) s = k; return fill(s, p); }
+  function fill(s, p) { return p ? String(s).replace(/\{(\w+)\}/g, function (m, x) { return p[x] != null ? p[x] : m; }) : s; }
+  function nf(v, d) { return Number(v).toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: d == null ? 2 : d }); }
+  function cname(code) { var c = P.COUNTRIES[code]; return c ? c[LANG === 'fr' ? 1 : 0] : (code || '?'); }
+  var ACC = ['111 km', '11 km', '1.1 km', '110 m', '11 m', '1.1 m'];
+  function fmtParams(p) {
+    var o = {}; Object.keys(p || {}).forEach(function (k) {
+      var v = p[k];
+      if (k === 'a' || k === 'b') v = nf(v, 2); else if (k === 'm2') v = nf(v, 0); else if (k === 'country') v = cname(v); else if (k === 'to' && typeof v === 'number') v = nf(v, 4);
+      else if (k === 'type') v = (UI[LANG].types[v] || v); else if (k === 'why') v = UI[LANG].why[v] || v;
+      o[k] = esc(v);
+    });
+    if (p && p.d != null) o.acc = ACC[Math.min(p.d, 5)];
+    return o;
+  }
+  function msg(code) { var m = MSG[code] || { en: { n: code }, fr: { n: code } }; return m[LANG] || m.en; }
+  function sevOf(code) { return code[0] === 'E' ? 'E' : code[0] === 'W' ? 'W' : code[0] === 'I' ? 'I' : 'F'; }
+
+  // ---------- language ----------
+  function buildCountry() {
+    var sel = $('country'), cur = sel.value;
+    var codes = Object.keys(P.COUNTRIES).sort(function (a, b) { return cname(a).localeCompare(cname(b), LANG); });
+    sel.innerHTML = '<option value="">' + esc(t('countryAuto')) + '</option>' + codes.map(function (c) { return '<option value="' + c + '">' + esc(cname(c)) + ' (' + c + ')</option>'; }).join('');
+    sel.value = cur;
+  }
+  function buildRules() {
+    $('rulesList').innerHTML = RULES[LANG].map(function (r, k) {
+      var links = r[2].map(function (s) { return '<a href="' + SRC[s] + '" target="_blank" rel="noopener">' + esc(SRC_NAME[LANG][s]) + '</a>'; }).join(' · ');
+      return '<details' + (k === 0 ? ' open' : '') + '><summary>' + esc(r[0]) + '</summary><p>' + esc(r[1]) + '</p>' + (links ? '<p class="note">' + (LANG === 'fr' ? 'Sources : ' : 'Sources: ') + links + '</p>' : '') + '</details>';
+    }).join('');
+  }
+  function applyLang() {
+    document.documentElement.lang = LANG;
+    document.title = LANG === 'fr' ? 'Vérificateur de fichiers de parcelles EUDR : contrôlez et corrigez vos GeoJSON dans le navigateur' : 'EUDR Plot File Checker: check and fix farm plot GeoJSON in your browser';
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+    document.querySelectorAll('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === LANG)); });
+    $('pasteText').placeholder = '{"type":"FeatureCollection","features":[…]}';
+    buildCountry(); buildRules();
+    if (STATE) render();
+  }
+  document.querySelectorAll('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { LANG = b.getAttribute('data-lang'); store.set('lang', LANG); applyLang(); }); });
+
+  // ---------- running a check ----------
+  var STATE = null;
+  function run(text, name, size, isSample) {
+    $('status').textContent = '';
+    var parsed;
+    try { parsed = P.parse(text, name); }
+    catch (e) { STATE = { name: name, fileErr: { code: e.code || 'E_PARSE', p: e.p || { why: 'json' } } }; render(); return; }
+    var res = P.analyze(parsed, { country: $('country').value || null, size: size });
+    STATE = { name: name, size: size, parsed: parsed, res: res, isSample: !!isSample };
+    render();
+    if (!isSample && parsed.plots.length) {
+      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check', plots: parsed.plots.length }) }).catch(function () {}); } catch (e) { /* offline */ }
+    }
+    $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function rerun() { if (STATE && STATE.parsed) { STATE.res = P.analyze(STATE.parsed, { country: $('country').value || null, size: STATE.size }); render(); } }
+  function readFile(file) {
+    if (!file) return;
+    if (file.size > 50 * 1024 * 1024) { $('status').textContent = t('tooBig'); return; }
+    $('status').textContent = t('reading', { name: file.name });
+    var ext = (file.name.toLowerCase().match(/\.([a-z0-9]+)$/) || [])[1] || '';
+    if (['zip', 'shp', 'shx', 'dbf', 'kmz', 'xlsx', 'xls', 'ods', 'gpkg'].indexOf(ext) >= 0) { run('', file.name, file.size, false); return; }
+    file.text().then(function (txt) { run(txt, file.name, file.size, false); }, function () { run('', file.name, file.size, false); });
+  }
+  $('chooseBtn').addEventListener('click', function () { $('file').click(); });
+  $('file').addEventListener('change', function (e) { readFile(e.target.files[0]); e.target.value = ''; });
+  var drop = $('drop');
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('on'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('on'); }); });
+  drop.addEventListener('drop', function (e) { readFile(e.dataTransfer && e.dataTransfer.files[0]); });
+  $('sampleMessy').addEventListener('click', function () { var s = P.SAMPLES.messy; run(s.text, s.name, s.text.length, true); });
+  $('sampleClean').addEventListener('click', function () { var s = P.SAMPLES.clean; run(s.text, s.name, s.text.length, true); });
+  $('pasteBtn').addEventListener('click', function () { var v = $('pasteText').value; if (v.trim()) run(v, LANG === 'fr' ? 'texte collé' : 'pasted text', v.length, false); });
+  $('country').addEventListener('change', rerun);
+  $('excludeErr').addEventListener('change', function () { $('dlMsg').textContent = ''; });
+
+  // ---------- rendering ----------
+  function plotLabel(i) {
+    var pl = STATE.res.plots[i], p = (pl && pl.props) || {};
+    var l = p.ProductionPlace || p.ProducerName || p.name || p.Name || p.id || p.ID || '';
+    return String(l).slice(0, 60);
+  }
+  function plotRef(i) { var l = plotLabel(i); return '#' + (i + 1) + (l ? ' ' + l : ''); }
+  function statuses() {
+    var res = STATE.res, st = res.plots.map(function () { return 'ok'; });
+    res.fixes.forEach(function (f) { if (f.plot >= 0) st[f.plot] = 'fixed'; });
+    res.after.forEach(function (x) { if (x.plot < 0) return; var s = sevOf(x.code); if (s === 'W' && st[x.plot] !== 'err') st[x.plot] = 'check'; if (s === 'E') st[x.plot] = 'err'; });
+    return st;
+  }
+  function group(list) {
+    var g = {}, order = [];
+    list.forEach(function (x) { if (!g[x.code]) { g[x.code] = []; order.push(x.code); } g[x.code].push(x); });
+    var rank = { E: 0, W: 1, I: 2, F: 3 };
+    order.sort(function (a, b) { return rank[sevOf(a)] - rank[sevOf(b)]; });
+    return order.map(function (c) { return { code: c, items: g[c] }; });
+  }
+  function renderGroups(list, el, emptyKey) {
+    var gs = group(list);
+    if (!gs.length) { el.innerHTML = '<li class="muted">' + esc(t(emptyKey)) + '</li>'; return; }
+    el.innerHTML = gs.map(function (gr) {
+      var m = msg(gr.code), s = sevOf(gr.code), cls = { E: 't-err', W: 't-warn', I: 't-info', F: 't-fix' }[s];
+      var plots = gr.items.filter(function (x) { return x.plot >= 0; });
+      var file = gr.items.filter(function (x) { return x.plot < 0; });
+      var head = fill(m.n, fmtParams((file[0] || gr.items[0]).p));
+      var seen = {}, rows = [];
+      plots.forEach(function (x) { var key = x.plot + '|' + (m.t ? fill(m.t, fmtParams(x.p)) : ''); if (seen[key]) return; seen[key] = 1; rows.push(x); });
+      var lis = rows.slice(0, 40).map(function (x) { return '<li>' + esc(plotRef(x.plot)) + (m.t ? ': ' + fill(m.t, fmtParams(x.p)) : '') + '</li>'; }).join('');
+      if (rows.length > 40) lis += '<li class="muted">' + esc(t('andMore', { n: rows.length - 40 })) + '</li>';
+      var count = plots.length ? ' <span class="muted">(' + new Set(plots.map(function (x) { return x.plot; })).size + ')</span>' : '';
+      return '<li data-code="' + gr.code + '"><span class="tag ' + cls + '">' + esc(t('sev' + s)) + '</span><b>' + head + '</b>' + count + (m.h ? '<p class="why">' + esc(m.h) + '</p>' : '') + (lis ? '<ul class="plots">' + lis + '</ul>' : '') + '</li>';
+    }).join('');
+  }
+  function render() {
+    $('result').hidden = false;
+    $('resTitle').textContent = t('resTitle', { name: STATE.name });
+    $('dlMsg').textContent = ''; $('copyOut').hidden = true;
+    var showFull = !STATE.fileErr && STATE.res && STATE.res.plots.length > 0;
+    ['mapCard', 'dlCard'].forEach(function (id) { $(id).hidden = !showFull; });
+    $('tbl').closest('.card').hidden = !showFull; $('need').closest('.card').hidden = !showFull; $('fixed').closest('.card').hidden = !showFull;
+    if (!showFull) {
+      var fe = STATE.fileErr || { code: 'E_EMPTY', p: {} };
+      $('vDot').className = 'dot v-bad'; $('verdict').textContent = t('verdictFile'); $('tiles').innerHTML = '';
+      $('fileErrCard').hidden = false; renderGroups([{ code: fe.code, plot: -1, p: fe.p }], $('fileErr'), 'needNone');
+      return;
+    }
+    $('fileErrCard').hidden = true;
+    var res = STATE.res, n = res.plots.length, st = statuses();
+    var nErr = st.filter(function (s) { return s === 'err'; }).length, nChk = st.filter(function (s) { return s === 'check'; }).length;
+    var fileErr = res.after.some(function (x) { return x.plot < 0 && sevOf(x.code) === 'E'; });
+    var problems = res.before.filter(function (x) { return sevOf(x.code) !== 'I'; }).length;
+    var area = res.plots.reduce(function (a, pl) { return a + (P.polysOf(pl.geom).length ? (P.geomAreaHa(pl.geom) || 0) : 0); }, 0);
+    var dot, v;
+    if (nErr || fileErr) { dot = 'v-bad'; v = t('verdictBad', { e: nErr, n: n }); }
+    else if (nChk) { dot = 'v-warn'; v = t('verdictWarn', { w: nChk, n: n }); }
+    else { dot = 'v-ok'; v = res.fixes.length ? t('verdictOkFixed', { n: n, f: res.fixes.length }) : t('verdictOk', { n: n }); }
+    $('vDot').className = 'dot ' + dot; $('verdict').textContent = v;
+    var tiles = [[n, 'tPlots'], [problems, 'tProblems'], [res.fixes.length, 'tFixed'], [nErr, 'tAttention'], [nChk, 'tCheck'], [nf(area, 2) + ' ha', 'tArea']];
+    $('tiles').innerHTML = tiles.map(function (x) { return '<div class="tile"><div class="v">' + esc(typeof x[0] === 'number' ? nf(x[0], 0) : x[0]) + '</div><div class="k">' + esc(t(x[1])) + '</div></div>'; }).join('');
+    renderGroups(res.after, $('need'), 'needNone');
+    renderGroups(res.fixes, $('fixed'), 'fixedNone');
+    renderMap(res.plots, st);
+    renderTable(res.plots, st);
+  }
+  var STCLS = { ok: 'st-ok', fixed: 'st-fixed', check: 'st-check', err: 'st-err' }, STKEY = { ok: 'lgOk', fixed: 'lgFixed', check: 'lgCheck', err: 'lgErr' };
+  function renderTable(plots, st) {
+    var max = 1000, rows = plots.slice(0, max).map(function (pl, i) {
+      var g = pl.geom, type = g && g.type ? (UI[LANG].types[g.type] || g.type) : '—';
+      var hasPoly = g && P.validStructure(g) && P.polysOf(g).length;
+      var area = hasPoly ? nf(P.geomAreaHa(g), 2) : (P.getProp(pl.props, 'Area') != null && P.getProp(pl.props, 'Area') !== '' ? '(' + esc(P.getProp(pl.props, 'Area')) + ')' : '');
+      var corners = hasPoly ? P.polysOf(g).reduce(function (a, poly) { return a + poly.reduce(function (b, r) { return b + Math.max(0, r.length - 1); }, 0); }, 0) : '';
+      return '<tr id="row-' + i + '"><td class="num">' + (i + 1) + '</td><td>' + esc(plotLabel(i)) + '</td><td>' + esc(type) + '</td><td class="num">' + area + '</td><td class="num">' + corners + '</td><td><span class="st ' + STCLS[st[i]] + '">' + esc(t(STKEY[st[i]])) + '</span></td></tr>';
+    });
+    $('tbl').innerHTML = '<thead><tr><th>' + esc(t('thN')) + '</th><th>' + esc(t('thPlot')) + '</th><th>' + esc(t('thType')) + '</th><th>' + esc(t('thArea')) + '</th><th>' + esc(t('thCorners')) + '</th><th>' + esc(t('thStatus')) + '</th></tr></thead><tbody>' + rows.join('') + '</tbody>';
+    $('tblNote').textContent = plots.length > max ? t('moreRows', { n: max }) : '';
+  }
+  function renderMap(plots, st) {
+    var ids = [], bb = [Infinity, Infinity, -Infinity, -Infinity];
+    plots.forEach(function (pl, i) {
+      var g = pl.geom; if (!g || !P.validStructure(g)) return;
+      var pos = P.positions(g);
+      if (!pos.length || pos.some(function (p) { return !isFinite(p[0]) || !isFinite(p[1]) || Math.abs(p[0]) > 180 || Math.abs(p[1]) > 90 || (p[0] === 0 && p[1] === 0); })) return;
+      ids.push(i); pos.forEach(function (p) { bb[0] = Math.min(bb[0], p[0]); bb[1] = Math.min(bb[1], p[1]); bb[2] = Math.max(bb[2], p[0]); bb[3] = Math.max(bb[3], p[1]); });
+    });
+    var legend = ['ok', 'fixed', 'check', 'err'].map(function (k) { return '<span><i class="s-' + k + '" style="background:var(--' + { ok: 'green', fixed: 'accent', check: 'amber', err: 'red' }[k] + ')"></i>' + esc(t(STKEY[k])) + '</span>'; }).join('');
+    $('legend').innerHTML = legend;
+    if (!ids.length) { $('map').innerHTML = '<p class="note" style="padding:16px;margin:0">' + esc(t('mapNone')) + '</p>'; return; }
+    var k = Math.cos((bb[1] + bb[3]) / 2 * Math.PI / 180);
+    var X = function (lon) { return lon * k; }, Y = function (lat) { return -lat; };
+    var x0 = X(bb[0]), x1 = X(bb[2]), y0 = Y(bb[3]), y1 = Y(bb[1]);
+    var w = Math.max(x1 - x0, 0.002), h = Math.max(y1 - y0, 0.002), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, pad = Math.max(w, h) * 0.08;
+    var vb = [cx - w / 2 - pad, cy - h / 2 - pad, w + 2 * pad, h + 2 * pad], size = Math.max(vb[2], vb[3]);
+    var f = function (v) { return v.toFixed(7); };
+    var ring = function (r) { return 'M' + r.map(function (p) { return f(X(p[0])) + ' ' + f(Y(p[1])); }).join('L'); };
+    var shapes = ids.map(function (i) {
+      var g = plots[i].geom, cls = 's-' + st[i], title = '<title>' + esc(plotRef(i)) + '</title>', out = '';
+      if (g.type === 'Polygon' || g.type === 'MultiPolygon') out = '<path data-i="' + i + '" class="' + cls + '" fill-rule="evenodd" d="' + P.polysOf(g).map(function (poly) { return poly.map(function (r) { return ring(r) + 'Z'; }).join(''); }).join('') + '">' + title + '</path>';
+      else if (g.type === 'LineString' || g.type === 'MultiLineString') out = '<path data-i="' + i + '" class="ln ' + cls + '" d="' + (g.type === 'LineString' ? [g.coordinates] : g.coordinates).map(ring).join('') + '">' + title + '</path>';
+      else if (g.type === 'Point' || g.type === 'MultiPoint') out = (g.type === 'Point' ? [g.coordinates] : g.coordinates).map(function (p) { return '<circle data-i="' + i + '" class="' + cls + '" cx="' + f(X(p[0])) + '" cy="' + f(Y(p[1])) + '" r="' + f(size * 0.012) + '">' + title + '</circle>'; }).join('');
+      return out;
+    }).join('');
+    var labels = '';
+    if (ids.length <= 40) labels = ids.map(function (i) { var pos = P.positions(plots[i].geom), c = [0, 0]; pos.forEach(function (p) { c[0] += p[0] / pos.length; c[1] += p[1] / pos.length; }); return '<text x="' + f(X(c[0])) + '" y="' + f(Y(c[1]) - size * 0.02) + '" font-size="' + f(size * 0.035) + '" text-anchor="middle">' + (i + 1) + '</text>'; }).join('');
+    $('map').innerHTML = '<svg class="mp" viewBox="' + vb.map(f).join(' ') + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="' + esc(t('mapTitle')) + '">' + shapes + labels + '</svg>';
+  }
+  $('map').addEventListener('click', function (e) {
+    var el = e.target.closest('[data-i]'); if (!el) return;
+    var i = el.getAttribute('data-i');
+    document.querySelectorAll('.mp .sel').forEach(function (s) { s.classList.remove('sel'); }); document.querySelectorAll('[data-i="' + i + '"]').forEach(function (s) { s.classList.add('sel'); });
+    document.querySelectorAll('tr.hl').forEach(function (r) { r.classList.remove('hl'); });
+    var row = $('row-' + i); if (row) { row.classList.add('hl'); row.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  });
+
+  // ---------- downloads and report ----------
+  function baseName() { return String(STATE.name || 'plots').replace(/\.[a-z0-9]+$/i, '').replace(/[^\w.-]+/g, '-').slice(0, 60) || 'plots'; }
+  function errSet() { var s = new Set(); STATE.res.after.forEach(function (x) { if (x.plot >= 0 && sevOf(x.code) === 'E') s.add(x.plot); }); return s; }
+  function fixedText() { return P.serialize(STATE.res.plots, { exclude: $('excludeErr').checked ? errSet() : null }); }
+  function plainMsg(code, p) { var m = msg(code); var tmp = document.createElement('div'); tmp.innerHTML = fill(m.n, fmtParams(p)) + (m.t ? ': ' + fill(m.t, fmtParams(p)) : ''); return tmp.textContent; }
+  function reportRows() {
+    var rows = [];
+    STATE.res.after.forEach(function (x) { rows.push([x.plot >= 0 ? x.plot + 1 : '', x.plot >= 0 ? plotLabel(x.plot) : t('fileLevel'), t('sev' + sevOf(x.code)), x.code, plainMsg(x.code, x.p), msg(x.code).h || '']); });
+    STATE.res.fixes.forEach(function (x) { rows.push([x.plot >= 0 ? x.plot + 1 : '', x.plot >= 0 ? plotLabel(x.plot) : t('fileLevel'), t('sevF'), x.code, plainMsg(x.code, x.p), '']); });
+    return rows;
+  }
+  function reportCSV() {
+    var q = function (v) { v = String(v == null ? '' : v); return /[",\n;]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var head = LANG === 'fr' ? ['parcelle', 'nom', 'gravite', 'code', 'message', 'conseil'] : ['plot', 'label', 'severity', 'code', 'message', 'advice'];
+    return '﻿' + [head].concat(reportRows()).map(function (r) { return r.map(q).join(','); }).join('\r\n') + '\r\n';
+  }
+  function reportText() {
+    var lines = [t('h1') + ' — ' + STATE.name, $('verdict').textContent, t('caveat'), ''];
+    reportRows().forEach(function (r) { lines.push('[' + r[2] + '] ' + (r[0] !== '' ? '#' + r[0] + ' ' + r[1] : r[1]) + ' — ' + r[4]); });
+    return lines.join('\n') + '\n';
+  }
+  function download(text, name, type) {
+    var url = URL.createObjectURL(new Blob([text], { type: type })), a = document.createElement('a');
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+  function copy(text) {
+    var done = function () { $('dlMsg').textContent = t('copied'); $('copyOut').hidden = true; };
+    var fail = function () { $('dlMsg').textContent = t('copyFail'); var o = $('copyOut'); o.textContent = text.length > 500000 ? text.slice(0, 500000) + '\n…' : text; o.hidden = false; try { var r = document.createRange(); r.selectNodeContents(o); var s = getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) { /* ignore */ } };
+    try { if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fail); else fail(); } catch (e) { fail(); }
+  }
+  $('dlGeo').addEventListener('click', function () {
+    var out = fixedText(); download(out.text, baseName() + '-fixed.geojson', 'application/geo+json');
+    var m = [t('dlDone', { n: out.count })]; if (out.omitted) m.push(t('dlOmitted', { n: out.omitted })); if (out.excluded) m.push(t('dlExcluded', { n: out.excluded }));
+    $('dlMsg').textContent = m.join(' ');
+  });
+  $('dlCsv').addEventListener('click', function () { download(reportCSV(), baseName() + '-report.csv', 'text/csv;charset=utf-8'); });
+  $('cpGeo').addEventListener('click', function () { copy(fixedText().text); });
+  $('cpRep').addEventListener('click', function () { copy(reportText()); });
+
+  // ---------- waitlist ----------
+  $('wlForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = $('wlEmail').value.trim(), m = $('wlMsg');
+    m.className = 'msg';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !$('wlConsent').checked) { m.textContent = t('wlBad'); m.classList.add('bad-msg'); return; }
+    $('wlBtn').disabled = true; m.textContent = t('wlSending');
+    fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'waitlist', email: email }) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); m.textContent = t('wlThanks'); m.classList.add('ok-msg'); $('wlEmail').value = ''; })
+      .catch(function () { m.textContent = t('wlFail'); m.classList.add('bad-msg'); })
+      .then(function () { $('wlBtn').disabled = false; });
+  });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
