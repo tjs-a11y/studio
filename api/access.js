@@ -1,5 +1,5 @@
 // GET /api/access?tool=x&session_id=cs_...   after checkout: verifies with Stripe, returns a signed access token
-// GET /api/access?tool=x&token=...            later visits: re-checks the subscription with Stripe
+// GET /api/access?tool=x&token=...            later visits: re-checks the subscription (or one-time purchase) with Stripe
 import { stripe, json, fail, toolById, signToken, readToken, verifySession, activeSubscription } from './_lib/core.js';
 
 export async function GET(request) {
@@ -13,10 +13,16 @@ export async function GET(request) {
     if (!/^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId)) return fail(400, 'Bad session.');
     const v = await verifySession(s, sessionId, tool.id);
     if (!v.ok) return json({ pro: false, reason: v.reason });
-    return json({ pro: true, token: signToken({ c: v.customer, t: tool.id }), plan: v.subscription.metadata?.plan || null });
+    if (v.once) return json({ pro: true, once: true, token: signToken({ c: v.customer, t: tool.id, s: v.session }, 365), plan: v.plan });
+    return json({ pro: true, token: signToken({ c: v.customer, t: tool.id }), plan: v.plan });
   }
   const p = readToken(q.get('token'));
   if (!p || p.t !== tool.id) return json({ pro: false, reason: 'no_access' });
+  if (p.s) { // one-time purchase: re-read the original checkout from Stripe
+    const v = await verifySession(s, p.s, tool.id);
+    if (!v.ok) return json({ pro: false, reason: v.reason });
+    return json({ pro: true, once: true, token: signToken({ c: p.c, t: tool.id, s: p.s }, 365), plan: v.plan });
+  }
   const sub = await activeSubscription(s, p.c, tool.id);
   if (!sub) return json({ pro: false, reason: 'inactive' });
   return json({ pro: true, token: signToken({ c: p.c, t: tool.id }), plan: sub.metadata?.plan || null });

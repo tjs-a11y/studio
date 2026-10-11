@@ -1,0 +1,18 @@
+** TEST FIXTURE: FAKE RECORDS FOR AUTOMATED TESTS ONLY. NOT RRC DATA. NEVER PUBLISH. **
+01099000199329TEST FIXTURE LEASE ALPHA        08900001    20261001TEST OPERATOR ONE LLC             A
+02                                              1H    11250      01                                                              20261008                00000000                                                                                 N12      40        T&P RR CO / TEST SURVEY                                A-0999                                                                                                                                                                           Y        32999901
+0399900001
+14-102.012345  31.912345
+15-102.022345  31.932345
+01099000299329TEST FIXTURE LEASE BRAVO        08900002    20261002TEST OPERATOR TWO INC             A
+02                                              2     09800      07                                                              20261009                00000000                                                                                 N7       39        TEST SURVEY TWO                                        A-0123                                                                                                                                                                           N        32999902
+14-102.100000  32.050000
+15-102.110000  32.070000
+01099000399389TEST FIXTURE LEASE CHARLIE      08900001    20261003TEST OPERATOR ONE LLC             A
+02                                              3H    12500      01                                                              20261010                00000000                                                                                 X                                                                                                                                                                                                                                                          Y        12345678
+14-103.500000  31.400000
+15-103.510000  31.420000
+01099000499255TEST FIXTURE LEASE DELTA        02900003    20260801TEST OPERATOR THREE LP            A
+02                                              4     08000      01                                                              20260805                00000000                                                                                 N                  OLD TEST SURVEY                                        A-0001                                                                                                                                                                           N
+01099000599255TEST FIXTURE LEASE ECHO         02900003    20261005TEST OPERATOR THREE LP            P
+02                                              5H    00000      01                                                              00000000                00000000                                                                                 N                  TEST SURVEY ECHO                                       A-0555                                                                                                                                                                           N

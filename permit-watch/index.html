@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permit Watch — Texas: new drilling permits by county, with free alerts</title>
+<meta name="description" content="See new Texas drilling permits in your county, filter by survey, abstract or operator, and get free alerts through any RSS app. Built from public Railroad Commission of Texas data.">
+<style>
+  :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --green:#1d7a46; --amber:#a86b00; --chip:#f0f2f6; --dot:#1f5ed8; --mark:#c2341f; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101215; --ink:#eef0f3; --muted:#9aa3b2; --card:#181b21; --line:#2a2f38; --accent:#79a3ff; --green:#5fd38d; --amber:#f0b43c; --chip:#20242c; --dot:#79a3ff; --mark:#ff7b66; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:900px; margin:0 auto; padding:28px 16px 64px; }
+  h1 { font-size:clamp(1.6rem,4.6vw,2.3rem); margin:0 0 6px; letter-spacing:-.02em; } .lede { color:var(--muted); margin:0 0 18px; }
+  h2 { font-size:1.15rem; margin:0 0 8px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:14px 0; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; } .row label { display:flex; flex-direction:column; font-size:.85rem; color:var(--muted); gap:4px; }
+  .grow { flex:1 1 220px; min-width:0; }
+  select, input[type=text], input[type=number], input[type=url] { width:100%; padding:9px 10px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font:inherit; min-width:0; }
+  input[type=number] { width:8em; }
+  button { font:inherit; padding:10px 16px; border-radius:9px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; } button.ghost { background:transparent; color:var(--accent); } button.small { padding:6px 10px; font-size:.9rem; } button:disabled { opacity:.5; cursor:not-allowed; }
+  .muted { color:var(--muted); } .note { font-size:.88rem; color:var(--muted); }
+  .status { font-size:.92rem; color:var(--muted); margin:0 0 4px; }
+  .pending { border-left:4px solid var(--amber); }
+  ul.permits { list-style:none; padding:0; margin:0; } ul.permits li { border-top:1px solid var(--line); padding:12px 0; } ul.permits li:first-child { border-top:0; }
+  .ptitle { font-weight:650; overflow-wrap:anywhere; } .pmeta { font-size:.9rem; color:var(--muted); overflow-wrap:anywhere; }
+  .tag { display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.03em; padding:1px 8px; border-radius:999px; background:var(--chip); color:var(--muted); margin-left:6px; vertical-align:1px; }
+  .tag.ok { color:var(--green); } .tag.pend { color:var(--amber); }
+  .feed { display:flex; gap:8px; } .feed input { flex:1; font:13px/1.4 ui-monospace,Menlo,Consolas,monospace; }
+  ol.steps { margin:8px 0 0; padding-left:20px; } ol.steps li { margin:4px 0; }
+  ul.watches { list-style:none; padding:0; margin:8px 0 0; } ul.watches li { display:flex; justify-content:space-between; align-items:center; gap:8px; border-top:1px solid var(--line); padding:8px 0; } ul.watches li:first-child { border-top:0; }
+  ul.watches a { overflow-wrap:anywhere; }
+  .plot { width:100%; height:auto; max-height:280px; background:var(--chip); border-radius:10px; cursor:crosshair; display:block; margin-top:10px; touch-action:manipulation; }
+  .plot .d { fill:var(--dot); opacity:.75; } .plot .d.far { opacity:.18; } .plot .m { fill:var(--mark); } .plot .r { fill:none; stroke:var(--mark); stroke-dasharray:4 3; }
+  .plot.picking { outline:2px solid var(--mark); }
+  .soon { border-color:var(--accent); }
+  details { border-top:1px solid var(--line); padding:10px 0; } details:first-of-type { border-top:0; } summary { cursor:pointer; font-weight:600; }
+  footer { margin-top:36px; font-size:.88rem; color:var(--muted); } a { color:var(--accent); }
+  .toast { position:fixed; left:50%; bottom:20px; transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:8px 14px; border-radius:8px; font-size:.9rem; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Permit Watch — Texas</h1>
+  <p class="lede">See new drilling permits filed in your Texas county, narrow them to your survey, abstract or operator, and get a free alert on your phone or by email when a new one shows up. Built for mineral and royalty owners. Free, from public Railroad Commission of Texas (RRC) data.</p>
+
+  <section class="card" aria-labelledby="find-h">
+    <h2 id="find-h">Find permits</h2>
+    <p class="status" id="status" role="status">Loading permit data…</p>
+    <div class="row" style="margin-top:10px">
+      <label class="grow">County <select id="county" aria-label="Texas county"></select></label>
+      <label class="grow">Survey, abstract, operator or lease (optional) <input type="text" id="q" placeholder="e.g. A-123, T&amp;P RR, or an operator name" autocomplete="off"></label>
+    </div>
+    <details id="near">
+      <summary>Only show permits near my tract (optional)</summary>
+      <p class="note" style="margin:6px 0 10px">Works for permits that include a surface location. Enter your tract's latitude and longitude (decimal degrees, from your lease plat, county appraisal map or a map app), or click "Use a point" and then click the plot of permits below. Nothing is sent anywhere.</p>
+      <div class="row">
+        <label>Latitude <input type="number" id="lat" step="0.0001" min="25" max="37" inputmode="decimal" placeholder="31.9"></label>
+        <label>Longitude <input type="number" id="lon" step="0.0001" min="-107" max="-93" inputmode="decimal" placeholder="-102.1"></label>
+        <label>Radius (miles) <input type="number" id="radius" step="0.5" min="0.5" max="100" inputmode="decimal" value="5"></label>
+        <button class="ghost small" id="pick" type="button">Use a point</button>
+        <button class="ghost small" id="clearNear" type="button">Clear</button>
+      </div>
+      <svg class="plot" id="plot" viewBox="0 0 600 300" role="img" aria-label="Plot of permit surface locations in this county" hidden></svg>
+      <p class="note" id="plotNote" hidden></p>
+    </details>
+  </section>
+
+  <section class="card" id="results" aria-live="polite">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <h2 id="resTitle" style="margin:0">Recent permits</h2>
+      <button class="small" id="watchBtn" type="button">Watch this county</button>
+    </div>
+    <ul class="permits" id="list"></ul>
+    <p class="muted" id="empty" hidden></p>
+  </section>
+
+  <section class="card" id="watch" hidden>
+    <h2>Get alerts for <span id="watchName"></span> County</h2>
+    <p class="note" style="margin-top:0">Every county has its own RSS feed. A free RSS app checks it for you and tells you when a new permit is added.</p>
+    <div class="feed"><input type="url" id="feedUrl" readonly aria-label="RSS feed address"><button class="small" id="copy" type="button">Copy</button></div>
+    <ol class="steps">
+      <li><b>Phone alerts:</b> install a free RSS reader (for example Feedly or Inoreader), choose "add feed" or "follow", paste the address above, and turn on notifications for it.</li>
+      <li><b>Email alerts:</b> use a free "RSS to email" service, such as an IFTTT applet ("If new feed item, then send me an email") or Blogtrottr, and paste the address above.</li>
+      <li><b>Only care about one survey or operator?</b> Most readers can filter or highlight by keyword. Use the same words you typed in the filter.</li>
+    </ol>
+    <p class="note">These are third-party apps with their own terms; we don't control them and aren't paid by them. The feed updates once a day.</p>
+    <div class="row" style="margin-top:8px"><button class="ghost small" id="saveWatch" type="button">Save this watch on this device</button> <span class="note" id="saveNote"></span></div>
+  </section>
+
+  <section class="card" id="saved">
+    <h2>Your saved watches</h2>
+    <p class="note" id="savedEmpty" style="margin:0">None yet. Pick a county, add a filter if you like, then "Watch this county" and "Save this watch". Saved on this device only.</p>
+    <ul class="watches" id="watches"></ul>
+  </section>
+
+  <section class="card soon">
+    <b>Same-day email alerts — coming soon, $9/month.</b>
+    <p class="note" style="margin:6px 0 0">We'll email you the day a permit is filed that matches your county, survey, abstract or operator, with no RSS app needed. This paid tier isn't available yet: it needs an email-sending service that we haven't set up. Nothing to buy and no sign-up on this page. Until then, the free RSS alerts above do the same job once a day.</p>
+  </section>
+
+  <section class="card">
+    <h2>About the data</h2>
+    <details><summary>Where does this come from?</summary><p>The Railroad Commission of Texas (RRC) publishes its drilling permit data as free downloadable files. We download the RRC's daily drilling permit file once a day, keep the last 30 days, and show it here. Each permit links to the RRC's own Drilling Permit (W-1) Query, where you can search the permit number to see the official record and plats.</p></details>
+    <details><summary>How fresh is it?</summary><p>We update once a day, in the morning (Texas time). Data may lag the RRC's site by up to a day, and our history starts the day this tool began collecting it. If an RRC file is late or changes format, an update can be skipped; the date at the top shows when the data was last refreshed.</p></details>
+    <details><summary>Why does a permit say "Pending" or have no location?</summary><p>Some records in the RRC file are applications not yet approved, and some have no surface coordinates yet. Survey, abstract and API fields are only shown when the file provides them in a form we can read. Always check the official RRC record.</p></details>
+    <details><summary>What does a permit mean for a mineral owner?</summary><p>A drilling permit (Form W-1) means an operator has applied for, or received, approval to drill, re-enter or recomplete a well at a location. It doesn't mean a well will be drilled. Texas law requires notice to the surface owner, not to mineral owners who don't own the surface, which is why many mineral owners watch permits themselves.</p></details>
+  </section>
+
+  <footer>Public RRC data; may lag the RRC site by up to a day. Not affiliated with or endorsed by the Railroad Commission of Texas. Not legal or investment advice: check the official RRC record and talk to a professional before acting. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const BASE = '/permit-watch/';
+  const RRC_QUERY = 'https://webapps2.rrc.texas.gov/EWA/drillingPermitsQueryAction.do';
+  // All 254 Texas counties by RRC / FIPS county code (same list as scripts/counties.mjs).
+  const COUNTIES = {
+  '001':'Anderson','003':'Andrews','005':'Angelina','007':'Aransas','009':'Archer','011':'Armstrong','013':'Atascosa','015':'Austin','017':'Bailey','019':'Bandera',
+  '021':'Bastrop','023':'Baylor','025':'Bee','027':'Bell','029':'Bexar','031':'Blanco','033':'Borden','035':'Bosque','037':'Bowie','039':'Brazoria',
+  '041':'Brazos','043':'Brewster','045':'Briscoe','047':'Brooks','049':'Brown','051':'Burleson','053':'Burnet','055':'Caldwell','057':'Calhoun','059':'Callahan',
+  '061':'Cameron','063':'Camp','065':'Carson','067':'Cass','069':'Castro','071':'Chambers','073':'Cherokee','075':'Childress','077':'Clay','079':'Cochran',
+  '081':'Coke','083':'Coleman','085':'Collin','087':'Collingsworth','089':'Colorado','091':'Comal','093':'Comanche','095':'Concho','097':'Cooke','099':'Coryell',
+  '101':'Cottle','103':'Crane','105':'Crockett','107':'Crosby','109':'Culberson','111':'Dallam','113':'Dallas','115':'Dawson','117':'Deaf Smith','119':'Delta',
+  '121':'Denton','123':'DeWitt','125':'Dickens','127':'Dimmit','129':'Donley','131':'Duval','133':'Eastland','135':'Ector','137':'Edwards','139':'Ellis',
+  '141':'El Paso','143':'Erath','145':'Falls','147':'Fannin','149':'Fayette','151':'Fisher','153':'Floyd','155':'Foard','157':'Fort Bend','159':'Franklin',
+  '161':'Freestone','163':'Frio','165':'Gaines','167':'Galveston','169':'Garza','171':'Gillespie','173':'Glasscock','175':'Goliad','177':'Gonzales','179':'Gray',
+  '181':'Grayson','183':'Gregg','185':'Grimes','187':'Guadalupe','189':'Hale','191':'Hall','193':'Hamilton','195':'Hansford','197':'Hardeman','199':'Hardin',
+  '201':'Harris','203':'Harrison','205':'Hartley','207':'Haskell','209':'Hays','211':'Hemphill','213':'Henderson','215':'Hidalgo','217':'Hill','219':'Hockley',
+  '221':'Hood','223':'Hopkins','225':'Houston','227':'Howard','229':'Hudspeth','231':'Hunt','233':'Hutchinson','235':'Irion','237':'Jack','239':'Jackson',
+  '241':'Jasper','243':'Jeff Davis','245':'Jefferson','247':'Jim Hogg','249':'Jim Wells','251':'Johnson','253':'Jones','255':'Karnes','257':'Kaufman','259':'Kendall',
+  '261':'Kenedy','263':'Kent','265':'Kerr','267':'Kimble','269':'King','271':'Kinney','273':'Kleberg','275':'Knox','277':'Lamar','279':'Lamb',
+  '281':'Lampasas','283':'La Salle','285':'Lavaca','287':'Lee','289':'Leon','291':'Liberty','293':'Limestone','295':'Lipscomb','297':'Live Oak','299':'Llano',
+  '301':'Loving','303':'Lubbock','305':'Lynn','307':'McCulloch','309':'McLennan','311':'McMullen','313':'Madison','315':'Marion','317':'Martin','319':'Mason',
+  '321':'Matagorda','323':'Maverick','325':'Medina','327':'Menard','329':'Midland','331':'Milam','333':'Mills','335':'Mitchell','337':'Montague','339':'Montgomery',
+  '341':'Moore','343':'Morris','345':'Motley','347':'Nacogdoches','349':'Navarro','351':'Newton','353':'Nolan','355':'Nueces','357':'Ochiltree','359':'Oldham',
+  '361':'Orange','363':'Palo Pinto','365':'Panola','367':'Parker','369':'Parmer','371':'Pecos','373':'Polk','375':'Potter','377':'Presidio','379':'Rains',
+  '381':'Randall','383':'Reagan','385':'Real','387':'Red River','389':'Reeves','391':'Refugio','393':'Roberts','395':'Robertson','397':'Rockwall','399':'Runnels',
+  '401':'Rusk','403':'Sabine','405':'San Augustine','407':'San Jacinto','409':'San Patricio','411':'San Saba','413':'Schleicher','415':'Scurry','417':'Shackelford','419':'Shelby',
+  '421':'Sherman','423':'Smith','425':'Somervell','427':'Starr','429':'Stephens','431':'Sterling','433':'Stonewall','435':'Sutton','437':'Swisher','439':'Tarrant',
+  '441':'Taylor','443':'Terrell','445':'Terry','447':'Throckmorton','449':'Titus','451':'Tom Green','453':'Travis','455':'Trinity','457':'Tyler','459':'Upshur',
+  '461':'Upton','463':'Uvalde','465':'Val Verde','467':'Van Zandt','469':'Victoria','471':'Walker','473':'Waller','475':'Ward','477':'Washington','479':'Webb',
+  '481':'Wharton','483':'Wheeler','485':'Wichita','487':'Wilbarger','489':'Willacy','491':'Williamson','493':'Wilson','495':'Winkler','497':'Wise','499':'Wood',
+  '501':'Yoakum','503':'Young','505':'Zapata','507':'Zavala',
+};
+  const slugify = (n) => String(n).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const BY_SLUG = {}; for (const [code, name] of Object.entries(COUNTIES)) BY_SLUG[slugify(name)] = { code, name };
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const ls = { get(k, d) { try { const v = localStorage.getItem('pwtx:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+               set(k, v) { try { localStorage.setItem('pwtx:' + k, JSON.stringify(v)); return true; } catch (e) { return false; } } };
+  const fmtDate = (d) => { if (!d) return ''; const [y, m, dd] = d.split('-').map(Number); return new Date(y, m - 1, dd).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); };
+  const pdate = (p) => p.issued || p.received || '';
+  function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => { t.hidden = true; }, 1800); }
+
+  let DATA = null; // null = not loaded, false = pending/unavailable
+  let picking = false;
+
+  // ---------- county select ----------
+  const sel = $('county');
+  sel.innerHTML = '<option value="">Choose a county…</option>' + Object.keys(COUNTIES).sort().map((k) => COUNTIES[k]).map((n) => `<option value="${slugify(n)}">${esc(n)}</option>`).join('');
+  const params = new URLSearchParams(location.search);
+  const startSlug = params.get('county') || ls.get('county', '');
+  if (BY_SLUG[startSlug]) sel.value = startSlug;
+  if (params.get('q')) $('q').value = params.get('q');
+
+  function syncUrl() {
+    const p = new URLSearchParams(); if (sel.value) p.set('county', sel.value); if ($('q').value.trim()) p.set('q', $('q').value.trim());
+    const qs = p.toString(); try { history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '')); } catch (e) { /* ignore */ }
+  }
+
+  // ---------- distance ----------
+  function miles(aLat, aLon, bLat, bLon) {
+    const r = Math.PI / 180, dLat = (bLat - aLat) * r, dLon = (bLon - aLon) * r;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(aLat * r) * Math.cos(bLat * r) * Math.sin(dLon / 2) ** 2;
+    return 3958.8 * 2 * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  function nearFilter() {
+    const lat = parseFloat($('lat').value), lon = parseFloat($('lon').value), rad = parseFloat($('radius').value);
+    if (!isFinite(lat) || !isFinite(lon) || lat < 25 || lat > 37 || lon < -107 || lon > -93) return null;
+    return { lat, lon, rad: isFinite(rad) && rad > 0 ? rad : 5 };
+  }
+
+  // ---------- render ----------
+  function filtered() {
+    if (!DATA || !sel.value) return [];
+    const c = BY_SLUG[sel.value]; const q = $('q').value.trim().toLowerCase(); const nf = nearFilter();
+    return DATA.permits.filter((p) => p.countyCode === c.code)
+      .filter((p) => !q || [p.survey, p.abstract, p.operator, p.lease, p.section && 'section ' + p.section, p.block && 'block ' + p.block, p.api, p.permit].some((v) => v && String(v).toLowerCase().includes(q)))
+      .map((p) => nf && p.lat != null ? Object.assign({}, p, { _mi: miles(nf.lat, nf.lon, p.lat, p.lon) }) : p)
+      .filter((p) => !nf || (p._mi != null && p._mi <= nf.rad));
+  }
+
+  function itemHtml(p) {
+    const loc = [p.survey && `Survey: ${p.survey}`, p.abstract && `Abstract ${p.abstract}`, p.section && `Sec. ${p.section}`, p.block && `Blk. ${p.block}`].filter(Boolean).join(' · ');
+    const tag = p.status ? `<span class="tag ${p.status === 'Approved' ? 'ok' : p.status === 'Pending' ? 'pend' : ''}">${esc(p.status)}</span>` : '';
+    const when = p.issued ? `Issued ${fmtDate(p.issued)}` : p.received ? `Filed ${fmtDate(p.received)}` : '';
+    const meta1 = [when, p.district && `District ${p.district}`, p.type, p.horizontal && 'Horizontal', p.depth && `${p.depth.toLocaleString('en-US')} ft`].filter(Boolean).map(esc).join(' · ');
+    const meta2 = [p.api && `API ${p.api}`, p.lat != null && `${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}`, p._mi != null && `${p._mi.toFixed(1)} mi from your point`].filter(Boolean).map(esc).join(' · ');
+    return `<li><div class="ptitle">${esc(p.operator || 'Unknown operator')}${tag}</div>
+      <div>${esc(p.lease || 'Lease not listed')}${p.well ? ' #' + esc(p.well) : ''}</div>
+      <div class="pmeta">${meta1}</div>${loc ? `<div class="pmeta">${esc(loc)}</div>` : ''}${meta2 ? `<div class="pmeta">${meta2}</div>` : ''}
+      <div class="pmeta">Permit #${esc(p.permit)} · <a href="${RRC_QUERY}" target="_blank" rel="noopener">Look it up on the RRC W-1 Query</a></div></li>`;
+  }
+
+  function render() {
+    const c = BY_SLUG[sel.value];
+    $('watchBtn').disabled = !c;
+    if (!c) { $('resTitle').textContent = 'Recent permits'; $('list').innerHTML = ''; $('empty').hidden = false; $('empty').textContent = 'Choose a county to see its recent permits.'; drawPlot([]); return; }
+    if (!$('watch').hidden) showWatch();
+    if (DATA === false) { $('resTitle').textContent = `${c.name} County`; $('list').innerHTML = ''; $('empty').hidden = false; $('empty').textContent = 'First data load pending. Permits will appear here after the first daily update. You can still set up a watch now.'; drawPlot([]); return; }
+    if (!DATA) return;
+    const rows = filtered();
+    const all = DATA.permits.filter((p) => p.countyCode === c.code);
+    $('resTitle').textContent = `${c.name} County: ${rows.length} permit${rows.length === 1 ? '' : 's'}` + (rows.length !== all.length ? ` (of ${all.length})` : '') + ` in the last ${DATA.windowDays || 30} days`;
+    $('list').innerHTML = rows.map(itemHtml).join('');
+    $('empty').hidden = rows.length > 0;
+    $('empty').textContent = all.length ? 'No permits match your filter. Try fewer words or a larger radius.' : `No permits in ${c.name} County in the last ${DATA.windowDays || 30} days of data.`;
+    drawPlot(all);
+  }
+
+  // ---------- plot (no map tiles: just permit points on a lat/lon grid) ----------
+  let proj = null;
+  function drawPlot(all) {
+    const svg = $('plot'), pts = all.filter((p) => p.lat != null && p.lon != null), nf = nearFilter();
+    if (!pts.length && !nf) { svg.setAttribute('hidden', ''); proj = null; $('plotNote').hidden = !(DATA && sel.value); $('plotNote').textContent = 'No permits with a surface location in this county yet, so there is nothing to plot. You can still type a latitude and longitude.'; return; }
+    $('plotNote').hidden = false; $('plotNote').textContent = picking ? 'Click the plot to set your point.' : 'Dots are permit surface locations (north is up). Your point and radius show in red.';
+    const lats = pts.map((p) => p.lat).concat(nf ? [nf.lat] : []), lons = pts.map((p) => p.lon).concat(nf ? [nf.lon] : []);
+    let minLa = Math.min(...lats), maxLa = Math.max(...lats), minLo = Math.min(...lons), maxLo = Math.max(...lons);
+    const padLa = Math.max(0.05, (maxLa - minLa) * 0.12), k = Math.cos(((minLa + maxLa) / 2) * Math.PI / 180), padLo = Math.max(0.05 / k, (maxLo - minLo) * 0.12);
+    minLa -= padLa; maxLa += padLa; minLo -= padLo; maxLo += padLo;
+    const W = 600, H = 300, sx = W / ((maxLo - minLo) * k), sy = H / (maxLa - minLa), s = Math.min(sx, sy);
+    const ox = (W - (maxLo - minLo) * k * s) / 2, oy = (H - (maxLa - minLa) * s) / 2;
+    proj = { x: (lo) => ox + (lo - minLo) * k * s, y: (la) => oy + (maxLa - la) * s, lon: (x) => minLo + (x - ox) / (k * s), lat: (y) => maxLa - (y - oy) / s };
+    let h = pts.map((p) => { const far = nf && miles(nf.lat, nf.lon, p.lat, p.lon) > nf.rad; return `<circle class="d${far ? ' far' : ''}" cx="${proj.x(p.lon).toFixed(1)}" cy="${proj.y(p.lat).toFixed(1)}" r="6"><title>${esc(p.operator || '')} ${esc(p.lease || '')}</title></circle>`; }).join('');
+    if (nf) { const rx = (nf.rad / (69.17 * k)) * k * s, ry = (nf.rad / 69.17) * s; h += `<ellipse class="r" cx="${proj.x(nf.lon).toFixed(1)}" cy="${proj.y(nf.lat).toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}"/><circle class="m" cx="${proj.x(nf.lon).toFixed(1)}" cy="${proj.y(nf.lat).toFixed(1)}" r="5"/>`; }
+    svg.innerHTML = h; svg.removeAttribute('hidden'); svg.classList.toggle('picking', picking);
+  }
+  $('plot').addEventListener('click', (e) => {
+    if (!picking || !proj) return;
+    const svg = $('plot'), r = svg.getBoundingClientRect(), x = (e.clientX - r.left) * 600 / r.width, y = (e.clientY - r.top) * 300 / r.height;
+    $('lat').value = proj.lat(y).toFixed(4); $('lon').value = proj.lon(x).toFixed(4); picking = false; $('pick').textContent = 'Use a point'; render();
+  });
+  $('pick').onclick = () => {
+    if (!proj) { toast(DATA ? 'No plotted permits in this county; type a latitude and longitude instead.' : 'Choose a county with data first.'); return; }
+    picking = !picking; $('pick').textContent = picking ? 'Click the plot…' : 'Use a point'; render();
+  };
+  $('clearNear').onclick = () => { $('lat').value = ''; $('lon').value = ''; picking = false; $('pick').textContent = 'Use a point'; render(); };
+
+  // ---------- watching ----------
+  const feedUrl = (slug) => location.origin + BASE + 'feeds/' + slug + '.xml';
+  function showWatch() {
+    const c = BY_SLUG[sel.value]; if (!c) return;
+    $('watch').hidden = false; $('watchName').textContent = c.name; $('feedUrl').value = feedUrl(sel.value); $('saveNote').textContent = '';
+  }
+  $('watchBtn').onclick = () => { showWatch(); $('watch').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  $('copy').onclick = async () => {
+    const v = $('feedUrl').value;
+    try { await navigator.clipboard.writeText(v); toast('Feed address copied'); }
+    catch (e) { $('feedUrl').select(); try { document.execCommand('copy'); toast('Feed address copied'); } catch (e2) { toast('Select the address and copy it'); } }
+  };
+  function savedList() { const v = ls.get('watches', []); return Array.isArray(v) ? v : []; }
+  function renderSaved() {
+    const w = savedList();
+    $('savedEmpty').hidden = w.length > 0;
+    $('watches').innerHTML = w.map((x, i) => { const c = BY_SLUG[x.county]; if (!c) return ''; return `<li><span><a href="?county=${encodeURIComponent(x.county)}${x.q ? '&q=' + encodeURIComponent(x.q) : ''}" data-i="${i}" class="open">${esc(c.name)} County${x.q ? ': “' + esc(x.q) + '”' : ''}</a><br><span class="note">${esc(feedUrl(x.county))}</span></span><button class="ghost small" data-del="${i}" type="button" aria-label="Remove ${esc(c.name)} watch">Remove</button></li>`; }).join('');
+  }
+  $('watches').addEventListener('click', (e) => {
+    const del = e.target.closest('[data-del]'), open = e.target.closest('a.open');
+    if (del) { const w = savedList(); w.splice(+del.dataset.del, 1); ls.set('watches', w); renderSaved(); }
+    else if (open) { e.preventDefault(); const x = savedList()[+open.dataset.i]; if (!x) return; sel.value = x.county; $('q').value = x.q || ''; onChange(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
+  $('saveWatch').onclick = () => {
+    if (!sel.value) return; const q = $('q').value.trim(); const w = savedList();
+    if (!w.some((x) => x.county === sel.value && (x.q || '') === q)) w.push({ county: sel.value, q });
+    $('saveNote').textContent = ls.set('watches', w) ? 'Saved on this device.' : 'Couldn\'t save (your browser blocks storage). Copy the feed address instead.';
+    renderSaved();
+  };
+
+  function onChange() { ls.set('county', sel.value); syncUrl(); render(); }
+  sel.addEventListener('change', onChange);
+  let tq; $('q').addEventListener('input', () => { clearTimeout(tq); tq = setTimeout(onChange, 150); });
+  ['lat', 'lon', 'radius'].forEach((id) => $(id).addEventListener('input', () => render()));
+  if (params.get('lat') && params.get('lon')) { $('lat').value = params.get('lat'); $('lon').value = params.get('lon'); $('near').open = true; }
+
+  // ---------- load ----------
+  async function load() {
+    try {
+      const r = await fetch(BASE + 'data/latest.json', { cache: 'no-cache' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const j = await r.json();
+      if (!j || !Array.isArray(j.permits)) throw new Error('bad data');
+      DATA = j;
+      const upd = j.updated ? new Date(j.updated) : null;
+      $('status').textContent = `${j.permits.length.toLocaleString('en-US')} Texas permits from the last ${j.windowDays || 30} days. Data refreshed ${upd && !isNaN(upd) ? upd.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'recently'} from the RRC daily permit file.`;
+    } catch (e) {
+      DATA = false;
+      $('results').classList.add('pending');
+      $('status').textContent = 'First data load pending. The daily update from the Railroad Commission of Texas hasn\'t run yet, so there are no permits to show. Check back tomorrow.';
+    }
+    render();
+  }
+  renderSaved();
+  render();
+  load();
+})();
+</script>
+</body>
+</html>

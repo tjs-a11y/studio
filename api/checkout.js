@@ -1,4 +1,5 @@
-// POST /api/checkout  { tool, plan, interval }  ->  { url }  (Stripe-hosted checkout for a subscription)
+// POST /api/checkout  { tool, plan, interval }  ->  { url }  Stripe-hosted checkout.
+// interval 'month' | 'year' = subscription; plans marked { once: true } in the catalog sell one-time (lookup key <tool>__<plan>__once).
 import { stripe, json, fail, toolById, taxOn, randomLetters, originOf } from './_lib/core.js';
 
 export async function POST(request) {
@@ -8,21 +9,24 @@ export async function POST(request) {
   const tool = toolById(String(body.tool || ''));
   if (!tool) return fail(404, 'Unknown tool.');
   const plan = tool.plans.find((p) => p.id === body.plan) || tool.plans[0];
-  const interval = body.interval === 'year' ? 'year' : 'month';
+  const once = !!plan.once;
+  const interval = once ? 'once' : body.interval === 'year' ? 'year' : 'month';
   const lookup = `${tool.id}__${plan.id}__${interval}`;
   const prices = await s.prices.list({ lookup_keys: [lookup], active: true, limit: 1 });
   const price = prices.data[0];
   if (!price) return fail(409, 'This plan is not on sale yet.');
   const base = originOf(request);
   const session = await s.checkout.sessions.create({
-    mode: 'subscription',
+    mode: once ? 'payment' : 'subscription',
     // payment_method_types is deliberately omitted: Stripe shows the best payment methods for each customer.
     line_items: [{ price: price.id, quantity: 1 }],
     success_url: `${base}/${tool.id}/?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${base}/${tool.id}/?checkout=cancelled`,
     client_reference_id: tool.id,
     metadata: { tool: tool.id, plan: plan.id },
-    subscription_data: { metadata: { tool: tool.id, plan: plan.id }, ...(plan.trialDays ? { trial_period_days: plan.trialDays } : {}) },
+    ...(once
+      ? { customer_creation: 'always', payment_intent_data: { metadata: { tool: tool.id, plan: plan.id } } }
+      : { subscription_data: { metadata: { tool: tool.id, plan: plan.id }, ...(plan.trialDays ? { trial_period_days: plan.trialDays } : {}) } }),
     allow_promotion_codes: true,
     integration_identifier: `${tool.id}_${randomLetters(8)}`,
     // Tax is only switched on once a tax registration exists (TAX_ENABLED=1); otherwise Stripe would silently collect $0.

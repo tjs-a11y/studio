@@ -1,0 +1,54 @@
+name: Permit Watch (Texas) data
+
+on:
+  schedule:
+    - cron: '15 13 * * *'   # daily, 13:15 UTC (8:15 am Texas time in summer, 7:15 am in winter)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: permit-watch-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Scheduled runs stay off until the RRC's terms for automated downloads are confirmed and the
+    # repo variable PERMIT_WATCH_ENABLED is set to 1. A manual run (workflow_dispatch) always works.
+    if: github.event_name == 'workflow_dispatch' || vars.PERMIT_WATCH_ENABLED == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test the parser
+        run: node --test permit-watch/test/*.test.mjs
+
+      - name: Download and parse the RRC daily permit file
+        # Fails (and commits nothing) if the RRC file can't be downloaded or parsed.
+        # GitHub emails the repo owner about failed scheduled runs.
+        run: node permit-watch/scripts/update.mjs
+        env:
+          SITE_URL: ${{ vars.PERMIT_WATCH_SITE_URL }}
+          RRC_DAF420_URL: ${{ vars.RRC_DAF420_URL }}
+
+      - name: Commit changed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add permit-watch/data permit-watch/feeds
+          if git diff --cached --quiet; then
+            echo "No permit changes today."
+            exit 0
+          fi
+          git commit -m "Update Texas permit data"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1

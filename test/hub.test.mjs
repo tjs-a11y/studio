@@ -89,3 +89,27 @@ test('webhook verifies signatures', async () => {
   assert.equal((await webhook(post('/api/webhook', payload, { 'stripe-signature': good }))).status, 200);
   assert.equal((await webhook(post('/api/webhook', payload, { 'stripe-signature': 't=1,v1=bad' }))).status, 400);
 });
+
+test('one-time plan: payment-mode checkout, then access re-checked from the original session', async () => {
+  core.tools.push({ id: 'kit', name: 'Kit', tagline: 'x', plans: [{ id: 'kit', once: true }] });
+  const prev = { list: fake.prices.list, retrieve: fake.checkout.sessions.retrieve };
+  let paid = 'paid';
+  fake.prices.list = async (q) => ({ data: q.lookup_keys[0] === 'kit__kit__once' ? [{ id: 'price_once' }] : [] });
+  fake.checkout.sessions.retrieve = async (id) => ({ id, mode: 'payment', status: 'complete', payment_status: paid, customer: 'cus_2', metadata: { tool: 'kit', plan: 'kit' }, subscription: null });
+  const r = await checkout(post('/api/checkout', { tool: 'kit', plan: 'kit', interval: 'month' }));
+  assert.equal(r.status, 200);
+  const p = calls.filter((c) => c[0] === 'create').at(-1)[1];
+  assert.equal(p.mode, 'payment');
+  assert.equal(p.subscription_data, undefined);
+  assert.equal(p.customer_creation, 'always');
+  assert.equal(p.payment_intent_data.metadata.tool, 'kit');
+  const j = await (await access(req('/api/access?tool=kit&session_id=cs_test_kit'))).json();
+  assert.equal(j.pro, true); assert.equal(j.once, true);
+  const again = await (await access(req(`/api/access?tool=kit&token=${encodeURIComponent(j.token)}`))).json();
+  assert.equal(again.pro, true);
+  paid = 'unpaid';
+  assert.equal((await (await access(req(`/api/access?tool=kit&token=${encodeURIComponent(j.token)}`))).json()).pro, false);
+  const demoTok = (await (await access(req('/api/access?tool=kit&session_id=cs_test_kit'))).json()).token;
+  assert.equal(demoTok, undefined);
+  fake.prices.list = prev.list; fake.checkout.sessions.retrieve = prev.retrieve;
+});

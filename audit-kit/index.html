@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Entrant Audit Self-Check and Audit Kit for New Trucking Carriers</title>
+<meta name="description" content="Free self-check against the 16 rules that automatically fail an FMCSA new entrant safety audit. Then a $39 one-time kit: DQ files, drug and alcohol program, HOS, maintenance, insurance, audit binder and expiry calendar, filled in for your company. Runs in your browser.">
+<style>
+  :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --red:#c2341f; --amber:#a86b00; --green:#1d7a46; --chip:#f0f2f6; --on:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101215; --ink:#eef0f3; --muted:#9aa3b2; --card:#181b21; --line:#2a2f38; --accent:#79a3ff; --red:#ff7b66; --amber:#f0b43c; --green:#5fd38d; --chip:#20242c; --on:#0d1117; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:900px; margin:0 auto; padding:28px 16px 64px; }
+  h1 { font-size:clamp(1.6rem,4.6vw,2.3rem); margin:0 0 6px; letter-spacing:-.02em; } h2 { font-size:1.25rem; margin:0 0 8px; } h3 { font-size:1.05rem; margin:14px 0 6px; }
+  .lede { color:var(--muted); margin:0 0 18px; } .muted { color:var(--muted); } .note { font-size:.88rem; color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:14px 0; }
+  .card.pro { border-color:var(--accent); }
+  a { color:var(--accent); }
+  button { font:inherit; padding:10px 16px; border-radius:9px; border:1px solid var(--accent); background:var(--accent); color:var(--on); cursor:pointer; } button.ghost { background:transparent; color:var(--accent); } button.small { padding:6px 10px; font-size:.9rem; } button:disabled { opacity:.5; cursor:not-allowed; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  /* questions */
+  .q { border-top:1px solid var(--line); padding:14px 0; } .q:first-of-type { border-top:0; }
+  .q p { margin:0 0 8px; } .q .cite { font-size:.8rem; color:var(--muted); white-space:nowrap; }
+  .seg { display:inline-flex; flex-wrap:wrap; gap:6px; } .seg label { position:relative; }
+  .seg input { position:absolute; opacity:0; width:1px; height:1px; }
+  .seg span { display:inline-block; padding:8px 14px; border:1px solid var(--line); border-radius:999px; cursor:pointer; background:var(--bg); min-width:64px; text-align:center; font-size:.95rem; }
+  .seg input:focus-visible + span { outline:2px solid var(--accent); outline-offset:2px; }
+  .seg input:checked + span { background:var(--accent); border-color:var(--accent); color:var(--on); font-weight:600; }
+  .seg input[value=no]:checked + span { background:var(--red); border-color:var(--red); }
+  .seg input[value=unsure]:checked + span { background:var(--amber); border-color:var(--amber); color:#1b1300; }
+  .q.na { opacity:.6; } .q.na .seg { display:none; }
+  .chip { display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.03em; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--muted); margin-left:6px; vertical-align:middle; }
+  .num { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--chip); font-size:.8rem; font-weight:700; margin-right:6px; }
+  .setup { display:grid; gap:12px; } .setup p { margin:0 0 6px; font-weight:600; }
+  /* result */
+  .grade { display:flex; gap:18px; align-items:center; flex-wrap:wrap; } .big { font-size:1.6rem; font-weight:800; line-height:1.1; min-width:110px; padding:14px; border-radius:16px; text-align:center; color:#fff; }
+  .r-low { background:var(--green); } .r-med { background:var(--amber); color:#1b1300; } .r-high { background:var(--red); } .r-none { background:var(--muted); }
+  ul.items { list-style:none; padding:0; margin:0; } ul.items li { border-top:1px solid var(--line); padding:10px 0; } ul.items li:first-child { border-top:0; }
+  .tag { display:inline-block; min-width:70px; text-align:center; font-size:.72rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-right:8px; }
+  .t-no { color:#fff; background:var(--red); } .t-unsure { color:#1b1300; background:var(--amber); } .t-blank { color:var(--muted); background:var(--chip); }
+  .why { color:var(--muted); font-size:.92rem; margin:4px 0 0; }
+  /* kit */
+  .contents { padding-left:20px; margin:8px 0 12px; } .contents li { margin:4px 0; }
+  .price { font-size:1.3rem; font-weight:800; }
+  .preview { position:relative; max-height:520px; overflow:hidden; border-radius:10px; border:1px solid var(--line); margin-top:12px; }
+  .preview .page { margin:0; box-shadow:none; }
+  .preview::after { content:""; position:absolute; left:0; right:0; bottom:0; height:55%; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.85)); }
+  .wm { position:absolute; inset:0; pointer-events:none; display:grid; place-items:center; z-index:2; overflow:hidden; }
+  .wm span { transform:rotate(-28deg); font:800 clamp(1.6rem,7vw,3.4rem)/1.2 system-ui,sans-serif; color:rgba(194,52,31,.28); letter-spacing:.08em; white-space:nowrap; text-align:center; }
+  fieldset { border:1px solid var(--line); border-radius:10px; padding:12px; margin:12px 0; } legend { font-weight:700; padding:0 6px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
+  .grid label, .rep label { display:flex; flex-direction:column; font-size:.85rem; color:var(--muted); gap:4px; }
+  input[type=text], input[type=date] { width:100%; padding:9px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font:inherit; min-height:42px; }
+  .rep { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; align-items:end; padding:10px 0; border-top:1px dashed var(--line); }
+  .rep:first-child { border-top:0; }
+  .tabs { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; } .tabs button { white-space:nowrap; }
+  .tabs button[aria-selected=true] { background:var(--accent); color:var(--on); } .tabs button[aria-selected=false] { background:transparent; color:var(--accent); }
+  .msg { font-size:.92rem; margin-top:8px; } .msg.err { color:var(--red); } .msg.ok { color:var(--green); }
+  details { border-top:1px solid var(--line); padding:10px 0; } summary { cursor:pointer; font-weight:600; }
+  footer { margin-top:36px; font-size:.88rem; color:var(--muted); }
+  .disc { border-left:4px solid var(--amber); }
+  [hidden] { display:none !important; }
+</style>
+<style id="docCss">
+  .page { background:#fff; color:#111; border:1px solid #d8d8d2; border-radius:6px; padding:28px 26px; margin:16px 0; box-shadow:0 1px 3px rgba(0,0,0,.06); font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; position:relative; overflow-wrap:anywhere; }
+  .page h2 { font-size:1.25rem; margin:0 0 4px; color:#111; } .page h3 { font-size:1rem; margin:16px 0 6px; color:#111; } .page p { margin:6px 0; }
+  .ph { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; border-bottom:2px solid #111; padding-bottom:6px; margin-bottom:12px; font-size:12px; color:#333; }
+  .pf { margin-top:18px; border-top:1px solid #bbb; padding-top:6px; font-size:10.5px; color:#555; }
+  .page table { width:100%; border-collapse:collapse; margin:6px 0 10px; font-size:12.5px; }
+  .page th, .page td { border:1px solid #999; padding:5px 6px; text-align:left; vertical-align:top; }
+  .page th { background:#efefea; } .page td.bx { width:28px; text-align:center; font-size:15px; } .page td.fill { min-width:90px; } .page tr.blank td { height:28px; }
+  .page .cite { color:#444; font-size:11px; white-space:nowrap; }
+  .page .warn { color:#a32012; font-weight:700; } .page .soon { color:#8a5700; font-weight:700; } .page .okd { color:#14653a; }
+  .page .line { border-bottom:1px solid #777; display:inline-block; min-width:180px; height:1em; }
+  .page ol, .page ul { margin:6px 0; padding-left:20px; } .page li { margin:3px 0; }
+  .page .tplnote { background:#fff6dc; border:1px solid #e5cf8a; padding:6px 8px; border-radius:4px; font-size:12px; }
+  .tablewrap { overflow-x:auto; }
+  @media print {
+    @page { margin:14mm; }
+    body { background:#fff !important; color:#000 !important; }
+    main { max-width:none; padding:0; }
+    .noprint, .card:not(.docs), footer, h1, .lede { display:none !important; }
+    .card.docs { border:0; padding:0; margin:0; background:#fff; }
+    .page { border:0; box-shadow:none; padding:0; margin:0; break-after:page; page-break-after:always; }
+    .page:last-child { break-after:auto; page-break-after:auto; }
+    body.print-one .doc:not(.print-target) { display:none !important; }
+    .doc[hidden] { display:block !important; }
+    body.print-one .doc.print-target { display:block !important; }
+    .tablewrap { overflow:visible; }
+    .page table { font-size:11px; } tr, td, th { break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Will you pass your new entrant audit?</h1>
+  <p class="lede">New trucking carriers get an FMCSA safety audit in their first year. Breaking any one of 16 specific rules means an automatic fail. Answer one question per rule and see where you stand in about 3 minutes. <b>Runs in your browser: your answers stay on this device.</b></p>
+
+  <section class="card noprint" id="checkCard">
+    <h2>Free self-check: the 16 automatic-fail rules</h2>
+    <p class="note">From 49 CFR 385.321(b). Answer for your company today. "Not sure" counts as a risk, because the auditor will ask for proof.</p>
+    <div class="setup" id="setup"></div>
+    <div id="questions" style="margin-top:6px"></div>
+    <div class="row" style="margin-top:8px"><button id="score">See my result</button> <button class="ghost" id="reset">Start over</button></div>
+  </section>
+
+  <section id="result" class="noprint" hidden>
+    <div class="card">
+      <div class="grade"><div class="big" id="riskBox">-</div>
+        <div><div id="riskText" style="font-weight:700"></div><div class="muted" id="riskSub"></div></div>
+      </div>
+      <p class="note" style="margin-bottom:0">A self-check, not a prediction. Auditors also review other areas, and other problems can still lead to a failed audit or a required corrective action plan.</p>
+    </div>
+    <div class="card"><h2>Rules at risk, and what to fix</h2><ul class="items" id="items"></ul></div>
+  </section>
+
+  <!-- ===== KIT: locked ===== -->
+  <section class="card pro noprint" id="upsell">
+    <h2>The New Authority Audit Kit</h2>
+    <p style="margin:0 0 6px"><span class="price">$39 once.</span> Less than one month of a compliance service. One-time purchase, not a subscription.</p>
+    <p class="note" style="margin-top:0">Fill in a short company profile (drivers, trucks, dates). The kit builds every document below with your company's details, flags anything expired or expiring, and prints clean or saves as PDF.</p>
+    <ol class="contents">
+      <li><b>Driver qualification files:</b> fill-in checklist, plus a cover sheet for each driver with CDL and medical card expiry warnings</li>
+      <li><b>Drug &amp; alcohol program kit:</b> policy template, consortium/TPA enrollment checklist, pre-employment test log, Clearinghouse query log</li>
+      <li><b>Hours of service / ELD:</b> records checklist and a supporting-documents retention log</li>
+      <li><b>Vehicle maintenance file:</b> a maintenance and annual inspection record for each unit, plus a DVIR log</li>
+      <li><b>Insurance &amp; registration:</b> MCS-90, BOC-3, UCR and related filings checklist</li>
+      <li><b>Audit-day binder:</b> table of contents, document request list, "what the auditor asks" prep sheet, and a 30/60/90-day timeline dated from your authority grant</li>
+      <li><b>Expiry calendar:</b> every upcoming CDL, medical card, inspection and filing date, with a calendar file (.ics) for your phone</li>
+    </ol>
+    <div class="row"><button id="buy">Get the kit: $39</button> <button class="ghost" id="sampleBtn" aria-expanded="false">See a sample page</button></div>
+    <div class="msg" id="buyMsg" role="status" aria-live="polite"></div>
+    <p class="note">No guarantee of passing: the kit organizes your records; you still have to keep them. Everything is generated on your device. Nothing you type is sent to us.</p>
+    <div id="previewWrap" hidden>
+      <div class="preview" aria-label="Sample page preview, watermarked">
+        <div class="wm" aria-hidden="true"><span>SAMPLE · PREVIEW<br>SAMPLE · PREVIEW</span></div>
+        <div id="previewBody"></div>
+      </div>
+      <p class="note">Sample company and sample data. The full kit uses your own details and has no watermark.</p>
+    </div>
+  </section>
+
+  <!-- ===== KIT: unlocked ===== -->
+  <section class="card pro noprint" id="kitOn" hidden>
+    <h2>Your audit kit</h2>
+    <p class="msg ok" id="welcome" hidden>Thanks. Your kit is unlocked.</p>
+    <p class="note" style="margin-top:0">Kit unlocked on this device. Lost access? Use the same browser, or contact support via the link in the footer.</p>
+    <p class="note"><b>Privacy:</b> your company profile is saved only in this browser (local storage) and never leaves your device. Clear it any time with "Clear my data".</p>
+    <form id="profile" autocomplete="off" onsubmit="return false">
+      <fieldset><legend>Company</legend>
+        <div class="grid">
+          <label>Legal name <input type="text" id="p_name" placeholder="e.g. Blue Ridge Hauling LLC"></label>
+          <label>USDOT number <input type="text" id="p_dot" inputmode="numeric" placeholder="e.g. 4123456"></label>
+          <label>MC number (if any) <input type="text" id="p_mc" placeholder="optional"></label>
+          <label>Principal address <input type="text" id="p_addr" placeholder="Street, city, state ZIP"></label>
+          <label>Authority grant date <input type="date" id="p_grant"></label>
+          <label>Insurance policy expires <input type="date" id="p_ins"></label>
+          <label>Drug &amp; alcohol contact (DER) <input type="text" id="p_der" placeholder="Name, phone"></label>
+          <label>Consortium / TPA name <input type="text" id="p_tpa" placeholder="optional"></label>
+        </div>
+      </fieldset>
+      <fieldset><legend>Drivers (include yourself if you drive)</legend>
+        <div id="drivers"></div>
+        <button type="button" class="small ghost" id="addDriver">+ Add driver</button>
+      </fieldset>
+      <fieldset><legend>Vehicles (trucks and trailers)</legend>
+        <div id="vehicles"></div>
+        <button type="button" class="small ghost" id="addVehicle">+ Add vehicle</button>
+      </fieldset>
+      <div class="row"><button type="button" id="build">Build my kit</button> <button type="button" class="ghost" id="loadSample">Fill with sample data</button> <button type="button" class="ghost" id="clearData">Clear my data</button></div>
+      <div class="msg" id="profMsg" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section class="card docs" id="docsCard" hidden>
+    <div class="noprint">
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="small" id="printOne">Print / Save as PDF</button>
+        <button class="small ghost" id="printAll">Print all documents</button>
+        <button class="small ghost" id="dlAll">Download all as .html</button>
+      </div>
+    </div>
+    <div id="docs"></div>
+  </section>
+
+  <section class="card noprint">
+    <h2>The new entrant audit, in plain English</h2>
+    <details><summary>What is it, and when does it happen?</summary><p>New US carriers with a USDOT number are "new entrants" and are monitored for 18 months (49 CFR 385.307). FMCSA aims to do a safety audit within the first 12 months of operation for property carriers (49 CFR 385.308). Exact timing varies, so get ready from day one.</p></details>
+    <details><summary>What happens if I fail?</summary><p>FMCSA sends a written notice. You get a limited time to send proof that you fixed the problems (a corrective action plan). If you don't, your new entrant registration is revoked and you must stop interstate operations (49 CFR 385.319, 385.325). The deadline is in the notice. Read it the day it arrives.</p></details>
+    <details><summary>Why do some rules say "51% of records"?</summary><p>For hours-of-service records (395.8(a)) and periodic inspections (396.17(a)), FMCSA's 2008 rule says a fail needs a pattern: violations in 51% or more of the records checked. Every other rule on the list fails on a single occurrence. Don't aim for 50%. Every record should be right.</p></details>
+    <details><summary>My trucks don't need a CDL. What applies?</summary><p>Drug and alcohol testing (Part 382) and the CDL rules (Part 383) apply to drivers of vehicles that need a CDL: generally 26,001 lbs or more, 16 or more passengers, or placarded hazmat (see 49 CFR 383.5). Medical cards, hours of service, inspections and insurance still apply to most interstate carriers with vehicles of 10,001 lbs or more. Check the definitions before you skip anything.</p></details>
+    <details><summary>Sources</summary><ul class="note">
+      <li>49 CFR 385.321 (automatic-fail list): <a href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-385/subpart-D/section-385.321" rel="noopener">ecfr.gov</a></li>
+      <li>49 CFR Part 385 Subpart D (new entrant program): <a href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-385/subpart-D" rel="noopener">ecfr.gov</a></li>
+      <li>FMCSA: what would cause a carrier to fail a new entrant safety audit: <a href="https://www.fmcsa.dot.gov/faq/what-would-cause-motor-carrier-fail-new-entrant-safety-audit-ss-385321" rel="noopener">fmcsa.dot.gov</a></li>
+      <li>2008 final rule (51% threshold for 395.8(a) and 396.17(a)): <a href="https://www.federalregister.gov/documents/2008/12/16/E8-29253/new-entrant-safety-assurance-process" rel="noopener">federalregister.gov</a></li>
+      <li>Drug &amp; Alcohol Clearinghouse: <a href="https://clearinghouse.fmcsa.dot.gov/" rel="noopener">clearinghouse.fmcsa.dot.gov</a></li>
+    </ul></details>
+  </section>
+
+  <section class="card disc noprint">
+    <b>Not legal advice.</b> This is an educational checklist. FMCSA rules change. Confirm every requirement on <a href="https://www.fmcsa.dot.gov/" rel="noopener">fmcsa.dot.gov</a> and <a href="https://www.ecfr.gov/current/title-49" rel="noopener">ecfr.gov</a>, and talk to a qualified professional about your situation. No tool can guarantee you pass an audit.
+  </section>
+
+  <footer>Nothing you enter leaves your browser. · <a href="/">More tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<script src="/js/pro.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const TOOL = 'audit-kit';
+  let PRO = false;
+  const ls = {
+    get(k, d) { try { const v = localStorage.getItem('auditkit:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem('auditkit:' + k, JSON.stringify(v)); } catch (e) { /* private mode: lasts this visit */ } },
+    del(k) { try { localStorage.removeItem('auditkit:' + k); } catch (e) { /* ignore */ } },
+  };
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  // ---------- dates ----------
+  const today = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })();
+  function parseD(s) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); if (!m) return null; const d = new Date(+m[1], +m[2] - 1, +m[3]); return isNaN(d) ? null : d; }
+  const fmt = (d) => d ? d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const addMonths = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth() + n, 1); const last = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate(); x.setDate(Math.min(d.getDate(), last)); return x; };
+  const daysUntil = (d) => Math.round((d - today) / 864e5);
+  const ymd = (d) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+  function nextAnniv(d) { if (!d) return null; let n = 1; let x = addMonths(d, 12); while (x < today && n < 100) { n++; x = addMonths(d, 12 * n); } return x; }
+  function status(d) {
+    if (!d) return '<span class="soon">No date entered</span>';
+    const n = daysUntil(d);
+    if (n < 0) return `<span class="warn">EXPIRED ${-n} day${n === -1 ? '' : 's'} ago</span>`;
+    if (n <= 60) return `<span class="soon">Expires in ${n} day${n === 1 ? '' : 's'}</span>`;
+    return '<span class="okd">OK</span>';
+  }
+
+  // ---------- the 16 automatic-fail rules: 49 CFR 385.321(b) ----------
+  // applies(ctx): ctx = { cdl: 'yes'|'no'|'unsure', haul: 'freight'|'passengers'|'both', foreign: 'yes'|'no' }
+  const needsCdl = (c) => c.cdl !== 'no';
+  const RULES = [
+    { id: 'r1', cite: '§382.115(a)', title: 'Drug & alcohol testing program (US carriers)', applies: (c) => needsCdl(c) && c.foreign !== 'yes',
+      q: 'Do you have a DOT drug and alcohol testing program in place (your own, or through a consortium/third-party administrator), set up before any CDL driver started work?',
+      fix: 'Join a consortium/TPA (owner-operators must, to be in a random pool), adopt a written policy, and register in the FMCSA Drug & Alcohol Clearinghouse. Keep the enrollment certificate.' },
+    { id: 'r2', cite: '§382.115(b)', title: 'Drug & alcohol testing program (Canada/Mexico-domiciled carriers)', applies: (c) => needsCdl(c) && c.foreign === 'yes',
+      q: 'As a foreign-domiciled carrier, do you have a DOT drug and alcohol testing program in place before operating in the US?',
+      fix: 'Set up a Part 382 program (consortium/TPA, written policy, Clearinghouse registration) before operating in the US. Keep proof.' },
+    { id: 'r3', cite: '§382.201', title: 'Alcohol 0.04 or higher', applies: needsCdl,
+      q: 'Can you say no driver has ever done safety-sensitive work for you while known to have an alcohol concentration of 0.04 or higher?',
+      fix: 'A driver at 0.04 or higher must be removed from safety-sensitive work at once and cannot return until the return-to-duty process is done (substance abuse professional evaluation and a negative return-to-duty test: §382.503, 49 CFR Part 40 Subpart O).' },
+    { id: 'r4', cite: '§382.211', title: 'Driver who refused a test', applies: needsCdl,
+      q: 'Can you say no driver who refused a required drug or alcohol test has kept doing safety-sensitive work for you?',
+      fix: 'A refusal counts like a positive test. Remove the driver from safety-sensitive work until the return-to-duty process is complete. Know what counts as a refusal (49 CFR 40.191 and 40.261).' },
+    { id: 'r5', cite: '§382.215', title: 'Driver who tested positive for drugs', applies: needsCdl,
+      q: 'Can you say no driver known to have tested positive for drugs has kept doing safety-sensitive work for you?',
+      fix: 'Remove the driver right away. They can return only after the substance abuse professional process and a negative return-to-duty test. Check the Clearinghouse before every hire.' },
+    { id: 'r6', cite: '§382.305', title: 'Random testing program', applies: needsCdl,
+      q: 'Is every CDL driver, including you if you drive, in a random drug and alcohol testing pool right now?',
+      fix: 'Enroll every CDL driver in a random pool. Owner-operators must use a consortium/TPA. Keep the selection records and the consortium\'s annual summary.' },
+    { id: 'r7', cite: '§383.3(a) / §383.23(a)', title: 'Driver without a valid CDL', applies: needsCdl,
+      q: 'Does every driver of a CDL-required vehicle hold a valid CDL of the right class, with the endorsements the load needs?',
+      fix: 'Check the class and endorsements against each vehicle and load. Keep a copy of each CDL in the driver file and track expiry dates.' },
+    { id: 'r8', cite: '§383.37', title: 'Suspended, revoked, canceled or disqualified CDL', applies: needsCdl,
+      q: 'Do you check each driver\'s license status (driving record) so no one with a suspended, revoked, canceled or disqualified CDL drives for you?',
+      fix: 'Pull a driving record (MVR) before hire and at least every 12 months, and act on any change at once. Many states offer license-status alerts.' },
+    { id: 'r9', cite: '§387.7(a)', title: 'Insurance at the required level (property carriers)', applies: (c) => c.haul !== 'passengers',
+      q: 'Do you carry liability insurance at or above the federal minimum for what you haul (§387.9), and keep the MCS-90 endorsement or other accepted proof at your office?',
+      fix: 'Confirm your limit against the table in §387.9 (for example $750,000 for most general freight in vehicles of 10,001 lbs or more; higher for some hazmat). Keep the MCS-90 at your principal place of business (§387.7(d)) and never let the policy lapse.' },
+    { id: 'r10', cite: '§387.31(a)', title: 'Insurance at the required level (passenger carriers)', applies: (c) => c.haul !== 'freight',
+      q: 'For passenger service, do you carry liability insurance at or above the federal minimum for your vehicle seating (§387.33), with the MCS-90B endorsement or accepted proof?',
+      fix: 'Check your limit against §387.33 for your vehicles\' seating capacity and keep the MCS-90B at your principal place of business.' },
+    { id: 'r11', cite: '§391.15(a)', title: 'Disqualified driver', applies: () => true,
+      q: 'Do you check that no driver is disqualified from driving a commercial motor vehicle, before hiring and while they drive for you?',
+      fix: 'Review each driver\'s driving record and past-employer history before hire, and the driving record at least every 12 months. Remove any disqualified driver at once.' },
+    { id: 'r12', cite: '§391.11(b)(4)', title: 'Driver without a valid medical certificate', applies: () => true,
+      q: 'Does every driver have a current DOT medical certificate from an examiner on the National Registry, with proof in the driver\'s file?',
+      fix: 'Get each driver examined by an examiner listed on the National Registry. Keep the certificate (or, for CDL drivers, the state record showing medical certification) and verify the examiner (§391.51(b)(7), (9)). Track expiry dates.' },
+    { id: 'r13', cite: '§395.8(a)', title: 'No hours-of-service records', applies: () => true, threshold: true,
+      q: 'Does every driver record hours of service every day, on a registered ELD (or a paper log or short-haul time record only where the rules allow)?',
+      fix: 'Use an ELD on FMCSA\'s registered list unless an exception applies (for example short-haul under §395.1(e)). Keep logs and supporting documents for 6 months (§395.8(k)).' },
+    { id: 'r14', cite: '§396.9(c)(2)', title: 'Operating an out-of-service vehicle', applies: () => true,
+      q: 'Can you say no vehicle placed out of service at a roadside inspection has been driven before the repairs were made?',
+      fix: 'Never move an out-of-service vehicle until it is repaired. Certify the repairs on the inspection report and return it as the report directs (§396.9(d)). Keep the paperwork in the vehicle file.' },
+    { id: 'r15', cite: '§396.11(a)(3)', title: 'Out-of-service defects on a driver report not fixed', applies: () => true,
+      q: 'When a driver reports a defect that would put the vehicle out of service, is it fixed, and the fix certified on the report, before the vehicle runs again?',
+      fix: 'Repair reported defects before the next trip, sign the repair certification on the DVIR, and keep DVIRs for 3 months (§396.11(a)(4)).' },
+    { id: 'r16', cite: '§396.17(a)', title: 'No periodic (annual) inspection', applies: () => true, threshold: true,
+      q: 'Has every truck and trailer you run passed a periodic (annual) inspection in the last 12 months, with the report or decal as proof?',
+      fix: 'Get an annual inspection by a qualified inspector (§396.19) for every unit, including trailers. Keep the report for 14 months (§396.21) and carry proof on the vehicle.' },
+  ];
+
+  // ---------- free self-check ----------
+  const SETUP = [
+    { k: 'cdl', q: 'Do any of your trucks need a CDL to drive? (generally 26,001 lbs or more, 16+ passengers, or placarded hazmat)', opts: [['yes', 'Yes'], ['no', 'No'], ['unsure', 'Not sure']] },
+    { k: 'haul', q: 'What do you carry?', opts: [['freight', 'Freight'], ['passengers', 'Passengers'], ['both', 'Both']] },
+    { k: 'foreign', q: 'Where is your company based?', opts: [['no', 'United States'], ['yes', 'Canada or Mexico']] },
+  ];
+  const DEF_CTX = { cdl: 'yes', haul: 'freight', foreign: 'no' };
+  let ctx = Object.assign({}, DEF_CTX, ls.get('ctx', {}));
+  let answers = ls.get('answers', {});
+  const segHtml = (name, opts, val) => `<div class="seg" role="radiogroup">${opts.map(([v, l]) => `<label><input type="radio" name="${name}" value="${v}"${val === v ? ' checked' : ''}><span>${l}</span></label>`).join('')}</div>`;
+  function drawSetup() { $('setup').innerHTML = SETUP.map((s) => `<div><p>${esc(s.q)}</p>${segHtml('s_' + s.k, s.opts, ctx[s.k])}</div>`).join(''); }
+  function drawQuestions() {
+    $('questions').innerHTML = RULES.map((r, i) => {
+      const ok = r.applies(ctx);
+      return `<div class="q${ok ? '' : ' na'}" data-id="${r.id}"><p><span class="num">${i + 1}</span>${esc(r.q)} <span class="cite">${esc(r.cite)}</span>${r.threshold ? '<span class="chip">51% of records</span>' : ''}${ok ? '' : '<span class="chip">Doesn\'t apply to you</span>'}</p>${segHtml('q_' + r.id, [['yes', 'Yes'], ['no', 'No'], ['unsure', 'Not sure']], answers[r.id])}</div>`;
+    }).join('');
+  }
+  $('setup').addEventListener('change', (e) => { const k = e.target.name.slice(2); ctx[k] = e.target.value; ls.set('ctx', ctx); drawQuestions(); if (!$('result').hidden) score(false); });
+  $('questions').addEventListener('change', (e) => { answers[e.target.name.slice(2)] = e.target.value; ls.set('answers', answers); if (!$('result').hidden) score(false); });
+
+  function score(scroll) {
+    const app = RULES.filter((r) => r.applies(ctx));
+    const no = app.filter((r) => answers[r.id] === 'no'), un = app.filter((r) => answers[r.id] === 'unsure'), bl = app.filter((r) => !answers[r.id]);
+    const yes = app.length - no.length - un.length - bl.length;
+    const box = $('riskBox');
+    let label, cls, text;
+    if (no.length) { label = 'HIGH'; cls = 'r-high'; text = `${no.length} automatic-fail rule${no.length > 1 ? 's' : ''} at risk. Fix ${no.length > 1 ? 'these' : 'this'} before your audit.`; }
+    else if (un.length || bl.length) { label = 'MEDIUM'; cls = 'r-med'; text = `No clear fails, but ${un.length + bl.length} rule${un.length + bl.length > 1 ? 's' : ''} you can't yet prove.`; }
+    else { label = 'LOW'; cls = 'r-low'; text = 'You answered Yes to every rule that applies. Now make sure you can show the records.'; }
+    box.textContent = label + ' risk'; box.className = 'big ' + cls;
+    $('riskText').textContent = text;
+    $('riskSub').textContent = `Ready on ${yes} of ${app.length} rules that apply to you (${app.length ? Math.round(100 * yes / app.length) : 0}% readiness).` + (app.length < 16 ? ` ${16 - app.length} don't apply based on your setup answers.` : '');
+    const list = [...no.map((r) => [r, 'no']), ...un.map((r) => [r, 'unsure']), ...bl.map((r) => [r, 'blank'])];
+    $('items').innerHTML = list.length ? list.map(([r, s]) => `<li><span class="tag t-${s}">${s === 'no' ? 'AT RISK' : s === 'unsure' ? 'NOT SURE' : 'UNANSWERED'}</span><b>${esc(r.title)}</b> <span class="note">${esc(r.cite)}</span>${r.threshold ? ' <span class="chip">fails at 51% of records</span>' : ''}<p class="why"><b>Fix:</b> ${esc(r.fix)}</p></li>`).join('')
+      : '<li>Nothing flagged. Keep every record current. The kit below helps you build the binder the auditor will ask for.</li>';
+    $('result').hidden = false;
+    ls.set('scored', true);
+    if (scroll) $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  $('score').onclick = () => score(true);
+  $('reset').onclick = () => { answers = {}; ctx = Object.assign({}, DEF_CTX); ls.del('answers'); ls.del('ctx'); ls.del('scored'); drawSetup(); drawQuestions(); $('result').hidden = true; };
+  drawSetup(); drawQuestions(); if (ls.get('scored', false)) score(false);
+
+  // ---------- kit document generators ----------
+  const cite = (c) => `<span class="cite">${esc(c)}</span>`;
+  const blank = '<span class="line"></span>';
+  const val = (v) => v ? esc(v) : blank;
+  const blanks = (n, cols) => Array.from({ length: n }, () => `<tr class="blank">${'<td></td>'.repeat(cols)}</tr>`).join('');
+  const tbl = (head, rows) => `<div class="tablewrap"><table><thead><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  const check = (items) => tbl(['Done', 'Item', 'Date / notes'], items.map(([t, c]) => `<tr><td class="bx">&#9744;</td><td>${t} ${c ? cite(c) : ''}</td><td class="fill"></td></tr>`).join(''));
+  function page(P, title, body) {
+    return `<section class="page"><div class="ph"><div><b>${P.name ? esc(P.name) : 'Company: ____________'}</b> · USDOT ${P.dot ? esc(P.dot) : '________'}${P.mc ? ' · MC ' + esc(P.mc) : ''}</div><div>${esc(title)}</div></div>${body}<div class="pf">Prepared ${fmt(today)} with the New Authority Audit Kit. Educational template, not legal advice. FMCSA rules change: confirm on fmcsa.dot.gov and ecfr.gov.</div></section>`;
+  }
+  const driverName = (d, i) => d.name || `Driver ${i + 1}`;
+
+  function docDQ(P) {
+    const ck = [
+      ['Employment application, signed and dated (covers the prior 3 years; 10 years of CMV driving for CDL drivers)', '§391.21'],
+      ['Driving record (MVR) from every state where the driver held a license in the past 3 years, requested within 30 days of hire', '§391.23(a)(1)'],
+      ['Safety performance history from DOT-regulated employers in the past 3 years, including drug & alcohol history, requested within 30 days of hire', '§391.23(a)(2), (c)–(e)'],
+      ['Road test certificate, or an accepted equivalent such as a copy of a valid CDL', '§391.31, §391.33'],
+      ['Medical examiner\'s certificate, or for CDL drivers the state record showing medical certification', '§391.43, §391.51(b)(7)'],
+      ['Note verifying the medical examiner is on the National Registry', '§391.51(b)(9)'],
+      ['Annual driving record (MVR) from each state, at least every 12 months', '§391.25(a)'],
+      ['Annual review of the driving record, signed and dated by the reviewer', '§391.25(b)–(c)'],
+      ['Copy of the CDL / license (class, endorsements, expiry checked against vehicles and loads)', '§383.23'],
+      ['Clearinghouse: pre-employment full query before first safety-sensitive work; limited query at least once a year (CDL drivers; may be kept in the drug & alcohol file)', '§382.701'],
+      ['Pre-employment drug test with a verified negative result before first safety-sensitive work (CDL drivers; keep in the drug & alcohol file)', '§382.301'],
+    ];
+    let html = page(P, 'Driver Qualification File: Checklist', `<h2>Driver Qualification (DQ) File Checklist</h2><p>Keep one file for each driver, for as long as they drive for you plus 3 years ${cite('§391.51(c)')}. Some items may be removed 3 years after they were made ${cite('§391.51(d)')}. The auditor will pull files for drivers on your list.</p>${check(ck)}<p class="tplnote">Tip: keep drug &amp; alcohol test results in a separate, locked file, not in the DQ file ${cite('§382.401')}.</p>`);
+    const drivers = P.drivers.length ? P.drivers : [{}];
+    drivers.forEach((d, i) => {
+      const cdl = parseD(d.cdlExp), med = parseD(d.medExp), hire = parseD(d.hire);
+      const nextMvr = nextAnniv(hire);
+      html += page(P, 'DQ File Cover Sheet', `<h2>DQ File Cover Sheet: ${esc(driverName(d, i))}</h2>
+        ${tbl(['Field', 'Value', 'Status'], [
+          ['Driver name', val(d.name), ''],
+          ['Date of hire', hire ? fmt(hire) : blank, ''],
+          ['CDL state', val(d.state), ''],
+          ['CDL / license expires', cdl ? fmt(cdl) : blank, status(cdl)],
+          ['Medical certificate expires', med ? fmt(med) : blank, status(med)],
+          ['Next annual MVR + review due', nextMvr ? fmt(nextMvr) : blank, nextMvr ? status(nextMvr).replace('Expires in', 'Due in').replace('EXPIRED', 'OVERDUE') : '<span class="soon">Enter hire date</span>'],
+          ['Next annual Clearinghouse limited query', nextMvr ? fmt(nextMvr) : blank, '<span class="cite">§382.701(b)</span>'],
+        ].map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join(''))}
+        <h3>File contents</h3>${check(ck.slice(0, 9).map(([t, c]) => [t.split(' (')[0].split(', requested')[0], c]))}
+        <p>Reviewed by: ${blank} &nbsp; Date: ${blank}</p>`);
+    });
+    return html;
+  }
+
+  function docDA(P) {
+    const contact = P.der ? esc(P.der) : '__________________';
+    const policy = page(P, 'Drug & Alcohol Policy (Template)', `<h2>Drug &amp; Alcohol Testing Policy</h2>
+      <p class="tplnote">Template. Every driver must receive the materials described in ${cite('§382.601')} and sign a receipt. Review it against Part 382 and 49 CFR Part 40, or have your consortium/TPA review it, before you adopt it.</p>
+      <ol>
+        <li><b>Company and contact.</b> ${P.name ? esc(P.name) : '______________'} (USDOT ${P.dot ? esc(P.dot) : '______'}). Questions about this policy go to: ${contact} ${cite('§382.601(b)(1)')}.</li>
+        <li><b>Who is covered.</b> Every driver who operates a commercial motor vehicle requiring a CDL, including owner-operators ${cite('§382.103')}.</li>
+        <li><b>Safety-sensitive functions.</b> All on-duty time from when a driver begins to work or must be ready to work until relieved, including driving, inspecting, loading and waiting ${cite('§382.107')}.</li>
+        <li><b>Prohibited conduct.</b> Alcohol concentration of 0.04 or higher; using alcohol on duty or within 4 hours before duty; using alcohol within 8 hours after an accident or until tested; refusing a test; using controlled substances; testing positive ${cite('§382.201–§382.215')}.</li>
+        <li><b>When you will be tested.</b> Pre-employment (drugs) ${cite('§382.301')}; post-accident ${cite('§382.303')}; random ${cite('§382.305')}; reasonable suspicion ${cite('§382.307')}; return-to-duty ${cite('§382.309')}; follow-up ${cite('§382.311')}.</li>
+        <li><b>How tests are done.</b> Under 49 CFR Part 40, by DOT-qualified collectors, laboratories and medical review officers.</li>
+        <li><b>Refusals.</b> Refusing or tampering is treated like a positive test (49 CFR 40.191, 40.261).</li>
+        <li><b>Consequences.</b> A violation means immediate removal from safety-sensitive work and referral to a substance abuse professional ${cite('§382.501–§382.505')}. A result of 0.02–0.039 means removal for at least 24 hours ${cite('§382.505')}. Company discipline: ______________.</li>
+        <li><b>Clearinghouse.</b> Violations are reported to the FMCSA Drug &amp; Alcohol Clearinghouse, and the company queries it before hire and at least once a year ${cite('§382.701')}.</li>
+        <li><b>Help.</b> Information on the effects of alcohol and drugs, and on where to find help, is attached ${cite('§382.601(b)(10)–(11)')}.</li>
+      </ol>
+      <h3>Driver receipt</h3><p>I received this policy and the educational materials. Driver: ${blank} Signature: ${blank} Date: ${blank}</p>`);
+    const enroll = page(P, 'Consortium / TPA Enrollment Checklist', `<h2>Consortium / TPA Enrollment Checklist</h2>
+      <p>Consortium / TPA: ${val(P.tpa)} &nbsp; Account #: ${blank}</p>
+      ${check([
+        ['Enrolled with a consortium/third-party administrator (required in practice for owner-operators, who must be in a random pool)', '§382.103, §382.305'],
+        ['Enrollment certificate or letter on file, listing the company and every CDL driver in the random pool', '§382.305'],
+        ['Designated employer representative (DER) named: ' + contact, '49 CFR 40.3'],
+        ['Written policy and educational materials given to every driver, signed receipts on file', '§382.601'],
+        ['Supervisors trained in reasonable-suspicion signs (60 min alcohol + 60 min drugs), if you have supervisors', '§382.603'],
+        ['Registered as an employer in the FMCSA Clearinghouse; consortium/TPA designated there', '§382.711'],
+        ['Clearinghouse query plan purchased; each driver registered and consent given', '§382.703'],
+        ['Random selections notified, tested promptly, and records kept', '§382.305'],
+        ['Annual random-rate summary (MIS data) from your consortium kept on file', '§382.403'],
+        ['Records kept for the right periods (e.g. 5 years for positives and refusals, 1 year for negatives)', '§382.401'],
+      ])}`);
+    const drv = P.drivers.length ? P.drivers : [];
+    const preRows = drv.map((d, i) => `<tr><td>${esc(driverName(d, i))}</td><td>${d.hire ? fmt(parseD(d.hire)) : ''}</td><td></td><td></td><td></td><td></td></tr>`).join('') + blanks(Math.max(3, 8 - drv.length), 6);
+    const preLog = page(P, 'Pre-Employment Test Log', `<h2>Pre-Employment Drug Test Log</h2><p>A verified negative result is required before a driver's first safety-sensitive work ${cite('§382.301')}. Pre-employment alcohol testing is optional.</p>
+      ${tbl(['Driver', 'Hire date', 'Collection date', 'Result (MRO verified)', 'Date result received', 'First day driving'], preRows)}`);
+    const chRows = drv.map((d, i) => `<tr><td>${esc(driverName(d, i))}</td><td>Full (pre-employment)</td><td></td><td></td><td></td></tr><tr><td>${esc(driverName(d, i))}</td><td>Limited (annual)</td><td></td><td></td><td></td></tr>`).join('') + blanks(Math.max(3, 8 - 2 * drv.length), 5);
+    const chLog = page(P, 'Clearinghouse Query Log', `<h2>Clearinghouse Query Log</h2><p>Full query before a driver's first safety-sensitive work; limited query (with the driver's consent) at least once every 12 months; keep records of each query for 3 years ${cite('§382.701, §382.703, §382.401')}.</p>
+      ${tbl(['Driver', 'Query type', 'Date run', 'Result', 'Run by'], chRows)}`);
+    return policy + enroll + preLog + chLog;
+  }
+
+  function docHOS(P) {
+    const ck = page(P, 'Hours of Service / ELD Records Checklist', `<h2>Hours of Service / ELD Records Checklist</h2>
+      <p>The auditor samples drivers and checks their records of duty status. For this rule, an automatic fail needs violations in 51% or more of the records checked, but aim for 100% ${cite('§395.8(a)')}.</p>
+      ${check([
+        ['Every driver records duty status every day, on an ELD unless an exception applies', '§395.8(a)'],
+        ['ELD is on FMCSA\'s registered device list (check the list again if the device is revoked)', '§395.22(a)'],
+        ['In each truck: ELD user manual, data-transfer instructions, malfunction instructions, and blank paper logs for at least 8 days', '§395.22(h)'],
+        ['Exceptions written down for any driver not on an ELD (e.g. short-haul time records, or vehicles with engines older than model year 2000)', '§395.1(e), §395.8(a)(1)'],
+        ['Drivers certify each 24-hour record; carrier reviews and edits only with driver approval', '§395.30'],
+        ['Unassigned driving time reviewed and assigned or explained', '§395.32'],
+        ['ELD malfunctions noted, reported and fixed within the allowed time', '§395.34'],
+        ['Records of duty status and supporting documents kept for 6 months', '§395.8(k)'],
+        ['Supporting documents kept (up to 8 per driver per 24 hours): bills of lading, dispatch records, expense receipts, electronic messages, payroll', '§395.11'],
+        ['Back-up copy of ELD records kept on a separate device', '§395.22(i)'],
+        ['Drivers know the 11-hour, 14-hour, 30-minute break and 60/70-hour limits', '§395.3'],
+      ])}`);
+    const log = page(P, 'Supporting Documents Retention Log', `<h2>Supporting Documents Retention Log</h2><p>Keep each document 6 months, then it may be destroyed ${cite('§395.8(k)(1), §395.11')}.</p>
+      ${tbl(['Date', 'Driver', 'Document type', 'Load / trip #', 'Where stored', 'Keep until'], blanks(16, 6))}`);
+    return ck + log;
+  }
+
+  function docMaint(P) {
+    const vs = P.vehicles.length ? P.vehicles : [{}];
+    let html = '';
+    vs.forEach((v, i) => {
+      const ann = parseD(v.annual); const due = ann ? addMonths(ann, 12) : null;
+      html += page(P, 'Vehicle Maintenance File', `<h2>Maintenance File: Unit ${v.unit ? esc(v.unit) : '#' + (i + 1)}</h2>
+        <p>Keep for each vehicle you control for 30 days or more, for 1 year while you have it and 6 months after it leaves ${cite('§396.3(b)–(c)')}.</p>
+        ${tbl(['Field', 'Value'], [
+          ['Unit number', val(v.unit)], ['Type', val(v.type)], ['Year / make', val(v.ymm)], ['VIN / serial number', val(v.vin)],
+          ['Tire size', blank], ['Owner (if not the carrier)', blank],
+          ['Last annual inspection', ann ? fmt(ann) : blank], ['Next annual inspection due', due ? `${fmt(due)} &nbsp; ${status(due).replace('Expires in', 'Due in').replace('EXPIRED', 'OVERDUE')}` : blank],
+        ].map((r) => `<tr><td style="width:40%">${r[0]}</td><td>${r[1]}</td></tr>`).join(''))}
+        <h3>Inspection schedule ${cite('§396.3(b)(2)')}</h3>
+        ${tbl(['Item', 'Interval (miles / months)', 'Next due'], ['Oil and filter', 'Brakes / adjustment', 'Tires', 'Lights and reflectors', 'Coupling devices', 'Annual inspection (§396.17)'].map((x) => `<tr><td>${x}</td><td></td><td></td></tr>`).join(''))}
+        <h3>Inspection, repair and maintenance record ${cite('§396.3(b)(3)')}</h3>
+        ${tbl(['Date', 'Odometer', 'Work done', 'By (shop / mechanic)', 'Invoice #'], blanks(8, 5))}
+        <h3>Annual inspection record ${cite('§396.17, §396.21')}</h3>
+        <p class="note">Keep the inspection report 14 months; the inspector must be qualified ${cite('§396.19')}.</p>
+        ${tbl(['Date', 'Inspector / location', 'Passed?', 'Report kept where'], (ann ? `<tr><td>${fmt(ann)}</td><td></td><td></td><td></td></tr>` : '') + blanks(3, 4))}
+        <h3>Roadside inspections and out-of-service repairs ${cite('§396.9')}</h3>
+        ${tbl(['Date', 'Report #', 'Out of service?', 'Repairs certified (date)', 'Returned as directed'], blanks(3, 5))}`);
+    });
+    html += page(P, 'Driver Vehicle Inspection Report (DVIR) Log', `<h2>Driver Vehicle Inspection Report (DVIR) Log</h2>
+      <p>Drivers report defects at the end of each day's work. Defects that affect safety must be repaired, and the repair certified, before the vehicle runs again. Keep each DVIR 3 months ${cite('§396.11(a)(3)–(4)')}. Before driving, the next driver reviews and signs the last report if it listed defects ${cite('§396.13')}.</p>
+      ${tbl(['Date', 'Unit #', 'Driver', 'Defects found (or none)', 'Repaired / certified by', 'Repair date', 'Next driver reviewed'], blanks(14, 7))}`);
+    return html;
+  }
+
+  function docIns(P) {
+    const ins = parseD(P.ins);
+    return page(P, 'Insurance & Registration Checklist', `<h2>Insurance &amp; Registration Checklist</h2>
+      <p>Policy expires: <b>${ins ? fmt(ins) : blank}</b> ${ins ? status(ins) : ''}</p>
+      ${check([
+        ['Liability insurance at or above the federal minimum for what you haul (e.g. $750,000 for most general freight, 10,001+ lbs; more for some hazmat)', '§387.7(a), §387.9'],
+        ['MCS-90 endorsement (or other accepted proof) kept at your principal place of business', '§387.7(d), §387.15'],
+        ['Insurer\'s filing (BMC-91 or BMC-91X) shows active on FMCSA\'s public record (for-hire authority)', '49 CFR 387 Subpart C'],
+        ['Process agents designated in every state on Form BOC-3, filed with FMCSA', '49 CFR Part 366'],
+        ['Unified Carrier Registration (UCR) paid for the current year, receipt on file (ucr.gov)', 'UCR Act'],
+        ['MCS-150 (USDOT registration) updated every 2 years on your scheduled month, and whenever details change', '§390.19'],
+        ['Accident register kept for 3 years, even if it is empty', '§390.15(b)'],
+        ['IRP apportioned plates and IFTA fuel-tax license, if your vehicles qualify (state programs)', 'State rules'],
+        ['Heavy Vehicle Use Tax (IRS Form 2290) Schedule 1, for vehicles of 55,000 lbs or more', 'IRS'],
+        ['Hazmat registration with PHMSA, if you haul placarded hazmat', '49 CFR 107 Subpart G'],
+        ['Cargo and physical-damage coverage as your brokers and lenders require (usually contract, not federal, requirements)', ''],
+      ])}
+      <p class="tplnote">Check your authority and insurance status any time on FMCSA's public record (search your USDOT number at safer.fmcsa.dot.gov or li-public.fmcsa.dot.gov).</p>`);
+  }
+
+  function mcs150(dot) {
+    const d = String(dot || '').replace(/\D/g, ''); if (d.length < 2) return null;
+    const last = +d[d.length - 1], ntl = +d[d.length - 2];
+    const month = last === 0 ? 9 : last - 1; // 1=Jan ... 9=Sep, 0=Oct
+    const odd = ntl % 2 === 1;
+    let y = today.getFullYear();
+    for (let k = 0; k < 4; k++, y++) { if ((y % 2 === 1) === odd) { const end = new Date(y, month + 1, 0); if (end >= today) return end; } }
+    return null;
+  }
+
+  function events(P) {
+    const ev = [];
+    P.drivers.forEach((d, i) => {
+      const n = driverName(d, i);
+      const cdl = parseD(d.cdlExp), med = parseD(d.medExp), hire = parseD(d.hire);
+      if (cdl) ev.push({ d: cdl, t: `${n}: CDL expires`, c: '§383.23' });
+      if (med) ev.push({ d: med, t: `${n}: medical certificate expires`, c: '§391.45' });
+      const a = nextAnniv(hire); if (a) ev.push({ d: a, t: `${n}: annual MVR, review and Clearinghouse limited query due`, c: '§391.25, §382.701(b)' });
+    });
+    P.vehicles.forEach((v, i) => { const a = parseD(v.annual); if (a) ev.push({ d: addMonths(a, 12), t: `Unit ${v.unit || '#' + (i + 1)}: annual inspection due`, c: '§396.17' }); });
+    const ins = parseD(P.ins); if (ins) ev.push({ d: ins, t: 'Insurance policy expires: renew before this date', c: '§387.7' });
+    const m = mcs150(P.dot); if (m) ev.push({ d: m, t: 'MCS-150 biennial update due by end of this month (check FMCSA schedule)', c: '§390.19' });
+    const ucr = new Date(today.getFullYear(), 11, 1); ev.push({ d: ucr, t: `UCR registration for ${today.getFullYear() + 1}: pay before Jan 1 (confirm at ucr.gov)`, c: 'UCR' });
+    const g = parseD(P.grant);
+    if (g) { const a = addMonths(g, 12); if (a >= today) ev.push({ d: a, t: 'About 12 months since authority: new entrant audit window (approx.)', c: '§385.308' }); const e = addMonths(g, 18); if (e >= today) ev.push({ d: e, t: 'About 18 months: new entrant monitoring period ends (approx.)', c: '§385.307' }); }
+    return ev.sort((a, b) => a.d - b.d);
+  }
+
+  function docBinder(P) {
+    const toc = page(P, 'Audit-Day Binder: Contents', `<h2>Audit-Day Binder</h2><p>Put one tab per section, in this order. Bring originals or have them ready to upload; the audit may be on-site or off-site.</p>
+      ${tbl(['Tab', 'Section', 'What goes in it'], [
+        ['1', 'Company', 'USDOT/MC record, MCS-150, BOC-3, UCR receipt, list of all drivers (hire/end dates) and all vehicles'],
+        ['2', 'Drug &amp; alcohol', 'Policy and driver receipts, consortium enrollment, pre-employment results, random selection records, Clearinghouse query records'],
+        ['3', 'Driver qualification files', 'One file per driver (see DQ checklist)'],
+        ['4', 'Hours of service', 'Last 6 months of logs and supporting documents, ELD documents'],
+        ['5', 'Vehicles', 'Maintenance file per unit, annual inspections, DVIRs (3 months), roadside reports and repair certifications'],
+        ['6', 'Insurance', 'Policy, MCS-90, proof of filing'],
+        ['7', 'Accidents', 'Accident register (3 years) and any accident reports'],
+        ['8', 'Hazmat (if any)', 'PHMSA registration, training records, shipping papers'],
+      ].map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join(''))}`);
+    const req = page(P, 'Document Request List', `<h2>Document Request List</h2><p>Typical items an auditor asks for. Your notice lists the exact items: follow it.</p>
+      ${check([
+        ['List of all drivers used in the past year, with hire and end dates', ''],
+        ['List of all vehicles (owned and leased) with unit numbers and VINs', ''],
+        ['Drug &amp; alcohol program: policy, consortium enrollment, random selection and test records', 'Part 382'],
+        ['Clearinghouse registration and query history', '§382.701'],
+        ['Driver qualification files for the drivers requested', '§391.51'],
+        ['Records of duty status and supporting documents for the period requested (up to 6 months)', '§395.8, §395.11'],
+        ['Vehicle maintenance files, annual inspection reports, DVIRs', '§396.3, §396.11, §396.17'],
+        ['Roadside inspection reports with repair certifications', '§396.9'],
+        ['Proof of insurance / MCS-90', '§387.7'],
+        ['Accident register', '§390.15'],
+      ])}`);
+    const prep = page(P, 'What the Auditor Asks: Prep Sheet', `<h2>What the Auditor Asks: Prep Sheet</h2><p>Practice your answer to each question, and know where the proof is.</p>
+      ${tbl(['Question', 'Your answer / where the proof is'], [
+        'Who are all the drivers who drove for you since you started? Show me the list.',
+        'Which consortium or TPA runs your drug & alcohol program? Show me the enrollment.',
+        'Who is your designated employer representative?',
+        'Show me pre-employment test results for each CDL driver, dated before their first trip.',
+        'Show me the Clearinghouse queries for each driver.',
+        'Show me the DQ file for this driver. Where is the medical card? The MVRs? The past-employer checks?',
+        'How do your drivers record hours of service? Show me 6 months of logs and supporting documents.',
+        'Show me the maintenance file and last annual inspection for each truck and trailer.',
+        'Have any vehicles been placed out of service? Show me the repair certification.',
+        'Show me proof of insurance and the MCS-90.',
+        'Have you had any recordable accidents? Show me the accident register.',
+      ].map((q) => `<tr><td style="width:55%">${esc(q)}</td><td></td></tr>`).join(''))}`);
+    const g = parseD(P.grant);
+    const d = (n) => g ? fmt(addDays(g, n)) : `Grant + ${n} days`;
+    const dm = (n) => g ? fmt(addMonths(g, n)) : `Grant + ${n} months`;
+    const tl = page(P, '30/60/90-Day Timeline', `<h2>30/60/90-Day Timeline</h2><p>Authority granted: <b>${g ? fmt(g) : 'enter the date in your profile'}</b>. Suggested plan; legal deadlines are cited.</p>
+      ${tbl(['By', 'Do this'], [
+        [`${d(0)} (before the first load)`, 'Drug &amp; alcohol program and random pool in place; pre-employment negative result and Clearinghouse full query for each CDL driver; DQ file complete for each driver; ELD installed; insurance and BOC-3 active; every vehicle with a current annual inspection.'],
+        [d(30), 'Self-audit: check every DQ file against the checklist. Confirm DVIRs and supporting documents are being kept. Start the accident register.'],
+        [d(60), 'Review 30 days of logs for violations and unassigned driving. Confirm random selections from your consortium are being tested. Check every expiry date in the calendar.'],
+        [d(90), 'Run this self-check again. Put the audit binder together, tab by tab. Fix anything still marked "Not sure".'],
+        [dm(12), 'Approximate end of the window in which FMCSA aims to complete the safety audit for property carriers ' + cite('§385.308') + '. Timing varies.'],
+        [dm(18), 'Approximate end of the new entrant monitoring period ' + cite('§385.307') + '.'],
+        ['If you get a failure notice', 'Send your corrective action plan with proof before the deadline in the notice ' + cite('§385.319, §385.325') + '. Don\'t wait.'],
+      ].map((r) => `<tr><td style="width:30%">${r[0]}</td><td>${r[1]}</td></tr>`).join(''))}`);
+    return toc + req + prep + tl;
+  }
+
+  function docCal(P) {
+    const ev = events(P);
+    const rows = ev.map((e) => `<tr><td>${fmt(e.d)}</td><td>${esc(e.t)}</td><td>${status(e.d).replace('Expires in', 'In').replace('EXPIRED', 'PAST')}</td><td>${cite(e.c)}</td></tr>`).join('');
+    return page(P, 'Expiry Calendar', `<h2>Expiry Calendar</h2><p>Upcoming expirations and due dates from your profile. Add them to your phone with the calendar file (.ics) button above the documents.</p>
+      ${tbl(['Date', 'What', 'Status', 'Rule'], rows || '<tr><td colspan="4">Add drivers, vehicles and dates to your profile to fill this in.</td></tr>')}
+      <p class="note">MCS-150 timing follows FMCSA's schedule based on the last two digits of your USDOT number; confirm on fmcsa.dot.gov. Audit-window dates are approximate.</p>`);
+  }
+
+  const DOCS = [
+    { id: 'dq', title: '1. Driver files', gen: docDQ },
+    { id: 'da', title: '2. Drug & alcohol', gen: docDA },
+    { id: 'hos', title: '3. Hours of service', gen: docHOS },
+    { id: 'maint', title: '4. Vehicles', gen: docMaint },
+    { id: 'ins', title: '5. Insurance', gen: docIns },
+    { id: 'binder', title: '6. Audit binder', gen: docBinder },
+    { id: 'cal', title: '7. Expiry calendar', gen: docCal },
+  ];
+
+  // ---------- profile form ----------
+  const SAMPLE = {
+    name: 'Sample Freight LLC', dot: '4000017', mc: 'MC-000000', addr: '100 Example Rd, Springfield, IL 62701',
+    grant: '', ins: '', der: 'Jordan Sample, (555) 010-0100', tpa: 'Example Consortium',
+    drivers: [{ name: 'Jordan Sample', state: 'IL', cdlExp: '', medExp: '', hire: '' }, { name: 'Casey Example', state: 'IN', cdlExp: '', medExp: '', hire: '' }],
+    vehicles: [{ unit: '101', type: 'Tractor', ymm: '2019 Freightliner', vin: '1FUJGLDR0KL000000', annual: '' }, { unit: 'T-1', type: 'Trailer', ymm: '2018 Utility', vin: '1UYVS2530JU000000', annual: '' }],
+  };
+  (function datedSample() {
+    const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    SAMPLE.grant = iso(addDays(today, -45)); SAMPLE.ins = iso(addMonths(today, 10));
+    SAMPLE.drivers[0].cdlExp = iso(addMonths(today, 30)); SAMPLE.drivers[0].medExp = iso(addDays(today, 21)); SAMPLE.drivers[0].hire = iso(addDays(today, -40));
+    SAMPLE.drivers[1].cdlExp = iso(addMonths(today, 14)); SAMPLE.drivers[1].medExp = iso(addDays(today, -5)); SAMPLE.drivers[1].hire = iso(addDays(today, -20));
+    SAMPLE.vehicles[0].annual = iso(addMonths(today, -11)); SAMPLE.vehicles[1].annual = iso(addMonths(today, -3));
+  })();
+
+  const DF = [['name', 'Name', 'text'], ['state', 'CDL state', 'text'], ['cdlExp', 'CDL expires', 'date'], ['medExp', 'Med card expires', 'date'], ['hire', 'Hire date', 'date']];
+  const VF = [['unit', 'Unit #', 'text'], ['type', 'Type (truck/trailer)', 'text'], ['ymm', 'Year / make', 'text'], ['vin', 'VIN', 'text'], ['annual', 'Last annual inspection', 'date']];
+  const repRow = (kind, fields, o, i) => `<div class="rep" data-kind="${kind}" data-i="${i}">${fields.map(([k, l, t]) => `<label>${l}<input type="${t}" data-k="${k}" value="${esc(o[k] || '')}"></label>`).join('')}<button type="button" class="small ghost" data-del="${kind}" data-i="${i}" aria-label="Remove">Remove</button></div>`;
+  let P = ls.get('profile', null) || { name: '', dot: '', mc: '', addr: '', grant: '', ins: '', der: '', tpa: '', drivers: [{}], vehicles: [{}] };
+  const CF = ['name', 'dot', 'mc', 'addr', 'grant', 'ins', 'der', 'tpa'];
+  function drawProfile() {
+    CF.forEach((k) => { $('p_' + k).value = P[k] || ''; });
+    $('drivers').innerHTML = P.drivers.map((d, i) => repRow('drivers', DF, d, i)).join('');
+    $('vehicles').innerHTML = P.vehicles.map((v, i) => repRow('vehicles', VF, v, i)).join('');
+  }
+  function readProfile() {
+    CF.forEach((k) => { P[k] = $('p_' + k).value.trim(); });
+    ['drivers', 'vehicles'].forEach((kind) => {
+      P[kind] = [...$(kind).querySelectorAll('.rep')].map((r) => { const o = {}; r.querySelectorAll('input').forEach((x) => { o[x.dataset.k] = x.value.trim(); }); return o; });
+    });
+    ls.set('profile', P);
+  }
+  const cleaned = () => Object.assign({}, P, { drivers: P.drivers.filter((d) => Object.values(d).some(Boolean)), vehicles: P.vehicles.filter((v) => Object.values(v).some(Boolean)) });
+  $('profile').addEventListener('input', () => readProfile());
+  $('profile').addEventListener('click', (e) => { const k = e.target.dataset.del; if (!k) return; readProfile(); P[k].splice(+e.target.dataset.i, 1); if (!P[k].length) P[k].push({}); ls.set('profile', P); drawProfile(); });
+  $('addDriver').onclick = () => { readProfile(); P.drivers.push({}); drawProfile(); };
+  $('addVehicle').onclick = () => { readProfile(); P.vehicles.push({}); drawProfile(); };
+  $('loadSample').onclick = () => { P = JSON.parse(JSON.stringify(SAMPLE)); ls.set('profile', P); drawProfile(); buildKit(); $('profMsg').className = 'msg ok'; $('profMsg').textContent = 'Sample data loaded. Replace it with your own details, then press "Build my kit".'; };
+  $('clearData').onclick = () => { ls.del('profile'); P = { name: '', dot: '', mc: '', addr: '', grant: '', ins: '', der: '', tpa: '', drivers: [{}], vehicles: [{}] }; drawProfile(); $('docsCard').hidden = true; $('profMsg').className = 'msg'; $('profMsg').textContent = 'Your profile was removed from this browser.'; };
+
+  // ---------- kit rendering ----------
+  let current = 'dq';
+  function buildKit() {
+    if (!PRO) return;
+    readProfile();
+    const C = cleaned();
+    $('docs').innerHTML = DOCS.map((d) => `<div class="doc" id="doc-${d.id}" role="tabpanel"${d.id === current ? '' : ' hidden'}>${d.id === 'cal' ? '<div class="row noprint" style="margin:10px 0"><button class="small" id="icsBtn">Download calendar (.ics)</button> <button class="small ghost" id="copyCal">Copy dates as text</button> <span class="msg" id="calMsg" role="status" aria-live="polite"></span></div>' : ''}${d.gen(C)}</div>`).join('');
+    $('tabs').innerHTML = DOCS.map((d) => `<button role="tab" class="small" data-doc="${d.id}" aria-selected="${d.id === current}">${esc(d.title)}</button>`).join('');
+    $('docsCard').hidden = false;
+    $('icsBtn').onclick = () => downloadIcs(C);
+    $('copyCal').onclick = () => copyText(calText(C));
+    const warn = events(C).filter((e) => daysUntil(e.d) < 0).length;
+    $('profMsg').className = 'msg ' + (warn ? 'err' : 'ok');
+    $('profMsg').textContent = `Kit built: ${DOCS.length} documents.` + (warn ? ` ${warn} date${warn > 1 ? 's are' : ' is'} already past: see the expiry calendar.` : '');
+  }
+  $('build').onclick = () => { buildKit(); $('docsCard').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  $('tabs').addEventListener('click', (e) => { const id = e.target.dataset.doc; if (!id) return; current = id; DOCS.forEach((d) => { $('doc-' + d.id).hidden = d.id !== id; }); [...$('tabs').children].forEach((b) => b.setAttribute('aria-selected', String(b.dataset.doc === id))); });
+  function doPrint(one) {
+    document.body.classList.toggle('print-one', one);
+    document.querySelectorAll('.doc').forEach((d) => d.classList.toggle('print-target', d.id === 'doc-' + current));
+    window.print();
+  }
+  window.addEventListener('afterprint', () => document.body.classList.remove('print-one'));
+  $('printOne').onclick = () => doPrint(true);
+  $('printAll').onclick = () => doPrint(false);
+  function download(name, type, text) {
+    const url = URL.createObjectURL(new Blob([text], { type }));
+    const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+  const slug = (s) => (String(s || 'company').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'company');
+  $('dlAll').onclick = () => {
+    readProfile(); const C = cleaned();
+    const css = $('docCss').textContent.replace(/body\.print-one[^}]*}/g, '');
+    const body = DOCS.map((d) => d.gen(C)).join('\n');
+    const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Audit kit: ${esc(C.name || 'company')}</title><style>body{margin:0;background:#f4f4f0;}main{max-width:900px;margin:0 auto;padding:16px;}${css}</style></head><body><main>${body}</main></body></html>`;
+    download(`audit-kit-${slug(C.name)}.html`, 'text/html', html);
+  };
+
+  // ---------- calendar export ----------
+  const icsEsc = (s) => String(s).replace(/\\/g, '\\\\').replace(/[,;]/g, (c) => '\\' + c).replace(/\n/g, '\\n');
+  const fold = (line) => { const out = []; let s = line; while (s.length > 74) { out.push(s.slice(0, 74)); s = ' ' + s.slice(74); } out.push(s); return out.join('\r\n'); };
+  function icsText(C) {
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+    const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Quickwell//Audit Kit//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+    events(C).forEach((e, i) => {
+      lines.push('BEGIN:VEVENT', `UID:auditkit-${ymd(e.d)}-${i}-${Math.random().toString(36).slice(2, 10)}@quickwell`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${ymd(e.d)}`, `DTEND;VALUE=DATE:${ymd(addDays(e.d, 1))}`,
+        `SUMMARY:${icsEsc(e.t)}`, `DESCRIPTION:${icsEsc((C.name ? C.name + ' - ' : '') + 'Rule: ' + e.c + '. Educational reminder; confirm on fmcsa.dot.gov.')}`,
+        'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(e.t)}`, 'TRIGGER:-P30D', 'END:VALARM', 'END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+  function calText(C) { return events(C).map((e) => `${fmt(e.d)}: ${e.t} (${e.c})`).join('\n') || 'No dates yet.'; }
+  function downloadIcs(C) { download(`audit-kit-dates-${slug(C.name)}.ics`, 'text/calendar', icsText(C)); calMsg('Calendar file downloaded. Open it to add the dates (each has a 30-day reminder).', 'ok'); }
+  function calMsg(t, c) { const m = $('calMsg'); if (m) { m.className = 'msg ' + c; m.textContent = t; } }
+  function copyText(t) {
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; } ta.remove(); calMsg(ok ? 'Dates copied. Paste them into your calendar or notes.' : 'Copy failed. Select the table and copy it by hand.', ok ? 'ok' : 'err'); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(() => calMsg('Dates copied. Paste them into your calendar or notes.', 'ok'), fallback); else fallback();
+  }
+
+  // ---------- locked preview ----------
+  $('sampleBtn').onclick = () => {
+    const w = $('previewWrap'); const show = w.hidden;
+    if (show && !$('previewBody').innerHTML) { const S = JSON.parse(JSON.stringify(SAMPLE)); S.drivers = S.drivers.slice(1); $('previewBody').innerHTML = docDQ(S).split('</section>')[1] + '</section>'; }
+    w.hidden = !show; $('sampleBtn').setAttribute('aria-expanded', String(show)); $('sampleBtn').textContent = show ? 'Hide sample page' : 'See a sample page';
+  };
+
+  // ---------- billing (shared Quickwell billing; one-time purchase) ----------
+  function setPro(s) {
+    PRO = !!(s && s.pro);
+    $('upsell').hidden = PRO; $('kitOn').hidden = !PRO;
+    if (!PRO) { $('docsCard').hidden = true; $('docs').innerHTML = ''; return; }
+    $('welcome').hidden = !s.welcome;
+    drawProfile();
+    if (ls.get('profile', null)) buildKit();
+  }
+  $('buy').onclick = () => {
+    const m = $('buyMsg'); m.className = 'msg'; m.textContent = 'Opening secure checkout…'; $('buy').disabled = true;
+    window.Studio.upgrade('kit', 'once').catch((e) => {
+      m.className = 'msg err';
+      m.textContent = /not switched on|not on sale|unknown|not found/i.test(e.message || '') ? 'The kit opens for purchase very soon. Check back shortly. The free self-check works now.' : (e.message || 'Something went wrong. Please try again.');
+    }).finally(() => { $('buy').disabled = false; });
+  };
+  if (window.Studio) window.Studio.init({ tool: TOOL, onChange: setPro }); else setPro({ pro: false });
+})();
+</script>
+</body>
+</html>

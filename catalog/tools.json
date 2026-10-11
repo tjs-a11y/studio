@@ -10,6 +10,17 @@
           "trialDays": 0
         }
       ]
+    },
+    {
+      "id": "audit-kit",
+      "name": "New Authority Audit Kit",
+      "tagline": "Get ready for your FMCSA new entrant safety audit, with every form filled in.",
+      "plans": [
+        {
+          "id": "kit",
+          "once": true
+        }
+      ]
     }
   ]
 }

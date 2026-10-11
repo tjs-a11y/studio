@@ -54,9 +54,15 @@ export async function verifySession(s, sessionId, tool) {
   const session = await s.checkout.sessions.retrieve(sessionId, { expand: ['subscription'] });
   if (session.metadata?.tool !== tool) return { ok: false, reason: 'wrong_tool' };
   if (session.status !== 'complete' || session.payment_status === 'unpaid') return { ok: false, reason: 'not_paid' };
+  const customer = typeof session.customer === 'string' ? session.customer : session.customer?.id;
+  // One-time purchases (mode=payment): paid is final; there is no subscription to watch.
+  if (session.mode === 'payment') {
+    if (session.payment_status !== 'paid') return { ok: false, reason: 'not_paid' };
+    return { ok: true, once: true, customer, session: session.id, plan: session.metadata?.plan || null };
+  }
   const sub = session.subscription;
   if (!isActive(sub)) return { ok: false, reason: 'inactive' };
-  return { ok: true, customer: typeof session.customer === 'string' ? session.customer : session.customer?.id, subscription: sub };
+  return { ok: true, customer, subscription: sub, plan: sub.metadata?.plan || null };
 }
 
 export const randomLetters = (n = 8) => Array.from(crypto.randomBytes(n), (b) => String.fromCharCode(97 + (b % 26))).join('');
