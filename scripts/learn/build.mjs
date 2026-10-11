@@ -35,7 +35,7 @@ for (const { S, pages } of sections) {
     });
     related.push({ href: S.path, title: fr ? `Toutes les pages : ${S.name}` : `All of the ${S.name.toLowerCase()}`, text: '' });
     const page = {
-      ...p, path: pathOf(S, p.slug), lang: S.lang, h1: p.h1 || p.term, crumbs: S.crumbs.concat([secCrumb]), crumbName: p.crumbName || p.short && p.term || p.h1,
+      ...p, path: pathOf(S, p.slug), lang: S.lang, h1: p.h1 || p.term, crumbs: S.crumbs.concat([secCrumb]), crumbName: p.crumbName || p.term || p.h1.replace(/ \(49 CFR.*/, ''),
       schema: S.termSet ? 'DefinedTerm' : 'Article', termSet: { name: S.name, path: S.path }, related, cta: p.cta || S.cta,
       alternates: p.alt ? { [S.lang]: pathOf(S, p.slug), [S.altLang]: p.alt } : undefined, otherLang: p.alt,
       disclaimer: p.disclaimer || S.disclaimer,

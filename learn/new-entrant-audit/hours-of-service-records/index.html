@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Entrant Audit: No Record of Duty Status / ELD Logs (395.8(a)) and the 51% Rule</title>
+<meta name="description" content="Automatic-fail row 13 of the FMCSA new entrant audit: failing to require drivers to record duty status, with a 51% threshold (49 CFR 395.8(a)). ELDs, paper-log exceptions, short-haul and retention.">
+<link rel="canonical" href="https://quickwell.example/learn/new-entrant-audit/hours-of-service-records/">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.example/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.example/learn/"},{"@type":"ListItem","position":3,"name":"New entrant audit","item":"https://quickwell.example/learn/new-entrant-audit/"},{"@type":"ListItem","position":4,"name":"Row 13: Failing to require a record of duty status","item":"https://quickwell.example/learn/new-entrant-audit/hours-of-service-records/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Row 13: Failing to require a record of duty status (49 CFR 395.8(a))","description":"Automatic-fail row 13 of the FMCSA new entrant audit: failing to require drivers to record duty status, with a 51% threshold (49 CFR 395.8(a)). ELDs, paper-log exceptions, short-haul and retention.","inLanguage":"en","url":"https://quickwell.example/learn/new-entrant-audit/hours-of-service-records/","dateModified":"2026-10-11","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/new-entrant-audit/">New entrant audit</a></li><li aria-current="page">Row 13: Failing to require a record of duty status</li></ol></nav>
+  <article>
+    <h1>Row 13: Failing to require a record of duty status (49 CFR 395.8(a))</h1>
+    <p class="lede">Row 13 fails a new carrier that fails to require its drivers to make a record of duty status (RODS). Unlike most rows, it takes a pattern: violations in 51% or more of the records examined.</p>
+    
+
+<h2>What the rule says</h2>
+<p>Under <a href="https://www.ecfr.gov/current/title-49/section-395.8" rel="noopener">49 CFR 395.8</a> (a), a motor carrier subject to Part 395 must require each driver it uses to record duty status for each 24-hour period. The default method is an <b>electronic logging device (ELD)</b>. A carrier may let a driver record duty status manually (paper log on the standard grid) only in listed cases, including:</p>
+<ul>
+<li>a driver who needs a record of duty status on not more than 8 days in any 30-day period;</li>
+<li>driveaway-towaway operations where the vehicle driven is part of the shipment, or the vehicle transported is a motor home or RV trailer;</li>
+<li>a vehicle manufactured before model year 2000, as shown by the VIN.</li>
+</ul>
+<p>Drivers must submit their records to the carrier within 13 days, and the carrier must keep records of duty status and supporting documents for at least 6 months (<a href="https://www.ecfr.gov/current/title-49/section-395.8" rel="noopener">49 CFR 395.8</a> (k)).</p>
+<h2>The 51% threshold</h2>
+<p>The 385.321 table says this violation "requires a violation threshold (51% or more of examined records) to trigger automatic failure" (<a href="https://www.ecfr.gov/current/title-49/section-385.321" rel="noopener">49 CFR 385.321</a>). An auditor examines a sample of driver-days; if a majority have no required record, the audit fails automatically. Fewer violations can still count against you under the general safety-management review, so don't aim for 50%.</p>
+<h2>Short-haul drivers</h2>
+<p>A driver who stays within a 150 air-mile radius of the normal work reporting location, returns there and is released within 14 consecutive hours, and has the required off-duty time is exempt from 395.8 and 395.11 if the carrier keeps accurate time records for 6 months showing the time on duty, total hours, time released, and (for new or intermittent drivers) the preceding 7 days (<a href="https://www.ecfr.gov/current/title-49/section-395.1" rel="noopener">49 CFR 395.1</a> (e)(1)). Those time records replace logs; without them, the exemption doesn't hold. Separate rules apply to non-CDL property carriers.</p>
+<h2>What an auditor compares</h2>
+<p>ELD records against supporting documents: fuel receipts, tolls, bills of lading, dispatch records. Missing days, a truck moving with no driver logged in, or days with no record at all are what count toward the threshold.</p>
+<h2>How to fix it</h2>
+<ol>
+<li>Use an ELD on FMCSA's registered list in every truck that needs one, and have each driver log in under their own account.</li>
+<li>If you rely on an exception (8-in-30, pre-2000 engine, short-haul), write down which one and keep the records it requires.</li>
+<li>Collect supporting documents and keep logs and documents 6 months.</li>
+<li>Review a week of logs every month for missing days and unassigned driving.</li>
+</ol>
+<p>If an auditor finds this violation, the audit fails. FMCSA then has up to 45 days to send written notice, and you get 60 days from the notice date to fix the problem and prove it (45 days for certain passenger and hazmat carriers) before your new entrant registration is revoked (<a href="https://www.ecfr.gov/current/title-49/section-385.319" rel="noopener">49 CFR 385.319</a>, <a href="https://www.ecfr.gov/current/title-49/section-385.325" rel="noopener">49 CFR 385.325</a>). The <a href="/learn/new-entrant-audit/">overview</a> explains the timeline.</p>
+  </article>
+  <aside class="card cta"><b>Check yourself against all 16 rules</b>The free New Entrant Audit Self-Check asks one question per automatic-fail rule and shows what to fix. The $39 Audit Kit fills in your DQ files, drug and alcohol program, maintenance files and audit binder. Runs in your browser.<br><a class="btn" href="/audit-kit/">Open the audit self-check</a></aside>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/new-entrant-audit/annual-inspection/"><b>Row 16: Using a CMV not periodically inspected (49 CFR 396.17(a))</b><span>Row 16 · §396.17(a) · 51% or more of records</span></a><a class="tile" href="/learn/new-entrant-audit/dvir-defects/"><b>Row 15: Not fixing out-of-service defects on a driver vehicle inspection report (49 CFR 396.11(a)(3))</b><span>Row 15 · §396.11(a)(3) · single occurrence</span></a><a class="tile" href="/learn/new-entrant-audit/medical-certificate/"><b>Row 12: Knowingly using a physically unqualified driver (49 CFR 391.11(b)(4))</b><span>Row 12 · §391.11(b)(4) · single occurrence</span></a><a class="tile" href="/learn/new-entrant-audit/out-of-service-vehicle/"><b>Row 14: Operating a vehicle declared out of service before repairs (49 CFR 396.9(c)(2))</b><span>Row 14 · §396.9(c)(2) · single occurrence</span></a><a class="tile" href="/learn/new-entrant-audit/"><b>All of the new entrant audit</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>49 CFR 385.321 (the 16 automatic-fail regulations), eCFR text up to date as of Oct 7, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=385&amp;section=385.321" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=385&amp;section=385.321</a></li><li>49 CFR 395.8 (record of duty status), eCFR text up to date as of Oct 7, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.8" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.8</a></li><li>49 CFR 395.1 (short-haul exception), eCFR text up to date as of Oct 7, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.1" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-07/title-49.xml?part=395&amp;section=395.1</a></li><li>Quickwell New Authority Audit Kit, rule table (built from the same eCFR text): <a href="/audit-kit/" rel="noopener">/audit-kit/</a></li></ul><p class="note">Sources opened and checked on October 11, 2026.</p></section>
+  <p class="disclaimer">Not legal advice. This page explains public rules and common contract terms in plain English; it is not a substitute for reading your own documents or asking a qualified professional. Rules change, so check the official source.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
