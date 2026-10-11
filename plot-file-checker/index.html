@@ -234,7 +234,7 @@
     return { type: g.type, coordinates: m(g.coordinates) };
   }
   function clone(x) { if (Array.isArray(x)) return x.map(clone); if (x && typeof x === 'object') { var o = {}; Object.keys(x).forEach(function (k) { o[k] = clone(x[k]); }); return o; } return x; }
-  function polysOf(g) { return !g ? [] : g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : []; }
+  function polysOf(g) { return !g ? [] : g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : g.type === 'GeometryCollection' ? [].concat.apply([], (g.geometries || []).map(polysOf)) : []; }
   // Planar signed area in degrees² (shoelace) of an open ring: > 0 means counter-clockwise.
   function planarArea(open) {
     var n = open.length; if (n < 3) return 0; var x0 = open[0][0], y0 = open[0][1], s = 0;
@@ -543,7 +543,7 @@
     if (!pos.length) { add('E_NO_GEOM', i); return; }
     if (pos.some(function (p) { return !isFinite(p[0]) || !isFinite(p[1]); })) { add('E_BAD_COORD', i); return; }
     if (pos.some(function (p) { return p[0] === 0 && p[1] === 0; })) { add('E_ZERO', i); return; }
-    if (pos.some(function (p) { return p.length > 2; })) add('W_ALTITUDE', i);
+    if (pos.some(function (p) { return p.length > 2; })) add('I_ALTITUDE', i);
     var big = pos.find(function (p) { return Math.abs(p[0]) > 180 || Math.abs(p[1]) > 90; });
     if (big) {
       if (pos.some(function (p) { return Math.abs(p[0]) > 1000 || Math.abs(p[1]) > 1000; })) { add('E_PROJECTED', i, { x: big[0] + ', ' + big[1] }); return; }
@@ -554,10 +554,15 @@
       else if (sw.state === 'maybe') add('W_MAYBE_SWAPPED', i, { country: sw.country });
       else if (sw.state === 'outside') add('W_OUTSIDE_COUNTRY', i, { country: sw.country });
     }
-    if (!pl.padded && pl.minDec < 6) add('E_PRECISION', i, { d: pl.minDec });
-    if (pl.minDec <= 4) add('W_LOW_PRECISION', i, { d: pl.minDec });
+    // Precision uses the most decimals seen in the plot: JSON writers drop trailing zeros (-49.006830 becomes -49.00683),
+    // so a single short value does not mean the GPS was imprecise. The EU's own sample file has such values.
+    if (!pl.padded && pl.maxDec < 6) add('E_PRECISION', i, { d: pl.maxDec });
+    if (pl.maxDec <= 4) add('W_LOW_PRECISION', i, { d: pl.maxDec });
     if (g.type === 'LineString' || g.type === 'MultiLineString') add('E_LINE', i, { type: g.type });
-    if (g.type === 'GeometryCollection') add(gcMerge(g) ? 'W_GC' : 'E_GC', i);
+    if (g.type === 'GeometryCollection') {
+      var gl = (g.geometries || []).find(function (m) { return m.type === 'LineString' || m.type === 'MultiLineString'; });
+      if (gl) add('E_LINE', i, { type: gl.type }); else add(gcMerge(g) ? 'I_GC' : 'W_GC_MIXED', i);
+    }
     var polys = polysOf(g), dupN = 0, unclosed = false, cw = false, few = false, holes = 0, xs = [];
     polys.forEach(function (poly) {
       if (poly.length > 1) holes += poly.length - 1;
@@ -581,10 +586,11 @@
     if (few) add('E_FEW_VERTICES', i);
     if (xs.length) add('E_SELF_INTERSECT', i, { at: ptStr(xs[0]) });
     if (holes) add('E_HOLES', i, { n: holes });
-    if (cw) add('W_WINDING', i);
+    if (cw) add('I_WINDING', i);
     var areaHa = geomAreaHa(g); pl.areaHa = areaHa;
     if (g.type === 'Point' || g.type === 'MultiPoint') {
       if (aNum != null && aNum > 4) add('E_POINT_OVER_4HA', i, { a: aNum });
+      else if (aNum != null && aNum < 0.0001) add('E_POINT_AREA_SMALL', i, { v: String(aRaw) });
       else if (!aGiven) add('I_POINT_DEFAULT_AREA', i);
     }
     if (polys.length && areaHa > 0 && !few && !xs.length) {
@@ -622,10 +628,16 @@
       }
     }
   }
+  // EU Information System validation rules: geolocation data per DDS is limited to 25 Mb (we read this as 25,000,000 bytes,
+  // the stricter reading). We start warning at 20 MB because the limit covers all GeoJSON files in one DDS together.
+  var LIMIT_BYTES = 25e6, WARN_BYTES = 20e6;
   function checkAll(plots, ctx, opts, phase) {
     var iss = []; function add(code, plot, p) { iss.push({ code: code, plot: plot, p: p || {} }); }
     if (!plots.length) { add('E_EMPTY', -1); return iss; }
-    if (ctx.size > 10 * 1024 * 1024) add('W_FILE_SIZE', -1, { mb: (ctx.size / 1048576).toFixed(1) });
+    if (ctx.size > LIMIT_BYTES) add('E_FILE_SIZE', -1, { mb: (ctx.size / 1e6).toFixed(1) });
+    else if (ctx.size > WARN_BYTES) add('W_FILE_SIZE', -1, { mb: (ctx.size / 1e6).toFixed(1) });
+    var prod = new Set(); plots.forEach(function (p) { var nm = getProp(p.props, 'ProducerName'); if (nm != null && String(nm).trim() !== '') prod.add(String(nm).trim() + '|' + String(getProp(p.props, 'ProducerCountry') || '').trim()); });
+    if (prod.size > 1000) add('W_PRODUCERS', -1, { n: prod.size });
     if (plots.length > 10000) add('W_TOO_MANY', -1, { n: plots.length });
     if (ctx.crs) add(crsIsWGS(ctx.crs) ? 'W_CRS_MEMBER' : 'E_CRS', -1, { crs: crsName(ctx.crs) });
     var withC = plots.filter(function (p) { var v = getProp(p.props, 'ProducerCountry'); return v != null && String(v).trim() !== ''; }).length;
@@ -637,7 +649,14 @@
   }
 
   // ---------- safe fixes ----------
-  function r6(v) { return Math.round(v * 1e6) / 1e6; }
+  // Cut (truncate toward zero) to 6 decimals, as the EU system does before storing. Works on the decimal text, so
+  // 0.29 stays 0.29 (floating-point multiplication would give 0.289999).
+  function t6(v) {
+    if (!isFinite(v) || Math.abs(v) < 1e-6) return 0;
+    var s = String(v); if (/e/i.test(s)) s = v.toFixed(20);
+    var m = /^(-?\d+)(?:\.(\d{0,6})\d*)?$/.exec(s); if (!m) return v;
+    var r = Number(m[1] + (m[2] ? '.' + m[2] : '')); return r === 0 ? 0 : r;
+  }
   function fixAll(parsed, opts) {
     var fixes = []; function add(code, plot, p) { fixes.push({ code: code, plot: plot, p: p || {} }); }
     if (parsed.format !== 'geojson') add('F_CONVERTED', -1, { from: parsed.format.toUpperCase() });
@@ -658,9 +677,9 @@
       if (pos.some(function (p) { return p.length > 2; })) { g = mapPos(g, function (p) { return [p[0], p[1]]; }); add('F_ALTITUDE', i); }
       if (sw[i] && sw[i].state === 'swap') { g = mapPos(g, function (p) { return [p[1], p[0]]; }); add('F_SWAP', i); }
       if (pos.some(function (p) { return Math.abs(p[0]) > 1000 || Math.abs(p[1]) > 1000; })) { out.geom = g; return out; }
-      g = mapPos(g, function (p) { return [r6(p[0]), r6(p[1])]; });
-      if (pl.minDec < 6 && !pos.every(function (p) { return p[0] === 0 && p[1] === 0; })) add('F_PAD', i, { d: pl.minDec });
-      if (pl.maxDec > 6) add('F_ROUND', i);
+      g = mapPos(g, function (p) { return [t6(p[0]), t6(p[1])]; });
+      if (pl.maxDec < 6 && !pos.every(function (p) { return p[0] === 0 && p[1] === 0; })) add('F_PAD', i, { d: pl.maxDec });
+      if (pl.maxDec > 6) add('F_TRUNC', i);
       out.padded = true;
       if (g.type === 'Polygon' || g.type === 'MultiPolygon') {
         var dup = 0, closed = 0, rew = 0;
@@ -695,7 +714,7 @@
     return { before: before, after: after, fixes: fx.fixes, plots: fx.plots, format: parsed.format };
   }
   function serializable(pl) { return !!pl.geom && validStructure(pl.geom) && positions(pl.geom).every(function (p) { return isFinite(p[0]) && isFinite(p[1]); }); }
-  function fmt6(v) { var s = r6(v).toFixed(6); return s === '-0.000000' ? '0.000000' : s; }
+  function fmt6(v) { var s = t6(v).toFixed(6); return s === '-0.000000' ? '0.000000' : s; }
   function serGeom(g) {
     if (g.type === 'GeometryCollection') return '{"type":"GeometryCollection","geometries":[' + g.geometries.map(serGeom).join(',') + ']}';
     function c(x) { return isPos(x) ? '[' + x.map(fmt6).join(',') + ']' : '[' + x.map(c).join(',') + ']'; }
@@ -736,7 +755,7 @@
     parse: parse, analyze: analyze, serialize: serialize, detectSwaps: detectSwaps, checkAll: checkAll, fixAll: fixAll,
     ringAreaM2: ringAreaM2, geomAreaHa: geomAreaHa, planarArea: planarArea, isCCW: isCCW, ringSelfIntersections: ringSelfIntersections,
     ringsOverlap: ringsOverlap, validStructure: validStructure, positions: positions, polysOf: polysOf, countryCode: countryCode,
-    getProp: getProp, decimalsOfStr: decimalsOfStr, COUNTRIES: COUNTRIES, SAMPLES: SAMPLES, EARTH_RADIUS_M: R
+    getProp: getProp, decimalsOfStr: decimalsOfStr, t6: t6, COUNTRIES: COUNTRIES, SAMPLES: SAMPLES, EARTH_RADIUS_M: R
   };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -753,6 +772,8 @@
 
   var SRC = {
     eu: 'https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html',
+    rules: 'https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html',
+    api: 'https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html',
     reg: 'https://eur-lex.europa.eu/eli/reg/2023/1115/oj',
     rfc: 'https://www.rfc-editor.org/rfc/rfc7946',
     whisp: 'https://www.fao.org/transparent-supply-chains/news---events/news/detail/supporting-eudr-compliance-with-whisp/en'
@@ -836,8 +857,10 @@
     E_EMPTY: { en: { n: 'No plots found in this file', h: 'Check that the file is GeoJSON, KML, CSV with latitude/longitude columns, or WKT.' }, fr: { n: 'Aucune parcelle trouvée dans ce fichier', h: 'Vérifiez qu’il s’agit d’un GeoJSON, d’un KML, d’un CSV avec colonnes latitude/longitude, ou de WKT.' } },
     E_PARSE: { en: { n: 'Could not read this file: {why}' , h: 'Open it in a text editor or QGIS to check it, or export it again.' }, fr: { n: 'Impossible de lire ce fichier : {why}', h: 'Ouvrez-le dans un éditeur de texte ou QGIS pour le vérifier, ou exportez-le à nouveau.' } },
     E_UNSUPPORTED: { en: { n: 'This file type ({ext}) is not supported yet', h: 'Shapefiles (.zip/.shp), KMZ and Excel files are not read yet. In QGIS use Export > Save Features As > GeoJSON. In Excel use Save As > CSV. In Google Earth save as .kml.' }, fr: { n: 'Ce type de fichier ({ext}) n’est pas encore pris en charge', h: 'Les shapefiles (.zip/.shp), KMZ et fichiers Excel ne sont pas encore lus. Dans QGIS : Exporter > Sauvegarder les entités sous > GeoJSON. Dans Excel : Enregistrer sous > CSV. Dans Google Earth : enregistrer en .kml.' } },
-    W_FILE_SIZE: { en: { n: 'Large file ({mb} MB)', h: 'Upload limits reported by vendors range from about 10 MB to 25 MB. We could not confirm the current official limit. Consider splitting the file.' }, fr: { n: 'Fichier volumineux ({mb} Mo)', h: 'Les limites signalées par des prestataires vont d’environ 10 Mo à 25 Mo. Nous n’avons pas pu confirmer la limite officielle actuelle. Pensez à découper le fichier.' } },
-    W_TOO_MANY: { en: { n: '{n} plots in one file', h: 'Some platforms report a limit of 10,000 plots per batch (not confirmed officially). Consider splitting the file.' }, fr: { n: '{n} parcelles dans un seul fichier', h: 'Certaines plateformes signalent une limite de 10 000 parcelles par lot (non confirmée officiellement). Pensez à découper le fichier.' } },
+    E_FILE_SIZE: { en: { n: 'File too large for the EU system ({mb} MB)', h: 'The EU Information System accepts at most 25 MB of geolocation data per due diligence statement, counting all GeoJSON files in it together. Split the plots across several statements, or simplify the boundaries (two points are enough for a straight edge; a point is enough for a plot of 4 ha or less).' }, fr: { n: 'Fichier trop lourd pour le système de l’UE ({mb} Mo)', h: 'Le système d’information de l’UE accepte au plus 25 Mo de données de géolocalisation par déclaration de diligence raisonnée, tous fichiers GeoJSON confondus. Répartissez les parcelles sur plusieurs déclarations, ou simplifiez les contours (deux points suffisent pour un côté droit ; un point suffit pour une parcelle de 4 ha ou moins).' } },
+    W_FILE_SIZE: { en: { n: 'Large file ({mb} MB)', h: 'The EU Information System accepts at most 25 MB of geolocation data per due diligence statement, counting all GeoJSON files in it together. This file is close to that limit.' }, fr: { n: 'Fichier volumineux ({mb} Mo)', h: 'Le système d’information de l’UE accepte au plus 25 Mo de données de géolocalisation par déclaration de diligence raisonnée, tous fichiers GeoJSON confondus. Ce fichier approche de cette limite.' } },
+    W_TOO_MANY: { en: { n: '{n} plots in one file', h: 'The EU rules set no plot limit per file, but they allow at most 10,000 producer entries per due diligence statement and 1,000 per commodity. A file this large will probably need splitting.' }, fr: { n: '{n} parcelles dans un seul fichier', h: 'Les règles de l’UE ne fixent pas de limite de parcelles par fichier, mais autorisent au plus 10 000 producteurs par déclaration de diligence raisonnée et 1 000 par produit de base. Un fichier aussi gros devra sans doute être découpé.' } },
+    W_PRODUCERS: { en: { n: '{n} different producers in one file', h: 'The EU rules allow at most 1,000 producers per commodity and 10,000 per due diligence statement (producers counted by ProducerName and ProducerCountry). Split the file across commodities or statements.' }, fr: { n: '{n} producteurs différents dans un seul fichier', h: 'Les règles de l’UE autorisent au plus 1 000 producteurs par produit de base et 10 000 par déclaration de diligence raisonnée (producteurs comptés par ProducerName et ProducerCountry). Répartissez le fichier sur plusieurs produits ou déclarations.' } },
     W_CRS_MEMBER: { en: { n: 'Old-style "crs" entry in the file', h: 'GeoJSON (RFC 7946) is always WGS 84 and no longer uses "crs".' }, fr: { n: 'Ancienne entrée « crs » dans le fichier', h: 'Le GeoJSON (RFC 7946) est toujours en WGS 84 et n’utilise plus « crs ».' } },
     E_CRS: { en: { n: 'The file declares another coordinate system ({crs})', h: 'The EU needs WGS 84 longitude/latitude in decimal degrees (EPSG:4326). Reproject the file in QGIS (Export > Save Features As, CRS EPSG:4326) and check it again.' }, fr: { n: 'Le fichier déclare un autre système de coordonnées ({crs})', h: 'L’UE exige des longitudes/latitudes WGS 84 en degrés décimaux (EPSG:4326). Reprojetez le fichier dans QGIS (Exporter > Sauvegarder les entités sous, SCR EPSG:4326) puis revérifiez.' } },
     W_COUNTRY_MIXED: { en: { n: '{n} of {t} plots have no ProducerCountry', h: 'A file with several producers needs ProducerCountry (2-letter code, e.g. CI, GH) on every plot.' }, fr: { n: '{n} parcelle(s) sur {t} n’ont pas de ProducerCountry', h: 'Un fichier avec plusieurs producteurs doit indiquer ProducerCountry (code à 2 lettres, ex. CI, GH) pour chaque parcelle.' } },
@@ -845,7 +868,7 @@
     E_BAD_GEOM: { en: { n: 'Unknown shape type', t: '"{type}"', h: 'Use Point or Polygon (or MultiPoint/MultiPolygon).' }, fr: { n: 'Type de forme inconnu', t: '« {type} »', h: 'Utilisez Point ou Polygon (ou MultiPoint/MultiPolygon).' } },
     E_BAD_COORD: { en: { n: 'Missing or unreadable coordinates', h: 'Coordinates must be decimal numbers (e.g. -5.123456). Degrees-minutes-seconds and empty cells are not readable.' }, fr: { n: 'Coordonnées manquantes ou illisibles', h: 'Les coordonnées doivent être des nombres décimaux (ex. -5.123456). Les degrés-minutes-secondes et les cellules vides ne sont pas lisibles.' } },
     E_ZERO: { en: { n: 'Coordinates at 0, 0 (in the ocean)', h: 'Usually a GPS without a fix or an empty cell. Measure this plot again.' }, fr: { n: 'Coordonnées à 0, 0 (en plein océan)', h: 'En général un GPS sans signal ou une cellule vide. Relevez à nouveau cette parcelle.' } },
-    W_ALTITUDE: { en: { n: 'Altitude values present' }, fr: { n: 'Valeurs d’altitude présentes' } },
+    I_ALTITUDE: { en: { n: 'Altitude values present', h: 'Allowed by the EU format, but only longitude and latitude are used. We remove them.' }, fr: { n: 'Valeurs d’altitude présentes', h: 'Autorisées par le format de l’UE, mais seules longitude et latitude sont utilisées. Nous les supprimons.' } },
     E_PROJECTED: { en: { n: 'Coordinates look like metres, not degrees', t: '{x}', h: 'The file seems to use a projected system such as UTM. The EU needs WGS 84 decimal degrees (EPSG:4326). Reproject it in QGIS.' }, fr: { n: 'Coordonnées en mètres et non en degrés', t: '{x}', h: 'Le fichier semble utiliser une projection comme l’UTM. L’UE exige des degrés décimaux WGS 84 (EPSG:4326). Reprojetez-le dans QGIS.' } },
     E_RANGE: { en: { n: 'Coordinates out of range', t: '{x}', h: 'Longitude must be between -180 and 180, latitude between -90 and 90.' }, fr: { n: 'Coordonnées hors limites', t: '{x}', h: 'La longitude doit être entre -180 et 180, la latitude entre -90 et 90.' } },
     E_SWAPPED: { en: { n: 'Latitude and longitude are swapped', h: 'GeoJSON needs longitude first, then latitude.' }, fr: { n: 'Latitude et longitude inversées', h: 'Le GeoJSON exige la longitude d’abord, puis la latitude.' } },
@@ -854,22 +877,23 @@
     E_PRECISION: { en: { n: 'Fewer than 6 decimal places', t: '{d} decimal place(s)', h: 'The regulation asks for at least six decimal digits.' }, fr: { n: 'Moins de 6 décimales', t: '{d} décimale(s)', h: 'Le règlement demande au moins six décimales.' } },
     W_LOW_PRECISION: { en: { n: 'Low GPS precision', t: '{d} decimal place(s), accurate to about {acc} at best', h: 'Adding zeros makes the file pass the format check but does not make the location more accurate. Consider measuring again with a GPS app that records 6 decimals.' }, fr: { n: 'Précision GPS faible', t: '{d} décimale(s), soit environ {acc} au mieux', h: 'Ajouter des zéros fait passer le contrôle de format mais ne rend pas la position plus précise. Pensez à refaire le relevé avec une application GPS qui enregistre 6 décimales.' } },
     E_LINE: { en: { n: 'Line instead of a shape', t: '{type}', h: 'The EU system does not accept lines as a production place. Map the plot as a closed polygon, or use a single point if the plot is 4 ha or less.' }, fr: { n: 'Ligne au lieu d’une surface', t: '{type}', h: 'Le système de l’UE n’accepte pas les lignes comme lieu de production. Relevez la parcelle en polygone fermé, ou utilisez un point si elle fait 4 ha ou moins.' } },
-    E_GC: { en: { n: 'Mix of points and shapes in one plot', h: 'Split it into separate plots (one feature each).' }, fr: { n: 'Mélange de points et de surfaces dans une parcelle', h: 'Séparez-les en parcelles distinctes (une entité chacune).' } },
-    W_GC: { en: { n: 'GeometryCollection used' }, fr: { n: 'GeometryCollection utilisée' } },
+    W_GC_MIXED: { en: { n: 'Mix of points and shapes in one plot', h: 'The EU system lists GeometryCollection as a supported type, but one Area value cannot describe both a point and a polygon. Splitting it into separate plots (one feature each) is clearer.' }, fr: { n: 'Mélange de points et de surfaces dans une parcelle', h: 'Le système de l’UE accepte le type GeometryCollection, mais une seule valeur Area ne peut pas décrire à la fois un point et un polygone. Il est plus clair de les séparer en parcelles distinctes (une entité chacune).' } },
+    I_GC: { en: { n: 'GeometryCollection used', h: 'Accepted by the EU system. We turn it into a single MultiPolygon or MultiPoint, which is simpler for other tools.' }, fr: { n: 'GeometryCollection utilisée', h: 'Acceptée par le système de l’UE. Nous la transformons en un seul MultiPolygon ou MultiPoint, plus simple pour les autres outils.' } },
     E_UNCLOSED: { en: { n: 'Polygon not closed', h: 'The last point must repeat the first one.' }, fr: { n: 'Polygone non fermé', h: 'Le dernier point doit répéter le premier.' } },
     W_DUP_VERTEX: { en: { n: 'Repeated points in a row', t: '{n} repeated point(s)' }, fr: { n: 'Points répétés à la suite', t: '{n} point(s) répété(s)' } },
     E_FEW_VERTICES: { en: { n: 'Fewer than 3 distinct corners, or a flat shape', h: 'A boundary needs at least 3 different corners. Map the plot again, or use a single point if it is 4 ha or less.' }, fr: { n: 'Moins de 3 sommets distincts, ou forme plate', h: 'Un contour doit avoir au moins 3 sommets différents. Relevez à nouveau la parcelle, ou utilisez un point si elle fait 4 ha ou moins.' } },
     E_SELF_INTERSECT: { en: { n: 'Boundary crosses itself', t: 'near {at}', h: 'Self-crossing shapes (like a figure 8) are rejected. We do not fix this automatically, because guessing the boundary could misstate the plot. Walk the boundary again in the field, or redraw it carefully.' }, fr: { n: 'Le contour se croise', t: 'près de {at}', h: 'Les formes qui se croisent (comme un 8) sont refusées. Nous ne corrigeons pas cela automatiquement : deviner le contour pourrait fausser la parcelle. Refaites le tour de la parcelle sur le terrain, ou redessinez-la avec soin.' } },
     E_HOLES: { en: { n: 'Polygon with holes', t: '{n} hole(s)', h: 'The EU format description says polygons with holes are not processed. Split the plot into parts that go around the hole. This changes the plot, so it is your decision.' }, fr: { n: 'Polygone avec trous', t: '{n} trou(s)', h: 'La description du format de l’UE indique que les polygones avec trous ne sont pas traités. Découpez la parcelle en morceaux qui contournent le trou. Cela modifie la parcelle : c’est à vous de décider.' } },
-    W_WINDING: { en: { n: 'Corners run clockwise' }, fr: { n: 'Sommets dans le sens horaire' } },
-    W_AREA_BAD: { en: { n: 'Area is not a number', t: '"{v}"', h: 'Area must be a number of hectares, e.g. 2.5.' }, fr: { n: 'Area n’est pas un nombre', t: '« {v} »', h: 'Area doit être un nombre d’hectares, ex. 2.5.' } },
-    W_AREA_TEXT: { en: { n: 'Area written as text' }, fr: { n: 'Area écrite comme du texte' } },
+    I_WINDING: { en: { n: 'Corners run clockwise', h: 'The EU guidance sets no direction rule. The GeoJSON standard (RFC 7946) prefers counter-clockwise, so we reorder them.' }, fr: { n: 'Sommets dans le sens horaire', h: 'Les consignes de l’UE n’imposent pas de sens. La norme GeoJSON (RFC 7946) préfère le sens antihoraire : nous les remettons dans cet ordre.' } },
+    W_AREA_BAD: { en: { n: 'Area is not a number', t: '"{v}"', h: 'Area must be a number of hectares, e.g. 2.5. The EU system reads anything else as 0.' }, fr: { n: 'Area n’est pas un nombre', t: '« {v} »', h: 'Area doit être un nombre d’hectares, ex. 2.5. Le système de l’UE lit toute autre valeur comme 0.' } },
+    W_AREA_TEXT: { en: { n: 'Area written as text', h: 'The EU guidance says "Area": "3" (in quotes) is read as 0. We store it as a number.' }, fr: { n: 'Area écrite comme du texte', h: 'Selon les consignes de l’UE, "Area": "3" (entre guillemets) est lu comme 0. Nous l’enregistrons comme nombre.' } },
     E_POINT_OVER_4HA: { en: { n: 'Single point used for a plot over 4 ha', t: 'Area {a} ha', h: 'Plots over 4 hectares need a polygon (the boundary), not a point. The regulation exempts cattle establishments from this; for other commodities, map the boundary.' }, fr: { n: 'Point unique pour une parcelle de plus de 4 ha', t: 'Area {a} ha', h: 'Les parcelles de plus de 4 hectares exigent un polygone (le contour), pas un point. Le règlement en exempte les établissements d’élevage ; pour les autres produits, relevez le contour.' } },
+    E_POINT_AREA_SMALL: { en: { n: 'Area too small for a point', t: '"{v}"', h: 'When a point has an Area, the EU system requires at least 0.0001 ha (1 m²). Enter the plot size in hectares, or leave Area out to use the 4 ha default.' }, fr: { n: 'Area trop petite pour un point', t: '« {v} »', h: 'Quand un point a une valeur Area, le système de l’UE exige au moins 0,0001 ha (1 m²). Indiquez la superficie en hectares, ou retirez Area pour garder la valeur par défaut de 4 ha.' } },
     I_POINT_DEFAULT_AREA: { en: { n: 'Point without Area: the EU system will assume 4 ha', h: 'Add an Area value in hectares if you know it.' }, fr: { n: 'Point sans Area : le système de l’UE retiendra 4 ha', h: 'Ajoutez une valeur Area en hectares si vous la connaissez.' } },
     W_TINY: { en: { n: 'Very small polygon', t: '{m2} m²', h: 'Possibly a GPS error or points recorded in one place.' }, fr: { n: 'Polygone très petit', t: '{m2} m²', h: 'Peut-être une erreur GPS ou des points relevés au même endroit.' } },
     W_HUGE: { en: { n: 'Very large polygon', t: '{a} ha', h: 'Check that this is one plot and that the coordinates are right.' }, fr: { n: 'Polygone très grand', t: '{a} ha', h: 'Vérifiez qu’il s’agit d’une seule parcelle et que les coordonnées sont justes.' } },
     W_AREA_MISMATCH: { en: { n: 'Area value does not match the shape', t: 'Area says {a} ha, the shape measures {b} ha', h: 'Check the Area value or the boundary.' }, fr: { n: 'La valeur Area ne correspond pas à la forme', t: 'Area indique {a} ha, la forme mesure {b} ha', h: 'Vérifiez la valeur Area ou le contour.' } },
-    W_PROP_ALIAS: { en: { n: 'Property name the EU system does not read' }, fr: { n: 'Nom de propriété non lu par le système de l’UE' } },
+    W_PROP_ALIAS: { en: { n: 'Property name the EU system does not read', h: 'Names are case-sensitive: the EU system reads "ProductionPlace" but not "productionplace". We rename them.' }, fr: { n: 'Nom de propriété non lu par le système de l’UE', h: 'Les noms respectent la casse : le système de l’UE lit « ProductionPlace » mais pas « productionplace ». Nous les renommons.' } },
     E_COUNTRY_CODE: { en: { n: 'ProducerCountry is not a 2-letter code', t: '"{v}"' }, fr: { n: 'ProducerCountry n’est pas un code à 2 lettres', t: '« {v} »' } },
     W_COUNTRY_UNKNOWN: { en: { n: 'ProducerCountry not recognised', t: '"{v}"', h: 'Use the 2-letter ISO code, e.g. CI for Côte d’Ivoire, GH for Ghana.' }, fr: { n: 'ProducerCountry non reconnu', t: '« {v} »', h: 'Utilisez le code ISO à 2 lettres, ex. CI pour la Côte d’Ivoire, GH pour le Ghana.' } },
     W_OVERLAP: { en: { n: 'Overlaps another plot', t: 'overlaps plot {j}', h: 'Two plots claiming the same land is a common question from buyers and authorities. Check both boundaries.' }, fr: { n: 'Chevauche une autre parcelle', t: 'chevauche la parcelle {j}', h: 'Deux parcelles sur le même terrain est une question fréquente des acheteurs et des autorités. Vérifiez les deux contours.' } },
@@ -881,7 +905,7 @@
     F_ALTITUDE: { en: { n: 'Removed altitude values (only longitude and latitude are needed)' }, fr: { n: 'Altitudes supprimées (seules longitude et latitude sont utiles)' } },
     F_SWAP: { en: { n: 'Swapped latitude/longitude into longitude, latitude order' }, fr: { n: 'Latitude/longitude remises dans l’ordre longitude, latitude' } },
     F_PAD: { en: { n: 'Wrote coordinates with 6 decimal places', t: 'they had {d}', h: 'Padding with zeros does not add accuracy.' }, fr: { n: 'Coordonnées écrites avec 6 décimales', t: 'elles en avaient {d}', h: 'Ajouter des zéros n’améliore pas la précision.' } },
-    F_ROUND: { en: { n: 'Rounded coordinates to 6 decimal places (about 11 cm; the EU system keeps 6)' }, fr: { n: 'Coordonnées arrondies à 6 décimales (environ 11 cm ; le système de l’UE en garde 6)' } },
+    F_TRUNC: { en: { n: 'Cut coordinates to 6 decimal places (about 11 cm), as the EU system does before storing them' }, fr: { n: 'Coordonnées coupées à 6 décimales (environ 11 cm), comme le fait le système de l’UE avant de les enregistrer' } },
     F_DUP: { en: { n: 'Removed repeated points', t: '{n} point(s)' }, fr: { n: 'Points répétés supprimés', t: '{n} point(s)' } },
     F_CLOSE: { en: { n: 'Closed the polygon (repeated the first point at the end)' }, fr: { n: 'Polygone fermé (premier point répété à la fin)' } },
     F_REWIND: { en: { n: 'Put corners in counter-clockwise order (GeoJSON right-hand rule)' }, fr: { n: 'Sommets remis dans le sens antihoraire (règle de la main droite du GeoJSON)' } },
@@ -892,28 +916,28 @@
   var RULES = {
     en: [
       ['Format and coordinate order', 'GeoJSON (RFC 7946) in WGS 84 decimal degrees, longitude first, then latitude. We convert KML, CSV and WKT to GeoJSON and fix swapped coordinates when the location makes it obvious.', ['eu', 'rfc']],
-      ['Shapes', 'Points and polygons (MultiPoint and MultiPolygon too). Lines are not accepted as production places. Polygons with holes and self-crossing polygons are not processed: we flag these and never redraw them for you.', ['eu']],
-      ['Six decimal places', 'Coordinates need at least six decimal digits. The EU system keeps 6 decimals. We pad shorter values with zeros, but warn you when the original GPS precision was low.', ['reg', 'eu']],
-      ['Points and the 4-hectare rule', 'Plots over 4 hectares need a polygon (cattle establishments are exempt). A point without an Area value is counted as 4 ha.', ['reg', 'eu']],
-      ['Properties', 'The EU system reads ProducerName, ProducerCountry (2-letter ISO code), ProductionPlace and Area (hectares). Other properties are ignored, so we rename common variants such as "pays" or "superficie".', ['eu']],
-      ['Clean polygons', 'Rings closed (last point = first), at least 3 distinct corners, no repeated points, outer boundary counter-clockwise (GeoJSON right-hand rule; most systems accept either).', ['rfc']],
-      ['File size and plot count', 'Vendors report limits of roughly 10 to 25 MB per file and 10,000 plots per batch. We could not confirm these officially, so we only warn.', []],
+      ['Shapes', 'Points and polygons (MultiPoint, MultiPolygon and GeometryCollection too). Lines are not accepted as production places. Polygons with holes and self-crossing polygons are not processed: we flag these and never redraw them for you.', ['eu', 'api']],
+      ['Six decimal places', 'Coordinates need at least six decimal digits. The EU system cuts (truncates) them to 6 decimals before storing, and we do the same, so the checks run on the shape the EU will keep. Many programs drop trailing zeros (5.100000 becomes 5.1), so we judge precision by the longest value in each plot. We pad shorter values with zeros, but warn you when the original GPS precision was low.', ['reg', 'eu', 'rules']],
+      ['Points and the 4-hectare rule', 'Plots over 4 hectares need a polygon (cattle establishments are exempt). A point without an Area value is counted as 4 ha. When a point has an Area, it must be a number (not text in quotes) of at least 0.0001 ha.', ['reg', 'eu', 'rules']],
+      ['Properties', 'The EU system reads ProducerName, ProducerCountry (2-letter ISO code), ProductionPlace and Area (hectares). Names are case-sensitive and other properties are ignored, so we rename common variants such as "pays", "superficie" or "productionplace".', ['eu']],
+      ['Clean polygons', 'Rings closed (last point = first), at least 3 distinct corners, no repeated points, no straight-line shapes. The EU guidance sets no corner direction; we still put the outer boundary counter-clockwise, as the GeoJSON standard prefers.', ['eu', 'rfc']],
+      ['File size and producer count', 'The EU system accepts at most 25 MB of geolocation data per due diligence statement (all GeoJSON files together), 1,000 producers per commodity and 10,000 per statement. It sets no separate plot limit per file. We flag files over 25 MB as errors and warn as you get close.', ['rules']],
       ['Overlaps and duplicates', 'Not a format rule, but buyers and authorities often ask about plots that overlap or repeat. We flag them.', []],
       ['Deforestation risk', 'This tool checks the file format only, not deforestation. For a free risk screen, see Whisp.', ['whisp']]
     ],
     fr: [
       ['Format et ordre des coordonnées', 'GeoJSON (RFC 7946) en degrés décimaux WGS 84, longitude d’abord, puis latitude. Nous convertissons KML, CSV et WKT en GeoJSON et corrigeons les coordonnées inversées quand la position le rend évident.', ['eu', 'rfc']],
-      ['Formes', 'Points et polygones (MultiPoint et MultiPolygon aussi). Les lignes ne sont pas acceptées comme lieu de production. Les polygones avec trous ou qui se croisent ne sont pas traités : nous les signalons sans jamais les redessiner à votre place.', ['eu']],
-      ['Six décimales', 'Les coordonnées doivent avoir au moins six décimales. Le système de l’UE en conserve 6. Nous complétons les valeurs plus courtes avec des zéros, mais vous prévenons quand la précision GPS d’origine était faible.', ['reg', 'eu']],
-      ['Points et règle des 4 hectares', 'Les parcelles de plus de 4 hectares exigent un polygone (les établissements d’élevage sont exemptés). Un point sans valeur Area compte pour 4 ha.', ['reg', 'eu']],
-      ['Propriétés', 'Le système de l’UE lit ProducerName, ProducerCountry (code ISO à 2 lettres), ProductionPlace et Area (hectares). Les autres propriétés sont ignorées : nous renommons donc les variantes courantes comme « pays » ou « superficie ».', ['eu']],
-      ['Polygones propres', 'Anneaux fermés (dernier point = premier), au moins 3 sommets distincts, pas de points répétés, contour extérieur dans le sens antihoraire (règle de la main droite du GeoJSON ; la plupart des systèmes acceptent les deux).', ['rfc']],
-      ['Taille du fichier et nombre de parcelles', 'Des prestataires signalent des limites d’environ 10 à 25 Mo par fichier et 10 000 parcelles par lot. Nous n’avons pas pu les confirmer officiellement : nous nous limitons à un avertissement.', []],
+      ['Formes', 'Points et polygones (MultiPoint, MultiPolygon et GeometryCollection aussi). Les lignes ne sont pas acceptées comme lieu de production. Les polygones avec trous ou qui se croisent ne sont pas traités : nous les signalons sans jamais les redessiner à votre place.', ['eu', 'api']],
+      ['Six décimales', 'Les coordonnées doivent avoir au moins six décimales. Le système de l’UE les coupe (tronque) à 6 décimales avant de les enregistrer ; nous faisons de même, pour que les contrôles portent sur la forme que l’UE conservera. Beaucoup de logiciels suppriment les zéros finaux (5.100000 devient 5.1) : nous jugeons donc la précision sur la valeur la plus longue de chaque parcelle. Nous complétons les valeurs plus courtes avec des zéros, mais vous prévenons quand la précision GPS d’origine était faible.', ['reg', 'eu', 'rules']],
+      ['Points et règle des 4 hectares', 'Les parcelles de plus de 4 hectares exigent un polygone (les établissements d’élevage sont exemptés). Un point sans valeur Area compte pour 4 ha. Quand un point a une valeur Area, ce doit être un nombre (pas du texte entre guillemets) d’au moins 0,0001 ha.', ['reg', 'eu', 'rules']],
+      ['Propriétés', 'Le système de l’UE lit ProducerName, ProducerCountry (code ISO à 2 lettres), ProductionPlace et Area (hectares). Les noms respectent la casse et les autres propriétés sont ignorées : nous renommons donc les variantes courantes comme « pays », « superficie » ou « productionplace ».', ['eu']],
+      ['Polygones propres', 'Anneaux fermés (dernier point = premier), au moins 3 sommets distincts, pas de points répétés, pas de formes réduites à une ligne droite. Les consignes de l’UE n’imposent pas de sens de parcours ; nous mettons tout de même le contour extérieur dans le sens antihoraire, que préfère la norme GeoJSON.', ['eu', 'rfc']],
+      ['Taille du fichier et nombre de producteurs', 'Le système de l’UE accepte au plus 25 Mo de données de géolocalisation par déclaration de diligence raisonnée (tous fichiers GeoJSON confondus), 1 000 producteurs par produit de base et 10 000 par déclaration. Il ne fixe pas de limite de parcelles par fichier. Nous signalons en erreur les fichiers de plus de 25 Mo et vous prévenons à l’approche de la limite.', ['rules']],
       ['Chevauchements et doublons', 'Ce n’est pas une règle de format, mais acheteurs et autorités posent souvent la question des parcelles qui se chevauchent ou se répètent. Nous les signalons.', []],
       ['Risque de déforestation', 'Cet outil vérifie seulement le format du fichier, pas la déforestation. Pour une analyse de risque gratuite, voir Whisp.', ['whisp']]
     ]
   };
-  var SRC_NAME = { en: { eu: 'EU Information System: GeoJSON file description', reg: 'Regulation (EU) 2023/1115, Article 2(28)', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO: Supporting EUDR compliance with Whisp' }, fr: { eu: 'Système d’information de l’UE : description du fichier GeoJSON', reg: 'Règlement (UE) 2023/1115, article 2, point 28', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO : Whisp et la conformité RDUE' } };
+  var SRC_NAME = { en: { rules: 'EU Information System: validation rules', api: 'EU Information System: DDS API reference', eu: 'EU Information System: GeoJSON file description', reg: 'Regulation (EU) 2023/1115, Article 2(28)', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO: Supporting EUDR compliance with Whisp' }, fr: { rules: 'Système d’information de l’UE : règles de validation', api: 'Système d’information de l’UE : référence de l’API DDS', eu: 'Système d’information de l’UE : description du fichier GeoJSON', reg: 'Règlement (UE) 2023/1115, article 2, point 28', rfc: 'RFC 7946 (GeoJSON)', whisp: 'FAO : Whisp et la conformité RDUE' } };
 
   function t(k, p) { var s = UI[LANG][k]; if (s == null) s = UI.en[k]; if (s == null) s = k; return fill(s, p); }
   function fill(s, p) { return p ? String(s).replace(/\{(\w+)\}/g, function (m, x) { return p[x] != null ? p[x] : m; }) : s; }

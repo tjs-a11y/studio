@@ -135,7 +135,7 @@ test('messy sample: expected problems, fixes and leftovers', () => {
   assert.ok(codes(res.after, 6).includes('E_LINE'));
   assert.ok(codes(res.after, 0).includes('W_OVERLAP') && codes(res.after, 7).includes('W_OVERLAP'));
   // before-check saw the raw problems
-  for (const c of ['E_UNCLOSED', 'E_PRECISION', 'E_SWAPPED', 'W_WINDING', 'W_DUP_VERTEX', 'E_COUNTRY_CODE', 'W_PROP_ALIAS']) assert.ok(codes(res.before).includes(c), 'before missing ' + c);
+  for (const c of ['E_UNCLOSED', 'E_PRECISION', 'E_SWAPPED', 'I_WINDING', 'W_DUP_VERTEX', 'E_COUNTRY_CODE', 'W_PROP_ALIAS']) assert.ok(codes(res.before).includes(c), 'before missing ' + c);
   // fixed geometry
   const p1 = res.plots[0].geom.coordinates[0];
   deq(p1[0], p1[p1.length - 1]);
@@ -215,9 +215,72 @@ test('projected coordinates, holes, closed line and GeometryCollection', () => {
   res = P.analyze(P.parse(fc({ type: 'GeometryCollection', geometries: [{ type: 'Polygon', coordinates: [sq(-1.62, 6.7, 0.002, 0.002)] }, { type: 'Polygon', coordinates: [sq(-1.61, 6.7, 0.002, 0.002)] }] }), 'gc.geojson'), {});
   assert.equal(res.plots[0].geom.type, 'MultiPolygon');
   res = P.analyze(P.parse(fc({ type: 'GeometryCollection', geometries: [{ type: 'Point', coordinates: [-1.6, 6.7] }, { type: 'Polygon', coordinates: [sq(-1.62, 6.7, 0.002, 0.002)] }] }), 'gc2.geojson'), {});
-  assert.ok(codes(res.after).includes('E_GC'));
+  assert.ok(codes(res.after).includes('W_GC_MIXED'));
   // NaN / string coordinates are never written to the output
   res = P.analyze(P.parse(fc({ type: 'Point', coordinates: ['x', 6.7] }), 'n.geojson'), {});
   assert.ok(codes(res.after).includes('E_BAD_COORD'));
   assert.equal(P.serialize(res.plots, {}).omitted, 1);
+});
+
+// ---- Rules checked against the EU Information System documentation (opened 11 Oct 2026):
+// https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html
+// https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html
+
+test('official EU sample (Type I, FAZENDA TABOAO II) passes with no errors or warnings', () => {
+  // Copied from the EU GeoJSON file description. Some values have 5 decimals because trailing zeros were dropped.
+  const text = JSON.stringify({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: { ProductionPlace: 'FAZENDA TABOAO II', Area: 2.39, ProducerCountry: 'BR' }, geometry: { type: 'Polygon', coordinates: [[[-48.186023,-22.880156],[-48.186128,-22.880023],[-48.186271,-22.879937],[-48.186509,-22.879844],[-48.186677,-22.879827],[-48.186853,-22.879906],[-48.187031,-22.880049],[-48.187185,-22.88015],[-48.187214,-22.880164],[-48.187169,-22.880216],[-48.187148,-22.880317],[-48.187223,-22.880431],[-48.187365,-22.880416],[-48.187428,-22.880321],[-48.187456,-22.88036],[-48.187496,-22.88055],[-48.187491,-22.88091],[-48.187622,-22.881404],[-48.187712,-22.881757],[-48.187831,-22.88206],[-48.187887,-22.88214],[-48.187745,-22.882094],[-48.187763,-22.882069],[-48.18777,-22.882054],[-48.187776,-22.882034],[-48.187779,-22.882013],[-48.187779,-22.881992],[-48.187775,-22.881971],[-48.187768,-22.881951],[-48.187758,-22.881932],[-48.187745,-22.881916],[-48.187729,-22.881901],[-48.187711,-22.88189],[-48.187692,-22.881881],[-48.187671,-22.881875],[-48.187399,-22.881809],[-48.186554,-22.881342],[-48.186573,-22.881321],[-48.186581,-22.881262],[-48.186504,-22.881222],[-48.186498,-22.881225],[-48.18644,-22.881271],[-48.186319,-22.881194],[-48.186338,-22.881162],[-48.18631,-22.881087],[-48.186335,-22.881001],[-48.186286,-22.880875],[-48.186036,-22.88084],[-48.186046,-22.880804],[-48.186046,-22.880447],[-48.186023,-22.880156]]] } }] });
+  const res = P.analyze(P.parse(text, 'eu.geojson'), { size: text.length });
+  assert.ok(!codes(res.before).includes('E_PRECISION'), 'trailing zeros dropped by JSON are not a precision error');
+  assert.ok(!codes(res.fixes).includes('F_PAD'));
+  deq(res.after.filter((x) => x.code[0] !== 'I').map((x) => x.code), []);
+});
+
+test('coordinates are truncated to 6 decimals like the EU system, and truncation duplicates are removed', () => {
+  assert.equal(P.t6(-5.8227394567), -5.822739);
+  assert.equal(P.t6(144.2567074567), 144.256707);
+  assert.equal(P.t6(2.3488), 2.3488);
+  assert.equal(P.t6(0.29), 0.29);
+  assert.equal(P.t6(-0.0000004), 0);
+  assert.equal(P.t6(1.9999999), 1.999999);
+  // EU example: these two points become the same point after truncation
+  const ring = [[-1.6, 6.7], [-1.6, 6.701], [-1.5992391234, 6.7012567071234], [-1.5992394567, 6.7012567074567], [-1.599, 6.7], [-1.6, 6.7]];
+  const text = JSON.stringify({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring.map(([a, b]) => [a, b])] } }] }).replace(/(-1\.6|6\.7|6\.701|-1\.599)(?=[,\]])/g, (m) => Number(m).toFixed(6));
+  const res = P.analyze(P.parse(text, 't.geojson'), {});
+  assert.ok(codes(res.fixes).includes('F_TRUNC'));
+  assert.ok(codes(res.fixes).includes('F_DUP'));
+  const out = res.plots[0].geom.coordinates[0];
+  assert.equal(out.length, 5);
+  deq(out[2], [-1.599239, 6.701256]);
+});
+
+test('EU limits: 25 MB per DDS, Area of a point, producers per commodity', () => {
+  const pt = (props) => ({ props, geom: { type: 'Point', coordinates: [-5.123456, 6.123456] }, minDec: 6, maxDec: 6 });
+  assert.ok(codes(P.checkAll([pt({})], { size: 26e6 }, {}, 'after')).includes('E_FILE_SIZE'));
+  assert.ok(codes(P.checkAll([pt({})], { size: 21e6 }, {}, 'after')).includes('W_FILE_SIZE'));
+  assert.ok(!codes(P.checkAll([pt({})], { size: 12e6 }, {}, 'after')).some((c) => /FILE_SIZE/.test(c)));
+  assert.ok(codes(P.checkAll([pt({ Area: 0 })], { size: 1 }, {}, 'after')).includes('E_POINT_AREA_SMALL'));
+  assert.ok(!codes(P.checkAll([pt({ Area: 0.0001 })], { size: 1 }, {}, 'after')).includes('E_POINT_AREA_SMALL'));
+  assert.ok(codes(P.checkAll([pt({ Area: 4.5 })], { size: 1 }, {}, 'after')).includes('E_POINT_OVER_4HA'));
+  assert.ok(codes(P.checkAll([pt({})], { size: 1 }, {}, 'after')).includes('I_POINT_DEFAULT_AREA'));
+  // "Area": "3" is read as 0 by the EU system: flagged, then stored as a number
+  const text = JSON.stringify({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: { Area: '3' }, geometry: { type: 'Point', coordinates: [-5.123456, 6.123456] } }] });
+  const res = P.analyze(P.parse(text, 'a.geojson'), {});
+  assert.ok(codes(res.before).includes('W_AREA_TEXT'));
+  assert.equal(res.plots[0].props.Area, 3);
+  const many = Array.from({ length: 1001 }, (_, k) => pt({ ProducerName: 'Farmer ' + k, ProducerCountry: 'CI' }));
+  assert.ok(codes(P.checkAll(many, { size: 1 }, {}, 'before')).includes('W_PRODUCERS'));
+  assert.ok(!codes(P.checkAll(many.slice(0, 1000), { size: 1 }, {}, 'before')).includes('W_PRODUCERS'));
+});
+
+test('GeometryCollection is accepted; lines inside it are not', () => {
+  const fc = (geom) => JSON.stringify({ type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: geom }] });
+  let res = P.analyze(P.parse(fc({ type: 'GeometryCollection', geometries: [{ type: 'Point', coordinates: [-1.6, 6.7] }, { type: 'Point', coordinates: [-1.61, 6.7] }] }), 'g.geojson'), {});
+  assert.ok(codes(res.before).includes('I_GC'));
+  assert.equal(res.plots[0].geom.type, 'MultiPoint');
+  res = P.analyze(P.parse(fc({ type: 'GeometryCollection', geometries: [{ type: 'Point', coordinates: [-1.6, 6.7] }, { type: 'LineString', coordinates: [[-1.6, 6.7], [-1.61, 6.71]] }] }), 'g.geojson'), {});
+  assert.ok(codes(res.after).includes('E_LINE'));
+  // polygons inside a mixed collection are still checked (holes here)
+  const outer = sq(-1.62, 6.70, 0.004, 0.004), hole = sq(-1.619, 6.701, 0.001, 0.001).reverse();
+  res = P.analyze(P.parse(fc({ type: 'GeometryCollection', geometries: [{ type: 'Point', coordinates: [-1.6, 6.7] }, { type: 'Polygon', coordinates: [outer, hole] }] }), 'g.geojson'), {});
+  assert.ok(codes(res.after).includes('W_GC_MIXED') && codes(res.after).includes('E_HOLES'));
 });
