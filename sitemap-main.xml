@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://quickwell.example/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/rate-con-checker/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/audit-kit/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/plot-file-checker/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/permit-watch/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/eudr-geolocalisation-geojson/</loc><lastmod>2026-10-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.example/guides/eudr-geolocalisation-geojson/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.example/guides/eudr-geolocation-geojson/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.example/guides/eudr-geolocation-geojson/"/></url>
-  <url><loc>https://quickwell.example/guides/eudr-geolocation-geojson/</loc><lastmod>2026-10-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.example/guides/eudr-geolocation-geojson/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.example/guides/eudr-geolocalisation-geojson/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.example/guides/eudr-geolocation-geojson/"/></url>
-  <url><loc>https://quickwell.example/guides/eudr-plot-file-rejected/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/find-texas-drilling-permits/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/new-authority-checklist-first-18-months/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/new-drilling-permit-royalty-owners/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/new-entrant-audit-automatic-fail-violations/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/rate-confirmation-red-flags/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/guides/tonu-detention-layover-rate-con/</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/privacy.html</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://quickwell.example/terms.html</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/rate-con-checker/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/audit-kit/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/plot-file-checker/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/permit-watch/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/eudr-geolocalisation-geojson/</loc><lastmod>2026-10-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/></url>
+  <url><loc>https://quickwell.app/guides/eudr-geolocation-geojson/</loc><lastmod>2026-10-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/></url>
+  <url><loc>https://quickwell.app/guides/eudr-plot-file-rejected/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/find-texas-drilling-permits/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/new-authority-checklist-first-18-months/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/new-drilling-permit-royalty-owners/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/new-entrant-audit-automatic-fail-violations/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/rate-confirmation-red-flags/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/guides/tonu-detention-layover-rate-con/</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/privacy.html</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://quickwell.app/terms.html</loc><lastmod>2026-10-11</lastmod></url>
 </urlset>

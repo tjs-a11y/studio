@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /_template/
 
-Sitemap: https://quickwell.example/sitemap.xml
+Sitemap: https://quickwell.app/sitemap.xml
