@@ -33,6 +33,21 @@
       "name": "Permit Watch — Texas",
       "tagline": "See new drilling permits filed in your Texas county and get free alerts by RSS.",
       "plans": []
+    },
+    {
+      "id": "vendor-check",
+      "name": "Year-End Vendor Check",
+      "tagline": "Find who needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.",
+      "plans": [
+        {
+          "id": "owner",
+          "once": true
+        },
+        {
+          "id": "bookkeeper",
+          "once": true
+        }
+      ]
     }
   ]
 }
