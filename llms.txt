@@ -1,13 +1,13 @@
 # Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page.
+> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. A separate reference section helps small businesses manage auto-renewals, vendor price increases and recurring charges.
 
 All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
 
 ## Tools
 
 - [Rate Con Checker](https://quickwell.app/rate-con-checker/): Paste a trucking broker rate confirmation; 20 checks (detention, TONU, layover, lumper, fines, setoff, payment terms, broker identity and more) give a grade and a ready-to-send fix request. Runs in the browser; nothing is uploaded. 3 free checks a day; Pro is $9/month or $79/year.
-- [New Authority Audit Kit](https://quickwell.app/audit-kit/): Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser.
+- [New Authority Audit Kit](https://quickwell.app/audit-kit/): Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser. A free one-page printable of the 16 rules is at /audit-kit/16-rules-printable/.
 - [EUDR Plot File Checker](https://quickwell.app/plot-file-checker/): Free checker for farm plot geolocation files (GeoJSON, KML, CSV, WKT) under the EU Deforestation Regulation; flags the EU Information System's file rules and fixes the safe ones. English and French. Runs in the browser.
 - [Permit Watch (Texas)](https://quickwell.app/permit-watch/): Free list of new Texas drilling permits by county from the Railroad Commission of Texas daily permit file, with filters and a free RSS feed per county. First data load pending.
 
@@ -18,6 +18,7 @@ All tools run in the browser; files and text people check are not uploaded. Refe
 - [EUDR plot file errors](https://quickwell.app/learn/eudr/): The common reasons an EUDR geolocation (GeoJSON) file is rejected by the EU Information System: swapped coordinates, decimals, open or self-crossing polygons, holes, points over 4 ha, file size, property names. One page each. (11 pages)
 - [Erreurs de fichiers RDUE (French)](https://quickwell.app/fr/learn/eudr/): Pourquoi un fichier de géolocalisation RDUE (GeoJSON) est refusé par le Système d'information de l'UE : coordonnées inversées, décimales, polygones ouverts ou croisés, trous, points de plus de 4 ha, taille, noms de propriétés. (11 pages)
 - [Texas RRC districts](https://quickwell.app/learn/texas-drilling-permits/): All 13 Railroad Commission of Texas oil and gas districts (01–10, 6E, 7B, 7C, 8A): the counties in each, district offices, major formations, recent permit counts and how to watch new drilling permits. (13 pages)
+- [Business costs](https://quickwell.app/learn/business-costs/): Small-business guides: find auto-renewal deadlines in contracts, push back on vendor price increases, and spot recurring and duplicate charges. (3 pages)
 - [Guides](https://quickwell.app/guides/): Longer how-to guides for the same audiences.
 
 ## Optional

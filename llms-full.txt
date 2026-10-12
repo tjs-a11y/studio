@@ -5,7 +5,7 @@
 ## Tools
 
 - [Rate Con Checker](https://quickwell.app/rate-con-checker/): Paste a trucking broker rate confirmation; 20 checks (detention, TONU, layover, lumper, fines, setoff, payment terms, broker identity and more) give a grade and a ready-to-send fix request. Runs in the browser; nothing is uploaded. 3 free checks a day; Pro is $9/month or $79/year.
-- [New Authority Audit Kit](https://quickwell.app/audit-kit/): Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser.
+- [New Authority Audit Kit](https://quickwell.app/audit-kit/): Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser. A free one-page printable of the 16 rules is at /audit-kit/16-rules-printable/.
 - [EUDR Plot File Checker](https://quickwell.app/plot-file-checker/): Free checker for farm plot geolocation files (GeoJSON, KML, CSV, WKT) under the EU Deforestation Regulation; flags the EU Information System's file rules and fixes the safe ones. English and French. Runs in the browser.
 - [Permit Watch (Texas)](https://quickwell.app/permit-watch/): Free list of new Texas drilling permits by county from the Railroad Commission of Texas daily permit file, with filters and a free RSS feed per county. First data load pending.
 
@@ -103,3 +103,10 @@
 - [RRC District 8A (Lubbock): counties, drilling permits and how to watch them](https://quickwell.app/learn/texas-drilling-permits/district-8a/): Railroad Commission of Texas oil and gas District 8A: all 21 counties, the Lubbock district office, major formations, permit counts for July–September 2026, and how to follow new drilling permits.
 - [RRC District 09 (Wichita Falls): counties, drilling permits and how to watch them](https://quickwell.app/learn/texas-drilling-permits/district-09/): Railroad Commission of Texas oil and gas District 09: all 15 counties, the Wichita Falls district office, major formations, permit counts for July–September 2026, and how to follow new drilling permits.
 - [RRC District 10 (Pampa): counties, drilling permits and how to watch them](https://quickwell.app/learn/texas-drilling-permits/district-10/): Railroad Commission of Texas oil and gas District 10: all 26 counties, the Pampa district office, major formations, permit counts for July–September 2026, and how to follow new drilling permits.
+
+## Business costs
+
+- [Recurring business costs: auto-renewals, price increases and forgotten subscriptions](https://quickwell.app/learn/business-costs/): Small-business guides: find auto-renewal deadlines in contracts, push back on vendor price increases, and spot recurring and duplicate charges.
+- [Auto-renewal clauses: how to find your cancel-by date and not miss it](https://quickwell.app/learn/business-costs/auto-renewal-notice-window/): Find the auto-renewal clause in a business contract, work out the cancel-by date from the notice window, calendar it, and word a non-renewal letter.
+- [Vendor and SaaS price increases at renewal: how to spot them and negotiate](https://quickwell.app/learn/business-costs/vendor-price-increase-at-renewal/): Spot vendor and SaaS price creep in bank statements and contracts, then negotiate the renewal price, a cap or fewer seats before the contract renews.
+- [How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export](https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/): Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.

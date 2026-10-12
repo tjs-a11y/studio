@@ -28,7 +28,7 @@ export const SECTION = {
     { title: 'Driver qualification (Part 391)', slugs: ['disqualified-driver', 'medical-certificate'] },
     { title: 'Hours of service and maintenance (Parts 395 and 396)', slugs: ['hours-of-service-records', 'out-of-service-vehicle', 'dvir-defects', 'annual-inspection'] },
   ],
-  outro: '<p class="note">Row numbers follow the official table in 49 CFR 385.321(b). The table was checked against the eCFR (Title 49 up to date as of October 7, 2026). Regulations change; recheck before relying on this list.</p>',
+  outro: '<p class="note">Row numbers follow the official table in 49 CFR 385.321(b). The table was checked against the eCFR (Title 49 up to date as of October 7, 2026). Regulations change; recheck before relying on this list.</p><p>Want all 16 on paper? <a href="/audit-kit/16-rules-printable/">Print the one-page sheet</a>, with a box to tick for each rule.</p>',
   sources: [T321, ecfr('385.307', '18-month monitoring, audit timing, records'), ecfr('385.319', 'notice and corrective action periods'), ecfr('385.323', 'extensions'), ecfr('385.325', 'revocation and out-of-service order'), KIT],
   cta: { title: 'Check yourself against all 16 rules', text: 'The free New Entrant Audit Self-Check asks one question per automatic-fail rule and shows what to fix. The $39 Audit Kit fills in your DQ files, drug and alcohol program, maintenance files and audit binder. Runs in your browser.', href: '/audit-kit/', label: 'Open the audit self-check' },
 };

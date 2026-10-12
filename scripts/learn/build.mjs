@@ -11,7 +11,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin.replace(/\/$/, '');
 
 // Each module exports SECTION and PAGES (or TERMS). Missing modules are skipped.
-const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas'];
+const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas', 'business-costs'];
 const sections = [];
 for (const m of MODULES) {
   const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');
@@ -38,7 +38,7 @@ for (const { S, pages } of sections) {
       ...p, path: pathOf(S, p.slug), lang: S.lang, h1: p.h1 || p.term, crumbs: S.crumbs.concat([secCrumb]), crumbName: p.crumbName || p.term || p.h1.replace(/ \(49 CFR.*/, ''),
       schema: S.termSet ? 'DefinedTerm' : 'Article', termSet: { name: S.name, path: S.path }, related, cta: p.cta || S.cta,
       alternates: p.alt ? { [S.lang]: pathOf(S, p.slug), [S.altLang]: p.alt } : undefined, otherLang: p.alt,
-      disclaimer: p.disclaimer || S.disclaimer,
+      disclaimer: p.disclaimer || S.disclaimer, checked: p.checked || S.checked,
     };
     out.push({ path: page.path, html: render(page, SITE), page, minWords: 400 });
   }
@@ -49,7 +49,7 @@ ${groups.map((g) => `${g.title ? `<h2>${g.title}</h2>` : ''}${g.text ? `<p>${g.t
 ${S.outro || ''}`;
   const idx = { path: S.path, lang: S.lang, title: S.title, h1: S.h1, description: S.description, lede: S.lede, body, crumbs: S.crumbs, crumbName: S.name,
     schema: 'CollectionPage', termSetLd: !!S.termSet, cta: S.cta, sources: S.sources || uniqSources(pages), disclaimer: S.disclaimer,
-    alternates: S.alt ? { [S.lang]: S.path, [S.altLang]: S.alt } : undefined, otherLang: S.alt };
+    alternates: S.alt ? { [S.lang]: S.path, [S.altLang]: S.alt } : undefined, otherLang: S.alt, checked: S.checked };
   out.push({ path: S.path, html: render(idx, SITE), page: idx, minWords: 150 });
 }
 
@@ -64,9 +64,9 @@ const en = sections.filter((x) => x.S.lang === 'en');
 if (en.length) {
   const hub = {
     path: '/learn/', lang: 'en', title: 'Learn: Plain-English Guides for Truckers, EUDR Exporters and Texas Mineral Owners | Quickwell',
-    h1: 'Learn', description: 'Plain-English reference pages behind the Quickwell tools: rate confirmation terms, the FMCSA new entrant audit, EUDR plot file errors and Texas drilling permit districts.',
+    h1: 'Learn', description: 'Plain-English reference pages: rate confirmation terms, the FMCSA new entrant audit, EUDR plot files, Texas drilling permits and small-business recurring costs.',
     lede: 'Reference pages that answer one specific question each, written in plain English, with the official source linked on every page.',
-    body: `<p>Each section below sits next to one of the Quickwell tools. The pages explain the rules the tool checks, so you can understand a result, or fix a problem, without the tool. Every page lists the sources it was checked against and the date.</p>
+    body: `<p>Most sections below sit next to one of the Quickwell tools. The pages explain the rules the tool checks, so you can understand a result, or fix a problem, without the tool. The business costs section is a standalone set of how-to pages for small businesses. Every page lists the sources it was checked against and the date.</p>
 <div class="grid">${en.map(({ S, pages }) => `<a class="tile" href="${S.path}"><b>${S.name}</b><span>${pages.length} pages. ${S.hubText || ''}</span></a>`).join('')}</div>`,
     crumbs: [{ name: 'Quickwell', path: '/' }], crumbName: 'Learn', schema: 'CollectionPage',
     sources: en.flatMap(({ S, pages }) => uniqSources(pages).slice(0, 2)),
@@ -81,7 +81,7 @@ for (const o of out) {
 }
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${out.map((o) => `  <url><loc>${SITE}${o.path}</loc><lastmod>${CHECKED}</lastmod></url>`).join('\n')}
+${out.map((o) => `  <url><loc>${SITE}${o.path}</loc><lastmod>${(o.page.checked && o.page.checked.iso) || CHECKED}</lastmod></url>`).join('\n')}
 </urlset>
 `;
 writeFileSync(join(root, 'sitemap-learn.xml'), sitemap);
@@ -90,7 +90,7 @@ console.log(`built ${out.length} pages (${sections.map((x) => `${x.S.path}: ${x.
 // llms.txt / llms-full.txt: a plain-text map of the site for AI search assistants (https://llmstxt.org).
 const TOOLS = [
   ['Rate Con Checker', '/rate-con-checker/', 'Paste a trucking broker rate confirmation; 20 checks (detention, TONU, layover, lumper, fines, setoff, payment terms, broker identity and more) give a grade and a ready-to-send fix request. Runs in the browser; nothing is uploaded. 3 free checks a day; Pro is $9/month or $79/year.'],
-  ['New Authority Audit Kit', '/audit-kit/', 'Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser.'],
+  ['New Authority Audit Kit', '/audit-kit/', 'Free self-check against the 16 violations that automatically fail an FMCSA new entrant safety audit (49 CFR 385.321(b)), then an optional $39 one-time kit that fills in driver files, drug and alcohol program documents, maintenance files and an audit binder. Runs in the browser. A free one-page printable of the 16 rules is at /audit-kit/16-rules-printable/.'],
   ['EUDR Plot File Checker', '/plot-file-checker/', 'Free checker for farm plot geolocation files (GeoJSON, KML, CSV, WKT) under the EU Deforestation Regulation; flags the EU Information System\'s file rules and fixes the safe ones. English and French. Runs in the browser.'],
   ['Permit Watch (Texas)', '/permit-watch/', 'Free list of new Texas drilling permits by county from the Railroad Commission of Texas daily permit file, with filters and a free RSS feed per county. First data load pending.'],
 ];
@@ -98,7 +98,7 @@ const secs = sections;
 const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
 const llms = `# Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page.
+> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. A separate reference section helps small businesses manage auto-renewals, vendor price increases and recurring charges.
 
 All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
 

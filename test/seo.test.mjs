@@ -11,7 +11,8 @@ const origin = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).
 const read = (f) => readFileSync(join(root, f), 'utf8');
 const tools = JSON.parse(read('catalog/tools.json')).tools.map((t) => t.id);
 const guideDirs = readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
-const pages = ['index.html', ...tools.map((t) => `${t}/index.html`), 'guides/index.html', ...guideDirs.map((g) => `guides/${g}/index.html`), 'privacy.html', 'terms.html'];
+const subPages = (id) => readdirSync(join(root, id), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, id, d.name, 'index.html'))).map((d) => `${id}/${d.name}/index.html`);
+const pages = ['index.html', ...tools.flatMap((t) => [`${t}/index.html`, ...subPages(t)]), 'guides/index.html', ...guideDirs.map((g) => `guides/${g}/index.html`), 'privacy.html', 'terms.html'];
 const urlPath = (f) => '/' + f.replace(/index\.html$/, '');
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<');
 const exists = (href) => { const p = join(root, decodeURIComponent(href.split(/[?#]/)[0])); return existsSync(p) && (!statSync(p).isDirectory() || existsSync(join(p, 'index.html'))); };

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find Recurring Charges and Duplicate Subscriptions in a CSV</title>
+<meta name="description" content="Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.">
+<link rel="canonical" href="https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/">
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#f0f2f6; --warn:#a86b00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --warn:#f0b43c; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:17px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 56px; }
+  a { color:var(--accent); } a:hover { text-decoration-thickness:2px; }
+  nav.crumbs ol { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:4px; font-size:.88rem; color:var(--muted); }
+  nav.crumbs li + li::before { content:"/"; margin-right:4px; color:var(--line); }
+  nav.crumbs a { color:var(--muted); }
+  h1 { font-size:clamp(1.65rem,5vw,2.3rem); line-height:1.2; margin:0 0 10px; letter-spacing:-.02em; overflow-wrap:anywhere; }
+  h2 { font-size:1.28rem; margin:32px 0 8px; letter-spacing:-.01em; } h3 { font-size:1.05rem; margin:22px 0 6px; }
+  p.lede { color:var(--muted); font-size:1.08rem; margin:0 0 20px; }
+  .meta { font-size:.85rem; color:var(--muted); margin:-8px 0 20px; }
+  article ul, article ol { padding-left:22px; } article li { margin:4px 0; }
+  code, .mono { font:.9em/1.4 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:1px 5px; border-radius:5px; overflow-wrap:anywhere; }
+  pre { font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace; background:var(--chip); padding:12px; border-radius:10px; overflow-x:auto; max-width:100%; white-space:pre; }
+  blockquote { margin:12px 0; padding:10px 14px; border-left:3px solid var(--accent); background:var(--card); border-radius:0 10px 10px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:20px 0; }
+  .cta { border-color:var(--accent); } .cta b { display:block; margin-bottom:4px; } .cta a.btn { display:inline-block; margin-top:10px; padding:9px 14px; border-radius:9px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  @media (prefers-color-scheme: dark) { .cta a.btn { color:#0d1117; } }
+  .tbl { overflow-x:auto; max-width:100%; margin:12px 0; } table { border-collapse:collapse; width:100%; font-size:.93rem; }
+  th, td { text-align:left; vertical-align:top; padding:7px 8px; border-top:1px solid var(--line); } th { font-weight:600; }
+  .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr)); margin:12px 0; }
+  a.tile { display:block; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:inherit; text-decoration:none; }
+  a.tile:hover { border-color:var(--accent); } a.tile b { display:block; margin-bottom:2px; } a.tile span { color:var(--muted); font-size:.92rem; }
+  .note { font-size:.9rem; color:var(--muted); } .warn { color:var(--warn); font-weight:600; }
+  .sources ul { padding-left:20px; font-size:.9rem; overflow-wrap:anywhere; }
+  .disclaimer { font-size:.88rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; margin-top:28px; }
+  footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.app/"},{"@type":"ListItem","position":2,"name":"Learn","item":"https://quickwell.app/learn/"},{"@type":"ListItem","position":3,"name":"Business costs","item":"https://quickwell.app/learn/business-costs/"},{"@type":"ListItem","position":4,"name":"Find recurring charges in a CSV","item":"https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export","description":"Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.","inLanguage":"en","url":"https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/","dateModified":"2026-10-12","publisher":{"@type":"Organization","name":"Quickwell"}}</script>
+</head>
+<body>
+<main>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Quickwell</a></li><li><a href="/learn/">Learn</a></li><li><a href="/learn/business-costs/">Business costs</a></li><li aria-current="page">Find recurring charges in a CSV</li></ol></nav>
+  <article>
+    <h1>How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export</h1>
+    <p class="lede">A transaction export and an ordinary spreadsheet are enough to list every subscription your business pays for, find the ones paid twice, and see which ones went up. This takes about an hour the first time.</p>
+    
+
+<h2>Step 1: Export at least 13 months</h2>
+<p>Thirteen months catches yearly renewals, which are the easiest to miss. Export from every place money leaves the business:</p>
+<ul>
+<li><b>Business checking accounts.</b> Online banking usually offers a download of account activity; look for "Download", "Export" or the statements area, and choose CSV (or a spreadsheet format) for the date range. Some banks limit how far back a single download goes, so you may need two or three downloads.</li>
+<li><b>Business credit cards.</b> Many subscriptions are on cards, not the bank account. Export each card separately.</li>
+<li><b>Accounting software.</b> A transaction list or general ledger report for expense accounts, exported to CSV or Excel, gives the same data with your categories already applied.</li>
+<li><b>Payment apps and marketplaces</b> you pay vendors through, if any.</li>
+</ul>
+<p>Menu names change and differ between banks and software, so if you cannot find the export, the provider's help pages or support line will have the current steps.</p>
+<p class="note">Privacy: a transaction export shows who you pay and who pays you. Keep it on your own computer or your company's storage. Do not upload it to sites you do not trust, and delete working copies when you are done.</p>
+
+<h2>Step 2: Put everything in one sheet with the same columns</h2>
+<p>Exports differ, but almost all have a date, a description (the merchant text) and an amount. Make one sheet with these columns and paste every export into it:</p>
+<div class="tbl"><table><thead><tr><th>Column</th><th>What goes in it</th></tr></thead><tbody>
+<tr><td>Date</td><td>The transaction or posting date. Make sure the spreadsheet reads it as a date, not text.</td></tr>
+<tr><td>Source</td><td>Which account or card it came from.</td></tr>
+<tr><td>Description</td><td>The merchant text exactly as exported.</td></tr>
+<tr><td>Amount</td><td>Money out as a positive number. If your export has separate Debit and Credit columns, use the Debit column. If it has one signed column where money out is negative, flip the sign.</td></tr>
+<tr><td>Merchant</td><td>A cleaned-up name (Step 3).</td></tr>
+<tr><td>Month</td><td>The year and month, e.g. <code>=TEXT(A2,"yyyy-mm")</code> in Excel or Google Sheets.</td></tr>
+</tbody></table></div>
+<p>Delete transfers between your own accounts and card payments from the bank account, or you will count the same spending twice.</p>
+
+<h2>Step 3: Clean the merchant names</h2>
+<p>The same vendor often appears with changing reference numbers, like <code>ACME SOFTWARE *INV 20931</code> one month and <code>ACME SOFTWARE *INV 21877</code> the next. Grouping needs one name per vendor.</p>
+<ul>
+<li><b>Google Sheets:</b> <code>=TRIM(REGEXREPLACE(UPPER(C2),"[0-9#*.]+"," "))</code> removes digits and common symbols. Copy it down, then fix the few names it leaves messy.</li>
+<li><b>Any spreadsheet:</b> sort by Description, then type a short Merchant name for each group by hand. For 13 months of a small business this is usually a few hundred rows, and many repeat.</li>
+</ul>
+
+<h2>Step 4: Pivot by merchant and month</h2>
+<p>Insert a pivot table: Merchant in rows, Month in columns, sum of Amount in values. Then add a second pivot (or extra value fields) with, per merchant: count of transactions, minimum amount and maximum amount. Read it like this:</p>
+<ul>
+<li><b>Recurring:</b> a merchant that appears in three or more separate months with similar amounts, or in the same month a year apart.</li>
+<li><b>Rising:</b> maximum noticeably above minimum for the same merchant. Divide (max − min) by min to see the change, then check the invoices (see the <a href="/learn/business-costs/vendor-price-increase-at-renewal/">price increase page</a>).</li>
+<li><b>Duplicate:</b> two charges from the same merchant for the same amount in the same month; the same tool paid on two different cards; or two products that do the same job (two video-call tools, two file-sharing services, two password managers).</li>
+<li><b>Forgotten:</b> a merchant nobody on the team recognizes. Search your email for the name to find the account and its owner.</li>
+</ul>
+
+<h2>Step 5: Turn the list into decisions</h2>
+<p>Copy every recurring merchant to a short register: vendor, what it is for, owner, monthly or yearly cost, payment method, renewal date, and a decision (keep, cut, downgrade, renegotiate, merge). Then:</p>
+<ol>
+<li>For each "keep", find the contract or terms and note the cancel-by date (see <a href="/learn/business-costs/auto-renewal-notice-window/">auto-renewal notice windows</a>).</li>
+<li>For each "cut", cancel through the vendor's own process and keep the confirmation. Watch the next statement to make sure the charges stopped.</li>
+<li>For each duplicate, pick one, move the users, and cancel the other at its next cancel-by date.</li>
+<li>Repeat the review every quarter. The second time takes a fraction of the first, because the merchant names are already cleaned.</li>
+</ol>
+
+<h2>An example of what you are looking for</h2>
+<p>This is a made-up extract, not real data:</p>
+<pre>Date,Description,Amount
+2026-01-03,ACME SOFTWARE *INV 20931,120.00
+2026-01-17,CLOUDBOX STORAGE,15.00
+2026-01-17,CLOUDBOX STORAGE,15.00
+2026-02-03,ACME SOFTWARE *INV 21877,120.00
+2026-03-03,ACME SOFTWARE *INV 22710,132.00</pre>
+<p>Acme is recurring and rose from $120 to $132 (10%) in March. CloudBox was charged twice on the same day: either two accounts or a billing error, worth a support ticket.</p>
+
+<h2>Stopping a charge you did not agree to</h2>
+<p>First ask the vendor to cancel and refund, in writing. For a card, your card issuer has its own dispute process and deadlines; check your cardholder agreement. For bank debits:</p>
+<p>One federal rule is worth knowing if you pay any business costs from a <em>personal</em> account. Regulation E covers "consumer" accounts, which it defines as accounts established primarily for personal, family or household purposes (<a href="https://www.ecfr.gov/current/title-12/chapter-X/part-1005/subpart-A/section-1005.2" rel="noopener">12 CFR 1005.2(b)</a>); a business checking account generally falls outside it. For a covered account, you can stop a preauthorized electronic transfer by telling your bank, orally or in writing, at least three business days before the scheduled date, and the bank may ask for written confirmation within 14 days (<a href="https://www.ecfr.gov/current/title-12/chapter-X/part-1005/subpart-A/section-1005.10" rel="noopener">12 CFR 1005.10</a>(c)). If a preauthorized transfer will change in amount, the payee or the bank must send written notice of the amount and date at least 10 days before the transfer, though you can agree to get notice only when it falls outside a set range (<a href="https://www.ecfr.gov/current/title-12/chapter-X/part-1005/subpart-A/section-1005.10" rel="noopener">12 CFR 1005.10</a>(d)). Stopping a payment does not end the contract; you may still owe the money.</p>
+  </article>
+  <section><h2>Related</h2><div class="grid"><a class="tile" href="/learn/business-costs/vendor-price-increase-at-renewal/"><b>Vendor and SaaS price increases at renewal: how to spot them and negotiate</b><span>Spot price creep in statements and contracts, then ask for a lock, a cap or fewer seats before the renewal date.</span></a><a class="tile" href="/learn/business-costs/auto-renewal-notice-window/"><b>Auto-renewal clauses: how to find your cancel-by date and not miss it</b><span>Find the renewal clause, work out the cancel-by date, calendar it, and send a clean non-renewal notice.</span></a><a class="tile" href="/learn/business-costs/"><b>All of the business costs</b></a></div></section>
+  <section class="sources"><h2>Sources</h2><ul><li>12 CFR 1005.10 (Regulation E, preauthorized transfers), eCFR text, Title 12 up to date as of Oct 8, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-05/title-12.xml?part=1005&amp;section=1005.10" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-05/title-12.xml?part=1005&amp;section=1005.10</a></li><li>12 CFR 1005.2(b) (Regulation E, definition of &quot;account&quot;), eCFR text, Title 12 up to date as of Oct 8, 2026: <a href="https://www.ecfr.gov/api/versioner/v1/full/2026-10-05/title-12.xml?part=1005&amp;section=1005.2" rel="noopener">https://www.ecfr.gov/api/versioner/v1/full/2026-10-05/title-12.xml?part=1005&amp;section=1005.2</a></li></ul><p class="note">Sources opened and checked on October 12, 2026.</p></section>
+  <p class="disclaimer">Not legal, tax or financial advice. These pages explain common contract terms and bookkeeping steps in plain English. Contract wording and state laws vary, so read your own documents and ask a qualified professional before you rely on a deadline or stop a payment.</p>
+  <footer><a href="/">Quickwell home</a> · <a href="/learn/">Learn</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

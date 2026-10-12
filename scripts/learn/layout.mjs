@@ -51,7 +51,7 @@ export function render(page, SITE) {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: abs(c.path) })),
   }];
-  const base = { headline: page.h1, description: page.description, inLanguage: page.lang, url: abs(page.path), dateModified: CHECKED,
+  const base = { headline: page.h1, description: page.description, inLanguage: page.lang, url: abs(page.path), dateModified: (page.checked && page.checked.iso) || CHECKED,
     publisher: { '@type': 'Organization', name: 'Quickwell' } };
   if (page.schema === 'DefinedTerm') {
     ld.push({ '@context': 'https://schema.org', '@type': 'DefinedTerm', name: page.term, description: page.description, url: abs(page.path),
@@ -65,7 +65,7 @@ export function render(page, SITE) {
   const alt = page.alternates ? Object.entries(page.alternates).map(([l, p]) => `<link rel="alternate" hreflang="${l}" href="${esc(abs(p))}">`).join('\n') + '\n' : '';
   const T = fr
     ? { crumbs: "Fil d'Ariane", related: 'Voir aussi', sources: 'Sources', checked: `Sources ouvertes et vérifiées le ${CHECKED_FR}.`, home: 'Accueil Quickwell', privacy: 'Confidentialité', terms: 'Conditions', other: 'English version' }
-    : { crumbs: 'Breadcrumb', related: 'Related', sources: 'Sources', checked: `Sources opened and checked on ${CHECKED_EN}.`, home: 'Quickwell home', privacy: 'Privacy', terms: 'Terms', other: 'Version française' };
+    : { crumbs: 'Breadcrumb', related: 'Related', sources: 'Sources', checked: `Sources opened and checked on ${(page.checked && page.checked.en) || CHECKED_EN}.`, home: 'Quickwell home', privacy: 'Privacy', terms: 'Terms', other: 'Version française' };
   const disclaimer = page.disclaimer || (fr
     ? "Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour."
     : 'Not legal advice. This page explains public rules and common contract terms in plain English; it is not a substitute for reading your own documents or asking a qualified professional. Rules change, so check the official source.');
