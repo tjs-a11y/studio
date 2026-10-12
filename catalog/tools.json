@@ -48,6 +48,17 @@
           "once": true
         }
       ]
+    },
+    {
+      "id": "spare-key",
+      "name": "Spare Key",
+      "tagline": "Your lost-phone and family legacy plan: see what would lock you out, fix it in minutes, and leave your family a way in. Stays on your phone.",
+      "plans": [
+        {
+          "id": "family",
+          "once": true
+        }
+      ]
     }
   ]
 }

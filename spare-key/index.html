@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'none'; frame-src 'none'; object-src 'none'; form-action 'self' https://*.stripe.com; base-uri 'self'">
+<!-- seo -->
+<title>Spare Key: Lost-Phone Recovery and Family Plan</title>
+<meta name="description" content="Lost your phone? See which accounts would lock you out, fix them, and print a one-page plan for you and your family. Free. Nothing leaves your phone.">
+<link rel="canonical" href="https://quickwell.app/spare-key/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Spare Key: your plan for a lost phone, and for your family">
+<meta property="og:description" content="Lost your phone? See which accounts would lock you out, fix them, and print a one-page plan for you and your family. Free. Nothing leaves your phone.">
+<meta property="og:url" content="https://quickwell.app/spare-key/">
+<meta property="og:image" content="https://quickwell.app/spare-key/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Spare Key: if you lost your phone tonight, could you get back into your accounts? Lockout Score and a one-page plan.">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spare Key: your plan for a lost phone, and for your family">
+<meta name="twitter:description" content="Lost your phone? See which accounts would lock you out, fix them, and print a one-page plan for you and your family. Free. Nothing leaves your phone.">
+<meta name="twitter:image" content="https://quickwell.app/spare-key/og.png">
+<meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ccircle cx='24' cy='32' r='10' fill='none' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M34 32h20M46 32v8M52 32v6' stroke='%23fff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Spare Key","alternateName":"Lost-Phone and Family Plan","url":"https://quickwell.app/spare-key/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","inLanguage":["en","es"],"publisher":{"@id":"https://quickwell.app/#org"},"description":"See which accounts would lock you out if you lost your phone, fix them with links to each official help page, and print a one-page Lost-Phone Sheet and a letter for your family. Everything stays on your device.","offers":[{"@type":"Offer","name":"Free plan for one person","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Family Pack (one-time)","price":"4.99","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Spare Key ask for my passwords?","acceptedAnswer":{"@type":"Answer","text":"No. It never asks for passwords, PINs, codes or recovery phrases. You tap how each account signs in and what backup it has. Backup codes go on paper, by hand."}},{"@type":"Question","name":"Where is my plan kept?","acceptedAnswer":{"@type":"Answer","text":"On your device only. If you save it, it is encrypted with a passphrase only you know. We can't read it or reset it."}},{"@type":"Question","name":"Is the For My Family letter a will?","acceptedAnswer":{"@type":"Answer","text":"No. It is not a will or power of attorney. For legal questions about an estate, ask a qualified professional where you live."}}]}]}</script>
+<!-- /seo -->
+<style>
+  :root { --bg:#f5f4ef; --ink:#14181a; --muted:#566069; --card:#fff; --line:#e1e0d8; --accent:#0f766e; --accent-ink:#fff; --soft:#e6f3f1; --chip:#eeefea;
+    --red:#b42318; --soft-red:#fdecea; --amber:#9a5b00; --soft-amber:#fff3d6; --green:#16794a; --soft-green:#e3f4ea; --shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05); }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f1413; --ink:#ecf0ef; --muted:#9aa6a4; --card:#171d1c; --line:#28302f; --accent:#4fd1c0; --accent-ink:#06211e; --soft:#12302c; --chip:#1f2725;
+    --red:#ff8a7a; --soft-red:#3a1c18; --amber:#f2b84b; --soft-amber:#33280f; --green:#5fd39a; --soft-green:#11301f; --shadow:none; } }
+  * { box-sizing:border-box; } html { -webkit-text-size-adjust:100%; }
+  body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); overflow-x:hidden; }
+  main { max-width:760px; margin:0 auto; padding:8px 16px 64px; }
+  .top { max-width:760px; margin:0 auto; padding:12px 16px 0; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .brand { font-weight:700; color:var(--ink); text-decoration:none; letter-spacing:-.01em; } .brand span { color:var(--muted); font-weight:500; }
+  h1 { font-size:clamp(2rem,7vw,2.8rem); margin:0; letter-spacing:-.03em; line-height:1.05; }
+  h2 { font-size:1.3rem; margin:0 0 6px; line-height:1.25; letter-spacing:-.01em; } h3 { font-size:1.02rem; margin:14px 0 6px; }
+  p { margin:0 0 10px; } .muted { color:var(--muted); } .note { font-size:.88rem; color:var(--muted); } .small { font-size:.84rem; }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; margin:14px 0; box-shadow:var(--shadow); min-width:0; }
+  button, .btn { font:inherit; font-weight:600; padding:11px 18px; border-radius:12px; border:1px solid var(--accent); background:var(--accent); color:var(--accent-ink); cursor:pointer; min-height:46px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+  button.ghost, .btn.ghost { background:transparent; color:var(--accent); }
+  button.small { padding:6px 12px; font-size:.9rem; min-height:38px; border-radius:10px; }
+  button.link { background:none; border:0; color:var(--accent); padding:0; min-height:0; text-decoration:underline; font-weight:500; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; } .row.end { justify-content:flex-end; } .spread { display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap; }
+  .stack > * + * { margin-top:10px; }
+  label.f { display:flex; flex-direction:column; gap:4px; font-size:.88rem; color:var(--muted); min-width:0; }
+  input[type=text], input[type=date], input[type=password], select, textarea { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--ink); font:inherit; min-height:46px; }
+  textarea { min-height:90px; resize:vertical; }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; }
+  .err { color:var(--red); font-size:.88rem; } .ok { color:var(--green); }
+  .msg { font-size:.92rem; margin-top:8px; min-height:1.2em; } .msg.err { color:var(--red); } .msg.ok { color:var(--green); }
+  [hidden] { display:none !important; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  /* hero */
+  .hero { padding:22px 20px; background:linear-gradient(160deg,var(--soft),var(--card) 70%); }
+  .hero .sub { font-size:1.08rem; color:var(--muted); margin:6px 0 14px; }
+  .hero .hook { font-size:1.2rem; line-height:1.45; margin:0 0 16px; font-weight:500; }
+  .keymark { width:52px; height:52px; border-radius:14px; background:var(--accent); display:grid; place-items:center; margin-bottom:12px; }
+  .keymark svg { width:34px; height:34px; }
+  .cta { display:grid; grid-template-columns:1fr 1fr; gap:10px; } @media (max-width:430px) { .cta { grid-template-columns:1fr; } }
+  .badges { display:flex; flex-wrap:wrap; gap:6px; margin:14px 0 0; } .badge { font-size:.8rem; padding:4px 10px; border-radius:999px; background:var(--chip); color:var(--muted); }
+  .how { counter-reset:h; list-style:none; padding:0; margin:0; display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); }
+  .how li { counter-increment:h; background:var(--bg); border-radius:12px; padding:12px; font-size:.92rem; } .how li::before { content:counter(h); display:inline-grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:.8rem; margin-right:6px; }
+  /* stepper */
+  .steps { display:flex; gap:6px; margin:14px 0 4px; font-size:.82rem; color:var(--muted); flex-wrap:wrap; } .steps span { padding:3px 10px; border-radius:999px; background:var(--chip); } .steps span.on { background:var(--accent); color:var(--accent-ink); font-weight:600; }
+  /* people bar */
+  .people { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin:8px 0; }
+  .people button { min-height:38px; padding:6px 12px; font-size:.9rem; background:var(--card); color:var(--ink); border-color:var(--line); }
+  .people button[aria-pressed=true] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  /* tiles */
+  .group { margin:14px 0 6px; } .group h3 { margin:0 0 8px; font-size:.95rem; display:flex; gap:8px; align-items:baseline; } .group h3 small { color:var(--muted); font-weight:400; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px; }
+  .tile { text-align:left; justify-content:flex-start; background:var(--card); color:var(--ink); border:1px solid var(--line); font-weight:500; font-size:.92rem; min-height:48px; padding:8px 12px; line-height:1.25; border-radius:12px; }
+  .tile::before { content:""; flex:0 0 18px; height:18px; border-radius:6px; border:2px solid var(--line); margin-right:4px; }
+  .tile[aria-pressed=true] { border-color:var(--accent); background:var(--soft); font-weight:600; }
+  .tile[aria-pressed=true]::before { background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; border-color:var(--accent); }
+  .addother { display:flex; gap:8px; margin-top:8px; } .addother input { flex:1; min-width:0; }
+  .sticky { position:sticky; bottom:0; background:linear-gradient(transparent,var(--bg) 30%); padding:18px 0 10px; display:flex; justify-content:space-between; gap:10px; align-items:center; z-index:2; }
+  /* questions */
+  .q { border:1px solid var(--line); border-radius:14px; padding:14px; margin:10px 0; background:var(--card); }
+  .q .qh { display:flex; justify-content:space-between; gap:4px 10px; align-items:baseline; flex-wrap:wrap; } .q .qh b { font-size:1.02rem; overflow-wrap:break-word; flex:1 1 180px; } .q .qh .note { white-space:nowrap; }
+  .q fieldset { border:0; padding:0; margin:10px 0 0; min-width:0; } .q legend { font-size:.86rem; color:var(--muted); padding:0; margin-bottom:6px; }
+  .seg { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:6px; } .seg label { position:relative; display:flex; } .seg.yn { grid-template-columns:repeat(3,minmax(0,1fr)); max-width:420px; }
+  .seg input { position:absolute; opacity:0; width:1px; height:1px; }
+  .seg span { display:flex; flex:1; align-items:center; min-height:42px; padding:6px 12px; border-radius:12px !important; border:1px solid var(--line); border-radius:999px; cursor:pointer; background:var(--card); font-size:.9rem; line-height:1.25; }
+  .seg input:focus-visible + span { outline:3px solid var(--accent); outline-offset:2px; }
+  .seg input:checked + span { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600; }
+  .q.done { border-color:color-mix(in srgb,var(--accent) 40%,var(--line)); }
+  .pill { font-size:.74rem; font-weight:700; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+  .pill.red { background:var(--soft-red); color:var(--red); } .pill.amber { background:var(--soft-amber); color:var(--amber); } .pill.green { background:var(--soft-green); color:var(--green); } .pill.grey { background:var(--chip); color:var(--muted); }
+  /* score */
+  .score { text-align:left; } .big { font-size:clamp(2.6rem,12vw,3.6rem); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+  .big small { font-size:.4em; color:var(--muted); font-weight:600; letter-spacing:0; }
+  .meter { display:flex; gap:3px; margin:12px 0; } .meter i { flex:1; height:12px; border-radius:4px; background:var(--soft-red); } .meter i.ok { background:var(--green); } .meter i.slow { background:var(--amber); }
+  .lines { display:grid; gap:8px; margin:10px 0 4px; } .lines div { display:flex; gap:10px; align-items:flex-start; font-size:1.02rem; } .lines b { font-variant-numeric:tabular-nums; }
+  .dot { flex:0 0 12px; height:12px; border-radius:50%; margin-top:7px; } .dot.red { background:var(--red); } .dot.green { background:var(--green); } .dot.amber { background:var(--amber); }
+  .gain { display:inline-block; margin-top:6px; padding:4px 10px; border-radius:999px; background:var(--soft-green); color:var(--green); font-weight:700; font-size:.9rem; }
+  /* fix cards */
+  .fix { border:1px solid var(--line); border-left:5px solid var(--red); border-radius:12px; padding:12px 14px; margin:10px 0; background:var(--card); }
+  .fix.amber { border-left-color:var(--amber); } .fix.info { border-left-color:var(--accent); } .fix.done { border-left-color:var(--green); opacity:.85; }
+  .fix .fh { display:flex; justify-content:space-between; gap:8px; align-items:baseline; flex-wrap:wrap; } .fix .fh b { overflow-wrap:anywhere; }
+  .fix ol { margin:8px 0; padding-left:20px; } .fix li { margin:3px 0; }
+  .fix .src { font-size:.82rem; color:var(--muted); margin-top:6px; } .fix .quick { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .fix .quick button { min-height:38px; padding:6px 12px; font-size:.86rem; background:var(--card); color:var(--accent); }
+  .more-fixes { border:0; padding:4px 0 0; } .more-fixes summary { color:var(--accent); padding:8px 0; }
+  .allgood { background:var(--soft-green); border-radius:12px; padding:14px; }
+  /* preview sheets */
+  .preview { border:1px solid var(--line); border-radius:12px; background:#fff; color:#111; padding:16px; max-height:420px; overflow:auto; font-size:.86rem; }
+  .preview .pp { break-after:auto; }
+  .locked { position:relative; }
+  .packlist { padding-left:20px; margin:8px 0; } .packlist li { margin:4px 0; }
+  .price { font-size:1.5rem; font-weight:800; }
+  .pro-on { background:var(--soft-green); color:var(--green); border-radius:12px; padding:10px 12px; font-weight:600; }
+  .callout { border-radius:12px; padding:12px 14px; margin:10px 0; font-size:.93rem; } .callout.warn { background:var(--soft-amber); } .callout.info { background:var(--soft); } .callout.bad { background:var(--soft-red); }
+  details { border-top:1px solid var(--line); padding:12px 0; } details:first-of-type { border-top:0; } summary { cursor:pointer; font-weight:600; min-height:28px; }
+  .contact { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:6px; margin:6px 0; } @media (max-width:560px) { .contact { grid-template-columns:1fr 1fr; } }
+  .passbox { font:600 1.15rem/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:var(--soft); border-radius:10px; padding:12px; overflow-wrap:anywhere; user-select:all; }
+  dialog { border:1px solid var(--line); border-radius:16px; background:var(--card); color:var(--ink); padding:18px; width:min(520px,calc(100vw - 32px)); max-height:calc(100vh - 32px); overflow:auto; }
+  dialog::backdrop { background:rgba(0,0,0,.45); }
+  .banner { background:var(--soft); border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line)); border-radius:14px; padding:12px 14px; margin:12px 0; }
+  footer { margin-top:36px; font-size:.88rem; color:var(--muted); }
+  .src-list { padding-left:18px; } .src-list li { margin:3px 0; }
+  #printArea { display:none; }
+  /* printed pages (also used, scaled, for on-screen previews) */
+  .pp { font:12px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:#111; }
+  .pp h2 { font-size:19px; margin:0 0 2px; color:#111; } .pp h3 { font-size:13.5px; margin:14px 0 6px; border-bottom:1.5px solid #111; padding-bottom:2px; color:#111; }
+  .pp .sub { color:#444; margin:0 0 8px; } .pp ol, .pp ul { margin:4px 0; padding-left:20px; } .pp li { margin:3px 0; }
+  .pp table { width:100%; border-collapse:collapse; font-size:11.5px; margin:4px 0 8px; } .pp th, .pp td { border:1px solid #888; padding:4px 6px; text-align:left; vertical-align:top; } .pp th { background:#eee; }
+  .pp .write { display:inline-block; min-width:150px; border-bottom:1px solid #333; height:1.1em; vertical-align:bottom; }
+  .pp .wline { border-bottom:1px solid #333; height:24px; } .pp .hand { border:1.5px dashed #555; border-radius:6px; padding:8px; min-height:110px; }
+  .pp .foot { margin-top:14px; border-top:1px solid #999; padding-top:6px; font-size:10px; color:#333; }
+  .pp .cards { display:flex; flex-wrap:wrap; gap:8mm; } .pp .wcard { width:85.6mm; height:54mm; border:1px solid #333; border-radius:3mm; padding:3mm 4mm; font-size:9px; line-height:1.35; overflow:hidden; } .pp .wcard b { font-size:10.5px; }
+  @media print {
+    @page { margin:14mm; }
+    body { background:#fff !important; color:#000 !important; }
+    body.printing main, body.printing .top, body.printing dialog { display:none !important; } body.printing #printArea { display:block !important; }
+    .pp { break-after:page; page-break-after:always; } .pp:last-child { break-after:auto; page-break-after:auto; } tr { break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="top">
+  <a class="brand" href="/">Quickwell <span>· Spare Key</span></a>
+  <button class="ghost small" type="button" id="langBtn" lang="es" aria-label="Ver en español">Español</button>
+</div>
+<main>
+  <div id="vaultBanner" class="banner" hidden role="region" aria-labelledby="vbTitle">
+    <b id="vbTitle" data-i18n="vb.title">You have a locked plan on this device.</b>
+    <p class="note" style="margin:4px 0 8px" data-i18n="vb.body">Open it with your passphrase to see and update it.</p>
+    <div class="row"><button type="button" class="small" id="vbOpen" data-i18n="vb.open">Open my plan</button> <button type="button" class="ghost small" id="vbDelete" data-i18n="vb.delete">Delete it from this device</button></div>
+  </div>
+  <p id="welcome" class="pro-on" hidden role="status" data-i18n="welcome">Thank you. The Family Pack is on for this browser.</p>
+
+  <!-- 1. start -->
+  <section id="s-start">
+    <div class="card hero">
+      <div class="keymark" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="22" cy="32" r="11" fill="none" stroke="currentColor" stroke-width="6" style="color:var(--accent-ink)"/><path d="M33 32h22M47 32v9M54 32v6" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" style="color:var(--accent-ink)"/></svg></div>
+      <h1>Spare Key</h1>
+      <p class="sub" data-i18n="hero.sub">Your plan for a lost phone — and for your family</p>
+      <p class="hook" data-i18n="hero.hook">If you lost your phone tonight, could you get back into your bank, email and WhatsApp? Find out in 10 minutes. Nothing leaves your phone.</p>
+      <div class="cta"><button type="button" id="goMine" data-i18n="hero.mine">Make my plan</button><button type="button" class="ghost" id="goParent" data-i18n="hero.parent">Make one for a parent</button></div>
+      <p id="startMsg" class="callout warn" hidden role="status"></p>
+      <div class="row" style="margin-top:12px"><button type="button" class="link" id="openFileBtn" data-i18n="hero.open">Open a plan file</button></div>
+      <div class="badges"><span class="badge" data-i18n="b1">Never asks for passwords or codes</span><span class="badge" data-i18n="b2">Stays on this device</span><span class="badge" data-i18n="b3">Free for one person</span><span class="badge" data-i18n="b4">No sign-up</span></div>
+    </div>
+    <div class="card">
+      <h2 data-i18n="how.h">How it works</h2>
+      <ol class="how">
+        <li data-i18n="how.1">Tap the accounts that would hurt to lose. No logins, no passwords.</li>
+        <li data-i18n="how.2">Answer three taps each: how you sign in, your backup, and whether family could act.</li>
+        <li data-i18n="how.3">Get your Lockout Score, a fix list with official links, and a one-page Lost-Phone Sheet to print.</li>
+      </ol>
+      <p class="note" style="margin-top:12px" data-i18n="how.honest">Spare Key is a planning checklist. It doesn't log in to anything, and it can't recover an account for you.</p>
+    </div>
+  </section>
+
+  <!-- people (Family Pack) -->
+  <div id="peopleWrap" hidden>
+    <div class="people" id="people" role="group" aria-label="People in this plan"></div>
+  </div>
+
+  <!-- 2. pick -->
+  <section id="s-pick" hidden>
+    <div class="steps" aria-hidden="true"><span class="on" data-i18n="st.1">1 Accounts</span><span data-i18n="st.2">2 Three taps</span><span data-i18n="st.3">3 Your plan</span></div>
+    <div class="card">
+      <h2 id="pickTitle" data-i18n="pick.h">Which accounts would hurt to lose?</h2>
+      <p class="note" data-i18n="pick.note">Tap each one you use. We only need the name. You'll never be asked to sign in.</p>
+      <div class="grid2">
+        <label class="f"><span data-i18n="pick.name">Whose plan is this? (a first name or "Me")</span><input type="text" id="pName" maxlength="40" autocomplete="off" placeholder="Me"></label>
+        <label class="f"><span data-i18n="pick.country">Country (shows local services)</span>
+          <select id="pCountry">
+            <option value="US">United States</option><option value="UK">United Kingdom</option><option value="EU">European Union</option><option value="CA">Canada</option>
+            <option value="NG">Nigeria</option><option value="KE">Kenya</option><option value="IN">India</option><option value="PH">Philippines</option><option value="OTHER" data-i18n="pick.other">Other country</option>
+          </select></label>
+      </div>
+      <p id="parentTip" class="callout info" hidden><span data-i18n="pick.parentTip">Doing this with a parent? Sit together, let them hold their phone, and tap what they use. Never type their passwords.</span> <button type="button" class="link" id="guideBtn" data-i18n="save.guide">Print the sit-down guide</button></p>
+      <div id="groups"></div>
+    </div>
+    <div class="sticky"><button type="button" class="ghost" id="pickBack" data-i18n="back">Back</button><button type="button" id="pickNext" disabled>Next</button></div>
+  </section>
+
+  <!-- 3. three taps -->
+  <section id="s-ask" hidden>
+    <div class="steps" aria-hidden="true"><span data-i18n="st.1">1 Accounts</span><span class="on" data-i18n="st.2">2 Three taps</span><span data-i18n="st.3">3 Your plan</span></div>
+    <div class="card">
+      <h2 data-i18n="ask.h">Three taps for each account</h2>
+      <p class="note" data-i18n="ask.note">Not sure? Pick "Not sure". You can change any answer later. Nothing here is a password.</p>
+      <div id="askList"></div>
+      <div class="q" id="carrierQ">
+        <div class="qh"><b data-i18n="ask.numH">Your phone number</b></div>
+        <fieldset><legend data-i18n="ask.numQ">Does your mobile carrier account have its own PIN or number lock, so nobody can move your number without it?</legend>
+          <div class="seg yn" id="carrierSeg"></div></fieldset>
+        <p class="note" style="margin:8px 0 0" data-i18n="ask.numNote">Just tell us yes or no. Never type the PIN here.</p>
+      </div>
+    </div>
+    <div class="sticky"><button type="button" class="ghost" id="askBack" data-i18n="back">Back</button><button type="button" id="askNext" data-i18n="ask.next">See my score</button></div>
+  </section>
+
+  <!-- 4. result -->
+  <section id="s-result" hidden>
+    <div class="steps" aria-hidden="true"><span data-i18n="st.1">1 Accounts</span><span data-i18n="st.2">2 Three taps</span><span class="on" data-i18n="st.3">3 Your plan</span></div>
+    <div class="card score" id="scoreCard" aria-live="polite"></div>
+
+    <div class="card" id="fixCard">
+      <div class="spread"><h2 data-i18n="fix.h">Your fix list</h2><button type="button" class="ghost small" id="editAnswers" data-i18n="fix.edit">Edit accounts</button></div>
+      <p class="note" data-i18n="fix.note">Most important first. Each fix takes a few minutes. When you've done one, tap what you did and your score updates.</p>
+      <div id="fixList"></div>
+    </div>
+
+    <div class="card" id="phoneCard"></div>
+
+    <div class="card" id="sheetCard">
+      <h2 data-i18n="sheet.h">Your Lost-Phone Sheet</h2>
+      <p class="note" data-i18n="sheet.note">One page for the worst hour. Print it or save it as a PDF, and keep it away from your phone (a drawer at home, a family member's house).</p>
+      <div class="grid2">
+        <label class="f"><span data-i18n="sheet.place">Where your printed backup codes are kept (a place, not the codes)</span><input type="text" id="codesPlace" maxlength="120" autocomplete="off" placeholder="e.g. blue folder, top desk drawer"></label>
+        <label class="f"><span data-i18n="sheet.trusted">A trusted person who can help (name)</span><input type="text" id="trustedName" maxlength="60" autocomplete="off" placeholder="e.g. my sister Ana"></label>
+      </div>
+      <p class="err" id="secretWarn" role="alert" hidden></p>
+      <label class="row small" style="margin:10px 0"><input type="checkbox" id="handBox"> <span data-i18n="sheet.hand">Add a box to write backup codes by hand on paper (they are never typed here)</span></label>
+      <div class="row"><button type="button" id="printSheet" data-i18n="sheet.print">Print or save as PDF</button><button type="button" class="ghost" id="toggleSheet" data-i18n="sheet.preview">Preview</button></div>
+      <div class="preview" id="sheetPreview" hidden></div>
+    </div>
+
+    <div class="card" id="familyCard">
+      <h2 data-i18n="fam.h">For your family</h2>
+      <div id="familyLocked">
+        <p data-i18n="fam.lockedP">If you died or couldn't speak for yourself, would your family know which accounts you have, who to call, and what you want? The Family Pack turns your plan into a letter they can use.</p>
+      </div>
+      <div id="familyOpen" hidden>
+        <p class="note" data-i18n="fam.openNote">Fill in what helps. Leave out what doesn't. Places and names only: never passwords, PINs or codes.</p>
+        <h3 data-i18n="fam.contacts">People to contact first</h3>
+        <div id="contacts"></div>
+        <button type="button" class="ghost small" id="addContact" data-i18n="fam.addContact">Add a person</button>
+        <h3 data-i18n="fam.where">Where my documents are (places, not numbers)</h3>
+        <div class="grid2" id="whereFields"></div>
+        <h3 data-i18n="fam.wishes">My wishes</h3>
+        <div class="grid2" id="wishFields"></div>
+        <label class="f" style="margin-top:10px"><span data-i18n="fam.subs">Subscriptions and bills to cancel</span><textarea id="subs" maxlength="600" placeholder="e.g. streaming, gym, phone contract, cloud storage"></textarea></label>
+        <label class="f" style="margin-top:10px"><span data-i18n="fam.notes">Anything else my family should know</span><textarea id="notes" maxlength="800"></textarea></label>
+        <p class="err" id="famWarn" role="alert" hidden></p>
+        <h3 data-i18n="fam.docs">Document expiry reminders</h3>
+        <p class="note" data-i18n="fam.docsNote">Add a passport, driving licence or ID card and its expiry date. Your reminders file gets a note 90 days before.</p>
+        <div id="docs"></div>
+        <button type="button" class="ghost small" id="addDoc" data-i18n="fam.addDoc">Add a document</button>
+        <div class="row" style="margin-top:14px">
+          <button type="button" id="printLetter" data-i18n="fam.print">Print the For My Family letter</button>
+          <button type="button" class="ghost" id="printCards" data-i18n="fam.cards">Print wallet cards</button>
+          <button type="button" class="ghost" id="printBinder" data-i18n="fam.binder">Print the whole binder</button>
+        </div>
+        <p class="note" style="margin-top:10px" data-i18n="fam.notWill">The For My Family letter is not a will or power of attorney. For legal questions about an estate, ask a qualified professional where you live.</p>
+      </div>
+    </div>
+
+    <section class="card" id="upsell" aria-labelledby="upH">
+      <div class="spread"><h2 id="upH" data-i18n="up.h">Family Pack</h2><div><span class="price">$4.99</span> <span class="note" data-i18n="up.once">once</span></div></div>
+      <ul class="packlist">
+        <li data-i18n="up.1">Up to 6 people in one plan file (set it up for your parents, partner or kids)</li>
+        <li data-i18n="up.2">The For My Family letter: who to call, where documents are, legacy settings, your wishes, subscriptions to cancel</li>
+        <li data-i18n="up.3">Wallet cards and a print-ready binder for every person</li>
+        <li data-i18n="up.4">Document expiry reminders (passport, licence, ID) in your calendar file</li>
+      </ul>
+      <p class="note" data-i18n="up.fair">One payment. No subscription, no renewal, no trial to cancel. Your own plan, score, fix list, Lost-Phone Sheet, encrypted file and yearly reminder stay free. Checkout shows the final price in your currency before you pay.</p>
+      <div class="row"><button type="button" id="buyBtn" data-i18n="up.buy">Get the Family Pack for $4.99</button></div>
+      <p class="msg" id="buyMsg" role="status"></p>
+    </section>
+    <p class="pro-on" id="proOn" hidden data-i18n="up.on">Family Pack is on. Add people above, and fill in the letter.</p>
+
+    <div class="card" id="saveCard">
+      <h2 data-i18n="save.h">Keep it, share it, check it once a year</h2>
+      <div class="stack">
+        <div>
+          <h3 data-i18n="save.lockH">Save on this device (encrypted)</h3>
+          <p class="note" data-i18n="save.lockP">Locked with a passphrase only you know. We can't read it or reset it, by design.</p>
+          <div class="row"><button type="button" id="saveLocal" data-i18n="save.lockBtn">Save with a passphrase</button><span class="note" id="saveState" role="status"></span></div>
+        </div>
+        <div>
+          <h3 data-i18n="save.fileH">Plan file for another device or a trusted person</h3>
+          <p class="note" data-i18n="save.fileP">Downloads an encrypted file (family-plan.sparekey). Give the passphrase in person or in a separate message, never in the same email.</p>
+          <div class="row"><button type="button" class="ghost" id="exportFile" data-i18n="save.export">Download plan file</button><button type="button" class="ghost" id="importFile" data-i18n="save.import">Open a plan file</button></div>
+        </div>
+        <div>
+          <h3 data-i18n="save.remH">Yearly check reminder</h3>
+          <p class="note" data-i18n="save.remP">A calendar file for your phone or computer: one review a year (plus document expiry dates with the Family Pack).</p>
+          <button type="button" class="ghost" id="icsBtn" data-i18n="save.remBtn">Add the reminder to my calendar</button>
+        </div>
+        <div>
+          <h3 data-i18n="save.shareH">Share your score, not your accounts</h3>
+          <p class="note" data-i18n="save.shareP">Your score card shows only numbers. The invite link is a plain link with nothing about you in it.</p>
+          <div class="row"><button type="button" class="ghost" id="shareScore" data-i18n="save.shareBtn">Share my score</button><button type="button" class="ghost" id="inviteBtn" data-i18n="save.invite">Send a parent the link</button><button type="button" class="ghost" id="guideBtn2" data-i18n="save.guide">Print the sit-down guide</button></div>
+          <p class="msg" id="shareMsg" role="status"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <input type="file" id="fileIn" accept=".sparekey,application/json,text/plain" hidden>
+
+  <section class="card" id="faq">
+    <h2 data-i18n="faq.h">Questions</h2>
+    <details><summary data-i18n="faq.q1">Does it ask for my passwords?</summary>
+      <p data-i18n="faq.a1">No, never. Not passwords, PINs, codes or crypto recovery phrases. You tap how each account signs in and what backup it has. If you have backup codes, you write them on paper by hand. Text boxes refuse anything that looks like a code.</p></details>
+    <details><summary data-i18n="faq.q2">What is the Lockout Score?</summary>
+      <p data-i18n="faq.a2">How many of your key accounts you could get back into without this phone. An account counts as ready when you can sign in with just a password, or when it has a backup that doesn't need this phone: a recovery email, a second phone number, printed backup codes or a trusted contact. Text-message codes alone count as locked until your carrier gives you a new SIM. The family line counts accounts with a legacy setting turned on or a trusted contact.</p></details>
+    <details><summary data-i18n="faq.q3">Why are there no step-by-step instructions for each app?</summary>
+      <p data-i18n="faq.a3">Platform rules change, and we only show steps we have checked against the platform's official help page. Until we've checked a platform, its card links to its official help page instead, with general steps that work for most services. Each card shows when we last checked it.</p></details>
+    <details><summary data-i18n="faq.q4">Privacy</summary>
+      <p data-i18n="faq.a4">Your plan stays on this device. We never see your accounts, and we never ask for passwords or codes. If you save it, it's encrypted with a passphrase only you know. We can't read it or recover it. If you buy the Family Pack, Stripe processes the payment, and we keep only the record that you bought it.</p>
+      <p class="note" data-i18n="faq.a4b">This page makes no calls to other websites. It talks only to our own server: once, anonymously, to count that a plan was made (no names, no accounts, no answers), and to check or start a Family Pack purchase. Your language choice is remembered in this browser.</p>
+      <p><a href="/privacy.html" data-i18n="faq.policy">Privacy policy</a></p></details>
+    <details><summary data-i18n="faq.q5">I forgot my passphrase</summary>
+      <p data-i18n="faq.a5">We can't reset it, by design: nobody, including us, can open the file without it. Start a new plan (it takes 10 minutes) and save it with a new passphrase.</p></details>
+    <details><summary data-i18n="faq.q6">Is the For My Family letter a will?</summary>
+      <p data-i18n="faq.a6">No. The For My Family letter is not a will or power of attorney. For legal questions about an estate, ask a qualified professional where you live. Rules about who may access a person's accounts after death differ by country and by service.</p></details>
+    <details><summary data-i18n="faq.q7">Official help pages</summary>
+      <p class="note" data-i18n="faq.a7">Platform rules change. Each step links to the official page and shows when we last checked it.</p>
+      <ul class="src-list small" id="srcList"></ul></details>
+  </section>
+
+  <footer>
+    <p><b data-i18n="foot.b">Spare Key is a planning checklist. It doesn't log in to anything, and it can't recover an account for you. Information, not legal advice.</b></p>
+    <p><span data-i18n="foot.p">Nothing you add leaves this device.</span> · <a href="/">More tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  </footer>
+</main>
+
+<dialog id="passDlg" aria-labelledby="pdTitle">
+  <form method="dialog" id="pdForm">
+    <h2 id="pdTitle"></h2>
+    <p class="note" id="pdIntro"></p>
+    <div id="pdNew">
+      <p class="small" data-i18n="pd.gen">Your new passphrase (shown once):</p>
+      <div class="passbox" id="pdGen" aria-live="polite"></div>
+      <div class="row" style="margin:8px 0"><button type="button" class="ghost small" id="pdCopy" data-i18n="pd.copy">Copy</button><button type="button" class="ghost small" id="pdAgain" data-i18n="pd.again">Another one</button><button type="button" class="link" id="pdOwnBtn" data-i18n="pd.own">Use my own</button></div>
+      <label class="f" id="pdOwnWrap" hidden><span data-i18n="pd.ownL">Your own passphrase (12+ characters, a few words is best)</span><input type="password" id="pdOwn" data-passphrase="true" autocomplete="new-password" maxlength="200"></label>
+      <label class="row small" style="margin-top:10px"><input type="checkbox" id="pdAck"> <span data-i18n="pd.ack">I've written it down. I know nobody can reset it.</span></label>
+      <p class="callout warn small" data-i18n="pd.warn">Give the passphrase in person or in a separate message. Never in the same email as the file.</p>
+    </div>
+    <div id="pdOld" hidden>
+      <label class="f"><span data-i18n="pd.enter">Passphrase</span><input type="password" id="pdPass" data-passphrase="true" autocomplete="current-password" maxlength="200"></label>
+    </div>
+    <p class="msg" id="pdMsg" role="alert"></p>
+    <div class="row end" style="margin-top:10px"><button type="button" class="ghost" id="pdCancel" data-i18n="cancel">Cancel</button><button type="submit" id="pdOk" value="ok"></button></div>
+  </form>
+</dialog>
+<div id="printArea"></div>
+<script id="sk-core">
+/* Spare Key: planning engine. Pure functions, no DOM, no network.
+   Runs in the browser (window.SK) and in Node unit tests (vm context with crypto, TextEncoder, TextDecoder, btoa, atob).
+   By design there is no field anywhere in this model for a password, PIN, passcode, recovery code or seed phrase. */
+(function (root) {
+  'use strict';
+  const SK = {};
+  SK.VERSION = 1;
+  SK.MAX_PEOPLE = 6;        // Family Pack
+  SK.FREE_PEOPLE = 1;       // free plan: one person
+  SK.KDF_ITERATIONS = 600000;
+  SK.LIBRARY_CHECKED = '2026-10-12'; // date we last tried to open every official page (see README: none could be opened)
+
+  // ------------------------------------------------------------------ categories (order = how the picker shows them)
+  SK.CATS = ['email', 'phone', 'bank', 'money', 'msg', 'cloud', 'social', 'gov', 'work', 'pm', 'crypto'];
+  // Recovery order on the Lost-Phone Sheet: email first, then the phone number, then banks, then messaging (build spec).
+  // The password manager goes right after the phone number because it holds the keys to everything else.
+  SK.RECOVERY_ORDER = ['email', 'phone', 'pm', 'bank', 'money', 'msg', 'cloud', 'gov', 'work', 'social', 'crypto'];
+  SK.COUNTRIES = ['US', 'UK', 'EU', 'CA', 'NG', 'KE', 'IN', 'PH', 'OTHER'];
+
+  // ------------------------------------------------------------------ platform library
+  // Plain-text names only (no logos). url = the platform's official help center or, where we don't know a stable help URL,
+  // its official website (kind 'site'). steps: only filled when staff opened and read the official page (checked = date).
+  // On 2026-10-12 our network could not open any of these pages (proxy policy 403), so every entry ships link-only.
+  const L = (id, cat, name, url, kind, c) => ({ id, cat, name, url: url || '', kind: url ? (kind || 'help') : 'none', c: c || null, checked: null, checkedBy: null, steps: [] });
+  SK.LIBRARY = [
+    L('google', 'email', 'Google Account (Gmail, Photos, Drive)', 'https://support.google.com/accounts'),
+    L('apple', 'email', 'Apple Account (iCloud, iMessage)', 'https://support.apple.com'),
+    L('microsoft', 'email', 'Microsoft account (Outlook, OneDrive)', 'https://support.microsoft.com'),
+    L('yahoo', 'email', 'Yahoo Mail', 'https://help.yahoo.com'),
+    L('proton', 'email', 'Proton Mail', 'https://proton.me/support'),
+
+    L('verizon', 'phone', 'Verizon', 'https://www.verizon.com/support/', 'help', ['US']),
+    L('att', 'phone', 'AT&T', 'https://www.att.com/support/', 'help', ['US']),
+    L('tmobile', 'phone', 'T-Mobile', 'https://www.t-mobile.com/support', 'help', ['US']),
+    L('ee', 'phone', 'EE', 'https://ee.co.uk/help', 'help', ['UK']),
+    L('vodafoneuk', 'phone', 'Vodafone UK', 'https://www.vodafone.co.uk', 'site', ['UK']),
+    L('o2', 'phone', 'O2', 'https://www.o2.co.uk/help', 'help', ['UK']),
+    L('three', 'phone', 'Three', 'https://www.three.co.uk', 'site', ['UK']),
+    L('rogers', 'phone', 'Rogers', 'https://www.rogers.com', 'site', ['CA']),
+    L('bell', 'phone', 'Bell', 'https://www.bell.ca', 'site', ['CA']),
+    L('telus', 'phone', 'Telus', 'https://www.telus.com', 'site', ['CA']),
+    L('mtn', 'phone', 'MTN Nigeria', 'https://www.mtn.ng', 'site', ['NG']),
+    L('airtelng', 'phone', 'Airtel Nigeria', 'https://www.airtel.com.ng', 'site', ['NG']),
+    L('glo', 'phone', 'Glo', 'https://www.gloworld.com', 'site', ['NG']),
+    L('safaricom', 'phone', 'Safaricom', 'https://www.safaricom.co.ke', 'site', ['KE']),
+    L('airtelke', 'phone', 'Airtel Kenya', 'https://www.airtelkenya.com', 'site', ['KE']),
+    L('jio', 'phone', 'Jio', 'https://www.jio.com', 'site', ['IN']),
+    L('airtelin', 'phone', 'Airtel India', 'https://www.airtel.in', 'site', ['IN']),
+    L('vi', 'phone', 'Vi', 'https://www.myvi.in', 'site', ['IN']),
+    L('globe', 'phone', 'Globe', 'https://www.globe.com.ph', 'site', ['PH']),
+    L('smart', 'phone', 'Smart', 'https://smart.com.ph', 'site', ['PH']),
+    L('carrier', 'phone', 'My mobile carrier', ''),
+
+    L('bank1', 'bank', 'My main bank', ''),
+    L('card1', 'bank', 'My credit card', ''),
+    L('bank2', 'bank', 'Savings or second bank', ''),
+    L('invest', 'bank', 'Pension or investments', ''),
+
+    L('paypal', 'money', 'PayPal', 'https://www.paypal.com', 'site'),
+    L('venmo', 'money', 'Venmo', 'https://help.venmo.com', 'help', ['US']),
+    L('cashapp', 'money', 'Cash App', 'https://cash.app/help', 'help', ['US']),
+    L('zelle', 'money', 'Zelle', 'https://www.zellepay.com', 'site', ['US']),
+    L('wise', 'money', 'Wise', 'https://wise.com/help', 'help'),
+    L('revolut', 'money', 'Revolut', 'https://www.revolut.com/help', 'help', ['UK', 'EU']),
+    L('mpesa', 'money', 'M-Pesa', 'https://www.safaricom.co.ke', 'site', ['KE']),
+    L('momo', 'money', 'MTN MoMo', 'https://www.mtn.ng', 'site', ['NG']),
+    L('paytm', 'money', 'Paytm', 'https://paytm.com', 'site', ['IN']),
+    L('phonepe', 'money', 'PhonePe', 'https://www.phonepe.com', 'site', ['IN']),
+    L('gpay', 'money', 'Google Pay', 'https://support.google.com/googlepay', 'help', ['US', 'IN', 'UK', 'EU']),
+    L('gcash', 'money', 'GCash', 'https://www.gcash.com', 'site', ['PH']),
+    L('maya', 'money', 'Maya', 'https://www.maya.ph', 'site', ['PH']),
+
+    L('whatsapp', 'msg', 'WhatsApp', 'https://faq.whatsapp.com'),
+    L('signal', 'msg', 'Signal', 'https://support.signal.org'),
+    L('telegram', 'msg', 'Telegram', 'https://telegram.org/faq'),
+    L('messenger', 'msg', 'Messenger', 'https://www.facebook.com/help'),
+
+    L('dropbox', 'cloud', 'Dropbox', 'https://help.dropbox.com'),
+    L('cloudother', 'cloud', 'Other photo or file storage', ''),
+
+    L('facebook', 'social', 'Facebook', 'https://www.facebook.com/help'),
+    L('instagram', 'social', 'Instagram', 'https://help.instagram.com'),
+    L('tiktok', 'social', 'TikTok', 'https://support.tiktok.com'),
+    L('x', 'social', 'X (Twitter)', 'https://help.x.com'),
+    L('linkedin', 'social', 'LinkedIn', 'https://www.linkedin.com/help/linkedin'),
+    L('snapchat', 'social', 'Snapchat', 'https://help.snapchat.com'),
+
+    L('logingov', 'gov', 'Login.gov', 'https://login.gov/help/', 'help', ['US']),
+    L('idme', 'gov', 'ID.me', 'https://help.id.me', 'help', ['US']),
+    L('ssa', 'gov', 'my Social Security', 'https://www.ssa.gov/myaccount/', 'help', ['US']),
+    L('govuk', 'gov', 'GOV.UK One Login', 'https://www.gov.uk', 'site', ['UK']),
+    L('hmrc', 'gov', 'HMRC online account', 'https://www.gov.uk', 'site', ['UK']),
+    L('cra', 'gov', 'CRA My Account', 'https://www.canada.ca/en/revenue-agency.html', 'site', ['CA']),
+    L('nimc', 'gov', 'NIN (NIMC)', 'https://nimc.gov.ng', 'site', ['NG']),
+    L('ecitizen', 'gov', 'eCitizen', 'https://www.ecitizen.go.ke', 'site', ['KE']),
+    L('digilocker', 'gov', 'DigiLocker', 'https://www.digilocker.gov.in', 'site', ['IN']),
+    L('aadhaar', 'gov', 'Aadhaar (UIDAI)', 'https://uidai.gov.in', 'site', ['IN']),
+    L('eid', 'gov', 'National digital ID', '', 'none', ['EU']),
+    L('govother', 'gov', 'Other government login', ''),
+
+    L('workemail', 'work', 'Work email and sign-in', ''),
+
+    L('1password', 'pm', '1Password', 'https://support.1password.com'),
+    L('bitwarden', 'pm', 'Bitwarden', 'https://bitwarden.com/help/'),
+    L('lastpass', 'pm', 'LastPass', 'https://support.lastpass.com'),
+    L('dashlane', 'pm', 'Dashlane', 'https://support.dashlane.com'),
+    L('devicepw', 'pm', 'Passwords saved in my phone or browser', ''),
+
+    L('coinbase', 'crypto', 'Coinbase', 'https://help.coinbase.com'),
+    L('binance', 'crypto', 'Binance', 'https://www.binance.com/en/support'),
+    L('kraken', 'crypto', 'Kraken', 'https://support.kraken.com'),
+    L('selfwallet', 'crypto', 'My own crypto wallet', ''),
+  ];
+  SK.byId = (id) => SK.LIBRARY.find((p) => p.id === id) || null;
+  SK.forCountry = (country) => SK.LIBRARY.filter((p) => !p.c || p.c.includes(country));
+
+  // Guess a country from the browser language (e.g. en-GB -> UK). No location lookup, no network.
+  SK.guessCountry = (lang) => {
+    const m = /[-_]([A-Za-z]{2})\b/.exec(String(lang || ''));
+    const r = m ? m[1].toUpperCase() : '';
+    const map = { US: 'US', GB: 'UK', UK: 'UK', CA: 'CA', NG: 'NG', KE: 'KE', IN: 'IN', PH: 'PH' };
+    if (map[r]) return map[r];
+    if (['DE', 'FR', 'ES', 'IT', 'NL', 'BE', 'AT', 'IE', 'PT', 'FI', 'SE', 'DK', 'PL', 'GR', 'CZ', 'RO', 'HU', 'SK', 'SI', 'HR', 'BG', 'LT', 'LV', 'EE', 'LU', 'MT', 'CY'].includes(r)) return 'EU';
+    return r ? 'OTHER' : 'US';
+  };
+
+  // ------------------------------------------------------------------ answers
+  SK.SIGNIN = ['sms', 'app', 'passkey', 'phoneapp', 'pw', 'unsure'];   // how do you sign in?
+  SK.BACKUPS = ['email', 'phone2', 'codes', 'contact', 'none'];        // backup ready? (what survives losing the phone)
+  SK.LEGACY = ['set', 'no', 'na', 'unsure'];                           // if you died, could someone act?
+
+  // One account, judged two ways.
+  //   lost: 'ok' (you can get back in without this phone) | 'slow' (locked out until a replacement SIM) | 'locked' | 'unsure'
+  //   reach: your family could act (a legacy setting is on, or a trusted contact is set as a backup)
+  SK.assess = (acc) => {
+    const b = (acc.backups || []).filter((x) => x !== 'none' && SK.BACKUPS.includes(x));
+    const s = acc.signin || 'unsure';
+    let lost;
+    if (s === 'pw') lost = 'ok';
+    else if (b.length) lost = 'ok';
+    else if (s === 'sms') lost = 'slow';
+    else if (s === 'app' || s === 'passkey' || s === 'phoneapp') lost = 'locked';
+    else lost = 'unsure';
+    const reach = acc.legacy === 'set' || b.includes('contact');
+    return { lost, reach, weak: s === 'pw', backups: b };
+  };
+
+  SK.score = (person) => {
+    const accs = (person && person.accounts) || [];
+    const r = { n: accs.length, ready: 0, atRisk: 0, locked: 0, slow: 0, unsure: 0, reach: 0, weak: 0 };
+    for (const a of accs) {
+      const x = SK.assess(a);
+      if (x.lost === 'ok') r.ready++; else { r.atRisk++; r[x.lost]++; }
+      if (x.reach) r.reach++;
+      if (x.weak) r.weak++;
+    }
+    return r;
+  };
+
+  // ------------------------------------------------------------------ fix list
+  // Each item: { id, kind, pri, acc? }. Lower pri = do it first. Email comes first because it unlocks most other accounts.
+  const catRank = (c) => { const i = SK.RECOVERY_ORDER.indexOf(c); return i < 0 ? 99 : i; };
+  SK.usesPhoneNumber = (person) => (person.accounts || []).some((a) => a.cat === 'phone' || a.signin === 'sms' || (a.backups || []).includes('phone2'));
+  SK.fixes = (person) => {
+    const out = [];
+    const accs = person.accounts || [];
+    const emailAtRisk = accs.some((a) => a.cat === 'email' && SK.assess(a).lost !== 'ok');
+    for (const a of accs) {
+      const x = SK.assess(a);
+      const boost = a.cat === 'email' ? -0.5 : 0;
+      if (x.lost === 'locked') out.push({ id: `${a.id}:lost`, kind: a.signin === 'phoneapp' ? 'lost-app' : 'lost-locked', pri: 1 + boost, acc: a.id });
+      else if (x.lost === 'slow') out.push({ id: `${a.id}:lost`, kind: 'lost-slow', pri: 2 + boost, acc: a.id });
+      else if (x.lost === 'unsure') out.push({ id: `${a.id}:lost`, kind: 'check-signin', pri: 3 + boost, acc: a.id });
+      if (a.pid === 'selfwallet') out.push({ id: `${a.id}:wallet`, kind: 'crypto-wallet', pri: 3, acc: a.id });
+      if (!x.reach) {
+        if (a.legacy === 'na') out.push({ id: `${a.id}:legacy`, kind: 'legacy-letter', pri: 6, acc: a.id });
+        else if (a.pid !== 'selfwallet') out.push({ id: `${a.id}:legacy`, kind: 'legacy', pri: 4, acc: a.id });
+      }
+      if (x.weak) out.push({ id: `${a.id}:2sv`, kind: 'add-2sv', pri: 5, acc: a.id });
+    }
+    if (SK.usesPhoneNumber(person) && person.carrierPin !== 'yes') out.push({ id: 'carrier-pin', kind: 'carrier-pin', pri: 1.5 });
+    if (accs.some((a) => (a.backups || []).includes('codes')) && !String(person.codesPlace || '').trim()) out.push({ id: 'codes-place', kind: 'codes-place', pri: 3 });
+    if (emailAtRisk) out.push({ id: 'email-first', kind: 'email-first', pri: 0 });
+    const byId = Object.fromEntries(accs.map((a) => [a.id, a]));
+    return out.sort((p, q) => p.pri - q.pri || catRank((byId[p.acc] || {}).cat) - catRank((byId[q.acc] || {}).cat) || String((byId[p.acc] || {}).name || '').localeCompare(String((byId[q.acc] || {}).name || '')));
+  };
+
+  // Accounts in recovery order (for the Lost-Phone Sheet)
+  SK.recoveryOrder = (person) => (person.accounts || []).slice().sort((a, b) => catRank(a.cat) - catRank(b.cat) || a.name.localeCompare(b.name));
+
+  // ------------------------------------------------------------------ "is this a secret?" guard for free-text fields
+  // Free-text fields hold places and names, never codes. If someone pastes something that looks like a code, password or
+  // recovery phrase, we refuse to keep it. Returns a reason key, or '' when the text looks fine.
+  SK.looksSecret = (text) => {
+    const t = String(text || '').trim();
+    if (!t) return '';
+    if (/\b(pass ?word|passcode|pin|seed|recovery phrase|backup codes?|secret|contrase(ñ|n)a|clave)\s*(is|es|:|=|-)\s*\S/i.test(t)) return 'labelled';
+    if (/\b\d{6,}\b/.test(t)) return 'digits';                                  // 6+ digits in a row (codes, PINs, account numbers)
+    if (/\b\d{4}[ -]\d{4}\b/.test(t)) return 'digits';                         // "1234 5678" (backup-code shape)
+    if (/\b(?=[a-z0-9]*\d)(?=[a-z0-9]*[a-z])[a-z0-9]{4,6}-[a-z0-9]{4,6}\b/i.test(t)) return 'code';   // "ab12-cd34"
+    if (/(?=\S*\d)(?=\S*[a-z])(?=\S*[A-Z])\S{12,}/.test(t)) return 'code';          // long mixed random-looking string
+    const words = t.toLowerCase().split(/\s+/);
+    if (words.length >= 12 && words.length <= 24 && words.every((w) => /^[a-z]{3,8}$/.test(w))) return 'phrase'; // seed phrase shape
+    return '';
+  };
+
+  // ------------------------------------------------------------------ plan model + sanitizer
+  // The only fields a plan can ever contain. Anything else in an imported file is dropped.
+  const str = (v, n) => String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]/g, ' ').slice(0, n || 120);
+  const pick = (v, list, d) => (list.includes(v) ? v : d);
+  const safeText = (v, n) => { const s = str(v, n).trim(); return SK.looksSecret(s) ? '' : s; };
+  const ymdOk = (s) => (/^\d{4}-\d{2}-\d{2}$/.test(String(s || '')) ? String(s) : '');
+  let seq = 0;
+  SK.uid = (p) => `${p || 'x'}${Date.now().toString(36)}${(seq++).toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+
+  SK.newPerson = (opts) => ({ id: SK.uid('p'), name: str((opts && opts.name) || '', 40), relation: pick(opts && opts.relation, ['me', 'parent', 'partner', 'other'], 'me'), country: pick(opts && opts.country, SK.COUNTRIES, 'US'), accounts: [], carrierPin: '', codesPlace: '', trustedName: '', handBox: false, baseline: null });
+  SK.newAccount = (pid, name, cat) => { const p = SK.byId(pid); return { id: SK.uid('a'), pid: p ? p.id : '', name: str(name || (p && p.name) || '', 60), cat: pick(cat || (p && p.cat), SK.CATS, 'email'), signin: '', backups: [], legacy: '' }; };
+  SK.newPlan = () => ({ app: 'spare-key', v: SK.VERSION, created: '', updated: '', people: [], letter: SK.newLetter(), docs: [] });
+  SK.newLetter = () => ({ contacts: [], where: { will: '', id: '', insurance: '', property: '', money: '', other: '' }, wishes: { photos: '', social: '', email: '' }, subs: '', notes: '' });
+
+  SK.sanitizePlan = (raw) => {
+    const r = raw && typeof raw === 'object' ? raw : {};
+    if (r.app !== 'spare-key') throw new Error('not-a-plan');
+    const plan = SK.newPlan();
+    plan.created = ymdOk(r.created); plan.updated = ymdOk(r.updated);
+    const people = Array.isArray(r.people) ? r.people.slice(0, SK.MAX_PEOPLE) : [];
+    plan.people = people.map((p) => {
+      p = p || {};
+      const out = SK.newPerson({ name: safeText(p.name, 40), relation: p.relation, country: p.country });
+      if (typeof p.id === 'string' && /^[a-z0-9]{1,40}$/i.test(p.id)) out.id = p.id;
+      out.carrierPin = pick(p.carrierPin, ['yes', 'no', 'unsure'], '');
+      out.codesPlace = safeText(p.codesPlace, 120);
+      out.trustedName = safeText(p.trustedName, 60);
+      out.handBox = !!p.handBox;
+      if (p.baseline && typeof p.baseline === 'object') out.baseline = { ready: Math.max(0, Math.min(200, p.baseline.ready | 0)), n: Math.max(0, Math.min(200, p.baseline.n | 0)) };
+      out.accounts = (Array.isArray(p.accounts) ? p.accounts.slice(0, 120) : []).map((a) => {
+        a = a || {};
+        const acc = SK.newAccount(SK.byId(a.pid) ? a.pid : '', safeText(a.name, 60) || 'Account', a.cat);
+        if (typeof a.id === 'string' && /^[a-z0-9]{1,40}$/i.test(a.id)) acc.id = a.id;
+        acc.signin = pick(a.signin, SK.SIGNIN, '');
+        acc.backups = [...new Set((Array.isArray(a.backups) ? a.backups : []).filter((b) => SK.BACKUPS.includes(b)))];
+        if (acc.backups.includes('none') && acc.backups.length > 1) acc.backups = acc.backups.filter((b) => b !== 'none');
+        acc.legacy = pick(a.legacy, SK.LEGACY, '');
+        return acc;
+      });
+      return out;
+    });
+    const l = r.letter || {};
+    plan.letter.contacts = (Array.isArray(l.contacts) ? l.contacts.slice(0, 8) : []).map((c) => ({ name: safeText(c && c.name, 60), relation: safeText(c && c.relation, 40), reach: str(c && c.reach, 80).trim() })).filter((c) => c.name || c.reach);
+    for (const k of Object.keys(plan.letter.where)) plan.letter.where[k] = safeText(l.where && l.where[k], 160);
+    for (const k of Object.keys(plan.letter.wishes)) plan.letter.wishes[k] = safeText(l.wishes && l.wishes[k], 240);
+    plan.letter.subs = safeText(l.subs, 600);
+    plan.letter.notes = safeText(l.notes, 800);
+    plan.docs = (Array.isArray(r.docs) ? r.docs.slice(0, 24) : []).map((d) => ({ label: safeText(d && d.label, 40), who: safeText(d && d.who, 40), expires: ymdOk(d && d.expires) })).filter((d) => d.label && d.expires);
+    return plan;
+  };
+
+  // ------------------------------------------------------------------ calendar (.ics, RFC 5545)
+  const pad = (n) => String(n).padStart(2, '0');
+  SK.ymd = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+  SK.addDays = (s, n) => { const [y, m, d] = s.split('-').map(Number); const t = new Date(Date.UTC(y, m - 1, d + n)); return SK.ymd(t); };
+  SK.addYears = (s, n) => { const [y, m, d] = s.split('-').map(Number); const t = new Date(Date.UTC(y + n, m - 1, Math.min(d, m === 2 && d === 29 ? 28 : d))); return SK.ymd(t); };
+  const icsEsc = (s) => String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+  // Fold lines longer than 75 octets (RFC 5545 §3.1), never splitting a UTF-8 character.
+  SK.icsFold = (line) => {
+    const enc = new TextEncoder();
+    if (enc.encode(line).length <= 75) return line;
+    const out = []; let cur = ''; let curLen = 0; let limit = 75;
+    for (const ch of line) {
+      const l = enc.encode(ch).length;
+      if (curLen + l > limit) { out.push(cur); cur = ''; curLen = 0; limit = 74; }
+      cur += ch; curLen += l;
+    }
+    out.push(cur);
+    return out.join('\r\n ');
+  };
+  // events: [{ uid, date:'YYYY-MM-DD', title, desc, yearly?:bool, alarmDays?:number }]
+  SK.toICS = (events, stamp) => {
+    const dt = (s) => s.replace(/-/g, '');
+    const st = String(stamp || '20260101T000000Z');
+    const L2 = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Quickwell//Spare Key//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+    for (const e of events) {
+      L2.push('BEGIN:VEVENT', `UID:${e.uid}@quickwell.app`, `DTSTAMP:${st}`, `DTSTART;VALUE=DATE:${dt(e.date)}`, `DTEND;VALUE=DATE:${dt(SK.addDays(e.date, 1))}`, `SUMMARY:${icsEsc(e.title)}`);
+      if (e.desc) L2.push(`DESCRIPTION:${icsEsc(e.desc)}`);
+      if (e.yearly) L2.push('RRULE:FREQ=YEARLY');
+      L2.push('TRANSP:TRANSPARENT');
+      if (e.alarmDays != null) L2.push('BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(e.title)}`, `TRIGGER:-P${Math.max(0, e.alarmDays | 0)}D`, 'END:VALARM');
+      L2.push('END:VEVENT');
+    }
+    L2.push('END:VCALENDAR');
+    return L2.map(SK.icsFold).join('\r\n') + '\r\n';
+  };
+  // The reminders a plan produces. today: 'YYYY-MM-DD'. withDocs: Family Pack adds document-expiry reminders.
+  SK.reminders = (plan, today, withDocs, words) => {
+    const w = words || {};
+    const ev = [{ uid: `sk-review-${today}`, date: SK.addYears(today, 1), title: w.reviewTitle || 'Spare Key: yearly check of your lost-phone and family plan', desc: w.reviewDesc || 'Open your plan file, check each account still has a backup, update the family letter, and print a fresh Lost-Phone Sheet. quickwell.app/spare-key/', yearly: true, alarmDays: 0 }];
+    if (withDocs) for (const [i, d] of (plan.docs || []).entries()) {
+      if (!d.expires) continue;
+      const who = d.who ? ` (${d.who})` : '';
+      const early = SK.addDays(d.expires, -90);
+      if (early > today) ev.push({ uid: `sk-doc-${i}-early-${d.expires}`, date: early, title: `${w.renewSoon || 'Renew soon'}: ${d.label}${who}`, desc: `${w.expiresOn || 'Expires on'} ${d.expires}.`, alarmDays: 0 });
+      if (d.expires > today) ev.push({ uid: `sk-doc-${i}-exp-${d.expires}`, date: d.expires, title: `${w.expiresToday || 'Expires today'}: ${d.label}${who}`, desc: '', alarmDays: 7 });
+    }
+    return ev;
+  };
+
+  // ------------------------------------------------------------------ encryption (WebCrypto AES-GCM-256, key from PBKDF2-SHA-256)
+  // File: JSON envelope { app, v, kdf, iter, salt, iv, ct } (base64). The header is bound to the ciphertext as AES-GCM
+  // additional data, so changing the iteration count or app name makes decryption fail. There is no recovery: a lost
+  // passphrase means the file can't be opened, by anyone, including us.
+  const C = () => root.crypto || (typeof crypto !== 'undefined' ? crypto : null);
+  const b64 = (u8) => { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
+  const unb64 = (s) => { const bin = atob(String(s)); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+  const header = (iter) => ({ app: 'spare-key', v: 1, kdf: 'PBKDF2-SHA-256', cipher: 'AES-GCM-256', iter });
+  const aad = (h) => new TextEncoder().encode(`${h.app}|${h.v}|${h.kdf}|${h.cipher}|${h.iter}`);
+  SK.deriveKey = async (pass, salt, iter) => {
+    const c = C().subtle;
+    const base = await c.importKey('raw', new TextEncoder().encode(String(pass).normalize('NFC')), 'PBKDF2', false, ['deriveKey']);
+    return c.deriveKey({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: iter }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  };
+  // Encrypt with an already-derived key (used for re-saves in the same visit; the passphrase itself is never kept).
+  SK.encryptWithKey = async (obj, key, salt, iter) => {
+    const h = header(iter);
+    const iv = C().getRandomValues(new Uint8Array(12));
+    const ct = new Uint8Array(await C().subtle.encrypt({ name: 'AES-GCM', iv, additionalData: aad(h) }, key, new TextEncoder().encode(JSON.stringify(obj))));
+    return JSON.stringify({ ...h, salt: b64(salt), iv: b64(iv), ct: b64(ct) });
+  };
+  SK.encrypt = async (obj, pass, opts) => {
+    const iter = (opts && opts.iterations) || SK.KDF_ITERATIONS;
+    const salt = C().getRandomValues(new Uint8Array(16));
+    const key = await SK.deriveKey(pass, salt, iter);
+    const text = await SK.encryptWithKey(obj, key, salt, iter);
+    return opts && opts.keep ? { text, key, salt, iter } : text;
+  };
+  // Errors: 'not-a-file' (not our format), 'wrong-pass' (wrong passphrase or damaged file), 'not-a-plan'
+  SK.decrypt = async (text, pass, opts) => {
+    let e;
+    try { e = JSON.parse(text); } catch (x) { throw new Error('not-a-file'); }
+    if (!e || e.app !== 'spare-key' || e.v !== 1 || e.kdf !== 'PBKDF2-SHA-256' || e.cipher !== 'AES-GCM-256' || !e.salt || !e.iv || !e.ct) throw new Error('not-a-file');
+    const iter = Number(e.iter);
+    if (!Number.isInteger(iter) || iter < 100000 || iter > 5000000) throw new Error('not-a-file');
+    let salt, iv, ct;
+    try { salt = unb64(e.salt); iv = unb64(e.iv); ct = unb64(e.ct); } catch (x) { throw new Error('not-a-file'); }
+    if (salt.length !== 16 || iv.length !== 12) throw new Error('not-a-file');
+    const key = await SK.deriveKey(pass, salt, iter);
+    let plain;
+    try { plain = await C().subtle.decrypt({ name: 'AES-GCM', iv, additionalData: aad(header(iter)) }, key, ct); } catch (x) { throw new Error('wrong-pass'); }
+    let obj;
+    try { obj = JSON.parse(new TextDecoder().decode(plain)); } catch (x) { throw new Error('not-a-plan'); }
+    const plan = SK.sanitizePlan(obj);
+    return opts && opts.keep ? { plan, key, salt, iter } : plan;
+  };
+
+  // A passphrase made of 6 random words (about 46 bits from a 207-word list), plus the strength rule for typed ones.
+  SK.WORDS = ('acorn amber anchor apple arrow aspen atlas autumn badge bamboo banjo barley basil beacon berry birch biscuit blanket blossom bonfire breeze bridge brook bubble cabin cactus camera candle canoe canyon cargo carrot castle cedar cello chalk cherry chess cider cinnamon citrus clover cobalt cocoa comet copper coral cotton cradle crane crayon cricket crystal cupcake daisy dawn delta denim desert dolphin dragon drum eagle ember emerald falcon feather fern fiddle flint forest fossil fountain fox galaxy garden garnet ginger glacier globe granite grape gravel harbor harvest hazel heron hickory honey horizon icicle island ivory jacket jasmine jungle juniper kayak kettle kiwi koala ladder lagoon lantern lemon lilac linen lotus magnet mango maple marble meadow melon meteor mint mitten mosaic moss muffin nectar nest noodle nutmeg oasis ocean olive onion orbit orchid otter owl paddle palm panda paper parrot peach pebble pepper piano pickle pillow pine planet plum pocket pony poppy prairie pretzel pumpkin quartz quilt rabbit radish rainbow raven reef ribbon river robin rocket saddle saffron salmon sandal satin sequoia shell sierra silver sketch sparrow spice spruce squash summit sunset swan tango teapot thistle thunder tiger timber tomato topaz tulip tundra turtle umbrella valley velvet violet walnut walrus willow window winter wizard yarrow yellow yogurt zebra zephyr zinnia').split(' ');
+  SK.makePassphrase = (n) => {
+    const out = []; const W = SK.WORDS; const lim = Math.floor(65536 / W.length) * W.length;
+    while (out.length < (n || 6)) { const r = C().getRandomValues(new Uint16Array(1))[0]; if (r < lim) out.push(W[r % W.length]); }
+    return out.join('-');
+  };
+  SK.passOk = (p) => { const s = String(p || ''); return s.length >= 12 && new Set(s).size >= 6; };
+
+  if (typeof module !== 'undefined' && module.exports) module.exports = SK;
+  root.SK = SK;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script id="sk-i18n">
+/* Spare Key: words. English is the page's own text (static) plus the dynamic strings below; Spanish covers both.
+   Fix steps are our own general wording (no help-page text is copied). */
+(function (root) {
+  'use strict';
+  const en = {
+    'cat.email': 'Email', 'cat.phone': 'Phone number & carrier', 'cat.bank': 'Banking & cards', 'cat.money': 'Mobile money & payment apps', 'cat.msg': 'Messaging',
+    'cat.cloud': 'Photos & cloud', 'cat.social': 'Social', 'cat.gov': 'Government logins', 'cat.work': 'Work', 'cat.pm': 'Password manager', 'cat.crypto': 'Crypto',
+    'cath.email': 'unlocks most other accounts', 'cath.phone': 'receives your text codes', 'cath.pm': 'holds the keys to everything else',
+    'lib.carrier': 'My mobile carrier', 'lib.bank1': 'My main bank', 'lib.card1': 'My credit card', 'lib.bank2': 'Savings or second bank', 'lib.invest': 'Pension or investments',
+    'lib.cloudother': 'Other photo or file storage', 'lib.eid': 'National digital ID', 'lib.govother': 'Other government login', 'lib.workemail': 'Work email and sign-in',
+    'lib.devicepw': 'Passwords saved in my phone or browser', 'lib.selfwallet': 'My own crypto wallet',
+    'pick.addPh': 'Other: type a name', 'pick.add': 'Add', 'pick.next': 'Next: {n} accounts', 'pick.next1': 'Next: 1 account', 'pick.none': 'Tap an account', 'pick.parentName': 'Mom',
+    'si.sms': 'Password + text code', 'si.app': 'Authenticator app', 'si.passkey': 'Passkey or face/fingerprint', 'si.phoneapp': 'Only the app on my phone', 'si.pw': 'Just a password', 'si.unsure': 'Not sure',
+    'bk.email': 'Recovery email', 'bk.phone2': 'Second phone number', 'bk.codes': 'Printed backup codes', 'bk.contact': 'Trusted contact', 'bk.none': 'None',
+    'lg.set': 'Legacy contact set', 'lg.no': 'No', 'lg.na': 'Not offered', 'lg.unsure': 'Not sure',
+    'q.signin': 'How do you sign in?', 'q.backup': 'Backup ready? (tap all you have)', 'q.legacy': 'If you died, could someone act?', 'q.remove': 'Remove',
+    'yn.yes': 'Yes', 'yn.no': 'No', 'yn.unsure': 'Not sure', 'answered': '{a} of {n} answered',
+    'pill.locked': 'Locks you out', 'pill.slow': 'Locked until new SIM', 'pill.unsure': 'Check', 'pill.ok': 'Ready',
+    'sc.title': 'Lockout Score', 'sc.for': 'Plan for {name}', 'sc.ready': 'ready',
+    'sc.lost': 'If you lost your phone today: <b>{x} of {n}</b> key accounts would lock you out.', 'sc.lostNone': 'If you lost your phone today: you could get back into <b>all {n}</b> key accounts.',
+    'sc.died': 'If you died: your family could reach <b>{y} of {n}</b>.', 'sc.gain': 'Up from {a}/{n} when you started',
+    'fix.official': 'Official help page', 'fix.site': 'Official website', 'fix.notChecked': 'Steps for this service: not yet checked by us, so we show general steps. Follow the official page.',
+    'fix.checked': 'Last checked by us: {date}', 'fix.nolink': 'Use the phone number on your card or statement, or the official app or website. Never a number from a text message or email.',
+    'fix.more': 'Next fixes ({n} more)', 'fix.did': 'Done? Tap what you added:', 'fix.allgood': 'Nothing urgent. Every account has a way back, your family can reach them, and your number is locked. Print your sheet and check again in a year.',
+    'fix.legacySet': 'I turned on a legacy contact', 'fix.legacyNa': "It isn't offered", 'fix.pinSet': 'I set a carrier PIN or lock', 'fix.change': 'Change answers',
+    'fx.email-first.t': 'Fix email first', 'fx.email-first.p': 'Your email resets most other accounts. Give it a backup before anything else.',
+    'fx.lost-locked.t': '{name}: would lock you out', 'fx.lost-locked.p': 'It needs this phone to sign in, and there is no backup that works without it.',
+    'fx.lost-locked.s': ['Open the account on a computer or another device and go to its security or sign-in settings.', 'Add a recovery email that you can open without this phone.', 'If it offers backup codes, print them and keep the paper with your Lost-Phone Sheet, away from the phone.', "If it lets you add a second phone number, add a family member's.", 'If you use an authenticator app, check whether it can back up to your account or to a second device.'],
+    'fx.lost-app.t': '{name}: only works on this phone', 'fx.lost-app.p': 'Apps like this are often tied to one phone. On a new phone you usually need to prove who you are again.',
+    'fx.lost-app.s': ['Find out now how you would get back in on a new phone: a call, a branch or agent visit with ID, or a backup in the app.', 'Write the official customer service number on your Lost-Phone Sheet by hand. Take it from your card, statement or the official website.', 'If the app offers a backup email or a second device, add it.'],
+    'fx.lost-slow.t': '{name}: locked until you get a new SIM', 'fx.lost-slow.p': 'Text-message codes go to your number. Until your carrier gives you a replacement SIM, you can\'t get them, and a thief with your SIM can.',
+    'fx.lost-slow.s': ['Open the account\'s security or sign-in settings.', 'Add a backup that doesn\'t need your number: a recovery email, printed backup codes, or an authenticator app with a backup.', 'Then lock your phone number with your carrier (see "Protect your phone number").'],
+    'fx.check-signin.t': '{name}: check how you sign in', 'fx.check-signin.p': 'Open the app or website, look in its security settings, then tap how you sign in:',
+    'fx.crypto-wallet.t': '{name}: nobody can reset it', 'fx.crypto-wallet.p': 'A wallet you hold yourself has no help desk. If the recovery phrase is lost, the money is lost.',
+    'fx.crypto-wallet.s': ['Make sure the recovery phrase is written on paper (or metal) and kept somewhere safe, away from the phone.', 'Never type the phrase into any website, app or this page.', 'Tell your family the wallet exists and where the paper is kept (the place, not the words). The For My Family letter has a spot for it.'],
+    'fx.legacy.t': '{name}: your family couldn\'t act', 'fx.legacy.p': 'If you died or couldn\'t speak for yourself, nobody could reach this account.',
+    'fx.legacy.s': ['Look in the account\'s privacy or security settings for a legacy contact, inactive-account or memorialization option, and turn it on if there is one.', 'If there is none, or for banks and money apps, write the account in your For My Family letter so your family knows it exists and what you want.'],
+    'fx.legacy-letter.t': '{name}: no legacy setting', 'fx.legacy-letter.p': 'You told us this service doesn\'t offer one. Write the account and your wishes in your For My Family letter so your family knows it exists.',
+    'fx.add-2sv.t': '{name}: password only', 'fx.add-2sv.p': 'Anyone with the password can get in. Turning on two-step sign-in, with a backup, makes that much harder.',
+    'fx.carrier-pin.t': 'Lock your phone number', 'fx.carrier-pin.p': 'Your codes go to your number. Ask your carrier for an account PIN or number lock so nobody can move it to another SIM. Steps are just below the fix list.',
+    'fx.codes-place.t': 'Write down where your backup codes are', 'fx.codes-place.p': 'You have printed codes. Add the place they\'re kept (not the codes) to your Lost-Phone Sheet below.',
+    'ph.h': 'Protect your phone number', 'ph.p': 'Your number receives your codes. If someone moves it to their SIM (a "SIM swap"), they get your codes too.',
+    'ph.s': ['Call your carrier or open its official app and ask for an account PIN or passcode. It should be different from your phone\'s unlock code.', 'Ask whether they offer a number lock, port-out lock or SIM-change alert, and turn it on.', 'Write your carrier\'s official customer service number on your Lost-Phone Sheet by hand, so you can block the SIM fast from another phone.'],
+    'ph.carriers': 'Official pages for carriers in {country}:', 'ph.none': 'Find your carrier\'s official website on your bill or contract.',
+    'ph.yes': 'You told us your number is locked. Good.', 'ph.no': 'You told us your number isn\'t locked yet.', 'ph.unsure': 'You weren\'t sure whether your number is locked.',
+    'country.US': 'the United States', 'country.UK': 'the United Kingdom', 'country.EU': 'the European Union', 'country.CA': 'Canada', 'country.NG': 'Nigeria', 'country.KE': 'Kenya', 'country.IN': 'India', 'country.PH': 'the Philippines', 'country.OTHER': 'your country',
+    'sec.msg': 'That looks like a code, password or recovery phrase, so we didn\'t keep it. Write where it\'s kept (a place), never the code itself.',
+    'pp.me': 'Me', 'pp.add': '+ Add a person', 'pp.max': 'Up to 6 people in one plan.', 'pp.needPack': 'Adding more people is part of the Family Pack ($4.99 once).', 'pp.person': 'Person {n}', 'pp.remove': 'Remove {name} from this plan',
+    'pp.free1': 'The free plan holds one person. To make one for someone else, save this plan as a file first, or get the Family Pack to keep up to 6 people together.',
+    'pd.saveT': 'Lock your plan on this device', 'pd.exportT': 'Download an encrypted plan file', 'pd.openT': 'Open your plan',
+    'pd.saveI': 'Your plan is encrypted on this device with this passphrase. While this page is open, changes save automatically.', 'pd.exportI': 'The file is encrypted with this passphrase. Anyone with the file and the passphrase can open it, so keep them apart.',
+    'pd.openI': 'Type the passphrase this plan was saved with.', 'pd.checkoutI': 'Before you pay, lock your plan on this device so it\'s waiting when you come back from checkout.',
+    'pd.save': 'Save', 'pd.export': 'Download', 'pd.open': 'Open', 'pd.copied': 'Copied.', 'pd.working': 'Working… (this takes a moment on purpose)',
+    'sv.saved': 'Saved and encrypted at {time}.', 'sv.wrong': 'That passphrase doesn\'t open this plan. We can\'t reset it, by design.', 'sv.notfile': 'That isn\'t a Spare Key plan file.',
+    'sv.weak': 'Use at least 12 characters. A few words works best.', 'sv.ack': 'Tick the box once you\'ve written it down.', 'sv.exported': 'Downloaded family-plan.sparekey. Keep the passphrase separate from the file.',
+    'sv.opened': 'Plan opened.', 'sv.deleted': 'Deleted from this device.', 'sv.confirmDelete': 'Delete the locked plan from this device? This can\'t be undone.', 'sv.noStore': 'This browser won\'t let us save here (private mode?). Download a plan file instead.',
+    'sv.empty': 'Add at least one account first.', 'sv.leave': 'Your plan isn\'t saved yet.',
+    'buy.opening': 'Opening checkout…', 'buy.soon': 'The Family Pack opens for purchase very soon. Everything free works now.', 'buy.err': 'Something went wrong. Please try again.',
+    'sh.text': 'My lockout score: {a}/{n} → {b}/{n} ✅ Make your plan in 10 minutes · quickwell.app/spare-key', 'sh.text1': 'My lockout score: {b}/{n} ✅ Make your plan in 10 minutes · quickwell.app/spare-key',
+    'sh.copied': 'Copied. Paste it anywhere. No account names are in it.', 'sh.img': 'Score card saved as an image.', 'sh.cardT': 'My Lockout Score', 'sh.cardS': 'Make your plan in 10 minutes', 'sh.noScore': 'Finish your plan first.',
+    'inv.text': 'I made a plan for if I lose my phone. It takes 10 minutes and nothing leaves your phone: {url}', 'inv.copied': 'Link copied. It has nothing about you in it.',
+    'ics.reviewT': 'Spare Key: yearly check of your lost-phone and family plan', 'ics.reviewD': 'Open your plan file, check each account still has a backup, update the family letter, and print a fresh Lost-Phone Sheet. quickwell.app/spare-key/',
+    'ics.soon': 'Renew soon', 'ics.on': 'Expires on', 'ics.today': 'Expires today', 'ics.done': 'Calendar file downloaded. Open it to add the reminder.',
+    'doc.passport': 'Passport', 'doc.licence': 'Driving licence', 'doc.id': 'National ID card', 'doc.residence': 'Residence permit or visa', 'doc.other': 'Other document', 'doc.who': 'Whose', 'doc.date': 'Expires', 'doc.label': 'Document',
+    'ct.name': 'Name', 'ct.rel': 'Relationship', 'ct.reach': 'Phone or email', 'ct.remove': 'Remove',
+    'wh.will': 'Will or trust papers', 'wh.id': 'ID, passport, birth and marriage certificates', 'wh.insurance': 'Insurance policies', 'wh.property': 'Home, rental or car papers', 'wh.money': 'Bank, pension and tax papers', 'wh.other': 'Other important papers',
+    'wh.ph': 'e.g. grey box, bedroom closet', 'wi.photos': 'My photos and videos', 'wi.social': 'My social media accounts', 'wi.email': 'My email',
+    'wi.photosPh': 'e.g. save them and share with my children', 'wi.socialPh': 'e.g. memorialize Facebook, delete the rest', 'wi.emailPh': 'e.g. move important mail, then close it',
+    'pr.title': 'Lost-Phone Sheet', 'pr.for': 'for {name}', 'pr.keep': 'Keep this on paper, away from your phone. Updated {date}.',
+    'pr.h1': 'The first hour', 'pr.f1': 'From another phone, call your mobile carrier. Ask them to block your SIM and stop any transfer of your number.', 'pr.carrier': 'Carrier', 'pr.tel': 'Phone (write by hand)',
+    'pr.f2': 'From another device, use your phone maker\'s find-my-device service to locate, lock or erase the phone.', 'pr.f2ids': 'You\'ll sign in with: {ids}.',
+    'pr.f3': 'Call your banks and money apps to freeze cards and app access. Use the number on your card or the official website, never one from a text message.',
+    'pr.f4': 'From a computer you trust, sign in to your email, change its password and check its recovery settings.',
+    'pr.f5': 'If the phone was stolen, report it to the police and keep the reference number for your bank and carrier.',
+    'pr.f6': 'For the next few weeks, treat any text or call about your accounts as a possible scam. Call back on official numbers only.',
+    'pr.h2': 'Recovery order', 'pr.h2p': 'Get these back in this order. Email first: it resets most of the others.',
+    'pr.th.acc': 'Account', 'pr.th.sign': 'Signs in with', 'pr.th.backup': 'Backup without this phone', 'pr.th.status': 'Status',
+    'pr.h3': 'Where my backup codes are', 'pr.h3none': 'Place:', 'pr.hand': 'Backup codes, written by hand (keep this sheet somewhere safe)', 'pr.h4': 'Who can help', 'pr.noAcc': 'No accounts added yet.',
+    'pr.foot': 'Made with Spare Key (quickwell.app/spare-key). A planning checklist: it doesn\'t log in to anything and can\'t recover an account for you. Platform rules change: check each official help page.',
+    'lt.title': 'For My Family', 'lt.from': 'From {name}. Written {date}.', 'lt.intro': 'If something happens to me, this letter tells you where things are and what I\'d like. Please read it all before you contact anyone.',
+    'lt.notWill': 'The For My Family letter is not a will or power of attorney. For legal questions about an estate, ask a qualified professional where you live.',
+    'lt.h1': 'People to contact first', 'lt.h2': 'Where my documents are', 'lt.h3': 'My accounts', 'lt.h3p': 'Please ask each service how it handles an account holder\'s death, rather than trying to sign in as me. Where I turned on a legacy setting or named a trusted contact, it\'s marked.',
+    'lt.th.legacy': 'Legacy setting', 'lt.th.reach': 'Family can act?', 'lt.h4': 'My wishes', 'lt.h5': 'Subscriptions and bills to cancel', 'lt.h6': 'Our family code word', 'lt.h6p': 'Written by hand, never typed:', 'lt.h6q': 'If someone calls in my name asking for money or codes, ask for the code word.',
+    'lt.h7': 'My Lost-Phone Sheet and backup codes are kept', 'lt.h8': 'Anything else', 'lt.none': '(not filled in)', 'lt.yes': 'Yes', 'lt.no': 'No',
+    'wc.title': 'Spare Key card', 'wc.l1': 'If I lose my phone: call my carrier from another phone to block the SIM.', 'wc.place': 'My Lost-Phone Sheet is kept:', 'wc.trusted': 'Trusted person:',
+    'wc.back': 'In an emergency, please contact:', 'wc.noSecrets': 'No passwords or codes on this card.', 'wc.tel': 'Tel',
+    'gd.title': 'Doing it together: a 20-minute sit-down', 'gd.sub': 'For an adult child and a parent (or any two people who trust each other).',
+    'gd.s': ['Pick a calm time. Bring their phone, their glasses and any bank cards.', 'They hold their phone. You read the questions; they tap. Never ask for or type their passwords, PINs or codes.', 'Open quickwell.app/spare-key and tap "Make one for a parent".', 'Go through the fix list together. Most fixes are in each app\'s security settings. Do the first two today.', 'Print the Lost-Phone Sheet. Decide together where the paper lives.', 'If they want, fill in the For My Family letter together. Then add the yearly reminder to their calendar.'],
+    'gd.foot': 'Spare Key never asks for passwords, PINs or codes. Nothing leaves the phone.',
+    'src.not': 'steps not yet checked by us', 'yes': 'Yes', 'no': 'No', 'unsure': 'Not sure', 'next': 'Next', 'lang': 'Español', 'langAria': 'Ver en español',
+  };
+  const es = {
+    // static
+    'vb.title': 'Tienes un plan bloqueado en este dispositivo.', 'vb.body': 'Ábrelo con tu frase de contraseña para verlo y actualizarlo.', 'vb.open': 'Abrir mi plan', 'vb.delete': 'Borrarlo de este dispositivo',
+    'welcome': 'Gracias. El Paquete Familiar está activado en este navegador.',
+    'hero.sub': 'Tu plan si pierdes el teléfono, y para tu familia', 'hero.hook': 'Si perdieras tu teléfono esta noche, ¿podrías volver a entrar en tu banco, tu correo y WhatsApp? Descúbrelo en 10 minutos. Nada sale de tu teléfono.',
+    'hero.mine': 'Hacer mi plan', 'hero.parent': 'Hacer uno para mi madre o padre', 'hero.open': 'Abrir un archivo de plan',
+    'b1': 'Nunca pide contraseñas ni códigos', 'b2': 'Se queda en este dispositivo', 'b3': 'Gratis para una persona', 'b4': 'Sin registro',
+    'how.h': 'Cómo funciona', 'how.1': 'Toca las cuentas que te dolería perder. Sin iniciar sesión, sin contraseñas.', 'how.2': 'Responde tres toques por cuenta: cómo entras, tu respaldo y si tu familia podría actuar.',
+    'how.3': 'Obtén tu Puntuación de Bloqueo, una lista de arreglos con enlaces oficiales y una Hoja de Teléfono Perdido de una página para imprimir.',
+    'how.honest': 'Spare Key es una lista de planificación. No inicia sesión en nada y no puede recuperar una cuenta por ti.',
+    'st.1': '1 Cuentas', 'st.2': '2 Tres toques', 'st.3': '3 Tu plan',
+    'pick.h': '¿Qué cuentas te dolería perder?', 'pick.note': 'Toca cada una que uses. Solo necesitamos el nombre. Nunca te pediremos iniciar sesión.',
+    'pick.name': '¿De quién es este plan? (un nombre o "Yo")', 'pick.country': 'País (muestra servicios locales)', 'pick.other': 'Otro país',
+    'pick.parentTip': '¿Lo haces con tu madre o padre? Siéntense juntos, que ellos tengan su teléfono y toquen lo que usan. Nunca escribas sus contraseñas.',
+    'back': 'Atrás', 'ask.h': 'Tres toques por cuenta', 'ask.note': '¿No estás seguro? Elige "No sé". Puedes cambiar cualquier respuesta después. Nada aquí es una contraseña.',
+    'ask.numH': 'Tu número de teléfono', 'ask.numQ': '¿Tu cuenta con la operadora móvil tiene su propio PIN o bloqueo de número, para que nadie pueda mover tu número sin él?',
+    'ask.numNote': 'Solo dinos sí o no. Nunca escribas el PIN aquí.', 'ask.next': 'Ver mi puntuación',
+    'fix.h': 'Tu lista de arreglos', 'fix.edit': 'Editar cuentas', 'fix.note': 'Lo más importante primero. Cada arreglo lleva unos minutos. Cuando hagas uno, toca lo que hiciste y tu puntuación se actualiza.',
+    'sheet.h': 'Tu Hoja de Teléfono Perdido', 'sheet.note': 'Una página para la peor hora. Imprímela o guárdala como PDF, y tenla lejos de tu teléfono (un cajón en casa, la casa de un familiar).',
+    'sheet.place': 'Dónde guardas tus códigos de respaldo impresos (un lugar, no los códigos)', 'sheet.trusted': 'Una persona de confianza que pueda ayudar (nombre)',
+    'sheet.hand': 'Añadir un recuadro para escribir a mano los códigos de respaldo en papel (nunca se escriben aquí)', 'sheet.print': 'Imprimir o guardar como PDF', 'sheet.preview': 'Vista previa',
+    'fam.h': 'Para tu familia', 'fam.lockedP': 'Si murieras o no pudieras hablar por ti, ¿sabría tu familia qué cuentas tienes, a quién llamar y qué quieres? El Paquete Familiar convierte tu plan en una carta que pueden usar.',
+    'fam.openNote': 'Rellena lo que ayude. Deja fuera lo que no. Solo lugares y nombres: nunca contraseñas, PIN ni códigos.', 'fam.contacts': 'Personas a quienes llamar primero', 'fam.addContact': 'Añadir una persona',
+    'fam.where': 'Dónde están mis documentos (lugares, no números)', 'fam.wishes': 'Mis deseos', 'fam.subs': 'Suscripciones y facturas que cancelar', 'fam.notes': 'Algo más que mi familia debería saber',
+    'fam.docs': 'Recordatorios de caducidad de documentos', 'fam.docsNote': 'Añade un pasaporte, permiso de conducir o documento de identidad y su fecha de caducidad. Tu archivo de recordatorios incluye un aviso 90 días antes.',
+    'fam.addDoc': 'Añadir un documento', 'fam.print': 'Imprimir la carta Para Mi Familia', 'fam.cards': 'Imprimir tarjetas de cartera', 'fam.binder': 'Imprimir la carpeta completa',
+    'fam.notWill': 'La carta Para Mi Familia no es un testamento ni un poder notarial. Para preguntas legales sobre una herencia, consulta a un profesional cualificado donde vives.',
+    'up.h': 'Paquete Familiar', 'up.once': 'un solo pago', 'up.1': 'Hasta 6 personas en un archivo de plan (para tus padres, tu pareja o tus hijos)',
+    'up.2': 'La carta Para Mi Familia: a quién llamar, dónde están los documentos, ajustes de legado, tus deseos, suscripciones que cancelar', 'up.3': 'Tarjetas de cartera y una carpeta lista para imprimir para cada persona',
+    'up.4': 'Recordatorios de caducidad de documentos (pasaporte, permiso, identidad) en tu archivo de calendario',
+    'up.fair': 'Un solo pago. Sin suscripción, sin renovación, sin prueba que cancelar. Tu propio plan, la puntuación, la lista de arreglos, la Hoja de Teléfono Perdido, el archivo cifrado y el recordatorio anual siguen gratis. El pago muestra el precio final en tu moneda antes de pagar.',
+    'up.buy': 'Obtener el Paquete Familiar por 4,99 US$', 'up.on': 'El Paquete Familiar está activado. Añade personas arriba y rellena la carta.',
+    'save.h': 'Guárdalo, compártelo, revísalo una vez al año', 'save.lockH': 'Guardar en este dispositivo (cifrado)', 'save.lockP': 'Bloqueado con una frase de contraseña que solo tú conoces. No podemos leerlo ni restablecerla, a propósito.',
+    'save.lockBtn': 'Guardar con frase de contraseña', 'save.fileH': 'Archivo del plan para otro dispositivo o una persona de confianza',
+    'save.fileP': 'Descarga un archivo cifrado (family-plan.sparekey). Da la frase de contraseña en persona o en otro mensaje, nunca en el mismo correo.', 'save.export': 'Descargar archivo del plan', 'save.import': 'Abrir un archivo de plan',
+    'save.remH': 'Recordatorio de revisión anual', 'save.remP': 'Un archivo de calendario para tu teléfono u ordenador: una revisión al año (más fechas de caducidad de documentos con el Paquete Familiar).', 'save.remBtn': 'Añadir el recordatorio a mi calendario',
+    'save.shareH': 'Comparte tu puntuación, no tus cuentas', 'save.shareP': 'Tu tarjeta de puntuación solo muestra números. El enlace de invitación es un enlace simple, sin nada sobre ti.',
+    'save.shareBtn': 'Compartir mi puntuación', 'save.invite': 'Enviar el enlace a mi madre o padre', 'save.guide': 'Imprimir la guía para hacerlo juntos',
+    'faq.h': 'Preguntas', 'faq.q1': '¿Pide mis contraseñas?', 'faq.a1': 'No, nunca. Ni contraseñas, ni PIN, ni códigos, ni frases de recuperación de cripto. Tocas cómo entra cada cuenta y qué respaldo tiene. Si tienes códigos de respaldo, los escribes a mano en papel. Los campos de texto rechazan cualquier cosa que parezca un código.',
+    'faq.q2': '¿Qué es la Puntuación de Bloqueo?', 'faq.a2': 'Cuántas de tus cuentas clave podrías recuperar sin este teléfono. Una cuenta cuenta como lista si puedes entrar solo con una contraseña, o si tiene un respaldo que no necesita este teléfono: un correo de recuperación, un segundo número, códigos de respaldo impresos o un contacto de confianza. Los códigos por SMS solos cuentan como bloqueo hasta que tu operadora te dé una nueva SIM. La línea de la familia cuenta las cuentas con un ajuste de legado activado o un contacto de confianza.',
+    'faq.q3': '¿Por qué no hay instrucciones paso a paso para cada app?', 'faq.a3': 'Las reglas de las plataformas cambian, y solo mostramos pasos que hemos comprobado en la página de ayuda oficial. Hasta que comprobemos una plataforma, su tarjeta enlaza a su página de ayuda oficial, con pasos generales que sirven para la mayoría de servicios. Cada tarjeta muestra cuándo la comprobamos por última vez.',
+    'faq.q4': 'Privacidad', 'faq.a4': 'Tu plan se queda en este dispositivo. Nunca vemos tus cuentas y nunca pedimos contraseñas ni códigos. Si lo guardas, se cifra con una frase de contraseña que solo tú conoces. No podemos leerlo ni recuperarlo. Si compras el Paquete Familiar, Stripe procesa el pago y solo guardamos el registro de que lo compraste.',
+    'faq.a4b': 'Esta página no llama a otros sitios web. Solo habla con nuestro propio servidor: una vez, de forma anónima, para contar que se hizo un plan (sin nombres, sin cuentas, sin respuestas), y para comprobar o iniciar una compra del Paquete Familiar. Tu idioma se recuerda en este navegador.',
+    'faq.policy': 'Política de privacidad', 'faq.q5': 'Olvidé mi frase de contraseña', 'faq.a5': 'No podemos restablecerla, a propósito: nadie, ni nosotros, puede abrir el archivo sin ella. Empieza un plan nuevo (lleva 10 minutos) y guárdalo con una frase nueva.',
+    'faq.q6': '¿La carta Para Mi Familia es un testamento?', 'faq.a6': 'No. La carta Para Mi Familia no es un testamento ni un poder notarial. Para preguntas legales sobre una herencia, consulta a un profesional cualificado donde vives. Las reglas sobre quién puede acceder a las cuentas de una persona fallecida cambian según el país y el servicio.',
+    'faq.q7': 'Páginas de ayuda oficiales', 'faq.a7': 'Las reglas de las plataformas cambian. Cada paso enlaza a la página oficial y muestra cuándo la comprobamos por última vez.',
+    'foot.b': 'Spare Key es una lista de planificación. No inicia sesión en nada y no puede recuperar una cuenta por ti. Información, no asesoría legal.', 'foot.p': 'Nada de lo que añades sale de este dispositivo.',
+    'pd.gen': 'Tu nueva frase de contraseña (se muestra una sola vez):', 'pd.copy': 'Copiar', 'pd.again': 'Otra', 'pd.own': 'Usar la mía', 'pd.ownL': 'Tu propia frase (12+ caracteres; mejor unas palabras)',
+    'pd.ack': 'La he anotado. Sé que nadie puede restablecerla.', 'pd.warn': 'Da la frase de contraseña en persona o en otro mensaje. Nunca en el mismo correo que el archivo.', 'pd.enter': 'Frase de contraseña', 'cancel': 'Cancelar',
+    // dynamic
+    'cat.email': 'Correo', 'cat.phone': 'Número y operadora', 'cat.bank': 'Bancos y tarjetas', 'cat.money': 'Dinero móvil y apps de pago', 'cat.msg': 'Mensajería',
+    'cat.cloud': 'Fotos y nube', 'cat.social': 'Redes sociales', 'cat.gov': 'Accesos del gobierno', 'cat.work': 'Trabajo', 'cat.pm': 'Gestor de contraseñas', 'cat.crypto': 'Cripto',
+    'cath.email': 'desbloquea casi todas las demás', 'cath.phone': 'recibe tus códigos por SMS', 'cath.pm': 'guarda las llaves de todo lo demás',
+    'lib.carrier': 'Mi operadora móvil', 'lib.bank1': 'Mi banco principal', 'lib.card1': 'Mi tarjeta de crédito', 'lib.bank2': 'Ahorros o segundo banco', 'lib.invest': 'Pensión o inversiones',
+    'lib.cloudother': 'Otro almacenamiento de fotos o archivos', 'lib.eid': 'Identidad digital nacional', 'lib.govother': 'Otro acceso del gobierno', 'lib.workemail': 'Correo y acceso del trabajo',
+    'lib.devicepw': 'Contraseñas guardadas en mi teléfono o navegador', 'lib.selfwallet': 'Mi propia billetera de cripto',
+    'pick.addPh': 'Otra: escribe un nombre', 'pick.add': 'Añadir', 'pick.next': 'Siguiente: {n} cuentas', 'pick.next1': 'Siguiente: 1 cuenta', 'pick.none': 'Toca una cuenta', 'pick.parentName': 'Mamá',
+    'si.sms': 'Contraseña + código SMS', 'si.app': 'App autenticadora', 'si.passkey': 'Llave de acceso o cara/huella', 'si.phoneapp': 'Solo la app de mi teléfono', 'si.pw': 'Solo contraseña', 'si.unsure': 'No sé',
+    'bk.email': 'Correo de recuperación', 'bk.phone2': 'Segundo número', 'bk.codes': 'Códigos de respaldo impresos', 'bk.contact': 'Contacto de confianza', 'bk.none': 'Ninguno',
+    'lg.set': 'Contacto de legado activado', 'lg.no': 'No', 'lg.na': 'No se ofrece', 'lg.unsure': 'No sé',
+    'q.signin': '¿Cómo entras?', 'q.backup': '¿Respaldo listo? (toca todos los que tengas)', 'q.legacy': 'Si murieras, ¿podría alguien actuar?', 'q.remove': 'Quitar',
+    'yn.yes': 'Sí', 'yn.no': 'No', 'yn.unsure': 'No sé', 'answered': '{a} de {n} respondidas',
+    'pill.locked': 'Te bloquea', 'pill.slow': 'Bloqueada hasta nueva SIM', 'pill.unsure': 'Revisar', 'pill.ok': 'Lista',
+    'sc.title': 'Puntuación de Bloqueo', 'sc.for': 'Plan de {name}', 'sc.ready': 'listas',
+    'sc.lost': 'Si perdieras tu teléfono hoy: <b>{x} de {n}</b> cuentas clave te dejarían fuera.', 'sc.lostNone': 'Si perdieras tu teléfono hoy: podrías volver a entrar en <b>las {n}</b> cuentas clave.',
+    'sc.died': 'Si murieras: tu familia podría acceder a <b>{y} de {n}</b>.', 'sc.gain': 'Antes: {a}/{n} cuando empezaste',
+    'fix.official': 'Página de ayuda oficial', 'fix.site': 'Sitio web oficial', 'fix.notChecked': 'Pasos para este servicio: aún no comprobados por nosotros, así que mostramos pasos generales. Sigue la página oficial.',
+    'fix.checked': 'Comprobado por nosotros: {date}', 'fix.nolink': 'Usa el número de tu tarjeta o extracto, o la app o web oficial. Nunca un número que llegue por SMS o correo.',
+    'fix.more': 'Siguientes arreglos ({n} más)', 'fix.did': '¿Hecho? Toca lo que añadiste:', 'fix.allgood': 'Nada urgente. Cada cuenta tiene una forma de volver, tu familia puede acceder y tu número está bloqueado. Imprime tu hoja y revisa de nuevo en un año.',
+    'fix.legacySet': 'Activé un contacto de legado', 'fix.legacyNa': 'No se ofrece', 'fix.pinSet': 'Puse un PIN o bloqueo en la operadora', 'fix.change': 'Cambiar respuestas',
+    'fx.email-first.t': 'Arregla primero el correo', 'fx.email-first.p': 'Tu correo restablece casi todas las demás cuentas. Dale un respaldo antes que nada.',
+    'fx.lost-locked.t': '{name}: te dejaría fuera', 'fx.lost-locked.p': 'Necesita este teléfono para entrar y no tiene un respaldo que funcione sin él.',
+    'fx.lost-locked.s': ['Abre la cuenta en un ordenador u otro dispositivo y ve a sus ajustes de seguridad o de inicio de sesión.', 'Añade un correo de recuperación que puedas abrir sin este teléfono.', 'Si ofrece códigos de respaldo, imprímelos y guarda el papel con tu Hoja de Teléfono Perdido, lejos del teléfono.', 'Si deja añadir un segundo número, añade el de un familiar.', 'Si usas una app autenticadora, comprueba si puede hacer copia en tu cuenta o en un segundo dispositivo.'],
+    'fx.lost-app.t': '{name}: solo funciona en este teléfono', 'fx.lost-app.p': 'Las apps así suelen estar ligadas a un teléfono. En uno nuevo normalmente tienes que demostrar otra vez quién eres.',
+    'fx.lost-app.s': ['Averigua ahora cómo volverías a entrar en un teléfono nuevo: una llamada, una visita a sucursal o agente con identificación, o un respaldo en la app.', 'Escribe a mano el número oficial de atención en tu Hoja de Teléfono Perdido. Tómalo de tu tarjeta, extracto o web oficial.', 'Si la app ofrece un correo de respaldo o un segundo dispositivo, añádelo.'],
+    'fx.lost-slow.t': '{name}: bloqueada hasta tener nueva SIM', 'fx.lost-slow.p': 'Los códigos por SMS van a tu número. Hasta que tu operadora te dé una SIM de reemplazo no puedes recibirlos, y un ladrón con tu SIM sí.',
+    'fx.lost-slow.s': ['Abre los ajustes de seguridad o de inicio de sesión de la cuenta.', 'Añade un respaldo que no necesite tu número: un correo de recuperación, códigos de respaldo impresos o una app autenticadora con copia.', 'Después bloquea tu número con tu operadora (mira "Protege tu número").'],
+    'fx.check-signin.t': '{name}: revisa cómo entras', 'fx.check-signin.p': 'Abre la app o la web, mira en sus ajustes de seguridad y toca cómo entras:',
+    'fx.crypto-wallet.t': '{name}: nadie puede restablecerla', 'fx.crypto-wallet.p': 'Una billetera propia no tiene servicio de ayuda. Si se pierde la frase de recuperación, se pierde el dinero.',
+    'fx.crypto-wallet.s': ['Asegúrate de que la frase de recuperación está escrita en papel (o metal) y guardada en un lugar seguro, lejos del teléfono.', 'Nunca escribas la frase en ninguna web, app ni en esta página.', 'Dile a tu familia que la billetera existe y dónde está el papel (el lugar, no las palabras). La carta Para Mi Familia tiene un sitio para eso.'],
+    'fx.legacy.t': '{name}: tu familia no podría actuar', 'fx.legacy.p': 'Si murieras o no pudieras hablar por ti, nadie podría acceder a esta cuenta.',
+    'fx.legacy.s': ['Busca en los ajustes de privacidad o seguridad de la cuenta una opción de contacto de legado, cuenta inactiva o conmemoración, y actívala si existe.', 'Si no existe, o para bancos y apps de dinero, anota la cuenta en tu carta Para Mi Familia para que tu familia sepa que existe y qué quieres.'],
+    'fx.legacy-letter.t': '{name}: sin ajuste de legado', 'fx.legacy-letter.p': 'Nos dijiste que este servicio no lo ofrece. Anota la cuenta y tus deseos en tu carta Para Mi Familia para que tu familia sepa que existe.',
+    'fx.add-2sv.t': '{name}: solo contraseña', 'fx.add-2sv.p': 'Cualquiera con la contraseña puede entrar. Activar la verificación en dos pasos, con un respaldo, lo hace mucho más difícil.',
+    'fx.carrier-pin.t': 'Bloquea tu número de teléfono', 'fx.carrier-pin.p': 'Tus códigos van a tu número. Pide a tu operadora un PIN de cuenta o un bloqueo de número para que nadie pueda pasarlo a otra SIM. Los pasos están justo debajo de la lista.',
+    'fx.codes-place.t': 'Anota dónde están tus códigos de respaldo', 'fx.codes-place.p': 'Tienes códigos impresos. Añade el lugar donde están (no los códigos) en tu Hoja de Teléfono Perdido, abajo.',
+    'ph.h': 'Protege tu número', 'ph.p': 'Tu número recibe tus códigos. Si alguien lo pasa a su SIM (un "SIM swap" o duplicado de SIM), también recibe tus códigos.',
+    'ph.s': ['Llama a tu operadora o abre su app oficial y pide un PIN o clave de cuenta. Debe ser distinto del código de desbloqueo del teléfono.', 'Pregunta si ofrecen bloqueo de número, bloqueo de portabilidad o aviso de cambio de SIM, y actívalo.', 'Escribe a mano el número oficial de atención de tu operadora en tu Hoja de Teléfono Perdido, para bloquear la SIM rápido desde otro teléfono.'],
+    'ph.carriers': 'Páginas oficiales de operadoras en {country}:', 'ph.none': 'Busca la web oficial de tu operadora en tu factura o contrato.',
+    'ph.yes': 'Nos dijiste que tu número está bloqueado. Bien.', 'ph.no': 'Nos dijiste que tu número aún no está bloqueado.', 'ph.unsure': 'No estabas seguro de si tu número está bloqueado.',
+    'country.US': 'Estados Unidos', 'country.UK': 'el Reino Unido', 'country.EU': 'la Unión Europea', 'country.CA': 'Canadá', 'country.NG': 'Nigeria', 'country.KE': 'Kenia', 'country.IN': 'India', 'country.PH': 'Filipinas', 'country.OTHER': 'tu país',
+    'sec.msg': 'Eso parece un código, una contraseña o una frase de recuperación, así que no lo guardamos. Escribe dónde está guardado (un lugar), nunca el código.',
+    'pp.me': 'Yo', 'pp.add': '+ Añadir persona', 'pp.max': 'Hasta 6 personas en un plan.', 'pp.needPack': 'Añadir más personas es parte del Paquete Familiar (4,99 US$, un solo pago).', 'pp.person': 'Persona {n}', 'pp.remove': 'Quitar a {name} de este plan',
+    'pp.free1': 'El plan gratis tiene una persona. Para hacer uno para otra persona, guarda antes este plan como archivo, u obtén el Paquete Familiar para tener hasta 6 personas juntas.',
+    'pd.saveT': 'Bloquea tu plan en este dispositivo', 'pd.exportT': 'Descargar un archivo de plan cifrado', 'pd.openT': 'Abrir tu plan',
+    'pd.saveI': 'Tu plan se cifra en este dispositivo con esta frase. Mientras esta página esté abierta, los cambios se guardan solos.', 'pd.exportI': 'El archivo se cifra con esta frase. Cualquiera con el archivo y la frase puede abrirlo, así que mantenlos separados.',
+    'pd.openI': 'Escribe la frase con la que se guardó este plan.', 'pd.checkoutI': 'Antes de pagar, bloquea tu plan en este dispositivo para que esté aquí cuando vuelvas del pago.',
+    'pd.save': 'Guardar', 'pd.export': 'Descargar', 'pd.open': 'Abrir', 'pd.copied': 'Copiada.', 'pd.working': 'Procesando… (tarda un momento a propósito)',
+    'sv.saved': 'Guardado y cifrado a las {time}.', 'sv.wrong': 'Esa frase no abre este plan. No podemos restablecerla, a propósito.', 'sv.notfile': 'Eso no es un archivo de plan de Spare Key.',
+    'sv.weak': 'Usa al menos 12 caracteres. Mejor unas cuantas palabras.', 'sv.ack': 'Marca la casilla cuando la hayas anotado.', 'sv.exported': 'Descargado family-plan.sparekey. Guarda la frase separada del archivo.',
+    'sv.opened': 'Plan abierto.', 'sv.deleted': 'Borrado de este dispositivo.', 'sv.confirmDelete': '¿Borrar el plan bloqueado de este dispositivo? No se puede deshacer.', 'sv.noStore': 'Este navegador no nos deja guardar aquí (¿modo privado?). Descarga un archivo de plan.',
+    'sv.empty': 'Añade al menos una cuenta primero.', 'sv.leave': 'Tu plan aún no está guardado.',
+    'buy.opening': 'Abriendo el pago…', 'buy.soon': 'El Paquete Familiar se podrá comprar muy pronto. Todo lo gratis funciona ya.', 'buy.err': 'Algo salió mal. Inténtalo de nuevo.',
+    'sh.text': 'Mi puntuación de bloqueo: {a}/{n} → {b}/{n} ✅ Haz tu plan en 10 minutos · quickwell.app/spare-key', 'sh.text1': 'Mi puntuación de bloqueo: {b}/{n} ✅ Haz tu plan en 10 minutos · quickwell.app/spare-key',
+    'sh.copied': 'Copiado. Pégalo donde quieras. No incluye nombres de cuentas.', 'sh.img': 'Tarjeta de puntuación guardada como imagen.', 'sh.cardT': 'Mi Puntuación de Bloqueo', 'sh.cardS': 'Haz tu plan en 10 minutos', 'sh.noScore': 'Termina tu plan primero.',
+    'inv.text': 'Hice un plan por si pierdo el teléfono. Lleva 10 minutos y nada sale de tu teléfono: {url}', 'inv.copied': 'Enlace copiado. No lleva nada sobre ti.',
+    'ics.reviewT': 'Spare Key: revisión anual de tu plan de teléfono perdido y familia', 'ics.reviewD': 'Abre tu archivo de plan, comprueba que cada cuenta sigue teniendo respaldo, actualiza la carta familiar e imprime una Hoja de Teléfono Perdido nueva. quickwell.app/spare-key/',
+    'ics.soon': 'Renovar pronto', 'ics.on': 'Caduca el', 'ics.today': 'Caduca hoy', 'ics.done': 'Archivo de calendario descargado. Ábrelo para añadir el recordatorio.',
+    'doc.passport': 'Pasaporte', 'doc.licence': 'Permiso de conducir', 'doc.id': 'Documento de identidad', 'doc.residence': 'Permiso de residencia o visado', 'doc.other': 'Otro documento', 'doc.who': 'De quién', 'doc.date': 'Caduca', 'doc.label': 'Documento',
+    'ct.name': 'Nombre', 'ct.rel': 'Parentesco', 'ct.reach': 'Teléfono o correo', 'ct.remove': 'Quitar',
+    'wh.will': 'Testamento o fideicomiso', 'wh.id': 'Identidad, pasaporte, actas de nacimiento y matrimonio', 'wh.insurance': 'Pólizas de seguro', 'wh.property': 'Papeles de casa, alquiler o coche', 'wh.money': 'Papeles de banco, pensión e impuestos', 'wh.other': 'Otros papeles importantes',
+    'wh.ph': 'p. ej. caja gris, armario del dormitorio', 'wi.photos': 'Mis fotos y vídeos', 'wi.social': 'Mis redes sociales', 'wi.email': 'Mi correo',
+    'wi.photosPh': 'p. ej. guardarlas y compartirlas con mis hijos', 'wi.socialPh': 'p. ej. conmemorar Facebook, borrar el resto', 'wi.emailPh': 'p. ej. pasar el correo importante y luego cerrarlo',
+    'pr.title': 'Hoja de Teléfono Perdido', 'pr.for': 'de {name}', 'pr.keep': 'Guárdala en papel, lejos de tu teléfono. Actualizada el {date}.',
+    'pr.h1': 'La primera hora', 'pr.f1': 'Desde otro teléfono, llama a tu operadora. Pide que bloqueen tu SIM y detengan cualquier traspaso de tu número.', 'pr.carrier': 'Operadora', 'pr.tel': 'Teléfono (escríbelo a mano)',
+    'pr.f2': 'Desde otro dispositivo, usa el servicio para encontrar dispositivos del fabricante de tu teléfono para localizarlo, bloquearlo o borrarlo.', 'pr.f2ids': 'Entrarás con: {ids}.',
+    'pr.f3': 'Llama a tus bancos y apps de dinero para congelar tarjetas y el acceso a las apps. Usa el número de tu tarjeta o de la web oficial, nunca uno que llegue por SMS.',
+    'pr.f4': 'Desde un ordenador de confianza, entra en tu correo, cambia la contraseña y revisa sus ajustes de recuperación.',
+    'pr.f5': 'Si te robaron el teléfono, denúncialo a la policía y guarda el número de denuncia para tu banco y tu operadora.',
+    'pr.f6': 'Durante las próximas semanas, trata cualquier SMS o llamada sobre tus cuentas como una posible estafa. Devuelve la llamada solo a números oficiales.',
+    'pr.h2': 'Orden de recuperación', 'pr.h2p': 'Recupéralas en este orden. Primero el correo: restablece casi todas las demás.',
+    'pr.th.acc': 'Cuenta', 'pr.th.sign': 'Entra con', 'pr.th.backup': 'Respaldo sin este teléfono', 'pr.th.status': 'Estado',
+    'pr.h3': 'Dónde están mis códigos de respaldo', 'pr.h3none': 'Lugar:', 'pr.hand': 'Códigos de respaldo, escritos a mano (guarda esta hoja en un lugar seguro)', 'pr.h4': 'Quién puede ayudar', 'pr.noAcc': 'Aún no hay cuentas.',
+    'pr.foot': 'Hecho con Spare Key (quickwell.app/spare-key). Una lista de planificación: no inicia sesión en nada y no puede recuperar una cuenta por ti. Las reglas cambian: revisa cada página de ayuda oficial.',
+    'lt.title': 'Para Mi Familia', 'lt.from': 'De {name}. Escrita el {date}.', 'lt.intro': 'Si me pasa algo, esta carta os dice dónde están las cosas y qué me gustaría. Leedla entera antes de contactar a nadie.',
+    'lt.notWill': 'La carta Para Mi Familia no es un testamento ni un poder notarial. Para preguntas legales sobre una herencia, consulta a un profesional cualificado donde vives.',
+    'lt.h1': 'Personas a quienes llamar primero', 'lt.h2': 'Dónde están mis documentos', 'lt.h3': 'Mis cuentas', 'lt.h3p': 'Preguntad a cada servicio cómo gestiona el fallecimiento del titular, en lugar de intentar entrar como yo. Donde activé un ajuste de legado o nombré un contacto de confianza, está marcado.',
+    'lt.th.legacy': 'Ajuste de legado', 'lt.th.reach': '¿La familia puede actuar?', 'lt.h4': 'Mis deseos', 'lt.h5': 'Suscripciones y facturas que cancelar', 'lt.h6': 'Nuestra palabra clave familiar', 'lt.h6p': 'Escrita a mano, nunca tecleada:', 'lt.h6q': 'Si alguien llama en mi nombre pidiendo dinero o códigos, pedidle la palabra clave.',
+    'lt.h7': 'Mi Hoja de Teléfono Perdido y mis códigos de respaldo están en', 'lt.h8': 'Algo más', 'lt.none': '(sin rellenar)', 'lt.yes': 'Sí', 'lt.no': 'No',
+    'wc.title': 'Tarjeta Spare Key', 'wc.l1': 'Si pierdo mi teléfono: llamar a mi operadora desde otro teléfono para bloquear la SIM.', 'wc.place': 'Mi Hoja de Teléfono Perdido está en:', 'wc.trusted': 'Persona de confianza:',
+    'wc.back': 'En caso de emergencia, contactar a:', 'wc.noSecrets': 'Sin contraseñas ni códigos en esta tarjeta.', 'wc.tel': 'Tel',
+    'gd.title': 'Hacerlo juntos: 20 minutos sentados', 'gd.sub': 'Para un hijo adulto y su madre o padre (o dos personas que confían entre sí).',
+    'gd.s': ['Elegid un momento tranquilo. Traed su teléfono, sus gafas y sus tarjetas del banco.', 'Ellos tienen su teléfono. Tú lees las preguntas; ellos tocan. Nunca pidas ni escribas sus contraseñas, PIN ni códigos.', 'Abrid quickwell.app/spare-key y tocad "Hacer uno para mi madre o padre".', 'Revisad juntos la lista de arreglos. Casi todos están en los ajustes de seguridad de cada app. Haced los dos primeros hoy.', 'Imprimid la Hoja de Teléfono Perdido. Decidid juntos dónde se guarda el papel.', 'Si quieren, rellenad juntos la carta Para Mi Familia. Luego añadid el recordatorio anual a su calendario.'],
+    'gd.foot': 'Spare Key nunca pide contraseñas, PIN ni códigos. Nada sale del teléfono.',
+    'src.not': 'pasos aún no comprobados por nosotros', 'yes': 'Sí', 'no': 'No', 'unsure': 'No sé', 'next': 'Siguiente', 'lang': 'English', 'langAria': 'View in English',
+  };
+  root.SK_I18N = { en, es };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script src="/js/pro.js"></script>
+<script id="sk-ui">
+/* Spare Key: page. Talks only to our own /api (anonymous plan count, Family Pack check and checkout via /js/pro.js). */
+(function () {
+  'use strict';
+  const SK = window.SK, I = window.SK_I18N, TOOL = 'spare-key';
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const ls = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+    del(k) { try { localStorage.removeItem(k); } catch (e) { /* storage blocked */ } },
+  };
+  const VAULT = 'spare-key:vault', LANGK = 'spare-key:lang';
+  const pad = (n) => String(n).padStart(2, '0');
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+  const fmtDate = (s) => { try { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString(LANG === 'es' ? 'es' : 'en', { year: 'numeric', month: 'long', day: 'numeric' }); } catch (e) { return s; } };
+
+  // ------------------------------------------------------------------ words
+  let LANG = String(ls.get(LANGK) || navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const STATIC_EN = {};
+  document.querySelectorAll('[data-i18n]').forEach((el) => { if (!(el.dataset.i18n in STATIC_EN)) STATIC_EN[el.dataset.i18n] = el.innerHTML; });
+  const raw = (k) => { const a = I[LANG] && I[LANG][k]; if (a != null) return a; if (I.en[k] != null) return I.en[k]; return STATIC_EN[k] != null ? STATIC_EN[k] : k; };
+  const fill = (s, v, f) => (typeof s === 'string' && v ? s.replace(/\{(\w+)\}/g, (m, x) => (v[x] != null ? f(v[x]) : m)) : s);
+  const t = (k, v) => fill(raw(k), v, String);   // plain text (share text, calendar, prompts)
+  const h = (k, v) => fill(raw(k), v, esc);      // HTML (templates are ours; variables are escaped)
+  const libName = (p) => (I[LANG] && I[LANG]['lib.' + p.id]) || p.name;
+  function applyLang() {
+    document.documentElement.lang = LANG;
+    document.querySelectorAll('[data-i18n]').forEach((el) => { const k = el.dataset.i18n; el.innerHTML = LANG === 'en' ? STATIC_EN[k] : (I.es[k] != null ? I.es[k] : STATIC_EN[k]); });
+    const b = $('langBtn'); b.textContent = t('lang'); b.setAttribute('aria-label', t('langAria')); b.lang = LANG === 'en' ? 'es' : 'en';
+    $('pickNext').textContent = t('next');
+  }
+
+  // ------------------------------------------------------------------ state
+  const S = { plan: SK.newPlan(), cur: 0, step: 'start', pro: false, vault: null, dirty: false, counted: false, parentMode: false };
+  S.plan.created = today();
+  const P = () => S.plan.people[S.cur];
+  const accById = (id) => (P() ? P().accounts.find((a) => a.id === id) : null);
+
+  let saveTimer = null;
+  function changed() {
+    S.dirty = true;
+    if (S.vault) { clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 500); }
+  }
+  async function saveNow() {
+    if (!S.vault) return;
+    S.plan.updated = today();
+    const text = await SK.encryptWithKey(S.plan, S.vault.key, S.vault.salt, S.vault.iter);
+    if (ls.set(VAULT, text)) { S.dirty = false; $('saveState').textContent = t('sv.saved', { time: new Date().toLocaleTimeString(LANG, { hour: '2-digit', minute: '2-digit' }) }); }
+    else $('saveState').textContent = t('sv.noStore');
+  }
+  window.addEventListener('beforeunload', (e) => {
+    if (S.dirty && !S.vault && P() && P().accounts.length) { e.preventDefault(); e.returnValue = t('sv.leave'); }
+  });
+
+  // ------------------------------------------------------------------ navigation
+  const SECTIONS = { start: 's-start', pick: 's-pick', ask: 's-ask', result: 's-result' };
+  function go(step, opts) {
+    S.step = step;
+    for (const [k, id] of Object.entries(SECTIONS)) $(id).hidden = k !== step;
+    render();
+    if (!(opts && opts.keepScroll)) window.scrollTo(0, 0);
+    const h2 = $(SECTIONS[step]).querySelector('h1, h2'); if (h2 && step !== 'start') { h2.tabIndex = -1; h2.focus({ preventScroll: true }); }
+  }
+  function render() {
+    renderPeople();
+    if (S.step === 'pick') renderPick();
+    if (S.step === 'ask') renderAsk();
+    if (S.step === 'result') renderResult();
+  }
+  function startPlan(relation) {
+    const msgEl = $('startMsg');
+    let p = P();
+    if (p && p.accounts.length) {
+      if (relation === 'me' && p.relation === 'me') return go(p.baseline ? 'result' : 'pick');
+      if (!S.pro) { msgEl.hidden = false; msgEl.textContent = t('pp.free1'); return; }
+      if (S.plan.people.length >= SK.MAX_PEOPLE) { msgEl.hidden = false; msgEl.textContent = t('pp.max'); return; }
+      S.plan.people.push(SK.newPerson({ relation, country: p.country })); S.cur = S.plan.people.length - 1;
+    } else if (p) { p.relation = relation; }
+    else { S.plan.people.push(SK.newPerson({ relation, country: SK.guessCountry(navigator.language) })); S.cur = 0; }
+    S.parentMode = relation === 'parent';
+    msgEl.hidden = true; changed(); go('pick');
+  }
+
+  // ------------------------------------------------------------------ people (Family Pack)
+  function renderPeople() {
+    const wrap = $('peopleWrap');
+    const show = S.step !== 'start' && (S.pro || S.plan.people.length > 1);
+    wrap.hidden = !show; if (!show) return;
+    const ppl = S.plan.people;
+    let html = ppl.map((p, i) => `<button type="button" data-person="${i}" aria-pressed="${i === S.cur}">${esc(p.name || (i === 0 ? t('pp.me') : t('pp.person', { n: i + 1 })))}</button>`).join('');
+    if (ppl.length < SK.MAX_PEOPLE) html += `<button type="button" id="addPerson" class="ghost">${h('pp.add')}</button>`;
+    if (ppl.length > 1) html += `<button type="button" id="rmPerson" class="link small" aria-label="${esc(t('pp.remove', { name: P().name || t('pp.person', { n: S.cur + 1 }) }))}">${h('q.remove')}</button>`;
+    $('people').innerHTML = html;
+  }
+  $('people').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.person != null) { S.cur = +b.dataset.person; go(P().baseline ? 'result' : 'pick'); return; }
+    if (b.id === 'addPerson') {
+      if (!S.pro) { $('buyMsg').textContent = t('pp.needPack'); $('upsell').scrollIntoView({ behavior: 'smooth' }); return; }
+      S.plan.people.push(SK.newPerson({ relation: 'other', country: P().country })); S.cur = S.plan.people.length - 1; changed(); go('pick'); return;
+    }
+    if (b.id === 'rmPerson') {
+      if (!confirm(t('pp.remove', { name: P().name || t('pp.person', { n: S.cur + 1 }) }) + '?')) return;
+      S.plan.people.splice(S.cur, 1); S.cur = 0; changed(); go(P().baseline ? 'result' : 'pick');
+    }
+  });
+
+  // ------------------------------------------------------------------ secret guard for text fields
+  function guard(input, warnEl) {
+    const v = input.value;
+    const bad = SK.looksSecret(v);
+    input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    if (warnEl) { warnEl.hidden = !bad; warnEl.textContent = bad ? t('sec.msg') : ''; }
+    return bad ? '' : v.trim();
+  }
+
+  // ------------------------------------------------------------------ 2. pick accounts
+  function renderPick() {
+    const p = P();
+    $('pName').value = p.name; $('pName').placeholder = S.parentMode || p.relation === 'parent' ? t('pick.parentName') : t('pp.me');
+    $('pCountry').value = p.country;
+    $('parentTip').hidden = !(S.parentMode || p.relation === 'parent');
+    const lib = SK.forCountry(p.country);
+    $('groups').innerHTML = SK.CATS.map((cat) => {
+      const tiles = lib.filter((x) => x.cat === cat).map((x) => `<button type="button" class="tile" data-pid="${x.id}" aria-pressed="${p.accounts.some((a) => a.pid === x.id)}">${esc(libName(x))}</button>`);
+      const custom = p.accounts.filter((a) => a.cat === cat && !a.pid).map((a) => `<button type="button" class="tile" data-acc="${a.id}" aria-pressed="true">${esc(a.name)}</button>`);
+      const hint = raw('cath.' + cat) !== 'cath.' + cat ? ` <small>${h('cath.' + cat)}</small>` : '';
+      return `<div class="group" role="group" aria-labelledby="g-${cat}"><h3 id="g-${cat}">${h('cat.' + cat)}${hint}</h3><div class="tiles">${tiles.join('')}${custom.join('')}</div>
+        <div class="addother"><input type="text" maxlength="60" autocomplete="off" data-other="${cat}" placeholder="${esc(t('pick.addPh'))}" aria-label="${esc(t('cat.' + cat) + ': ' + t('pick.addPh'))}"><button type="button" class="ghost small" data-addother="${cat}">${h('pick.add')}</button></div>
+        <p class="err" data-otherwarn="${cat}" hidden></p></div>`;
+    }).join('');
+    updatePickNext();
+  }
+  function updatePickNext() {
+    const n = P().accounts.length; const b = $('pickNext');
+    b.disabled = !n; b.textContent = n ? (n === 1 ? t('pick.next1') : t('pick.next', { n })) : t('pick.none');
+  }
+  $('groups').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const p = P();
+    if (b.dataset.pid) {
+      const pid = b.dataset.pid; const on = p.accounts.some((a) => a.pid === pid);
+      if (on) p.accounts = p.accounts.filter((a) => a.pid !== pid);
+      else { const x = SK.byId(pid); p.accounts.push(SK.newAccount(pid, libName(x), x.cat)); }
+      b.setAttribute('aria-pressed', String(!on)); changed(); updatePickNext(); return;
+    }
+    if (b.dataset.acc) { p.accounts = p.accounts.filter((a) => a.id !== b.dataset.acc); b.remove(); changed(); updatePickNext(); return; }
+    if (b.dataset.addother) addOther(b.dataset.addother);
+  });
+  $('groups').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.dataset.other) { e.preventDefault(); addOther(e.target.dataset.other); } });
+  function addOther(cat) {
+    const input = document.querySelector(`[data-other="${cat}"]`); const warn = document.querySelector(`[data-otherwarn="${cat}"]`);
+    const v = guard(input, warn); if (!v) { if (!warn.hidden) input.focus(); return; }
+    P().accounts.push(SK.newAccount('', v, cat)); changed(); renderPick();
+    const again = document.querySelector(`[data-other="${cat}"]`); if (again) again.focus();
+  }
+  $('pName').addEventListener('input', (e) => { P().name = guard(e.target, null).slice(0, 40); changed(); });
+  $('pCountry').addEventListener('change', (e) => { P().country = e.target.value; changed(); renderPick(); });
+  $('pickBack').addEventListener('click', () => go('start'));
+  $('pickNext').addEventListener('click', () => { if (P().accounts.length) go('ask'); });
+
+  // ------------------------------------------------------------------ 3. three taps
+  const seg = (name, type, values, labelKey, checked, acc, field) => `<div class="seg">${values.map((v) => `<label><input type="${type}" name="${name}" value="${v}" data-acc="${acc}" data-f="${field}"${checked(v) ? ' checked' : ''}><span>${h(labelKey + v)}</span></label>`).join('')}</div>`;
+  function askCard(a) {
+    const done = a.signin && a.legacy && a.backups.length;
+    return `<div class="q${done ? ' done' : ''}" id="q-${a.id}"><div class="qh"><b>${esc(a.name)}</b><span class="note">${h('cat.' + a.cat)} · <button type="button" class="link small" data-rm="${a.id}">${h('q.remove')}</button></span></div>
+      <fieldset><legend>${h('q.signin')}</legend>${seg('si-' + a.id, 'radio', SK.SIGNIN, 'si.', (v) => a.signin === v, a.id, 'signin')}</fieldset>
+      <fieldset><legend>${h('q.backup')}</legend>${seg('bk-' + a.id, 'checkbox', SK.BACKUPS, 'bk.', (v) => a.backups.includes(v), a.id, 'backups')}</fieldset>
+      <fieldset><legend>${h('q.legacy')}</legend>${seg('lg-' + a.id, 'radio', SK.LEGACY, 'lg.', (v) => a.legacy === v, a.id, 'legacy')}</fieldset></div>`;
+  }
+  function renderAsk() {
+    const p = P();
+    $('askList').innerHTML = SK.recoveryOrder(p).map(askCard).join('');
+    $('carrierSeg').innerHTML = ['yes', 'no', 'unsure'].map((v) => `<label><input type="radio" name="carrierPin" value="${v}"${p.carrierPin === v ? ' checked' : ''}><span>${h('yn.' + v)}</span></label>`).join('');
+  }
+  $('askList').addEventListener('change', (e) => {
+    const i = e.target; const a = accById(i.dataset.acc); if (!a) return;
+    if (i.dataset.f === 'signin') a.signin = i.value;
+    else if (i.dataset.f === 'legacy') a.legacy = i.value;
+    else if (i.dataset.f === 'backups') {
+      let b = a.backups.filter((x) => x !== i.value);
+      if (i.checked) b = i.value === 'none' ? ['none'] : [...b.filter((x) => x !== 'none'), i.value];
+      a.backups = b;
+      document.querySelectorAll(`input[name="bk-${a.id}"]`).forEach((x) => { x.checked = a.backups.includes(x.value); });
+    }
+    $('q-' + a.id).classList.toggle('done', !!(a.signin && a.legacy && a.backups.length));
+    changed();
+  });
+  $('askList').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-rm]'); if (!b) return;
+    P().accounts = P().accounts.filter((a) => a.id !== b.dataset.rm); changed();
+    if (!P().accounts.length) go('pick'); else renderAsk();
+  });
+  $('carrierSeg').addEventListener('change', (e) => { P().carrierPin = e.target.value; changed(); });
+  $('askBack').addEventListener('click', () => go('pick'));
+  $('askNext').addEventListener('click', () => {
+    const p = P(); const s = SK.score(p);
+    if (!p.baseline) p.baseline = { ready: s.ready, n: s.n };
+    changed(); go('result'); countOnce();
+  });
+  function countOnce() {
+    if (S.counted) return; S.counted = true;
+    try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }) }).catch(() => {}); } catch (e) { /* offline */ }
+  }
+
+  // ------------------------------------------------------------------ 4. results
+  const statusPill = (lost) => `<span class="pill ${lost === 'ok' ? 'green' : lost === 'locked' ? 'red' : 'amber'}">${h('pill.' + lost)}</span>`;
+  function renderScore() {
+    const p = P(); const s = SK.score(p);
+    const segs = SK.recoveryOrder(p).map((a) => { const x = SK.assess(a).lost; return `<i class="${x === 'ok' ? 'ok' : x === 'locked' ? '' : 'slow'}"></i>`; }).join('');
+    const gain = p.baseline && p.baseline.n === s.n && p.baseline.ready < s.ready ? `<span class="gain">${h('sc.gain', { a: p.baseline.ready, n: s.n })}</span>` : '';
+    $('scoreCard').innerHTML = `<p class="note" style="margin:0">${p.name ? h('sc.for', { name: p.name }) : ''}</p>
+      <h2 style="margin:4px 0 6px">${h('sc.title')}</h2>
+      <div class="big" id="bigScore">${s.ready}<small>/${s.n} ${h('sc.ready')}</small></div>
+      <div class="meter" aria-hidden="true">${segs}</div>
+      <div class="lines"><div><span class="dot ${s.atRisk ? 'red' : 'green'}"></span><span id="lostLine">${s.atRisk ? h('sc.lost', { x: s.atRisk, n: s.n }) : h('sc.lostNone', { n: s.n })}</span></div>
+      <div><span class="dot ${s.reach === s.n ? 'green' : s.reach ? 'amber' : 'red'}"></span><span id="diedLine">${h('sc.died', { y: s.reach, n: s.n })}</span></div></div>${gain}`;
+  }
+  function linkLine(a) {
+    const x = SK.byId(a.pid);
+    if (x && x.url) {
+      const label = x.kind === 'site' ? h('fix.site') : h('fix.official');
+      const checked = x.checked ? h('fix.checked', { date: x.checked }) : h('fix.notChecked');
+      return `<p class="src"><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${label}: ${esc(libName(x))}</a><br>${checked}</p>`;
+    }
+    if (['bank', 'money', 'phone', 'gov', 'work'].includes(a.cat) || (x && x.cat === 'crypto')) return `<p class="src">${h('fix.nolink')}</p>`;
+    return '';
+  }
+  function fixCard(f) {
+    const a = f.acc ? accById(f.acc) : null; const name = a ? a.name : '';
+    const x = a ? SK.byId(a.pid) : null;
+    const cls = { 'lost-locked': '', 'lost-app': '', 'email-first': '', 'lost-slow': 'amber', 'check-signin': 'amber', 'carrier-pin': 'amber', 'codes-place': 'amber', 'crypto-wallet': 'amber' }[f.kind];
+    let steps = x && x.checked && x.steps.length ? x.steps : raw('fx.' + f.kind + '.s');
+    if (f.kind === 'carrier-pin') steps = null; // the steps are in the "Protect your phone number" card right below
+    const ol = Array.isArray(steps) ? `<ol>${steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>` : '';
+    let quick = '';
+    const qb = (act, v, label) => `<button type="button" data-act="${act}" data-acc="${a ? a.id : ''}" data-v="${v}">${label}</button>`;
+    if (['lost-locked', 'lost-slow', 'lost-app'].includes(f.kind)) quick = `<span class="note" style="width:100%">${h('fix.did')}</span>` + ['email', 'phone2', 'codes', 'contact'].map((v) => qb('bk', v, h('bk.' + v))).join('');
+    else if (f.kind === 'check-signin') quick = SK.SIGNIN.filter((v) => v !== 'unsure').map((v) => qb('si', v, h('si.' + v))).join('');
+    else if (f.kind === 'legacy') quick = qb('lg', 'set', h('fix.legacySet')) + qb('lg', 'na', h('fix.legacyNa')) + qb('bk', 'contact', h('bk.contact'));
+    else if (f.kind === 'add-2sv') quick = qb('edit', '', h('fix.change'));
+    else if (f.kind === 'carrier-pin') quick = qb('pin', 'yes', h('fix.pinSet'));
+    else if (f.kind === 'codes-place') quick = qb('focus', 'codesPlace', h('sheet.place'));
+    const pill = a && f.kind.startsWith('lost') ? statusPill(SK.assess(a).lost) : '';
+    return `<div class="fix ${f.kind.startsWith('legacy') || f.kind === 'add-2sv' ? 'info' : cls}" data-fix="${esc(f.id)}"><div class="fh"><b>${h('fx.' + f.kind + '.t', { name })}</b>${pill}</div>
+      <p class="small" style="margin:4px 0 0">${h('fx.' + f.kind + '.p')}</p>${ol}${a ? linkLine(a) : ''}${quick ? `<div class="quick">${quick}</div>` : ''}</div>`;
+  }
+  function renderFixes() {
+    const list = SK.fixes(P());
+    const TOP = 4;
+    $('fixList').innerHTML = !list.length ? `<p class="allgood">${h('fix.allgood')}</p>`
+      : list.slice(0, TOP).map(fixCard).join('') + (list.length > TOP ? `<details class="more-fixes"${S.moreOpen ? ' open' : ''}><summary>${h('fix.more', { n: list.length - TOP })}</summary>${list.slice(TOP).map(fixCard).join('')}</details>` : '');
+    const d = $('fixList').querySelector('details'); if (d) d.addEventListener('toggle', () => { S.moreOpen = d.open; });
+  }
+  $('fixList').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const a = accById(b.dataset.acc); const v = b.dataset.v; const p = P();
+    if (b.dataset.act === 'bk' && a) a.backups = [...new Set([...a.backups.filter((x) => x !== 'none'), v])];
+    else if (b.dataset.act === 'si' && a) a.signin = v;
+    else if (b.dataset.act === 'lg' && a) a.legacy = v;
+    else if (b.dataset.act === 'pin') p.carrierPin = 'yes';
+    else if (b.dataset.act === 'focus') { $(v).focus(); $(v).scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    else if (b.dataset.act === 'edit') { go('ask'); const q = $('q-' + (a && a.id)); if (q) q.scrollIntoView({ block: 'center' }); return; }
+    changed(); renderScore(); renderFixes(); renderPhone(); refreshPreview();
+  });
+  function renderPhone() {
+    const p = P();
+    const carriers = SK.LIBRARY.filter((x) => x.cat === 'phone' && x.url && x.c && x.c.includes(p.country));
+    const status = p.carrierPin ? `<p class="${p.carrierPin === 'yes' ? 'ok' : 'note'}" style="font-weight:600">${h('ph.' + p.carrierPin)}</p>` : '';
+    $('phoneCard').innerHTML = `<h2>${h('ph.h')}</h2><p>${h('ph.p')}</p>${status}<ol>${raw('ph.s').map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
+      <p class="small" style="margin:10px 0 4px">${carriers.length ? h('ph.carriers', { country: t('country.' + p.country) }) : h('ph.none')}</p>
+      ${carriers.length ? `<ul class="src-list small">${carriers.map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a> <span class="note">· ${x.checked ? h('fix.checked', { date: x.checked }) : h('src.not')}</span></li>`).join('')}</ul>` : ''}`;
+  }
+  function renderResult() {
+    renderScore(); renderFixes(); renderPhone();
+    const p = P();
+    $('codesPlace').value = p.codesPlace; $('trustedName').value = p.trustedName; $('handBox').checked = !!p.handBox;
+    refreshPreview(); renderFamily(); renderBilling();
+  }
+
+  // ------------------------------------------------------------------ Lost-Phone Sheet
+  const line = (w) => `<span class="write" style="min-width:${w || 150}px"></span>`;
+  const signLabel = (a) => (a.signin ? t('si.' + a.signin) : t('si.unsure'));
+  const backupLabel = (a) => { const b = SK.assess(a).backups; return b.length ? b.map((x) => t('bk.' + x)).join(', ') : '—'; };
+  function sheetHTML(p) {
+    const order = SK.recoveryOrder(p);
+    const carrier = p.accounts.find((a) => a.cat === 'phone');
+    const ids = p.accounts.filter((a) => a.pid === 'apple' || a.pid === 'google').map((a) => (a.pid === 'apple' ? 'Apple Account' : 'Google Account'));
+    const money = p.accounts.filter((a) => a.cat === 'bank' || a.cat === 'money');
+    const who = p.name || t('pp.me');
+    return `<section class="pp"><h2>${h('pr.title')} <span style="font-weight:400">${h('pr.for', { name: who })}</span></h2><p class="sub">${h('pr.keep', { date: fmtDate(today()) })}</p>
+      <h3>${h('pr.h1')}</h3><ol>
+        <li>${h('pr.f1')}<br>${h('pr.carrier')}: <b>${carrier ? esc(carrier.name) : line(120)}</b> · ${h('pr.tel')}: ${line(140)}</li>
+        <li>${h('pr.f2')} ${ids.length ? h('pr.f2ids', { ids: ids.join(', ') }) : ''}</li>
+        <li>${h('pr.f3')}${money.length ? `<table><tr><th>${h('pr.th.acc')}</th><th>${h('pr.tel')}</th></tr>${money.map((a) => `<tr><td>${esc(a.name)}</td><td></td></tr>`).join('')}</table>` : ''}</li>
+        <li>${h('pr.f4')}</li><li>${h('pr.f5')}</li><li>${h('pr.f6')}</li></ol>
+      <h3>${h('pr.h2')}</h3><p>${h('pr.h2p')}</p>
+      ${order.length ? `<table><tr><th>#</th><th>${h('pr.th.acc')}</th><th>${h('pr.th.sign')}</th><th>${h('pr.th.backup')}</th><th>${h('pr.th.status')}</th></tr>${order.map((a, i) => `<tr><td>${i + 1}</td><td>${esc(a.name)}</td><td>${esc(signLabel(a))}</td><td>${esc(backupLabel(a))}</td><td>${h('pill.' + SK.assess(a).lost)}</td></tr>`).join('')}</table>` : `<p>${h('pr.noAcc')}</p>`}
+      <h3>${h('pr.h3')}</h3><p>${p.codesPlace ? esc(p.codesPlace) : `${h('pr.h3none')} ${line(260)}`}</p>
+      ${p.handBox ? `<p class="small">${h('pr.hand')}</p><div class="hand"></div>` : ''}
+      <h3>${h('pr.h4')}</h3><p>${p.trustedName ? esc(p.trustedName) : line(200)} · ${h('pr.tel')}: ${line(140)}</p>
+      <p class="foot">${h('pr.foot')}</p></section>`;
+  }
+  function refreshPreview() { if (!$('sheetPreview').hidden && P()) $('sheetPreview').innerHTML = sheetHTML(P()); }
+  $('toggleSheet').addEventListener('click', () => { const pv = $('sheetPreview'); pv.hidden = !pv.hidden; refreshPreview(); });
+  const sheetWarn = $('secretWarn');
+  $('codesPlace').addEventListener('input', (e) => { P().codesPlace = guard(e.target, sheetWarn); changed(); renderFixes(); refreshPreview(); });
+  $('trustedName').addEventListener('input', (e) => { P().trustedName = guard(e.target, sheetWarn); changed(); refreshPreview(); });
+  $('handBox').addEventListener('change', (e) => { P().handBox = e.target.checked; changed(); refreshPreview(); });
+
+  function printDoc(html) {
+    const pa = $('printArea'); pa.innerHTML = html;
+    document.body.classList.add('printing');
+    const done = () => { document.body.classList.remove('printing'); pa.innerHTML = ''; window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    try { window.print(); } catch (e) { done(); }
+  }
+  $('printSheet').addEventListener('click', () => printDoc(sheetHTML(P())));
+
+  // ------------------------------------------------------------------ sit-down guide (free)
+  const guideHTML = () => `<section class="pp"><h2>${h('gd.title')}</h2><p class="sub">${h('gd.sub')}</p><ol>${raw('gd.s').map((s) => `<li style="margin:8px 0">${esc(s)}</li>`).join('')}</ol><p class="foot">${h('gd.foot')} ${h('pr.foot')}</p></section>`;
+  $('guideBtn').addEventListener('click', () => printDoc(guideHTML()));
+  $('guideBtn2').addEventListener('click', () => printDoc(guideHTML()));
+
+  // ------------------------------------------------------------------ Family Pack: letter, cards, docs, binder
+  const WHERE = ['will', 'id', 'insurance', 'property', 'money', 'other'], WISH = ['photos', 'social', 'email'];
+  const DOCS = ['passport', 'licence', 'id', 'residence', 'other'];
+  const letterHasContent = (l) => !!(l.contacts.length || Object.values(l.where).some(Boolean) || Object.values(l.wishes).some(Boolean) || l.subs || l.notes);
+  function renderFamily() {
+    const open = S.pro;
+    $('familyOpen').hidden = !open; $('familyLocked').hidden = open;
+    if (!open) {
+      const ro = letterHasContent(S.plan.letter);
+      $('familyLocked').innerHTML = `<p>${h('fam.lockedP')}</p>${ro ? `<button type="button" class="ghost" id="printLetterRO">${h('fam.print')}</button>` : ''}`;
+      const b = $('printLetterRO'); if (b) b.addEventListener('click', () => printDoc(letterHTML()));
+      return;
+    }
+    const l = S.plan.letter;
+    $('contacts').innerHTML = l.contacts.map((c, i) => `<div class="contact"><input type="text" data-ct="${i}" data-k="name" maxlength="60" value="${esc(c.name)}" placeholder="${esc(t('ct.name'))}" aria-label="${esc(t('ct.name'))}"><input type="text" data-ct="${i}" data-k="relation" maxlength="40" value="${esc(c.relation)}" placeholder="${esc(t('ct.rel'))}" aria-label="${esc(t('ct.rel'))}"><input type="text" data-ct="${i}" data-k="reach" maxlength="80" value="${esc(c.reach)}" placeholder="${esc(t('ct.reach'))}" aria-label="${esc(t('ct.reach'))}"><button type="button" class="ghost small" data-ctrm="${i}">${h('ct.remove')}</button></div>`).join('');
+    $('whereFields').innerHTML = WHERE.map((k) => `<label class="f"><span>${h('wh.' + k)}</span><input type="text" data-where="${k}" maxlength="160" value="${esc(l.where[k])}" placeholder="${esc(t('wh.ph'))}"></label>`).join('');
+    $('wishFields').innerHTML = WISH.map((k) => `<label class="f"><span>${h('wi.' + k)}</span><input type="text" data-wish="${k}" maxlength="240" value="${esc(l.wishes[k])}" placeholder="${esc(t('wi.' + k + 'Ph'))}"></label>`).join('');
+    $('subs').value = l.subs; $('notes').value = l.notes;
+    const names = S.plan.people.map((p, i) => p.name || (i === 0 ? t('pp.me') : t('pp.person', { n: i + 1 })));
+    $('docs').innerHTML = S.plan.docs.map((d, i) => `<div class="contact"><select data-doc="${i}" data-k="label" aria-label="${esc(t('doc.label'))}">${DOCS.map((k) => `<option${t('doc.' + k) === d.label ? ' selected' : ''}>${esc(t('doc.' + k))}</option>`).join('')}${DOCS.some((k) => t('doc.' + k) === d.label) ? '' : `<option selected>${esc(d.label)}</option>`}</select>
+      <select data-doc="${i}" data-k="who" aria-label="${esc(t('doc.who'))}">${names.map((n) => `<option${n === d.who ? ' selected' : ''}>${esc(n)}</option>`).join('')}${names.includes(d.who) || !d.who ? '' : `<option selected>${esc(d.who)}</option>`}</select>
+      <input type="date" data-doc="${i}" data-k="expires" value="${esc(d.expires)}" aria-label="${esc(t('doc.date'))}"><button type="button" class="ghost small" data-docrm="${i}">${h('ct.remove')}</button></div>`).join('');
+  }
+  const famWarn = $('famWarn');
+  $('familyOpen').addEventListener('input', (e) => {
+    const i = e.target; const l = S.plan.letter;
+    if (i.dataset.ct != null) { const c = l.contacts[+i.dataset.ct]; c[i.dataset.k] = i.dataset.k === 'reach' ? i.value.trim() : guard(i, famWarn); }
+    else if (i.dataset.where) l.where[i.dataset.where] = guard(i, famWarn);
+    else if (i.dataset.wish) l.wishes[i.dataset.wish] = guard(i, famWarn);
+    else if (i.id === 'subs') l.subs = guard(i, famWarn);
+    else if (i.id === 'notes') l.notes = guard(i, famWarn);
+    else if (i.dataset.doc != null) { const d = S.plan.docs[+i.dataset.doc]; d[i.dataset.k] = i.value; }
+    else return;
+    changed();
+  });
+  $('familyOpen').addEventListener('change', (e) => { const i = e.target; if (i.dataset.doc != null) { S.plan.docs[+i.dataset.doc][i.dataset.k] = i.value; changed(); } });
+  $('familyOpen').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.ctrm != null) { S.plan.letter.contacts.splice(+b.dataset.ctrm, 1); changed(); renderFamily(); }
+    if (b.dataset.docrm != null) { S.plan.docs.splice(+b.dataset.docrm, 1); changed(); renderFamily(); }
+  });
+  $('addContact').addEventListener('click', () => { if (S.plan.letter.contacts.length >= 8) return; S.plan.letter.contacts.push({ name: '', relation: '', reach: '' }); renderFamily(); const ins = $('contacts').querySelectorAll('input'); if (ins.length) ins[ins.length - 3].focus(); });
+  $('addDoc').addEventListener('click', () => { if (S.plan.docs.length >= 24) return; S.plan.docs.push({ label: t('doc.passport'), who: P().name || t('pp.me'), expires: '' }); renderFamily(); });
+
+  const none = () => `<i>${h('lt.none')}</i>`;
+  function letterHTML() {
+    const l = S.plan.letter; const ppl = S.plan.people;
+    const names = ppl.map((p, i) => p.name || (i === 0 ? t('pp.me') : t('pp.person', { n: i + 1 }))).join(', ');
+    const legacyTxt = (a) => (a.legacy ? t('lg.' + a.legacy) : t('lg.unsure'));
+    return `<section class="pp"><h2>${h('lt.title')}</h2><p class="sub">${h('lt.from', { name: names, date: fmtDate(today()) })}</p>
+      <p>${h('lt.intro')}</p><p><b>${h('lt.notWill')}</b></p>
+      <h3>${h('lt.h1')}</h3>${l.contacts.length ? `<table><tr><th>${h('ct.name')}</th><th>${h('ct.rel')}</th><th>${h('ct.reach')}</th></tr>${l.contacts.map((c) => `<tr><td>${esc(c.name)}</td><td>${esc(c.relation)}</td><td>${esc(c.reach)}</td></tr>`).join('')}</table>` : `<p>${none()}</p>`}
+      <h3>${h('lt.h2')}</h3><table>${WHERE.map((k) => `<tr><th style="width:42%">${h('wh.' + k)}</th><td>${l.where[k] ? esc(l.where[k]) : ''}</td></tr>`).join('')}</table>
+      <h3>${h('lt.h3')}</h3><p>${h('lt.h3p')}</p>
+      ${ppl.map((p, i) => `${ppl.length > 1 ? `<p><b>${esc(p.name || (i === 0 ? t('pp.me') : t('pp.person', { n: i + 1 })))}</b></p>` : ''}${p.accounts.length ? `<table><tr><th>${h('pr.th.acc')}</th><th>${h('lt.th.legacy')}</th><th>${h('lt.th.reach')}</th></tr>${SK.recoveryOrder(p).map((a) => `<tr><td>${esc(a.name)} <span style="color:#555">(${h('cat.' + a.cat)})</span></td><td>${esc(legacyTxt(a))}</td><td>${SK.assess(a).reach ? h('lt.yes') : h('lt.no')}</td></tr>`).join('')}</table>` : `<p>${none()}</p>`}
+        <p>${h('lt.h7')}: ${p.codesPlace ? esc(p.codesPlace) : line(220)}</p>`).join('')}
+      <h3>${h('lt.h4')}</h3><table>${WISH.map((k) => `<tr><th style="width:42%">${h('wi.' + k)}</th><td>${l.wishes[k] ? esc(l.wishes[k]) : ''}</td></tr>`).join('')}</table>
+      <h3>${h('lt.h5')}</h3><p style="white-space:pre-wrap">${l.subs ? esc(l.subs) : none()}</p>
+      <h3>${h('lt.h6')}</h3><p>${h('lt.h6p')} ${line(200)}</p><p class="small">${h('lt.h6q')}</p>
+      <h3>${h('lt.h8')}</h3><p style="white-space:pre-wrap">${l.notes ? esc(l.notes) : none()}</p>
+      <p class="foot">${h('lt.notWill')} ${h('pr.foot')}</p></section>`;
+  }
+  function cardsHTML() {
+    const cards = S.plan.people.map((p) => {
+      const carrier = p.accounts.find((a) => a.cat === 'phone');
+      return `<div class="wcard"><b>${h('wc.title')}${p.name ? ' · ' + esc(p.name) : ''}</b><br>${h('wc.l1')}<br>${h('pr.carrier')}: ${carrier ? esc(carrier.name) : line(90)} · ${h('wc.tel')}: ${line(80)}<br>${h('wc.place')} ${p.codesPlace ? esc(p.codesPlace) : line(110)}<br>${h('wc.trusted')} ${p.trustedName ? esc(p.trustedName) : line(90)} · ${h('wc.tel')}: ${line(70)}<br><i>${h('wc.noSecrets')}</i></div>
+        <div class="wcard"><b>${h('wc.back')}</b><br><br>${h('ct.name')}: ${line(150)}<br><br>${h('wc.tel')}: ${line(150)}<br><br>${h('ct.name')}: ${line(150)}<br><br>${h('wc.tel')}: ${line(150)}</div>`;
+    }).join('');
+    return `<section class="pp"><h2>${h('fam.cards')}</h2><p class="sub">85.6 × 54 mm</p><div class="cards">${cards}</div></section>`;
+  }
+  $('printLetter').addEventListener('click', () => printDoc(letterHTML()));
+  $('printCards').addEventListener('click', () => printDoc(cardsHTML()));
+  $('printBinder').addEventListener('click', () => printDoc(S.plan.people.filter((p) => p.accounts.length).map(sheetHTML).join('') + letterHTML() + cardsHTML() + guideHTML()));
+
+  // ------------------------------------------------------------------ billing (shared Quickwell billing; one-time Family Pack)
+  function renderBilling() { $('upsell').hidden = S.pro; $('proOn').hidden = !S.pro; }
+  function setPro(s) {
+    S.pro = !!(s && s.pro);
+    $('welcome').hidden = !(s && s.welcome);
+    render();
+  }
+  async function buy() {
+    const m = $('buyMsg'); const btn = $('buyBtn');
+    m.className = 'msg';
+    if (!window.Studio) { m.className = 'msg err'; m.textContent = t('buy.soon'); return; }
+    if (P() && P().accounts.length && !S.vault) {
+      const ok = await passDialog('save', t('pd.checkoutI'));
+      if (!ok) return;
+    }
+    m.textContent = t('buy.opening'); btn.disabled = true;
+    window.Studio.upgrade('family', 'once').catch((e) => {
+      m.className = 'msg err';
+      m.textContent = /not switched on|not on sale|unknown|not found|free/i.test((e && e.message) || '') ? t('buy.soon') : t('buy.err');
+    }).finally(() => { btn.disabled = false; });
+  }
+  $('buyBtn').addEventListener('click', buy);
+
+  // ------------------------------------------------------------------ passphrase dialog, encrypted save, file export/import
+  const dlg = $('passDlg');
+  let dlgAction = null, dlgResolve = null, useOwn = false;
+  function newPass() { $('pdGen').textContent = SK.makePassphrase(6); }
+  // mode: 'save' | 'export' | 'open' | 'vault'
+  function passDialog(mode, intro, payload) {
+    return new Promise((resolve) => {
+      const isNew = mode === 'save' || mode === 'export';
+      dlgResolve = resolve; useOwn = false;
+      $('pdTitle').textContent = t({ save: 'pd.saveT', export: 'pd.exportT', open: 'pd.openT', vault: 'pd.openT' }[mode]);
+      $('pdIntro').textContent = intro || t({ save: 'pd.saveI', export: 'pd.exportI', open: 'pd.openI', vault: 'pd.openI' }[mode]);
+      $('pdOk').textContent = t({ save: 'pd.save', export: 'pd.export', open: 'pd.open', vault: 'pd.open' }[mode]);
+      $('pdNew').hidden = !isNew; $('pdOld').hidden = isNew;
+      $('pdOwnWrap').hidden = true; $('pdOwn').value = ''; $('pdPass').value = ''; $('pdAck').checked = false; $('pdMsg').textContent = ''; $('pdMsg').className = 'msg';
+      if (isNew) newPass(); else $('pdGen').textContent = '';
+      dlgAction = { mode, payload };
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+      setTimeout(() => (isNew ? $('pdCopy') : $('pdPass')).focus(), 30);
+    });
+  }
+  function closeDialog(result) {
+    $('pdOwn').value = ''; $('pdPass').value = ''; $('pdGen').textContent = ''; // the passphrase is shown once, then wiped
+    if (dlg.open) { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); }
+    const r = dlgResolve; dlgResolve = null; dlgAction = null; if (r) r(result);
+  }
+  $('pdAgain').addEventListener('click', newPass);
+  $('pdOwnBtn').addEventListener('click', () => { useOwn = !useOwn; $('pdOwnWrap').hidden = !useOwn; if (useOwn) $('pdOwn').focus(); });
+  $('pdCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('pdGen').textContent); $('pdMsg').className = 'msg ok'; $('pdMsg').textContent = t('pd.copied'); } catch (e) { /* select-all text still works */ } });
+  $('pdCancel').addEventListener('click', () => closeDialog(false));
+  dlg.addEventListener('cancel', (e) => { e.preventDefault(); closeDialog(false); });
+  $('pdForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!dlgAction) return;
+    const { mode, payload } = dlgAction; const msg = $('pdMsg'); msg.className = 'msg err';
+    const isNew = mode === 'save' || mode === 'export';
+    const pass = isNew ? (useOwn ? $('pdOwn').value : $('pdGen').textContent) : $('pdPass').value;
+    if (isNew && !SK.passOk(pass)) { msg.textContent = t('sv.weak'); return; }
+    if (isNew && !$('pdAck').checked) { msg.textContent = t('sv.ack'); return; }
+    if (!isNew && !pass) return;
+    msg.className = 'msg'; msg.textContent = t('pd.working'); $('pdOk').disabled = true;
+    try {
+      if (mode === 'save') {
+        S.plan.updated = today();
+        const r = await SK.encrypt(S.plan, pass, { keep: true });
+        if (!ls.set(VAULT, r.text)) throw new Error('no-store');
+        S.vault = { key: r.key, salt: r.salt, iter: r.iter }; S.dirty = false;
+        $('saveState').textContent = t('sv.saved', { time: new Date().toLocaleTimeString(LANG, { hour: '2-digit', minute: '2-digit' }) });
+      } else if (mode === 'export') {
+        S.plan.updated = today();
+        const text = await SK.encrypt(S.plan, pass);
+        download('family-plan.sparekey', 'application/octet-stream', text);
+        $('saveState').textContent = t('sv.exported'); if (!S.vault) S.dirty = false;
+      } else if (mode === 'vault') {
+        const r = await SK.decrypt(ls.get(VAULT) || '', pass, { keep: true });
+        loadPlan(r.plan); S.vault = { key: r.key, salt: r.salt, iter: r.iter }; $('vaultBanner').hidden = true;
+      } else if (mode === 'open') {
+        const plan = await SK.decrypt(payload, pass);
+        loadPlan(plan); S.vault = null; S.dirty = true;
+      }
+      $('pdOk').disabled = false; closeDialog(true);
+      if (mode === 'vault' || mode === 'open') { go(P() && P().baseline ? 'result' : 'pick'); $('saveState').textContent = t('sv.opened'); }
+    } catch (err) {
+      $('pdOk').disabled = false; msg.className = 'msg err';
+      const k = err && err.message;
+      msg.textContent = k === 'wrong-pass' ? t('sv.wrong') : k === 'no-store' ? t('sv.noStore') : k === 'not-a-file' || k === 'not-a-plan' ? t('sv.notfile') : t('buy.err');
+    }
+  });
+  function loadPlan(plan) {
+    S.plan = plan; S.cur = 0; S.parentMode = false;
+    if (!S.plan.people.length) S.plan.people.push(SK.newPerson({ country: SK.guessCountry(navigator.language) }));
+  }
+  function download(name, type, data) {
+    const blob = data instanceof Blob ? data : new Blob([data], { type });
+    const u = URL.createObjectURL(blob); const a = document.createElement('a');
+    a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 5000);
+  }
+  const hasPlan = () => P() && P().accounts.length;
+  $('saveLocal').addEventListener('click', () => { if (!hasPlan()) { $('saveState').textContent = t('sv.empty'); return; } passDialog('save'); });
+  $('exportFile').addEventListener('click', () => { if (!hasPlan()) { $('saveState').textContent = t('sv.empty'); return; } passDialog('export'); });
+  const pickFile = () => { $('fileIn').value = ''; $('fileIn').click(); };
+  $('importFile').addEventListener('click', pickFile); $('openFileBtn').addEventListener('click', pickFile);
+  $('fileIn').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    if (f.size > 2e6) { alert(t('sv.notfile')); return; }
+    const text = await f.text();
+    passDialog('open', '', text);
+  });
+  $('vbOpen').addEventListener('click', () => passDialog('vault'));
+  $('vbDelete').addEventListener('click', () => { if (!confirm(t('sv.confirmDelete'))) return; ls.del(VAULT); S.vault = null; $('vaultBanner').hidden = true; });
+
+  // ------------------------------------------------------------------ reminders (.ics)
+  $('icsBtn').addEventListener('click', () => {
+    const words = { reviewTitle: t('ics.reviewT'), reviewDesc: t('ics.reviewD'), renewSoon: t('ics.soon'), expiresOn: t('ics.on'), expiresToday: t('ics.today') };
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+    download('spare-key-reminders.ics', 'text/calendar;charset=utf-8', SK.toICS(SK.reminders(S.plan, today(), S.pro, words), stamp));
+    $('shareMsg').textContent = t('ics.done');
+  });
+
+  // ------------------------------------------------------------------ sharing: score card (numbers only) and a plain invite link
+  function scoreImage(a, b, n) {
+    return new Promise((resolve) => {
+      const c = document.createElement('canvas'); c.width = 1080; c.height = 1080; const x = c.getContext('2d');
+      x.fillStyle = '#0f766e'; x.fillRect(0, 0, 1080, 1080);
+      x.fillStyle = '#e6f3f1'; x.font = '600 56px system-ui, sans-serif'; x.fillText(t('sh.cardT'), 90, 220);
+      x.fillStyle = '#ffffff'; x.font = '800 190px system-ui, sans-serif';
+      x.fillText(a !== b ? `${a}/${n} → ${b}/${n}` : `${b}/${n}`, 90, 520, 900);
+      x.fillStyle = '#e6f3f1'; x.font = '500 46px system-ui, sans-serif'; x.fillText(t('sh.cardS'), 90, 760); x.font = '700 50px system-ui, sans-serif'; x.fillText('quickwell.app/spare-key', 90, 840);
+      x.font = '600 40px system-ui, sans-serif'; x.fillText('Spare Key', 90, 980);
+      c.toBlob((blob) => resolve(blob), 'image/png');
+    });
+  }
+  $('shareScore').addEventListener('click', async () => {
+    const m = $('shareMsg'); const p = P(); if (!p || !p.accounts.length) { m.textContent = t('sh.noScore'); return; }
+    const s = SK.score(p); const a = p.baseline && p.baseline.n === s.n ? p.baseline.ready : s.ready;
+    const text = a !== s.ready ? t('sh.text', { a, b: s.ready, n: s.n }) : t('sh.text1', { b: s.ready, n: s.n });
+    const blob = await scoreImage(a, s.ready, s.n);
+    try {
+      const file = blob && new File([blob], 'my-lockout-score.png', { type: 'image/png' });
+      if (file && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    let copied = false; try { await navigator.clipboard.writeText(text); copied = true; } catch (e) { /* no clipboard */ }
+    if (blob) download('my-lockout-score.png', 'image/png', blob);
+    m.textContent = (copied ? t('sh.copied') + ' ' : text + ' ') + t('sh.img');
+  });
+  $('inviteBtn').addEventListener('click', async () => {
+    const url = `${location.origin}/spare-key/?ref=invite`; const text = t('inv.text', { url }); const m = $('shareMsg');
+    try { if (navigator.share) { await navigator.share({ text }); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(text); m.textContent = t('inv.copied'); } catch (e) { m.textContent = text; }
+  });
+
+  // ------------------------------------------------------------------ official pages list (FAQ)
+  function renderSources() {
+    $('srcList').innerHTML = SK.LIBRARY.filter((x) => x.url).map((x) => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.name)}</a> <span class="note">· ${x.checked ? h('fix.checked', { date: x.checked }) : h('src.not')}</span></li>`).join('');
+  }
+
+  // ------------------------------------------------------------------ start
+  $('goMine').addEventListener('click', () => startPlan('me'));
+  $('goParent').addEventListener('click', () => startPlan('parent'));
+  $('editAnswers').addEventListener('click', () => go('pick'));
+  $('langBtn').addEventListener('click', () => { LANG = LANG === 'en' ? 'es' : 'en'; ls.set(LANGK, LANG); applyLang(); renderSources(); render(); });
+  if (ls.get(VAULT)) $('vaultBanner').hidden = false;
+  applyLang(); renderSources(); go('start', { keepScroll: true });
+  window.__sk = { S, SK }; // read-only hook for our browser tests
+  if (window.Studio) window.Studio.init({ tool: TOOL, onChange: setPro }); else setPro({ pro: false });
+})();
+</script>
+</body>
+</html>
