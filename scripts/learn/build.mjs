@@ -11,7 +11,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin.replace(/\/$/, '');
 
 // Each module exports SECTION and PAGES (or TERMS). Missing modules are skipped.
-const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas', 'business-costs'];
+const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas', 'business-costs', '1099'];
 const sections = [];
 for (const m of MODULES) {
   const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');
@@ -64,9 +64,9 @@ const en = sections.filter((x) => x.S.lang === 'en');
 if (en.length) {
   const hub = {
     path: '/learn/', lang: 'en', title: 'Learn: Plain-English Guides for Truckers, EUDR Exporters and Texas Mineral Owners | Quickwell',
-    h1: 'Learn', description: 'Plain-English reference pages: rate confirmation terms, the FMCSA new entrant audit, EUDR plot files, Texas drilling permits and small-business recurring costs.',
+    h1: 'Learn', description: 'Plain-English reference pages: rate confirmation terms, the FMCSA new entrant audit, EUDR plot files, Texas drilling permits, small-business recurring costs and 2026 Form 1099 rules.',
     lede: 'Reference pages that answer one specific question each, written in plain English, with the official source linked on every page.',
-    body: `<p>Most sections below sit next to one of the Quickwell tools. The pages explain the rules the tool checks, so you can understand a result, or fix a problem, without the tool. The business costs section is a standalone set of how-to pages for small businesses. Every page lists the sources it was checked against and the date.</p>
+    body: `<p>Most sections below sit next to one of the Quickwell tools. The pages explain the rules the tool checks, so you can understand a result, or fix a problem, without the tool. The business costs and 1099 reporting sections are how-to pages for small businesses; both sit next to the Year-End Vendor Check. Every page lists the sources it was checked against and the date.</p>
 <div class="grid">${en.map(({ S, pages }) => `<a class="tile" href="${S.path}"><b>${S.name}</b><span>${pages.length} pages. ${S.hubText || ''}</span></a>`).join('')}</div>`,
     crumbs: [{ name: 'Quickwell', path: '/' }], crumbName: 'Learn', schema: 'CollectionPage',
     sources: en.flatMap(({ S, pages }) => uniqSources(pages).slice(0, 2)),
@@ -99,7 +99,7 @@ const secs = sections;
 const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
 const llms = `# Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. A separate reference section helps small businesses manage auto-renewals, vendor price increases and recurring charges.
+> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French), a Texas drilling permit watcher and a year-end vendor check for small businesses (1099 list, renewals and price increases). Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. Two reference sections help small businesses manage auto-renewals, vendor price increases and recurring charges, and apply the 2026 Form 1099 rules ($2,000 threshold, exclusions, deadlines).
 
 All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
 

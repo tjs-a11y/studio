@@ -84,6 +84,7 @@ Current term ends <b>March 31, 2027</b>. Notice must be given "at least 60 days 
 <li>Give each event an owner by name, and invite a second person so a holiday or departure does not sink it.</li>
 <li>Keep a simple list (a spreadsheet is fine) with one row per contract: vendor, cost per year, term end, notice days, cancel-by date, notice method, owner, decision.</li>
 </ol>
+<p>If you would rather not count the days by hand, the free <a href="/vendor-check/">Year-End Vendor Check</a> reads pasted contract text, finds the renewal and notice wording, and works out the cancel-by date. It also lists the recurring charges in a bank or card export, so you can see which contracts you are still paying for. It runs in your browser, and it is a starting point: check the date against your contract.</p>
 
 <h2>Sample non-renewal notice</h2>
 <p>Send it by the method the Notices section requires, and keep proof (a sent email with the vendor's reply, a portal confirmation screenshot, or a mail receipt). Adapt this wording:</p>
@@ -135,6 +136,7 @@ agreement will end on [end date].
 <li>Look at the invoice, not just the bank line. The bank line shows the total; the invoice shows whether the unit price, the number of units or a fee changed.</li>
 <li>Watch for amounts that differ by small, steady steps month to month. That is usually seats being added.</li>
 </ul>
+<p>To do this comparison for every vendor at once, the free <a href="/vendor-check/">Year-End Vendor Check</a> groups a bank or card export by vendor in your browser, flags amounts that rose 5% or more, and estimates when each charge is likely to renew. Nothing is uploaded. You still need the invoice to see why a price changed.</p>
 
 <h2>How to spot it in the contract</h2>
 <p>Search the order form and main terms for: <code>renewal pricing</code>, <code>then-current</code>, <code>list price</code>, <code>increase</code>, <code>uplift</code>, <code>CPI</code>, <code>price protection</code>, <code>true-up</code>, <code>fees may change</code>. What you find tells you how much room there is:</p>
@@ -238,6 +240,7 @@ ${regE}
 <li>For each duplicate, pick one, move the users, and cancel the other at its next cancel-by date.</li>
 <li>Repeat the review every quarter. The second time takes a fraction of the first, because the merchant names are already cleaned.</li>
 </ol>
+<p>The same export answers a second year-end question: which contractors and landlords need a Form 1099. For 2026 payments the federal line is $2,000 per payee (see <a href="/learn/1099/threshold-2026/">the new $2,000 rule</a>). The free <a href="/vendor-check/">Year-End Vendor Check</a> does Steps 2 to 4 above and the 1099 totals from one file, in your browser.</p>
 
 <h2>An example of what you are looking for</h2>
 <p>This is a made-up extract, not real data:</p>

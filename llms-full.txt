@@ -111,3 +111,10 @@
 - [Auto-renewal clauses: how to find your cancel-by date and not miss it](https://quickwell.app/learn/business-costs/auto-renewal-notice-window/): Find the auto-renewal clause in a business contract, work out the cancel-by date from the notice window, calendar it, and word a non-renewal letter.
 - [Vendor and SaaS price increases at renewal: how to spot them and negotiate](https://quickwell.app/learn/business-costs/vendor-price-increase-at-renewal/): Spot vendor and SaaS price creep in bank statements and contracts, then negotiate the renewal price, a cap or fewer seats before the contract renews.
 - [How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export](https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/): Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.
+
+## 1099 reporting
+
+- [Form 1099 for small businesses: the 2026 rules in plain English](https://quickwell.app/learn/1099/): The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027.
+- [1099 threshold for 2026: the new $2,000 rule](https://quickwell.app/learn/1099/threshold-2026/): For payments after Dec 31, 2025, the 1099-NEC and 1099-MISC threshold is $2,000, not $600 (26 U.S.C. 6041). What changed and why some rules still say $600.
+- [Who doesn't get a 1099: card payments, corporations and the attorney and medical exceptions](https://quickwell.app/learn/1099/who-does-not-get-a-1099/): Card and payment-network payments, most corporations, goods and employees usually need no 1099 from you. Attorneys and medical providers are exceptions.
+- [1099 deadlines for 2026 payments (filed in early 2027)](https://quickwell.app/learn/1099/deadlines-2026-payments/): 1099-NEC forms for 2026 payments are due Feb 1, 2027, because Jan 31 is a Sunday (26 U.S.C. 6071(c), 7503). Other e-filed 1099s: Mar 31, 2027.

@@ -1,6 +1,6 @@
 # Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French) and a Texas drilling permit watcher. Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. A separate reference section helps small businesses manage auto-renewals, vendor price increases and recurring charges.
+> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English and French), a Texas drilling permit watcher and a year-end vendor check for small businesses (1099 list, renewals and price increases). Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. Two reference sections help small businesses manage auto-renewals, vendor price increases and recurring charges, and apply the 2026 Form 1099 rules ($2,000 threshold, exclusions, deadlines).
 
 All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
 
@@ -20,6 +20,7 @@ All tools run in the browser; files and text people check are not uploaded. Refe
 - [Erreurs de fichiers RDUE (French)](https://quickwell.app/fr/learn/eudr/): Pourquoi un fichier de géolocalisation RDUE (GeoJSON) est refusé par le Système d'information de l'UE : coordonnées inversées, décimales, polygones ouverts ou croisés, trous, points de plus de 4 ha, taille, noms de propriétés. (11 pages)
 - [Texas RRC districts](https://quickwell.app/learn/texas-drilling-permits/): All 13 Railroad Commission of Texas oil and gas districts (01–10, 6E, 7B, 7C, 8A): the counties in each, district offices, major formations, recent permit counts and how to watch new drilling permits. (13 pages)
 - [Business costs](https://quickwell.app/learn/business-costs/): Small-business guides: find auto-renewal deadlines in contracts, push back on vendor price increases, and spot recurring and duplicate charges. (3 pages)
+- [1099 reporting](https://quickwell.app/learn/1099/): The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027. (3 pages)
 - [Guides](https://quickwell.app/guides/): Longer how-to guides for the same audiences.
 
 ## Optional
