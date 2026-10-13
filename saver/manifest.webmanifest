@@ -1,0 +1,11 @@
+{
+  "name": "Quickwell Saver",
+  "short_name": "Saver",
+  "description": "Find every subscription, price hike, double charge and bank fee in your own bank export. Nothing is uploaded.",
+  "start_url": "/saver/?ref=pwa",
+  "scope": "/saver/",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#1f6b52",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

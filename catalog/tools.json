@@ -90,6 +90,7 @@
       "name": "Quickwell Plus",
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
+        "saver",
         "footsure",
         "brain-pass",
         "spare-key",
@@ -108,6 +109,16 @@
       "plans": [
         {
           "id": "desk"
+        }
+      ]
+    },
+    {
+      "id": "saver",
+      "name": "Quickwell Saver",
+      "tagline": "Find every subscription, price hike, double charge and bank fee in your own bank export, then cancel, push back and track what you save. Nothing is uploaded.",
+      "plans": [
+        {
+          "id": "saver"
         }
       ]
     }
