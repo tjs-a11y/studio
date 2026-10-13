@@ -454,9 +454,9 @@ async function renderFamily() {
         <li>One-page summary to bring to the doctor</li>
         <li>Up to 2 people</li>
       </ul>
-      <div class="price" style="margin-top:12px"><span>Family</span><b>$4.99/month</b></div>
-      <div class="muted small">or $39/year · cancel anytime</div>
-      ${studio ? '<button type="button" id="buyMonth">Start Family · $4.99/month</button><button type="button" class="secondary" id="buyYear">Family yearly · $39/year</button>'
+      <div class="price" style="margin-top:12px"><span>Family</span><b>$2.99/month</b></div>
+      <div class="muted small">or $24.99/year · cancel anytime · also in <a href="/plus/">Quickwell Plus</a></div>
+      ${studio ? '<button type="button" id="buyMonth">Start Family · $2.99/month</button><button type="button" class="secondary" id="buyYear">Family yearly · $24.99/year</button>'
         : '<p class="small warnline">Plans open soon.</p>'}
       <p class="small warnline" id="buyErr" role="alert"></p>
       <button type="button" class="secondary" data-go="home">Back to start</button></div>`;

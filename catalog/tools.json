@@ -84,6 +84,21 @@
           "id": "family"
         }
       ]
+    },
+    {
+      "id": "plus",
+      "name": "Quickwell Plus",
+      "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
+      "covers": [
+        "footsure",
+        "brain-pass",
+        "spare-key"
+      ],
+      "plans": [
+        {
+          "id": "plus"
+        }
+      ]
     }
   ]
 }

@@ -27,13 +27,17 @@
       url.searchParams.delete('session_id'); history.replaceState(null, '', url.pathname + url.search + url.hash);
       if (r && r.pro) { store.set(tool, { token: r.token, at: Date.now(), plan: r.plan }); return set({ pro: true, plan: r.plan, welcome: true }); }
     }
-    const saved = store.get(tool);
+    const own = store.get(tool);
+    // No purchase for this tool? A Quickwell Plus pass on this device may cover it (the server decides).
+    const plus = !own && tool !== 'plus' ? store.get('plus') : null;
+    const saved = own || plus;
+    const key = own ? tool : 'plus';
     if (!saved) return set({ pro: false, plan: null });
     if (Date.now() - saved.at < 6 * 3600e3) set({ pro: true, plan: saved.plan }); // fast path; re-verified below
     const r = await fetch(`/api/access?tool=${encodeURIComponent(tool)}&token=${encodeURIComponent(saved.token)}`).then((x) => x.json()).catch(() => null);
     if (!r) return; // offline: keep the last known state
-    if (r.pro) { store.set(tool, { token: r.token, at: Date.now(), plan: r.plan }); set({ pro: true, plan: r.plan }); }
-    else { store.clear(tool); set({ pro: false, plan: null }); }
+    if (r.pro) { store.set(key, { token: r.token, at: Date.now(), plan: r.plan }); set({ pro: true, plan: r.plan }); }
+    else { if (!(key === 'plus' && r.reason === 'no_access')) store.clear(key); set({ pro: false, plan: null }); }
   }
   async function post(path, body) {
     const r = await fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
@@ -44,7 +48,10 @@
   window.Studio = {
     init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
     upgrade(plan, interval) { return post('/api/checkout', { tool, plan, interval, ref: ref() }); },
-    manage() { const s = store.get(tool); return post('/api/portal', { tool, token: s && s.token }); },
+    manage() {
+      const own = store.get(tool); const plus = !own && store.get('plus');
+      return post('/api/portal', own ? { tool, token: own.token } : { tool: 'plus', token: plus && plus.token });
+    },
     get state() { return state; },
   };
 })();

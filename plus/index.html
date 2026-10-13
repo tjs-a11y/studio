@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quickwell Plus: every everyday tool, one subscription</title>
+<meta name="description" content="One subscription unlocks Footsure Family, Brain Pass, the Spare Key Family Pack and every new Quickwell everyday tool. $4.99 a month or $39 a year.">
+<link rel="canonical" href="https://quickwell.app/plus/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Quickwell Plus: every everyday tool, one subscription">
+<meta property="og:description" content="One subscription unlocks Footsure Family, Brain Pass, the Spare Key Family Pack and every new Quickwell everyday tool. $4.99 a month or $39 a year.">
+<meta property="og:url" content="https://quickwell.app/plus/">
+<meta property="og:image" content="https://quickwell.app/plus/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickwell Plus: every everyday tool, one subscription">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickwell Plus: every everyday tool, one subscription">
+<meta name="twitter:description" content="Footsure Family, Brain Pass, the Spare Key Family Pack and every new tool. $4.99 a month or $39 a year.">
+<meta name="twitter:image" content="https://quickwell.app/plus/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Quickwell Plus","url":"https://quickwell.app/plus/","description":"One subscription for every Quickwell everyday tool: Footsure Family, Brain Pass, the Spare Key Family Pack and each new consumer tool as it launches.","brand":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Quickwell Plus monthly","price":"4.99","priceCurrency":"USD"},{"@type":"Offer","name":"Quickwell Plus yearly","price":"39.00","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+:root{--bg:#f6f4ef;--card:#fffdf8;--fg:#1d2420;--muted:#5d665f;--line:#e2ddd2;--accent:#1f6b52;--accent-fg:#fff;--chip:#e8f1ec}
+@media (prefers-color-scheme:dark){:root{--bg:#121614;--card:#1a201d;--fg:#e9ece8;--muted:#a3ada6;--line:#2c3430;--accent:#5cc29a;--accent-fg:#0d1311;--chip:#1f2c26;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 56px;display:grid;gap:22px}
+h1{font-size:clamp(30px,6vw,44px);line-height:1.08;margin:0;text-wrap:balance}
+.lede{font-size:19px;color:var(--muted);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px}
+.tools{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.tools li{display:grid;gap:2px;padding:12px 0;border-bottom:1px solid var(--line)}.tools li:last-child{border-bottom:0}
+.tools b a{color:var(--fg)}.tools span{color:var(--muted);font-size:15px}
+.plans{display:grid;gap:10px}
+.plan{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;padding:16px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+.plan:hover,.plan:focus-visible{border-color:var(--accent)}.plan.best{border-color:var(--accent)}
+.plan small{display:block;color:var(--muted);font-size:14px}.price{font-weight:700;font-size:22px;white-space:nowrap}
+.small{font-size:14px}.muted{color:var(--muted)}a{color:var(--accent)}
+.chip{display:inline-block;background:var(--chip);color:var(--accent);font-weight:600;font-size:13px;padding:3px 10px;border-radius:99px}
+button.link{background:none;border:0;padding:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer}
+#msg{min-height:1.2em}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <a href="/" class="small">← Quickwell</a>
+  <div id="cancelled" class="card" hidden><b>Checkout cancelled.</b> No charge was made.</div>
+  <section id="on" class="card" hidden>
+    <span class="chip">Plus is on</span>
+    <h1>Welcome to Quickwell Plus 🎉</h1>
+    <p>Every tool below is unlocked in this browser. Open any of them and the paid features are ready.</p>
+    <p class="small muted">To change your card or cancel, use <button class="link" id="manage">Manage subscription</button>.</p>
+  </section>
+  <section id="off" style="display:grid;gap:22px">
+    <span class="chip">One subscription</span>
+    <h1>Every everyday tool. One small price.</h1>
+    <p class="lede">Quickwell Plus unlocks the paid features of every tool below, plus each new everyday tool the day it launches, at no extra cost.</p>
+    <div class="card">
+      <div class="plans">
+        <button class="plan" data-buy="month"><span><b>Monthly</b><small>Cancel anytime</small></span><span class="price">$4.99<small>/mo</small></span></button>
+        <button class="plan best" data-buy="year"><span><b>Yearly · save 35%</b><small>About $3.25 a month</small></span><span class="price">$39<small>/yr</small></span></button>
+      </div>
+      <p id="msg" class="small" role="status"></p>
+      <p class="small muted" style="margin:0">Secure checkout by Stripe. Where available, checkout shows the price in your local currency, set for your country.</p>
+    </div>
+  </section>
+  <section class="card">
+    <h2 style="margin:0;font-size:22px">What's included</h2>
+    <ul class="tools">
+      <li><b><a href="/footsure/">Footsure Family</a></b><span>The CDC's 3 fall-risk tests for an aging parent: monthly re-checks, the trend, a family share link and a doctor summary.</span></li>
+      <li><b><a href="/brain-pass/">Brain Pass</a></b><span>Unlimited play in Echo, Swift and Linkr: every difficulty, extra modes, full stats.</span></li>
+      <li><b><a href="/spare-key/">Spare Key Family Pack</a></b><span>Your lost-phone and family legacy plan for up to 6 people: letter, wallet cards, printable binder.</span></li>
+      <li><b>Every new everyday tool</b><span>New tools join Plus automatically, the day they launch.</span></li>
+    </ul>
+  </section>
+  <p class="small muted">Business tools (Rate Con Checker, Audit Kit, Vendor Check) are sold separately. Everything you add to Quickwell tools stays on your device. <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</main>
+<script src="/js/pro.js"></script>
+<script>
+(function(){
+  var $ = function (s) { return document.querySelector(s); };
+  if (new URLSearchParams(location.search).get('checkout') === 'cancelled') $('#cancelled').hidden = false;
+  Studio.init({ tool: 'plus', onChange: function (s) { $('#on').hidden = !s.pro; $('#off').style.display = s.pro ? 'none' : 'grid'; } });
+  document.querySelectorAll('[data-buy]').forEach(function (b) {
+    b.onclick = function () {
+      b.disabled = true; $('#msg').textContent = 'Opening secure checkout…';
+      Studio.upgrade('plus', b.dataset.buy).catch(function (e) { $('#msg').textContent = (e && e.message && !/fetch/i.test(e.message)) ? e.message : 'Checkout is not available right now. Please try again later.'; }).finally(function () { b.disabled = false; });
+    };
+  });
+  $('#manage').onclick = function () { Studio.manage().catch(function (e) { $('#msg').textContent = e.message || 'Not available right now.'; }); };
+})();
+</script>
+</body>
+</html>

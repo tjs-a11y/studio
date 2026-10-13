@@ -20,6 +20,7 @@ export const fail = (status, message) => json({ error: message }, status);
 
 export const tools = catalog.tools;
 export const toolById = (id) => tools.find((t) => t.id === id) || null;
+export const plusCovers = (id) => !!(toolById('plus')?.covers || []).includes(id);
 export const taxOn = () => process.env.TAX_ENABLED === '1';
 const ACTIVE = new Set(['active', 'trialing']);
 export const isActive = (sub) => !!sub && ACTIVE.has(sub.status);

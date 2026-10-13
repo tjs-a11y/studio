@@ -125,3 +125,34 @@ test('checkout carries a clean marketing ref label and drops junk', async () => 
   await checkout(post('/api/checkout', { tool: 'demo', plan: 'pro', interval: 'month', ref: '<script>x' }));
   assert.equal(calls.filter((c) => c[0] === 'create').at(-1)[1].metadata.ref, undefined);
 });
+
+test('Quickwell Plus: a plus token unlocks covered tools only while the plus subscription is active', async () => {
+  const plusSub = { id: 'sub_plus', status: 'active', metadata: { tool: 'plus', plan: 'plus' } };
+  const orig = fake.subscriptions.list;
+  const token = core.signToken({ c: 'cus_9', t: 'plus' });
+  try {
+    fake.subscriptions.list = async () => ({ data: [plusSub] });
+    let j = await (await access(req(`/api/access?tool=footsure&token=${token}`))).json();
+    assert.equal(j.pro, true); assert.equal(j.via, 'plus'); assert.equal(j.plan, 'plus');
+    assert.equal(core.readToken(j.token).t, 'plus');
+    // Business tools are not in "covers"
+    j = await (await access(req(`/api/access?tool=rate-con-checker&token=${token}`))).json();
+    assert.equal(j.pro, false);
+    // Cancelled plus subscription: access ends at once
+    fake.subscriptions.list = async () => ({ data: [{ ...plusSub, status: 'canceled' }] });
+    j = await (await access(req(`/api/access?tool=brain-pass&token=${token}`))).json();
+    assert.equal(j.pro, false); assert.equal(j.reason, 'inactive');
+    // A token for another tool never unlocks via plus
+    const other = core.signToken({ c: 'cus_9', t: 'demo' });
+    fake.subscriptions.list = async () => ({ data: [plusSub] });
+    j = await (await access(req(`/api/access?tool=footsure&token=${other}`))).json();
+    assert.equal(j.pro, false);
+  } finally { fake.subscriptions.list = orig; }
+});
+
+test('Quickwell Plus covers only consumer tools that exist in the catalog', () => {
+  const plus = core.toolById('plus');
+  assert.ok(plus && plus.covers.length >= 3);
+  for (const id of plus.covers) assert.ok(core.toolById(id), `covered tool ${id} exists`);
+  for (const biz of ['rate-con-checker', 'audit-kit', 'vendor-check']) assert.ok(!plus.covers.includes(biz), biz);
+});
