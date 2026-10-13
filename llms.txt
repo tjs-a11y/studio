@@ -26,6 +26,8 @@ All tools run in the browser; files and text people check are not uploaded. Refe
 - [Texas RRC districts](https://quickwell.app/learn/texas-drilling-permits/): All 13 Railroad Commission of Texas oil and gas districts (01–10, 6E, 7B, 7C, 8A): the counties in each, district offices, major formations, recent permit counts and how to watch new drilling permits. (13 pages)
 - [Business costs](https://quickwell.app/learn/business-costs/): Small-business guides: find auto-renewal deadlines in contracts, push back on vendor price increases, and spot recurring and duplicate charges. (3 pages)
 - [1099 reporting](https://quickwell.app/learn/1099/): The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027. (3 pages)
+- [Fall-risk tests explained](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.
+- [Pruebas de riesgo de caídas (Spanish)](https://quickwell.app/es/learn/fall-risk-tests/): Cómo funcionan las tres pruebas STEADI de los CDC (silla de 30 segundos, equilibrio en 4 posiciones y Timed Up and Go) y sus valores de corte.
 - [Guides](https://quickwell.app/guides/): Longer how-to guides for the same audiences.
 
 ## Optional

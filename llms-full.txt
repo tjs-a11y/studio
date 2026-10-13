@@ -123,3 +123,8 @@
 - [1099 threshold for 2026: the new $2,000 rule](https://quickwell.app/learn/1099/threshold-2026/): For payments after Dec 31, 2025, the 1099-NEC and 1099-MISC threshold is $2,000, not $600 (26 U.S.C. 6041). What changed and why some rules still say $600.
 - [Who doesn't get a 1099: card payments, corporations and the attorney and medical exceptions](https://quickwell.app/learn/1099/who-does-not-get-a-1099/): Card and payment-network payments, most corporations, goods and employees usually need no 1099 from you. Attorneys and medical providers are exceptions.
 - [1099 deadlines for 2026 payments (filed in early 2027)](https://quickwell.app/learn/1099/deadlines-2026-payments/): 1099-NEC forms for 2026 payments are due Feb 1, 2027, because Jan 31 is a Sunday (26 U.S.C. 6071(c), 7503). Other e-filed 1099s: Mar 31, 2027.
+
+## Health and everyday reference pages
+
+- [Fall-risk tests explained: the CDC's chair stand, balance and Timed Up and Go](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.
+- [Pruebas de riesgo de caídas: levantarse de la silla, equilibrio y Timed Up and Go (Spanish)](https://quickwell.app/es/learn/fall-risk-tests/): Cómo funcionan las tres pruebas STEADI de los CDC (silla de 30 segundos, equilibrio en 4 posiciones y Timed Up and Go) y sus valores de corte.

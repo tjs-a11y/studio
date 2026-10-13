@@ -111,6 +111,13 @@ table.hist th{color:var(--muted);font-weight:600}
 .hidden{display:none !important}
 .foot{font-size:12px;color:var(--muted);text-align:center;margin:18px 0 30px}
 .foot p{margin:4px 0}
+/* "Also from Quickwell" strip (markup from scripts/xlinks.mjs) */
+.qw-also{margin:0 0 16px;text-align:left}
+.qw-also>p{margin:0 0 6px;font-weight:600;font-size:13px}
+.qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:8px}
+.qw-also a{display:flex;flex-direction:column;justify-content:center;min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--muted);text-decoration:none}
+.qw-also a:hover{border-color:var(--accent)}
+.qw-also b{color:var(--ink);font-size:14px}
 #printArea{display:none}
 @media print{
   body{background:#fff;color:#000}

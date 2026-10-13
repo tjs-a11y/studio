@@ -34,7 +34,7 @@ function renderMenu() {
   $('#daily-title').textContent = `Daily Echo #${n}`;
   if (done) {
     $('#daily-body').innerHTML = `<p style="margin:0 0 8px">Done for today: <b>${C.fmtInt(done.score)}</b> points, ${done.rounds} rounds. <span class="muted">Next challenge in ${U.nextIn()}.</span></p><div id="daily-share"></div>`;
-    U.shareBlock($('#daily-share'), done.card);
+    U.shareBlock($('#daily-share'), done.card, { game: ID, name: NAME, n });
   } else {
     $('#daily-body').innerHTML = `<p class="muted" style="margin:0 0 12px">Same sequence for everyone today. 3 hearts, ${E.DAILY_ROUNDS} rounds. Free, always.</p><button class="btn big block" id="play-daily">Play today's Echo</button>`;
     $('#play-daily').onclick = () => start('daily');
@@ -139,10 +139,10 @@ function end() {
   const title = daily ? `Echo #${n} · ${cleared}/${run.rounds.length} rounds` : `Echo ${run.mirror ? 'Mirror' : 'practice'} (${E.TIERS[run.tier].name}) · ${cleared} rounds`;
   const card = C.shareText({ title, pattern: E.sharePattern(run.results), stats: `${C.fmtInt(run.score)} pts · longest ${best} tiles${streak > 1 ? ` · 🔥${streak}` : ''}`, game: ID });
   if (daily) { const g = U.loadGame(ID); g.daily[run.day] = { score: run.score, rounds: cleared, card }; U.saveGame(ID, g); }
-  showResult({ score: run.score, headline: daily ? `Daily Echo #${n}` : 'Practice run', sub: `${cleared} round${cleared === 1 ? '' : 's'} cleared · longest sequence ${best}`, card, out, daily });
+  showResult({ score: run.score, headline: daily ? `Daily Echo #${n}` : 'Practice run', sub: `${cleared} round${cleared === 1 ? '' : 's'} cleared · longest sequence ${best}`, card, out, daily, n });
   run = null;
 }
-function showResult({ score, headline, sub, card, out, daily }) {
+function showResult({ score, headline, sub, card, out, daily, n }) {
   show('result');
   $('#r-head').textContent = headline; $('#r-sub').textContent = sub;
   U.countUp($('#r-score'), score);
@@ -151,7 +151,7 @@ function showResult({ score, headline, sub, card, out, daily }) {
   if (daily && out.streak > 1) badges.push(`🔥 ${out.streak}-day streak`);
   $('#r-badges').innerHTML = badges.map((b) => `<span class="badge">${b}</span>`).join('');
   $('#r-xp').textContent = `+${out.xp} XP`;
-  U.shareBlock($('#r-share'), card);
+  U.shareBlock($('#r-share'), card, daily ? { game: ID, name: NAME, n } : null);
   const left = U.practiceLeft(ID);
   $('#r-note').innerHTML = !daily && !U.pass.on && left === 0
     ? 'That was your last free practice run today. They come back at midnight. <button class="link-btn" id="r-pass">Brain Pass</button> makes practice unlimited.'

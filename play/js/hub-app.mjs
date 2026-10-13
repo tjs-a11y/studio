@@ -25,6 +25,8 @@ function render() {
 U.boot({});
 U.onPass((p) => { $('#pass-off').hidden = p.on; $('#pass-on').hidden = !p.on; });
 $('#see-pass').onclick = () => U.passSheet();
+// "Put today's puzzle on your site": copy the iframe code for the Linkr widget.
+$('#copy-embed').onclick = () => U.copyText($('#embed-code').textContent);
 $('#manage-pass').onclick = () => U.manageSheet();
 // Install: Chrome/Android fire beforeinstallprompt; we show our own button only then (never nag).
 let deferred = null;

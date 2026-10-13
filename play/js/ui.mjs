@@ -237,12 +237,14 @@ export async function copyText(text) {
     toast(ok ? 'Copied. Paste it anywhere.' : 'Select the text above to copy it.'); return ok ? 'copied' : 'failed';
   } catch (e) { toast('Select the text above to copy it.'); return 'failed'; }
 }
-// Share block for a result screen: the card text plus Share / Copy buttons.
-export function shareBlock(container, text) {
+// Share block for a result screen: the card text plus Share / Copy buttons. For a daily, pass
+// challenge = { game, name, n } to add "Challenge a friend", which shares a link to today's daily (no personal data).
+export function shareBlock(container, text, challenge) {
   container.innerHTML = `<pre class="share" aria-label="Your result card">${esc(text)}</pre>
-    <div class="row" style="justify-content:center"><button class="btn" data-share>Share result</button><button class="btn ghost" data-copy>Copy</button></div>`;
+    <div class="row" style="justify-content:center"><button class="btn" data-share>Share result</button><button class="btn ghost" data-copy>Copy</button>${challenge ? '<button class="btn ghost" data-challenge>Challenge a friend</button>' : ''}</div>`;
   $('[data-share]', container).onclick = () => shareText(text);
   $('[data-copy]', container).onclick = () => copyText(text);
+  if (challenge) $('[data-challenge]', container).onclick = () => shareText(C.challengeText(challenge));
 }
 
 // ---------- Stats ----------

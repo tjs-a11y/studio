@@ -52,6 +52,9 @@ test('internal links point at files in this folder or at studio pages that exist
   for (const f of Object.keys(PAGES)) for (const m of read(f).matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
     const p = m[1].split('#')[0];
     if (studioPages.includes(p)) continue;
+    // The shared "Also from Quickwell" strip (scripts/xlinks.mjs) links the other consumer tools with ?ref=xlink-commodities.
+    const x = /^\/([a-z-]+)\/\?ref=xlink-commodities$/.exec(p);
+    if (x && existsSync(join(KIT, x[1], 'index.html'))) continue;
     assert.ok(p.startsWith('/commodities/'), `${f}: ${p}`);
     const local = join(TOOL, p.slice('/commodities/'.length));
     assert.ok(existsSync(local.endsWith('/') ? join(local, 'index.html') : local), `${f}: broken ${p}`);

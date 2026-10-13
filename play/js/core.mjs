@@ -121,6 +121,12 @@ export function summary(history, mode) {
 // ---------- Share cards ----------
 export const SITE = 'https://quickwell.app';
 export const shareURL = (game) => `${SITE}/play/${game}/?ref=share-${game}`;
+// Challenge a friend: a link that opens today's daily of the same game (same puzzle for everyone on a given date).
+// Nothing personal in it: no name, no score, no id; only the game, the daily number and the ref label.
+export const challengeURL = (game) => `${SITE}/play/${game}/?play=daily&ref=challenge-${game}`;
+export function challengeText({ game, name, n }) {
+  return `I played today's ${name} #${n} on Quickwell Play. Same challenge for everyone today, free, no sign-up. Can you beat me?\n${challengeURL(game)}`;
+}
 // A plain-text card: title line, our own emoji pattern, a stat line, and the link. No personal data, no spoilers.
 export function shareText({ title, pattern, stats, game }) {
   return [title, pattern, stats, shareURL(game)].filter(Boolean).join('\n');

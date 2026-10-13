@@ -110,3 +110,11 @@ test('share text carries the game link with ?ref=share-<game>, and a sparkline o
   assert.equal(C.spark([0, 5, 10]), '▁▅█');
   assert.equal(C.fmtTime(65000), '1:05');
 });
+
+test('challenge-a-friend link opens today\'s daily of the same game with ?ref=challenge-<game>, and carries no personal data', () => {
+  assert.equal(C.challengeURL('linkr'), 'https://quickwell.app/play/linkr/?play=daily&ref=challenge-linkr');
+  const t = C.challengeText({ game: 'swift', name: 'Swift', n: 3 });
+  assert.match(t, /today's Swift #3/);
+  assert.ok(t.endsWith('\nhttps://quickwell.app/play/swift/?play=daily&ref=challenge-swift'));
+  assert.doesNotMatch(t, /\d+ pts|score|streak/i);
+});

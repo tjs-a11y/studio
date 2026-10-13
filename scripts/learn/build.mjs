@@ -1,4 +1,4 @@
-// Builds the /learn/ reference pages (and /fr/learn/eudr/) from the content modules, plus sitemap-learn.xml.
+// Builds the /learn/ reference pages (and /fr/learn/eudr/, /es/learn/fall-risk-tests/) from the content modules, plus sitemap-learn.xml.
 //   node scripts/learn/build.mjs          build
 //   node scripts/learn/build.mjs --check  build, then fail if a page is thin (<400 words) or an internal link is broken
 // The absolute address comes from site.config.json ("origin"); scripts/set-domain.mjs rewrites it in the built files.
@@ -18,6 +18,15 @@ for (const m of MODULES) {
   if (!existsSync(f)) continue;
   const mod = await import(f);
   sections.push({ id: m, S: mod.SECTION, pages: mod.PAGES || mod.TERMS });
+}
+// Standalone articles (one page each, any language, at their own path): modules export ARTICLES and a HUB tile.
+const ARTICLE_MODULES = ['footsure'];
+const articles = []; const articleTiles = [];
+for (const m of ARTICLE_MODULES) {
+  const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');
+  if (!existsSync(f)) continue;
+  const mod = await import(f);
+  articles.push(...mod.ARTICLES); if (mod.HUB) articleTiles.push(mod.HUB);
 }
 
 const out = []; // { path, html, page, minWords }
@@ -53,6 +62,11 @@ ${S.outro || ''}`;
   out.push({ path: S.path, html: render(idx, SITE), page: idx, minWords: 150 });
 }
 
+for (const a of articles) {
+  const page = { ...a, schema: 'Article', alternates: a.alt ? { [a.lang]: a.path, [a.altLang]: a.alt } : undefined, otherLang: a.alt, otherLangCode: a.altLang };
+  out.push({ path: a.path, html: render(page, SITE), page, minWords: 400 });
+}
+
 function uniqSources(pages) {
   const seen = new Map();
   for (const p of pages) for (const s of p.sources) if (!seen.has(s.url)) seen.set(s.url, s);
@@ -67,7 +81,7 @@ if (en.length) {
     h1: 'Learn', description: 'Plain-English reference pages: rate confirmation terms, the FMCSA new entrant audit, EUDR plot files, Texas drilling permits, small-business recurring costs and 2026 Form 1099 rules.',
     lede: 'Reference pages that answer one specific question each, written in plain English, with the official source linked on every page.',
     body: `<p>Most sections below sit next to one of the Quickwell tools. The pages explain the rules the tool checks, so you can understand a result, or fix a problem, without the tool. The business costs and 1099 reporting sections are how-to pages for small businesses; both sit next to the Year-End Vendor Check. Every page lists the sources it was checked against and the date.</p>
-<div class="grid">${en.map(({ S, pages }) => `<a class="tile" href="${S.path}"><b>${S.name}</b><span>${pages.length} pages. ${S.hubText || ''}</span></a>`).join('')}</div>`,
+<div class="grid">${en.map(({ S, pages }) => `<a class="tile" href="${S.path}"><b>${S.name}</b><span>${pages.length} pages. ${S.hubText || ''}</span></a>`).join('')}${articleTiles.map((t) => `<a class="tile" href="${t.path}"><b>${t.title}</b><span>${t.text}</span></a>`).join('')}</div>`,
     crumbs: [{ name: 'Quickwell', path: '/' }], crumbName: 'Learn', schema: 'CollectionPage',
     sources: en.flatMap(({ S, pages }) => uniqSources(pages).slice(0, 2)),
   };
@@ -85,7 +99,7 @@ ${out.map((o) => `  <url><loc>${SITE}${o.path}</loc><lastmod>${(o.page.checked &
 </urlset>
 `;
 writeFileSync(join(root, 'sitemap-learn.xml'), sitemap);
-console.log(`built ${out.length} pages (${sections.map((x) => `${x.S.path}: ${x.pages.length + 1}`).join(', ')}, hub: 1) and sitemap-learn.xml; origin ${SITE}`);
+console.log(`built ${out.length} pages (${sections.map((x) => `${x.S.path}: ${x.pages.length + 1}`).join(', ')}, articles: ${articles.length}, hub: 1) and sitemap-learn.xml; origin ${SITE}`);
 
 // llms.txt / llms-full.txt: a plain-text map of the site for AI search assistants (https://llmstxt.org).
 const TOOLS = [
@@ -115,6 +129,7 @@ ${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
 ## Reference pages
 
 ${secs.map(({ S, pages }) => line(S.name + (S.lang === 'fr' ? ' (French)' : ''), S.path, `${S.description} (${pages.length} pages)`)).join('\n')}
+${articles.map((a) => line(a.crumbName + (a.lang === 'es' ? ' (Spanish)' : ''), a.path, a.description)).join('\n')}
 ${existsSync(join(root, 'guides', 'index.html')) ? line('Guides', '/guides/', 'Longer how-to guides for the same audiences.') + '\n' : ''}
 ## Optional
 
@@ -132,6 +147,10 @@ ${secs.map(({ S, pages }) => `
 
 ${line(S.h1, S.path, S.description)}
 ${pages.map((p) => line(p.h1 || p.term, S.path + p.slug + '/', p.description)).join('\n')}`).join('\n')}
+
+## Health and everyday reference pages
+
+${articles.map((a) => line(a.h1 + (a.lang === 'es' ? ' (Spanish)' : ''), a.path, a.description)).join('\n')}
 `;
 writeFileSync(join(root, 'llms.txt'), llms);
 writeFileSync(join(root, 'llms-full.txt'), full);

@@ -1,5 +1,5 @@
 // Shared page shell for the /learn/ reference pages (and /fr/learn/).
-// Same look as /index.html and /_template/: light/dark from the system, phone-first, no external assets.
+// (English, French and Spanish.) Same look as /index.html and /_template/: light/dark from the system, phone-first, no external assets.
 
 export const CHECKED = '2026-10-11';
 export const CHECKED_EN = 'October 11, 2026';
@@ -40,6 +40,25 @@ export const CSS = `
   footer { margin-top:26px; color:var(--muted); font-size:.88rem; } footer a { color:inherit; }
 `;
 
+// Open Graph and Twitter tags, for pages that set ogImage (a 1200x630 image path on this site).
+const OG_LOCALE = { en: 'en_US', es: 'es_US', fr: 'fr_FR' };
+function og(page, abs) {
+  const t = esc(page.title), d = esc(page.description), img = esc(abs(page.ogImage));
+  return `<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="${t}">
+<meta property="og:description" content="${d}">
+<meta property="og:url" content="${esc(abs(page.path))}">
+<meta property="og:image" content="${img}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="${OG_LOCALE[page.lang] || 'en_US'}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${t}">
+<meta name="twitter:description" content="${d}">
+<meta name="twitter:image" content="${img}">
+`;
+}
+
 // page: { path, lang, title, h1, description, lede, body, schema: 'DefinedTerm'|'Article'|'CollectionPage',
 //         term, termSet: {name, path}, crumbs: [{name, path}], cta: {title, text, href, label}, related: [{href, title, text}],
 //         sources: [{label, url}], alternates: {en, fr} }
@@ -63,9 +82,15 @@ export function render(page, SITE) {
     ld.push({ '@context': 'https://schema.org', '@type': 'Article', ...base });
   }
   const alt = page.alternates ? Object.entries(page.alternates).map(([l, p]) => `<link rel="alternate" hreflang="${l}" href="${esc(abs(p))}">`).join('\n') + '\n' : '';
+  const es = page.lang === 'es';
   const T = fr
-    ? { crumbs: "Fil d'Ariane", related: 'Voir aussi', sources: 'Sources', checked: `Sources ouvertes et vérifiées le ${CHECKED_FR}.`, home: 'Accueil Quickwell', privacy: 'Confidentialité', terms: 'Conditions', other: 'English version' }
-    : { crumbs: 'Breadcrumb', related: 'Related', sources: 'Sources', checked: `Sources opened and checked on ${(page.checked && page.checked.en) || CHECKED_EN}.`, home: 'Quickwell home', privacy: 'Privacy', terms: 'Terms', other: 'Version française' };
+    ? { crumbs: "Fil d'Ariane", related: 'Voir aussi', sources: 'Sources', checked: `Sources ouvertes et vérifiées le ${CHECKED_FR}.`, home: 'Accueil Quickwell', privacy: 'Confidentialité', terms: 'Conditions' }
+    : es
+      ? { crumbs: 'Ruta de navegación', related: 'Relacionado', sources: 'Fuentes', checked: `Fuentes abiertas y verificadas el ${(page.checked && page.checked.es) || page.checked.iso}.`, home: 'Inicio de Quickwell', privacy: 'Privacidad', terms: 'Condiciones' }
+      : { crumbs: 'Breadcrumb', related: 'Related', sources: 'Sources', checked: `Sources opened and checked on ${(page.checked && page.checked.en) || CHECKED_EN}.`, home: 'Quickwell home', privacy: 'Privacy', terms: 'Terms' };
+  // The link to the page's twin in the other language, labelled in that language.
+  const otherLang = page.otherLangCode || (fr ? 'en' : 'fr');
+  const OTHER = { en: 'English version', fr: 'Version française', es: 'Versión en español' }[otherLang];
   const disclaimer = page.disclaimer || (fr
     ? "Ceci n'est pas un avis juridique. Ces pages expliquent des règles techniques publiques ; elles ne garantissent pas qu'un fichier ou une déclaration sera accepté. Vérifiez toujours la documentation officielle à jour."
     : 'Not legal advice. This page explains public rules and common contract terms in plain English; it is not a substitute for reading your own documents or asking a qualified professional. Rules change, so check the official source.');
@@ -77,7 +102,7 @@ export function render(page, SITE) {
 <meta name="description" content="${esc(page.description)}">
 <link rel="canonical" href="${esc(abs(page.path))}">
 <link rel="icon" href="data:,">
-${alt}<style>${CSS}</style>
+${page.ogImage ? og(page, abs) : ''}${alt}<style>${CSS}</style>
 ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('\n')}
 </head>
 <body>
@@ -86,7 +111,7 @@ ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('
   <article>
     <h1>${esc(page.h1)}</h1>
     ${page.lede ? `<p class="lede">${page.lede}</p>` : ''}
-    ${page.otherLang ? `<p class="meta"><a href="${page.otherLang}" hreflang="${fr ? 'en' : 'fr'}" lang="${fr ? 'en' : 'fr'}">${T.other}</a></p>` : ''}
+    ${page.otherLang ? `<p class="meta"><a href="${page.otherLang}" hreflang="${otherLang}" lang="${otherLang}">${OTHER}</a></p>` : ''}
 ${page.body}
   </article>
 ${page.cta ? `  <aside class="card cta"><b>${esc(page.cta.title)}</b>${page.cta.text}<br><a class="btn" href="${page.cta.href}">${esc(page.cta.label)}</a></aside>\n` : ''}${page.related && page.related.length ? `  <section><h2>${T.related}</h2><div class="grid">${page.related.map((r) => `<a class="tile" href="${r.href}"><b>${esc(r.title)}</b>${r.text ? `<span>${esc(r.text)}</span>` : ''}</a>`).join('')}</div></section>\n` : ''}  <section class="sources"><h2>${T.sources}</h2><ul>${page.sources.map((s) => `<li>${esc(s.label)}: <a href="${esc(s.url)}" rel="noopener">${esc(s.url)}</a></li>`).join('')}</ul><p class="note">${T.checked}</p></section>

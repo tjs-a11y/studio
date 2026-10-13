@@ -31,7 +31,7 @@ function renderMenu() {
     return `<div class="drow"><div><b>${L.TIERS[t].name}</b> <span class="muted small">${L.TIERS[t].n}×${L.TIERS[t].n}${L.TIERS[t].gems ? `, ${L.TIERS[t].gems} gem${L.TIERS[t].gems > 1 ? 's' : ''}` : ''}</span>${r ? `<div class="small">${L.STAR[r.stars]} ${C.fmtTime(r.ms)} · ${C.fmtInt(r.score)} pts</div>` : ''}</div>
       ${r ? '<span class="pill">Solved</span>' : `<button class="btn ${t === FREE_DAILY ? '' : 'ghost'}" data-daily="${t}">${locked ? '🔒 ' : ''}Play</button>`}</div>`;
   }).join('') + (today.card ? `<div id="daily-share"></div><p class="small muted" style="margin:0">Next puzzles in ${U.nextIn()}.</p>` : '<p class="small muted" style="margin:8px 0 0">Same puzzles for everyone today. Normal is free, always.</p>');
-  if (today.card) U.shareBlock($('#daily-share'), today.card);
+  if (today.card) U.shareBlock($('#daily-share'), today.card, { game: ID, name: NAME, n });
   U.$$('[data-daily]').forEach((b) => { b.onclick = () => start('daily', b.dataset.daily); });
   $('#mode-chips').innerHTML = MODES.map(([k, l]) => `<button class="chip" data-mode="${k}" aria-pressed="${sel.mode === k}">${l}${!U.pass.on && PASS_MODES.includes(k) ? '<span class="lock" aria-label="Brain Pass">🔒</span>' : ''}</button>`).join('');
   $('#tier-chips').innerHTML = Object.entries(L.TIERS).map(([k, t]) => `<button class="chip" data-tier="${k}" aria-pressed="${sel.tier === k}">${t.name}${!U.pass.on && !FREE_TIERS.includes(k) ? '<span class="lock" aria-label="Brain Pass">🔒</span>' : ''}</button>`).join('');
@@ -132,7 +132,7 @@ async function win() {
   const badges = []; if (out.newBest) badges.push('New personal best!'); if (daily && out.streak > 1) badges.push(`🔥 ${out.streak}-day streak`);
   $('#r-badges').innerHTML = badges.map((b) => `<span class="badge">${b}</span>`).join('');
   $('#r-xp').textContent = `+${out.xp} XP`;
-  U.shareBlock($('#r-share'), card);
+  U.shareBlock($('#r-share'), card, daily ? { game: ID, name: NAME, n } : null);
   const left = U.practiceLeft(ID);
   $('#r-note').innerHTML = !daily && !U.pass.on && left === 0 ? 'That was your last free practice puzzle today. They come back at midnight. <button class="link-btn" id="r-pass">Brain Pass</button> makes practice unlimited.'
     : daily && run.tier === FREE_DAILY && !U.pass.on ? 'Want more? Hard and Expert dailies come with <button class="link-btn" id="r-pass">Brain Pass</button>.' : '';

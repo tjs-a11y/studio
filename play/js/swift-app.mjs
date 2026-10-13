@@ -27,7 +27,7 @@ function renderMenu() {
   $('#daily-title').textContent = `Daily Swift #${n}`;
   if (done) {
     $('#daily-body').innerHTML = `<p style="margin:0 0 8px">Done for today: <b>${C.fmtInt(done.score)}</b> points, best combo ×${done.mult || 1}. <span class="muted">Next challenge in ${U.nextIn()}.</span></p><div id="daily-share"></div>`;
-    U.shareBlock($('#daily-share'), done.card);
+    U.shareBlock($('#daily-share'), done.card, { game: ID, name: NAME, n });
   } else {
     $('#daily-body').innerHTML = `<p class="muted" style="margin:0 0 12px">${S.DAILY_SECONDS} seconds. The same challenges for everyone today. Free, always.</p><button class="btn big block" id="play-daily">Play today's Swift</button>`;
     $('#play-daily').onclick = () => start('daily');
@@ -159,7 +159,7 @@ function end() {
   const badges = []; if (out.newBest) badges.push('New personal best!'); if (daily && out.streak > 1) badges.push(`🔥 ${out.streak}-day streak`);
   $('#r-badges').innerHTML = badges.map((b) => `<span class="badge">${b}</span>`).join('');
   $('#r-xp').textContent = `+${out.xp} XP`;
-  U.shareBlock($('#r-share'), card);
+  U.shareBlock($('#r-share'), card, daily ? { game: ID, name: NAME, n } : null);
   const left = U.practiceLeft(ID);
   $('#r-note').innerHTML = !daily && !U.pass.on && left === 0 ? 'That was your last free practice run today. They come back at midnight. <button class="link-btn" id="r-pass">Brain Pass</button> makes practice unlimited.' : daily ? `Next daily in ${U.nextIn()}.` : '';
   const rp = $('#r-pass'); if (rp) rp.onclick = () => U.passSheet();
