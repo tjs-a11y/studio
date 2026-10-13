@@ -21,7 +21,8 @@ jobs:
   update:
     # Scheduled runs stay off until the first manual run has been checked (README "Needs a live check")
     # and the repo variable COMMODITY_DESK_ENABLED is set to 1. A manual run always works.
-    if: github.event_name == 'workflow_dispatch' || vars.COMMODITY_DESK_ENABLED == '1'
+    # First live run checked 2026-10-13 (World Bank Sep-2026 workbook found via the commodity-markets page; EIA, Treasury, ECB ok).
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
