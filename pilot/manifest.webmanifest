@@ -1,0 +1,11 @@
+{
+  "name": "Quickwell Pilot",
+  "short_name": "Pilot",
+  "description": "What your letters, bills and notices need from you, and when. Nothing is uploaded.",
+  "start_url": "/pilot/?ref=pwa",
+  "scope": "/pilot/",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#1f6b52",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

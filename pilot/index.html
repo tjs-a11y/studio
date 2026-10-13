@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://cdnjs.cloudflare.com; frame-src https://*.stripe.com; form-action 'self' https://*.stripe.com; base-uri 'self'; object-src 'none'">
+<title>Quickwell Pilot: What Your Letters and Bills Need From You</title>
+<meta name="description" content="Paste or snap any letter, bill or notice: see the action, deadline, amount and who to contact, plus a checklist, reminders and a reply. Nothing uploaded.">
+<link rel="canonical" href="https://quickwell.app/pilot/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Quickwell Pilot: what does this letter need from you?">
+<meta property="og:description" content="Any letter, bill, email or notice: the action, the deadline, the amount and who to contact, in seconds. Then a checklist, calendar reminders and a reply draft. Nothing is uploaded.">
+<meta property="og:url" content="https://quickwell.app/pilot/">
+<meta property="og:image" content="https://quickwell.app/pilot/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickwell Pilot: pay $142.18 by Oct 27, with a checklist and calendar reminders">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickwell Pilot: what does this letter need from you?">
+<meta name="twitter:description" content="The action, deadline, amount and contact from any letter or bill, plus reminders and a reply draft. Nothing is uploaded.">
+<meta name="twitter:image" content="https://quickwell.app/pilot/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Quickwell Pilot","url":"https://quickwell.app/pilot/","applicationCategory":"LifestyleApplication","operatingSystem":"Any (runs in a web browser; installable)","browserRequirements":"Requires JavaScript","inLanguage":["en","es"],"description":"Read any letter, bill, email, notice or form on your device: the action, deadline, amount and who to contact, a checklist, calendar reminders, reply drafts and one timeline of everything due.","publisher":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Pilot monthly","price":"2.99","priceCurrency":"USD"},{"@type":"Offer","name":"Pilot yearly","price":"24.99","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to the tool</a>
+<div class="wrap">
+  <header class="app">
+    <a class="brand" href="/" aria-label="Quickwell home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.2 6 10.5A6 6 0 0 1 6 13.5C6 10.2 9 7 12 3z" fill="currentColor"/><path d="M9.5 14.5l2 2 3.5-4" stroke="var(--accent-ink)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Quickwell Pilot</span>
+    </a>
+    <button type="button" class="ghost" id="langBtn" lang="es">Español</button>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <span class="chip" data-i18n="chip">Free · nothing uploaded</span>
+      <h1 data-i18n="h1">What does this letter need from you?</h1>
+      <p class="lede" data-i18n="lede">Paste, snap or upload any letter, bill, email, notice or form. See the action, the deadline, the amount and who to contact, then get a checklist, calendar reminders and a reply draft.</p>
+      <p class="lock"><span aria-hidden="true">🔒</span> <span data-i18n="lock">Runs on this device. Nothing is uploaded. We never ask for passwords or logins.</span></p>
+      <p class="pro-on hidden" id="proOn" role="status"><span class="chip ok" data-i18n="proOn">Pilot is on</span> <button type="button" class="link" id="manageBtn" data-i18n="manage">Manage plan</button></p>
+    </section>
+
+    <section class="card week hidden" id="weekCard" aria-labelledby="weekTitle">
+      <h2 id="weekTitle" data-i18n="weekTitle">This week</h2>
+      <div id="weekBody"></div>
+      <button type="button" class="secondary" id="weekOk" data-i18n="weekOk">Got it</button>
+    </section>
+
+    <section class="card" id="inputCard" aria-labelledby="inTitle">
+      <h2 id="inTitle" data-i18n="inTitle">Your letter</h2>
+      <label for="letterText" class="small muted" data-i18n="pasteLabel">Paste the text of a letter, bill, email or form</label>
+      <textarea id="letterText" rows="7" spellcheck="false" autocomplete="off"></textarea>
+      <button type="button" id="readBtn" data-i18n="readBtn">Read it</button>
+      <div class="row wrap-row two">
+        <label class="btn secondary" for="fileInput" id="fileLabel"><span aria-hidden="true">📷</span> <span data-i18n="fileBtn">Photo, screenshot or PDF</span></label>
+        <button type="button" class="secondary" id="sampleBtn" data-i18n="sampleBtn">Try a sample letter</button>
+      </div>
+      <input type="file" id="fileInput" accept="image/*,application/pdf,.pdf,.txt,text/plain" class="sr-only">
+      <p class="small muted" data-i18n="fileHint" id="fileHint">Photos and screenshots are read on this device. Text PDFs work best.</p>
+      <div class="progress hidden" id="ocrBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fileMsg"><i></i></div>
+      <p class="small warn hidden" id="fileMsg" role="status"></p>
+      <p class="small muted hidden" id="photoTip" data-i18n="photoTip"></p>
+    </section>
+
+    <section id="results" class="hidden" aria-live="polite">
+      <section class="card need" id="needCard" aria-labelledby="needTitle">
+        <h2 id="needTitle" data-i18n="needTitle">What this needs from you</h2>
+        <p class="big" id="headline"></p>
+        <p class="small muted" id="daysLeft"></p>
+        <p class="small warn hidden" id="sensitiveNote" data-i18n="sensitive"></p>
+        <dl class="fields" id="fields"></dl>
+        <p class="small muted" data-i18n="confHelp">How sure we are about each detail. Fix anything that looks wrong.</p>
+        <div id="others"></div>
+        <div class="row wrap-row two">
+          <button type="button" id="icsBtn" data-i18n="icsBtn">Add to calendar (.ics)</button>
+          <button type="button" class="secondary" id="saveBtn" data-i18n="saveBtn">Save to my list</button>
+        </div>
+        <p class="small muted" data-i18n="icsHelp">One event with reminders 7 days and 1 day before.</p>
+        <p class="small" id="saveMsg" role="status"></p>
+      </section>
+      <section class="card" id="checkCard" aria-labelledby="checkTitle">
+        <h2 id="checkTitle" data-i18n="checkTitle">Checklist</h2>
+        <ul class="checks" id="checklist"></ul>
+      </section>
+      <section class="card" id="replyCard" aria-labelledby="replyTitle">
+        <h2 id="replyTitle" data-i18n="replyTitle">Draft a reply</h2>
+        <p class="small muted" data-i18n="replyLede">A polite, plain letter you edit and send yourself.</p>
+        <div class="acts" id="replyKinds" role="group" aria-labelledby="replyTitle"></div>
+        <div id="replyBox" class="hidden">
+          <label for="replyName" class="small muted" data-i18n="yourName">Your name (optional)</label>
+          <input type="text" id="replyName" autocomplete="name">
+          <label for="replySubject" class="small muted" data-i18n="subject">Subject</label>
+          <input type="text" id="replySubject">
+          <label for="replyBody" class="small muted" data-i18n="letter">Letter</label>
+          <textarea id="replyBody" rows="12"></textarea>
+          <p class="small muted" data-i18n="replyNote">Fill in the [brackets] and check every detail before you send it. Not legal advice.</p>
+          <div class="row wrap-row three">
+            <button type="button" class="secondary" id="copyBtn" data-i18n="copy">Copy</button>
+            <a class="btn secondary" id="mailBtn" href="mailto:" data-i18n="emailIt">Open in my email app</a>
+            <button type="button" class="secondary" id="txtBtn" data-i18n="downloadTxt">Download .txt</button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="dueCard" aria-labelledby="dueTitle">
+      <h2 id="dueTitle"><span data-i18n="dueTitle">What’s due</span> <span class="count" id="dueCount">0</span></h2>
+      <p class="small muted" data-i18n="dueLede">Everything you saved, in date order.</p>
+      <div id="dueSummary"></div>
+      <div id="dueList"></div>
+      <div id="dueLocked" class="locked-box">
+        <h3 data-i18n="dueLockedTitle">The full timeline is part of Pilot</h3>
+        <p class="small" data-i18n="dueLockedText"></p>
+        <button type="button" class="secondary" data-show-plan data-i18n="seePlan">See the Pilot plan</button>
+      </div>
+      <div id="duePro" class="hidden">
+        <details class="add" id="addBox">
+          <summary data-i18n="addTitle">Add something yourself</summary>
+          <form id="addForm" class="grid2">
+            <label><span data-i18n="f.title">What</span><input type="text" name="title" maxlength="120"></label>
+            <label><span data-i18n="f.action">Action</span><select name="action" id="addAction"></select></label>
+            <label><span data-i18n="f.deadline">Deadline</span><input type="date" name="date"></label>
+            <label><span data-i18n="f.time">Time</span><input type="time" name="time"></label>
+            <label><span data-i18n="f.amount">Amount</span><input type="number" name="amount" min="0" step="0.01" inputmode="decimal"></label>
+            <label><span data-i18n="f.notes">Notes</span><input type="text" name="notes" maxlength="200"></label>
+            <button type="submit" data-i18n="addBtn">Add to timeline</button>
+          </form>
+        </details>
+        <div class="row wrap-row two">
+          <button type="button" class="secondary" id="saverBtn" data-i18n="saverBtn">Import renewals from Quickwell Saver</button>
+          <button type="button" class="secondary" id="allIcsBtn" data-i18n="allIcs">Calendar for everything (.ics)</button>
+          <button type="button" class="secondary" id="backupBtn" data-i18n="backupBtn">Download a backup</button>
+          <label class="btn secondary" for="restoreInput" data-i18n="restoreBtn">Restore a backup</label>
+        </div>
+        <input type="file" id="restoreInput" accept=".json,application/json" class="sr-only">
+      </div>
+      <p class="small" id="dueMsg" role="status"></p>
+    </section>
+
+    <section class="card plan" id="planCard" aria-labelledby="planTitle">
+      <h2 id="planTitle" data-i18n="planTitle">Pilot: never miss what’s due</h2>
+      <p data-i18n="planLede">Reading letters, the checklist and calendar files are free (up to 3 saved items). Pilot adds:</p>
+      <ul class="ticks small">
+        <li data-i18n="plan1">Unlimited saved items and one timeline of everything due</li>
+        <li data-i18n="plan2">Reply drafts: more time, payment made, questions and disputes, cancel, reschedule</li>
+        <li data-i18n="plan3">Quickwell Saver renewals and cancel-by dates in the same timeline</li>
+        <li data-i18n="plan4">A weekly “what’s due” summary when you open Pilot</li>
+        <li data-i18n="plan5">A backup file you keep, and a calendar file for everything</li>
+      </ul>
+      <div class="plans">
+        <button type="button" class="planbtn" data-buy="month"><span><b data-i18n="month">Monthly</b><small data-i18n="monthSub">Cancel anytime</small></span><span class="price">$2.99<small>/mo</small></span></button>
+        <button type="button" class="planbtn best" data-buy="year"><span><b data-i18n="year">Yearly · save 30%</b><small data-i18n="yearSub">About $2.08 a month</small></span><span class="price">$24.99<small>/yr</small></span></button>
+      </div>
+      <p class="small muted" data-i18n="localPrice">Secure checkout by Stripe. Where available, checkout shows the price in your local currency.</p>
+      <p class="small"><a href="/plus/?ref=pilot" data-i18n="plusLink">Also included in Quickwell Plus</a></p>
+      <p class="small" id="buyMsg" role="status"></p>
+    </section>
+
+    <section class="card" id="privacy" aria-labelledby="privTitle">
+      <h2 id="privTitle" data-i18n="privTitle">Privacy</h2>
+      <ul class="small">
+        <li data-i18n="priv1">Letters, photos and PDFs are read by this page, in your browser. They are never uploaded, logged or stored on a server.</li>
+        <li data-i18n="priv2">We never ask for passwords, logins or card numbers. Please never type them here.</li>
+        <li data-i18n="priv3">Only what you save is kept in this browser. The letter itself is not kept.</li>
+        <li data-i18n="priv4">The page sends one anonymous count when someone reads a letter, and talks to our payment server only if you buy.</li>
+      </ul>
+      <button type="button" class="secondary" id="clearBtn" data-i18n="privClear">Delete my saved items on this device</button>
+      <p class="small" id="clearMsg" role="status"></p>
+    </section>
+  </main>
+
+  <footer class="foot small muted">
+    <p data-i18n="disclaimer">Quickwell Pilot reads letters with simple rules and can be wrong: always check the letter itself. Not legal, tax or financial advice. Not affiliated with any company or agency.</p>
+    <!-- xlinks:pilot -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/saver/?ref=xlink-pilot"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/footsure/?ref=xlink-pilot"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-pilot"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-pilot"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-pilot"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-pilot"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+    <p><a href="/privacy.html" data-i18n="privacyLink">Privacy policy</a> · <a href="/terms.html" data-i18n="termsLink">Terms</a> · Quickwell</p>
+  </footer>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/js/pro.js"></script>
+<script type="module" src="js/app.mjs"></script>
+</body>
+</html>

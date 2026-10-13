@@ -1,0 +1,15 @@
+Eléctrica del Norte S.A.
+Apartado de correos 1200, 28080 Madrid
+Atención al cliente: 900 123 456
+
+Fecha de emisión: 5 de octubre de 2026
+Número de cliente: 7781-2290-11
+Periodo de facturación: del 1 de septiembre de 2026 al 30 de septiembre de 2026
+
+Total a pagar: 86,45 €
+Fecha límite de pago: 20 de octubre de 2026
+
+Estimado cliente:
+Le recordamos que el importe de su factura debe pagarse antes del 20 de octubre de 2026. Puede pagar en www.electricadelnorte.example.es/pagar.
+Si no está de acuerdo con la factura, puede presentar una reclamación dentro de los 30 días siguientes a la fecha de esta factura.
+Para cualquier consulta, llámenos al 900 123 456 o escriba a clientes@electricadelnorte.example.es.

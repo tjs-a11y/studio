@@ -91,6 +91,7 @@
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
         "saver",
+        "pilot",
         "footsure",
         "brain-pass",
         "spare-key",
@@ -119,6 +120,16 @@
       "plans": [
         {
           "id": "saver"
+        }
+      ]
+    },
+    {
+      "id": "pilot",
+      "name": "Quickwell Pilot",
+      "tagline": "Paste or snap any letter, bill or notice: see what it needs from you, by when, how much and who to contact, then get a checklist, calendar reminders and a reply draft. Nothing is uploaded.",
+      "plans": [
+        {
+          "id": "pilot"
         }
       ]
     }

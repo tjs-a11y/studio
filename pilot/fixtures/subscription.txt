@@ -1,0 +1,11 @@
+From: StreamNest <billing@streamnest.example.com>
+To: you@example.com
+Date: Tue, Oct 13, 2026 at 7:02 AM
+Subject: Your StreamNest Premium plan renews soon
+
+Hi there,
+Your StreamNest Premium annual plan renews automatically on November 1, 2026.
+You'll be charged $119.99 to the card ending in 4242.
+Don't want to keep it? Cancel anytime before October 31, 2026 to avoid being charged:
+go to streamnest.example.com/account and choose Cancel plan.
+Questions? Reply to this email or visit help.streamnest.example.com.
