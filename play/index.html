@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- seo -->
+<title>Quickwell Play: 3 free daily brain games, no sign-up</title>
+<meta name="description" content="Echo for memory, Swift for focus, Linkr for logic. A new free challenge in each game every day, streaks and stats. Works offline on your phone.">
+<link rel="canonical" href="https://quickwell.app/play/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell Play">
+<meta property="og:title" content="Quickwell Play: 3 free daily brain games, no sign-up">
+<meta property="og:description" content="Echo for memory, Swift for focus, Linkr for logic. A new free challenge in each game every day, streaks and stats. Works offline on your phone.">
+<meta property="og:url" content="https://quickwell.app/play/">
+<meta property="og:image" content="https://quickwell.app/play/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickwell Play: Echo, Swift and Linkr, three daily brain games">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickwell Play: 3 free daily brain games, no sign-up">
+<meta name="twitter:description" content="Echo for memory, Swift for focus, Linkr for logic. A new free challenge in each game every day, streaks and stats. Works offline on your phone.">
+<meta name="twitter:image" content="https://quickwell.app/play/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://quickwell.app/play/#collection","name":"Quickwell Play","url":"https://quickwell.app/play/","description":"Three daily brain games: Echo (memory), Swift (focus) and Linkr (logic).","inLanguage":"en","publisher":{"@id":"https://quickwell.app/#org"},"hasPart":[{"@type":"VideoGame","name":"Echo","url":"https://quickwell.app/play/echo/"},{"@type":"VideoGame","name":"Swift","url":"https://quickwell.app/play/swift/"},{"@type":"VideoGame","name":"Linkr","url":"https://quickwell.app/play/linkr/"}]},{"@type":"WebApplication","name":"Quickwell Play","url":"https://quickwell.app/play/","applicationCategory":"GameApplication","operatingSystem":"Any (runs in a web browser; installable)","browserRequirements":"Requires JavaScript","image":"https://quickwell.app/play/og.png","publisher":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Free: every daily challenge and 3 practice runs per game a day","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Brain Pass monthly","price":"2.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"2.99","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}},{"@type":"Offer","name":"Brain Pass yearly","price":"19.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"19.99","priceCurrency":"USD","unitCode":"ANN","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"ANN"}}},{"@type":"Offer","name":"Brain Pass lifetime","price":"29.99","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are the games free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every daily challenge is free forever, plus 3 practice runs per game each day. Brain Pass ($2.99 a month, $19.99 a year or $29.99 once) adds unlimited practice, every difficulty, extra modes, full stats, themes and weekly streak freezes."}},{"@type":"Question","name":"Will these games make me smarter?","acceptedAnswer":{"@type":"Answer","text":"We don't claim that. You will get better at the skills each game practises. Research has not shown that brain games raise general intelligence, prevent memory decline or improve everyday performance."}},{"@type":"Question","name":"Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"No. Your scores, streaks and stats are saved on your device only. Nothing is uploaded."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<!-- /seo -->
+<meta name="theme-color" content="#f5f4f0">
+<link rel="manifest" href="/play/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/play/icons/apple-touch-icon.png">
+<script>try{var p=JSON.parse(localStorage.getItem('qw-play:prefs')||'{}');if(p.theme==='light'||p.theme==='dark')document.documentElement.dataset.theme=p.theme}catch(e){}</script>
+<link rel="stylesheet" href="/play/css/play.css">
+<style>
+  .games { display: grid; gap: 12px; margin: 16px 0; }
+  .game { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 14px; box-shadow: var(--shadow); color: inherit; text-decoration: none; position: relative; }
+  .game:hover { border-color: var(--g); }
+  .game .ic { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 1.9rem; background: var(--gs); color: var(--g); }
+  .game h3 { margin: 0; font-size: 1.15rem; } .game p { margin: 2px 0 8px; color: var(--muted); font-size: .92rem; }
+  .game .skill { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--g); }
+  .game .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .game .btn { min-height: 44px; padding: 8px 14px; background: var(--g); border-color: var(--g); }
+  .game .done { font-weight: 700; color: var(--good); font-size: .92rem; }
+  .g-echo { --g: #6246ea; --gs: #ece8fe; } .g-swift { --g: #b45309; --gs: #fdf0e1; } .g-linkr { --g: #0f766e; --gs: #dff4f1; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .g-echo { --g: #a796ff; --gs: #2a2550; } :root:not([data-theme="light"]) .g-swift { --g: #ffad42; --gs: #3a2a14; } :root:not([data-theme="light"]) .g-linkr { --g: #3fd6c3; --gs: #123532; } }
+  :root[data-theme="dark"] .g-echo { --g: #a796ff; --gs: #2a2550; } :root[data-theme="dark"] .g-swift { --g: #ffad42; --gs: #3a2a14; } :root[data-theme="dark"] .g-linkr { --g: #3fd6c3; --gs: #123532; }
+  .echo-ic { display: grid; grid-template-columns: repeat(3, 12px); gap: 3px; } .echo-ic i { width: 12px; height: 12px; border-radius: 3px; background: color-mix(in srgb, var(--g) 30%, transparent); } .echo-ic i.on { background: var(--g); }
+  .today { display: flex; gap: 6px; align-items: center; }
+  .today i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--line); } .today i.on { background: var(--good); border-color: var(--good); }
+  .passbox { background: linear-gradient(135deg, var(--accent-soft), var(--card)); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+  .passbox .prices { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 12px; }
+  .passbox .prices span { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; font-size: .9rem; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="icon-btn" id="btn-back" href="/" aria-label="Quickwell home"></a>
+  <div class="title"><span>Quickwell Play</span><span class="pill" id="pass-pill" hidden>Brain Pass</span></div>
+  <button class="icon-btn" id="btn-sound"></button>
+  <button class="icon-btn" id="btn-settings" aria-label="Settings"></button>
+</header>
+<main class="wrap">
+  <h1>Three quick games. A fresh challenge in each, every day.</h1>
+  <p class="lede">Practise your memory, focus and logic in a few minutes a day. Free daily challenges, no sign-up, no ads, works offline.</p>
+
+  <div class="meta">
+    <div><b id="h-streak">0</b><span>Play streak 🔥</span></div>
+    <div><b id="h-today">0/3</b><span>Done today</span></div>
+    <div><b id="h-level">3</b><span>Total level</span></div>
+  </div>
+
+  <div class="games" id="games">
+    <article class="game g-echo">
+      <div class="ic" aria-hidden="true"><div class="echo-ic"><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i></div></div>
+      <div><span class="skill">Memory</span><h3><a href="/play/echo/" style="color:inherit;text-decoration:none">Echo</a></h3><p>Watch the tiles light up, then tap them back in order. One more each round.</p><div class="acts" data-game="echo"></div></div>
+    </article>
+    <article class="game g-swift">
+      <div class="ic" aria-hidden="true">⚡</div>
+      <div><span class="skill">Focus</span><h3><a href="/play/swift/" style="color:inherit;text-decoration:none">Swift</a></h3><p>Ink colours, tricky arrows, odd ones out. Fast answers build a combo up to ×4.</p><div class="acts" data-game="swift"></div></div>
+    </article>
+    <article class="game g-linkr">
+      <div class="ic" aria-hidden="true">🔗</div>
+      <div><span class="skill">Logic</span><h3><a href="/play/linkr/" style="color:inherit;text-decoration:none">Linkr</a></h3><p>Draw a path from start to flag so the numbers add up to exactly the target.</p><div class="acts" data-game="linkr"></div></div>
+    </article>
+  </div>
+  <p class="small muted" id="next-line"></p>
+
+  <section class="card passbox" id="passbox" aria-labelledby="pass-title">
+    <h2 id="pass-title">Brain Pass</h2>
+    <div id="pass-off">
+      <p style="margin:0">Love it? One pass unlocks more in all three games: unlimited practice, every difficulty, extra modes, full stats, colour themes and a weekly streak freeze.</p>
+      <div class="prices"><span><b>$2.99</b>/month</span><span><b>$19.99</b>/year</span><span><b>$29.99</b> once, for life</span></div>
+      <p class="small muted" style="margin:0 0 12px">7 days free on monthly and yearly. Cancel anytime. Daily challenges stay free forever.</p>
+      <button class="btn" id="see-pass">See Brain Pass</button>
+    </div>
+    <div id="pass-on" hidden>
+      <p style="margin:0 0 12px">Brain Pass is on. Everything is unlocked in all three games. Thank you for supporting independent games.</p>
+      <button class="btn ghost" id="manage-pass">Manage</button>
+    </div>
+  </section>
+
+  <section class="card" id="install-card" hidden>
+    <h2>Put it on your home screen</h2>
+    <p class="muted" style="margin:0 0 12px">Opens like an app, works offline, no app store.</p>
+    <button class="btn" id="install">Install Quickwell Play</button>
+  </section>
+
+  <section class="card" id="science" aria-labelledby="science-title">
+    <h2 id="science-title">About the science</h2>
+    <p>These games are for fun. Each one practises a skill: Echo short-term memory, Swift quick attention, Linkr planning and arithmetic. You will get better at each game as you play it, and your stats show that progress.</p>
+    <p style="margin-bottom:0">Research has <b>not</b> shown that brain games raise general intelligence, prevent memory loss or decline, or make you better at everyday tasks, and we don't claim they do. If you are worried about your memory, talk to a doctor.</p>
+  </section>
+
+  <p class="small muted">Your scores, streaks and stats stay on this device. No account, no ads, nothing uploaded. On a new day your challenges reset at midnight where you are.</p>
+  <footer class="foot"><a href="/">Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<script src="/js/pro.js"></script>
+<script type="module" src="/play/js/hub-app.mjs"></script>
+</body>
+</html>

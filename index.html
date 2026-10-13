@@ -29,7 +29,7 @@
   h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 8px; letter-spacing: -0.02em; } p.lede { color: var(--muted); margin: 0 0 32px; }
   .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
   a.card { display: block; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: inherit; text-decoration: none; }
-  a.card:hover { border-color: var(--accent); } .card b { display: block; margin-bottom: 4px; } .card span { color: var(--muted); font-size: .95rem; }
+  a.card:hover { border-color: var(--accent); } a.card.play { margin-bottom: 14px; border-color: var(--accent); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--card)), var(--card)); } .card b { display: block; margin-bottom: 4px; } .card span { color: var(--muted); font-size: .95rem; }
   h2 { font-size: 1.25rem; margin: 40px 0 8px; } ul.guides { padding-left: 20px; margin: 0 0 12px; } ul.guides li { margin: 6px 0; } a { color: var(--accent); }
   footer { margin-top: 48px; color: var(--muted); font-size: .9rem; } footer a { color: inherit; }
 </style>
@@ -39,6 +39,7 @@
   <h1>Quickwell</h1>
   <p style="font-size:1.25rem;margin:0 0 6px"><b>Small tools. Big time savers.</b></p>
   <p class="lede">Each tool solves one annoying problem, fast. Free to use; Pro when you want more.</p>
+  <a class="card play" href="/play/"><b>New: Quickwell Play</b><span>Three quick daily games for memory, focus and logic: Echo, Swift and Linkr. Free, no sign-up. Play now →</span></a>
   <div class="grid" id="tools"><a class="card" href="/rate-con-checker/"><b>Rate Con Checker</b><span>Catch costly fine print in a broker rate confirmation before you sign.</span></a><a class="card" href="/audit-kit/"><b>New Authority Audit Kit</b><span>Get ready for your FMCSA new entrant safety audit, with every form filled in.</span></a><a class="card" href="/plot-file-checker/"><b>EUDR Plot File Checker</b><span>Check and fix farm plot maps for the EU deforestation rule, in English or French. Free.</span></a><a class="card" href="/permit-watch/"><b>Permit Watch — Texas</b><span>See new drilling permits filed in your Texas county and get free alerts by RSS.</span></a><a class="card" href="/vendor-check/"><b>Year-End Vendor Check</b><span>Find who needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.</span></a><a class="card" href="/spare-key/"><b>Spare Key</b><span>Your lost-phone and family legacy plan: see what would lock you out, fix it in minutes, and leave your family a way in. Stays on your phone.</span></a></div>
   <h2>Guides</h2>
   <ul class="guides">
@@ -52,7 +53,7 @@
     <li><a href="/guides/new-drilling-permit-royalty-owners/">What a new drilling permit means for royalty owners</a></li>
   </ul>
   <p><a href="/guides/">All guides</a> · <a href="/learn/">Reference library</a> · <a href="/learn/business-costs/">Small business: auto-renewals and price increases</a> · <a href="/learn/1099/">Small business: 2026 Form 1099 rules ($2,000 threshold)</a> · <a href="/guides/eudr-geolocalisation-geojson/" hreflang="fr" lang="fr">Guide EUDR en français</a></p>
-  <footer><a href="/guides/">Guides</a> · <a href="/learn/">Reference library</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+  <footer><a href="/play/">Play</a> · <a href="/guides/">Guides</a> · <a href="/learn/">Reference library</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
 </main>
 <script>
   fetch('/catalog/tools.json').then((r) => r.json()).then((c) => {

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- seo -->
+<title>Linkr: daily number path logic puzzle, free</title>
+<meta name="description" content="Draw a path from start to flag so the numbers add up to exactly the target, through every gem. A new free logic puzzle daily, plus Hard and Expert.">
+<link rel="canonical" href="https://quickwell.app/play/linkr/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell Play">
+<meta property="og:title" content="Linkr: daily number path logic puzzle, free">
+<meta property="og:description" content="Draw a path from start to flag so the numbers add up to exactly the target, through every gem. A new free logic puzzle daily, plus Hard and Expert.">
+<meta property="og:url" content="https://quickwell.app/play/linkr/">
+<meta property="og:image" content="https://quickwell.app/play/linkr/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Linkr: a number grid with a path drawn from start to flag, by Quickwell Play">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Linkr: daily number path logic puzzle, free">
+<meta name="twitter:description" content="Draw a path from start to flag so the numbers add up to exactly the target, through every gem. A new free logic puzzle daily, plus Hard and Expert.">
+<meta name="twitter:image" content="https://quickwell.app/play/linkr/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Linkr","url":"https://quickwell.app/play/linkr/","description":"A logic puzzle: draw one path across a number grid from the start tile to the flag so the numbers add up to exactly the target, passing every gem. New daily puzzles in Normal, Hard and Expert.","image":"https://quickwell.app/play/linkr/og.png","genre":["Puzzle","Logic"],"gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any (runs in a web browser)","inLanguage":"en","isPartOf":{"@id":"https://quickwell.app/play/#collection"},"publisher":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Free: daily Normal puzzle and 3 practice puzzles a day","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Brain Pass monthly","price":"2.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"2.99","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}},{"@type":"Offer","name":"Brain Pass yearly","price":"19.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"19.99","priceCurrency":"USD","unitCode":"ANN","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"ANN"}}},{"@type":"Offer","name":"Brain Pass lifetime","price":"29.99","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<!-- /seo -->
+<meta name="theme-color" content="#f5f4f0">
+<link rel="manifest" href="/play/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/play/icons/apple-touch-icon.png">
+<script>try{var p=JSON.parse(localStorage.getItem('qw-play:prefs')||'{}');if(p.theme==='light'||p.theme==='dark')document.documentElement.dataset.theme=p.theme}catch(e){}</script>
+<link rel="stylesheet" href="/play/css/play.css">
+<style>
+  .drow { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .drow:first-child { border-top: 0; padding-top: 0; }
+  .board { --n: 5; position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: clamp(4px, 1.4vw, 8px); width: min(100%, 460px); margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+  .lt { position: relative; z-index: 1; aspect-ratio: 1; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font: 800 clamp(1.1rem, 5.6vw, 1.6rem)/1 system-ui, sans-serif; cursor: pointer; padding: 0; display: grid; place-items: center; box-shadow: var(--shadow); transition: background .1s, border-color .1s, transform .1s; font-variant-numeric: tabular-nums; }
+  .lt.next { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+  .lt.on { background: var(--accent-soft); border-color: var(--accent); }
+  .lt.head { background: var(--accent); color: var(--on-accent); border-color: var(--accent); transform: scale(1.04); }
+  .lt.pop { animation: bump .3s ease; }
+  .lt .mk { position: absolute; font-size: .62rem; font-weight: 900; line-height: 1; }
+  .lt .mk.s { top: 4px; left: 5px; background: var(--good); color: #fff; border-radius: 5px; padding: 2px 4px; }
+  .lt .mk.f { top: 3px; right: 5px; font-size: .85rem; color: var(--bad); }
+  .lt.head .mk.f { color: var(--on-accent); }
+  .lt .mk.g { bottom: 3px; right: 5px; font-size: .8rem; color: var(--gold); }
+  /* The trail runs under the tiles, so it shows as links in the gaps and never covers a number. */
+  .trail { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .trail polyline { fill: none; stroke: var(--accent); stroke-width: .16; stroke-linecap: round; stroke-linejoin: round; }
+  .board.dense .lt .mk { font-size: .5rem; } .board.dense .lt .mk.s { padding: 1px 3px; top: 2px; left: 2px; } .board.dense .lt .mk.f, .board.dense .lt .mk.g { font-size: .62rem; }
+  .hud .over b { color: var(--bad); }
+  .tools { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+  .hero-path { font-size: 2.4rem; line-height: 1; flex: none; }
+</style>
+</head>
+<body data-game="linkr">
+<header class="bar">
+  <a class="icon-btn" id="btn-back" href="/play/" aria-label="All games"></a>
+  <div class="title"><span>Linkr</span><span class="pill" id="pass-pill" hidden title="Brain Pass is on">Pass</span></div>
+  <button class="icon-btn" id="btn-help" aria-label="How to play"></button>
+  <button class="icon-btn" id="btn-sound"></button>
+  <button class="icon-btn" id="btn-stats" aria-label="Stats"></button>
+  <button class="icon-btn" id="btn-settings" aria-label="Settings"></button>
+</header>
+<main class="wrap">
+  <section id="menu">
+    <div class="spread" style="flex-wrap:nowrap">
+      <div><h1>Linkr</h1><p class="lede">Draw a path from start to flag. The numbers must add up to exactly the target, through every gem. Easy to learn, satisfying to crack.</p></div>
+      <div class="hero-path" aria-hidden="true">🔗</div>
+    </div>
+    <div class="meta">
+      <div><b id="m-level">1</b><span>Level</span></div>
+      <div><b id="m-streak">0</b><span>Day streak 🔥</span></div>
+      <div><b id="m-best">0</b><span>Daily best</span></div>
+    </div>
+    <div class="xpbar" aria-hidden="true"><i id="m-xp" style="width:0"></i></div>
+    <p class="small muted" id="xp-label" style="margin:4px 0 0"></p>
+
+    <section class="card accent" id="daily-card" aria-labelledby="daily-title">
+      <h2 id="daily-title">Daily Linkr</h2>
+      <div id="daily-body"></div>
+    </section>
+
+    <section class="card" id="practice-card" aria-labelledby="practice-title">
+      <h2 id="practice-title">Practice</h2>
+      <div class="small muted">Mode</div>
+      <div class="chips" id="mode-chips" role="group" aria-label="Mode"></div>
+      <div class="small muted">Difficulty</div>
+      <div class="chips" id="tier-chips" role="group" aria-label="Difficulty"></div>
+      <p class="small" id="mode-note" style="margin:0 0 4px"></p>
+      <p class="small muted" id="practice-left" style="margin:0 0 12px"></p>
+      <button class="btn block" id="play-practice">New practice puzzle</button>
+    </section>
+
+    <p class="science"><b>About the science.</b> Linkr practises planning and mental arithmetic, and you will get better at Linkr by playing it. Games like this train the skills they practise; research has not shown that they raise general intelligence or prevent decline, and we don't claim they do. Play because it's fun, and track your own progress. <a href="/play/#science">More</a></p>
+    <p class="small muted">Every puzzle is built from a real path, so every puzzle has at least one solution.</p>
+    <footer class="foot"><a href="/play/">All games</a> · <a href="/play/echo/">Echo</a> · <a href="/play/swift/">Swift</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/">Quickwell</a></footer>
+  </section>
+
+  <section id="play" hidden aria-label="Puzzle">
+    <div class="hud">
+      <div class="stat"><b id="hud-target">0</b><span>Target</span></div>
+      <div class="stat"><b id="hud-sum">0</b><span>Your sum</span></div>
+      <div class="stat"><b id="hud-time">0:00</b><span id="hud-tier">Normal</span></div>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <div class="board" id="board"></div>
+    <div class="tools"><button class="btn quiet" id="undo">↩ Undo</button><button class="btn quiet" id="reset">Restart path</button></div>
+    <p style="text-align:center;margin-top:12px"><button class="link-btn" id="quit">Leave puzzle</button></p>
+  </section>
+
+  <section id="result" hidden class="result" aria-live="polite">
+    <p class="muted" id="r-head" style="margin:16px 0 0;font-weight:700"></p>
+    <div class="score" id="r-score">0</div>
+    <p id="r-sub" class="muted" style="margin:0"></p>
+    <div id="r-badges" style="margin:8px 0"></div>
+    <p class="small" style="margin:0"><b id="r-xp"></b></p>
+    <div id="r-share"></div>
+    <p class="small muted" id="r-note"></p>
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="r-again">Play again</button><button class="btn quiet" id="r-menu">Back</button></div>
+  </section>
+</main>
+<script src="/js/pro.js"></script>
+<script type="module" src="/play/js/linkr-app.mjs"></script>
+</body>
+</html>

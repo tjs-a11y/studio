@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- seo -->
+<title>Brain Pass: unlimited play in Echo, Swift and Linkr</title>
+<meta name="description" content="One pass for all three Quickwell Play games: unlimited practice, every difficulty, extra modes, full stats and streak freezes. From $2.99 a month.">
+<link rel="canonical" href="https://quickwell.app/brain-pass/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell Play">
+<meta property="og:title" content="Brain Pass: unlimited play in Echo, Swift and Linkr">
+<meta property="og:description" content="One pass for all three Quickwell Play games: unlimited practice, every difficulty, extra modes, full stats and streak freezes. From $2.99 a month.">
+<meta property="og:url" content="https://quickwell.app/brain-pass/">
+<meta property="og:image" content="https://quickwell.app/play/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickwell Play: Echo, Swift and Linkr, three daily brain games">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brain Pass: unlimited play in Echo, Swift and Linkr">
+<meta name="twitter:description" content="One pass for all three Quickwell Play games: unlimited practice, every difficulty, extra modes, full stats and streak freezes. From $2.99 a month.">
+<meta name="twitter:image" content="https://quickwell.app/play/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Brain Pass","url":"https://quickwell.app/brain-pass/","description":"Unlocks unlimited practice, every difficulty tier, extra modes, full stats history, colour themes and weekly streak freezes in Echo, Swift and Linkr.","image":"https://quickwell.app/play/og.png","brand":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Brain Pass monthly","price":"2.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"2.99","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}},{"@type":"Offer","name":"Brain Pass yearly","price":"19.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"19.99","priceCurrency":"USD","unitCode":"ANN","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"ANN"}}},{"@type":"Offer","name":"Brain Pass lifetime","price":"29.99","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<!-- /seo -->
+<meta name="theme-color" content="#f5f4f0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script>try{var p=JSON.parse(localStorage.getItem('qw-play:prefs')||'{}');if(p.theme==='light'||p.theme==='dark')document.documentElement.dataset.theme=p.theme}catch(e){}</script>
+<link rel="stylesheet" href="/play/css/play.css">
+</head>
+<body>
+<header class="bar">
+  <a class="icon-btn" id="btn-back" href="/play/" aria-label="All games"></a>
+  <div class="title"><span>Brain Pass</span><span class="pill" id="pass-pill" hidden>On</span></div>
+</header>
+<main class="wrap">
+  <div id="cancelled" class="card" hidden><b>Checkout cancelled.</b> No charge was made. The daily challenges are still free.</div>
+  <section id="on" hidden>
+    <h1>Brain Pass is on 🎉</h1>
+    <p class="lede">Everything is unlocked in Echo, Swift and Linkr on this device.</p>
+    <a class="btn big block" id="back-to" href="/play/">Back to the games</a>
+    <p class="small muted">Your Pass is saved in this browser. To change your card or cancel, use <button class="link-btn" id="manage">Manage subscription</button>.</p>
+  </section>
+  <section id="off">
+    <h1>Brain Pass</h1>
+    <p class="lede">One pass for all three games. Daily challenges stay free forever; the Pass is for people who want more.</p>
+    <div class="card"><div id="perks"></div>
+      <div class="plans">
+        <button class="plan" data-buy="month"><span><b>Monthly</b><small>7 days free, then $2.99 a month</small></span><span class="price">$2.99<small>/mo</small></span></button>
+        <button class="plan best" data-buy="year"><span><b>Yearly · save 44%</b><small>7 days free, then $19.99 a year (about $1.67 a month)</small></span><span class="price">$19.99<small>/yr</small></span></button>
+        <button class="plan" data-buy="lifetime"><span><b>Lifetime</b><small>Pay once, keep it. No renewals.</small></span><span class="price">$29.99<small> once</small></span></button>
+      </div>
+      <p class="small muted" style="margin:0">Cancel anytime from Manage in the game settings; you won't be charged if you cancel during the free week. Secure checkout by Stripe. Prices in US dollars. Gifting a Brain Pass is coming later.</p>
+    </div>
+  </section>
+  <p class="science"><b>About the science.</b> The games train the skills they practise. Research has not shown that brain games raise general intelligence or prevent decline, and we don't claim they do.</p>
+  <footer class="foot"><a href="/play/">All games</a> · <a href="/play/echo/">Echo</a> · <a href="/play/swift/">Swift</a> · <a href="/play/linkr/">Linkr</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<script src="/js/pro.js"></script>
+<script type="module">
+  import * as U from '/play/js/ui.mjs';
+  // Checkout returns here (success and cancel URLs are /brain-pass/). pro.js verifies the session with our server,
+  // stores the access token, and every game reads it.
+  const $ = U.$;
+  $('#perks').innerHTML = U.passPerks();
+  if (new URLSearchParams(location.search).get('checkout') === 'cancelled') $('#cancelled').hidden = false;
+  let back = '/play/'; try { const r = sessionStorage.getItem('qw-play-return'); if (r && /^\/play\/[a-z/]*$/.test(r)) back = r; } catch (e) { /* fine */ }
+  $('#back-to').href = back;
+  U.boot({});
+  U.onPass((p) => { $('#on').hidden = !p.on; $('#off').hidden = p.on; });
+  for (const b of U.$$('[data-buy]')) b.onclick = async () => {
+    if (navigator.onLine === false) return U.toast("You're offline. Connect to get Brain Pass.");
+    b.disabled = true;
+    try { if (b.dataset.buy === 'lifetime') await Studio.upgrade('lifetime', 'once'); else await Studio.upgrade('pass', b.dataset.buy); }
+    catch (e) { U.toast(e && e.message && !/fetch/i.test(e.message) ? e.message : 'Checkout is not available right now. Please try again later.'); }
+    finally { b.disabled = false; }
+  };
+  $('#manage').onclick = () => Studio.manage().catch((e) => U.toast(e.message || 'Not available right now.'));
+</script>
+</body>
+</html>

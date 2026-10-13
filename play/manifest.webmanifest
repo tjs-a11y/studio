@@ -1,0 +1,23 @@
+{
+  "id": "/play/",
+  "name": "Quickwell Play",
+  "short_name": "Play",
+  "description": "Three quick daily games for memory, focus and logic: Echo, Swift and Linkr. Free daily challenges, works offline.",
+  "start_url": "/play/",
+  "scope": "/play/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f4f0",
+  "theme_color": "#3b5bdb",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "/play/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/play/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/play/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Today's Echo", "short_name": "Echo", "url": "/play/echo/?play=daily", "icons": [{ "src": "/play/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Today's Swift", "short_name": "Swift", "url": "/play/swift/?play=daily", "icons": [{ "src": "/play/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Today's Linkr", "short_name": "Linkr", "url": "/play/linkr/?play=daily", "icons": [{ "src": "/play/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

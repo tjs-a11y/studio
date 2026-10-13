@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- seo -->
+<title>Echo: free daily memory game, repeat the pattern</title>
+<meta name="description" content="Watch the tiles light up, then tap them back in order. One more tile each round. A free daily memory challenge with streaks and stats. No sign-up.">
+<link rel="canonical" href="https://quickwell.app/play/echo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell Play">
+<meta property="og:title" content="Echo: free daily memory game, repeat the pattern">
+<meta property="og:description" content="Watch the tiles light up, then tap them back in order. One more tile each round. A free daily memory challenge with streaks and stats. No sign-up.">
+<meta property="og:url" content="https://quickwell.app/play/echo/">
+<meta property="og:image" content="https://quickwell.app/play/echo/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Echo: a glowing grid of tiles, a memory game by Quickwell Play">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Echo: free daily memory game, repeat the pattern">
+<meta name="twitter:description" content="Watch the tiles light up, then tap them back in order. One more tile each round. A free daily memory challenge with streaks and stats. No sign-up.">
+<meta name="twitter:image" content="https://quickwell.app/play/echo/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Echo","url":"https://quickwell.app/play/echo/","description":"A memory game: watch tiles light up on a grid and tap them back in the same order, one more tile each round. Daily challenge, practice, Mirror and Dual modes.","image":"https://quickwell.app/play/echo/og.png","genre":["Puzzle","Memory"],"gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any (runs in a web browser)","inLanguage":"en","isPartOf":{"@id":"https://quickwell.app/play/#collection"},"publisher":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Free: daily challenge and 3 practice runs a day","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Brain Pass monthly","price":"2.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"2.99","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}},{"@type":"Offer","name":"Brain Pass yearly","price":"19.99","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"19.99","priceCurrency":"USD","unitCode":"ANN","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"ANN"}}},{"@type":"Offer","name":"Brain Pass lifetime","price":"29.99","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<!-- /seo -->
+<meta name="theme-color" content="#f5f4f0">
+<link rel="manifest" href="/play/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/play/icons/apple-touch-icon.png">
+<script>try{var p=JSON.parse(localStorage.getItem('qw-play:prefs')||'{}');if(p.theme==='light'||p.theme==='dark')document.documentElement.dataset.theme=p.theme}catch(e){}</script>
+<link rel="stylesheet" href="/play/css/play.css">
+<style>
+  .board { --n: 3; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: clamp(6px, 2vw, 10px); width: min(100%, 440px); margin: 0 auto; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  .tile { aspect-ratio: 1; border-radius: 16px; border: 2px solid var(--line); background: var(--card); cursor: pointer; padding: 0; transition: background .12s, transform .12s, box-shadow .12s; box-shadow: var(--shadow); display: grid; place-items: center; }
+  .watching .tile { cursor: default; }
+  .tile.lit { background: var(--accent); border-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 0 4px var(--accent-soft), 0 0 28px color-mix(in srgb, var(--accent) 60%, transparent); }
+  .tile.hit { background: var(--accent-soft); border-color: var(--accent); transform: scale(.95); }
+  .tile.wrong { background: var(--bad); border-color: var(--bad); }
+  .dual .tile.lit { background: var(--card); transform: scale(1.06); }
+  .sym { font-size: clamp(2rem, 11vw, 3.2rem); line-height: 1; }
+  .s0 { color: #0072B2; } .s1 { color: #B86E00; } .s2 { color: #B5468C; } .s3 { color: #007A5A; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .s0 { color: #56B4E9; } :root:not([data-theme="light"]) .s1 { color: #E69F00; } :root:not([data-theme="light"]) .s2 { color: #E08BC0; } :root:not([data-theme="light"]) .s3 { color: #2BC79A; } }
+  :root[data-theme="dark"] .s0 { color: #56B4E9; } :root[data-theme="dark"] .s1 { color: #E69F00; } :root[data-theme="dark"] .s2 { color: #E08BC0; } :root[data-theme="dark"] .s3 { color: #2BC79A; }
+  .dual-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(100%, 440px); margin: 16px auto 0; }
+  .dual-controls .btn { min-height: 64px; }
+  .dual-controls .btn.ok { background: var(--good); border-color: var(--good); color: #fff; }
+  .dual-controls .btn.no { background: var(--bad); border-color: var(--bad); color: #fff; }
+  .hero-grid { display: grid; grid-template-columns: repeat(3, 18px); gap: 4px; flex: none; }
+  .hero-grid i { width: 18px; height: 18px; border-radius: 5px; background: var(--accent-soft); }
+  .hero-grid i.on { background: var(--accent); }
+</style>
+</head>
+<body data-game="echo">
+<header class="bar">
+  <a class="icon-btn" id="btn-back" href="/play/" aria-label="All games"></a>
+  <div class="title"><span>Echo</span><span class="pill" id="pass-pill" hidden title="Brain Pass is on">Pass</span></div>
+  <button class="icon-btn" id="btn-help" aria-label="How to play"></button>
+  <button class="icon-btn" id="btn-sound"></button>
+  <button class="icon-btn" id="btn-stats" aria-label="Stats"></button>
+  <button class="icon-btn" id="btn-settings" aria-label="Settings"></button>
+</header>
+<main class="wrap">
+  <section id="menu">
+    <div class="spread" style="flex-wrap:nowrap">
+      <div><h1>Echo</h1><p class="lede">Watch the tiles light up, then tap them back in order. One more each round. How long a sequence can you hold?</p></div>
+      <div class="hero-grid" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i></div>
+    </div>
+    <div class="meta">
+      <div><b id="m-level">1</b><span>Level</span></div>
+      <div><b id="m-streak">0</b><span>Day streak 🔥</span></div>
+      <div><b id="m-best">0</b><span>Daily best</span></div>
+    </div>
+    <div class="xpbar" aria-hidden="true"><i id="m-xp" style="width:0"></i></div>
+    <p class="small muted" id="xp-label" style="margin:4px 0 0"></p>
+
+    <section class="card accent" id="daily-card" aria-labelledby="daily-title">
+      <h2 id="daily-title">Daily Echo</h2>
+      <div id="daily-body"></div>
+    </section>
+
+    <section class="card" id="practice-card" aria-labelledby="practice-title">
+      <h2 id="practice-title">Practice</h2>
+      <div class="small muted">Mode</div>
+      <div class="chips" id="mode-chips" role="group" aria-label="Mode"></div>
+      <div class="small muted">Difficulty</div>
+      <div class="chips" id="tier-chips" role="group" aria-label="Difficulty"></div>
+      <p class="small" id="mode-note" style="margin:0 0 4px"></p>
+      <p class="small muted" id="practice-left" style="margin:0 0 12px"></p>
+      <button class="btn block" id="play-practice">Start practice</button>
+    </section>
+
+    <p class="science"><b>About the science.</b> Echo practises short-term visual memory, and you will get better at Echo by playing it. Games like this train the skills they practise; research has not shown that they raise general intelligence or prevent memory loss, and we don't claim they do. Play because it's fun, and track your own progress. <a href="/play/#science">More</a></p>
+    <footer class="foot"><a href="/play/">All games</a> · <a href="/play/swift/">Swift</a> · <a href="/play/linkr/">Linkr</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/">Quickwell</a></footer>
+  </section>
+
+  <section id="play" hidden aria-label="Game">
+    <div class="hud">
+      <div class="stat"><b id="hud-round">1</b><span id="hud-round-label">Round</span></div>
+      <div class="stat"><b class="hearts" id="hud-lives">♥♥♥</b><span id="hud-lives-label">Hearts</span></div>
+      <div class="stat"><b id="hud-score">0</b><span>Score</span></div>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <div class="board" id="board"></div>
+    <div class="dual-controls" id="dual-controls" hidden>
+      <button class="btn" id="dual-pos">Place <small>(A)</small></button>
+      <button class="btn" id="dual-sym">Symbol <small>(L)</small></button>
+    </div>
+    <p style="text-align:center;margin-top:20px"><button class="link-btn" id="quit">Leave run</button></p>
+  </section>
+
+  <section id="result" hidden class="result" aria-live="polite">
+    <p class="muted" id="r-head" style="margin:16px 0 0;font-weight:700"></p>
+    <div class="score" id="r-score">0</div>
+    <p id="r-sub" class="muted" style="margin:0"></p>
+    <div id="r-badges" style="margin:8px 0"></div>
+    <p class="small" style="margin:0"><b id="r-xp"></b></p>
+    <div id="r-share"></div>
+    <p class="small muted" id="r-note"></p>
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="r-again">Play again</button><button class="btn quiet" id="r-menu">Back</button></div>
+  </section>
+</main>
+<script src="/js/pro.js"></script>
+<script type="module" src="/play/js/echo-app.mjs"></script>
+</body>
+</html>

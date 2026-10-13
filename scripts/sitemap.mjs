@@ -1,4 +1,4 @@
-// Writes sitemap-main.xml (home, tools, guides, privacy, terms) and sitemap.xml, a sitemap index that lists
+// Writes sitemap-main.xml (home, tools, the Play games, guides, privacy, terms) and sitemap.xml, a sitemap index that lists
 // sitemap-main.xml plus every other sitemap-*.xml at the repo root (e.g. sitemap-learn.xml).
 // Each page's URL is read from its own <link rel="canonical">, and EN/FR pairs from its hreflang links,
 // so the sitemap always matches the pages. Origin comes from site.config.json.
@@ -16,7 +16,13 @@ const tools = JSON.parse(readFileSync(join(root, 'catalog', 'tools.json'), 'utf8
 const guides = existsSync(join(root, 'guides'))
   ? ['guides/index.html', ...readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, 'guides', d.name, 'index.html'))).map((d) => `guides/${d.name}/index.html`).sort()]
   : [];
-export const MAIN_PAGES = ['index.html', ...tools, ...guides, 'privacy.html', 'terms.html'];
+// Sections that aren't billed tools (so aren't in the catalog): their index page plus every sub-page with an index.html,
+// e.g. play/ -> play/index.html, play/echo/index.html … Standalone pages are listed one by one.
+const SECTIONS = ['play'];
+const STANDALONE = ['brain-pass/index.html'];
+const sections = SECTIONS.filter((s) => existsSync(join(root, s, 'index.html'))).flatMap((s) => [`${s}/index.html`, ...subPages(s)]);
+const standalone = STANDALONE.filter((f) => existsSync(join(root, f)));
+export const MAIN_PAGES = [...new Set(['index.html', ...tools, ...sections, ...standalone, ...guides, 'privacy.html', 'terms.html'])];
 
 const xml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const entries = MAIN_PAGES.map((f) => {

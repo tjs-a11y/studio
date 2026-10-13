@@ -12,7 +12,8 @@ const read = (f) => readFileSync(join(root, f), 'utf8');
 const tools = JSON.parse(read('catalog/tools.json')).tools.map((t) => t.id);
 const guideDirs = readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 const subPages = (id) => readdirSync(join(root, id), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, id, d.name, 'index.html'))).map((d) => `${id}/${d.name}/index.html`);
-const pages = ['index.html', ...tools.flatMap((t) => [`${t}/index.html`, ...subPages(t)]), 'guides/index.html', ...guideDirs.map((g) => `guides/${g}/index.html`), 'privacy.html', 'terms.html'];
+const play = ['play/index.html', ...subPages('play'), 'brain-pass/index.html'];
+const pages = [...new Set(['index.html', ...tools.flatMap((t) => [`${t}/index.html`, ...subPages(t)]), ...play, 'guides/index.html', ...guideDirs.map((g) => `guides/${g}/index.html`), 'privacy.html', 'terms.html'])];
 const urlPath = (f) => '/' + f.replace(/index\.html$/, '');
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<');
 const exists = (href) => { const p = join(root, decodeURIComponent(href.split(/[?#]/)[0])); return existsSync(p) && (!statSync(p).isDirectory() || existsSync(join(p, 'index.html'))); };
@@ -48,6 +49,8 @@ test('JSON-LD parses, and tool offers match the real prices', () => {
   assert.deepEqual(offers['audit-kit/index.html'], ['0', '39']);
   assert.deepEqual(offers['plot-file-checker/index.html'], ['0']);
   assert.deepEqual(offers['permit-watch/index.html'], ['0']);
+  for (const f of ['play/index.html', 'play/echo/index.html', 'play/swift/index.html', 'play/linkr/index.html']) assert.deepEqual(offers[f], ['0', '19.99', '2.99', '29.99'], f);
+  assert.deepEqual(offers['brain-pass/index.html'], ['19.99', '2.99', '29.99']);
 });
 
 test('internal links on main pages resolve', () => {

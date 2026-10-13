@@ -59,6 +59,21 @@
           "once": true
         }
       ]
+    },
+    {
+      "id": "brain-pass",
+      "name": "Brain Pass",
+      "tagline": "Unlimited play in Echo, Swift and Linkr: every difficulty, extra modes, full stats and streak freezes. Daily challenges are always free.",
+      "plans": [
+        {
+          "id": "pass",
+          "trialDays": 7
+        },
+        {
+          "id": "lifetime",
+          "once": true
+        }
+      ]
     }
   ]
 }
