@@ -1,0 +1,60 @@
+name: Commodity Desk data
+
+# Copy to .github/workflows/commodity-desk.yml in the studio repo.
+# Daily update of commodities/data (prices, history, brief) from free public sources:
+# EIA spot prices (via FRED), World Bank Pink Sheet (monthly), U.S. Treasury par yield curve, ECB reference rates.
+# A source that fails keeps its last good data; if every source fails the run fails and nothing is committed.
+
+on:
+  schedule:
+    - cron: '35 22 * * 1-5'   # weekdays 22:35 UTC: after the ECB (about 14:00 UTC), Treasury (afternoon ET) and the FRED/EIA daily posts
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: commodity-desk-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Scheduled runs stay off until the first manual run has been checked (README "Needs a live check")
+    # and the repo variable COMMODITY_DESK_ENABLED is set to 1. A manual run always works.
+    if: github.event_name == 'workflow_dispatch' || vars.COMMODITY_DESK_ENABLED == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test the parsers and the brief
+        run: node --test commodities/test/*.test.mjs
+
+      - name: Download, parse and write data
+        run: node commodities/scripts/fetch.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          WB_PINK_URL: ${{ vars.WB_PINK_URL }}
+          ECB_URL: ${{ vars.ECB_URL }}
+          TREASURY_URL: ${{ vars.TREASURY_URL }}
+          FRED_URL: ${{ vars.FRED_URL }}
+
+      - name: Commit changed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add commodities/data commodities/brief/index.html
+          if git diff --cached --quiet; then
+            echo "No new commodity data today."
+            exit 0
+          fi
+          git commit -m "Update commodity desk data"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1

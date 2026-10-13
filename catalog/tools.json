@@ -92,11 +92,22 @@
       "covers": [
         "footsure",
         "brain-pass",
-        "spare-key"
+        "spare-key",
+        "commodities"
       ],
       "plans": [
         {
           "id": "plus"
+        }
+      ]
+    },
+    {
+      "id": "commodities",
+      "name": "WorldSource Commodity Desk",
+      "tagline": "Gold, oil, grain, fertilizer, currency and Treasury yield prices from official sources, a daily brief, and a private holdings tracker in any currency.",
+      "plans": [
+        {
+          "id": "desk"
         }
       ]
     }
