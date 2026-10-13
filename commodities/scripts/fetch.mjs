@@ -115,15 +115,23 @@ async function runWorldBank() {
   let buf;
   if (FIX) buf = fixture('pink-sheet.sample.xlsx', true);
   else {
-    try { buf = await download(URLS.worldbank(), { binary: true }); parsePinkSheet(buf); }
-    catch (e) {
-      // The file's address can change between releases: look for the current link on the commodity-markets page.
-      console.warn(`World Bank: default URL failed (${e.message}); looking for the current link.`);
+    // The workbook's address changes with each monthly release, so find the current link on the
+    // commodity-markets page first. The fixed URL is only a fallback, and an old file (newest month more than
+    // 3 months back) is never accepted.
+    const fresh = (b) => { const w = parsePinkSheet(b); const [y, m] = w.lastMonth.split('-').map(Number); const t = new Date(TODAY + 'T00:00:00Z'); return (t.getUTCFullYear() - y) * 12 + (t.getUTCMonth() + 1 - m) <= 3; };
+    const tries = [];
+    if (process.env.WB_PINK_URL) tries.push(process.env.WB_PINK_URL);
+    try {
       const page = await download(URLS.worldbankPage());
-      const m = /href="([^"]*CMO-Historical-Data-Monthly\.xlsx)"/i.exec(page);
-      if (!m) throw new Error('World Bank: monthly workbook link not found on the commodity-markets page');
-      buf = await download(new URL(m[1], URLS.worldbankPage()).href, { binary: true });
+      const links = [...page.matchAll(/href="([^"]*CMO-Historical-Data-Monthly\.xlsx)"/gi)].map((m) => new URL(m[1], URLS.worldbankPage()).href);
+      tries.push(...links);
+    } catch (e) { console.warn(`World Bank: commodity-markets page failed (${e.message})`); }
+    tries.push(URLS.worldbank());
+    for (const u of [...new Set(tries)]) {
+      try { const b = await download(u, { binary: true }); if (fresh(b)) { buf = b; break; } console.warn(`World Bank: ${u} is an old release; skipping`); }
+      catch (e) { console.warn(`World Bank: ${u} failed (${e.message})`); }
     }
+    if (!buf) throw new Error('World Bank: no current monthly workbook found (all candidates missing or older than 3 months)');
   }
   const wb = parsePinkSheet(buf);
   const prevMonth = prevRows('worldbank').map((r) => r.asOf).sort().at(-1);

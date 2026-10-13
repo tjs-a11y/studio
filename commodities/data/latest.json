@@ -1,1 +1,248 @@
-{"generated":"2026-10-13T17:41:43.949Z","sample":false,"sources":{"eia":{"name":"U.S. Energy Information Administration (EIA)","url":"https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm","frequency":"daily","license":"U.S. government data (EIA): public domain; EIA asks for credit as the source.","status":"ok","lastSuccess":"2026-10-13T17:41:43.949Z"},"worldbank":{"name":"World Bank Commodity Price Data (The Pink Sheet)","url":"https://www.worldbank.org/en/research/commodity-markets","frequency":"monthly","license":"CC BY 4.0. Source: World Bank Commodity Price Data (The Pink Sheet).","status":"ok","lastSuccess":"2026-10-13T17:41:43.949Z"},"treasury":{"name":"U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates","url":"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve","frequency":"daily","license":"U.S. government data: public domain.","status":"ok","lastSuccess":"2026-10-13T17:41:43.949Z"},"ecb":{"name":"European Central Bank, euro foreign exchange reference rates","url":"https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html","frequency":"daily","license":"Reuse permitted with the source credited (ECB). Reference rates are published for information purposes only.","status":"ok","lastSuccess":"2026-10-13T17:41:43.949Z"}},"series":[{"id":"brent","group":"energy","unit":"bbl","source":"eia","freq":"daily","value":125.44,"asOf":"2026-10-06","prev":125.51,"prevAsOf":"2026-10-05"},{"id":"wti","group":"energy","unit":"bbl","source":"eia","freq":"daily","value":96.24,"asOf":"2026-10-06","prev":96.13,"prevAsOf":"2026-10-05"},{"id":"henryhub","group":"energy","unit":"mmbtu","source":"eia","freq":"daily","value":3.03,"asOf":"2026-10-06","prev":2.96,"prevAsOf":"2026-10-05"},{"id":"gas_eu","group":"energy","unit":"mmbtu","source":"worldbank","freq":"monthly","value":13.85662099801,"asOf":"2024-12","prev":13.92640045783,"prevAsOf":"2024-11"},{"id":"lng_jp","group":"energy","unit":"mmbtu","source":"worldbank","freq":"monthly","value":12.76,"asOf":"2024-12","prev":12.82273138964,"prevAsOf":"2024-11"},{"id":"coal_au","group":"energy","unit":"t","source":"worldbank","freq":"monthly","value":129.81,"asOf":"2024-12","prev":142.12,"prevAsOf":"2024-11"},{"id":"coal_za","group":"energy","unit":"t","source":"worldbank","freq":"monthly","value":105.47,"asOf":"2024-12","prev":106.82,"prevAsOf":"2024-11"},{"id":"gold","group":"metals","unit":"ozt","source":"worldbank","freq":"monthly","value":2648.01,"asOf":"2024-12","prev":2651.13,"prevAsOf":"2024-11"},{"id":"silver","group":"metals","unit":"ozt","source":"worldbank","freq":"monthly","value":30.764,"asOf":"2024-12","prev":31.094,"prevAsOf":"2024-11"},{"id":"platinum","group":"metals","unit":"ozt","source":"worldbank","freq":"monthly","value":937.88,"asOf":"2024-12","prev":965.53,"prevAsOf":"2024-11"},{"id":"copper","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":8916.32,"asOf":"2024-12","prev":9075.73,"prevAsOf":"2024-11"},{"id":"aluminium","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":2541.02,"asOf":"2024-12","prev":2582.19,"prevAsOf":"2024-11"},{"id":"nickel","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":15444.89,"asOf":"2024-12","prev":15723.06,"prevAsOf":"2024-11"},{"id":"zinc","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":3034.16,"asOf":"2024-12","prev":3004.2,"prevAsOf":"2024-11"},{"id":"lead","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":1990.43,"asOf":"2024-12","prev":1987.53,"prevAsOf":"2024-11"},{"id":"tin","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":28864.99,"asOf":"2024-12","prev":29654.89,"prevAsOf":"2024-11"},{"id":"iron_ore","group":"metals","unit":"t","source":"worldbank","freq":"monthly","value":102.21,"asOf":"2024-12","prev":100.5,"prevAsOf":"2024-11"},{"id":"wheat_srw","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":230.276254257,"asOf":"2024-12","prev":229.02329511,"prevAsOf":"2024-11"},{"id":"wheat_hrw","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":252.17,"asOf":"2024-12","prev":253.75,"prevAsOf":"2024-11"},{"id":"maize","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":202.59757,"asOf":"2024-12","prev":201.33106,"prevAsOf":"2024-11"},{"id":"soybeans","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":409.26716703136,"asOf":"2024-12","prev":435.64075,"prevAsOf":"2024-11"},{"id":"rice","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":527,"asOf":"2024-12","prev":511,"prevAsOf":"2024-11"},{"id":"palm_oil","group":"agri","unit":"t","source":"worldbank","freq":"monthly","value":1189.73208472222,"asOf":"2024-12","prev":1168.58791,"prevAsOf":"2024-11"},{"id":"coffee_arabica","group":"agri","unit":"kg","source":"worldbank","freq":"monthly","value":7.569342308,"asOf":"2024-12","prev":6.723650076,"prevAsOf":"2024-11"},{"id":"coffee_robusta","group":"agri","unit":"kg","source":"worldbank","freq":"monthly","value":5.218996926,"asOf":"2024-12","prev":4.984866282,"prevAsOf":"2024-11"},{"id":"cocoa","group":"agri","unit":"kg","source":"worldbank","freq":"monthly","value":10.32051,"asOf":"2024-12","prev":7.89481,"prevAsOf":"2024-11"},{"id":"sugar","group":"agri","unit":"kg","source":"worldbank","freq":"monthly","value":0.436294298,"asOf":"2024-12","prev":0.450403866,"prevAsOf":"2024-11"},{"id":"cotton","group":"agri","unit":"kg","source":"worldbank","freq":"monthly","value":1.762373228,"asOf":"2024-12","prev":1.797206224,"prevAsOf":"2024-11"},{"id":"urea","group":"fertilizers","unit":"t","source":"worldbank","freq":"monthly","value":352,"asOf":"2024-12","prev":352.3,"prevAsOf":"2024-11"},{"id":"dap","group":"fertilizers","unit":"t","source":"worldbank","freq":"monthly","value":568.33,"asOf":"2024-12","prev":574.5,"prevAsOf":"2024-11"},{"id":"tsp","group":"fertilizers","unit":"t","source":"worldbank","freq":"monthly","value":477.5,"asOf":"2024-12","prev":491,"prevAsOf":"2024-11"},{"id":"potash","group":"fertilizers","unit":"t","source":"worldbank","freq":"monthly","value":292.5,"asOf":"2024-12","prev":281,"prevAsOf":"2024-11"},{"id":"phosphate_rock","group":"fertilizers","unit":"t","source":"worldbank","freq":"monthly","value":152.5,"asOf":"2024-12","prev":152.5,"prevAsOf":"2024-11"}],"fx":{"source":"ecb","freq":"daily","base":"EUR","asOf":"2026-10-13","prevAsOf":"2026-10-12","eur":{"USD":1.1188,"JPY":176.91,"CZK":24.368,"DKK":7.4753,"GBP":0.8446,"HUF":364.31,"PLN":4.3768,"RON":5.3363,"SEK":11.1698,"CHF":0.9312,"ISK":136.2,"NOK":10.6685,"TRY":55.2325,"AUD":1.6033,"BRL":5.6125,"CAD":1.5933,"CNY":7.489,"HKD":8.7802,"IDR":20004.87,"ILS":3.4404,"INR":106.6,"KRW":1500.81,"MXN":20.5126,"MYR":4.5714,"NZD":1.9931,"PHP":70.225,"SGD":1.4319,"THB":37.58,"ZAR":18.4561},"prevEur":{"USD":1.1181,"JPY":177.33,"CZK":24.391,"DKK":7.4748,"GBP":0.84478,"HUF":365.13,"PLN":4.385,"RON":5.337,"SEK":11.1965,"CHF":0.9312,"ISK":136.4,"NOK":10.6955,"TRY":55.1635,"AUD":1.6032,"BRL":5.5819,"CAD":1.5946,"CNY":7.4832,"HKD":8.7743,"IDR":20036.18,"ILS":3.432,"INR":107.086,"KRW":1490.53,"MXN":20.5081,"MYR":4.5663,"NZD":1.9968,"PHP":70.169,"SGD":1.4314,"THB":37.585,"ZAR":18.4945}},"yields":{"source":"treasury","freq":"daily","asOf":"2026-10-09","prevAsOf":"2026-10-08","tenors":[{"key":"1m","col":"1 Mo","months":1,"value":4.13,"prev":4.14},{"key":"1.5m","col":"1.5 Month","months":1.5,"value":4.13,"prev":4.14},{"key":"2m","col":"2 Mo","months":2,"value":4.13,"prev":4.13},{"key":"3m","col":"3 Mo","months":3,"value":4.25,"prev":4.23},{"key":"4m","col":"4 Mo","months":4,"value":4.29,"prev":4.29},{"key":"6m","col":"6 Mo","months":6,"value":4.32,"prev":4.3},{"key":"1y","col":"1 Yr","months":12,"value":4.47,"prev":4.44},{"key":"2y","col":"2 Yr","months":24,"value":4.8,"prev":4.75},{"key":"3y","col":"3 Yr","months":36,"value":4.89,"prev":4.85},{"key":"5y","col":"5 Yr","months":60,"value":5.02,"prev":4.99},{"key":"7y","col":"7 Yr","months":84,"value":5.13,"prev":5.11},{"key":"10y","col":"10 Yr","months":120,"value":5.24,"prev":5.22},{"key":"20y","col":"20 Yr","months":240,"value":5.65,"prev":5.64},{"key":"30y","col":"30 Yr","months":360,"value":5.6,"prev":5.6}]}}
+{
+  "generated": "2026-10-13T17:41:43.949Z",
+  "sample": false,
+  "sources": {
+    "eia": {
+      "name": "U.S. Energy Information Administration (EIA)",
+      "url": "https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm",
+      "frequency": "daily",
+      "license": "U.S. government data (EIA): public domain; EIA asks for credit as the source.",
+      "status": "ok",
+      "lastSuccess": "2026-10-13T17:41:43.949Z"
+    },
+    "worldbank": {
+      "name": "World Bank Commodity Price Data (The Pink Sheet)",
+      "url": "https://www.worldbank.org/en/research/commodity-markets",
+      "frequency": "monthly",
+      "license": "CC BY 4.0. Source: World Bank Commodity Price Data (The Pink Sheet).",
+      "status": "pending",
+      "lastSuccess": "2026-10-13T17:41:43.949Z"
+    },
+    "treasury": {
+      "name": "U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "frequency": "daily",
+      "license": "U.S. government data: public domain.",
+      "status": "ok",
+      "lastSuccess": "2026-10-13T17:41:43.949Z"
+    },
+    "ecb": {
+      "name": "European Central Bank, euro foreign exchange reference rates",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+      "frequency": "daily",
+      "license": "Reuse permitted with the source credited (ECB). Reference rates are published for information purposes only.",
+      "status": "ok",
+      "lastSuccess": "2026-10-13T17:41:43.949Z"
+    }
+  },
+  "series": [
+    {
+      "id": "brent",
+      "group": "energy",
+      "unit": "bbl",
+      "source": "eia",
+      "freq": "daily",
+      "value": 125.44,
+      "asOf": "2026-10-06",
+      "prev": 125.51,
+      "prevAsOf": "2026-10-05"
+    },
+    {
+      "id": "wti",
+      "group": "energy",
+      "unit": "bbl",
+      "source": "eia",
+      "freq": "daily",
+      "value": 96.24,
+      "asOf": "2026-10-06",
+      "prev": 96.13,
+      "prevAsOf": "2026-10-05"
+    },
+    {
+      "id": "henryhub",
+      "group": "energy",
+      "unit": "mmbtu",
+      "source": "eia",
+      "freq": "daily",
+      "value": 3.03,
+      "asOf": "2026-10-06",
+      "prev": 2.96,
+      "prevAsOf": "2026-10-05"
+    }
+  ],
+  "fx": {
+    "source": "ecb",
+    "freq": "daily",
+    "base": "EUR",
+    "asOf": "2026-10-13",
+    "prevAsOf": "2026-10-12",
+    "eur": {
+      "USD": 1.1188,
+      "JPY": 176.91,
+      "CZK": 24.368,
+      "DKK": 7.4753,
+      "GBP": 0.8446,
+      "HUF": 364.31,
+      "PLN": 4.3768,
+      "RON": 5.3363,
+      "SEK": 11.1698,
+      "CHF": 0.9312,
+      "ISK": 136.2,
+      "NOK": 10.6685,
+      "TRY": 55.2325,
+      "AUD": 1.6033,
+      "BRL": 5.6125,
+      "CAD": 1.5933,
+      "CNY": 7.489,
+      "HKD": 8.7802,
+      "IDR": 20004.87,
+      "ILS": 3.4404,
+      "INR": 106.6,
+      "KRW": 1500.81,
+      "MXN": 20.5126,
+      "MYR": 4.5714,
+      "NZD": 1.9931,
+      "PHP": 70.225,
+      "SGD": 1.4319,
+      "THB": 37.58,
+      "ZAR": 18.4561
+    },
+    "prevEur": {
+      "USD": 1.1181,
+      "JPY": 177.33,
+      "CZK": 24.391,
+      "DKK": 7.4748,
+      "GBP": 0.84478,
+      "HUF": 365.13,
+      "PLN": 4.385,
+      "RON": 5.337,
+      "SEK": 11.1965,
+      "CHF": 0.9312,
+      "ISK": 136.4,
+      "NOK": 10.6955,
+      "TRY": 55.1635,
+      "AUD": 1.6032,
+      "BRL": 5.5819,
+      "CAD": 1.5946,
+      "CNY": 7.4832,
+      "HKD": 8.7743,
+      "IDR": 20036.18,
+      "ILS": 3.432,
+      "INR": 107.086,
+      "KRW": 1490.53,
+      "MXN": 20.5081,
+      "MYR": 4.5663,
+      "NZD": 1.9968,
+      "PHP": 70.169,
+      "SGD": 1.4314,
+      "THB": 37.585,
+      "ZAR": 18.4945
+    }
+  },
+  "yields": {
+    "source": "treasury",
+    "freq": "daily",
+    "asOf": "2026-10-09",
+    "prevAsOf": "2026-10-08",
+    "tenors": [
+      {
+        "key": "1m",
+        "col": "1 Mo",
+        "months": 1,
+        "value": 4.13,
+        "prev": 4.14
+      },
+      {
+        "key": "1.5m",
+        "col": "1.5 Month",
+        "months": 1.5,
+        "value": 4.13,
+        "prev": 4.14
+      },
+      {
+        "key": "2m",
+        "col": "2 Mo",
+        "months": 2,
+        "value": 4.13,
+        "prev": 4.13
+      },
+      {
+        "key": "3m",
+        "col": "3 Mo",
+        "months": 3,
+        "value": 4.25,
+        "prev": 4.23
+      },
+      {
+        "key": "4m",
+        "col": "4 Mo",
+        "months": 4,
+        "value": 4.29,
+        "prev": 4.29
+      },
+      {
+        "key": "6m",
+        "col": "6 Mo",
+        "months": 6,
+        "value": 4.32,
+        "prev": 4.3
+      },
+      {
+        "key": "1y",
+        "col": "1 Yr",
+        "months": 12,
+        "value": 4.47,
+        "prev": 4.44
+      },
+      {
+        "key": "2y",
+        "col": "2 Yr",
+        "months": 24,
+        "value": 4.8,
+        "prev": 4.75
+      },
+      {
+        "key": "3y",
+        "col": "3 Yr",
+        "months": 36,
+        "value": 4.89,
+        "prev": 4.85
+      },
+      {
+        "key": "5y",
+        "col": "5 Yr",
+        "months": 60,
+        "value": 5.02,
+        "prev": 4.99
+      },
+      {
+        "key": "7y",
+        "col": "7 Yr",
+        "months": 84,
+        "value": 5.13,
+        "prev": 5.11
+      },
+      {
+        "key": "10y",
+        "col": "10 Yr",
+        "months": 120,
+        "value": 5.24,
+        "prev": 5.22
+      },
+      {
+        "key": "20y",
+        "col": "20 Yr",
+        "months": 240,
+        "value": 5.65,
+        "prev": 5.64
+      },
+      {
+        "key": "30y",
+        "col": "30 Yr",
+        "months": 360,
+        "value": 5.6,
+        "prev": 5.6
+      }
+    ]
+  }
+}
