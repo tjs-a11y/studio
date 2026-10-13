@@ -74,6 +74,16 @@
           "once": true
         }
       ]
+    },
+    {
+      "id": "footsure",
+      "name": "Footsure",
+      "tagline": "The CDC's three fall-risk tests, run with your phone and a helper. Results stay on the phone. Family adds a monthly re-check, the trend and a summary to share.",
+      "plans": [
+        {
+          "id": "family"
+        }
+      ]
     }
   ]
 }

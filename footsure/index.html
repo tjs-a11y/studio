@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; font-src 'self'; connect-src 'self' https://cdn.jsdelivr.net https://storage.googleapis.com https://odml.pa.googleapis.com; worker-src 'self' blob:; manifest-src 'self'; frame-src 'none'; object-src 'none'; form-action 'self' https://*.stripe.com; base-uri 'self'">
+<title>Footsure: a Strength and Balance Check for Aging Parents</title>
+<meta name="description" content="The CDC's 3 fall-risk tests at home with your phone and a helper: compare with CDC cutoffs, re-check monthly. Results stay on your phone.">
+<link rel="canonical" href="https://quickwell.app/footsure/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Footsure: a Strength and Balance Check for Aging Parents">
+<meta property="og:description" content="The CDC's 3 fall-risk tests at home with your phone and a helper: compare with CDC cutoffs, re-check monthly. Results stay on your phone.">
+<meta property="og:url" content="https://quickwell.app/footsure/">
+<meta property="og:image" content="https://quickwell.app/footsure/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Footsure: the CDC&#x27;s three fall-risk tests at home, compared with CDC cutoffs.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Footsure: a Strength and Balance Check for Aging Parents">
+<meta name="twitter:description" content="The CDC&#x27;s 3 fall-risk tests at home with your phone and a helper. Results stay on your phone.">
+<meta name="twitter:image" content="https://quickwell.app/footsure/og.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Footsure", "url": "https://quickwell.app/footsure/", "applicationCategory": "HealthApplication", "operatingSystem": "Any (runs in a web browser; installable)", "description": "The CDC's 3 fall-risk tests at home with your phone and a helper: compare with CDC cutoffs, re-check monthly. Results stay on your phone.", "publisher": {"@id": "https://quickwell.app/#org"}, "offers": [{"@type": "Offer", "name": "Free check", "price": "0", "priceCurrency": "USD"}, {"@type": "Offer", "name": "Family monthly", "price": "4.99", "priceCurrency": "USD"}, {"@type": "Offer", "name": "Family yearly", "price": "39.00", "priceCurrency": "USD"}]}, {"@type": "Organization", "@id": "https://quickwell.app/#org", "name": "Quickwell", "url": "https://quickwell.app/"}]}</script>
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="banner" id="cutoffBanner" role="status">Cutoffs pending verification against the CDC STEADI form</div>
+<div class="wrap">
+  <header class="app">
+    <a class="brand" href="./" aria-label="Footsure home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2.4" fill="currentColor"/><path d="M12 7v7M12 14l-4 6M12 14l4 6M6 10h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+      <span>Footsure</span>
+    </a>
+    <div class="step" id="stepLabel">Start</div>
+  </header>
+
+  <main id="main">
+  <!-- HOME -->
+  <section data-screen="home">
+    <div class="card">
+      <h1>Film Mom standing up from a chair for 30 seconds.</h1>
+      <p>See how her strength and balance compare with the CDC's averages for her age. Re-check every month and watch the trend.</p>
+      <p class="muted small">The same three screening tests clinicians use (CDC STEADI): a 30-second chair stand, a 4-stage balance test and Timed Up and Go. Your phone's camera can count for you (beta), or you count by hand.</p>
+      <button type="button" id="startBtn">Start the check</button>
+      <button type="button" class="secondary hidden" id="historyBtn">See past checks</button>
+      <p class="lock"><span aria-hidden="true">🔒</span> Video is analyzed on this phone and never saved or uploaded. <a href="privacy.html">Privacy</a></p>
+    </div>
+    <div class="card small">
+      <div class="price"><span><b>Free</b> · a full check and today's result, any time</span></div>
+      <div class="price" style="margin-top:6px"><span><b>Family</b> · trend chart, monthly reminder, family share link, doctor summary, up to 2 people</span></div>
+      <div class="muted" style="margin-top:6px">$4.99/month or $39/year</div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section data-screen="profile" class="hidden">
+    <div class="card">
+      <h2>Who is being checked?</h2>
+      <p class="muted small">Used only to pick the CDC cutoff for the right age and sex. Stays on this device.</p>
+      <div id="peoplePick" class="hidden">
+        <label class="small" for="personSel">Person</label>
+        <select id="personSel"></select>
+      </div>
+      <div class="seg" id="whoSeg" role="group" aria-label="Who is being checked"><button type="button" class="on" data-v="someone">Someone I help</button><button type="button" data-v="me">Me</button></div>
+      <label class="small field" for="nick">Name or nickname (optional)</label>
+      <input type="text" id="nick" maxlength="40" placeholder="Mom" autocomplete="off">
+      <div class="row">
+        <div><label class="small field" for="age">Age</label><input type="number" id="age" inputmode="numeric" min="18" max="110" placeholder="74"></div>
+        <div><span class="small field" id="sexLbl">Sex (the CDC table has separate columns)</span>
+          <div class="seg" id="sexSeg" role="group" aria-labelledby="sexLbl"><button type="button" data-v="female">Female</button><button type="button" data-v="male">Male</button></div>
+        </div>
+      </div>
+      <p class="small warnline hidden" id="ageNote"></p>
+      <button type="button" id="profileNext" disabled>Next: safety check</button>
+      <button type="button" class="secondary" data-go="home">Back</button>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section data-screen="safety" class="hidden">
+    <div class="card">
+      <h2>Safety first</h2>
+      <p class="muted small">Tick every box to continue. These tests involve standing up and balancing.</p>
+      <label class="check"><input type="checkbox" class="sc"> <span>A <b>helper</b> (a second adult) will stand close by the whole time.</span></label>
+      <label class="check"><input type="checkbox" class="sc"> <span>A <b>sturdy chair without arms</b> (about 17 in / 43 cm seat), pushed against a wall so it can't slide.</span></label>
+      <label class="check"><input type="checkbox" class="sc"> <span><b>Clear space:</b> about 3 m (10 ft) of open floor, no rugs, cords or pets in the way. Normal shoes.</span></label>
+      <label class="check"><input type="checkbox" class="sc"> <span>We'll <b>stop at once</b> if there's dizziness, pain, shortness of breath or unsteadiness.</span></label>
+      <label class="check"><input type="checkbox" class="sc"> <span>No doctor or therapist has said to avoid tests like these.</span></label>
+      <label class="check"><input type="checkbox" class="sc"> <span>I understand this is a general wellness check, <b>not a medical diagnosis</b> and not medical advice.</span></label>
+      <p class="small muted" style="margin-top:10px">The one-foot balance stage is optional. Only try it with the helper right beside the person.</p>
+      <button type="button" id="safetyNext" disabled>Continue</button>
+      <button type="button" class="secondary" data-go="profile">Back</button>
+    </div>
+  </section>
+
+  <!-- SETUP -->
+  <section data-screen="setup" class="hidden">
+    <div class="card">
+      <h2>How should we count?</h2>
+      <div class="choice">
+        <h3>Use the camera</h3>
+        <p class="small muted">Prop the phone 2–3 m (7–10 ft) away at hip height, from the side, so the chair and the whole body are in view. Good light and fitted clothes help.</p>
+        <label class="check"><input type="checkbox" id="camConsent"> <span class="small">OK to download the pose-tracking files (up to about 20 MB, once; use Wi-Fi) from public CDNs. Video stays on this phone. The model's maker, Google, receives performance and usage metrics from it, not video. <a href="privacy.html#camera">Details</a></span></label>
+        <button type="button" id="camStart" disabled>Turn on the camera</button>
+      </div>
+      <div id="camHome" class="camslot"></div>
+      <label class="check"><input type="checkbox" id="speakOn"> <span class="small">Say the countdown and the count out loud</span></label>
+      <p class="small" id="camMsg" role="status" aria-live="polite"></p>
+      <button type="button" id="setupNext" class="hidden">Start test 1 of 3</button>
+      <div class="choice">
+        <h3>Count by hand</h3>
+        <p class="small muted">No camera. Tap a button for each stand and use the on-screen stopwatch.</p>
+        <button type="button" class="secondary" id="manualStart">Count by hand</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEST 1: CHAIR STAND -->
+  <section data-screen="stand" class="hidden">
+    <div class="card">
+      <h2>Test 1 · 30-second chair stand</h2>
+      <p class="muted small">Sit in the middle of the chair, feet flat, arms crossed over the chest. On "Go", stand all the way up and sit all the way down, as many times as possible in 30 seconds.</p>
+      <div class="camslot" data-camslot></div>
+      <div class="meter">
+        <svg viewBox="0 0 120 120" class="ring" aria-hidden="true"><circle cx="60" cy="60" r="52" class="ring-bg"/><circle cx="60" cy="60" r="52" class="ring-fg" id="standRing"/></svg>
+        <div class="meter-in"><div class="big" id="standCount" aria-live="polite">0</div><div class="timer" id="standTimer">30.0 s</div></div>
+      </div>
+      <p class="small center muted" id="standHint"></p>
+      <button type="button" id="standGo">Go: 3, 2, 1</button>
+      <button type="button" class="tap hidden" id="standTap">+1 stand <span class="small">(tap each time they're fully up)</span></button>
+      <div class="row hidden" id="standFix"><button type="button" class="secondary" id="standMinus">−1</button><button type="button" class="secondary" id="standPlus">+1</button></div>
+      <div id="standDone" class="hidden">
+        <p class="small" id="standAutoLine"></p>
+        <fieldset class="q"><legend class="small">When time ran out, were they more than halfway up?</legend>
+          <div class="seg" id="partialSeg"><button type="button" data-v="no">No</button><button type="button" data-v="yes">Yes, add 1</button></div></fieldset>
+        <fieldset class="q"><legend class="small">Did they push up with their arms or hands?</legend>
+          <div class="seg" id="armsSeg"><button type="button" data-v="no">No</button><button type="button" data-v="yes">Yes</button></div></fieldset>
+        <p class="small muted">The CDC form scores 0 if the arms are used.</p>
+        <label class="small field" for="standFinal">Final number of stands</label>
+        <input type="number" id="standFinal" inputmode="numeric" min="0" max="60">
+        <button type="button" id="standNext">Next: test 2 of 3</button>
+      </div>
+      <button type="button" class="stop" data-stop>Stop now</button>
+    </div>
+  </section>
+
+  <!-- TEST 2: BALANCE -->
+  <section data-screen="balance" class="hidden">
+    <div class="card">
+      <h2>Test 2 · 4-stage balance</h2>
+      <p class="muted small">Hold each position for 10 seconds without moving the feet or holding on. Arms can move to help balance. <b>No cane or walker, and keep the eyes open.</b> The helper stands close. Stop at the first one that can't be held.</p>
+      <div class="camslot" data-camslot></div>
+      <ol class="stages" id="stages"></ol>
+      <div id="stageNow" class="stagebox"></div>
+      <div id="balDone" class="hidden">
+        <label class="small field" for="balFinal">Stages held for 10 seconds, in a row</label>
+        <select id="balFinal"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        <button type="button" id="balNext">Next: test 3 of 3</button>
+      </div>
+      <button type="button" class="stop" data-stop>Stop now</button>
+    </div>
+  </section>
+
+  <!-- TEST 3: TUG -->
+  <section data-screen="tug" class="hidden">
+    <div class="card">
+      <h2>Test 3 · Timed Up and Go</h2>
+      <p class="muted small">Put a mark 3 m (10 ft) from the chair: tape, a shoe, or 4 big floor tiles. On "Go", stand up, walk to the mark at a normal pace, turn, walk back and sit down. Normal walking aid is fine.</p>
+      <label class="check"><input type="checkbox" id="tugMark"> <span>The mark is placed 3 m (10 ft) away.</span></label>
+      <div class="camslot" data-camslot></div>
+      <div class="big" id="tugTime" aria-live="off">0.0</div>
+      <div class="timer">seconds</div>
+      <p class="small center muted" id="tugHint"></p>
+      <button type="button" id="tugGo" disabled>Go</button>
+      <button type="button" class="tap hidden" id="tugStop">Stop: they're seated</button>
+      <div id="tugDone" class="hidden">
+        <p class="small" id="tugAutoLine"></p>
+        <label class="small field" for="tugFinal">Final time in seconds</label>
+        <input type="number" id="tugFinal" inputmode="decimal" min="0" max="300" step="0.1">
+        <button type="button" id="tugNext">See results</button>
+      </div>
+      <button type="button" class="stop" data-stop>Stop now</button>
+    </div>
+  </section>
+
+  <!-- STOPPED -->
+  <section data-screen="stopped" class="hidden">
+    <div class="card">
+      <h2>Stopped. That's fine.</h2>
+      <p>Help the person sit down and rest.</p>
+      <p class="small">If there was a fall, a hit to the head, chest pain or trouble breathing, get medical help now (in the US, call 911). If there was dizziness or unsteadiness, mention it to a doctor.</p>
+      <button type="button" id="skipTest">Skip this test and go on</button>
+      <button type="button" class="secondary" id="stoppedResults">See results so far</button>
+      <button type="button" class="secondary" data-go="home">Back to start</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section data-screen="results" class="hidden">
+    <div class="band" id="band" role="status"></div>
+    <div class="card" id="resCard"></div>
+    <div class="card small">
+      <b>What this means</b>
+      <p class="muted" style="margin-top:6px">Below average on any test? The CDC says that indicates a higher risk of falls. Share this page with a doctor or physical therapist. Strength and balance exercise lowers the rate of falls in older people.</p>
+      <p class="muted">This is a general wellness check. It is not a medical diagnosis.</p>
+      <ul class="tight">
+        <li><a href="https://www.cdc.gov/steadi/" rel="noopener" target="_blank">CDC STEADI (the screening program these tests come from)</a></li>
+        <li><a href="https://www.nia.nih.gov/health/exercise-and-physical-activity" rel="noopener" target="_blank">National Institute on Aging: exercise and physical activity</a></li>
+      </ul>
+      <div style="margin-top:10px"><span class="chip">Not medical advice</span><span class="chip">Not a medical device</span><span class="chip">Nothing uploaded</span></div>
+    </div>
+    <button type="button" id="toFamily">Track it monthly with the family →</button>
+    <button type="button" class="secondary" data-go="home">Done</button>
+  </section>
+
+  <!-- FAMILY -->
+  <section data-screen="family" class="hidden">
+    <div id="familyBody"></div>
+  </section>
+
+  <!-- SHARED (read-only) -->
+  <section data-screen="shared" class="hidden">
+    <div class="card small" id="sharedNote"><b>Shared with you · read-only</b><p class="muted" style="margin:6px 0 0">This history was decrypted on this device from the link itself. Nothing was sent to a server.</p></div>
+    <div id="sharedBody"></div>
+  </section>
+  </main>
+
+  <footer class="foot">
+    <p>Not medical advice. Not a medical device. Not affiliated with or endorsed by the CDC.</p>
+    <p><a href="privacy.html">Privacy</a> · <span id="cutoffFoot">CDC cutoffs pending verification</span> · Quickwell</p>
+  </footer>
+</div>
+
+<div id="printArea" aria-hidden="true"></div>
+<div id="camPanel" class="cam hidden">
+  <video id="camVideo" playsinline muted></video>
+  <canvas id="camCanvas"></canvas>
+  <span class="tag">Live · not recorded</span>
+  <span class="ok hidden" id="seeOk">I can see the whole body ✓</span>
+  <button type="button" class="flip" id="camFlip" aria-label="Switch camera">⟲</button>
+</div>
+
+<script src="/js/pro.js"></script>
+<script type="module" src="js/app.mjs"></script>
+</body>
+</html>

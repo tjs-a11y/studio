@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'none'; object-src 'none'; base-uri 'self'">
+<title>Footsure Privacy</title>
+<meta name="description" content="How Footsure handles camera video, check results and the pose model. Video never leaves your device.">
+<link rel="canonical" href="https://quickwell.app/footsure/privacy.html">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <a class="brand" href="./"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2.4" fill="currentColor"/><path d="M12 7v7M12 14l-4 6M12 14l4 6M6 10h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg><span>Footsure</span></a>
+    <div class="step">Privacy</div>
+  </header>
+  <main>
+  <div class="card">
+    <h1>Privacy, in plain words</h1>
+    <p><b>Video never leaves your device.</b> The camera picture goes straight into a pose model running inside your browser. It is not recorded, saved or uploaded, by us or anyone else. Only the 33 body points the model finds are used, for counting, and only while the test runs.</p>
+    <p><b>No account.</b> You don't sign up. We don't ask for a name, email or phone number.</p>
+  </div>
+
+  <div class="card">
+    <h2>What is stored, and where</h2>
+    <ul class="tight">
+      <li><b>On this device only (IndexedDB):</b> each person's nickname, age and sex, and each check's date and results. We can't see it. Clearing the site's data in your browser, or "Delete all checks on this device" on the Family page, removes it.</li>
+      <li><b>Family share links:</b> the results are encrypted on your device (AES-GCM) and both the encrypted results and the key go after the "#" in the link. Browsers don't send that part of a link to any server, so the results never reach us. Anyone who has the full link can read it, so send it only to family.</li>
+      <li><b>Calendar reminder:</b> a file created on your device. No email is sent.</li>
+      <li><b>Doctor summary:</b> printed or saved by your own browser.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="camera">
+    <h2>The camera and the pose model</h2>
+    <ul class="tight">
+      <li>Camera counting uses Google's <b>MediaPipe Pose Landmarker</b> (an open-source library). Per MediaPipe's own privacy notice, processing of the input "takes place on device, and MediaPipe does not send that input data to Google servers".</li>
+      <li><b>Usage metrics go to Google.</b> The same notice says MediaPipe "send[s] metrics about the performance and utilization of the APIs" to Google, which uses them "to measure performance, usage, debug, maintain and improve" MediaPipe, as described in <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's Privacy Policy</a>. These metrics are about how the library runs, not your video. We ask before the model loads, and you can avoid it entirely by counting by hand.</li>
+      <li><b>Model files come from public CDNs.</b> When you turn the camera on, the browser downloads the MediaPipe code and WebAssembly from jsDelivr (cdn.jsdelivr.net, version pinned) and the pose model file from Google (storage.googleapis.com). Those services see an ordinary download request (your IP address and browser type), as with any web download. After the first time, the files are kept in your browser so later checks can run offline.</li>
+      <li>Counting by hand uses no camera and downloads no model.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>What we do see</h2>
+    <ul class="tight">
+      <li>Our web host's standard request logs for the page itself (IP address, browser type, time), as for any website.</li>
+      <li>If you buy the Family plan: payment is handled by Stripe. We receive whether the plan is active, not your card details. Nothing about your checks is sent with it.</li>
+    </ul>
+    <p class="small muted" style="margin-top:10px">We never sell personal data. There is no advertising and no tracking across sites.</p>
+  </div>
+
+  <div class="card small">
+    <p><b>Not medical advice. Not a medical device.</b> Footsure is a general wellness check that compares results with the CDC's published screening averages. It is not a medical diagnosis. Not affiliated with or endorsed by the CDC or Google.</p>
+    <p class="muted">Questions: see the contact details on the main <a href="/privacy.html">Quickwell privacy page</a>.</p>
+    <a class="btn" href="./">Back to Footsure</a>
+  </div>
+  </main>
+  <footer class="foot"><p>Quickwell</p></footer>
+</div>
+</body>
+</html>

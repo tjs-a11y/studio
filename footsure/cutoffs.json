@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "note": "All three tests verified against the CDC STEADI assessment forms (2017) kept in sources/.",
+  "chairStand": {
+    "test": "30-second chair stand",
+    "rule": "A score below the number for the person's age and sex is below average.",
+    "compare": "below",
+    "verified": true,
+    "source": "CDC STEADI 30-Second Chair Stand form, as reported in search results (research memo O-033, 2026-10-13). Norms trace to Rikli & Jones (1999).",
+    "sourceUrls": [
+      "https://www.nj.gov/humanservices/doas/forms/STEADI-Assessment-30Sec-508.pdf",
+      "https://bpac.org.nz/falls/docs/The_30-Second_Chair_Stand_Test.pdf"
+    ],
+    "verifiedAgainst": "sources/CDC-STEADI-30sec-chair-stand-2017.pdf (CDC STEADI 30-Second Chair Stand assessment form, 2017; provided by the CEO 2026-10-13). Every row and both scoring notes checked line by line.",
+    "rows": [
+      {
+        "ageMin": 60,
+        "ageMax": 64,
+        "male": 14,
+        "female": 12,
+        "verified": true
+      },
+      {
+        "ageMin": 65,
+        "ageMax": 69,
+        "male": 12,
+        "female": 11,
+        "verified": true
+      },
+      {
+        "ageMin": 70,
+        "ageMax": 74,
+        "male": 12,
+        "female": 10,
+        "verified": true
+      },
+      {
+        "ageMin": 75,
+        "ageMax": 79,
+        "male": 11,
+        "female": 10,
+        "verified": true
+      },
+      {
+        "ageMin": 80,
+        "ageMax": 84,
+        "male": 10,
+        "female": 9,
+        "verified": true
+      },
+      {
+        "ageMin": 85,
+        "ageMax": 89,
+        "male": 8,
+        "female": 8,
+        "verified": true
+      },
+      {
+        "ageMin": 90,
+        "ageMax": 94,
+        "male": 7,
+        "female": 4,
+        "verified": true
+      }
+    ],
+    "scoringNotes": {
+      "armsUsed": "If the arms are used to stand, the score is 0.",
+      "partialStand": "A stand counts if the person is more than halfway up at 30 seconds.",
+      "verified": true,
+      "source": "sources/CDC-STEADI-30sec-chair-stand-2017.pdf (CDC STEADI 30-Second Chair Stand assessment form, 2017; provided by the CEO 2026-10-13). Every row and both scoring notes checked line by line."
+    }
+  },
+  "balance": {
+    "test": "4-stage balance test",
+    "rule": "Not holding the tandem stance (stage 3) for 10 seconds is outside the CDC range.",
+    "holdSeconds": 10,
+    "criticalStage": 3,
+    "stages": [
+      "Feet side by side",
+      "Semi-tandem: the instep of one foot touches the big toe of the other",
+      "Tandem: one foot in front of the other, heel touching toe",
+      "Stand on one foot"
+    ],
+    "verified": true,
+    "source": "Search results only: clinical-trial registry entry and a consumer article (research memo O-033). The CDC 4-Stage Balance Test page was not opened.",
+    "sourceUrls": [
+      "https://clinicaltrials.gov/study/NCT05815875",
+      "https://www.ibx.com/good-living/article/healthy-living/whats-your-risk-falling"
+    ],
+    "verifiedAgainst": "sources/CDC-STEADI-4stage-balance-2017.pdf (CDC STEADI 4-Stage Balance Test form, 2017; provided by the CEO 2026-10-13): 10-second holds; stop at the first position not held; an older adult who cannot hold the tandem stand for at least 10 seconds is at increased risk of falling; no assistive device (cane or walker); eyes open.",
+    "conditions": "No cane or walker; eyes open; a helper stands next to the person."
+  },
+  "tug": {
+    "test": "Timed Up and Go",
+    "rule": "12 seconds or more is outside the CDC range.",
+    "thresholdSeconds": 12,
+    "compare": "atOrAbove",
+    "walkMeters": 3,
+    "walkFeet": 10,
+    "timing": "Start on the word Go; stop when the person is seated again.",
+    "verified": true,
+    "source": "Search results only (research memo O-033). The CDC STEADI TUG form was not opened.",
+    "sourceUrls": [
+      "https://clinicaltrials.gov/study/NCT05815875",
+      "https://www.ibx.com/good-living/article/healthy-living/whats-your-risk-falling"
+    ],
+    "verifiedAgainst": "sources/CDC-STEADI-TUG-2017.pdf (CDC STEADI Timed Up & Go assessment form, 2017; provided by the CEO 2026-10-13): line 3 meters or 10 feet away; start timing on 'Go', stop after the patient sits back down; an older adult who takes >=12 seconds is at risk for falling; regular footwear; walking aid allowed; normal pace.",
+    "conditions": "Regular footwear; usual walking aid allowed; normal pace; a helper stays close."
+  }
+}

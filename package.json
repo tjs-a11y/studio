@@ -3,7 +3,13 @@
   "private": true,
   "type": "module",
   "description": "Small, sharp web tools with a shared billing server (Stripe).",
-  "engines": { "node": ">=20" },
-  "scripts": { "test": "node --test test/*.test.mjs play/test/*.test.mjs" },
-  "dependencies": { "stripe": "^23.0.0" }
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs play/test/*.test.mjs footsure/tests/*.test.mjs"
+  },
+  "dependencies": {
+    "stripe": "^23.0.0"
+  }
 }
