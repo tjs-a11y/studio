@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_template/
+Disallow: /deals/
 
 Sitemap: https://quickwell.app/sitemap.xml

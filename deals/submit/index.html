@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/deals/deals.css"><title>Send a Deal</title>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head><body><main>
+<div class="brand">Atlanta Off-Market Deals</div>
+<h1>Send a deal</h1>
+<p class="muted">Paste your deal email exactly as you'd send it: address, price, ARV, terms, comps. That's all.</p>
+<form id="f" class="card">
+<label for="text">Deal email</label><textarea id="text" required placeholder="Paste the whole email here"></textarea>
+<label for="photos">Photos link (optional)</label><input id="photos" type="url" placeholder="https://">
+<p><button>Send deal</button></p><div id="m" class="msg" role="status"></div>
+</form></main>
+<script>
+const k=new URLSearchParams(location.search).get('k')||'';const m=document.getElementById('m');
+document.getElementById('f').addEventListener('submit',async e=>{e.preventDefault();m.className='msg';m.textContent='Sending…';
+try{const r=await fetch('/api/deals?a=submit&k='+encodeURIComponent(k),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({text:document.getElementById('text').value,photos:document.getElementById('photos').value})});const j=await r.json();
+if(!r.ok)throw new Error(j.error||'Something went wrong.');m.className='msg ok';m.textContent='Got it: '+j.address+'. Thank you!';e.target.reset();}catch(err){m.className='msg err';m.textContent=err.message;}});
+</script></body></html>

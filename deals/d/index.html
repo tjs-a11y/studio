@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/deals/deals.css"><title>Off-Market Deal</title>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head><body><main>
+<div class="brand">Atlanta Off-Market Deals</div>
+<div id="deal"><p class="muted">Loading…</p></div>
+<div id="in" hidden>
+<h2>I want it</h2>
+<form id="f" class="card">
+<div class="row"><div style="flex:1 1 220px"><label for="name">Your name</label><input id="name" required autocomplete="name"></div><div style="flex:1 1 220px"><label for="company">Buying entity</label><input id="company" autocomplete="organization"></div></div>
+<div class="row"><div style="flex:1 1 220px"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div><div style="flex:1 1 220px"><label for="phone">Mobile</label><input id="phone" type="tel" required autocomplete="tel"></div></div>
+<label for="pof">Proof of funds (link, or say "will email")</label><input id="pof">
+<label class="chk"><input type="checkbox" id="emd" required> <span id="emdtext"></span></label>
+<p><button>I'm in at this price</button></p><div id="m" class="msg" role="status"></div>
+</form></div>
+<p class="small muted" style="margin-top:28px">Offered by a principal, not a licensed agent, subject to our acquiring the property. We will purchase it and resell it to you (double closing). Sold as-is with no due diligence period. Numbers and estimates are for your review only: verify everything yourself before you sign.</p>
+</main>
+<script>
+const id=new URLSearchParams(location.search).get('id')||'';const $=s=>document.getElementById(s);
+const usd=n=>n==null?'—':'$'+Math.round(n).toLocaleString('en-US');const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KIND={flip:'Fix and flip',rental:'Rental',teardown:'Teardown / new-build lot'};
+fetch('/api/deals?a=deal&id='+encodeURIComponent(id)).then(async r=>{const d=await r.json();if(!r.ok)throw new Error(d.error);
+document.title=d.address+', '+d.city;const v=d.investorView||{};
+const stats=[['Price',usd(d.price)],['ARV',usd(d.arv)+(d.kind==='teardown'?' (new build)':'')],d.rent?['Est. rent',usd(d.rent)+'/mo']:null,[d.kind==='teardown'?'Est. demolition':'Est. rehab',usd(d.rehabEstimate)],v.equity!=null?['Est. equity after rehab',usd(v.equity)]:null,v.rentRatio!=null?['Rent / all-in',v.rentRatio+'%']:null].filter(Boolean);
+$('deal').innerHTML='<span class="pill">'+esc(KIND[d.kind]||d.kind)+'</span><h1>'+esc(d.address)+', '+esc(d.city)+', GA '+esc(d.zip)+'</h1><p class="muted">'+[d.beds&&d.beds+' bd',d.baths&&d.baths+' ba',d.sqft&&d.sqft.toLocaleString()+' sq ft',d.lotSqft&&d.lotSqft.toLocaleString()+' sq ft lot',d.yearBuilt&&'built '+d.yearBuilt,d.county&&d.county+' County'].filter(Boolean).join(' · ')+'</p>'
++(d.status==='locked'?'<p class="msg warn">Under contract with a buyer. Backup offers welcome.</p>':'')
++'<div class="grid">'+stats.map(s=>'<div class="stat"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>').join('')+'</div>'
++(d.note?'<p>'+esc(d.note)+'</p>':'')+(d.photos?'<p><a class="btn" href="'+esc(d.photos)+'" target="_blank" rel="noopener">See photos</a></p>':'')
++(d.comps?.length?'<h2>Sold comps</h2><div class="scroll"><table><tr><th>Address</th><th>Sq ft</th><th>Sold</th><th>$/sq ft</th></tr>'+d.comps.map(c=>'<tr><td>'+esc(c.address)+'</td><td class="n">'+(c.sqft||'—')+'</td><td class="n">'+usd(c.price)+'</td><td class="n">'+(c.sqft?usd(c.price/c.sqft):'—')+'</td></tr>').join('')+'</table></div>':'')
++'<h2>Terms</h2><ul><li>As-is, <b>no due diligence period</b>. See it before you commit'+(d.terms.lockbox?' (lockbox access).':'.')+'</li><li><b>'+usd(d.terms.emd)+' earnest money</b> to the closing attorney within 24 hours of signing. Non-refundable.</li><li>Closing'+(d.terms.attorney?' at '+esc(d.terms.attorney):'')+(d.terms.closeOn?' on '+esc(d.terms.closeOn):d.terms.closeWithin?' within '+esc(d.terms.closeWithin):'')+'.</li>'+(d.respondBy?'<li>Respond by <b>'+esc(d.respondBy)+'</b>. First complete "I\'m in" with proof of funds gets it.</li>':'<li>First complete "I\'m in" with proof of funds gets it.</li>')+'</ul>';
+$('emdtext').textContent='I understand the terms: '+usd(d.terms.emd)+' non-refundable earnest money to the closing attorney within 24 hours of signing, as-is, no due diligence period.';
+if(d.status==='sent')$('in').hidden=false;}).catch(e=>{$('deal').innerHTML='<h1>Deal not available</h1><p class="muted">'+esc(e.message||'')+'</p><p><a href="/deals/join/">Get the next one: join the list</a></p>';});
+$('f').addEventListener('submit',async e=>{e.preventDefault();const m=$('m');m.className='msg';m.textContent='Sending…';
+try{const r=await fetch('/api/deals?a=interest&id='+encodeURIComponent(id),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:$('name').value,company:$('company').value,email:$('email').value,phone:$('phone').value,pof:$('pof').value,emdOk:$('emd').checked})});const j=await r.json();
+if(!r.ok)throw new Error(j.error||'Something went wrong.');m.className='msg ok';m.textContent=j.place===1?"You're first in line. We'll call you shortly with the contract.":"You're #"+j.place+" in line. We'll call you if it opens up.";e.target.querySelector('button').disabled=true;}catch(err){m.className='msg err';m.textContent=err.message;}});
+</script></body></html>

@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/deals/deals.css"><title>Get Off-Market Deals</title>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head><body><main>
+<div class="brand">Atlanta Off-Market Deals</div>
+<h1>Get off-market deals in metro Atlanta before anyone else</h1>
+<p>Fix-and-flips, rentals and teardown lots, sent to you only if they match what you buy. Discounted, as-is, quick closings through a closing attorney.</p>
+<form id="f" class="card">
+<div class="row"><div style="flex:1 1 220px"><label for="name">Your name</label><input id="name" required autocomplete="name"></div>
+<div style="flex:1 1 220px"><label for="company">Company / LLC</label><input id="company" autocomplete="organization"></div></div>
+<div class="row"><div style="flex:1 1 220px"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div>
+<div style="flex:1 1 220px"><label for="phone">Mobile</label><input id="phone" type="tel" autocomplete="tel"></div></div>
+<label>What you buy</label><div class="row" id="types">
+<label class="chk"><input type="checkbox" value="flip"> Fix and flip</label><label class="chk"><input type="checkbox" value="rental"> Rentals (buy and hold)</label><label class="chk"><input type="checkbox" value="teardown"> Teardowns / lots (builders)</label></div>
+<label>Counties you buy in</label><div class="row" id="counties"></div>
+<div class="row"><div style="flex:1 1 200px"><label for="max">Max purchase price</label><input id="max" type="number" min="0" step="1000" placeholder="e.g. 150000"></div>
+<div style="flex:1 1 200px"><label for="days">You can close in (days)</label><input id="days" type="number" min="1" max="90" placeholder="e.g. 14"></div></div>
+<label class="chk"><input type="checkbox" id="cash"> I buy with cash or hard money and can show proof of funds</label>
+<label class="chk"><input type="checkbox" id="consent" required> Email me deals that match. I can unsubscribe any time.</label>
+<p><button>Join the list</button></p><div id="m" class="msg" role="status"></div>
+</form>
+<p class="small muted">We only use your details to send you matching deals. We never sell or share them.</p>
+</main>
+<script>
+const box=document.getElementById('counties');fetch('/api/deals?a=counties').then(r=>r.json()).then(j=>{for(const c of j.counties){const l=document.createElement('label');l.className='chk';l.innerHTML='<input type="checkbox" value="'+c+'"> '+c;box.append(l);}}).catch(()=>{});
+const vals=id=>[...document.querySelectorAll('#'+id+' input:checked')].map(i=>i.value);const m=document.getElementById('m');const v=id=>document.getElementById(id);
+v('f').addEventListener('submit',async e=>{e.preventDefault();m.className='msg';m.textContent='Saving…';
+try{const r=await fetch('/api/deals?a=join',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:v('name').value,company:v('company').value,email:v('email').value,phone:v('phone').value,types:vals('types'),counties:vals('counties'),maxPrice:v('max').value,closeDays:v('days').value,cash:v('cash').checked,consent:v('consent').checked})});const j=await r.json();
+if(!r.ok)throw new Error(j.error||'Something went wrong.');m.className='msg ok';m.textContent=j.again?"You're already on the list.":"You're on the list. Matching deals will come to your inbox.";e.target.reset();}catch(err){m.className='msg err';m.textContent=err.message;}});
+</script></body></html>

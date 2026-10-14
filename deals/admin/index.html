@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/deals/deals.css"><title>Deal Desk</title>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>main{max-width:1000px}.deal{margin:14px 0}.deal h3{margin:.2em 0}.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}.edit{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.edit div{flex:1 1 160px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.GO{color:var(--good)}.THIN{color:var(--warn)}.PASS{color:var(--bad)}</style>
+</head><body><main>
+<div class="brand">Private</div><h1>Deal Desk</h1>
+<form id="login" class="card"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><p><button>Open</button></p><div id="lm" class="msg err"></div></form>
+<div id="app" hidden>
+<div class="card"><b>Links</b>
+<p class="small">Keenan's link (send him this once): <input id="sub" readonly></p>
+<p class="small">Investor signup (share in investor groups): <input id="join" readonly></p>
+<div class="row"><button class="ghost" id="refresh" type="button">Refresh</button></div></div>
+<h2>Deals</h2><div id="deals"></div>
+<h2>Investors (<span id="ic">0</span>)</h2><div class="scroll"><table id="inv"></table></div>
+</div></main>
+<script>
+const $=s=>document.getElementById(s);const usd=n=>n==null?'—':(n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let key='';try{key=sessionStorage.getItem('dd-key')||''}catch{}
+const api=(qs,b)=>fetch('/api/deals?'+qs,{method:b?'POST':'GET',headers:{'x-admin-key':key,'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(async r=>{const j=await r.json();if(!r.ok)throw new Error(j.error);return j;});
+async function copy(text,btn){try{await navigator.clipboard.writeText(text);btn.textContent='Copied';}catch{prompt('Copy:',text);}}
+$('login').addEventListener('submit',e=>{e.preventDefault();key=$('pw').value;try{sessionStorage.setItem('dd-key',key)}catch{};load();});
+async function load(){try{const [cfg,data]=await Promise.all([api('a=config'),api('a=admin')]);$('login').hidden=true;$('app').hidden=false;
+$('sub').value=location.origin+cfg.submitPath;$('join').value=location.origin+'/deals/join/';render(data);}catch(e){$('lm').textContent=e.message;$('login').hidden=false;}}
+function render({deals,investors,interest}){const byId=Object.fromEntries(investors.map(i=>[i.id,i]));$('ic').textContent=investors.length;
+$('deals').innerHTML=deals.length?'':'<p class="muted">No deals yet. Send Keenan his link.</p>';
+for(const d of deals){const p=d.parsed,u=d.uw,link=location.origin+'/deals/d/?id='+d.id;const el=document.createElement('div');el.className='card deal';
+const ints=interest[d.id]||[];const matched=(d.matched||[]).map(id=>byId[id]).filter(Boolean);
+el.innerHTML='<div class="row" style="justify-content:space-between"><div><span class="pill">'+esc(p.kind)+'</span> <span class="pill">'+esc(d.status)+'</span> <b class="'+u.verdict+'">'+u.verdict+'</b></div><span class="small muted">'+new Date(d.createdAt).toLocaleString()+'</span></div>'
++'<h3>'+esc(p.address)+', '+esc(p.city)+' <span class="muted small">'+esc(p.county||'county ?')+'</span></h3>'
++'<p class="small muted">'+[p.beds&&p.beds+'bd',p.baths&&p.baths+'ba',p.sqft&&p.sqft+' sqft',p.yearBuilt&&p.yearBuilt,p.rent&&'rent '+usd(p.rent),p.attorney&&'@ '+p.attorney,p.closeOn&&'close '+p.closeOn,p.closeWithin&&'close within '+p.closeWithin,p.offersDue&&'<b>offers due '+esc(p.offersDue)+'</b>',p.ddDays!=null&&p.ddDays+' days DD',p.emd&&'EMD '+usd(p.emd)].filter(Boolean).join(' · ')+'</p>'
++'<div class="nums">'+[['Your purchase',usd(u.purchase)],['ARV',usd(p.arv)],['Rehab est.',usd(u.rehabCost)],['Investor max',usd(u.investorMax)],['Investor price',usd(u.investorPrice)],['Gross spread',usd(u.gross)],['Funding fee',usd(u.fundingFee)],['Closing costs',usd(u.closingCosts)],['<b>Your net</b>','<b class="'+u.verdict+'">'+usd(u.net)+'</b>'],['Max bid for GO',usd(u.bidForGo)]].map(s=>'<div class="stat"><span>'+s[0]+'</span><b>'+s[1]+'</b></div>').join('')+'</div>'
++'<p class="small muted">Investor max = '+u.caps.map(c=>esc(c.rule)+' → '+usd(c.max)).join('; ')+'. Investor sees: all-in '+usd(u.investorView.allIn)+(u.investorView.pctOfArv!=null?' ('+u.investorView.pctOfArv+'% of ARV)':'')+(u.investorView.rentRatio!=null?', rent/all-in '+u.investorView.rentRatio+'%':'')+'.</p>'
++'<div class="edit"><div><label>Your offer to seller</label><input data-f="purchase" type="number" step="500" value="'+(u.purchase??'')+'"></div><div><label>Price to investors</label><input data-f="investorPrice" type="number" step="500" value="'+(u.investorPrice??'')+'"></div><div><label>Photos link for investors</label><input data-f="photos" value="'+esc(d.photos||'')+'"></div><div><label>Investors respond by</label><input data-f="respondBy" value="'+esc(d.respondBy||'')+'" placeholder="e.g. Thu 5 pm"></div></div>'
++'<div class="actions"><button data-a="save">Save numbers</button><button data-a="sent">Approve and share</button><button class="ghost" data-a="link">Copy investor link</button><button class="ghost" data-a="email">Copy email for '+matched.length+' matched investors</button><button class="ghost" data-a="locked">Mark under contract</button><button class="ghost" data-a="dead">Mark dead</button></div>'
++'<h4>"I\'m in" ('+ints.length+')</h4>'+(ints.length?'<div class="scroll"><table><tr><th>#</th><th>Name</th><th>Entity</th><th>Phone</th><th>Email</th><th>Proof of funds</th><th>When</th></tr>'+ints.map((i,n)=>'<tr><td>'+(n+1)+'</td><td>'+esc(i.name)+'</td><td>'+esc(i.company)+'</td><td>'+esc(i.phone)+'</td><td>'+esc(i.email)+'</td><td>'+esc(i.pof)+'</td><td class="small">'+new Date(i.at).toLocaleString()+'</td></tr>').join('')+'</table></div>':'<p class="small muted">None yet.</p>');
+el.addEventListener('click',async ev=>{const a=ev.target.dataset?.a;if(!a)return;const f={};el.querySelectorAll('[data-f]').forEach(i=>f[i.dataset.f]=i.value);
+if(a==='link')return copy(link,ev.target);
+if(a==='email'){const to=matched.map(i=>i.email).join(', ');const txt='BCC: '+to+'\n\nSubject: Off-market '+(p.kind==='rental'?'rental':p.kind==='teardown'?'lot':'flip')+': '+p.address+', '+p.city+' at '+usd(u.investorPrice)+'\n\n'+p.address+', '+p.city+', GA '+(p.zip||'')+'\nPrice: '+usd(u.investorPrice)+' | ARV: '+usd(p.arv)+(p.rent?' | Rent: '+usd(p.rent)+'/mo':'')+'\n'+[p.beds&&p.beds+' bd',p.baths&&p.baths+' ba',p.sqft&&p.sqft+' sq ft'].filter(Boolean).join(' / ')+'\n\nDetails, comps and terms, and to claim it: '+link+'\nFirst "I\'m in" with proof of funds gets it. $'+Math.max(5000,p.emd||0).toLocaleString()+' earnest money to the closing attorney within 24 hours of signing.\n\nReply STOP to stop getting deals.';return copy(txt,ev.target);}
+try{const b={id:d.id,purchase:f.purchase,investorPrice:f.investorPrice,photos:f.photos,respondBy:f.respondBy};if(['sent','locked','dead'].includes(a))b.status=a;await api('a=update',b);render(await api('a=admin'));}catch(e){alert(e.message)}});
+$('deals').append(el);}
+$('inv').innerHTML='<tr><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Counties</th><th>Buys</th><th>Max</th><th>Cash/POF</th><th>Joined</th></tr>'+investors.map(i=>'<tr><td>'+esc(i.name)+'</td><td>'+esc(i.company)+'</td><td>'+esc(i.email)+'</td><td>'+esc(i.phone)+'</td><td class="small">'+esc((i.counties||[]).join(', ')||'any')+'</td><td class="small">'+esc((i.types||[]).join(', ')||'any')+'</td><td class="n">'+usd(i.maxPrice)+'</td><td>'+(i.cash?'yes':'—')+'</td><td class="small">'+new Date(i.createdAt).toLocaleDateString()+'</td></tr>').join('');}
+$('refresh').addEventListener('click',load);if(key)load();
+</script></body></html>

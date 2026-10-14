@@ -1,0 +1,14 @@
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d2421;--muted:#5d6762;--line:#dcd7cc;--accent:#1f6b4f;--accent-ink:#fff;--warn:#9a5b00;--bad:#a1302b;--good:#1f6b4f}
+@media (prefers-color-scheme:dark){:root{--bg:#121614;--card:#1b211e;--ink:#e8ece9;--muted:#9aa59f;--line:#2e3833;--accent:#4fb487;--accent-ink:#0d1210;--warn:#e0a548;--bad:#e2726c;--good:#4fb487;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}h1{font-size:1.6rem;line-height:1.2;margin:.2em 0 .4em;text-wrap:balance}h2{font-size:1.15rem;margin:1.6em 0 .5em}
+.brand{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+label{display:block;font-weight:600;margin:12px 0 4px}input,textarea,select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+textarea{min-height:260px}button,.btn{display:inline-block;font:inherit;font-weight:600;border:0;border-radius:8px;padding:11px 18px;background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}.muted{color:var(--muted)}.small{font-size:.85rem}
+.row{display:flex;flex-wrap:wrap;gap:8px 16px}.chk{display:flex;gap:8px;align-items:flex-start;font-weight:400}.chk input{width:auto;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.stat{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card)}
+.stat b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}.stat span{font-size:.8rem;color:var(--muted)}
+.msg{margin-top:12px;font-weight:600}.ok{color:var(--good)}.err{color:var(--bad)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}.pill{display:inline-block;padding:1px 8px;border-radius:99px;font-size:.78rem;font-weight:700;border:1px solid currentColor}
