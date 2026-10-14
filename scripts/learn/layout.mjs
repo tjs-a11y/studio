@@ -104,6 +104,7 @@ export function render(page, SITE) {
 <link rel="icon" href="data:,">
 ${page.ogImage ? og(page, abs) : ''}${alt}<style>${CSS}</style>
 ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('\n')}
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <main>

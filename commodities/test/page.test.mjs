@@ -48,7 +48,7 @@ test('every page carries the no-advice, no-funds, no-trades line', () => {
 });
 
 test('internal links point at files in this folder or at studio pages that exist', () => {
-  const studioPages = ['/', '/privacy.html', '/terms.html', '/js/pro.js', '/plus/'];
+  const studioPages = ['/', '/privacy.html', '/terms.html', '/js/pro.js', '/plus/', '/js/va.js', '/_vercel/insights/script.js'];
   for (const f of Object.keys(PAGES)) for (const m of read(f).matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
     const p = m[1].split('#')[0];
     if (studioPages.includes(p)) continue;
