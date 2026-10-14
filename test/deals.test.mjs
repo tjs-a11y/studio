@@ -58,6 +58,116 @@ Closing @ Katz Durell on 10/23/2026
 Best,
 Keenan`;
 
+const DECATUR = `Hey Teon,
+
+I have a Decatur property right next to North Druid Hills. There are multiple exit strategies for this property: keep the current floorplan, close off the car port for a primary suite and 200+ square feet or go big and finish the basement for an additional 600 square feet. Let me know if you are interested in this one.
+
+975 Hunting Valley Pl, Decatur, GA 30033
+Purchase Price: $320,000
+ARV: $415k-525k
+
+3 beds / 1 bath
+SqFt: 1095 sq/ft (with 548 unfinished below)
+.26 acre lot
+Year Build: 1954
+County: Dekalb
+
+PHOTOS
+
+Terms
+
+Property is Vacant and delivered Vacant
+
+Cash or Hard Money Only
+
+As-Is Sale – Zero DD
+
+GAR Forms Only (Non-GAR or DD offers will not be reviewed)
+
+$5,000 Earnest Money Deposit required
+
+Closing Attorney: Katz Durell – Closing 10/21/2026`;
+
+const WOODS = `Hey Teon,
+
+I have a small but cheap fix & flip or rental near Center Hill in Atlanta. Currently owner-occupied; expected to be delivered vacant by 10/10. Roof is about 8 years old per the owner, but budget for a new HVAC. Full basement included, with room to add square footage if you want to push the ARV higher.
+
+Keeping the current footprint suggests an ARV in the low $200s; adding square footage pushes it toward the low-to-mid $300s. Rents for comparable homes in the area run up to $1,600-1800/mo.
+
+667 Woods Drive NW, Atlanta, GA 30318
+Price: $85,000
+ARV: $225k-$335k
+
+Beds / Baths: 3/1
+818 Sqft (plus full basement)
+.28 acre lot
+1950 build
+Photos
+Video
+
+Terms
+Property Delivered Vacant
+GAR Forms Only
+As-Is Sale - Zero DD
+$5,000 Earnest Money
+Closing @ Katz Durell on or before 10/16/2026`;
+
+const RIVERCHASE = `Hey Teon,
+
+We need a buyer ASAP! If you are interested in this one, CALL ME! Don't email back and waste time. We lost the buyer at the last minute and are scrambling. We got a significant price reduction for the previous buyer and now those savings are passed on to you. If you can dp $520k, the property is yours.
+
+
+6415 River Chase Cir, Sandy springs GA 30328
+Purchase price: $520,000
+ARV: $1.25M+
+
+5 bed | 4.5 bath
+5.032 sqft
+1980 build
+0.65 acre
+
+zillow pictures
+comps
+
+
+Terms
+Property is Vacant
+Cash or Hard Money Only
+As-Is Sale – Zero DD
+GAR Forms Only (Non-GAR or DD offers will not be reviewed)
+$10,000 Earnest Money Deposit required
+Closing Attorney: Katz Durell – Closing on or before 11/2`;
+
+test('parses the Decatur email (price label, ARV range, acres, county line)', () => {
+  const d = parseDeal(DECATUR);
+  assert.equal(d.address, '975 Hunting Valley Pl'); assert.equal(d.city, 'Decatur'); assert.equal(d.county, 'DeKalb');
+  assert.equal(d.price, 320000); assert.equal(d.arv, 415000); assert.equal(d.arvHigh, 525000);
+  assert.equal(d.beds, 3); assert.equal(d.baths, 1); assert.equal(d.sqft, 1095); assert.equal(d.lotSqft, 11326);
+  assert.equal(d.yearBuilt, 1954); assert.equal(d.ddDays, 0); assert.equal(d.emd, 5000);
+  assert.equal(d.attorney, 'Katz Durell'); assert.equal(d.closeOn, '10/21/2026'); assert.equal(d.kind, 'flip'); assert.equal(d.basement, true);
+});
+
+test('parses the Woods Drive email (flip or rental, rent range)', () => {
+  const d = parseDeal(WOODS);
+  assert.equal(d.address, '667 Woods Drive NW'); assert.equal(d.county, 'Fulton');
+  assert.equal(d.price, 85000); assert.equal(d.arv, 225000); assert.equal(d.arvHigh, 335000);
+  assert.equal(d.rent, 1600); assert.equal(d.rentHigh, 1800); assert.equal(d.sqft, 818); assert.equal(d.yearBuilt, 1950);
+  assert.equal(d.attorney, 'Katz Durell'); assert.equal(d.closeOn, '10/16/2026'); assert.equal(d.kind, 'flip'); assert.equal(d.ddDays, 0);
+});
+
+test('parses the River Chase email (no comma before GA, $1.25M, 5.032 sqft, urgent)', () => {
+  const d = parseDeal(RIVERCHASE);
+  assert.equal(d.address, '6415 River Chase Cir'); assert.equal(d.city, 'Sandy Springs'); assert.equal(d.county, 'Fulton');
+  assert.equal(d.price, 520000); assert.equal(d.arv, 1250000); assert.equal(d.beds, 5); assert.equal(d.baths, 4.5);
+  assert.equal(d.sqft, 5032); assert.equal(d.lotSqft, 28314); assert.equal(d.yearBuilt, 1980); assert.equal(d.emd, 10000);
+  assert.equal(d.closeOn, '11/2'); assert.equal(d.urgent, true); assert.equal(d.attorney, 'Katz Durell');
+});
+
+test('investor EMD matches a larger broker EMD', () => {
+  const parsed = parseDeal(RIVERCHASE);
+  assert.equal(publicDeal({ id: 'r', status: 'sent', parsed, uw: underwrite(parsed) }).terms.emd, 10000);
+});
+
 test('parses the Woodstock teardown email', () => {
   const d = parseDeal(WOODSTOCK);
   assert.equal(d.address, '520 Bluff Ct'); assert.equal(d.city, 'Woodstock'); assert.equal(d.county, 'Cherokee');

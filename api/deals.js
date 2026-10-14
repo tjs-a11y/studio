@@ -120,8 +120,8 @@ export async function POST(req) {
     if (!deal) return fail(404, 'No such deal.');
     const o = {};
     if (b.purchase != null) o.purchase = Number(b.purchase) || deal.parsed.price;
-    if (b.investorPrice != null) o.investorPrice = Number(b.investorPrice) || null;
-    if (b.parsed && typeof b.parsed === 'object') for (const k of ['arv', 'rent', 'sqft', 'kind', 'rehab', 'county']) if (b.parsed[k] != null) deal.parsed[k] = b.parsed[k];
+    if (b.investorPrice != null) o.investorPrice = Number(b.investorPrice) || undefined; // 0/blank = use the suggested price
+    if (b.parsed && typeof b.parsed === 'object') for (const k of ['arv', 'rent', 'sqft', 'kind', 'rehab', 'county']) if (b.parsed[k] != null && b.parsed[k] !== '') deal.parsed[k] = ['arv', 'rent', 'sqft'].includes(k) ? Number(b.parsed[k]) || deal.parsed[k] : String(b.parsed[k]);
     deal.overrides = { ...(deal.overrides || {}), ...o };
     deal.uw = underwrite(deal.parsed, undefined, deal.overrides);
     if (['new', 'sent', 'locked', 'dead'].includes(b.status)) deal.status = b.status;

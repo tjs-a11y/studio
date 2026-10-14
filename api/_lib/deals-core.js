@@ -17,8 +17,31 @@ export const SETTINGS = {
   goNet: 10000, thinNet: 5000,// verdict thresholds on CEO net
 };
 
-const money = (s) => (s == null ? null : Number(String(s).replace(/[$,\s]/g, '')) || null);
-const num = (s) => (s == null ? null : Number(String(s).replace(/,/g, '')) || null);
+// "$415k" -> 415000, "$1.25M+" -> 1250000, "75,000" -> 75000
+const money = (s) => {
+  if (s == null) return null;
+  const m = String(s).replace(/[$\s+]/g, '').match(/^([\d.,]+)([kKmM])?$/);
+  if (!m) return null;
+  let n = Number(m[1].replace(/,/g, ''));
+  if (m[2]) n *= /m/i.test(m[2]) ? 1e6 : 1e3;
+  return Number.isFinite(n) && n > 0 ? Math.round(n) : null;
+};
+// "1,248" -> 1248; "5.032" (a period typed as a thousands separator) -> 5032
+const num = (s) => {
+  if (s == null) return null;
+  const t = String(s).trim();
+  if (/^\d{1,3}\.\d{3}$/.test(t)) return Number(t.replace('.', ''));
+  const n = Number(t.replace(/,/g, ''));
+  return Number.isFinite(n) && t !== '' ? n : null;
+};
+// "$415k-525k" / "$225k-$335k" / "$1.25M+" / "$150,000" -> { low, high }
+const range = (s) => {
+  if (!s) return { low: null, high: null };
+  const parts = String(s).split(/\s*[-–—]\s*|\s+to\s+/i).map((p) => p.trim()).filter(Boolean);
+  const unit = (parts.at(-1).match(/[kKmM]\+?$/) || [''])[0].replace('+', '');
+  const vals = parts.map((p) => money(/[kKmM]\+?$/.test(p) || !unit ? p : p + unit)).filter(Boolean);
+  return { low: vals[0] ?? null, high: vals.length > 1 ? vals.at(-1) : null };
+};
 const pick = (re, t, i = 1) => { const m = t.match(re); return m ? m[i] : null; };
 const floor500 = (n) => Math.floor(n / 500) * 500;
 
@@ -33,36 +56,55 @@ const CITY_COUNTY = {
   griffin: 'Spalding', newnan: 'Coweta', douglasville: 'Douglas', conyers: 'Rockdale', covington: 'Newton', 'fayetteville': 'Fayette', 'peachtree city': 'Fayette', cumming: 'Forsyth', dallas: 'Paulding', hiram: 'Paulding', cartersville: 'Bartow', monroe: 'Walton', winder: 'Barrow', gainesville: 'Hall', carrollton: 'Carroll', villa: 'Carroll', 'villa rica': 'Carroll',
 };
 export const COUNTIES = [...new Set(Object.values(CITY_COUNTY))].sort();
+const COUNTY_NAMES = COUNTIES;
 export const countyFor = (city) => CITY_COUNTY[String(city || '').toLowerCase().trim()] || null;
 
+const MONEY = String.raw`\$?\s*[\d][\d,.]*\s*[kKmM]?\+?`;
+const titleCase = (t) => t.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase());
+
 export function parseDeal(text) {
-  const t = String(text || '').replace(/\r/g, '');
-  const addr = t.match(/^\s*(\d+[^\n,]*?),\s*([A-Za-z .'-]+?),\s*GA\s*(\d{5})/im);
-  const bb = t.match(/(\d+)\s*(?:beds?|bd|br)?\s*\/\s*(\d+(?:\.\d)?)\s*(?:baths?|ba)?/i);
-  const comps = [...t.matchAll(/(\d+[^\n\[\]]*?,\s*[A-Za-z .'-]+,\s*GA\s*\d{5})\]?(?:\([^)]*\))?\s*[—–-]+\s*([\d,]+)\s*sq\s*ft;?\s*sold for \$([\d,]+)/gi)]
+  const t = String(text || '').replace(/\r/g, '').replace(/ /g, ' ');
+  const addr = t.match(/^\s*(\d+[^\n,]*?),\s*([A-Za-z .'-]+?),?\s+GA,?\s*(\d{5})/im);
+  const bb = t.match(/(\d+)\s*(?:beds?|bd|br)?\s*[\/|]\s*(\d+(?:\.\d)?)\s*(?:baths?|ba)?/i);
+  const comps = [...t.matchAll(/(\d+[^\n\[\]]*?,\s*[A-Za-z .'-]+,?\s+GA\s*\d{5})\]?(?:\([^)]*\))?\s*[—–-]+\s*([\d,]+)\s*sq\s*ft;?\s*sold for \$([\d,]+)/gi)]
     .map((m) => ({ address: m[1].trim(), sqft: num(m[2]), price: money(m[3]) }));
   const lc = t.toLowerCase();
+  const flipWords = /fix\s*(?:&|and)\s*flip|\bflip\b|exit strateg/.test(lc);
   const kind = /teardown|tear down|total loss|new construction|fire[- ]damaged|land play|lot play/.test(lc) ? 'teardown'
-    : /rental|rent[- ]ready|1% rule|cash ?flow|tenant/.test(lc) ? 'rental' : 'flip';
+    : !flipWords && /rental|rent[- ]ready|1% rule|cash ?flow|tenant/.test(lc) ? 'rental' : 'flip';
   const rehab = /minimal work|light rehab|cosmetic|rent[- ]ready|move[- ]in/.test(lc) ? 'light'
-    : /full gut|gut job|heavy rehab|major|foundation|fire/.test(lc) ? 'heavy' : 'medium';
-  const closeOn = pick(/closing[^\n]*?on\s+(\d{1,2}\/\d{1,2}\/\d{2,4})/i, t);
-  const closeWithin = pick(/closing[^\n]*?within\s+([^\n.]+)/i, t);
+    : /full gut|gut job|heavy rehab|foundation|fire/.test(lc) ? 'heavy' : 'medium';
+  const priceRaw = pick(new RegExp(String.raw`(?:purchase\s+)?price:\s*(${MONEY})`, 'i'), t);
+  const arv = range(pick(new RegExp(String.raw`arv:\s*(${MONEY}(?:\s*[-–—]\s*${MONEY})?)`, 'i'), t));
+  const rentLine = pick(new RegExp(String.raw`\brents?\b[^\n$]*?(\$${MONEY}(?:\s*[-–—]\s*${MONEY})?)\s*(?:\/\s*mo|per month|a month)?`, 'i'), t);
+  const rent = range(rentLine);
+  const acres = pick(/(\d*\.?\d+)\s*acres?/i, t);
+  const lotSf = pick(/([\d,]+)\s*sf\s*lot/i, t);
+  const sqftRaw = pick(/(\d[\d,.]*)\s*sq\.?\s*\/?\s*ft(?!\s*lot)/i, t) || pick(/sq\.?\s*ft:?\s*(\d[\d,.]*)/i, t);
+  const countyLine = pick(/county:\s*([A-Za-z]+)/i, t);
+  const closeLine = (t.match(/^.*closing.*$/gim) || []).join(' ');
+  const attorney = pick(/closing\s+attorney:\s*([^\n–—]+?)\s*(?:[–—-]\s|$)/im, t) || pick(/closing\s*@\s*([^\n]+?)(?:\s+(?:on|within|by)\s|$)/im, t);
+  const city = addr ? titleCase(addr[2].trim()) : null;
   return {
-    address: addr ? addr[1].trim() : null, city: addr ? addr[2].trim() : null, zip: addr ? addr[3] : null,
-    county: addr ? countyFor(addr[2]) : null,
-    price: money(pick(/price:\s*\$?([\d,]+)/i, t)),
-    arv: money(pick(/arv:\s*\$?([\d,]+)/i, t)),
-    rent: money(pick(/rent:\s*\$?([\d,]+)/i, t)),
+    address: addr ? addr[1].trim() : null, city, zip: addr ? addr[3] : null,
+    county: countyLine ? (countyFor(countyLine) || COUNTY_NAMES.find((c) => c.toLowerCase() === countyLine.toLowerCase()) || titleCase(countyLine)) : countyFor(city),
+    price: money(priceRaw),
+    arv: arv.low, arvHigh: arv.high,
+    rent: rent.low, rentHigh: rent.high,
     beds: bb ? num(bb[1]) : null, baths: bb ? Number(bb[2]) : null,
-    sqft: num(pick(/([\d,]+)\s*sq\s*ft(?!\s*lot)/i, t)),
-    lotSqft: num(pick(/([\d,]+)\s*sf\s*lot/i, t)),
-    yearBuilt: num(pick(/(\d{4})\s*build/i, t)),
-    ddDays: num(pick(/(\d+)\s*days?\s*dd/i, t)) ?? (/\b0\s*day/i.test(t) ? 0 : null),
-    emd: money(pick(/\$([\d,]+)\s*earnest/i, t)),
-    attorney: pick(/closing\s*@\s*([^\n]+?)(?:\s+(?:on|within)\s|$)/im, t),
-    closeOn, closeWithin: closeWithin ? closeWithin.trim() : null,
+    sqft: num(sqftRaw),
+    lotSqft: lotSf ? num(lotSf) : acres ? Math.round(Number(acres) * 43560) : null,
+    yearBuilt: num(pick(/(?:year\s*buil[td]:?\s*)?(19\d{2}|20\d{2})\s*build|year\s*buil[td]:?\s*(\d{4})/i, t)) || num(pick(/year\s*buil[td]:?\s*(\d{4})/i, t)),
+    basement: /basement/i.test(t),
+    ddDays: num(pick(/(\d+)\s*days?\s*dd/i, t)) ?? (/\b(?:0|zero)\s*(?:day\s*)?dd\b|zero dd/i.test(t) ? 0 : null),
+    emd: money(pick(/(\$[\d,]+)\s*earnest/i, t)),
+    attorney: attorney ? attorney.trim() : null,
+    closeOn: pick(/(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)/, closeLine),
+    closeWithin: pick(/closing[^\n]*?within\s+([^\n.]+)/i, t)?.trim() || null,
     offersDue: pick(/offers are due by\s+([^\n.]+)/i, t),
+    urgent: /\basap\b|call me|scrambling/i.test(t),
+    vacant: /vacant/i.test(t),
+    cashOnly: /cash or hard money only/i.test(t),
     lockbox: /lockbox/i.test(t),
     kind, rehab, comps,
     notes: (t.match(/^(?:hey|hi|hello)[^\n]*\n+([\s\S]*?)\n\s*\n/i) || [])[1]?.trim().slice(0, 600) || null,
@@ -110,9 +152,9 @@ export function publicDeal(deal) {
   return {
     id: deal.id, status: deal.status, address: d.address, city: d.city, zip: d.zip, county: d.county,
     kind: d.kind, rehab: d.rehab, beds: d.beds, baths: d.baths, sqft: d.sqft, lotSqft: d.lotSqft, yearBuilt: d.yearBuilt,
-    arv: d.arv, rent: d.rent, price: u.investorPrice, rehabEstimate: u.rehabCost, investorView: u.investorView,
+    arv: d.arv, arvHigh: d.arvHigh || null, rent: d.rent, rentHigh: d.rentHigh || null, basement: !!d.basement, vacant: !!d.vacant, price: u.investorPrice, rehabEstimate: u.rehabCost, investorView: u.investorView,
     comps: (d.comps || []).map((c) => ({ address: c.address, sqft: c.sqft, price: c.price })),
-    terms: { emd: Math.max(5000, d.emd || 0), dueDiligenceDays: 0, attorney: d.attorney, closeOn: d.closeOn, closeWithin: d.closeWithin, lockbox: d.lockbox },
+    terms: { cashOnly: !!d.cashOnly, emd: Math.max(5000, d.emd || 0), dueDiligenceDays: 0, attorney: d.attorney, closeOn: d.closeOn, closeWithin: d.closeWithin, lockbox: d.lockbox },
     photos: deal.photos || null, respondBy: deal.respondBy || null, note: deal.publicNote || null,
   };
 }
