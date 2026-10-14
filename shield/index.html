@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://cdnjs.cloudflare.com; frame-src https://*.stripe.com; form-action 'self' https://*.stripe.com; base-uri 'self'; object-src 'none'">
+<title>Quickwell Shield: Is This Message a Scam? Free Checker</title>
+<meta name="description" content="Paste a text, email or link: see each scam warning sign in plain words, the exact words that raised it, and safe next steps. Checked on your device.">
+<link rel="canonical" href="https://quickwell.app/shield/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Quickwell Shield: is this message a scam?">
+<meta property="og:description" content="Paste any text, email, DM or link. See every warning sign in plain words and what to do next. Checked on your device; nothing is uploaded.">
+<meta property="og:url" content="https://quickwell.app/shield/">
+<meta property="og:image" content="https://quickwell.app/shield/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quickwell Shield: paste a message, see the scam warning signs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickwell Shield: is this message a scam?">
+<meta name="twitter:description" content="Paste any text, email or link. See every warning sign in plain words. Checked on your device.">
+<meta name="twitter:image" content="https://quickwell.app/shield/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Quickwell Shield","url":"https://quickwell.app/shield/","applicationCategory":"SecurityApplication","operatingSystem":"Any (runs in a web browser; installable)","browserRequirements":"Requires JavaScript","inLanguage":["en","es"],"description":"Check a text, email, DM, voicemail transcript or link for common scam warning signs, on your device. Every sign is explained with the words that raised it, plus safe next steps and a family code word kit.","publisher":{"@id":"https://quickwell.app/#org"},"offers":[{"@type":"Offer","name":"Free checks","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Shield Family monthly","price":"2.99","priceCurrency":"USD"},{"@type":"Offer","name":"Shield Family yearly","price":"24.99","priceCurrency":"USD"}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to the checker</a>
+<div class="wrap">
+  <header class="app">
+    <a class="brand" href="/" aria-label="Quickwell home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l7.5 3v6c0 4.6-3.2 8.6-7.5 10-4.3-1.4-7.5-5.4-7.5-10v-6z" fill="currentColor"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6" stroke="var(--accent-ink)" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Quickwell Shield</span>
+    </a>
+    <button type="button" class="ghost" id="langBtn" lang="es">Español</button>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <span class="chip" data-i18n="chip">Free · runs on your device</span>
+      <h1 data-i18n="h1">Is this message a scam?</h1>
+      <p class="lede" data-i18n="lede">Paste a text, email, DM, voicemail transcript or link. See the warning signs in plain words, the exact words that raised them, and what to do next.</p>
+      <p class="lock"><span aria-hidden="true">🔒</span> <span data-i18n="lock">Checked on this device. Nothing you paste is uploaded, and we never open the links.</span></p>
+      <p class="pro-on hidden" id="proOn" role="status"><span class="chip ok" data-i18n="proOn">Shield Family is on</span> <button type="button" class="link" id="manageBtn" data-i18n="manage">Manage plan</button></p>
+    </section>
+
+    <section class="card" id="inputCard" aria-labelledby="inLabel">
+      <label id="inLabel" for="msgBox" class="lbl" data-i18n="inLabel">Paste the message or link</label>
+      <textarea id="msgBox" rows="6" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="inHint"></textarea>
+      <p class="small muted" id="inHint" data-i18n="inHint">Tip: long-press the message, choose Copy, then paste here.</p>
+      <button type="button" id="checkBtn" data-i18n="checkBtn">Check it</button>
+      <div class="row two">
+        <button type="button" class="secondary" id="sampleBtn" data-i18n="sampleBtn">Try an example</button>
+        <button type="button" class="secondary" id="clearBtn" data-i18n="clearBtn">Clear</button>
+      </div>
+      <p class="small warn hidden" id="inMsg" role="alert"></p>
+    </section>
+
+    <section id="results" class="hidden" aria-live="polite" aria-labelledby="levelText">
+      <div class="card level" id="levelCard">
+        <p class="small muted" data-i18n="resTitle">Result</p>
+        <h2 id="levelText" tabindex="-1"></h2>
+        <p id="levelSub"></p>
+        <p class="offline small" id="offlineNote"><span aria-hidden="true">🔒</span> <b data-i18n="offline">Nothing left your device</b> · <span data-i18n="offlineText">This check ran in your browser.</span></p>
+      </div>
+      <section class="card" id="signsCard" aria-labelledby="signsTitle">
+        <h2 id="signsTitle"></h2>
+        <ul class="signs" id="signs"></ul>
+      </section>
+      <section class="card" id="msgCard" aria-labelledby="msgTitle">
+        <h2 id="msgTitle" data-i18n="msgTitle">Your message, with the warning signs marked</h2>
+        <div class="marked" id="marked"></div>
+      </section>
+      <section class="card hidden" id="linksCard" aria-labelledby="linksTitle">
+        <h2 id="linksTitle" data-i18n="linksTitle">Links in this message</h2>
+        <ul class="links" id="links"></ul>
+        <p class="small muted" data-i18n="linkNote">We read links as text. We never open them.</p>
+      </section>
+      <section class="card" id="stepsCard" aria-labelledby="stepsTitle">
+        <h2 id="stepsTitle" data-i18n="stepsTitle">What to do next</h2>
+        <ol class="steps" id="steps"></ol>
+      </section>
+      <section class="card" id="whatCard" aria-labelledby="whatTitle">
+        <details id="whatDetails">
+          <summary><h2 id="whatTitle" data-i18n="whatTitle">What we checked</h2></summary>
+          <p class="small" id="whatLede"></p>
+          <div id="what"></div>
+          <p class="small muted" data-i18n="rulesNote">The rules are plain patterns written by people.</p>
+        </details>
+      </section>
+    </section>
+
+    <section class="card plan" id="planCard" aria-labelledby="planTitle">
+      <h2 id="planTitle" data-i18n="planTitle">Shield Family</h2>
+      <p data-i18n="planLede">Checks and explanations are free, always. Shield Family helps the people you love stay ahead:</p>
+      <ul class="ticks small">
+        <li data-i18n="plan1">Family code word kit</li>
+        <li data-i18n="plan2">Scam alert cards</li>
+        <li data-i18n="plan3">History of your checks, kept on this device</li>
+        <li data-i18n="plan4">Every week’s scam pattern notes</li>
+      </ul>
+      <div class="plans">
+        <button type="button" class="planbtn" data-buy="month"><span><b data-i18n="month">Monthly</b><small data-i18n="monthSub">Cancel anytime</small></span><span class="price">$2.99<small>/mo</small></span></button>
+        <button type="button" class="planbtn best" data-buy="year"><span><b data-i18n="year">Yearly · save 30%</b><small data-i18n="yearSub">About $2.08 a month</small></span><span class="price">$24.99<small>/yr</small></span></button>
+      </div>
+      <p class="small muted" data-i18n="localPrice">Secure checkout by Stripe. Where available, checkout shows the price in your local currency.</p>
+      <p class="small"><a href="/plus/?ref=shield" data-i18n="plusLink">Also included in Quickwell Plus</a></p>
+      <p class="small" id="buyMsg" role="status"></p>
+    </section>
+
+    <section class="card" id="kitCard" aria-labelledby="kitTitle">
+      <h2 id="kitTitle" data-i18n="kitTitle">Family code word kit</h2>
+      <p data-i18n="kitLede">Agree on a word only your family knows.</p>
+      <div class="locked-box" id="kitLocked">
+        <p><b data-i18n="lockedKit">Part of Shield Family</b></p>
+        <button type="button" class="secondary" data-unlock data-i18n="unlock">See plans</button>
+      </div>
+      <div id="kitBody" class="hidden">
+        <label for="kitWord" class="lbl" data-i18n="kitPick">Your family code word</label>
+        <div class="row two">
+          <input type="text" id="kitWord" maxlength="40" autocomplete="off" spellcheck="false">
+          <button type="button" class="secondary" id="kitSuggest" data-i18n="kitSuggest">Suggest a word</button>
+        </div>
+        <p class="small muted" data-i18n="kitTips">Pick something easy to remember but impossible to guess.</p>
+        <label class="check small"><input type="checkbox" id="kitBlank" checked> <span data-i18n="kitBlank">Leave the word off the printed cards (write it in by hand)</span></label>
+        <label class="check small"><input type="checkbox" id="kitRemember"> <span data-i18n="kitRemember">Remember the word on this device</span></label>
+        <h3 class="sub" data-i18n="kitCards">Cards</h3>
+        <div id="cards" class="cards">
+          <div class="wallet"><b data-i18n="walletTitle">Family code word</b><p data-i18n="walletLine">If someone calls saying they’re family and asks for money or help: ask for our word.</p><p class="wordline"><span data-i18n="walletWord">Our word:</span> <span class="word" id="walletWordOut"></span></p></div>
+          <div class="fridge"><b data-i18n="fridgeTitle">Before you send money</b><ol><li data-i18n="fridge1">Hang up. Call them back on the number you already have.</li><li data-i18n="fridge2">Ask for our family code word.</li><li data-i18n="fridge3">Never pay with gift cards, crypto or wire because someone is rushing you.</li></ol><p class="wordline"><span data-i18n="walletWord">Our word:</span> <span class="word" id="fridgeWordOut"></span></p></div>
+        </div>
+        <button type="button" id="kitPrint" data-i18n="kitPrint">Print cards</button>
+        <h3 class="sub" data-i18n="scriptTitle">3-line call script</h3>
+        <ol class="script"><li data-i18n="script1"></li><li data-i18n="script2"></li><li data-i18n="script3"></li></ol>
+        <button type="button" class="secondary" id="scriptCopy" data-i18n="scriptCopy">Copy script</button>
+      </div>
+    </section>
+
+    <section class="card" id="alertCard" aria-labelledby="alertTitle">
+      <h2 id="alertTitle" data-i18n="alertTitle">Warn your family</h2>
+      <p data-i18n="alertLede">Pick a scam pattern and send a short warning.</p>
+      <div class="locked-box" id="alertLocked">
+        <p><b data-i18n="lockedKit">Part of Shield Family</b></p>
+        <button type="button" class="secondary" data-unlock data-i18n="unlock">See plans</button>
+      </div>
+      <div id="alertBody" class="hidden">
+        <label for="alertPick" class="lbl" data-i18n="alertPick">Scam pattern</label>
+        <select id="alertPick"></select>
+        <canvas id="alertCanvas" class="share" width="1080" height="1080" aria-hidden="true"></canvas>
+        <p class="small" id="alertText"></p>
+        <div class="row three">
+          <button type="button" id="alertShare" data-i18n="alertShare">Share warning</button>
+          <button type="button" class="secondary" id="alertCopy" data-i18n="alertCopy">Copy text</button>
+          <button type="button" class="secondary" id="alertPng" data-i18n="alertPng">Save image</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="histCard" aria-labelledby="histTitle">
+      <h2 id="histTitle" data-i18n="histTitle">Your checks on this device</h2>
+      <p class="small muted hidden" id="histLocked" data-i18n="histLocked">Shield Family keeps a history of your checks on this device.</p>
+      <div id="histBody" class="hidden">
+        <ul class="hist" id="hist"></ul>
+        <button type="button" class="secondary" id="histClear" data-i18n="histClear">Delete history</button>
+      </div>
+    </section>
+
+    <section class="card" id="tipsCard" aria-labelledby="tipsTitle">
+      <h2 id="tipsTitle" data-i18n="tipsTitle">Scam pattern notes</h2>
+      <p class="small muted" data-i18n="tipsLede">Short, dated notes on patterns our rules look for.</p>
+      <div id="tips"></div>
+      <p class="small muted" id="tipsMore" data-i18n="tipsMore">Shield Family shows every week’s notes.</p>
+    </section>
+
+    <section class="card" id="privacy" aria-labelledby="privTitle">
+      <h2 id="privTitle" data-i18n="privTitle">Privacy</h2>
+      <ul class="small">
+        <li data-i18n="priv1">Messages and links are checked by this page, in your browser.</li>
+        <li data-i18n="priv2">We never ask for passwords, codes or card numbers.</li>
+        <li data-i18n="priv3">With Shield Family, your check history stays in this browser only.</li>
+        <li data-i18n="priv4">The page talks to our payment server only to check or buy a plan.</li>
+      </ul>
+      <button type="button" class="secondary" id="privClear" data-i18n="privClear">Delete my saved data on this device</button>
+      <p class="small" id="clearMsg" role="status"></p>
+    </section>
+  </main>
+
+  <footer class="foot small muted">
+    <p data-i18n="disclaimer">Quickwell Shield checks messages with plain rules and can be wrong, in both directions. “No common warning signs found” never means safe. Not legal or financial advice. Not affiliated with any company or agency named on this page.</p>
+    <!-- xlinks:shield -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/saver/?ref=xlink-shield"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-shield"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/footsure/?ref=xlink-shield"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-shield"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-shield"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-shield"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-shield"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+    <p><a href="/privacy.html" data-i18n="privacyLink">Privacy policy</a> · <a href="/terms.html" data-i18n="termsLink">Terms</a> · Quickwell</p>
+  </footer>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/js/pro.js"></script>
+<script type="module" src="js/app.mjs"></script>
+</body>
+</html>

@@ -92,6 +92,7 @@
       "covers": [
         "saver",
         "pilot",
+        "shield",
         "footsure",
         "brain-pass",
         "spare-key",
@@ -130,6 +131,16 @@
       "plans": [
         {
           "id": "pilot"
+        }
+      ]
+    },
+    {
+      "id": "shield",
+      "name": "Quickwell Shield",
+      "tagline": "Paste any text, email, DM or link: see each scam warning sign in plain words, the exact words that raised it, and safe next steps. Checked on your device; nothing is uploaded.",
+      "plans": [
+        {
+          "id": "family"
         }
       ]
     }

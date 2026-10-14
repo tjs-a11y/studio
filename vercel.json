@@ -85,5 +85,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/shield/share-target",
+      "destination": "/api/share-target"
+    }
   ]
 }

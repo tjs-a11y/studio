@@ -14,6 +14,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const TOOLS = [
   { id: 'saver', name: 'Quickwell Saver', text: 'Find and stop the money leaks in your bank export', page: 'saver/index.html' },
   { id: 'pilot', name: 'Quickwell Pilot', text: 'What every letter and bill needs from you, by when', page: 'pilot/index.html' },
+  { id: 'shield', name: 'Quickwell Shield', text: 'Is this message a scam? See the warning signs', page: 'shield/index.html' },
   { id: 'footsure', name: 'Footsure', text: 'The CDC\'s strength and balance tests at home', page: 'footsure/index.html' },
   { id: 'play', name: 'Quickwell Play', text: 'Three free daily brain games', page: 'play/index.html' },
   { id: 'spare-key', name: 'Spare Key', text: 'A lost-phone plan for your accounts', page: 'spare-key/index.html' },

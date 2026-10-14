@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs play/test/*.test.mjs footsure/tests/*.test.mjs commodities/test/*.test.mjs saver/tests/*.test.mjs pilot/tests/*.test.mjs"
+    "test": "node --test test/*.test.mjs play/test/*.test.mjs footsure/tests/*.test.mjs commodities/test/*.test.mjs saver/tests/*.test.mjs pilot/tests/*.test.mjs shield/tests/*.test.mjs"
   },
   "dependencies": {
     "stripe": "^23.0.0"

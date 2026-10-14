@@ -1,0 +1,17 @@
+{
+  "name": "Quickwell Shield",
+  "short_name": "Shield",
+  "description": "Check any text, email, DM or link for common scam warning signs, on your device. Nothing is uploaded.",
+  "start_url": "/shield/?ref=pwa",
+  "scope": "/shield/",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#1f6b52",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }],
+  "share_target": {
+    "action": "/shield/share-target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  }
+}
