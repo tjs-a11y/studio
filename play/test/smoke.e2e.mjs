@@ -19,6 +19,7 @@ const SHOTS = process.env.SHOTS || '';
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.ico': 'image/x-icon', '.xml': 'application/xml', '.txt': 'text/plain' };
 const srv = http.createServer(async (req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  if (p === '/_vercel/insights/script.js') { res.writeHead(200, { 'content-type': 'text/javascript' }); return res.end(''); } // served by Vercel in production
   if (p.startsWith('/api/')) { res.writeHead(404, { 'content-type': 'application/json' }); return res.end('{"error":"Unknown tool."}'); }
   let f = join(root, p);
   try { if ((await stat(f)).isDirectory()) f = join(f, 'index.html'); const b = await readFile(f); res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream' }); res.end(b); }
@@ -38,7 +39,8 @@ const VIEWPORTS = [
 ];
 
 function watch(page, errs) {
-  page.on('console', (m) => { if (m.type() === 'error' && !/\/api\//.test(m.location().url || '') && !/\/api\//.test(m.text())) errs.push(m.text()); });
+  // The page-visit counter (/js/va.js, /_vercel/insights/) is not cached for offline use, so it fails quietly offline.
+  page.on('console', (m) => { const u = m.location().url || ''; if (m.type() === 'error' && !/\/api\//.test(u) && !/\/api\//.test(m.text()) && !/\/js\/va\.js|\/_vercel\/insights\//.test(u)) errs.push(m.text()); });
   page.on('pageerror', (e) => errs.push('pageerror: ' + e.message));
   page.on('dialog', (d) => d.accept());
 }

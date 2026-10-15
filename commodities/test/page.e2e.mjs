@@ -30,13 +30,18 @@ let dataDir = null; // null = no data published yet
 
 const server = http.createServer(async (rq, rs) => {
   let p = decodeURIComponent(new URL(rq.url, 'http://x').pathname);
+  if (p === '/_vercel/insights/script.js') { rs.writeHead(200, { 'content-type': 'text/javascript' }); return rs.end(''); } // served by Vercel in production
   if (p.endsWith('/')) p += 'index.html';
   let f;
   if (p.startsWith('/commodities/data/')) f = dataDir ? path.join(dataDir, p.slice('/commodities/data/'.length)) : null;
   else if (p.startsWith('/commodities/')) f = path.join(TOOL, p.slice('/commodities/'.length));
   else f = path.join(STUDIO, p);
   if (!f || p.startsWith('/api/') || p.includes('..')) { rs.writeHead(404, { 'content-type': 'text/plain' }); return rs.end('not found'); }
-  try { const b = await readFile(f); rs.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', ...(CSP ? { 'content-security-policy': CSP } : {}) }); rs.end(b); }
+  try {
+    let b = await readFile(f);
+    // The daily data run renders the real brief into the page; blank it so the test always sees the SAMPLE brief.
+    if (dataDir && p === '/commodities/brief/index.html') b = String(b).replace(/(<!-- brief:start -->)[\s\S]*?(<!-- brief:end -->)/, '$1$2');
+    rs.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', ...(CSP ? { 'content-security-policy': CSP } : {}) }); rs.end(b); }
   catch { rs.writeHead(404, { 'content-type': 'text/plain' }); rs.end('not found'); }
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));

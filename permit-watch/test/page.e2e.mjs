@@ -21,6 +21,7 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.json': 'application/json'
 
 const server = http.createServer(async (rq, rs) => {
   let p = decodeURIComponent(new URL(rq.url, 'http://x').pathname);
+  if (p === '/_vercel/insights/script.js') { rs.writeHead(200, { 'content-type': 'text/javascript' }); return rs.end(''); } // served by Vercel in production
   if (p.endsWith('/')) p += 'index.html';
   const f = path.join(ROOT, p);
   if (!f.startsWith(ROOT)) { rs.writeHead(403); return rs.end(); }

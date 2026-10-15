@@ -20,6 +20,7 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.json': 'application/json'
 
 const server = http.createServer(async (rq, rs) => {
   let p = decodeURIComponent(new URL(rq.url, 'http://x').pathname);
+  if (p === '/_vercel/insights/script.js') { rs.writeHead(200, { 'content-type': 'text/javascript' }); return rs.end(''); } // served by Vercel in production
   if (p.endsWith('/')) p += 'index.html';
   const f = path.join(ROOT, p);
   if (!f.startsWith(ROOT) || p.startsWith('/api/')) { rs.writeHead(404, { 'content-type': 'text/plain' }); return rs.end('not found'); }
@@ -56,7 +57,7 @@ async function open(opts, label) {
     const u = r.url();
     if (u.startsWith('data:') || u.startsWith('blob:')) return;
     const x = new URL(u);
-    if (x.origin !== ORIGIN || !(x.pathname.startsWith('/spare-key/') || x.pathname === '/js/pro.js' || x.pathname.startsWith('/api/'))) badRequests.push(`${label}: ${u}`);
+    if (x.origin !== ORIGIN || !(x.pathname.startsWith('/spare-key/') || x.pathname === '/js/pro.js' || x.pathname === '/js/va.js' || x.pathname === '/_vercel/insights/script.js' || x.pathname.startsWith('/api/'))) badRequests.push(`${label}: ${u}`);
   });
   return { ctx, page };
 }
@@ -287,7 +288,7 @@ try {
     await d.ctx.close();
   });
 
-  assert.deepEqual(badRequests, [], 'only /spare-key/, /js/pro.js and /api/* were requested');
+  assert.deepEqual(badRequests, [], 'only /spare-key/, /js/pro.js, the same-origin page-visit counter and /api/* were requested');
   assert.deepEqual(errors, [], 'no console errors beyond the known /api responses');
   console.log(`\n${passed} passed`);
 } finally {

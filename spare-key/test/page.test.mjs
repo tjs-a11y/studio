@@ -43,7 +43,7 @@ test('strict CSP: no outside scripts, styles, fonts or connections; checkout onl
   assert.deepEqual(d['script-src'], ["'self'", "'unsafe-inline'"]);
   assert.deepEqual(d['object-src'], ["'none'"]); assert.deepEqual(d['frame-src'], ["'none'"]);
   const srcs = [...html.matchAll(/<script[^>]*\ssrc="([^"]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(srcs, ['/js/pro.js']);
+  assert.deepEqual(srcs, ['/js/va.js', '/_vercel/insights/script.js', '/js/pro.js']); // same-origin page-visit counter (privacy page) + billing
   assert.ok(!/<link[^>]+rel="stylesheet"/.test(html), 'no outside stylesheets');
   const code = [...html.matchAll(/<script id="sk-(core|ui)">([\s\S]*?)<\/script>/g)].map((m) => m[2]).join('\n');
   const calls = [...code.matchAll(/fetch\(\s*(['"`])([^'"`]+)\1/g)].map((m) => m[2]);
