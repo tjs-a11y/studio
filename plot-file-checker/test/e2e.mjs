@@ -4,6 +4,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import os from 'node:os';
@@ -22,6 +23,7 @@ try { ({ chromium } = require('playwright')); } catch {
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png' };
 const server = http.createServer(async (req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  if (p === '/_vercel/insights/script.js') { res.writeHead(200, { 'content-type': 'text/javascript' }); return res.end(''); } // served by Vercel in production
   if (p.endsWith('/')) p += 'index.html';
   const file = path.join(ROOT, path.normalize(p));
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
@@ -101,6 +103,42 @@ await step('leave out plots with errors', async () => {
   await page.check('#excludeErr');
   const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#dlGeo')]);
   assert.equal(JSON.parse(readFileSync(await dl.path(), 'utf8')).features.length, 4);
+  await page.uncheck('#excludeErr');
+});
+
+await step('buyer summary: one printed page, fingerprint matches the downloaded file', async () => {
+  await page.evaluate(() => { window.__printed = 0; window.print = () => { window.__printed++; }; });
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#dlGeo')]);
+  const bytes = readFileSync(await dl.path());
+  const want = createHash('sha256').update(bytes).digest('hex');
+  await page.click('#dlSheet');
+  assert.equal(await page.evaluate(() => window.__printed), 1);
+  const sheet = await page.textContent('#sheet');
+  assert.match(sheet, /EUDR plot file check: summary/);
+  assert.match(sheet, /SAMPLE: fictional data/);
+  assert.match(sheet, /4 of 8 plots still need fixing/);
+  assert.match(sheet, /Boundary crosses itself/);
+  assert.match(sheet, /not a deforestation or legality check/);
+  assert.equal(await page.textContent('#sheetFp'), want, 'fingerprint = SHA-256 of the downloaded file');
+  assert.equal(await page.locator('#sheet .shmap svg').count(), 1);
+  await page.emulateMedia({ media: 'print' });
+  assert.equal(await page.isVisible('#sheet'), true, 'sheet shows when printing');
+  assert.equal(await page.isVisible('#drop'), false, 'the tool page is hidden when printing');
+  await page.pdf({ path: path.join(SHOTS, 'eudr-buyer-summary.pdf'), format: 'A4' });
+  await page.emulateMedia({ media: 'screen' });
+  assert.equal(await page.isVisible('#sheet'), false, 'sheet hidden on screen');
+  await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+  assert.equal(await page.evaluate(() => document.body.classList.contains('print-sheet')), false);
+});
+
+await step('buyer summary: fingerprint follows "leave out plots with errors"', async () => {
+  await page.check('#excludeErr');
+  const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#dlGeo')]);
+  const want = createHash('sha256').update(readFileSync(await dl.path())).digest('hex');
+  await page.waitForTimeout(200);
+  await page.click('#dlSheet');
+  assert.equal(await page.textContent('#sheetFp'), want);
+  assert.match(await page.textContent('#sheet'), /plots that still have errors left out/);
   await page.uncheck('#excludeErr');
 });
 
@@ -219,6 +257,12 @@ for (const scheme of ['light', 'dark']) {
     await shot(M.page, `phone-${scheme}`);
     await M.page.evaluate(() => window.scrollTo(0, 0));
     await M.page.screenshot({ path: path.join(SHOTS, `eudr-phone-${scheme}-top.png`) });
+  });
+  await step(`phone ${scheme}: buyer summary in French`, async () => {
+    await M.page.evaluate(() => { window.print = () => {}; });
+    await M.page.click('#dlSheet');
+    assert.match(await M.page.textContent('#sheet'), /Contrôle de fichier de parcelles EUDR : résumé/);
+    assert.match(await M.page.textContent('#sheetFp'), /^[0-9a-f]{64}$/);
   });
   await step(`phone ${scheme}: no console errors`, async () => { assert.deepEqual(M.errors, []); });
   await M.ctx.close();

@@ -60,6 +60,17 @@
   footer { margin-top:36px; font-size:.88rem; color:var(--muted); } a { color:var(--accent); }
   [hidden] { display:none !important; }
   html[lang="fr"] .faq-en, html:not([lang="fr"]) .faq-fr { display:none; }
+  /* one-page summary for the buyer: printed only */
+  #sheet { display:none; }
+  @media print {
+    body.print-sheet > *:not(#sheet) { display:none !important; }
+    body.print-sheet #sheet { display:block !important; color:#000; background:#fff; font-size:10pt; line-height:1.35; }
+    @page { margin:14mm; }
+  }
+  #sheet h1 { font-size:17pt; margin:0 0 4px; } #sheet h2 { font-size:12pt; margin:14px 0 4px; } #sheet .sample { border:2px solid #000; padding:6px 8px; font-weight:700; margin:8px 0; }
+  #sheet table { width:100%; border-collapse:collapse; font-size:10pt; } #sheet td, #sheet th { border:1px solid #999; padding:3px 6px; text-align:left; vertical-align:top; position:static; background:none; color:#000; } #sheet th { width:45%; font-weight:600; }
+  #sheet .verdict { font-size:12pt; margin:10px 0 4px; } #sheet ul { margin:4px 0 0; padding-left:18px; } #sheet .fp { font:9.5pt/1.3 ui-monospace,Menlo,Consolas,monospace; overflow-wrap:anywhere; }
+  #sheet .shmap svg { width:100%; height:200px; } #sheet .foot { margin-top:14px; font-size:9pt; color:#333; border-top:1px solid #999; padding-top:6px; }
 </style>
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -122,6 +133,8 @@
         <button type="button" class="ghost small" id="cpGeo" data-i18n="cpGeo"></button>
         <button type="button" class="ghost small" id="cpRep" data-i18n="cpRep"></button>
       </div>
+      <div class="row" style="margin-top:10px"><button type="button" class="ghost" id="dlSheet" data-i18n="dlSheet"></button></div>
+      <p class="note" style="margin:6px 0 0" data-i18n="sheetNote"></p>
       <p class="note" id="dlMsg" role="status" aria-live="polite"></p>
       <pre class="out" id="copyOut" hidden tabindex="0"></pre>
     </div>
@@ -161,7 +174,7 @@
       <details><summary>Which file formats can I check?</summary><p>GeoJSON, KML, CSV (latitude and longitude columns, one row per corner, a WKT column or a KoBo/ODK geoshape column) and WKT text. Shapefiles (.zip or .shp), KMZ and Excel files are not read: export them to GeoJSON, KML or CSV first.</p></details>
       <details><summary>If my file passes, will the EU Information System accept it?</summary><p>Not guaranteed. The checks follow the EU Information System's published GeoJSON rules, but rules change and the system checks things this tool cannot see. Confirm with the official EU guidance and your buyer.</p></details>
       <details><summary>Is it free?</summary><p>Yes. Checking and fixing files is free. A paid version for bulk files is planned; you can join the waitlist above.</p></details>
-      <p class="note" style="margin-bottom:0">Guides: <a href="/guides/eudr-geolocation-geojson/">What the EUDR GeoJSON file must contain</a> · <a href="/guides/eudr-plot-file-rejected/">Common reasons plot files get rejected</a></p>
+      <p class="note" style="margin-bottom:0">Guides: <a href="/guides/eudr-geolocation-geojson/">What the EUDR GeoJSON file must contain</a> · <a href="/guides/eudr-plot-file-rejected/">Common reasons plot files get rejected</a> · <a href="/guides/eudr-simplified-declaration-postal-address/">Simplified declaration: postal address or GeoJSON?</a></p>
     </div>
     <div class="faq-fr" lang="fr">
       <h2>Questions fréquentes</h2>
@@ -836,6 +849,16 @@
       lgOk: 'OK', lgFixed: 'Fixed', lgCheck: 'Check', lgErr: 'Fix needed',
       needTitle: 'Still needs your attention', needNone: 'Nothing left to fix.', fixedTitle: 'Fixed automatically', fixedNone: 'No changes were needed.',
       dlTitle: 'Download', dlGeo: 'Download fixed GeoJSON', dlCsv: 'Download issue report (CSV)', cpGeo: 'Copy fixed GeoJSON', cpRep: 'Copy report',
+      dlSheet: 'Print a summary for your buyer',
+      sheetNote: 'One page for your records or your EU buyer: the result, the counts, what was fixed and a fingerprint (SHA-256) of the fixed file, so anyone can confirm they have the same file. Choose "Save as PDF" in the print window to keep a copy.',
+      shTitle: 'EUDR plot file check: summary', shFile: 'File', shChecked: 'Checked on', shSample: 'SAMPLE: fictional data, for demonstration only.',
+      shCountries: 'Producer countries in the file', shNoCountry: 'none given', shPoints: 'Plots mapped as points', shPolys: 'Plots mapped as polygons',
+      shOpen: 'Still to fix or double-check', shFixed: 'Fixed automatically', shPlotsN: '{n} plot(s)', shWholeFile: 'whole file',
+      shFp: 'Fingerprint of the fixed GeoJSON (SHA-256)', shFpExcl: 'This fingerprint is for the fixed file with the plots that still have errors left out.',
+      shFpHow: 'To confirm that a file matches this summary, compute its SHA-256. Windows: certutil -hashfile "file.geojson" SHA256. Mac or Linux: shasum -a 256 file.geojson. The two values must be identical.',
+      shFpNone: 'Fingerprint not available in this browser.', shFpName: 'Fixed file name',
+      shRules: 'Checked against our reading of the EU Information System GeoJSON guidance and validation rules, last reviewed October 2026.',
+      shFoot: 'This is a check of the file format only. It is not a deforestation or legality check, it does not guarantee that the EU system or a buyer will accept the file, and it is not legal advice. Not affiliated with or endorsed by the European Union. Made with the free EUDR Plot File Checker: quickwell.app/plot-file-checker/',
       dlNote: 'The fixed file is a GeoJSON FeatureCollection in WGS 84, longitude first, with 6 decimals. Plots that still have errors are kept unchanged unless you leave them out. Fix them before you submit.',
       excludeErr: 'Leave out plots that still have errors', dlDone: 'Downloaded {n} plot(s).', dlOmitted: '{n} plot(s) with unreadable coordinates were left out.', dlExcluded: '{n} plot(s) with errors were left out.',
       copied: 'Copied to the clipboard.', copyFail: 'Copy did not work. The text is shown below: select it and copy.',
@@ -872,6 +895,16 @@
       lgOk: 'OK', lgFixed: 'Corrigée', lgCheck: 'À vérifier', lgErr: 'À corriger',
       needTitle: 'Reste à traiter', needNone: 'Plus rien à corriger.', fixedTitle: 'Corrigé automatiquement', fixedNone: 'Aucune modification nécessaire.',
       dlTitle: 'Télécharger', dlGeo: 'Télécharger le GeoJSON corrigé', dlCsv: 'Télécharger le rapport (CSV)', cpGeo: 'Copier le GeoJSON corrigé', cpRep: 'Copier le rapport',
+      dlSheet: 'Imprimer un résumé pour votre acheteur',
+      sheetNote: 'Une page pour vos archives ou votre acheteur européen : le résultat, les chiffres, les corrections et une empreinte (SHA-256) du fichier corrigé, pour que chacun puisse vérifier qu’il a bien le même fichier. Choisissez « Enregistrer au format PDF » dans la fenêtre d’impression pour en garder une copie.',
+      shTitle: 'Contrôle de fichier de parcelles EUDR : résumé', shFile: 'Fichier', shChecked: 'Contrôlé le', shSample: 'EXEMPLE : données fictives, à titre de démonstration uniquement.',
+      shCountries: 'Pays des producteurs dans le fichier', shNoCountry: 'non indiqué', shPoints: 'Parcelles relevées en point', shPolys: 'Parcelles relevées en polygone',
+      shOpen: 'Reste à corriger ou à revérifier', shFixed: 'Corrigé automatiquement', shPlotsN: '{n} parcelle(s)', shWholeFile: 'fichier entier',
+      shFp: 'Empreinte du GeoJSON corrigé (SHA-256)', shFpExcl: 'Cette empreinte correspond au fichier corrigé sans les parcelles encore en erreur.',
+      shFpHow: 'Pour vérifier qu’un fichier correspond à ce résumé, calculez son SHA-256. Windows : certutil -hashfile "fichier.geojson" SHA256. Mac ou Linux : shasum -a 256 fichier.geojson. Les deux valeurs doivent être identiques.',
+      shFpNone: 'Empreinte non disponible dans ce navigateur.', shFpName: 'Nom du fichier corrigé',
+      shRules: 'Contrôlé selon notre lecture des consignes GeoJSON et des règles de validation du système d’information de l’UE, revues en octobre 2026.',
+      shFoot: 'Ce contrôle porte uniquement sur le format du fichier. Ce n’est pas un contrôle de déforestation ou de légalité, il ne garantit pas que le système de l’UE ou un acheteur acceptera le fichier, et ce n’est pas un avis juridique. Outil non affilié à l’Union européenne et non approuvé par elle. Réalisé avec le vérificateur gratuit de fichiers de parcelles EUDR : quickwell.app/plot-file-checker/',
       dlNote: 'Le fichier corrigé est une FeatureCollection GeoJSON en WGS 84, longitude d’abord, avec 6 décimales. Les parcelles encore en erreur sont conservées telles quelles, sauf si vous les excluez. Corrigez-les avant le dépôt.',
       excludeErr: 'Exclure les parcelles encore en erreur', dlDone: '{n} parcelle(s) téléchargée(s).', dlOmitted: '{n} parcelle(s) aux coordonnées illisibles ont été exclues.', dlExcluded: '{n} parcelle(s) en erreur ont été exclues.',
       copied: 'Copié dans le presse-papiers.', copyFail: 'La copie n’a pas fonctionné. Le texte s’affiche ci-dessous : sélectionnez-le et copiez-le.',
@@ -1123,6 +1156,7 @@
     renderGroups(res.fixes, $('fixed'), 'fixedNone');
     renderMap(res.plots, st);
     renderTable(res.plots, st);
+    updateFp();
   }
   var STCLS = { ok: 'st-ok', fixed: 'st-fixed', check: 'st-check', err: 'st-err' }, STKEY = { ok: 'lgOk', fixed: 'lgFixed', check: 'lgCheck', err: 'lgErr' };
   function renderTable(plots, st) {
@@ -1212,6 +1246,65 @@
   $('dlCsv').addEventListener('click', function () { download(reportCSV(), baseName() + '-report.csv', 'text/csv;charset=utf-8'); });
   $('cpGeo').addEventListener('click', function () { copy(fixedText().text); });
   $('cpRep').addEventListener('click', function () { copy(reportText()); });
+
+  // ---------- one-page summary for the buyer (print / save as PDF) ----------
+  // The fingerprint is the SHA-256 of exactly the bytes "Download fixed GeoJSON" saves (same text, UTF-8),
+  // worked out ahead of time so the print window opens straight from the click (some phones block it otherwise).
+  function sha256(text) {
+    try {
+      if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve(null);
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (b) { return Array.from(new Uint8Array(b)).map(function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }, function () { return null; });
+    } catch (e) { return Promise.resolve(null); }
+  }
+  function updateFp() {
+    if (!STATE || !STATE.res || !STATE.res.plots.length) return;
+    var st = STATE, ex = $('excludeErr').checked;
+    st.fp = null;
+    sha256(fixedText().text).then(function (h) { if (STATE === st && $('excludeErr').checked === ex) st.fp = { exclude: ex, hash: h }; });
+  }
+  $('excludeErr').addEventListener('change', updateFp);
+  function plainText(html) { var d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
+  function sheetList(list) {
+    var gs = group(list);
+    if (!gs.length) return '<p>' + esc(t(list === STATE.res.fixes ? 'fixedNone' : 'needNone')) + '</p>';
+    return '<ul>' + gs.map(function (gr) {
+      var m = msg(gr.code), plots = new Set(gr.items.filter(function (x) { return x.plot >= 0; }).map(function (x) { return x.plot; })).size;
+      var head = plainText(fill(m.n, fmtParams((gr.items.filter(function (x) { return x.plot < 0; })[0] || gr.items[0]).p)));
+      return '<li>[' + esc(t('sev' + sevOf(gr.code))) + '] ' + esc(head) + ' — ' + esc(plots ? t('shPlotsN', { n: plots }) : t('shWholeFile')) + '</li>';
+    }).join('') + '</ul>';
+  }
+  function sheetHtml() {
+    var res = STATE.res, n = res.plots.length, st = statuses();
+    var count = function (k) { return st.filter(function (s) { return s === k; }).length; };
+    var polys = res.plots.filter(function (pl) { return pl.geom && P.validStructure(pl.geom) && P.polysOf(pl.geom).length; }).length;
+    var pts = res.plots.filter(function (pl) { return pl.geom && /Point/.test(pl.geom.type || ''); }).length;
+    var area = res.plots.reduce(function (a, pl) { return a + (pl.geom && P.validStructure(pl.geom) && P.polysOf(pl.geom).length ? (P.geomAreaHa(pl.geom) || 0) : 0); }, 0);
+    var cc = Array.from(new Set(res.plots.map(function (pl) { return pl.props && pl.props.ProducerCountry; }).filter(Boolean).map(String))).sort();
+    var ex = $('excludeErr').checked, fp = STATE.fp && STATE.fp.exclude === ex ? STATE.fp.hash : null;
+    var when = new Date().toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US', { dateStyle: 'long', timeStyle: 'short' });
+    var row = function (k, v) { return '<tr><th>' + esc(k) + '</th><td>' + esc(v) + '</td></tr>'; };
+    return '<h1>' + esc(t('shTitle')) + '</h1>' +
+      (STATE.isSample ? '<p class="sample">' + esc(t('shSample')) + '</p>' : '') +
+      '<table>' + row(t('shFile'), STATE.name) + row(t('shChecked'), when) + row(t('shCountries'), cc.length ? cc.join(', ') : t('shNoCountry')) + '</table>' +
+      '<p class="verdict"><b>' + esc($('verdict').textContent) + '</b></p>' +
+      '<table>' + row(t('tPlots'), nf(n, 0)) + row(t('shPolys'), nf(polys, 0)) + row(t('shPoints'), nf(pts, 0)) + row(t('tArea'), nf(area, 2) + ' ha') +
+      row(t('tFixed'), nf(res.fixes.length, 0)) + row(t('tAttention'), nf(count('err'), 0)) + row(t('tCheck'), nf(count('check'), 0)) + '</table>' +
+      ($('map').querySelector('svg') ? '<h2>' + esc(t('mapTitle')) + '</h2><div class="shmap">' + $('map').innerHTML + '</div>' : '') +
+      '<h2>' + esc(t('shOpen')) + '</h2>' + sheetList(res.after) +
+      '<h2>' + esc(t('shFixed')) + '</h2>' + sheetList(res.fixes) +
+      '<h2>' + esc(t('shFp')) + '</h2>' +
+      (fp ? '<table>' + row(t('shFpName'), baseName() + '-fixed.geojson') + '</table><p class="fp" id="sheetFp">' + fp + '</p>' + (ex ? '<p>' + esc(t('shFpExcl')) + '</p>' : '') + '<p>' + esc(t('shFpHow')) + '</p>' : '<p>' + esc(t('shFpNone')) + '</p>') +
+      '<p>' + esc(t('shRules')) + '</p>' +
+      '<p class="foot">' + esc(t('shFoot')) + '</p>';
+  }
+  $('dlSheet').addEventListener('click', function () {
+    var el = $('sheet');
+    if (!el) { el = document.createElement('section'); el.id = 'sheet'; document.body.appendChild(el); }
+    el.innerHTML = sheetHtml();
+    document.body.classList.add('print-sheet');
+    try { window.print(); } catch (e) { /* no print dialog here; the class only matters when printing */ }
+  });
+  window.addEventListener('afterprint', function () { document.body.classList.remove('print-sheet'); });
 
   // ---------- waitlist ----------
   $('wlForm').addEventListener('submit', function (e) {

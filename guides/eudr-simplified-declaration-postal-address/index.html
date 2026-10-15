@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDR Simplified Declaration: Postal Address or GeoJSON?</title>
+<meta name="description" content="Who can file an EUDR simplified declaration, and when a postal address or cadastral ID can replace GeoJSON plot coordinates, per the EU Information System.">
+<link rel="canonical" href="https://quickwell.app/guides/eudr-simplified-declaration-postal-address/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="EUDR Simplified Declaration: Postal Address or GeoJSON?">
+<meta property="og:description" content="Who can file an EUDR simplified declaration, and when a postal address or cadastral ID can replace GeoJSON plot coordinates, per the EU Information System.">
+<meta property="og:url" content="https://quickwell.app/guides/eudr-simplified-declaration-postal-address/">
+<meta property="og:image" content="https://quickwell.app/plot-file-checker/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EUDR Simplified Declaration: Postal Address or GeoJSON?">
+<meta name="twitter:description" content="Who can file an EUDR simplified declaration, and when a postal address or cadastral ID can replace GeoJSON plot coordinates, per the EU Information System.">
+<meta name="twitter:image" content="https://quickwell.app/plot-file-checker/og.png">
+<link rel="stylesheet" href="/guides/guide.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"EUDR simplified declaration: when a postal address can replace GeoJSON","description":"Who can file an EUDR simplified declaration, and when a postal address or cadastral ID can replace GeoJSON plot coordinates, per the EU Information System.","inLanguage":"en","datePublished":"2026-10-15","dateModified":"2026-10-15","url":"https://quickwell.app/guides/eudr-simplified-declaration-postal-address/","mainEntityOfPage":"https://quickwell.app/guides/eudr-simplified-declaration-postal-address/","image":"https://quickwell.app/plot-file-checker/og.png","author":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.app/"},"publisher":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.app/"},"citation":["https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/change-log.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/simplified-declaration-v3.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quickwell.app/guides/"},{"@type":"ListItem","position":3,"name":"EUDR simplified declaration: when a postal address can replace GeoJSON","item":"https://quickwell.app/guides/eudr-simplified-declaration-postal-address/"}]}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Quickwell</a> / <a href="/guides/">Guides</a></nav>
+<article>
+<h1>EUDR simplified declaration: when a postal address can replace GeoJSON</h1>
+<p class="meta">Updated 15 October 2026 · 4 min read</p>
+<p class="lede">The 2025 amendment to the EU Deforestation Regulation (Regulation (EU) 2025/2650) added a lighter route for the smallest producers: the <b>simplified declaration</b>. It is the one place in the EU Information System where a plot can be described by a postal address instead of GeoJSON coordinates. Here is who can use it, what it changes, and what it does not change for cooperatives and exporters.</p>
+
+<p class="note">Everything below that describes the rules comes from the EU Information System's own documentation pages (listed under Sources), opened on 15 October 2026. The documentation itself warns that it "may not be final" while the amendment of Implementing Regulation (EU) 2024/3084 is under way. The practical advice is ours.</p>
+
+<h2>The short answer</h2>
+<ul>
+  <li><b>Due diligence statement (DDS):</b> GeoJSON geolocation is still mandatory.</li>
+  <li><b>Simplified declaration (SD):</b> each producer's location may be given as GeoJSON, as one or more postal addresses, or as a cadastral identifier.</li>
+  <li>Only a <b>micro or small primary operator</b> in a <b>low-risk country</b> (or an authorised representative acting for one) can file a simplified declaration.</li>
+</ul>
+
+<h2>Who counts as a micro or small primary operator</h2>
+<p>The EU Information System FAQ defines a micro or small primary operator as a natural person or a micro or small undertaking, whatever its legal form, that:</p>
+<ol>
+  <li>is <b>established in a low-risk country</b>, and</li>
+  <li>places on the EU market, or exports, relevant products that it <b>produced itself in that country</b>.</li>
+</ol>
+<p>A low-risk country is a country, or part of one, that the European Commission has classified as presenting a low risk. The FAQ says this classification is what makes micro or small primary operator status possible, and it also brings a lower minimum check rate of 1%.</p>
+<p>Two things follow. A producer in a country that is not classified low-risk cannot use the simplified declaration, however small. And a trader or exporter that buys from farmers is not producing its own products, so on our reading it does not fit the definition.</p>
+
+<h2>What a simplified declaration is</h2>
+<ul>
+  <li><b>One-time, not per shipment.</b> The producer submits a single declaration covering all the relevant products it produces, instead of a due diligence statement for each shipment. The FAQ says it stays valid indefinitely unless major changes occur.</li>
+  <li><b>Content:</b> the information set out in the new Annex III of the Regulation.</li>
+  <li><b>A declaration identifier</b> is assigned on submission. It travels with the products through the supply chain in place of a DDS reference number, and must be available to customs before release for free circulation or export.</li>
+  <li><b>Reference format:</b> 14 characters starting with "S", the same length as a DDS reference.</li>
+  <li><b>Who submits:</b> the producer, or an authorised representative acting under a written mandate.</li>
+  <li><b>Exemption:</b> the change log notes an exemption where equivalent data is already held in national databases (Article 4a(4)).</li>
+</ul>
+
+<h2>Location: three options instead of one</h2>
+<div class="tbl"><table>
+  <thead><tr><th></th><th>Due diligence statement</th><th>Simplified declaration</th></tr></thead>
+  <tbody>
+    <tr><td><b>Plot location</b></td><td>GeoJSON geolocation, mandatory</td><td>GeoJSON geometry, <b>or</b> postal address(es), <b>or</b> a cadastral identifier</td></tr>
+    <tr><td><b>Who files</b></td><td>Operators and authorised representatives</td><td>Micro or small primary operators in low-risk countries, or their authorised representatives</td></tr>
+    <tr><td><b>How often</b></td><td>Before each placing on the market or export</td><td>Once, covering all relevant products the producer makes</td></tr>
+  </tbody>
+</table></div>
+<p>A postal address entry includes a required postal code for the production location. The declaration also carries a yes/no setting for whether the geolocation is confidential: if it is set to confidential, the geolocation is not shown to downstream operators and traders.</p>
+
+<h2>What does not change</h2>
+<ul>
+  <li><b>When GeoJSON is used, the same rules apply.</b> The EU FAQ still defines geolocation as latitude and longitude with at least 6 decimal digits, and polygons are still required for plots over 4 hectares (except cattle).</li>
+  <li><b>Cooperatives and exporters filing a DDS</b> still need a clean GeoJSON file for every plot.</li>
+  <li><b>Grouped declarations</b> (a new feature) inherit the geolocation of the declarations they reference, so errors in a referenced plot file carry through.</li>
+</ul>
+
+<h2>What downstream buyers now keep</h2>
+<p>Downstream operators and traders must collect and keep, for at least five years, their supplier details, the DDS reference numbers or declaration identifiers they received, and their buyer details. Non-SME downstream operators and traders must also register in the Information System. If you sell to an EU buyer, expect them to ask for your reference number or declaration identifier with every delivery.</p>
+
+<h2>What we could not confirm</h2>
+<ul>
+  <li><b>Which countries are classified low-risk.</b> Check the Commission's current country classification before assuming a producer qualifies.</li>
+  <li><b>Application dates.</b> We could not open the Regulation text on EUR-Lex on the day of writing. Confirm the dates that apply to you there.</li>
+  <li>The documentation notes that some features, such as grouping and versioning of simplified declarations, may come in later releases.</li>
+</ul>
+
+<p>For what a correct GeoJSON file must contain, read <a href="/guides/eudr-geolocation-geojson/">EUDR geolocation: what the GeoJSON file must contain</a>. For the errors that most often get files refused, see <a href="/guides/eudr-plot-file-rejected/">common reasons EUDR plot files get rejected</a>.</p>
+
+<div class="cta">
+  <p><b>Filing with GeoJSON?</b> The free <a href="/plot-file-checker/">EUDR Plot File Checker</a> checks a GeoJSON, KML, CSV or WKT plot file against the EU format rules, fixes what is safe to fix, and prints a one-page summary for your buyer with a fingerprint of the fixed file. English and French; your file stays on your device.</p>
+</div>
+<section class="legal">
+<p><b>Not legal advice.</b> This guide is general information, checked against the sources below on 15 October 2026. The EU documentation says it may still change. Confirm with the official source and a qualified professional before you act. Quickwell is not affiliated with the European Union.</p>
+</section>
+<section class="sources">
+<h2>Sources</h2>
+<ul>
+<li>EU Information System, Operator API Reference, FAQ: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html</a></li>
+<li>EU Information System, Change Log and "Regulatory Background (2025 Amendment)": <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/change-log.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/change-log.html</a></li>
+<li>EU Information System, "Simplified Declaration (SD) — V3 API Reference": <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/simplified-declaration-v3.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/simplified-declaration-v3.html</a></li>
+<li>EU Information System, Operator API Reference home (V3 and Regulation (EU) 2025/2650): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html</a></li>
+</ul>
+</section>
+</article>
+<footer><a href="/">Quickwell</a> · <a href="/guides/">All guides</a> · <a href="/plot-file-checker/">EUDR Plot File Checker</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>

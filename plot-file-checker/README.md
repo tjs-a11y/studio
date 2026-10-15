@@ -8,6 +8,7 @@ This is a free demand test. It passes at **300 files checked and 25 waitlist sig
 - **Reads:** GeoJSON (FeatureCollection, Feature or bare geometry), KML (Placemark Point/Polygon/LineString/MultiGeometry, with ExtendedData), CSV (lat/lon columns, one row per corner grouped by a plot ID, a WKT column, or a KoBo/ODK geoshape column `lat lon alt acc;…`; `,` `;` and tab delimiters, decimal commas) and WKT text. It does not read shapefiles (.zip/.shp), KMZ or Excel; it says so and explains how to export them.
 - **Shows:** a verdict, summary counts, an SVG outline map with no external tiles, the issues still open grouped by rule, the fixes applied, and a plot table.
 - **Downloads:** the fixed GeoJSON FeatureCollection (WGS 84, lon/lat, 6 decimals, one feature per line), with an option to leave out plots that still have errors, plus a CSV issue report (UTF-8 BOM so Excel shows accents correctly). Both can also be copied to the clipboard, with a visible-text fallback if copying fails.
+- **Buyer summary (2026-10-15):** a one-page printout (or PDF via the print window) for the exporter's records or the EU buyer: file name, date, producer countries, the verdict and counts, the outline map, open issues and fixes by rule, and the SHA-256 fingerprint of the fixed GeoJSON exactly as downloaded (it follows "leave out plots with errors"), with the commands to check it on Windows, Mac and Linux. Samples are labelled as fictional. It states plainly that it is a format check only, not a deforestation or legality check. Built in the browser; nothing is sent.
 - **Samples:** a messy sample (Côte d'Ivoire, 8 plots, one of each common problem) and a clean sample (Ghana, 4 plots). Both are fictional.
 
 ### Checks
@@ -72,3 +73,7 @@ node --test plot-file-checker/test/geometry.test.mjs        # 22 unit tests (are
 PW_NODE_MODULES=<dir with playwright> CHROMIUM_PATH=<chrome> SHOT_DIR=<dir> node plot-file-checker/test/e2e.mjs   # 23 browser checks
 ```
 The unit tests read the core straight out of `index.html` (`<script id="pfc-core">`), so there is no separate build.
+
+## Changelog
+- 2026-10-15: Buyer summary (print / save as PDF) with a SHA-256 fingerprint of the fixed file. Sources re-checked: the EU Information System GeoJSON page still reads "Updated 17 August 2026"; its API index now describes V3 (Regulation (EU) 2025/2650: micro or small primary operators and simplified declarations). No rule in this checker changed.
+- 2026-10-11: Checked against the EU Information System documentation (see Sources).
