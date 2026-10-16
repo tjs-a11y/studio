@@ -5,6 +5,9 @@ import Stripe from 'stripe';
 
 process.env.STRIPE_HUB_KEY = 'rk_test_fake';
 process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test_secret';
+// Strict mode for these tests: no check window and no entitlement cache, so every token check goes to Stripe.
+// That pins the original guarantees (live re-checks). The cache and window paths are covered in entitlements.test.mjs.
+process.env.ACCESS_RECHECK_SECONDS = '0';
 const core = await import('../api/_lib/core.js');
 const { POST: checkout } = await import('../api/checkout.js');
 const { GET: access } = await import('../api/access.js');
