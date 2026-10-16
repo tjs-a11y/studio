@@ -219,3 +219,20 @@ test('harvest: odd feed shapes and bad dates do not crash; Federal Register pape
   const fr = await fetchFederalRegister({ name: 'FR', agency: 'internal-revenue-service', days: 7 }, { date: '2026-10-16', fetchImpl });
   assert.deepEqual(fr.map((d) => d.title), ['Proposed Rule: Premium Tax Credit']);
 });
+
+test('run: a story one desk used is dropped from the next desk the same day', async () => {
+  const shared = scamsHarvest();
+  const household = { ...scamsHarvest(), desk: 'household-money', items: [...shared.items.slice(0, 3), item('S9', 'Bank fees rise 5% this year'), item('S10', 'New rule caps overdraft fees at $5'), item('S11', 'Subscription price hikes hit 2 in 5 households')] };
+  const { root, fx } = await tempRepo({ scams: shared, 'household-money': household });
+  const client = fakeClient(goodBrief(), {
+    ...goodBrief(), subject: 'Bank fees rise 5%', headline: 'Bank fees rise 5% as overdraft caps arrive', dek: 'Fees up 5%, overdraft caps at $5.', lede: 'Bank fees rose 5% this year.',
+    sections: [{ heading: 'Fees climb', bullets: ['Bank fees rose 5% this year.', 'Overdraft fees are capped at $5.'], source_ids: ['S1', 'S2'] }, { heading: 'Price hikes', bullets: ['2 in 5 households saw subscription hikes.', 'Check your statements.'], source_ids: ['S3'] }],
+    seo_description: 'Bank fees up 5% and $5 overdraft caps.',
+  });
+  const r = await run({ ...parseArgs(['--mode=publish', '--desk=scams,household-money', `--fixtures=${fx}`]), root }, { env: {}, now: NOW, client });
+  assert.deepEqual(r.results.map((x) => x.status), ['published', 'published']);
+  const prompt = client.calls[1].messages[0].content;
+  assert.ok(!prompt.includes('fake toll texts'), 'scams story not repeated');
+  assert.ok(prompt.includes('Bank fees rise 5%'));
+  await rm(root, { recursive: true });
+});

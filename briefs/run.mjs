@@ -81,11 +81,24 @@ export async function run(opts, { env = process.env, now = new Date(), client, f
   const chosen = DESKS.filter((d) => (opts.desks ? opts.desks.includes(d.id) : d.enabled));
   const results = [];
   let published = 0;
+  // Stories already cited by an earlier desk today, so two briefs never repeat the same news.
+  const usedLinks = new Set();
+  for (const d of DESKS) {
+    const f = path.join(opts.root, 'briefs/data', d.id, `${localDate(now)}.json`);
+    if (!existsSync(f)) continue;
+    const saved = JSON.parse(await readFile(f, 'utf8'));
+    const cited = new Set(saved.brief.sections.flatMap((s) => s.source_ids));
+    for (const i of saved.harvest.items) if (cited.has(i.id)) usedLinks.add(i.link);
+  }
 
   for (const desk of chosen) {
-    const h = opts.fixtures
+    const raw = opts.fixtures
       ? JSON.parse(await readFile(path.join(opts.fixtures, `${desk.id}.json`), 'utf8'))
       : await harvest(desk, { now, fetchImpl });
+    const dataFile = path.join(opts.root, 'briefs/data', desk.id, `${raw.date}.json`);
+    const kept = existsSync(dataFile) ? raw.items : raw.items.filter((i) => !usedLinks.has(i.link));
+    if (kept.length < raw.items.length) log(desk.id, `dropped ${raw.items.length - kept.length} item(s) already covered by another desk today`);
+    const h = { ...raw, items: kept.map((i, n) => ({ ...i, id: `S${n + 1}` })) };
     const { date } = h;
     log(desk.id, `${h.items.length} fresh items (${h.perSource.map((s) => `${s.source}: ${s.kept}/${s.fetched}`).join('; ')})`);
     for (const e of h.errors) warn(desk.id, `source failed: ${e.source}: ${e.message}`);
@@ -98,7 +111,6 @@ export async function run(opts, { env = process.env, now = new Date(), client, f
       continue;
     }
     if (h.items.length < desk.minItems) { log(desk.id, `only ${h.items.length} fresh items (needs ${desk.minItems}); skipping today, no brief written`); results.push({ desk: desk.id, status: 'thin' }); continue; }
-    const dataFile = path.join(opts.root, 'briefs/data', desk.id, `${date}.json`);
     if (!opts.force && existsSync(dataFile)) { log(desk.id, `already published for ${date}`); results.push({ desk: desk.id, status: 'exists' }); continue; }
     if (!canAfford(ledger, { date, cap })) { warn(desk.id, `monthly budget reached ($${monthSpend(ledger, date.slice(0, 7))} of $${cap}); skipping`); results.push({ desk: desk.id, status: 'budget' }); continue; }
 
@@ -121,6 +133,8 @@ export async function run(opts, { env = process.env, now = new Date(), client, f
     }
     const ctas = selectCtas(desk, h);
     const blocks = injectCtas(r.brief, ctas);
+    const cited = new Set(r.brief.sections.flatMap((s) => s.source_ids));
+    for (const i of h.items) if (cited.has(i.id)) usedLinks.add(i.link);
     log(desk.id, `brief passed the fact check ($${spent.toFixed(4)}); CTAs: ${ctas.map((c) => c.product).join(', ')}`);
     if (opts.mode === 'dry') {
       console.log(`\n===== ${desk.name} (dry run) =====\n${textVersion({ desk, brief: r.brief, blocks })}\n=====`);
