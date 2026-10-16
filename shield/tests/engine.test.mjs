@@ -80,6 +80,36 @@ test('negations: a code that says "never share" is not a request', () => {
   assert.ok(runRules('No worries, just send me the code')['code-ask'], '"No worries" is not a negation');
 });
 
+test('a code sent "by mistake" is a code scam, not an overpayment (EN + ES)', () => {
+  // Found 2026-10-15 while filming the TikTok test: the code sample also showed "Overpaid by mistake" (+2) and
+  // "Overpayment + send money" (+2), though it mentions no money.
+  const codeOnly = [
+    'Hi, I accidentally sent my verification code to your number. Can you send it to me? It is a 6-digit code.',
+    'Sorry, I accidentally sent you a code, please send it back',
+    'I mistakenly sent my 6-digit code to your phone, can you send it back?',
+    'Hey, I sent a code to your phone by mistake. Can you text it to me?',
+    'Te envié por error un código de verificación. ¿Me lo pasas?',
+    'Hola, te envié un código de WhatsApp por error. ¿Me lo pasas?',
+  ];
+  for (const s of codeOnly) {
+    const r = check(s), ids = r.findings.map((f) => f.id);
+    assert.ok(ids.includes('code-ask'), `code-ask should fire: ${s}`);
+    assert.ok(!ids.includes('overpay') && !ids.includes('combo-overpay'), `no overpayment signs: ${s} → ${ids.join(', ')}`);
+    assert.equal(r.level, 'scam', s);
+    assert.ok(r.kinds.includes('code'), s);
+  }
+  // real overpayment scams still fire, in both languages
+  for (const s of [
+    'I accidentally sent you $300 on Zelle, please send it back',
+    'I sent you $500 by mistake on Cash App. Please send back the money as soon as possible, it was for my rent.',
+    'I accidentally transferred 200 dollars to you, can you return the money?',
+    'I overpaid you',
+    'Te envié por error 200 dólares, devuélvemelos por Zelle',
+    'te envié de más',
+  ]) assert.ok(runRules(s).overpay, `overpay should fire: ${s}`);
+  assert.equal(check('Te envié por error 200 dólares, devuélvemelos por Zelle').level, 'scam');
+});
+
 test('highlights point at the exact words, and segments rebuild the original text', () => {
   const text = 'URGENT: pay with Apple gift cards and tell no one. https://bit.ly/x1';
   const r = check(text);

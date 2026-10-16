@@ -1,6 +1,7 @@
 // Quickwell Shield message rules. Plain, readable patterns in English and Spanish, run on the device.
 // Each rule: id, group, weight (points it adds when found), patterns. A rule counts once however often it matches;
 // every place it matched is highlighted. `not` = words just before a match that cancel it ("never share this code").
+// `need` = the message must also contain this, or the rule doesn't count (overpay needs money, not just "sent by mistake").
 // The "What we checked" panel lists every rule here with its result, so nothing is hidden.
 
 const L = '[\\p{L}\\p{N}]';
@@ -9,6 +10,11 @@ const W = (s) => new RegExp(`(?<!${L})(?:${s})(?!${L})`, 'giu');
 // Same, but case-sensitive (for short capitalised names like SAT or SSA that are ordinary words otherwise).
 const C = (s) => new RegExp(`(?<!${L})(?:${s})(?!${L})`, 'gu');
 const NEG = /(?:never|don'?t|do not|won'?t|will never|nunca|jam[aá]s|no (?:lo |la |le )?(?:compartas|comparta|des|d[eé]|env[ií]es|env[ií]e|digas|diga|reenv[ií]es|proporciones))\W+(?:\w+\W+){0,3}$/iu;
+
+// Right after "sent by mistake": the thing sent was a code, not money ("accidentally sent my verification code").
+const CODE_NEXT = "(?!\\W+(?:[\\p{L}\\p{N}-]+\\W+){0,3}?(?:code|codes|c[oó]digos?|passcode|pin|otp|token))";
+// Money words: an overpayment story always mentions money somewhere.
+const MONEY_CUE = W("[$€£]\\s?\\d|\\d[\\d,.]*\\s?(?:usd|dollars?|bucks|d[oó]lares|pesos|euros?)|money|cash|funds|payments?|paid|pay|deposit(?:ed)?|transfer(?:red)?|refund(?:ed)?|(?:a|the|my|your) check|cheques?|zelle|venmo|cash ?app|paypal|wire|difference|rent|overpa(?:id|yment)|over-payment|dinero|plata|efectivo|pagos?|pag[oó]|dep[oó]sit(?:o|[eé])|transfer[ií]|transferencia|reembols(?:o|[eé])|diferencia|bizum|renta|alquiler|de m[aá]s");
 
 export const GROUPS = ['pressure', 'secrecy', 'impersonation', 'payment', 'codes', 'offer', 'pattern', 'link'];
 
@@ -106,8 +112,8 @@ export const RULES = [
   ] },
   // ---- codes and passwords
   { id: 'code-ask', group: 'codes', w: 5, re: [
-    W("(?:send|share|give|tell|read|forward|text|reply with|provide|confirm|enter|repeat) (?:me |us |it to me |back )?(?:the |your |that |this )?(?:\\d-digit |six-digit |4-digit |verification |security |one-time |confirmation |login |access |sms |text )?(?:code|passcode|pin|otp|password|passcodes?)|(?:code|c[oó]digo)\\W+(?:\\w+\\W+){0,6}(?:by mistake|by accident|to your phone by mistake|por error|por equivocaci[oó]n)|(?:accidentally|mistakenly) (?:sent|texted|forwarded) (?:my |a |the |your )?(?:\\w+ )?code|(?:sent|texted) (?:my |a |the )?(?:\\w+ )?code to (?:your|the wrong) (?:number|phone)|what'?s the code|read (?:it|the numbers) (?:back )?to me"),
-    W("(?:env[ií]a|env[ií]ame|env[ií]eme|m[aá]ndeme|d[ií]game|comp[aá]rtame|reenv[ií]eme|dame|dime|comp[aá]rteme|m[aá]ndame|reenv[ií]a|reenv[ií]ame|proporcione|proporciona|confirme|confirma|d[ií]ctame|dicte|p[aá]same|p[aá]seme) (?:el|tu|su|ese|este)? ?(?:c[oó]digo|clave|contrase[nñ]a|nip|pin|token)"),
+    W("(?:send|share|give|tell|read|forward|text|reply with|provide|confirm|enter|repeat) (?:me |us |it to me |back )?(?:the |your |that |this )?(?:\\d-digit |six-digit |4-digit |verification |security |one-time |confirmation |login |access |sms |text )?(?:code|passcode|pin|otp|password|passcodes?)|(?:code|c[oó]digo)\\W+(?:\\w+\\W+){0,6}(?:by mistake|by accident|to your phone by mistake|por error|por equivocaci[oó]n)|(?:accidentally|mistakenly) (?:sent|texted|forwarded) (?:you )?(?:my |a |the |your )?(?:[\\w-]+ )?code|(?:sent|texted) (?:my |a |the )?(?:\\w+ )?code to (?:your|the wrong) (?:number|phone)|what'?s the code|read (?:it|the numbers) (?:back )?to me"),
+    W("(?:env[ií]a|env[ií]ame|env[ií]eme|m[aá]ndeme|d[ií]game|comp[aá]rtame|reenv[ií]eme|dame|dime|comp[aá]rteme|m[aá]ndame|reenv[ií]a|reenv[ií]ame|proporcione|proporciona|confirme|confirma|d[ií]ctame|dicte|p[aá]same|p[aá]seme) (?:el|tu|su|ese|este)? ?(?:c[oó]digo|clave|contrase[nñ]a|nip|pin|token)|(?:te |le )?(?:envi[eé]|mand[eé]|reenvi[eé]) (?:por error|por equivocaci[oó]n|sin querer) (?:un |el |mi |tu |su )?c[oó]digo"),
   ], not: NEG },
   { id: 'pii-ask', group: 'codes', w: 3, re: [
     W("(?:confirm|provide|enter|send|verify|update|give|reply with|tell us|need) (?:\\w+ ){0,4}(?:social security number|ssn|card number|cvv|cvc|security code on the back|bank (?:login|password|details)|online banking (?:password|login|details)|mother'?s maiden name|full card details|account number and pin|routing number|medicare (?:number|card number|id)|date of birth|birth ?date|bank account number)"),
@@ -136,9 +142,9 @@ export const RULES = [
     W("(?:mi )?(?:amor|cari[nñ]o|querid[oa]|cielo|mi vida)[,.!]?\\s(?:[^.!?]{0,80})(?:dinero|\\$\\d[\\d,.]*|tarifa|boleto|visa|aduana|tarjeta de regalo|transferencia)|plataforma petrolera|misi[oó]n de paz|no puedo hacer videollamada|boletos? (?:de avi[oó]n )?para (?:ir a )?verte"),
   ] },
   { id: 'overpay', group: 'pattern', w: 2, re: [
-    W("overpaid|over-?payment|refund (?:the|that) (?:difference|extra|balance)|send (?:back )?the (?:difference|extra|rest)|accidentally (?:sent|deposited|transferred|refunded)|sent (?:you )?(?:too much|extra|by mistake|by accident)|refunded (?:you )?too much|sent you (?:\\$?\\d[\\d,.]* )?(?:by mistake|by accident|accidentally)|(?:send|return|give) (?:me )?(?:back )?(?:the|my) money(?: back)?|send it back"),
-    W("(?:te |le )?(?:envi[eé]|deposit[eé]|transfer[ií]|reembols[eé]) (?:de m[aá]s|por error|por equivocaci[oó]n)|devu[eé]lve(?:me|lo)(?: la diferencia)?|reembolsa(?:r|e)? la diferencia|pag[oó] de m[aá]s"),
-  ] },
+    W(`overpaid|over-?payment|refund (?:the|that) (?:difference|extra|balance)|send (?:back )?the (?:difference|extra|rest)|accidentally (?:sent|deposited|transferred|refunded)${CODE_NEXT}|sent (?:you )?(?:too much|extra|by mistake|by accident)${CODE_NEXT}|refunded (?:you )?too much|sent you (?:\\$?\\d[\\d,.]* )?(?:by mistake|by accident|accidentally)${CODE_NEXT}|(?:send|return|give) (?:me )?(?:back )?(?:the|my) money(?: back)?|send it back`),
+    W(`(?:te |le )?(?:envi[eé]|deposit[eé]|transfer[ií]|reembols[eé]) (?:de m[aá]s|por error|por equivocaci[oó]n)${CODE_NEXT}|devu[eé]lve(?:me|lo)(?: la diferencia)?|reembolsa(?:r|e)? la diferencia|pag[oó] de m[aá]s`),
+  ], need: MONEY_CUE },
   { id: 'wrong-number', group: 'pattern', w: 1, re: [
     W("wrong number|sorry,? (?:i think )?i (?:have|got) the wrong|is this (?:still )?the number (?:of|for)|n[uú]mero equivocado|perd[oó]n,? me equivoqu[eé] de n[uú]mero"),
   ] },
@@ -154,6 +160,7 @@ export function runRules(text) {
   const s = String(text || '');
   const found = {};
   for (const r of RULES) {
+    if (r.need) { r.need.lastIndex = 0; if (!r.need.test(s)) continue; }
     const spans = [];
     for (const re of r.re) {
       re.lastIndex = 0;
