@@ -1,0 +1,85 @@
+name: Quickwell Briefs
+
+# Daily audience briefs (briefs/desks.mjs): fetch public sources, write and fact-check each brief
+# with Claude, publish /news/<desk>/<date>/, update sitemap-briefs.xml, push, ping IndexNow.
+# A desk skips the day (no Claude call) when its sources are thin, its brief already exists,
+# or the monthly budget (repo variable BRIEFS_MONTHLY_BUDGET_USD, default $15) is used up.
+
+on:
+  schedule:
+    - cron: '20 11 * * *'   # 11:20 UTC daily = 6:20 am Central (daylight time) / 5:20 am (standard time)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'sources = fetch only (free); dry = write briefs, publish nothing; publish = update the site'
+        type: choice
+        options: [sources, dry, publish]
+        default: sources
+      desks:
+        description: 'Comma-separated desk ids (blank = every enabled desk)'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quickwell-briefs
+  cancel-in-progress: false
+
+jobs:
+  briefs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: briefs/package-lock.json
+
+      - run: npm ci
+        working-directory: briefs
+
+      - name: Unit tests
+        run: npm test
+        working-directory: briefs
+
+      - name: Run desks
+        id: run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BRIEFS_MONTHLY_BUDGET_USD: ${{ vars.BRIEFS_MONTHLY_BUDGET_USD }}
+          MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
+          DESKS: ${{ inputs.desks }}
+        run: |
+          ARGS="--mode=$MODE"
+          if [ -n "$DESKS" ]; then ARGS="$ARGS --desk=$DESKS"; fi
+          node briefs/run.mjs $ARGS
+
+      - name: Commit and push
+        id: push
+        if: steps.run.outputs.published != '' && steps.run.outputs.published != '0'
+        run: |
+          node scripts/sitemap.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add news briefs/data sitemap.xml sitemap-main.xml sitemap-briefs.xml
+          git diff --cached --quiet && exit 0
+          git commit -m "Quickwell briefs: $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && echo "pushed=true" >> "$GITHUB_OUTPUT" && exit 0
+            sleep 10
+          done
+          exit 1
+
+      # Pushes made with GITHUB_TOKEN don't start other workflows, so the IndexNow ping runs here.
+      - name: Ping IndexNow
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          sleep 90
+          node scripts/indexnow.mjs
