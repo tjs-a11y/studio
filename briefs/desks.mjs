@@ -63,8 +63,9 @@ export const DESKS = [
     sources: [
       { type: 'federalRegister', name: 'Federal Register: IRS', agency: 'internal-revenue-service', types: ['RULE', 'PRORULE', 'NOTICE'], days: 7 },
       { type: 'federalRegister', name: 'Federal Register: SBA', agency: 'small-business-administration', types: ['RULE', 'PRORULE'], days: 14 },
+      { type: 'rss', name: 'CPA Practice Advisor', url: 'https://www.cpapracticeadvisor.com/feed/', include: /\b(IRS|1099|W-2|tax|payroll|small business|bookkeep|deduct|filing|deadline|sales tax|contractor)/i },
+      { type: 'rss', name: 'The CPA Journal', url: 'https://www.cpajournal.com/feed/', include: /\b(IRS|1099|tax|small business|payroll|deduct)/i },
       { type: 'rss', name: 'CFPB Newsroom', url: 'https://www.consumerfinance.gov/about-us/newsroom/feed/', include: /small business|merchant|fee|payment|lend/i },
-      { type: 'rss', name: 'Journal of Accountancy', url: 'https://www.journalofaccountancy.com/rss/all-news.xml' },
     ],
     minItems: 3,
     triggers: [
@@ -82,7 +83,8 @@ export const DESKS = [
     sources: [
       { type: 'rss', name: 'Mongabay', url: 'https://news.mongabay.com/feed/', include: /\bEUDR\b|deforestation (?:law|rule|regulation)|due diligence|European Union.*(?:deforest|forest)/i },
       { type: 'rss', name: 'Supply Chain Dive', url: 'https://www.supplychaindive.com/feeds/news/', include: /\bEUDR\b|deforestation|cocoa|coffee|palm oil/i },
-      { type: 'rss', name: 'European Commission: Environment', url: 'https://environment.ec.europa.eu/node/2/rss_en', include: /deforest|forest|EUDR/i },
+      { type: 'rss', name: 'FoodNavigator', url: 'https://www.foodnavigator.com/Info/FoodNavigator-RSS', include: /\bEUDR\b|deforestation|cocoa|coffee|palm oil|soy|traceab/i },
+      { type: 'rss', name: 'European Commission: Environment newsroom', url: 'https://ec.europa.eu/newsroom/env/feed', include: /deforest|forest|EUDR/i },
       { type: 'federalRegister', name: 'Federal Register: USTR/Commerce', agency: 'international-trade-administration', term: 'deforestation', days: 30 },
     ],
     minItems: 2,
@@ -98,7 +100,7 @@ export const DESKS = [
     focus: 'Texas drilling activity, oil and gas prices that drive royalty checks, Railroad Commission actions, and royalty-owner issues. ' + NEWS_ONLY,
     sources: [
       { type: 'rss', name: 'EIA Today in Energy', url: 'https://www.eia.gov/rss/todayinenergy.xml', include: /oil|gas|Permian|Texas|drilling|rig|crude/i },
-      { type: 'rss', name: 'EIA press releases', url: 'https://www.eia.gov/rss/press_rss.xml' },
+      { type: 'federalRegister', name: 'Federal Register: BLM', agency: 'land-management-bureau', term: 'Texas', days: 30 },
     ],
     minItems: 3,
     triggers: [],
@@ -111,7 +113,8 @@ export const DESKS = [
     audience: 'everyday U.S. consumers, and the adult children who help their parents stay safe online',
     focus: 'new scams and fraud warnings from regulators and law enforcement, phishing and impersonation trends, data breaches, and account-security advice. Say what the scam looks like and what to do. ' + NEWS_ONLY,
     sources: [
-      { type: 'rss', name: 'FTC Consumer Alerts', url: 'https://consumer.ftc.gov/consumer-alerts/feed' },
+      { type: 'rss', name: 'FBI IC3 alerts', url: 'https://www.ic3.gov/PSA/RSS' },
+      { type: 'rss', name: 'FTC Consumer Advice', url: 'https://www.consumer.ftc.gov/blog/gd-rss.xml' },
       { type: 'rss', name: 'FTC press releases', url: 'https://www.ftc.gov/feeds/press-release-consumer-protection.xml' },
       { type: 'rss', name: 'CISA news', url: 'https://www.cisa.gov/news.xml', include: /phish|scam|fraud|password|passkey|account|consumer|smishing/i },
       { type: 'rss', name: 'CFPB Newsroom', url: 'https://www.consumerfinance.gov/about-us/newsroom/feed/', include: /scam|fraud|impersonat/i },
@@ -131,8 +134,8 @@ export const DESKS = [
     focus: 'bank and card fees, subscriptions and price increases, consumer-finance rules, debt collection, medical and utility bills, and official letters people receive. ' + NEWS_ONLY,
     sources: [
       { type: 'rss', name: 'CFPB Newsroom', url: 'https://www.consumerfinance.gov/about-us/newsroom/feed/' },
-      { type: 'rss', name: 'CFPB Blog', url: 'https://www.consumerfinance.gov/about-us/blog/feed/' },
-      { type: 'rss', name: 'FTC press releases', url: 'https://www.ftc.gov/feeds/press-release-consumer-protection.xml', include: /subscription|cancel|fee|junk|price|billing|auto-renew|negative option/i },
+      { type: 'rss', name: 'FTC press releases', url: 'https://www.ftc.gov/feeds/press-release.xml', include: /consumer|subscription|cancel|fee|junk|price|billing|auto-renew|refund|negative option/i },
+      { type: 'rss', name: 'NerdWallet', url: 'https://www.nerdwallet.com/blog/feed/', include: /\bfees?\b|overdraft|subscription|bill|credit card|savings|bank account|insurance premium|price/i },
       { type: 'federalRegister', name: 'Federal Register: CFPB', agency: 'consumer-financial-protection-bureau', types: ['RULE', 'PRORULE'], days: 14 },
     ],
     minItems: 3,
@@ -151,7 +154,8 @@ export const DESKS = [
     sources: [
       { type: 'rss', name: 'CDC Newsroom', url: 'https://tools.cdc.gov/api/v2/resources/media/132608.rss', include: /older|aging|fall|senior|dementia|caregiv|Medicare|flu|vaccine|65/i },
       { type: 'rss', name: 'NIH News Releases', url: 'https://www.nih.gov/news-releases/feed.xml', include: /older|aging|fall|dementia|Alzheimer|caregiv|elder/i },
-      { type: 'rss', name: 'CMS Newsroom', url: 'https://www.cms.gov/newsroom/rss-feeds', include: /Medicare|older|senior|caregiv/i },
+      { type: 'rss', name: 'KFF Health News', url: 'https://kffhealthnews.org/feed/', include: /older|aging|elder|senior|fall|dementia|Alzheimer|caregiv|Medicare|nursing home|long-term care/i },
+      { type: 'rss', name: 'Next Avenue', url: 'https://www.nextavenue.org/feed/', include: /fall|balance|caregiv|dementia|Medicare|health|aging/i },
       { type: 'federalRegister', name: 'Federal Register: ACL', agency: 'community-living-administration', days: 30 },
     ],
     minItems: 2,
