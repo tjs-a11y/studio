@@ -11,6 +11,7 @@ import { isActive } from './core.js';
 
 const key = (customer, tool) => `ent:v1:${customer}:${tool}`;
 const DAY = 86400;
+export const ENTRY_TTL_SECONDS = DAY;
 
 // Stripe moved the billing period from the subscription onto its items (API 2025-03-31 "basil").
 // Read either place so the cache works on old and new API versions.
@@ -30,10 +31,10 @@ export async function recordSubscription(sub, eventCreated) {
   const active = isActive(sub);
   const end = periodEnd(sub);
   const rec = { active, status: sub.status, plan: sub.metadata?.plan || null, sub: sub.id, until: end || null, ts: Number(eventCreated) || Math.floor(Date.now() / 1000) };
-  // Active: keep until a little past the paid-through date (renewal webhooks refresh it).
-  // Inactive: remember the "no" for 35 days so repeat visits don't call Stripe.
+  // Every entry lives at most 24 hours (CEO direction, 2026-10-16), so the cache refreshes itself
+  // daily even if a webhook is ever missed. Webhooks still update it the moment anything changes.
   const now = Math.floor(Date.now() / 1000);
-  const ttl = active && end > now ? end - now + 2 * DAY : 35 * DAY;
+  const ttl = Math.min(ENTRY_TTL_SECONDS, active && end > now ? end - now + 2 * DAY : ENTRY_TTL_SECONDS);
   const ok = await kvSetJson(key(customer, tool), rec, ttl);
   return ok ? { stored: true, active } : { stored: false, active, reason: 'kv_write_failed' };
 }

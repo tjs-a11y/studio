@@ -119,3 +119,13 @@ test('webhook: a failed cache write returns 500 so Stripe retries the cancellati
   const r = await check(core.signToken({ c: 'cus_1', t: 'demo', v: Date.now() + 60000 }));
   assert.equal(r.pro, false); assert.equal(r.source, 'cache');
 });
+
+test('cache entries expire within 24 hours (active and canceled)', async () => {
+  const sets = [];
+  const store = kv.memoryKv();
+  kv.setKvForTests({ command: async (args) => { if (args[0] === 'SET') sets.push(Number(args[4])); return store.command(args); } });
+  await sendEvent('customer.subscription.updated', { ...sub, status: 'active' });
+  await sendEvent('customer.subscription.deleted', { ...sub, status: 'canceled' }, now() + 5);
+  assert.equal(sets.length, 2);
+  for (const ttl of sets) assert.ok(ttl > 0 && ttl <= 86400, `ttl ${ttl}`);
+});
