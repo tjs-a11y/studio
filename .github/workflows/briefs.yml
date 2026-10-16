@@ -13,7 +13,7 @@ on:
       mode:
         description: 'sources = fetch only (free); dry = write briefs, publish nothing; publish = update the site'
         type: choice
-        options: [sources, dry, publish]
+        options: [sources, probe, dry, publish]
         default: sources
       desks:
         description: 'Comma-separated desk ids (blank = every enabled desk)'
@@ -55,6 +55,7 @@ jobs:
           MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
           DESKS: ${{ inputs.desks }}
         run: |
+          if [ "$MODE" = "probe" ]; then node briefs/probe.mjs; exit 0; fi
           ARGS="--mode=$MODE"
           if [ -n "$DESKS" ]; then ARGS="$ARGS --desk=$DESKS"; fi
           node briefs/run.mjs $ARGS

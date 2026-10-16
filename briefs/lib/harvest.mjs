@@ -7,6 +7,13 @@ import { clean, daysBefore, localDate } from './util.mjs';
 const TIMEOUT_MS = 15000;
 const FR_API = 'https://www.federalregister.gov/api/v1/documents.json';
 const UA = 'QuickwellBriefs/1.0 (+https://quickwell.app/news/; one request per feed per day)';
+const HEADERS = { 'user-agent': UA, accept: 'application/rss+xml, application/atom+xml, application/xml;q=0.9, text/xml;q=0.9, */*;q=0.5' };
+
+// Feeds put text in odd shapes ({ _: 'text' }, arrays); dates can be unparseable. Never throw on them.
+const text = (v) => (typeof v === 'string' ? v : Array.isArray(v) ? text(v[0]) : v && typeof v === 'object' ? text(v._ ?? v['#'] ?? v.$t ?? '') : v == null ? '' : String(v));
+const isoOrNull = (v) => { const t = Date.parse(text(v)); return Number.isFinite(t) ? new Date(t).toISOString() : null; };
+// Federal Register paperwork that is never news for these readers.
+export const FR_NOISE_RE = /Agency Information Collection Activities|Performance Review Board|Privacy Act of 1974|Sunshine Act Meeting|Submission for OMB Review|Paperwork Reduction Act/i;
 
 // Publisher labels for paid or non-article items (FreightWaves uses "Sponsored Insights",
 // "FreightWaves TV"; others use similar words).
@@ -21,15 +28,15 @@ export function isFresh(item, { now, maxAgeDays }) {
   return age <= maxAgeDays && age >= -1;
 }
 
-export async function fetchRss(source, { parser = new Parser({ timeout: TIMEOUT_MS, headers: { 'user-agent': UA } }), max = 25 } = {}) {
+export async function fetchRss(source, { parser = new Parser({ timeout: TIMEOUT_MS, headers: HEADERS }), max = 25 } = {}) {
   const feed = await parser.parseURL(source.url);
   return (feed.items ?? []).slice(0, max).map((item) => ({
     source: source.name,
-    title: clean(item.title, 240),
-    link: item.link || '',
-    published: item.isoDate || (item.pubDate ? new Date(item.pubDate).toISOString() : null),
-    snippet: clean(item.contentSnippet || item.summary || '', 400),
-    categories: (item.categories ?? []).map((c) => clean(typeof c === 'string' ? c : c?._ ?? c?.name ?? '', 60)).filter(Boolean),
+    title: clean(text(item.title), 240),
+    link: text(item.link) || text(item.guid),
+    published: isoOrNull(item.isoDate) ?? isoOrNull(item.pubDate) ?? isoOrNull(item['dc:date']),
+    snippet: clean(text(item.contentSnippet) || text(item.summary), 400),
+    categories: (Array.isArray(item.categories) ? item.categories : []).map((c) => clean(text(c?.name ?? c), 60)).filter(Boolean),
   })).filter((i) => i.title && /^https?:\/\//.test(i.link));
 }
 
@@ -42,7 +49,7 @@ export async function fetchFederalRegister(source, { date, fetchImpl = fetch }) 
   if (source.term) url.searchParams.set('conditions[term]', source.term);
   for (const t of source.types ?? []) url.searchParams.append('conditions[type][]', t);
   for (const f of ['title', 'type', 'abstract', 'html_url', 'publication_date']) url.searchParams.append('fields[]', f);
-  const res = await fetchImpl(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers: { accept: 'application/json', 'user-agent': UA } });
+  const res = await fetchImpl(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers: { ...HEADERS, accept: 'application/json' } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const body = await res.json();
   return (body?.results ?? []).map((d) => ({
@@ -53,7 +60,7 @@ export async function fetchFederalRegister(source, { date, fetchImpl = fetch }) 
     published: d.publication_date ? `${d.publication_date}T12:00:00.000Z` : null,
     snippet: clean(d.abstract, 500),
     categories: [],
-  })).filter((d) => d.title && /^https:\/\/www\.federalregister\.gov\//.test(d.link));
+  })).filter((d) => d.title && !FR_NOISE_RE.test(d.title) && /^https:\/\/www\.federalregister\.gov\//.test(d.link));
 }
 
 export async function harvest(desk, { now = new Date(), fetchImpl = fetch, parser, maxAgeDays = 7 } = {}) {

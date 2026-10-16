@@ -204,3 +204,18 @@ test('federal register: date-bounded query with the agency slug', async () => {
   assert.equal(u.searchParams.get('conditions[publication_date][gte]'), '2026-10-09');
   void fetchRss;
 });
+
+test('harvest: odd feed shapes and bad dates do not crash; Federal Register paperwork is dropped', async () => {
+  const parser = { parseURL: async () => ({ items: [
+    { title: { _: 'NIH study on falls' }, link: 'https://nih.example/1', pubDate: 'not a date' },
+    { title: ['CMS Medicare update'], link: 'https://cms.example/2', isoDate: '2026-10-15T10:00:00Z' },
+  ] }) };
+  const items = await fetchRss({ name: 'X', url: 'https://x.example/feed' }, { parser });
+  assert.deepEqual(items.map((i) => [i.title, i.published]), [['NIH study on falls', null], ['CMS Medicare update', '2026-10-15T10:00:00.000Z']]);
+  const fetchImpl = async () => ({ ok: true, json: async () => ({ results: [
+    { type: 'Notice', title: 'Agency Information Collection Activities; Comment Request', html_url: 'https://www.federalregister.gov/d/1', publication_date: '2026-10-15' },
+    { type: 'Proposed Rule', title: 'Premium Tax Credit', html_url: 'https://www.federalregister.gov/d/2', publication_date: '2026-10-15' },
+  ] }) });
+  const fr = await fetchFederalRegister({ name: 'FR', agency: 'internal-revenue-service', days: 7 }, { date: '2026-10-16', fetchImpl });
+  assert.deepEqual(fr.map((d) => d.title), ['Proposed Rule: Premium Tax Credit']);
+});
