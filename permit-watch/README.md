@@ -42,7 +42,7 @@ Reading: one download a day of a file the RRC publishes for bulk download, free,
 2. `node permit-watch/scripts/update.mjs` downloads, parses and writes `data/` and `feeds/` (only files whose content changed),
 3. commits as "Update Texas permit data" using the default `GITHUB_TOKEN` (`contents: write`). No changes means no commit.
 
-If the download or parse fails, the script exits non-zero and writes nothing; the run fails and GitHub notifies the repo owner. The page keeps showing the last good data.
+The RRC file server sometimes resets connections, so a failed download is retried 3 times, each from a fresh session, after 15 s, 1 min and 3 min (a changed page layout is not retried). The job's time limit is 25 minutes to fit the retries. If the download or parse still fails, the script exits non-zero and writes nothing; the run fails and GitHub notifies the repo owner. The page keeps showing the last good data.
 
 Optional repo variables: `PERMIT_WATCH_SITE_URL` (e.g. `https://your-domain`, so feed items link back to the page; otherwise they link to the RRC W-1 Query), `RRC_DAF420_URL` (override the download link).
 
@@ -63,3 +63,8 @@ Run locally: `node permit-watch/scripts/update.mjs` (needs network access to `mf
 - Another public project reports the RRC blocking an IP it judged to be automated traffic on this file server. This job downloads once a day with a descriptive User-Agent; if it gets blocked, contact the RRC rather than retrying harder.
 - The paid tier ("Same-day email alerts", $9/month) is shown as coming soon only. It needs an email-sending service and a place to store each subscriber's watches, neither of which exists yet. The page collects no email and takes no payment.
 - Not affiliated with the RRC. Not legal or investment advice.
+
+## Changelog
+- 2026-10-16: Download retries (3 more attempts, 15 s / 1 min / 3 min, fresh session each time; layout errors fail at once); workflow time limit 15 → 25 min. Checked tonight: the RRC data-sets page and the GoDrive link load, the live listing still shows `daf420.dat` plus dated archives, and `godriveRequest()` built a valid download request from the live page. The file download itself failed with TLS resets (5 tries), so the parser is still **not verified against a real file**.
+- 2026-10-11: First build; offsets checked against manual OGA049M.
+

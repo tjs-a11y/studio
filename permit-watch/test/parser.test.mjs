@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { deflateRawSync } from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseDaily, mergeWindow, buildOutputs, rssFeed, unzip, ymd, coordsFrom, godriveRequest, DISTRICTS } from '../scripts/update.mjs';
+import { parseDaily, mergeWindow, buildOutputs, rssFeed, unzip, ymd, coordsFrom, godriveRequest, download, DISTRICTS } from '../scripts/update.mjs';
 import { COUNTIES, slugify } from '../scripts/counties.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -123,4 +123,18 @@ test('finds the daf420.dat download request on a Public GoDrive page', () => {
   assert.equal(r.action, 'https://mft.rrc.texas.gov/webclient/godrive/PublicGoDrive.xhtml');
   assert.deepEqual(r.fields, { fileTable_selection: '', fileList_SUBMIT: '1', 'javax.faces.ViewState': 'VS+1/=', fileList: 'fileList', 'fileTable:1:j_id_2f': 'fileTable:1:j_id_2f' });
   assert.throws(() => godriveRequest('<html></html>', 'https://x/'), /no file named daf420.dat/);
+});
+
+test('download retries network failures with waits, but not a changed page layout', async () => {
+  const waits = [], logs = [];
+  let calls = 0;
+  const flaky = async () => { calls++; if (calls < 3) { const e = new TypeError('fetch failed'); e.cause = { code: 'ECONNRESET' }; throw e; } return Buffer.from('ok'); };
+  const got = await download('https://x/', { once: flaky, waits: [1, 2, 3], sleep: async (ms) => { waits.push(ms); }, log: (m) => logs.push(m) });
+  assert.equal(got.toString(), 'ok'); assert.equal(calls, 3); assert.deepEqual(waits, [1, 2]); assert.match(logs[0], /attempt 1 failed \(ECONNRESET\)/);
+  calls = 0;
+  await assert.rejects(download('https://x/', { once: async () => { calls++; throw new Error('fetch failed'); }, waits: [1, 1], sleep: async () => {}, log: () => {} }), /fetch failed/);
+  assert.equal(calls, 3, 'gives up after the last wait');
+  calls = 0;
+  await assert.rejects(download('https://x/', { once: async () => { calls++; throw new Error('RRC download page has no file named daf420.dat'); }, waits: [1, 1], sleep: async () => {}, log: () => {} }), /no file named/);
+  assert.equal(calls, 1, 'layout errors fail at once');
 });

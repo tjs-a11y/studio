@@ -18,7 +18,7 @@ jobs:
     # repo variable PERMIT_WATCH_ENABLED is set to 1. A manual run (workflow_dispatch) always works.
     if: github.event_name == 'workflow_dispatch' || vars.PERMIT_WATCH_ENABLED == '1'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 

@@ -226,7 +226,22 @@ export function godriveRequest(html, base, fileName = DAILY_NAME) {
   return { action: new URL(unesc(attr(formTag, 'action') || base), base).toString(), fields };
 }
 
-export async function download(url) {
+// The RRC file server sometimes resets connections (TLS reset, ECONNRESET), on some days for every attempt.
+// Retry network failures with growing waits, each time from a fresh session. A page-layout error is not retried:
+// it will not fix itself, and the run should fail so someone looks.
+export const RETRY_WAITS_MS = [15000, 60000, 180000];
+export async function download(url, { once = downloadOnce, waits = RETRY_WAITS_MS, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), log = console.warn } = {}) {
+  for (let i = 0; ; i++) {
+    try { return await once(url); }
+    catch (e) {
+      if (/^RRC download page/.test(e.message) || i >= waits.length) throw e;
+      log(`Download attempt ${i + 1} failed (${e.cause?.code || e.message}); retrying in ${Math.round(waits[i] / 1000)} s`);
+      await sleep(waits[i]);
+    }
+  }
+}
+
+async function downloadOnce(url) {
   const jar = new Map();
   const req = async (u, opts = {}) => {
     const headers = { 'user-agent': UA, ...(opts.headers || {}) };
