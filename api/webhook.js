@@ -4,6 +4,14 @@
 import { stripe, json, fail, verifySession } from './_lib/core.js';
 import { recordSubscription } from './_lib/entitlements.js';
 
+// A failed cache write must not be acknowledged: if a cancellation were dropped, the old "active" record
+// would keep granting access until its TTL. Throwing returns 500, so Stripe redelivers the event.
+async function sync(sub, created) {
+  const r = await recordSubscription(sub, created);
+  if (r.reason === 'kv_write_failed') throw new Error('entitlement cache write failed');
+  return r;
+}
+
 export async function POST(request) {
   const s = stripe();
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -22,14 +30,14 @@ export async function POST(request) {
       case 'checkout.session.async_payment_succeeded': {
         if (obj.payment_status === 'unpaid') break; // delayed payment methods: wait for async_payment_succeeded
         const v = await verifySession(s, obj.id, obj.metadata?.tool);
-        if (v.ok && v.subscription) await recordSubscription({ ...v.subscription, customer: v.customer }, event.created);
+        if (v.ok && v.subscription) await sync({ ...v.subscription, customer: v.customer }, event.created);
         console.log(JSON.stringify({ evt: event.type, tool: obj.metadata?.tool, ok: v.ok, reason: v.reason || null }));
         break;
       }
       case 'customer.subscription.created':
       case 'customer.subscription.updated':
       case 'customer.subscription.deleted': {
-        const r = await recordSubscription(obj, event.created);
+        const r = await sync(obj, event.created);
         console.log(JSON.stringify({ evt: event.type, tool: obj.metadata?.tool || null, status: obj.status || null, cached: r.stored, reason: r.reason || null }));
         break;
       }

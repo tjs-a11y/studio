@@ -35,7 +35,7 @@ export async function recordSubscription(sub, eventCreated) {
   const now = Math.floor(Date.now() / 1000);
   const ttl = active && end > now ? end - now + 2 * DAY : 35 * DAY;
   const ok = await kvSetJson(key(customer, tool), rec, ttl);
-  return { stored: ok, active };
+  return ok ? { stored: true, active } : { stored: false, active, reason: 'kv_write_failed' };
 }
 
 // Cached answer for (customer, tool), or null when there is no usable cache entry.

@@ -106,3 +106,16 @@ test('webhook with a bad signature is refused and changes nothing', async () => 
   assert.equal(r.status, 400);
   assert.equal(store.m.size, 0);
 });
+
+test('webhook: a failed cache write returns 500 so Stripe retries the cancellation', async () => {
+  const store = kv.memoryKv();
+  kv.setKvForTests(store);
+  await firstToken();
+  const down = { command: async ([op, ...rest]) => (op === 'SET' ? null : store.command([op, ...rest])) };
+  kv.setKvForTests(down);
+  assert.equal((await sendEvent('customer.subscription.deleted', { ...sub, status: 'canceled' })).status, 500);
+  kv.setKvForTests(store);
+  assert.equal((await sendEvent('customer.subscription.deleted', { ...sub, status: 'canceled' })).status, 200, 'the retry succeeds');
+  const r = await check(core.signToken({ c: 'cus_1', t: 'demo', v: Date.now() + 60000 }));
+  assert.equal(r.pro, false); assert.equal(r.source, 'cache');
+});
