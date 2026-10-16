@@ -1,6 +1,6 @@
 # EUDR Plot File Checker (`plot-file-checker`)
 
-A free, browser-only tool for cocoa and coffee exporters, cooperatives and their consultants. It checks farm plot geolocation files before they go to an EU buyer or into the EU Information System (TRACES) under the EU Deforestation Regulation (EU) 2023/1115, and fixes the problems that are safe to fix. The UI is in English and French: it follows `navigator.language`, and a toggle switches it, with the choice saved in localStorage.
+A free, browser-only tool for cocoa and coffee exporters, cooperatives and their consultants. It checks farm plot geolocation files before they go to an EU buyer or into the EU Information System (TRACES) under the EU Deforestation Regulation (EU) 2023/1115, and fixes the problems that are safe to fix. The UI is in English, French and Spanish (Spanish added 2026-10-16): it follows `?lang=en|fr|es` first, then the choice saved in localStorage, then `navigator.language`; the EN/FR/ES toggle switches it. Spanish names of producer countries in files ("Costa de Marfil", "Perú") also convert to ISO-2 codes. The learn pages and guides are in English and French only (Spanish ones not written yet).
 
 This is a free demand test. It passes at **300 files checked and 25 waitlist sign-ups**.
 
@@ -70,10 +70,12 @@ Review these rules monthly against the official page. A wrong rule could pass a 
 ## Tests
 ```
 node --test plot-file-checker/test/geometry.test.mjs        # 22 unit tests (area, winding, self-intersection, swaps, parsers, fixes, EU limits, official EU sample)
-PW_NODE_MODULES=<dir with playwright> CHROMIUM_PATH=<chrome> SHOT_DIR=<dir> node plot-file-checker/test/e2e.mjs   # 23 browser checks
+node --test plot-file-checker/test/i18n.test.mjs            # 6 tests: every string, message, rule card, source and country in EN/FR/ES with matching {placeholders}
+PW_NODE_MODULES=<dir with playwright> CHROMIUM_PATH=<chrome> SHOT_DIR=<dir> node plot-file-checker/test/e2e.mjs   # 34 browser checks (incl. Spanish toggle, Spanish phone browser, ?lang=es, Spanish CSV headers)
 ```
 The unit tests read the core straight out of `index.html` (`<script id="pfc-core">`), so there is no separate build.
 
 ## Changelog
+- 2026-10-16: Spanish UI (all strings, the 58 issue messages, rule cards, FAQ, buyer summary, CSV report headers), `?lang=` links, Spanish country names recognised in files. Translation is staff-written and not yet reviewed by a native speaker. No checker rule changed.
 - 2026-10-15: Buyer summary (print / save as PDF) with a SHA-256 fingerprint of the fixed file. Sources re-checked: the EU Information System GeoJSON page still reads "Updated 17 August 2026"; its API index now describes V3 (Regulation (EU) 2025/2650: micro or small primary operators and simplified declarations). No rule in this checker changed.
 - 2026-10-11: Checked against the EU Information System documentation (see Sources).

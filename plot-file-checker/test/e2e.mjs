@@ -37,7 +37,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PAT
 const results = [];
 const step = async (name, fn) => { try { await fn(); results.push(['PASS', name]); } catch (e) { results.push(['FAIL', name, e.message.split('\n')[0]]); } };
 
-async function newPage(opts) {
+async function newPage(opts, query = '') {
   const ctx = await browser.newContext({ acceptDownloads: true, ...opts });
   const page = await ctx.newPage();
   const errors = [], events = [];
@@ -49,7 +49,7 @@ async function newPage(opts) {
     if (apiMode === 'fail') return route.fulfill({ status: 500, body: 'nope' });
     return route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
   });
-  await page.goto(URL0);
+  await page.goto(URL0 + query);
   return { ctx, page, errors, events, setApi: (m) => { apiMode = m; } };
 }
 const shot = (page, name) => page.screenshot({ path: path.join(SHOTS, `eudr-${name}.png`), fullPage: true });
@@ -240,6 +240,23 @@ await step('French toggle', async () => {
   assert.equal(await page.textContent('h1'), 'EUDR Plot File Checker');
 });
 
+await step('Spanish toggle', async () => {
+  await page.click('[data-lang="es"]');
+  assert.equal(await page.textContent('h1'), 'Verificador de archivos de parcelas EUDR');
+  assert.equal(await page.getAttribute('html', 'lang'), 'es');
+  assert.equal(await page.title(), 'Verificador EUDR: revise y corrija sus archivos GeoJSON');
+  assert.match(await page.textContent('#verdict'), /4 de 8 parcela\(s\)/);
+  assert.match(await page.textContent('#need'), /El contorno se cruza a sí mismo/);
+  assert.match(await page.textContent('#fixed'), /Se pusieron latitud\/longitud/);
+  assert.match(await page.textContent('.privacy'), /nunca sale de este dispositivo/);
+  assert.ok(await page.isVisible('.faq-es')); assert.ok(!(await page.isVisible('.faq-en'))); assert.ok(!(await page.isVisible('.faq-fr')));
+  assert.match(await page.textContent('#rulesList'), /Fuentes: /);
+  await shot(page, 'desktop-es');
+  await page.click('[data-lang="en"]');
+  assert.equal(await page.textContent('h1'), 'EUDR Plot File Checker');
+  assert.ok(await page.isVisible('.faq-en')); assert.ok(!(await page.isVisible('.faq-es')));
+});
+
 await step('desktop: no console errors (except the deliberate 500 in the waitlist failure test)', async () => { const errs = D.errors.filter((e) => !/status of 500/.test(e)); assert.deepEqual(errs, [], JSON.stringify(D.errors)); });
 await D.ctx.close();
 
@@ -266,6 +283,41 @@ for (const scheme of ['light', 'dark']) {
   });
   await step(`phone ${scheme}: no console errors`, async () => { assert.deepEqual(M.errors, []); });
   await M.ctx.close();
+}
+
+// ---------- phone, Spanish browser; and a ?lang=es link on an English browser ----------
+{
+  const M = await newPage({ viewport: { width: 375, height: 812 }, locale: 'es-ES', colorScheme: 'light', isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  await step('phone: Spanish picked from browser language', async () => {
+    assert.equal(await M.page.textContent('h1'), 'Verificador de archivos de parcelas EUDR');
+    assert.equal(await M.page.getAttribute('[data-lang="es"]', 'aria-pressed'), 'true');
+  });
+  await step('phone: Spanish messy sample, no horizontal scroll', async () => {
+    await M.page.click('#sampleMessy');
+    await M.page.waitForSelector('#result:not([hidden])');
+    const sw = await M.page.evaluate(() => document.documentElement.scrollWidth);
+    assert.ok(sw <= 375, 'scrollWidth ' + sw);
+    assert.match(await M.page.textContent('#tbl'), /Parcela/);
+    await shot(M.page, 'phone-es');
+  });
+  await step('phone: buyer summary in Spanish', async () => {
+    await M.page.evaluate(() => { window.print = () => {}; });
+    await M.page.click('#dlSheet');
+    assert.match(await M.page.textContent('#sheet'), /Revisión de archivo de parcelas EUDR: resumen/);
+    assert.match(await M.page.textContent('#sheetFp'), /^[0-9a-f]{64}$/);
+  });
+  await step('phone: Spanish issue report has Spanish headers', async () => {
+    const [dl] = await Promise.all([M.page.waitForEvent('download'), M.page.click('#dlCsv')]);
+    const csv = readFileSync(await dl.path(), 'utf8');
+    assert.match(csv, /^\uFEFFparcela,nombre,gravedad,codigo,mensaje,consejo\r\n/);
+  });
+  await step('phone Spanish: no console errors', async () => { assert.deepEqual(M.errors, []); });
+  await M.ctx.close();
+  const Q = await newPage({ viewport: { width: 375, height: 812 }, locale: 'en-US', colorScheme: 'dark', isMobile: true, hasTouch: true, deviceScaleFactor: 2 }, '?lang=es');
+  await step('?lang=es link opens in Spanish on an English browser', async () => {
+    assert.equal(await Q.page.textContent('h1'), 'Verificador de archivos de parcelas EUDR');
+  });
+  await Q.ctx.close();
 }
 
 await browser.close();

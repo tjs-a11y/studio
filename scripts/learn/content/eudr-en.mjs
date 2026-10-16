@@ -31,7 +31,7 @@ export const SECTION = {
   ],
   outro: '<p class="note">Checked against the EU Information System help pages on October 11, 2026. Application dates for the regulation are not covered here; check the European Commission\'s official timeline.</p>',
   sources: [SRC.geo, SRC.val, SRC.faq, SRC.dds, SRC.home, SRC.tool],
-  cta: { title: 'Check a plot file for free', text: 'Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English or French; nothing is uploaded.', href: '/plot-file-checker/', label: 'Open the Plot File Checker' },
+  cta: { title: 'Check a plot file for free', text: 'Drop a GeoJSON, KML or CSV file into the EUDR Plot File Checker. It flags every problem on this list, fixes the safe ones (closing rings, decimals, property names, obvious swaps) and gives you a corrected GeoJSON. In English, French or Spanish; nothing is uploaded.', href: '/plot-file-checker/', label: 'Open the Plot File Checker' },
   disclaimer: 'Not legal advice. These pages explain the technical file rules published by the EU Information System; they do not guarantee that a file or a due diligence statement will be accepted, and they say nothing about whether a plot is deforestation-free. Check the official documentation, which can change.',
 };
 
