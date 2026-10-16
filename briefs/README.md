@@ -6,11 +6,11 @@ northstar-delivery repo; the Commodity Desk has its own data-only brief at `/com
 
 | Desk | Audience | Promotes | Status |
 |---|---|---|---|
-| `small-business` | Owners, freelancers, bookkeepers | Vendor Check, Saver | on |
-| `eudr` | EUDR exporters and importers | EUDR Plot File Checker | on |
-| `scams` | Consumers and their families | Shield, Spare Key | on |
-| `household-money` | Households | Saver, Pilot | on |
-| `caregivers` | Older adults and caregivers | Footsure | on |
+| `small-business` | Owners, freelancers, bookkeepers | Vendor Check, Saver | on (9 items on 2026-10-16) |
+| `eudr` | EUDR exporters and importers | EUDR Plot File Checker | on; publishes only on days with EUDR news (0 items on 2026-10-16) |
+| `scams` | Consumers and their families | Shield, Spare Key | on (8 items on 2026-10-16) |
+| `household-money` | Households | Saver, Pilot | on (5 items on 2026-10-16) |
+| `caregivers` | Older adults and caregivers | Footsure | on; publishes on days with 2+ aging stories (1 on 2026-10-16) |
 | `texas-minerals` | Texas mineral owners | Permit Watch | off until Permit Watch has live data |
 
 ## How a run works
@@ -27,6 +27,9 @@ northstar-delivery repo; the Commodity Desk has its own data-only brief at `/com
 
 Every Claude call is logged with its tokens and cost in `data/usage.json`. `.vercelignore` keeps this
 folder off the public site.
+
+Feed addresses were chosen with `node briefs/probe.mjs` (workflow mode `probe`), which reports which
+candidate feeds return fresh items from GitHub's network.
 
 ## Commands
 ```bash
