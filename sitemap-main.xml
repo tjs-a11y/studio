@@ -26,10 +26,17 @@
   <url><loc>https://quickwell.app/guides/eudr-geolocalisation-geojson/</loc><lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/guides/eudr-geolocalizacion-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/></url>
+  <url><loc>https://quickwell.app/guides/eudr-geolocalizacion-geojson/</loc><lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/guides/eudr-geolocalizacion-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/></url>
   <url><loc>https://quickwell.app/guides/eudr-geolocation-geojson/</loc><lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/guides/eudr-geolocalizacion-geojson/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/"/></url>
   <url><loc>https://quickwell.app/guides/eudr-plot-file-rejected/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://quickwell.app/guides/eudr-simplified-declaration-postal-address/</loc><lastmod>2026-10-16</lastmod></url>

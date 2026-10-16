@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geolocalización EUDR: qué debe tener el archivo GeoJSON</title>
+<meta name="description" content="Qué debe contener un archivo GeoJSON de parcelas EUDR según el sistema de información de la UE: WGS 84, 6 decimales, geometrías y la regla de las 4 ha.">
+<link rel="canonical" href="https://quickwell.app/guides/eudr-geolocalizacion-geojson/">
+<link rel="alternate" hreflang="es" href="https://quickwell.app/guides/eudr-geolocalizacion-geojson/">
+<link rel="alternate" hreflang="fr" href="https://quickwell.app/guides/eudr-geolocalisation-geojson/">
+<link rel="alternate" hreflang="en" href="https://quickwell.app/guides/eudr-geolocation-geojson/">
+<link rel="alternate" hreflang="x-default" href="https://quickwell.app/guides/eudr-geolocation-geojson/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Geolocalización EUDR: qué debe tener el archivo GeoJSON">
+<meta property="og:description" content="Qué debe contener un archivo GeoJSON de parcelas EUDR según el sistema de información de la UE: WGS 84, 6 decimales, geometrías y la regla de las 4 ha.">
+<meta property="og:url" content="https://quickwell.app/guides/eudr-geolocalizacion-geojson/">
+<meta property="og:image" content="https://quickwell.app/plot-file-checker/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Geolocalización EUDR: qué debe tener el archivo GeoJSON">
+<meta name="twitter:description" content="Qué debe contener un archivo GeoJSON de parcelas EUDR según el sistema de información de la UE: WGS 84, 6 decimales, geometrías y la regla de las 4 ha.">
+<meta name="twitter:image" content="https://quickwell.app/plot-file-checker/og.png">
+<link rel="stylesheet" href="/guides/guide.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Geolocalización EUDR: qué debe contener el archivo GeoJSON","description":"Qué debe contener un archivo GeoJSON de parcelas EUDR según el sistema de información de la UE: WGS 84, 6 decimales, geometrías y la regla de las 4 ha.","inLanguage":"es","datePublished":"2026-10-16","dateModified":"2026-10-16","url":"https://quickwell.app/guides/eudr-geolocalizacion-geojson/","mainEntityOfPage":"https://quickwell.app/guides/eudr-geolocalizacion-geojson/","image":"https://quickwell.app/plot-file-checker/og.png","wordCount":1190,"author":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.app/"},"publisher":{"@type":"Organization","name":"Quickwell","url":"https://quickwell.app/"},"citation":["https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html","https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quickwell","item":"https://quickwell.app/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://quickwell.app/guides/"},{"@type":"ListItem","position":3,"name":"Geolocalización EUDR: qué debe contener el archivo GeoJSON","item":"https://quickwell.app/guides/eudr-geolocalizacion-geojson/"}]}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+<nav class="crumbs" aria-label="Ruta de navegación"><a href="/">Quickwell</a> / <a href="/guides/">Guías</a></nav>
+<article>
+<h1>Geolocalización EUDR: qué debe contener el archivo GeoJSON</h1>
+<p class="meta">Actualizado el 16 de octubre de 2026 · 5 min de lectura</p>
+<p class="lede">Con el Reglamento europeo sobre deforestación (EUDR), los operadores declaran dónde se produjeron productos como el café y el cacao, con las coordenadas de las parcelas en un archivo GeoJSON que se carga en el sistema de información de la UE. Esta guía explica, en lenguaje sencillo, qué debe contener ese archivo según la documentación oficial del sistema de información.</p>
+
+<h2>Para quién es esta guía</h2>
+<p>Para exportadores, cooperativas y consultores que preparan los mapas de parcelas para un comprador europeo o para una declaración de diligencia debida (DDS, por sus siglas en inglés). Según las preguntas frecuentes del sistema, las materias primas cubiertas son el ganado bovino, el cacao, el café, la palma de aceite, el caucho, la soja y la madera. Los productos deben estar «libres de deforestación»: producidos en tierras que no fueron deforestadas después del 31 de diciembre de 2020.</p>
+
+<h2>El formato: GeoJSON en WGS 84, primero la longitud</h2>
+<ul>
+  <li><b>Sistema de coordenadas:</b> WGS 84 (EPSG:4326), en grados decimales. Si sus coordenadas están en otro sistema, por ejemplo UTM en metros, conviértalas antes de cargarlas.</li>
+  <li><b>Orden:</b> cada posición se escribe <code>[longitud, latitud]</code>. La longitud va primero. Es al revés de como lo muestran muchos teléfonos y hojas de cálculo, y es una causa frecuente de puntos invertidos.</li>
+  <li><b>Precisión:</b> las preguntas frecuentes del sistema definen la geolocalización como coordenadas con al menos 6 decimales. El sistema recorta (trunca) las coordenadas a 6 decimales antes de guardarlas, así que enviar más no sirve de nada. Seis decimales de grado equivalen a unos 0,1 m sobre el terreno en el ecuador <span class="est">(estimación: un grado de latitud mide unos 111 km, así que 0,000001° ≈ 0,11 m)</span>.</li>
+</ul>
+
+<h2>Las geometrías aceptadas</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Geometría</th><th>¿Aceptada?</th><th>Notas</th></tr></thead>
+  <tbody>
+    <tr><td>Point</td><td>Sí</td><td>Un par de coordenadas. Para parcelas pequeñas (vea la regla de las 4 hectáreas).</td></tr>
+    <tr><td>MultiPoint</td><td>Sí</td><td>Dos o más puntos.</td></tr>
+    <tr><td>Polygon</td><td>Sí</td><td>Al menos cuatro pares de coordenadas; el primero y el último deben ser iguales para cerrar la forma.</td></tr>
+    <tr><td>MultiPolygon</td><td>Sí</td><td>Dos o más polígonos.</td></tr>
+    <tr><td>GeometryCollection</td><td>Sí</td><td>Dos o más geometrías. Figura como tipo admitido en la referencia de la API de DDS.</td></tr>
+    <tr><td>LineString, MultiLineString</td><td>No</td><td>Una línea no describe un lugar de producción y no se procesa.</td></tr>
+  </tbody>
+</table></div>
+<p>Dos reglas de forma bloquean muchos archivos:</p>
+<ul>
+  <li><b>Sin huecos.</b> Los polígonos con huecos («en forma de dona») no se admiten. La solución que indica la UE: dibujar dos medias donas.</li>
+  <li><b>Sin líneas que se cruzan.</b> Un contorno que se cruza a sí mismo, como un «8», no se procesa. Tampoco las formas con lados superpuestos o que se pliegan hacia dentro, ni las «formas» que son solo una línea recta.</li>
+</ul>
+<p>La descripción de la UE no fija ninguna regla sobre el sentido de los vértices (horario o antihorario).</p>
+
+<h2>La regla de las 4 hectáreas: ¿punto o polígono?</h2>
+<p>Las preguntas frecuentes indican que se exigen polígonos para las parcelas de más de 4 hectáreas, salvo para el ganado bovino. En un punto, la propiedad <code>Area</code> (en hectáreas) indica el tamaño de la parcela:</p>
+<ul>
+  <li>Sin Area, el sistema fija la superficie en <b>4 ha</b> por defecto.</li>
+  <li>Un punto con un Area mayor de 4 ha es un <b>error</b>, salvo para el ganado bovino.</li>
+  <li>Cuando se indica Area, debe ser de al menos <b>0,0001 ha</b>.</li>
+</ul>
+
+<h2>Las propiedades que lee el sistema</h2>
+<p>Cada entidad («Feature») puede llevar estas propiedades opcionales. Los nombres distinguen mayúsculas y minúsculas: <code>productionplace</code> no es <code>ProductionPlace</code>. Las demás propiedades se ignoran. Ojo: los nombres van siempre en inglés, también en un archivo en español (<code>pais</code> o <code>superficie</code> no se leen).</p>
+<div class="tbl"><table>
+  <thead><tr><th>Propiedad</th><th>Contenido</th></tr></thead>
+  <tbody>
+    <tr><td><code>ProducerName</code></td><td>El nombre del productor.</td></tr>
+    <tr><td><code>ProducerCountry</code></td><td>El país de producción en código ISO de 2 letras, por ejemplo <code>CO</code> o <code>PE</code>, y no «Colombia» ni «COL».</td></tr>
+    <tr><td><code>ProductionPlace</code></td><td>Un nombre para el lugar. La UE recomienda indicarlo.</td></tr>
+    <tr><td><code>Area</code></td><td>La superficie en hectáreas, para los puntos. Debe ser un número: <code>"Area": "3"</code> (entre comillas) se lee como 0.</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Archivos de tipo I y de tipo II</h2>
+<p>La estructura es la misma; cambian las propiedades.</p>
+<ul>
+  <li><b>Tipo I</b>: una lista de coordenadas de un solo productor. Contiene las geometrías y puede incluir las propiedades opcionales.</li>
+  <li><b>Tipo II</b>: reúne a varios productores agrupados por <code>ProducerName</code> y <code>ProducerCountry</code>. Cada entidad debe incluir <code>ProducerCountry</code>.</li>
+</ul>
+
+<h2>Límites de tamaño y de cantidad</h2>
+<ul>
+  <li>El total de datos de geolocalización de una DDS no puede superar los <b>25 MB</b>, sumando todos los archivos GeoJSON cargados. La UE aconseja quitar los puntos innecesarios en los lados rectos (dos puntos bastan para una línea recta).</li>
+  <li>Como máximo <b>1.000 productores</b> por materia prima y <b>10.000</b> por DDS.</li>
+</ul>
+
+<h2>Un ejemplo mínimo válido</h2>
+<p>Archivo ficticio con dos parcelas: una parcela pequeña como punto con su superficie, y un polígono.</p>
+<pre><code>{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "properties": { "ProducerName": "Productor Ejemplo", "ProducerCountry": "CO",
+                      "ProductionPlace": "Parcela A", "Area": 1.8 },
+      "geometry": { "type": "Point", "coordinates": [-75.681234, 4.535871] } },
+    { "type": "Feature",
+      "properties": { "ProducerName": "Productor Ejemplo", "ProducerCountry": "CO",
+                      "ProductionPlace": "Parcela B" },
+      "geometry": { "type": "Polygon", "coordinates": [[
+        [-75.684120, 4.532204], [-75.681870, 4.532511], [-75.681530, 4.530090],
+        [-75.683940, 4.529802], [-75.684120, 4.532204] ]] } }
+  ]
+}</code></pre>
+<p>Fíjese: primero la longitud, seis decimales, el último vértice del polígono repite el primero, el país va en código de 2 letras y Area es un número (con punto decimal, no con coma).</p>
+
+<h2>Declaraciones simplificadas</h2>
+<p>La documentación del sistema de información indica que la versión actual responde al Reglamento (UE) 2025/2650, que introdujo la declaración simplificada (SD) para los operadores primarios micro o pequeños. Según las preguntas frecuentes, se trata de personas físicas o micro o pequeñas empresas establecidas en un país de bajo riesgo que comercializan o exportan productos que ellas mismas produjeron en ese país, y la declaración simplificada les permite dar una o varias direcciones postales en lugar de la geometría GeoJSON. Compruebe si es su caso antes de cartografiar cada parcela.</p>
+
+<h2>Antes de cargar el archivo</h2>
+<ol>
+  <li>Abra el archivo en un SIG o en un verificador y mírelo en un mapa: ¿están las parcelas en el lugar correcto?</li>
+  <li>Busque coordenadas invertidas, contornos sin cerrar, contornos que se cruzan y huecos.</li>
+  <li>Revise los nombres de las propiedades, los códigos de país y el formato de los números.</li>
+  <li>Compruebe el tamaño total frente al límite de 25 MB.</li>
+</ol>
+<p><a href="/guides/eudr-geolocation-geojson/" hreflang="en" lang="en">Read this guide in English</a> · <a href="/guides/eudr-geolocalisation-geojson/" hreflang="fr" lang="fr">Lire ce guide en français</a>.</p>
+
+<div class="cta">
+  <p><b>Revise su archivo en el navegador.</b> El <a href="/plot-file-checker/?lang=es">verificador de archivos de parcelas EUDR</a> es gratuito y está en español. Lee archivos GeoJSON, KML, CSV y WKT, señala cada uno de los problemas anteriores, corrige los que se pueden corregir sin riesgo (cierre de contornos, seis decimales, códigos de país, nombres de propiedades, inversiones evidentes) y le entrega un GeoJSON corregido para descargar. Su archivo nunca sale de su dispositivo.</p>
+</div>
+<section class="legal">
+<p><b>No es asesoría legal.</b> Esta guía es información general, revisada el 16 de octubre de 2026 con las fuentes de abajo (en inglés). Las reglas cambian: confirme con la fuente oficial y con un profesional calificado antes de actuar. Quickwell no está afiliado a la Unión Europea ni cuenta con su respaldo.</p>
+</section>
+<section class="sources">
+<h2>Fuentes</h2>
+<ul>
+<li>EU Information System, "GeoJSON File Description" (updated 17 August 2026): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/geojson-description.html</a></li>
+<li>EU Information System, "Validation Rules": <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/validation-rules.html</a></li>
+<li>EU Information System, FAQ: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/faq.html</a></li>
+<li>EU Information System, Due Diligence Statement V3 API reference: <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/api/due-diligence-statement-v3.html</a></li>
+<li>EU Information System, Operator API Reference home page (EUDR overview and amendment note): <a href="https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html" rel="noopener">https://eudr.webcloud.ec.europa.eu/tracesnt/help/eudr-documentation/operator/index.html</a></li>
+</ul>
+</section>
+</article>
+<footer><a href="/">Quickwell</a> · <a href="/guides/">Todas las guías</a> · <a href="/plot-file-checker/?lang=es">Verificador EUDR</a> · <a href="/privacy.html">Privacidad</a> · <a href="/terms.html">Condiciones</a></footer>
+</main>
+</body>
+</html>
