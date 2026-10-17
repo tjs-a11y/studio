@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's for Dinner: meals from what you already have</title>
+<meta name="description" content="Tap what's in your fridge and get three dinners you can make tonight — plus the one thing to grab. Works in your browser; nothing is uploaded.">
+<link rel="canonical" href="https://quickwell.app/dinner/">
+<meta property="og:title" content="What's for Dinner: meals from what you already have">
+<meta property="og:description" content="Tap what you have, get three dinners you can make right now and the one thing to grab. Nothing is uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/dinner/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<meta name="twitter:title" content="What's for Dinner: meals from what you already have">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"What's for Dinner","url":"https://quickwell.app/dinner/","applicationCategory":"LifestyleApplication","description":"Suggests dinners you can make from the ingredients you already have, ranked by what you can make now versus what needs one more thing. Runs in the browser; nothing is uploaded.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I have to list everything?","acceptedAnswer":{"@type":"Answer","text":"No. Tap the handful of things you have; the more you add, the better the matches. It assumes you have basics like oil, salt and pepper."}},{"@type":"Question","name":"Is anything uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The matching happens in your browser and nothing you tap leaves your device."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6; --chip:#eef1f6; --on:#2457d6; --grn:#1f7a3d; --grnbg:#eaf6ee; --amb:#9a6700; --ambbg:#fbf3e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff; --chip:#20242c; --on:#7aa2ff; --grn:#7fc79a; --grnbg:#16241b; --amb:#f2c14e; --ambbg:#2a2414; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:30px 16px 56px; }
+  h1 { font-size:1.7rem; margin:0 0 6px; } .lede { margin:0 0 18px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0; }
+  .grp { margin:12px 0 4px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { border:1px solid var(--line); background:var(--chip); color:var(--ink); border-radius:999px; padding:8px 13px; font:inherit; font-size:.95rem; cursor:pointer; }
+  .chip[aria-pressed="true"] { background:var(--on); color:#fff; border-color:var(--on); }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px; }
+  input[type=text] { flex:1; min-width:140px; font:inherit; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  button { font:inherit; padding:11px 18px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .muted{color:var(--muted)} .small{font-size:.9rem}
+  .meal { border:1px solid var(--line); border-left-width:5px; border-radius:12px; padding:14px 16px; margin:12px 0; background:var(--card); }
+  .meal.now { border-left-color:var(--grn); } .meal.one { border-left-color:var(--amb); }
+  .meal h3 { margin:0 0 4px; font-size:1.15rem; } .badge { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:2px 8px; border-radius:20px; margin-left:8px; vertical-align:middle; }
+  .badge.now { background:var(--grn); color:#042a14; } .badge.one { background:var(--amb); color:#1b1500; }
+  .have { color:var(--muted); font-size:.9rem; margin:4px 0; } .need { background:var(--ambbg); border-radius:8px; padding:7px 10px; margin:6px 0; font-size:.92rem; }
+  ol { margin:8px 0 0; padding-left:20px; } ol li { margin:3px 0; }
+.qw-also{margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px}
+.qw-also p{margin:0 0 10px;font-weight:700;font-size:.95rem}
+.qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.qw-also a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.qw-also b{color:var(--accent)} .qw-also span{display:block;color:var(--muted);font-size:.85rem}
+  footer { margin-top:30px; color:var(--muted); font-size:.9rem; } a { color:var(--accent); } [hidden]{display:none!important}
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <h1>What's for Dinner?</h1>
+  <p class="lede">Open the fridge, tap what you see, and get three dinners you can make <b>tonight</b> — plus the one thing to grab if you want a fourth. No recipe hunting. <b>Nothing you tap is uploaded.</b></p>
+
+  <section class="card noprint">
+    <div id="palette"></div>
+    <div class="row">
+      <input id="add" type="text" placeholder="Add anything else (e.g. salmon, lentils)…" autocomplete="off" aria-label="Add an ingredient">
+      <button class="ghost" id="addbtn">Add</button>
+    </div>
+    <div class="row">
+      <button id="go">What can I make?</button>
+      <button class="ghost" id="clear">Clear</button>
+      <span class="small muted" id="count"></span>
+    </div>
+    <p class="small muted" style="margin-bottom:0">Assumes you've got the basics: oil, salt, pepper, common spices.</p>
+  </section>
+
+  <section id="out" hidden></section>
+
+  <!-- xlinks:dinner -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/before-you-sign/?ref=xlink-dinner"><b>Before You Sign</b><span>Spot the costly clauses in any contract before you sign</span></a></li><li><a href="/saver/?ref=xlink-dinner"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-dinner"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/shield/?ref=xlink-dinner"><b>Quickwell Shield</b><span>Is this message a scam? See the warning signs</span></a></li><li><a href="/footsure/?ref=xlink-dinner"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-dinner"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-dinner"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-dinner"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-dinner"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+
+  <footer>Dinner from what you already have — nothing you tap leaves your browser. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a class="qw-afterhours" href="https://riddlebound.app/?ref=quickwell" rel="noopener">After hours? Riddlebound</a></footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  // Ingredient palette: label -> tags. Tags are what recipes match on.
+  var GROUPS = [
+    ["Proteins", { "Chicken": ["protein"], "Beef": ["protein"], "Ground meat": ["protein"], "Pork": ["protein"], "Eggs": ["egg", "protein"], "Tofu": ["protein"], "Beans": ["protein", "beans"], "Chickpeas": ["protein", "beans"], "Canned tuna": ["protein"], "Shrimp": ["protein"], "Bacon": ["protein"], "Sausage": ["protein"] }],
+    ["Carbs", { "Rice": ["rice", "grain"], "Pasta": ["pasta", "grain"], "Noodles": ["noodles", "grain"], "Tortillas": ["tortilla"], "Bread": ["bread"], "Potatoes": ["potato"], "Quinoa": ["grain"] }],
+    ["Vegetables", { "Onion": ["veg", "aromatic"], "Garlic": ["aromatic"], "Tomato": ["veg", "tomato"], "Spinach": ["veg"], "Broccoli": ["veg"], "Bell pepper": ["veg"], "Carrot": ["veg"], "Mushroom": ["veg"], "Zucchini": ["veg"], "Lettuce": ["veg"], "Corn": ["veg"], "Peas": ["veg"], "Avocado": ["veg"] }],
+    ["Dairy & extras", { "Cheese": ["cheese", "dairy"], "Milk": ["dairy"], "Butter": ["dairy"], "Yogurt": ["dairy"], "Coconut milk": ["coconut"], "Tomato sauce": ["tomato", "tomatosauce"], "Broth": ["broth"] }]
+  ];
+  var KEYWORD = {}; // typed-word -> tags (built from the palette, plus a few synonyms)
+  GROUPS.forEach(function (g) { Object.keys(g[1]).forEach(function (k) { KEYWORD[k.toLowerCase()] = g[1][k]; }); });
+  [["salmon", ["protein"]], ["lentils", ["protein", "beans"]], ["kale", ["veg"]], ["pepper", ["veg"]], ["couscous", ["grain"]], ["turkey", ["protein"]], ["ham", ["protein"]], ["fish", ["protein"]], ["cauliflower", ["veg"]], ["sweet potato", ["potato"]], ["mozzarella", ["cheese", "dairy"]]].forEach(function (p) { KEYWORD[p[0]] = p[1]; });
+
+  // Flexible "formula" recipes. req = AND-groups; each group is any-of these tags. flex = nice-to-haves.
+  var EX = { protein: "any protein (chicken, egg, beans…)", veg: "any vegetable", tortilla: "tortillas", cheese: "cheese", broth: "broth or a bouillon cube", rice: "rice", grain: "rice or pasta", bread: "bread", egg: "eggs", tomato: "a tomato or a jar of sauce", aromatic: "garlic or onion", beans: "a can of beans", noodles: "noodles", coconut: "a can of coconut milk", potato: "potatoes", dairy: "milk or butter" };
+  var RECIPES = [
+    { n: "Veggie frittata", e: "🍳", req: [["egg"], ["veg"]], flex: ["cheese"], m: ["Beat the eggs with salt; sauté the veg in an oven-safe pan.", "Pour eggs over, scatter cheese, cook until the edges set.", "Finish under the broiler 2–3 min until puffed."] },
+    { n: "Loaded quesadilla", e: "🌯", req: [["tortilla"], ["cheese"]], flex: ["protein", "veg"], m: ["Fill a tortilla with cheese (and any protein/veg).", "Fold, cook in a dry pan until golden both sides.", "Cut into wedges; dip in whatever sauce you've got."] },
+    { n: "Fridge fried rice", e: "🍚", req: [["rice"], ["veg"]], flex: ["egg", "protein"], m: ["Get day-old rice sizzling in hot oil.", "Push aside, scramble an egg if you have one, add veg/protein.", "Splash of soy, toss, done in 8 minutes."] },
+    { n: "Garlic butter pasta", e: "🍝", req: [["pasta"], ["aromatic", "tomato", "cheese"]], flex: ["protein", "veg"], m: ["Boil the pasta; save a splash of the water.", "Sizzle garlic in butter/oil; add tomato or cheese.", "Toss pasta through with the pasta water until glossy."] },
+    { n: "Anything stir-fry", e: "🥘", req: [["protein"], ["veg"]], flex: ["rice", "noodles"], m: ["High heat, a little oil, protein first.", "Add the hardest veg, then the softer ones.", "Sauce it (soy + a little sugar/garlic); serve over rice or noodles."] },
+    { n: "Weeknight tacos", e: "🌮", req: [["tortilla"], ["protein"]], flex: ["veg", "cheese"], m: ["Brown the protein with salt and any spice you like.", "Warm the tortillas.", "Pile on protein, then whatever veg/cheese you have."] },
+    { n: "Grain bowl", e: "🥗", req: [["grain"], ["veg"]], flex: ["protein", "cheese"], m: ["Cook the grain.", "Roast or sauté the veg; add protein.", "Pile in a bowl, drizzle oil + lemon or yogurt, season."] },
+    { n: "Clean-out-the-fridge soup", e: "🍲", req: [["veg"], ["broth"]], flex: ["protein", "grain", "beans"], m: ["Soften onion/garlic, add chopped veg.", "Pour in broth; simmer 15–20 min.", "Add beans/grain/protein; season and finish."] },
+    { n: "Grilled cheese melt", e: "🥪", req: [["bread"], ["cheese"]], flex: ["protein", "veg", "tomato"], m: ["Butter the bread on the outside.", "Load cheese (and tomato/protein) inside.", "Griddle low-and-slow until deep golden and melty."] },
+    { n: "Coconut curry", e: "🍛", req: [["coconut"], ["protein", "veg"]], flex: ["rice"], m: ["Fry onion/garlic + any curry spice.", "Add protein/veg, then the coconut milk.", "Simmer until thick; serve over rice."] },
+    { n: "Loaded baked potatoes", e: "🥔", req: [["potato"]], flex: ["cheese", "protein", "veg"], m: ["Bake or microwave the potatoes until soft.", "Split, fluff, load with cheese/protein/veg.", "Back under heat 2 min to melt."] },
+    { n: "Burrito bowl", e: "🫔", req: [["rice"], ["beans"]], flex: ["protein", "cheese", "veg"], m: ["Warm rice and beans; season the beans well.", "Add protein and any veg/cheese.", "Top with avocado or yogurt + hot sauce."] },
+    { n: "Tomato pasta", e: "🍅", req: [["pasta"], ["tomato", "tomatosauce"]], flex: ["cheese", "protein"], m: ["Boil the pasta.", "Simmer tomato/sauce with garlic and oil.", "Toss, finish with cheese."] },
+    { n: "Big omelet for dinner", e: "🍳", req: [["egg"]], flex: ["cheese", "veg", "protein"], m: ["Beat 3 eggs with salt.", "Pour into a buttered pan; add fillings as it sets.", "Fold and slide out; toast on the side."] },
+    { n: "Pancakes for dinner", e: "🥞", req: [["egg"], ["dairy"]], flex: [], m: ["Whisk egg + milk + a cup of flour + pinch of salt.", "Ladle onto a buttered pan; flip when bubbly.", "Stack; top with whatever's sweet in the house."] },
+    { n: "Noodle stir-fry", e: "🍜", req: [["noodles"], ["veg"]], flex: ["protein", "egg"], m: ["Cook the noodles; drain.", "Stir-fry veg (and protein/egg) in hot oil.", "Add noodles + soy; toss hot."] }
+  ];
+
+  var chosen = {}; // tag -> true, built from selected ingredients
+  var picks = {};  // label -> true
+
+  function palette() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="grp">' + g[0] + '</div><div class="chips">';
+      Object.keys(g[1]).forEach(function (label) {
+        html += '<button class="chip" aria-pressed="false" data-label="' + esc(label) + '">' + esc(label) + '</button>';
+      });
+      html += "</div>";
+    });
+    $("palette").innerHTML = html;
+  }
+
+  function rebuild() {
+    chosen = {};
+    Object.keys(picks).forEach(function (label) {
+      var tags = KEYWORD[label.toLowerCase()] || ["veg"]; // unknown typed item defaults to a vegetable-ish match
+      tags.forEach(function (t) { chosen[t] = true; });
+    });
+    var n = Object.keys(picks).length;
+    $("count").textContent = n ? n + " item" + (n === 1 ? "" : "s") + " selected" : "";
+  }
+
+  function toggle(label, on) {
+    if (on === undefined) on = !picks[label];
+    if (on) picks[label] = true; else delete picks[label];
+    rebuild();
+  }
+
+  function has(group) { return group.some(function (t) { return chosen[t]; }); }
+
+  function match() {
+    var now = [], one = [];
+    RECIPES.forEach(function (r) {
+      var missing = r.req.filter(function (grp) { return !has(grp); });
+      var hadFlex = r.flex.filter(function (t) { return chosen[t]; }).length;
+      var entry = { r: r, hadFlex: hadFlex, reqMet: r.req.length - missing.length };
+      if (missing.length === 0) now.push(entry);
+      else if (missing.length === 1) { entry.miss = EX[missing[0][0]] || missing[0][0]; one.push(entry); }
+    });
+    // best first: more required groups + more flex matched
+    var rank = function (a, b) { return (b.reqMet + b.hadFlex) - (a.reqMet + a.hadFlex); };
+    now.sort(rank); one.sort(rank);
+    return { now: now, one: one };
+  }
+
+  function card(entry, kind) {
+    var r = entry.r;
+    var got = r.req.concat(r.flex.map(function (t) { return [t]; })).map(function (g) { return g[0]; }).filter(function (t) { return chosen[t]; });
+    return '<div class="meal ' + (kind === "now" ? "now" : "one") + '">'
+      + '<h3>' + r.e + " " + esc(r.n) + '<span class="badge ' + (kind === "now" ? "now" : "one") + '">' + (kind === "now" ? "Make it now" : "Need 1 thing") + '</span></h3>'
+      + (kind === "one" ? '<div class="need">Grab: <b>' + esc(entry.miss) + '</b></div>' : "")
+      + '<ol>' + r.m.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>"
+      + "</div>";
+  }
+
+  function run() {
+    rebuild();
+    if (Object.keys(picks).length < 2) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Tap at least a couple of things you have, then try again.</div>'; return; }
+    var m = match();
+    var html = "";
+    if (m.now.length) html += '<div class="grp" style="margin-top:4px">Make tonight</div>' + m.now.slice(0, 3).map(function (e) { return card(e, "now"); }).join("");
+    if (m.now.length < 3 && m.one.length) html += '<div class="grp">One quick stop away</div>' + m.one.slice(0, Math.max(1, 4 - m.now.length)).map(function (e) { return card(e, "one"); }).join("");
+    if (!html) html = '<div class="card">Nothing matched yet — add a carb (rice, pasta, bread, tortillas) or a protein and try again. Those unlock the most dinners.</div>';
+    $("out").innerHTML = html; $("out").hidden = false;
+    $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  palette();
+  $("palette").addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    var on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    toggle(b.dataset.label, on);
+  });
+  $("addbtn").onclick = function () {
+    var v = $("add").value.trim(); if (!v) return;
+    picks[v] = true; $("add").value = ""; rebuild();
+    // show it as a pressed chip at the end of the palette
+    var b = document.createElement("button"); b.className = "chip"; b.setAttribute("aria-pressed", "true"); b.dataset.label = v; b.textContent = v;
+    $("palette").appendChild(b);
+  };
+  $("add").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("addbtn").click(); } });
+  $("go").onclick = run;
+  $("clear").onclick = function () { picks = {}; rebuild(); palette(); $("out").hidden = true; };
+})();
+</script>
+</body>
+</html>

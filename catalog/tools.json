@@ -1,6 +1,12 @@
 {
   "tools": [
     {
+      "id": "dinner",
+      "name": "What's for Dinner?",
+      "tagline": "Tap what's in your fridge and get three dinners you can make tonight \u2014 plus the one thing to grab. Nothing is uploaded.",
+      "plans": []
+    },
+    {
       "id": "before-you-sign",
       "name": "Before You Sign",
       "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
@@ -96,6 +102,7 @@
       "name": "Quickwell Plus",
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
+        "dinner",
         "before-you-sign",
         "saver",
         "pilot",
