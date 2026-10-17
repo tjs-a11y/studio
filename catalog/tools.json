@@ -7,6 +7,18 @@
       "plans": []
     },
     {
+      "id": "copycat",
+      "name": "Copycat Kitchen",
+      "tagline": "Had something amazing out? Tell us what you saw and get a close home recipe \u2014 plus the trick restaurants use. Nothing is uploaded.",
+      "plans": []
+    },
+    {
+      "id": "kitchen",
+      "name": "Weekly Kitchen",
+      "tagline": "Save your pantry once, then plan a week of dinners from what you've got, use up what's spoiling, and get one grocery list. Nothing is uploaded.",
+      "plans": []
+    },
+    {
       "id": "before-you-sign",
       "name": "Before You Sign",
       "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
@@ -103,6 +115,8 @@
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
         "dinner",
+        "copycat",
+        "kitchen",
         "before-you-sign",
         "saver",
         "pilot",

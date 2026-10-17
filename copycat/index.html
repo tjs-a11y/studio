@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copycat Kitchen: make the restaurant dish at home</title>
+<meta name="description" content="Had something amazing out? Tell us what you saw and get a close home recipe — plus the trick restaurants use to taste like that. Nothing is uploaded.">
+<link rel="canonical" href="https://quickwell.app/copycat/">
+<meta property="og:title" content="Copycat Kitchen: make the restaurant dish at home">
+<meta property="og:description" content="Tell us what you ate out and get a close home recipe, plus the restaurant trick behind it. Nothing is uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/copycat/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<meta name="twitter:title" content="Copycat Kitchen: make the restaurant dish at home">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Copycat Kitchen","url":"https://quickwell.app/copycat/","applicationCategory":"LifestyleApplication","description":"Reverse-engineers a restaurant dish into a close home recipe from what you tell it you saw and tasted. Runs in the browser; the photo you add stays on your device and nothing is uploaded.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it recognize my photo automatically?","acceptedAnswer":{"@type":"Answer","text":"No, and nothing is uploaded. The photo is only your reference; you tell it the cuisine, the dish and a couple of flavor notes, and it reverse-engineers a close home version."}},{"@type":"Question","name":"Will it taste exactly like the restaurant?","acceptedAnswer":{"@type":"Answer","text":"It gets you close and shows the trick restaurants use. Tweak the seasonings to taste; that is how every copycat recipe works."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#b5452b; --chip:#f2ede9; --on:#b5452b; --grn:#1f7a3d; --grnbg:#eaf6ee; --amb:#9a6700; --ambbg:#fbf3e0; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#121012; --ink:#f0ece6; --muted:#a79e94; --card:#1c1917; --line:#322c28; --accent:#e8805f; --chip:#241f1c; --on:#e8805f; --grn:#7fc79a; --grnbg:#16241b; --amb:#f2c14e; --ambbg:#2a2414; color-scheme:dark; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:30px 16px 56px; }
+  h1 { font-size:1.7rem; margin:0 0 6px; } .lede { margin:0 0 18px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0; }
+  .grp { margin:14px 0 6px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+  .grp:first-child { margin-top:0; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { border:1px solid var(--line); background:var(--chip); color:var(--ink); border-radius:999px; padding:8px 13px; font:inherit; font-size:.95rem; cursor:pointer; }
+  .chip[aria-pressed="true"] { background:var(--on); color:#fff; border-color:var(--on); }
+  .filebtn { display:inline-block; border:1px dashed var(--line); background:var(--chip); color:var(--ink); border-radius:10px; padding:11px 15px; cursor:pointer; font:inherit; }
+  input[type=file] { position:absolute; width:1px; height:1px; opacity:0; }
+  #ref { max-width:160px; border-radius:10px; border:1px solid var(--line); display:block; margin-top:10px; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; }
+  button { font:inherit; padding:11px 18px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .muted{color:var(--muted)} .small{font-size:.9rem}
+  .dish { border:1px solid var(--line); border-left-width:5px; border-left-color:var(--accent); border-radius:12px; padding:14px 16px; margin:12px 0; background:var(--card); }
+  .dish h3 { margin:0 0 6px; font-size:1.2rem; }
+  .ing { background:var(--chip); border-radius:8px; padding:9px 12px; margin:8px 0; font-size:.94rem; }
+  .secret { background:var(--ambbg); border-radius:8px; padding:9px 12px; margin:8px 0; font-size:.92rem; }
+  .secret b { color:var(--amb); }
+  ol { margin:8px 0 0; padding-left:20px; } ol li { margin:4px 0; }
+  .tweak { color:var(--muted); font-size:.9rem; margin:6px 0 0; }
+.qw-also{margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px}
+.qw-also p{margin:0 0 10px;font-weight:700;font-size:.95rem}
+.qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.qw-also a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.qw-also b{color:var(--accent)} .qw-also span{display:block;color:var(--muted);font-size:.85rem}
+  footer { margin-top:30px; color:var(--muted); font-size:.9rem; } a { color:var(--accent); } [hidden]{display:none!important}
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <h1>Copycat Kitchen</h1>
+  <p class="lede">Had something amazing out and wished you could make it at home? Snap it for your own reference, tell us what you saw, and we'll reverse-engineer a close home version — <b>with the trick restaurants use.</b> The photo stays on your phone; nothing is uploaded.</p>
+
+  <section class="card noprint">
+    <div class="grp">Your photo (optional, stays on your device)</div>
+    <label class="filebtn" for="file">📷 Add a photo for reference<input id="file" type="file" accept="image/*" capture="environment"></label>
+    <img id="ref" hidden alt="your dish, for reference">
+
+    <div class="grp">What kind of food was it?</div>
+    <div class="chips" id="cuisine"></div>
+
+    <div class="grp">What was the dish, basically?</div>
+    <div class="chips" id="format"></div>
+
+    <div class="grp">Main thing in it</div>
+    <div class="chips" id="protein"></div>
+
+    <div class="grp">How did it taste? (pick any)</div>
+    <div class="chips" id="notes"></div>
+
+    <div class="row">
+      <button id="go">Rebuild it →</button>
+      <button class="ghost" id="clear">Start over</button>
+    </div>
+  </section>
+
+  <section id="out" hidden></section>
+
+  <section class="card noprint" id="premium" hidden>
+    <div id="locked">
+      <div class="grp" style="margin-top:0">Keep your copycats · Quickwell Plus</div>
+      <p class="small">Save every dish you crack to your own <b>copycat cookbook</b>, and turn any one into a <b>full meal</b> with sides and a grocery list. $4.99/month, and it covers every other Quickwell tool too.</p>
+      <div class="row"><a href="/plus/?ref=copycat" style="text-decoration:none;color:#fff;background:var(--accent);border:1px solid var(--accent);padding:11px 18px;border-radius:8px">Get Quickwell Plus — $4.99/mo</a></div>
+    </div>
+    <div id="unlocked" hidden>
+      <div class="grp" style="margin-top:0">Your copycat cookbook <span class="small muted">· Plus</span></div>
+      <div id="book"></div>
+    </div>
+  </section>
+
+  <!-- xlinks:copycat -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/dinner/?ref=xlink-copycat"><b>What's for Dinner?</b><span>Dinners from what you already have in the fridge</span></a></li><li><a href="/kitchen/?ref=xlink-copycat"><b>Weekly Kitchen</b><span>Plan a week of dinners from your saved pantry</span></a></li><li><a href="/before-you-sign/?ref=xlink-copycat"><b>Before You Sign</b><span>Spot the costly clauses in any contract before you sign</span></a></li><li><a href="/saver/?ref=xlink-copycat"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-copycat"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/shield/?ref=xlink-copycat"><b>Quickwell Shield</b><span>Is this message a scam? See the warning signs</span></a></li><li><a href="/footsure/?ref=xlink-copycat"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-copycat"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-copycat"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-copycat"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-copycat"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+
+  <footer>You describe it, we reverse-engineer it — the photo never leaves your browser. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+
+<script src="/js/pro.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  // What the user tells us. We reverse-engineer from this, not from pixels.
+  var CUISINES = {
+    italian: { label: "Italian", pack: ["garlic", "good olive oil", "parmesan", "basil or oregano"], secret: "Finish the dish in the pan with a splash of the starchy pasta water — that one move is what makes restaurant pasta silky instead of dry." },
+    mexican: { label: "Mexican", pack: ["cumin", "garlic", "lime", "fresh cilantro", "chili powder"], secret: "Bloom your spices in hot oil for 30 seconds before adding anything else. That toasted depth is the flavor you can't place at home." },
+    thai: { label: "Thai", pack: ["garlic", "ginger", "fish sauce", "lime", "chili", "a little sugar"], secret: "Balance it at the very end: salty (fish sauce), sour (lime), sweet (a little sugar), hot (chili). Taste and adjust until it 'pops'." },
+    indian: { label: "Indian", pack: ["onion", "garlic", "ginger", "garam masala", "cumin", "turmeric"], secret: "Cook the onion-garlic-ginger base low and slow until it's jammy and deep golden. Rushing that base is why home curry tastes flat." },
+    chinese: { label: "Chinese", pack: ["garlic", "ginger", "soy sauce", "toasted sesame oil", "a pinch of sugar", "cornstarch"], secret: "Screaming-hot pan, a little oil, and don't crowd it — the smoky 'wok hei' you taste out is mostly just very high heat." },
+    american: { label: "American", pack: ["butter", "garlic", "black pepper", "a little smoked paprika"], secret: "Season in layers and let meat rest before cutting. Restaurants salt more aggressively than you'd dare to at home — that's half the difference." },
+    mediterranean: { label: "Mediterranean / Greek", pack: ["olive oil", "lemon", "garlic", "oregano", "feta"], secret: "Add the lemon and a glug of good olive oil off the heat, at the end. Bright acid plus fat is what makes it taste like the taverna." },
+    japanese: { label: "Japanese", pack: ["soy sauce", "mirin", "ginger", "toasted sesame"], secret: "A splash of mirin (or sugar plus a little rice vinegar) gives that glossy, gently sweet izakaya finish." },
+    korean: { label: "Korean", pack: ["garlic", "gochujang", "soy sauce", "sesame oil", "a little sugar"], secret: "Gochujang + a little sugar + sesame oil is the backbone of most Korean dishes you love. Build the sauce first, then taste." },
+    "middle-eastern": { label: "Middle Eastern", pack: ["cumin", "garlic", "lemon", "lots of parsley", "olive oil"], secret: "Finish with a big handful of fresh herbs and a squeeze of lemon. Restaurants use far more herbs than most people do at home." }
+  };
+  var FORMATS = {
+    pasta: { label: "Pasta", staples: ["pasta"], steps: ["Boil the pasta in well-salted water until just shy of done; scoop out a cup of the water before draining.", "In a wide pan, soften the {aromatics} in oil or butter, then build the {sauce}; add the {protein} if you're using it.", "Toss the drained pasta through, loosening with the starchy water until the sauce coats every strand.", "Off the heat, finish with {finish} and a final taste for salt."] },
+    noodles: { label: "Noodle bowl / stir-fry noodles", staples: ["noodles"], steps: ["Cook the noodles, drain, and toss with a drop of oil so they don't clump.", "Get a pan very hot; stir-fry the {aromatics}, then the {protein}, then any vegetables.", "Add the noodles and the {sauce}; toss hard over high heat for a minute.", "Finish with {finish}."] },
+    stirfry: { label: "Stir-fry (over rice)", staples: ["rice"], steps: ["Start the rice first.", "Very hot pan, a little oil: {aromatics} for a few seconds, then the {protein} until browned.", "Add vegetables hardest-first; pour in the {sauce} and let it cling.", "Finish with {finish}; serve over the rice."] },
+    curry: { label: "Curry / saucy braise", staples: ["rice or bread"], steps: ["Build the base: cook the {aromatics} slowly until deep and soft.", "Stir in the spices for a minute so they toast, then add the {protein}.", "Pour in the {sauce} (a tomato or coconut base works) and simmer until thick and the protein is tender.", "Finish with {finish}; serve with rice or warm bread."] },
+    tacos: { label: "Tacos / wraps", staples: ["tortillas"], steps: ["Season and cook the {protein} hard so it gets some color, using the {aromatics}.", "Warm the tortillas directly over a flame or in a dry pan until pliable.", "Fill with the protein, then fresh toppings.", "Finish with {finish} and a squeeze of lime."] },
+    soup: { label: "Soup / stew", staples: ["broth"], steps: ["Soften the {aromatics} in the pot.", "Add the {protein} and any vegetables, then the broth and the {sauce}.", "Simmer until everything is tender and the flavors meld, 20–30 minutes.", "Finish with {finish}; taste for salt and acid."] },
+    grainbowl: { label: "Rice / grain bowl", staples: ["rice or grain"], steps: ["Cook the rice or grain.", "Cook the {protein} with the {aromatics} until browned and seasoned.", "Build the bowl: grain, protein, raw and cooked vegetables in sections.", "Spoon the {sauce} over and finish with {finish}."] },
+    sandwich: { label: "Sandwich / burger", staples: ["bread or buns"], steps: ["Cook the {protein}, seasoning it well with the {aromatics}.", "Toast the bread or buns with a little butter so they don't go soggy.", "Layer protein, cheese if you like, and crunchy toppings.", "Spread the {sauce} and finish with {finish}."] },
+    salad: { label: "Big salad", staples: [], steps: ["Make the dressing first: the {sauce} loosened with oil and acid; taste it on a leaf.", "Cook and slice the {protein} if you're adding one.", "Toss the greens and vegetables with just enough dressing to coat.", "Top with the protein and finish with {finish}."] },
+    roast: { label: "Grilled / roasted plate", staples: [], steps: ["Pat the {protein} dry and season it generously with the {aromatics}; let it sit while the oven or pan heats.", "Sear or roast hard for color, then cook through.", "Rest it a few minutes before slicing.", "Spoon over the {sauce} and finish with {finish}; add a simple side."] },
+    bake: { label: "Baked / casserole", staples: [], steps: ["Cook the {protein} and {aromatics} partway in a pan.", "Layer into a dish with the {sauce} and any starch (pasta, rice, potato).", "Top with cheese or crumbs and bake until bubbling and golden.", "Rest 10 minutes so it sets; finish with {finish}."] }
+  };
+  var PROTEINS = { chicken: "chicken", beef: "beef", pork: "pork", "shrimp / seafood": "shrimp or fish", tofu: "tofu", egg: "egg", beans: "beans or chickpeas", "no meat": "" };
+  var NOTES = {
+    spicy: { chip: "Spicy", t: "Make it spicy: add fresh or dried chili (or chili crisp) early, and a little more at the end to taste." },
+    creamy: { chip: "Creamy", t: "Make it creamy: stir in a splash of cream, coconut milk or a spoon of yogurt off the heat." },
+    cheesy: { chip: "Cheesy", t: "Make it cheesy: melt cheese in at the end; a handful of grated parmesan also adds savory depth." },
+    tangy: { chip: "Tangy / citrusy", t: "Make it tangy: a squeeze of lemon or lime, or a splash of vinegar, right at the end wakes everything up." },
+    garlicky: { chip: "Garlicky", t: "Make it garlicky: use more garlic than feels reasonable, and add some raw or lightly-cooked at the end." },
+    smoky: { chip: "Smoky / grilled", t: "Make it smoky: get real char on the protein, or add smoked paprika or a drop of liquid smoke." },
+    sweetsavory: { chip: "Sweet-savory", t: "Make it sweet-savory: a little honey, brown sugar or mirin balanced against soy or salt." },
+    herby: { chip: "Fresh / herby", t: "Make it herby: stir a big handful of chopped fresh herbs in at the very end, off the heat." }
+  };
+
+  var sel = { cuisine: null, format: null, protein: null, notes: {} };
+
+  function chipRow(host, obj, labeler) {
+    var html = Object.keys(obj).map(function (k) {
+      return '<button class="chip" aria-pressed="false" data-k="' + esc(k) + '">' + esc(labeler(k, obj[k])) + "</button>";
+    }).join("");
+    $(host).innerHTML = html;
+  }
+  chipRow("cuisine", CUISINES, function (k, v) { return v.label; });
+  chipRow("format", FORMATS, function (k, v) { return v.label; });
+  chipRow("protein", PROTEINS, function (k) { return k.charAt(0).toUpperCase() + k.slice(1); });
+  chipRow("notes", NOTES, function (k, v) { return v.chip; });
+
+  function single(host, key) {
+    $(host).addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      [].forEach.call($(host).children, function (c) { c.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); sel[key] = b.dataset.k;
+    });
+  }
+  single("cuisine", "cuisine"); single("format", "format"); single("protein", "protein");
+  $("notes").addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    var k = b.dataset.k, on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    if (on) sel.notes[k] = 1; else delete sel.notes[k];
+  });
+
+  $("file").addEventListener("change", function (e) {
+    var f = e.target.files && e.target.files[0]; if (!f) return;
+    var rd = new FileReader(); rd.onload = function () { $("ref").src = rd.result; $("ref").hidden = false; }; rd.readAsDataURL(f); // stays in the browser
+  });
+
+  function title(c, fmt, pro) {
+    var p = PROTEINS[pro] || "";
+    var cap = p ? p.charAt(0).toUpperCase() + p.slice(1) + " " : "";
+    var names = { pasta: "Pasta", noodles: "Noodles", stirfry: "Stir-fry", curry: "Curry", tacos: "Tacos", soup: "Soup", grainbowl: "Bowl", sandwich: "Sandwich", salad: "Salad", roast: "Plate", bake: "Bake" };
+    return c.label + " " + cap + names[fmt];
+  }
+
+  function build() {
+    var c = CUISINES[sel.cuisine], fmt = FORMATS[sel.format];
+    var p = PROTEINS[sel.protein];
+    var aromatics = c.pack.slice(0, 3).join(", ");
+    var sauce = c.label + "-style sauce (the " + c.pack.slice(-2).join(" and ") + ")";
+    var finish = c.pack[c.pack.length - 1];
+    var fill = function (s) {
+      return s.replace("{aromatics}", aromatics)
+        .replace("{protein}", p || "your main (or keep it vegetarian)")
+        .replace("{sauce}", sauce)
+        .replace("{finish}", finish);
+    };
+    var ing = [].concat(fmt.staples, p ? [p] : [], c.pack);
+    var steps = fmt.steps.map(fill);
+    var tweaks = Object.keys(sel.notes).map(function (k) { return NOTES[k].t; });
+    return { title: title(c, sel.format, sel.protein), ing: ing, steps: steps, secret: c.secret, tweaks: tweaks };
+  }
+
+  function dishHtml(d, saved) {
+    return '<div class="dish"><h3>' + esc(d.title) + "</h3>"
+      + '<div class="ing"><b>You\'ll need:</b> ' + esc(d.ing.join(", ")) + ", plus oil, salt and pepper.</div>"
+      + '<ol>' + d.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>"
+      + (d.tweaks.length ? d.tweaks.map(function (t) { return '<p class="tweak">• ' + esc(t) + "</p>"; }).join("") : "")
+      + '<div class="secret"><b>Restaurant trick:</b> ' + esc(d.secret) + "</div>"
+      + '<div class="row"><button class="ghost" data-copy>Copy recipe</button>'
+      + (saved ? "" : '<button class="ghost" data-save>★ Save to cookbook</button>')
+      + "</div></div>";
+  }
+
+  function run() {
+    if (!sel.cuisine || !sel.format) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Pick the kind of food and what the dish was, then try again.</div>'; $("out").scrollIntoView({ behavior: "smooth" }); return; }
+    if (!sel.protein) sel.protein = "no meat";
+    var d = build();
+    lastDish = d;
+    $("out").innerHTML = '<div class="grp" style="margin-top:4px">Your copycat</div>' + dishHtml(d, false)
+      + '<p class="small muted">This is a close home version built from what you told us — taste and adjust the seasoning as you go. That\'s how copycat recipes always work.</p>';
+    $("out").hidden = false; $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  var lastDish = null;
+  $("go").onclick = run;
+  $("clear").onclick = function () {
+    sel = { cuisine: null, format: null, protein: null, notes: {} };
+    document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+    $("out").hidden = true; $("ref").hidden = true; $("file").value = "";
+  };
+
+  function plain(d) {
+    return d.title + "\n\nYou'll need: " + d.ing.join(", ") + ", plus oil, salt and pepper.\n\n"
+      + d.steps.map(function (s, i) { return (i + 1) + ". " + s; }).join("\n")
+      + (d.tweaks.length ? "\n\n" + d.tweaks.map(function (t) { return "• " + t; }).join("\n") : "")
+      + "\n\nRestaurant trick: " + d.secret + "\n\nvia quickwell.app/copycat";
+  }
+
+  // ---- Quickwell Plus: your copycat cookbook ----
+  var PRO = false, book = [];
+  function loadBook() { try { book = JSON.parse(localStorage.getItem("copycat-book") || "[]"); } catch (e) { book = []; } }
+  function saveBook() { try { localStorage.setItem("copycat-book", JSON.stringify(book)); } catch (e) {} }
+  function renderBook() {
+    var el = $("book"); if (!el) return;
+    el.innerHTML = book.length
+      ? book.map(function (d, i) { return dishHtml(d, true).replace('<div class="row">', '<div class="row"><button class="ghost" data-del="' + i + '">Remove</button>'); }).join("")
+      : '<p class="small muted">Nothing saved yet. Build a copycat above and tap ★ Save.</p>';
+  }
+
+  document.addEventListener("click", function (e) {
+    var cp = e.target.closest("[data-copy]");
+    if (cp) {
+      var d = cp.closest("#book") ? book[[].indexOf.call(cp.closest("#book").querySelectorAll(".dish"), cp.closest(".dish"))] : lastDish;
+      try { navigator.clipboard.writeText(plain(d)); cp.textContent = "Copied ✓"; } catch (x) { cp.textContent = "Select & copy below"; }
+      return;
+    }
+    if (e.target.closest("[data-save]")) {
+      if (!PRO) { location.href = "/plus/?ref=copycat"; return; }
+      if (lastDish) { book.unshift(lastDish); saveBook(); renderBook(); e.target.closest("[data-save]").textContent = "Saved ★"; }
+      return;
+    }
+    var del = e.target.closest("[data-del]");
+    if (del) { book.splice(Number(del.dataset.del), 1); saveBook(); renderBook(); }
+  });
+
+  if (window.Studio) Studio.init({ tool: "copycat", onChange: function (s) { PRO = !!s.pro; $("premium").hidden = false; $("locked").hidden = PRO; $("unlocked").hidden = !PRO; if (PRO) { loadBook(); renderBook(); } } });
+})();
+</script>
+</body>
+</html>
