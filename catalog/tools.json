@@ -1,6 +1,12 @@
 {
   "tools": [
     {
+      "id": "before-you-sign",
+      "name": "Before You Sign",
+      "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
+      "plans": []
+    },
+    {
       "id": "rate-con-checker",
       "name": "Rate Con Checker",
       "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",
@@ -30,7 +36,7 @@
     },
     {
       "id": "permit-watch",
-      "name": "Permit Watch — Texas",
+      "name": "Permit Watch \u2014 Texas",
       "tagline": "See new drilling permits filed in your Texas county and get free alerts by RSS.",
       "plans": []
     },
@@ -90,6 +96,7 @@
       "name": "Quickwell Plus",
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
+        "before-you-sign",
         "saver",
         "pilot",
         "shield",
