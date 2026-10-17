@@ -1,0 +1,275 @@
+{
+ "brief": {
+  "subject": "Social Security wage cap rises to $192,300 for 2027",
+  "headline": "Payroll Tax Cap Climbs to $192,300 in 2027; IRS Finalizes Direct Card Payment Rules",
+  "dek": "The 2027 Social Security wage base rises, the IRS can take card payments directly, and dyed diesel penalties are paused through 2026.",
+  "lede": "The Social Security payroll tax cap rises from $184,500 to $192,300 in 2027. Update payroll setups and estimated tax plans before year-end.",
+  "sections": [
+   {
+    "heading": "Social Security wage base goes up",
+    "bullets": [
+     "The payroll tax cap moves from $184,500 to $192,300 in 2027, so more high-end wages face Social Security tax.",
+     "Employers paying salaries above the old cap should update payroll systems before the first 2027 pay run.",
+     "Self-employed owners with large net earnings will owe Social Security tax on more income next year.",
+     "Benefits also get a 3.6% cost-of-living adjustment, according to the Social Security Administration."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   },
+   {
+    "heading": "IRS can take cards directly",
+    "bullets": [
+     "Final IRS rules let the agency accept credit and debit card tax payments itself, without routing taxpayers to outside processors.",
+     "The rules implement Taxpayer First Act changes and lift limits on the IRS paying fees under card-payment contracts.",
+     "Card payment terms could change, so check costs before charging your next tax bill."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Dyed diesel penalties paused",
+    "bullets": [
+     "The IRS is suspending federal tax penalties for selling or using dyed diesel on highways nationwide for the rest of 2026.",
+     "Trucking, farming and construction businesses gain temporary relief from a normally costly violation."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "Premium tax credit rules proposed",
+    "bullets": [
+     "Proposed IRS regulations would change premium tax credit eligibility, how the credit is computed, and repayment of excess advance credits.",
+     "Freelancers buying Exchange health coverage should watch for changes that could affect their year-end tax bill."
+    ],
+    "source_ids": [
+     "S10"
+    ]
+   }
+  ],
+  "seo_description": "2027 Social Security wage cap rises to $192,300, IRS finalizes direct card payment rules, and dyed diesel penalties are paused for 2026."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-17T14:13:15.162Z",
+  "date": "2026-10-17",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Regulations Regarding Payment of Tax by Commercially Acceptable Means",
+    "link": "https://www.federalregister.gov/documents/2026/10/19/2026-21267/regulations-regarding-payment-of-tax-by-commercially-acceptable-means",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "This document contains final regulations regarding the payment of tax by commercially acceptable means. The final regulations reflect changes to the law made by the Taxpayer First Act that would allow the IRS to directly accept payments of tax by credit or debit card, without having to connect taxpayers to third-party payment processors. These final regulations remove restrictions on the payment of any fee by the IRS under any contracts related to payment of taxes by credit, debit, or charge car",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "IRS Prepares for Tax Professional Awareness Week",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/16/irs-prepares-for-tax-professional-awareness-week/191854/",
+    "published": "2026-10-16T20:22:58.000Z",
+    "snippet": "The IRS announced plans Friday for Tax Professional Awareness Week, which starts Oct. 19, featuring webinars, videos, guidance, and tools for practitioners ahead of tax season to support accurate returns and strengthen taxpayer service.",
+    "categories": [
+     "IRS",
+     "tax practitioners",
+     "Tax Professional Awareness Week",
+     "tax professionals",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "The Post-Extension Window: How to Sequence Firm Automation Before Busy Season",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/16/the-post-extension-window-how-to-sequence-firm-automation-before-busy-season/191855/",
+    "published": "2026-10-16T19:22:12.000Z",
+    "snippet": "Pick the workflow with the clearest rules and the most wasted hours. For most tax and bookkeeping practices that is document requests for individual returns.",
+    "categories": [
+     "automatic extension",
+     "Income Taxes",
+     "IRS",
+     "october 15",
+     "tax deadline",
+     "tax extensions",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "The Tax Answer is Right. But is It the Right Decision?",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/16/the-tax-answer-is-right-but-is-it-the-right-decision/191849/",
+    "published": "2026-10-16T17:37:57.000Z",
+    "snippet": "A technically correct tax analysis can leave important financial questions unresolved.",
+    "categories": [
+     "Advisory",
+     "cpa",
+     "CPAs",
+     "tax advisory",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Who Designed Prop. 40? Meet the Academics Behind California’s Billionaire Tax Brawl",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/16/who-designed-prop-40-meet-the-academics-behind-californias-billionaire-tax-brawl/191829/",
+    "published": "2026-10-16T14:53:43.000Z",
+    "snippet": "Four academics led by Emmanuel Saez designed California’s Proposition 40 billionaire tax, sparking fierce debate over inequality, enforcement and economic impact.",
+    "categories": [
+     "ballot measures",
+     "billionaire tax",
+     "billionaires",
+     "california",
+     "Income Taxes",
+     "tax on billionaires",
+     "Taxes",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "Social Security’s Payroll Tax Cap is Going Up in 2027",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/16/social-securitys-payroll-tax-cap-is-going-up-in-2027/191810/",
+    "published": "2026-10-16T12:34:15.000Z",
+    "snippet": "Along with a 3.6% cost-of-living adjustment for retirees, people with disabilities and dependents, the Social Security Administration said the payroll tax cap will increase from $184,500 to $192,300.",
+    "categories": [
+     "Benefits",
+     "COLA",
+     "cost-of-living adjustment",
+     "payroll tax",
+     "Payroll Taxes",
+     "retirement",
+     "senior citizens",
+     "seniors",
+     "Social Security",
+     "Social Security Administration",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Non-Applicability of Section 357(c) to Consolidated Groups",
+    "link": "https://www.federalregister.gov/documents/2026/10/16/2026-21253/non-applicability-of-section-357c-to-consolidated-groups",
+    "published": "2026-10-16T12:00:00.000Z",
+    "snippet": "This document contains final regulations clarifying that, in the case of certain transfers between members of a consolidated group, a transferee's assumption of certain liabilities will not reduce the transferor's basis in the transferee's stock received in the transfer. These final regulations affect consolidated groups and their members.",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "IRS Halts Penalties for Dyed Diesel Fuel Use for the Rest of 2026",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/15/irs-halts-penalties-for-died-diesel-fuel-use-for-the-rest-of-2026/191761/",
+    "published": "2026-10-15T20:37:14.000Z",
+    "snippet": "The IRS announced Wednesday evening that it's temporarily suspending federal tax penalties when dyed diesel fuel is sold for use or used on highways nationwide.",
+    "categories": [
+     "dyed fuel",
+     "IRS",
+     "red-dyed diesel fuel",
+     "tax relief",
+     "Taxes",
+     "Trump administration"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "Xero Announces Google Gemini Integration",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/15/xero-announces-google-gemini-integration/191779/",
+    "published": "2026-10-15T20:01:00.000Z",
+    "snippet": "Global small business accounting platform Xero this week launched a new integration with Google Gemini, bringing live Xero data directly into Google's popular artificial intelligence assistant.",
+    "categories": [
+     "Accounting",
+     "Artificial Intelligence",
+     "Google Gemini",
+     "Small Business",
+     "Technology",
+     "xero"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Premium Tax Credit",
+    "link": "https://www.federalregister.gov/documents/2026/10/15/2026-21056/premium-tax-credit",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "This document contains proposed regulations that would amend regulations regarding an individual taxpayer's eligibility for a premium tax credit (PTC), the computation of a PTC, and an individual's tax liability due to excess advance payments of the PTC. The proposed regulations would affect taxpayers who enroll themselves or a family member in individual health insurance coverage through a Health Insurance Exchange and may be allowed a PTC for this coverage. This document also provides a notice",
+    "categories": []
+   },
+   {
+    "id": "S11",
+    "source": "The CPA Journal",
+    "title": "New York City Non-Primary Residence Property Surcharge Overview",
+    "link": "https://www.cpajournal.com/2026/10/14/new-york-city-non-primary-residence-property-surcharge-overview/",
+    "published": "2026-10-14T11:00:20.000Z",
+    "snippet": "On May 28, 2026, Governor Hochul, as part of New York’s fiscal year 2026/2027 budget, enacted a new annual surcharge on certain high-value residential New York City properties that are not used as the primary residence of an owner, an owner’s family member, or a tenant; commonly referred to as the “pied-à-terre tax.” This surcharge […] The post New York City Non-Primary Residence Property Surcharg",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Columns",
+     "Taxation"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 3,
+    "kept": 3
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 7
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S1"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

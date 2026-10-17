@@ -1,0 +1,127 @@
+{
+ "brief": {
+  "subject": "CFPB targets bank debanking; who gets secured cards",
+  "headline": "CFPB Opens New Debanking Push Against Large Banks",
+  "dek": "The CFPB is acting on debanking findings from the OCC, and new application data shows how credit scores affect secured card approvals.",
+  "lede": "The CFPB announced a new initiative on October 14 aimed at large banks that cut off customers. Federal bank regulators had uncovered the practice.",
+  "sections": [
+   {
+    "heading": "CFPB Takes Aim at Debanking",
+    "bullets": [
+     "The CFPB announced a new initiative on October 14 targeting debanking by large banks, so account closures face more federal scrutiny.",
+     "The effort builds on debanking cases the OCC uncovered, which links two federal regulators on the issue.",
+     "The CFPB says the issue is people and businesses losing bank access because of constitutionally protected rights.",
+     "The agency calls this the next step in a broader administration push, so more actions on account access may follow."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Secured Card Approvals by Score",
+    "bullets": [
+     "New NerdWallet application data shows secured card approval rates broken out by credit score band.",
+     "Secured cards are often a first step toward rebuilding credit, so knowing your score band helps you judge your odds.",
+     "Checking your score before you apply can help you avoid denials and wasted applications."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "CFPB launches initiative on large-bank debanking uncovered by the OCC, plus data on secured credit card approvals by credit score."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-17T14:13:15.162Z",
+  "date": "2026-10-17",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "What Credit Score Do You Need for a Secured Credit Card? (Based on Real Applications)",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/real-applications-secured-credit-card-approval",
+    "published": "2026-10-15T17:09:00.000Z",
+    "snippet": "NerdWallet’s credit card application data shows the percentage of applicants approved for a secured credit card, by credit score band.",
+    "categories": [
+     "Credit Cards",
+     "Credit Cards for Bad Credit"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "Early Look: Inside Southwest’s Upcoming Lounges",
+    "link": "https://www.nerdwallet.com/travel/learn/southwest-lounges",
+    "published": "2026-10-15T14:25:11.000Z",
+    "snippet": "For people who like low fares and hate fees, Southwest Airlines is one of the best airlines out there — and the Southwest Rapid Rewards program is one of the…",
+    "categories": [
+     "Airlines",
+     "Loyalty Programs",
+     "Travel"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CFPB Newsroom",
+    "title": "CFPB Announces New Initiative to Address OCC-Uncovered Debanking by Large Banks",
+    "link": "https://www.consumerfinance.gov/about-us/newsroom/cfpb-announces-new-initiative-to-address-occ-uncovered-debanking-by-large-banks/",
+    "published": "2026-10-14T04:00:00.000Z",
+    "snippet": "Today, the Consumer Financial Protection Bureau (CFPB) announced the next step in its work to advance President Trump’s fight against the debanking of businesses and individuals on the basis of their constitutionally protected rights",
+    "categories": [
+     "Press release",
+     "Consumer Financial Protection Bureau"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 1
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S2"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

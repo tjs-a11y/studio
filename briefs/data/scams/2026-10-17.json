@@ -1,0 +1,194 @@
+{
+ "brief": {
+  "subject": "FBI warns of midterm election scams, plus a sextortion crackdown",
+  "headline": "FBI Flags Midterm Election Scams; FTC Halts Alleged Sextortion 'Relief' Scheme",
+  "dek": "Election-season fraud warnings, a court halt on a sextortion help firm, $9.8 million in wire-fraud refunds, and a ticket broker lawsuit.",
+  "lede": "The FBI says scammers are exploiting the 2026 midterm election to run multiple fraud schemes. Expect political-season pitches to keep coming as November nears.",
+  "sections": [
+   {
+    "heading": "Midterm Election Scams on the Rise",
+    "bullets": [
+     "The FBI warned on Oct. 15 that scammers are using the 2026 midterm election to run multiple fraud schemes.",
+     "A separate FBI alert cautions voters about election crimes ahead of the November vote.",
+     "Election season brings a flood of calls, texts and emails, which gives fraudsters cover to blend in.",
+     "Verify any election-related request before sharing money or personal details."
+    ],
+    "source_ids": [
+     "S2",
+     "S3"
+    ]
+   },
+   {
+    "heading": "Sextortion 'Help' Firm Halted",
+    "bullets": [
+     "A federal court temporarily halted Digital Forensics Corporation LLC and its CEO at the FTC's request.",
+     "The FTC alleges the firm took millions of dollars with false promises to identify sextortion criminals and stop attacks.",
+     "The FTC calls sextortion a rapidly growing threat, often run by foreign scammers.",
+     "Victims in a panic can be targeted a second time by paid 'rescue' services that overpromise."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "$9.8 Million Back for Wire-Fraud Victims",
+    "bullets": [
+     "The FTC is sending more than $9.8 million to consumers harmed through Walmart's wire transfer services.",
+     "Scammers used those services to take hundreds of millions of dollars from U.S. consumers, according to the FTC.",
+     "Walmart settled FTC charges in June 2025 over allegedly weak anti-fraud policies and staff training.",
+     "Wire transfers are a favorite scam payment method because money is hard to recover once sent."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   },
+   {
+    "heading": "Ticket Broker Sued Over Bulk Buying",
+    "bullets": [
+     "The FTC sued REPS & Company Inc., alleging it dodged limits on how many tickets one buyer can purchase.",
+     "The broker allegedly bought millions of tickets to high-demand events and resold them at a significant profit.",
+     "Such tactics can leave fans paying inflated resale prices for popular shows."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "FBI warns of 2026 midterm election scams, FTC halts an alleged sextortion relief scheme, and $9.8 million goes to wire-fraud victims."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-17T14:13:15.162Z",
+  "date": "2026-10-17",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FBI IC3 alerts",
+    "title": "Cyber Threat Actors Use a Variety of Techniques to Target Election and Campaign Officials",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261016",
+    "published": "2026-10-16T14:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FBI IC3 alerts",
+    "title": "Scammers Exploit 2026 U.S. Midterm Election to Perpetrate Multiple Fraud Schemes",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-3",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Warns Voters on Election Crimes Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-2",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Cautions About Threats to Election Workers Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC Sues Ticket Broker Over Unlawful Tactics Used to Buy Millions of Tickets to Popular Live Events",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-ticket-broker-over-unlawful-tactics-used-buy-millions-tickets-popular-live-events",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission sued REPS & Company Inc., alleging the ticket broker illegally circumvents measures designed to limit the number of tickets that can be purchased for a single event, purchasing millions of tickets to high-demand events that it later resells at a significant profit. The complaint, filed by the Department of Justice upon notification and referral from the FTC, alleges RE",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "FTC press releases",
+    "title": "FTC Sends More than $9.8 Million to Consumers Harmed by Walmart’s Failure to Stop Scammers that Used its Wire Transfer Services to Take Millions from Customers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sends-more-98-million-consumers-harmed-walmarts-failure-stop-scammers-used-its-wire-transfer",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is sending payments totaling more than $9.8 million to consumers harmed by Walmart’s alleged failure to stop scammers that took hundreds of millions of dollars from U.S. consumers using the company’s wire transfer services. In June 2025, Walmart settled FTC charges that the company failed to implement effective anti-fraud policies and procedures, did not properly train",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "FBI IC3 alerts",
+    "title": "North Korean IT Workers Expanding Use of Facilitators, Broadening Recruitment",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261013",
+    "published": "2026-10-13T19:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "FTC press releases",
+    "title": "FTC Sues Operator of Sextortion Relief Scheme for Misleading Consumers into Believing it Would Identify Criminals and End Sextortion Attacks",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-operator-sextortion-relief-scheme-misleading-consumers-believing-it-would-identify",
+    "published": "2026-10-13T12:00:00.000Z",
+    "snippet": "A federal court has granted the Federal Trade Commission’s request to temporarily halt the activities of Digital Forensics Corporation LLC and its CEO for allegedly defrauding consumers out of millions of dollars using false and deceptive promises relating to “sextortion assistance services.” Sextortion is a rapidly growing threat to Americans, routinely carried out by foreign scammers who threate",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 5
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S2",
+    "S6",
+    "S8"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
