@@ -7,6 +7,12 @@
       "plans": []
     },
     {
+      "id": "dispute-it",
+      "name": "Dispute It",
+      "tagline": "A wrong, double, unauthorized or never-delivered charge? See your right and deadline, and get a ready-to-send dispute letter. Nothing is uploaded.",
+      "plans": []
+    },
+    {
       "id": "rate-con-checker",
       "name": "Rate Con Checker",
       "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",
@@ -97,6 +103,7 @@
       "tagline": "One subscription for every Quickwell everyday tool, including each new one as it launches.",
       "covers": [
         "before-you-sign",
+        "dispute-it",
         "saver",
         "pilot",
         "shield",

@@ -12,6 +12,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // id = ref label and folder; page = file that carries the strip. Descriptions stay inside what each tool really does.
 export const TOOLS = [
+  { id: 'dispute-it', name: 'Dispute It', text: 'Get a wrong or unauthorized charge reversed, the right way', page: 'dispute-it/index.html' },
   { id: 'before-you-sign', name: 'Before You Sign', text: 'Spot the costly clauses in any contract before you sign', page: 'before-you-sign/index.html' },
   { id: 'saver', name: 'Quickwell Saver', text: 'Find and stop the money leaks in your bank export', page: 'saver/index.html' },
   { id: 'pilot', name: 'Quickwell Pilot', text: 'What every letter and bill needs from you, by when', page: 'pilot/index.html' },
