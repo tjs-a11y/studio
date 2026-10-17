@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before You Sign: spot the traps in any contract</title>
+<meta name="description" content="Paste any contract — a lease, loan, gym, phone, storage, medical consent or freelance agreement — and see the clauses that cost you: auto-renewal, arbitration, early-termination fees, price hikes and more. Runs in your browser; nothing you paste is uploaded.">
+<link rel="canonical" href="https://quickwell.app/before-you-sign/">
+<meta property="og:title" content="Before You Sign: spot the traps in any contract">
+<meta property="og:description" content="Paste any agreement and see the costly clauses in plain English, with a line to ask for each fix. Nothing you paste leaves your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/before-you-sign/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Before You Sign: spot the traps in any contract">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Before You Sign","url":"https://quickwell.app/before-you-sign/","applicationCategory":"UtilitiesApplication","description":"Reads any contract in your browser and flags the clauses that commonly cost people money or rights — auto-renewal, mandatory arbitration, early-termination fees, price-change clauses, personal guarantees, liens and more — with a plain-English reason and a line to ask for each fix.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my contract uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The text is read in your browser and nothing you paste leaves your device. There is no server call and no account."}},{"@type":"Question","name":"Does this replace a lawyer?","acceptedAnswer":{"@type":"Answer","text":"No. It is a plain-English checklist of clauses that commonly surprise people, not legal advice. For anything high-stakes, have a lawyer review it."}},{"@type":"Question","name":"What kinds of contracts does it work on?","acceptedAnswer":{"@type":"Answer","text":"Any text agreement: apartment and equipment leases, auto and personal loans, gym, phone, internet and storage contracts, medical consent forms, freelance and client agreements, NDAs and online terms of service."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#2457d6;
+          --red:#c2362f; --amb:#9a6700; --grn:#1f7a3d; --redbg:#fbecea; --ambbg:#fbf3e0; --grnbg:#eaf6ee; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111317; --ink:#eef0f3; --muted:#9aa3b2; --card:#191c22; --line:#2a2f38; --accent:#7aa2ff;
+          --red:#ff8a80; --amb:#f2c14e; --grn:#7fc79a; --redbg:#2a1b1a; --ambbg:#2a2414; --grnbg:#16241b; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:30px 16px 56px; }
+  h1 { font-size:1.7rem; margin:0 0 6px; } .lede { color:var(--ink); margin:0 0 20px; } .lede b { color:var(--ink); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0; }
+  textarea { width:100%; min-height:190px; resize:vertical; font:15px/1.5 ui-monospace,Menlo,monospace; color:var(--ink);
+             background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px; }
+  button { font:inherit; padding:10px 16px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .muted { color:var(--muted); } .small { font-size:.9rem; }
+  select { font:inherit; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  .grade { display:flex; align-items:center; gap:14px; }
+  .g { font-size:2.4rem; font-weight:800; width:62px; height:62px; display:grid; place-items:center; border-radius:12px; border:2px solid var(--line); }
+  .counts span { display:inline-block; margin-right:14px; font-weight:600; } .c-red{color:var(--red)} .c-amb{color:var(--amb)} .c-grn{color:var(--grn)}
+  .item { border:1px solid var(--line); border-left-width:4px; border-radius:10px; padding:12px 14px; margin:10px 0; }
+  .item.red { border-left-color:var(--red); background:var(--redbg); } .item.flag,.item.missing { border-left-color:var(--amb); background:var(--ambbg); }
+  .item.pass { border-left-color:var(--grn); background:var(--grnbg); } .item.info { border-left-color:var(--line); }
+  .item h3 { margin:0 0 4px; font-size:1.02rem; } .tag { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:2px 7px; border-radius:20px; vertical-align:middle; margin-left:8px; }
+  .tag.red{background:var(--red);color:#fff} .tag.flag,.tag.missing{background:var(--amb);color:#1b1500} .tag.pass{background:var(--grn);color:#042a14} .tag.info{background:var(--line);color:var(--muted)}
+  .snip { font:13px/1.5 ui-monospace,Menlo,monospace; color:var(--muted); background:var(--bg); border-radius:6px; padding:8px 10px; margin:8px 0 0; }
+  .ask { margin-top:8px; } .ask b { color:var(--ink); }
+  details { margin:8px 0; } summary { cursor:pointer; font-weight:600; }
+  footer { margin-top:30px; color:var(--muted); font-size:.9rem; }
+  a { color:var(--accent); } [hidden]{display:none!important}
+  @media print { body{background:#fff;color:#000} .noprint{display:none!important} .card{border-color:#999} }
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <h1>Before You Sign</h1>
+  <p class="lede">Paste any contract — a lease, a loan, a gym, phone or storage plan, a medical consent form, a freelance agreement. See the clauses that quietly cost you money or rights, in plain English, each with a line you can send to ask for a fix. <b>It runs in your browser: nothing you paste is uploaded, and there's no account.</b></p>
+
+  <section class="card noprint">
+    <textarea id="text" placeholder="Paste the contract text here (open the PDF or page, select all, copy, paste)…" aria-label="Contract text"></textarea>
+    <div class="row">
+      <label class="small muted" for="kind">Type (optional):
+        <select id="kind">
+          <option value="">Any contract</option>
+          <option value="lease">Lease / rental</option>
+          <option value="loan">Loan / financing</option>
+          <option value="service">Gym / phone / subscription</option>
+          <option value="work">Freelance / employment</option>
+          <option value="medical">Medical consent</option>
+        </select>
+      </label>
+      <button id="go">Check it</button>
+      <button class="ghost" id="sample">Try a sample</button>
+      <span id="quota" class="small muted"></span>
+    </div>
+  </section>
+
+  <section id="out" hidden>
+    <div class="card">
+      <div class="grade"><div class="g" id="gbox">—</div>
+        <div><div class="counts" id="counts"></div><div class="small muted" id="summary"></div></div>
+      </div>
+    </div>
+    <div id="items"></div>
+    <p class="small muted noprint">Found something worth asking about? Copy its fix line into your reply before you sign. <button class="ghost" id="print">Print / save</button></p>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0;font-size:1.15rem">What it looks for, in plain English</h2>
+    <details><summary>Auto-renewal (evergreen) clauses</summary><p>The contract renews itself — often for another full term — unless you cancel inside a short window. It's the #1 way people stay billed for things they meant to end.</p></details>
+    <details><summary>Mandatory arbitration &amp; class-action waivers</summary><p>You give up the right to sue or join a group lawsuit; disputes go to private arbitration you often can't appeal.</p></details>
+    <details><summary>Early-termination &amp; cancellation fees</summary><p>A charge for leaving early — sometimes the rest of the contract's value. Know the number before you're stuck with it.</p></details>
+    <details><summary>Price-change clauses</summary><p>Language letting the other side raise the price or change the terms after you sign.</p></details>
+    <details><summary>Personal guarantees, liens &amp; confession of judgment</summary><p>Serious clauses that put your personal assets, your property, or an automatic court judgment on the line. Rare in consumer deals — a red flag when present.</p></details>
+    <p class="small muted" style="margin-bottom:0">A checklist of common surprises, not legal advice. For anything high-stakes, have a lawyer read it.</p>
+  </section>
+
+  <footer>A plain-English checklist, not legal advice. Nothing you paste leaves your browser. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a class="qw-afterhours" href="https://riddlebound.app/?ref=quickwell" rel="noopener">After hours? Riddlebound</a></footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var ls = {
+    get: function (k, d) { try { var v = localStorage.getItem("bys:" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem("bys:" + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  function snipAt(t, i, len) { len = len || 120; var a = Math.max(0, i - 40), b = Math.min(t.length, i + len); return (a ? "…" : "") + t.slice(a, b).replace(/\s+/g, " ").trim() + (b < t.length ? "…" : ""); }
+  function find(t, re) { var m = re.exec(t); return m ? m.index : -1; }
+
+  // Each rule: id, title, status if matched, why, ask (fix line), optional `kinds` it's most relevant to, and a matcher.
+  // Matchers are deliberately conservative regexes — a miss is safer than a false alarm.
+  var RULES = [
+    { id: "renew", title: "Auto-renewal (evergreen)", sev: "red",
+      why: "Renews itself unless you cancel in a short window — the top reason people keep paying for things they meant to end.",
+      ask: "Please make this a fixed term that does NOT auto-renew, or give me a 60-day reminder and the right to cancel before each renewal.",
+      re: /auto(?:matic)?(?:ally)?[- ]?renew|renew(?:s|ed|al)?\s+automatically|evergreen|renew(?:s|ed)?\s+for\s+(?:an?\s+)?(?:additional|successive|like)\s+(?:term|period|year)|unless (?:you|either party|the \w+) (?:cancels?|terminates?|provides? notice)/i },
+    { id: "etf", title: "Early-termination / cancellation fee", sev: "red",
+      why: "A penalty for leaving early — sometimes the whole remaining balance. Find out the exact number before you're bound.",
+      ask: "What is the exact early-termination fee in dollars, and can it be removed or capped at one month?",
+      re: /early[- ]?termination|termination fee|cancellation (?:fee|charge|penalty)|liquidated damages|remaining (?:balance|payments) (?:become|are) due|accelerat(?:e|ion) of (?:all )?(?:payments|rent|amounts)/i },
+    { id: "price", title: "Price / terms can change after you sign", sev: "red",
+      why: "Lets the other side raise the price or rewrite the terms after you've committed.",
+      ask: "Please fix the price for the full term. Any change should need my written agreement.",
+      re: /(?:price|rate|fee|rent|dues|amount|charges?)[^.\n]{0,40}(?:subject to change|may (?:be )?(?:increase|adjust|change|raise)|reserves? the right to (?:increase|adjust|change|raise))|we (?:may|reserve the right to) (?:change|modify|amend)[^.\n]{0,30}(?:these )?terms/i },
+    { id: "arb", title: "Mandatory arbitration / class-action waiver", sev: "flag",
+      why: "You give up the right to sue in court or join a class action; disputes go to private arbitration.",
+      ask: "I'd like to keep my right to go to court and to small-claims. Please remove the binding-arbitration and class-waiver clause, or make it opt-in.",
+      re: /binding arbitration|mandatory arbitration|agree to arbitrat|waiv(?:e|er of)[^.\n]{0,30}(?:class|jury)|class[- ]action waiver|shall be (?:settled|resolved) by arbitration/i },
+    { id: "guarantee", title: "Personal guarantee", sev: "red",
+      why: "Puts YOUR personal money and assets on the line for this debt, even if it's a business or an LLC signing.",
+      ask: "Please remove the personal guarantee. The obligation should sit with the company/account only.",
+      re: /personal(?:ly)? guarant(?:ee|y|or)|individually (?:liable|guarantee)|guarantor('s)? personal/i },
+    { id: "coj", title: "Confession of judgment", sev: "red",
+      why: "Lets the other side get a court judgment against you WITHOUT a hearing if they say you defaulted. Rare and serious.",
+      ask: "Please strike the confession-of-judgment / warrant-of-attorney clause entirely.",
+      re: /confession of judgment|cognovit|warrant of attorney|confess judgment/i },
+    { id: "lien", title: "Lien / security interest / repossession", sev: "flag",
+      why: "Gives them a claim on your property (or the right to repossess it) if you fall behind.",
+      ask: "Please remove the security interest / lien, or limit it narrowly to the financed item only.",
+      re: /security interest|grants? (?:a )?lien|repossess|right to (?:take|seize) (?:the )?(?:property|goods|equipment)|chattel mortgage/i },
+    { id: "balloon", title: "Balloon / large final payment", sev: "flag",
+      why: "Most payments are small, then one big lump sum is due at the end. Easy to miss, hard to pay.",
+      ask: "Is there a final balloon payment? Please show it clearly and offer a version that fully amortizes.",
+      re: /balloon payment|final (?:lump[- ]sum|payment of)[^.\n]{0,20}\$|one (?:large|final) payment/i },
+    { id: "autopay", title: "Automatic charges to your card", sev: "flag",
+      why: "Your card is charged automatically, often with no notice before each charge.",
+      ask: "Please send a notice at least 10 days before any charge, and let me pay manually.",
+      re: /auto[- ]?pay|automatically charge|recurring (?:charge|payment|billing)|charge (?:your|the) (?:card|account|payment method)(?:[^.\n]{0,20})?(?:on file|each|automatically)|(?:card|payment method) on file[^.\n]{0,25}automatically|continuous (?:payment )?authority/i },
+    { id: "latefee", title: "Late fees / default interest", sev: "flag",
+      why: "Penalty fees or a higher interest rate kick in if a payment is late — sometimes after just one day.",
+      ask: "Please add a grace period of at least 10 days and cap the late fee.",
+      re: /late (?:fee|charge|payment (?:fee|penalty))|default (?:rate|interest)|past due[^.\n]{0,20}(?:fee|interest)|interest (?:rate )?of [0-9]{2}(?:\.[0-9]+)?\s*%/i },
+    { id: "noncompete", title: "Non-compete / non-solicit", sev: "flag",
+      why: "Limits where and for whom you can work (or who you can take as clients) after this ends.",
+      ask: "Please narrow or remove the non-compete; at most, a short non-solicit of clients I actually worked on.",
+      kinds: ["work"],
+      re: /non[- ]?compet|covenant not to compete|shall not (?:work for|engage|solicit)|non[- ]?solicit/i },
+    { id: "ip", title: "They own everything you make / broad rights to your content", sev: "flag",
+      why: "Hands over ownership of your work, ideas, or posted content — sometimes beyond the actual project.",
+      ask: "Please limit the assignment to the specific deliverables for this project; I keep my pre-existing and unrelated work.",
+      kinds: ["work"],
+      re: /(?:assigns?|transfers?)[^.\n]{0,40}(?:all|any) (?:right|title|interest|intellectual property)|work (?:made )?for hire|we own (?:all )?(?:content|rights)|perpetual,? (?:worldwide|royalty[- ]free) (?:license|right)/i },
+    { id: "indemnify", title: "One-sided indemnification", sev: "flag",
+      why: "You agree to cover their legal costs and losses — but they don't cover yours.",
+      ask: "Please make indemnification mutual, or remove it.",
+      re: /indemnif(?:y|ication|ies)|hold harmless|defend (?:and )?indemnify/i,
+      refine: function (t) { return /mutual|each party|both parties/i.test(t) ? "info" : "flag"; } },
+    { id: "assign", title: "They can transfer or sell this contract", sev: "info",
+      why: "Your agreement (or your debt) can be handed to another company you never chose.",
+      ask: "Please require my consent before this contract is assigned to anyone else.",
+      re: /may (?:assign|transfer|sell)[^.\n]{0,30}(?:this|the) (?:agreement|contract|debt|account)|assign(?:ment)? (?:to|of) (?:a )?third part/i },
+    { id: "venue", title: "Disputes handled in a far-away place", sev: "info",
+      why: "If there's a dispute, you may have to deal with it under another state's law or in its courts.",
+      ask: "Please set the governing law and venue to my home state.",
+      re: /governing law|venue|jurisdiction[^.\n]{0,30}(?:shall be|of)|courts? (?:located )?in [A-Z][a-z]+/i },
+    { id: "data", title: "They can share or sell your data", sev: "flag",
+      why: "Permission to share, sell, or use your personal information — often for marketing by others.",
+      ask: "Please limit data use to running my account only; no selling or sharing for marketing.",
+      kinds: ["service", "medical"],
+      re: /(?:sell|share|disclose|provide)[^.\n]{0,30}(?:your |personal )?(?:information|data) (?:to|with) (?:third|partners|affiliates)|for marketing purposes|sell your (?:personal )?(?:information|data)/i },
+    { id: "convenience", title: "They can cancel any time (termination for convenience)", sev: "info",
+      why: "The other side can end the deal whenever they like — useful to know if you're relying on it.",
+      ask: "If they can cancel for convenience, I'd like the same right, and notice.",
+      re: /terminate[^.\n]{0,25}for (?:any reason|convenience|no reason)|at (?:its|their) sole discretion[^.\n]{0,20}terminate|terminate (?:this )?(?:agreement )?(?:at any time|with or without cause)/i }
+  ];
+
+  var WEIGHT = { red: 18, flag: 8, info: 0, pass: 0 };
+
+  function analyze(text, kind) {
+    var t = text.replace(/ /g, " ");
+    var hits = [], passes = [];
+    RULES.forEach(function (r) {
+      var i = find(t, r.re);
+      if (i >= 0) {
+        var sev = r.refine ? r.refine(t) : r.sev;
+        hits.push({ id: r.id, title: r.title, status: sev, why: r.why, ask: r.ask, snip: snipAt(t, i), primary: r.kinds && kind && r.kinds.indexOf(kind) >= 0 });
+      } else if (["renew", "etf", "price", "arb", "autopay", "latefee"].indexOf(r.id) >= 0) {
+        passes.push({ id: r.id, title: r.title, status: "pass", why: "Not found in the text you pasted." });
+      }
+    });
+    // Order: reds first, then flags, then info, then passes; within a tier, kind-relevant first.
+    var order = { red: 0, flag: 1, info: 2, pass: 3 };
+    hits.sort(function (a, b) { return (order[a.status] - order[b.status]) || ((b.primary ? 1 : 0) - (a.primary ? 1 : 0)); });
+    var items = hits.concat(passes);
+    var score = Math.max(0, 100 - hits.reduce(function (s, i) { return s + (WEIGHT[i.status] || 0); }, 0));
+    var grade = score >= 90 ? "A" : score >= 75 ? "B" : score >= 60 ? "C" : score >= 45 ? "D" : "F";
+    return { items: items, score: score, grade: grade, reds: hits.filter(function (i) { return i.status === "red"; }).length,
+             flags: hits.filter(function (i) { return i.status === "flag"; }).length,
+             infos: hits.filter(function (i) { return i.status === "info"; }).length };
+  }
+
+  function render(r) {
+    $("gbox").textContent = r.grade;
+    $("gbox").style.color = r.grade === "A" || r.grade === "B" ? "var(--grn)" : r.grade === "C" ? "var(--amb)" : "var(--red)";
+    $("counts").innerHTML = '<span class="c-red">' + r.reds + ' red flag' + (r.reds === 1 ? "" : "s") + '</span>'
+      + '<span class="c-amb">' + (r.flags + r.infos) + ' to check</span>';
+    $("summary").textContent = r.reds ? "Read the red items before you sign." : r.flags ? "No red flags — a few things worth asking about." : "No common traps found. Still read the whole thing.";
+    var tagName = { red: "Red flag", flag: "Ask about this", info: "Heads up", pass: "Not present" };
+    $("items").innerHTML = r.items.map(function (i) {
+      return '<div class="item ' + i.status + '"><h3>' + esc(i.title) + '<span class="tag ' + i.status + '">' + tagName[i.status] + '</span></h3>'
+        + '<div class="small">' + esc(i.why) + '</div>'
+        + (i.snip ? '<div class="snip">“' + esc(i.snip) + '”</div>' : "")
+        + (i.ask && i.status !== "pass" ? '<div class="ask small"><b>Ask for a fix:</b> ' + esc(i.ask) + '</div>' : "")
+        + '</div>';
+    }).join("");
+    $("out").hidden = false;
+    $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function quota() { var q = ls.get("quota", { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
+  function showQuota() { var left = Math.max(0, 8 - quota().n); $("quota").textContent = left + " free check" + (left === 1 ? "" : "s") + " left today"; }
+
+  function run() {
+    var text = $("text").value.trim();
+    if (text.length < 40) { alert("Paste a bit more of the contract text first."); return; }
+    var q = quota();
+    if (q.n >= 8) { alert("That's 8 checks today in this browser. Come back tomorrow — your contracts are never stored or uploaded."); return; }
+    q.n++; ls.set("quota", q); showQuota();
+    render(analyze(text, $("kind").value));
+  }
+
+  var SAMPLE = "MEMBERSHIP AGREEMENT. This Agreement shall automatically renew for successive twelve (12) month terms unless Member provides written notice of cancellation at least thirty (30) days prior to the end of the then-current term. Monthly dues are subject to change upon notice. If Member terminates early, Member shall pay an early termination fee equal to the remaining balance of the current term. Any dispute shall be settled by binding arbitration, and Member waives the right to participate in any class action. The Company may charge the payment method on file automatically each month. Member grants the Company a security interest in any personal property left on the premises.";
+
+  $("go").onclick = run;
+  $("sample").onclick = function () { $("text").value = SAMPLE; $("kind").value = "service"; run(); };
+  $("print").onclick = function () { window.print(); };
+  $("text").addEventListener("keydown", function (e) { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") run(); });
+  showQuota();
+})();
+</script>
+</body>
+</html>
