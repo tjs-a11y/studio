@@ -19,6 +19,18 @@
       "plans": []
     },
     {
+      "id": "fair-price",
+      "name": "Fair Price",
+      "tagline": "Paste any estimate — auto repair, contractor, dental, vet, moving — and see the padding, what a fair quote includes, and the questions to ask. Nothing is uploaded.",
+      "plans": []
+    },
+    {
+      "id": "proof",
+      "name": "Proof",
+      "tagline": "Add a photo and get a timestamp and a fingerprint you keep — so later you can show it wasn't altered. For move-outs, damage and disputes. Nothing is uploaded.",
+      "plans": []
+    },
+    {
       "id": "before-you-sign",
       "name": "Before You Sign",
       "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
@@ -117,6 +129,8 @@
         "dinner",
         "copycat",
         "kitchen",
+        "fair-price",
+        "proof",
         "before-you-sign",
         "saver",
         "pilot",

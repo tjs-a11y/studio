@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof: timestamp and fingerprint any photo, on-device</title>
+<meta name="description" content="Add a photo and get a timestamp and a fingerprint you keep — so later you can show it wasn't altered — for move-outs, damage, disputes. Nothing uploaded.">
+<link rel="canonical" href="https://quickwell.app/proof/">
+<meta property="og:title" content="Proof: timestamp and fingerprint any photo, on-device">
+<meta property="og:description" content="Timestamp and fingerprint a photo so you can later show it wasn't altered — for move-outs, damage and disputes. Nothing is uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/proof/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<meta name="twitter:title" content="Proof: timestamp and fingerprint any photo, on-device">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Proof","url":"https://quickwell.app/proof/","applicationCategory":"UtilitiesApplication","description":"Records a timestamp and a SHA-256 fingerprint of a photo entirely on the device, so the photo can later be shown to be unaltered. Nothing is uploaded. A record you keep, not legal proof by itself.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Quickwell Plus","price":"4.99","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does this prove a photo wasn't changed?","acceptedAnswer":{"@type":"Answer","text":"It makes a fingerprint (a SHA-256 hash) of the exact file plus the time you recorded it. If even one pixel of the photo changes later, the fingerprint won't match — so the record you kept shows the original is the original."}},{"@type":"Question","name":"Is it legal proof?","acceptedAnswer":{"@type":"Answer","text":"It's a strong record you keep, not legal proof by itself. The timestamp is your device's clock, and a court weighs evidence its own way. Keep the record somewhere you don't control the date, like an email to yourself."}},{"@type":"Question","name":"Is my photo uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The photo and the fingerprint are made in your browser and never leave your device."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#4a4fb0; --chip:#ecedf6; --on:#4a4fb0; --grn:#1f7a3d; --grnbg:#eaf6ee; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101016; --ink:#eeeef4; --muted:#9a9ab0; --card:#17171f; --line:#292935; --accent:#9499f0; --chip:#1c1c28; --on:#9499f0; --grn:#7fc79a; --grnbg:#16241b; color-scheme:dark; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:30px 16px 56px; }
+  h1 { font-size:1.7rem; margin:0 0 6px; } .lede { margin:0 0 18px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0; }
+  .grp { margin:14px 0 6px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+  .grp:first-child { margin-top:0; }
+  .filebtn { display:inline-block; border:1px dashed var(--line); background:var(--chip); color:var(--ink); border-radius:10px; padding:12px 16px; cursor:pointer; font:inherit; }
+  input[type=file] { position:absolute; width:1px; height:1px; opacity:0; }
+  input[type=text] { width:100%; font:inherit; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  #preview { max-width:220px; border-radius:10px; border:1px solid var(--line); display:block; margin-top:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px; }
+  button { font:inherit; padding:11px 18px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .muted{color:var(--muted)} .small{font-size:.9rem}
+  .rec { border:1px solid var(--line); border-left:5px solid var(--grn); border-radius:10px; padding:14px 16px; margin:12px 0; background:var(--card); }
+  .rec dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:.92rem; }
+  .rec dt { color:var(--muted); font-weight:600; } .rec dd { margin:0; word-break:break-all; font-family:ui-monospace,Menlo,monospace; }
+.qw-also{margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px}
+.qw-also p{margin:0 0 10px;font-weight:700;font-size:.95rem}
+.qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.qw-also a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.qw-also b{color:var(--accent)} .qw-also span{display:block;color:var(--muted);font-size:.85rem}
+  footer { margin-top:30px; color:var(--muted); font-size:.9rem; } a { color:var(--accent); } [hidden]{display:none!important}
+  @media print { .noprint{display:none!important} body{background:#fff} }
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <h1>Proof</h1>
+  <p class="lede">Moving out, picking up a rental car, or opening a box that arrived broken? Add a photo and Proof stamps it with the <b>time</b> and a <b>fingerprint</b> — so if the photo is ever questioned, you can show it's the untouched original. <b>The photo never leaves your phone.</b></p>
+
+  <section class="card noprint">
+    <div class="grp">Add the photo</div>
+    <label class="filebtn" for="file">📷 Take or choose a photo<input id="file" type="file" accept="image/*" capture="environment"></label>
+    <img id="preview" hidden alt="the photo you added">
+    <div class="grp">What is it? (optional, helps later)</div>
+    <input id="note" type="text" placeholder="e.g. Apartment 4B kitchen wall, move-out day" autocomplete="off">
+    <div class="row">
+      <button id="go">Stamp it →</button>
+      <button class="ghost" id="clear">Clear</button>
+    </div>
+    <p class="small muted" style="margin-bottom:0">A record you keep — not legal proof by itself. The time is your device's clock. Nothing is uploaded.</p>
+  </section>
+
+  <section id="out" hidden></section>
+
+  <section class="card noprint" id="premium" hidden>
+    <div id="locked">
+      <div class="grp" style="margin-top:0">Keep a log · Quickwell Plus</div>
+      <p class="small">Unlock a <b>saved log</b> of every photo you stamp on this device, and a one-tap <b>printable report</b> you can save as a PDF or email to yourself — the safest place to keep a timestamp. $4.99/month, and it covers every other Quickwell tool.</p>
+      <div class="row"><a href="/plus/?ref=proof" style="text-decoration:none;color:#fff;background:var(--accent);border:1px solid var(--accent);padding:11px 18px;border-radius:8px">Get Quickwell Plus — $4.99/mo</a></div>
+    </div>
+    <div id="unlocked" hidden>
+      <div class="grp" style="margin-top:0">Your log <span class="small muted">· Plus · stays on this device</span></div>
+      <div class="row" style="margin-top:0"><button class="ghost" id="print">🖨️ Printable report</button> <button class="ghost" id="wipe">Clear log</button></div>
+      <div id="log"></div>
+    </div>
+  </section>
+
+  <!-- xlinks:proof -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/dinner/?ref=xlink-proof"><b>What's for Dinner?</b><span>Dinners from what you already have in the fridge</span></a></li><li><a href="/copycat/?ref=xlink-proof"><b>Copycat Kitchen</b><span>Rebuild a restaurant dish at home, with the trick behind it</span></a></li><li><a href="/kitchen/?ref=xlink-proof"><b>Weekly Kitchen</b><span>Plan a week of dinners from your saved pantry</span></a></li><li><a href="/fair-price/?ref=xlink-proof"><b>Fair Price</b><span>Is this quote fair? Spot the padding before you pay</span></a></li><li><a href="/before-you-sign/?ref=xlink-proof"><b>Before You Sign</b><span>Spot the costly clauses in any contract before you sign</span></a></li><li><a href="/saver/?ref=xlink-proof"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-proof"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/shield/?ref=xlink-proof"><b>Quickwell Shield</b><span>Is this message a scam? See the warning signs</span></a></li><li><a href="/footsure/?ref=xlink-proof"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-proof"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-proof"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-proof"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-proof"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+
+  <footer>Timestamp + fingerprint made on your device; the photo is never uploaded. A record you keep, not legal advice. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+
+<script src="/js/pro.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var file = null;
+
+  $("file").addEventListener("change", function (e) {
+    file = e.target.files && e.target.files[0]; if (!file) return;
+    var rd = new FileReader(); rd.onload = function () { $("preview").src = rd.result; $("preview").hidden = false; }; rd.readAsDataURL(file); // stays in the browser
+  });
+
+  function fmtBytes(n) { return n < 1024 ? n + " B" : n < 1048576 ? (n / 1024).toFixed(1) + " KB" : (n / 1048576).toFixed(2) + " MB"; }
+
+  async function hashFile(f) {
+    var buf = await f.arrayBuffer();
+    if (!(window.crypto && crypto.subtle && crypto.subtle.digest)) throw new Error("no-subtle");
+    var d = await crypto.subtle.digest("SHA-256", buf);
+    return [].map.call(new Uint8Array(d), function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
+  function recordHtml(r) {
+    return '<div class="rec"><dl>'
+      + "<dt>Photo</dt><dd>" + esc(r.name) + " · " + esc(r.size) + "</dd>"
+      + "<dt>Note</dt><dd>" + (r.note ? esc(r.note) : "<span class=\"muted\">—</span>") + "</dd>"
+      + "<dt>Stamped</dt><dd>" + esc(r.local) + "</dd>"
+      + "<dt>UTC</dt><dd>" + esc(r.utc) + "</dd>"
+      + "<dt>SHA-256</dt><dd>" + esc(r.hash) + "</dd>"
+      + "</dl></div>";
+  }
+  function plain(r) {
+    return "QUICKWELL PROOF RECORD\nPhoto: " + r.name + " (" + r.size + ")\nNote: " + (r.note || "-")
+      + "\nStamped: " + r.local + "\nUTC: " + r.utc + "\nSHA-256: " + r.hash
+      + "\n\nKeep this record. If the photo is changed, its SHA-256 fingerprint will no longer match this one.\nThe time is the device clock. A record you keep, not legal proof by itself. via quickwell.app/proof";
+  }
+
+  var lastRec = null;
+  async function run() {
+    if (!file) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Add a photo first, then stamp it.</div>'; return; }
+    $("go").disabled = true; $("go").textContent = "Stamping…";
+    try {
+      var hash = await hashFile(file);
+      var now = new Date();
+      var r = { name: file.name || "photo", size: fmtBytes(file.size), note: $("note").value.trim(), local: now.toLocaleString(), utc: now.toISOString(), hash: hash };
+      lastRec = r;
+      $("out").innerHTML = '<div class="grp" style="margin-top:4px">Your proof record</div>' + recordHtml(r)
+        + '<div class="row noprint"><button class="ghost" id="copyR">Copy record</button>' + (PRO ? ' <button class="ghost" id="save">★ Save to log</button>' : '') + "</div>"
+        + '<p class="small muted" style="margin-top:10px"><b>Now keep it safe:</b> email this record to yourself or save it somewhere you don\'t control the clock. That\'s what makes the timestamp hard to argue with later. If anyone changes the photo, its fingerprint won\'t match the one above.</p>'
+        + (PRO ? "" : '<p class="small muted">Tip: Quickwell Plus keeps a running log and a printable report.</p>');
+      $("out").hidden = false; $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (x) {
+      $("out").hidden = false; $("out").innerHTML = '<div class="card">Couldn\'t read that file. Try a JPG or PNG. (Proof needs a secure https connection to make the fingerprint.)</div>';
+    }
+    $("go").disabled = false; $("go").textContent = "Stamp it →";
+  }
+  $("go").onclick = run;
+  $("clear").onclick = function () { file = null; $("file").value = ""; $("preview").hidden = true; $("note").value = ""; $("out").hidden = true; };
+
+  // ---- Quickwell Plus: saved log + printable report ----
+  var PRO = false, log = [];
+  function loadLog() { try { log = JSON.parse(localStorage.getItem("proof-log") || "[]"); } catch (e) { log = []; } }
+  function saveLog() { try { localStorage.setItem("proof-log", JSON.stringify(log)); } catch (e) {} }
+  function renderLog() {
+    var el = $("log"); if (!el) return;
+    el.innerHTML = log.length ? log.map(recordHtml).join("") : '<p class="small muted">Nothing saved yet. Stamp a photo above and tap ★ Save.</p>';
+  }
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.id === "copyR") { try { navigator.clipboard.writeText(plain(lastRec)); e.target.textContent = "Copied ✓"; } catch (x) { e.target.textContent = "Select the record above"; } return; }
+    if (e.target && e.target.id === "save") { if (lastRec) { log.unshift(lastRec); saveLog(); renderLog(); e.target.textContent = "Saved ★"; } return; }
+    if (e.target && e.target.id === "wipe") { log = []; saveLog(); renderLog(); return; }
+    if (e.target && e.target.id === "print") { window.print(); return; }
+  });
+
+  if (window.Studio) Studio.init({ tool: "proof", onChange: function (s) { PRO = !!s.pro; $("premium").hidden = false; $("locked").hidden = PRO; $("unlocked").hidden = !PRO; if (PRO) { loadLog(); renderLog(); } } });
+})();
+</script>
+</body>
+</html>
