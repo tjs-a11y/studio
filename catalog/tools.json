@@ -31,6 +31,18 @@
       "plans": []
     },
     {
+      "id": "keep-the-receipt",
+      "name": "Keep the Receipt",
+      "tagline": "Log what you buy and never miss a return window or a warranty again — it tracks the deadlines and flags what's closing soon. Nothing is uploaded.",
+      "plans": []
+    },
+    {
+      "id": "double-dose",
+      "name": "Double Dose",
+      "tagline": "Enter the active ingredients off your medicine labels and see when two products share one, so you don't double up by accident. Not medical advice.",
+      "plans": []
+    },
+    {
       "id": "before-you-sign",
       "name": "Before You Sign",
       "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
@@ -131,6 +143,8 @@
         "kitchen",
         "fair-price",
         "proof",
+        "keep-the-receipt",
+        "double-dose",
         "before-you-sign",
         "saver",
         "pilot",

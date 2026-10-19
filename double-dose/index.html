@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Double Dose: catch the same ingredient twice</title>
+<meta name="description" content="Enter the active ingredients from your medicine labels; it flags when two products share one, so you don't double up. Not medical advice.">
+<link rel="canonical" href="https://quickwell.app/double-dose/">
+<meta property="og:title" content="Double Dose: catch the same ingredient twice">
+<meta property="og:description" content="Enter the active ingredients off your medicine labels and see when two products share one — so you don't double up by accident. Not medical advice.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/double-dose/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<meta name="twitter:title" content="Double Dose: catch the same ingredient twice">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Double Dose","url":"https://quickwell.app/double-dose/","applicationCategory":"HealthApplication","description":"Compares the active ingredients you enter from your medicine labels and flags when two products contain the same one, to help avoid accidental double-dosing. Runs on your device. Information only, not medical advice.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Quickwell Plus","price":"4.99","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. It only compares the active-ingredient names you type in from your own labels and flags matches. It does not know doses, interactions, or what is safe for you. Always read the label and ask a pharmacist or doctor."}},{"@type":"Question","name":"Is anything uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything you enter stays in your browser on your device."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<style>
+  :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#1f6a6f; --chip:#e9f1f1; --on:#1f6a6f; --red:#b23b2e; --redbg:#fbecea; --amb:#9a6700; --ambbg:#fbf3e0; --grn:#1f7a3d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101414; --ink:#edf0f0; --muted:#9aa7a7; --card:#171c1c; --line:#283030; --accent:#56b6bb; --chip:#19201f; --on:#56b6bb; --red:#f08b7e; --redbg:#2a1715; --amb:#f2c14e; --ambbg:#2a2414; --grn:#7fc79a; color-scheme:dark; } }
+  * { box-sizing:border-box; } body { margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:760px; margin:0 auto; padding:30px 16px 56px; }
+  h1 { font-size:1.7rem; margin:0 0 6px; } .lede { margin:0 0 14px; }
+  .note { background:var(--ambbg); border:1px solid var(--line); border-left:4px solid var(--amb); border-radius:10px; padding:11px 14px; margin:0 0 16px; font-size:.92rem; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0; }
+  .grp { margin:12px 0 4px; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+  .grp:first-child { margin-top:0; }
+  label.f { display:block; font-size:.85rem; color:var(--muted); margin:10px 0 3px; font-weight:600; }
+  input { width:100%; font:inherit; padding:9px 11px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px; }
+  button { font:inherit; padding:11px 18px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); }
+  .muted{color:var(--muted)} .small{font-size:.9rem}
+  .med { border:1px solid var(--line); border-radius:10px; padding:11px 14px; margin:10px 0; background:var(--card); }
+  .med h3 { margin:0 0 3px; font-size:1.02rem; } .med .ing { color:var(--muted); font-size:.92rem; }
+  .flag { border:1px solid var(--line); border-left:5px solid var(--red); background:var(--redbg); border-radius:10px; padding:12px 14px; margin:10px 0; }
+  .flag h3 { margin:0 0 4px; font-size:1.05rem; color:var(--red); }
+  .del { background:none; border:0; color:var(--muted); cursor:pointer; font-size:.85rem; padding:4px; text-decoration:underline; }
+.qw-also{margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px}
+.qw-also p{margin:0 0 10px;font-weight:700;font-size:.95rem}
+.qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.qw-also a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.qw-also b{color:var(--accent)} .qw-also span{display:block;color:var(--muted);font-size:.85rem}
+  footer { margin-top:30px; color:var(--muted); font-size:.9rem; } a { color:var(--accent); } [hidden]{display:none!important}
+  @media print { .noprint{display:none!important} body{background:#fff} }
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <h1>Double Dose</h1>
+  <p class="lede">Taking a cold medicine <i>and</i> a pain reliever? Many products quietly share the same active ingredient — and taking two at once can push you over a safe amount without you knowing. Type in what's on each label and this flags the overlaps. <b>It all stays on your phone.</b></p>
+  <div class="note"><b>Information, not medical advice.</b> This only compares the ingredient names you type from your own labels. It doesn't know your dose, your health, or how medicines interact. Read every label, and ask a pharmacist or doctor before you take or stop anything. In an emergency or a suspected overdose, call your local poison center or emergency number.</div>
+
+  <section class="card noprint">
+    <div class="grp">Add a medicine</div>
+    <label class="f" for="name">Product name (what's on the box)</label>
+    <input id="name" placeholder="e.g. Nighttime Cold &amp; Flu" autocomplete="off">
+    <label class="f" for="actives">Active ingredients — copy them off the label, separated by commas</label>
+    <input id="actives" list="common" placeholder="e.g. acetaminophen, dextromethorphan, doxylamine" autocomplete="off">
+    <datalist id="common"></datalist>
+    <p class="small muted" style="margin:6px 0 0">The "Active ingredients" box is usually near the top of the Drug Facts label. Type them exactly as written.</p>
+    <div class="row"><button id="add">Add to my cabinet</button> <button class="ghost" id="check">Check for overlaps</button></div>
+  </section>
+
+  <section id="flags"></section>
+  <section id="list"></section>
+
+  <section class="card noprint" id="premium" hidden>
+    <div id="locked">
+      <div class="grp" style="margin-top:0">A sheet for your pharmacist · Quickwell Plus</div>
+      <p class="small">Unlock a one-tap <b>printable list</b> of everything in your cabinet and its active ingredients — the thing a pharmacist or doctor actually wants to see. $4.99/month, and it covers every other Quickwell tool.</p>
+      <div class="row"><a href="/plus/?ref=double-dose" style="text-decoration:none;color:#fff;background:var(--accent);border:1px solid var(--accent);padding:11px 18px;border-radius:8px">Get Quickwell Plus — $4.99/mo</a></div>
+    </div>
+    <div id="unlocked" hidden>
+      <div class="grp" style="margin-top:0">Plus</div>
+      <div class="row" style="margin-top:0"><button class="ghost" id="print">🖨️ Printable list for a pharmacist</button></div>
+    </div>
+  </section>
+
+  <!-- xlinks:double-dose -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/dinner/?ref=xlink-double-dose"><b>What's for Dinner?</b><span>Dinners from what you already have in the fridge</span></a></li><li><a href="/copycat/?ref=xlink-double-dose"><b>Copycat Kitchen</b><span>Rebuild a restaurant dish at home, with the trick behind it</span></a></li><li><a href="/kitchen/?ref=xlink-double-dose"><b>Weekly Kitchen</b><span>Plan a week of dinners from your saved pantry</span></a></li><li><a href="/fair-price/?ref=xlink-double-dose"><b>Fair Price</b><span>Is this quote fair? Spot the padding before you pay</span></a></li><li><a href="/proof/?ref=xlink-double-dose"><b>Proof</b><span>Timestamp and fingerprint a photo for a dispute</span></a></li><li><a href="/keep-the-receipt/?ref=xlink-double-dose"><b>Keep the Receipt</b><span>Never miss a return window or a warranty again</span></a></li><li><a href="/before-you-sign/?ref=xlink-double-dose"><b>Before You Sign</b><span>Spot the costly clauses in any contract before you sign</span></a></li><li><a href="/saver/?ref=xlink-double-dose"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-double-dose"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/shield/?ref=xlink-double-dose"><b>Quickwell Shield</b><span>Is this message a scam? See the warning signs</span></a></li><li><a href="/footsure/?ref=xlink-double-dose"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-double-dose"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-double-dose"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-double-dose"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-double-dose"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+
+  <footer>Everything you enter stays in your browser. Information, not medical advice. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+
+<script src="/js/pro.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  // Spelling help only (not a product database). The most common OTC active ingredients.
+  var COMMON = ["acetaminophen", "ibuprofen", "naproxen", "aspirin", "diphenhydramine", "doxylamine",
+    "dextromethorphan", "guaifenesin", "phenylephrine", "pseudoephedrine", "chlorpheniramine",
+    "loratadine", "cetirizine", "fexofenadine", "famotidine", "omeprazole", "ranitidine",
+    "loperamide", "bismuth subsalicylate", "caffeine", "menthol", "melatonin"];
+  $("common").innerHTML = COMMON.map(function (c) { return '<option value="' + c + '">'; }).join("");
+
+  // A few well-documented alternate names, so the same ingredient under two names still matches.
+  var SYN = { "paracetamol": "acetaminophen", "apap": "acetaminophen", "n-acetyl-p-aminophenol": "acetaminophen",
+    "asa": "aspirin", "acetylsalicylic acid": "aspirin", "vitamin c": "ascorbic acid",
+    "dph": "diphenhydramine", "dxm": "dextromethorphan" };
+  function norm(s) {
+    var x = s.toLowerCase().replace(/\(.*?\)/g, "").replace(/\b(hbr|hcl|maleate|sodium|citrate|succinate|anhydrous)\b/g, "").replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
+    return SYN[x] || x;
+  }
+
+  var meds = [], PRO = false;
+  function load() { try { meds = JSON.parse(localStorage.getItem("dd-meds") || "[]"); } catch (e) { meds = []; } }
+  function save() { try { localStorage.setItem("dd-meds", JSON.stringify(meds)); } catch (e) {} }
+  load();
+
+  function overlaps() {
+    var map = {}; // normalized active -> {display, meds:[names]}
+    meds.forEach(function (m) {
+      m.actives.forEach(function (a) {
+        var n = norm(a); if (!n) return;
+        if (!map[n]) map[n] = { display: a.trim(), meds: [] };
+        if (map[n].meds.indexOf(m.name) < 0) map[n].meds.push(m.name);
+      });
+    });
+    return Object.keys(map).map(function (k) { return map[k]; }).filter(function (o) { return o.meds.length >= 2; });
+  }
+
+  function renderFlags() {
+    var ov = overlaps(), el = $("flags");
+    if (!meds.length) { el.innerHTML = ""; return; }
+    if (!ov.length) { el.innerHTML = '<div class="card" style="border-left:5px solid var(--grn)"><b>No shared active ingredients found</b> among what you entered. That\'s not a safety clearance — doses and interactions still matter. When in doubt, ask a pharmacist.</div>'; return; }
+    el.innerHTML = ov.map(function (o) {
+      return '<div class="flag"><h3>⚠️ ' + esc(o.display) + ' is in ' + o.meds.length + ' of your medicines</h3>'
+        + '<p style="margin:0">Found in: <b>' + o.meds.map(esc).join("</b>, <b>") + '</b>. Taking these together could mean more ' + esc(o.display)
+        + ' than you intend. This is common with acetaminophen in cold, flu, and pain products. <b>Do not take them together without checking with a pharmacist or doctor first.</b></p></div>';
+    }).join("");
+  }
+
+  function renderList() {
+    var el = $("list");
+    el.innerHTML = meds.length ? '<div class="grp">Your cabinet</div>' + meds.map(function (m, i) {
+      return '<div class="med"><h3>' + esc(m.name || "Medicine") + '</h3><div class="ing">' + (m.actives.length ? esc(m.actives.join(", ")) : "no ingredients entered") + '</div>'
+        + '<div class="noprint"><button class="del" data-del="' + i + '">Remove</button></div></div>';
+    }).join("") : "";
+  }
+  function render() { renderFlags(); renderList(); }
+
+  function add() {
+    var name = $("name").value.trim();
+    var actives = $("actives").value.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!actives.length) { $("actives").focus(); return; }
+    meds.push({ name: name || "(unnamed)", actives: actives }); save(); render();
+    $("name").value = ""; $("actives").value = ""; $("name").focus();
+  }
+  $("add").onclick = add;
+  $("check").onclick = function () { render(); $("flags").scrollIntoView({ behavior: "smooth", block: "start" }); };
+  document.addEventListener("click", function (e) {
+    var del = e.target.closest("[data-del]");
+    if (del) { meds.splice(Number(del.dataset.del), 1); save(); render(); return; }
+    if (e.target && e.target.id === "print") { window.print(); return; }
+  });
+
+  render();
+  if (window.Studio) Studio.init({ tool: "double-dose", onChange: function (s) { PRO = !!s.pro; $("premium").hidden = false; $("locked").hidden = PRO; $("unlocked").hidden = !PRO; } });
+})();
+</script>
+</body>
+</html>

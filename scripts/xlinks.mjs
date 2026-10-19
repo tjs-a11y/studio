@@ -17,6 +17,8 @@ export const TOOLS = [
   { id: 'kitchen', name: 'Weekly Kitchen', text: 'Plan a week of dinners from your saved pantry', page: 'kitchen/index.html' },
   { id: 'fair-price', name: 'Fair Price', text: 'Is this quote fair? Spot the padding before you pay', page: 'fair-price/index.html' },
   { id: 'proof', name: 'Proof', text: 'Timestamp and fingerprint a photo for a dispute', page: 'proof/index.html' },
+  { id: 'keep-the-receipt', name: 'Keep the Receipt', text: 'Never miss a return window or a warranty again', page: 'keep-the-receipt/index.html' },
+  { id: 'double-dose', name: 'Double Dose', text: 'Catch two medicines that share an active ingredient', page: 'double-dose/index.html' },
   { id: 'before-you-sign', name: 'Before You Sign', text: 'Spot the costly clauses in any contract before you sign', page: 'before-you-sign/index.html' },
   { id: 'saver', name: 'Quickwell Saver', text: 'Find and stop the money leaks in your bank export', page: 'saver/index.html' },
   { id: 'pilot', name: 'Quickwell Pilot', text: 'What every letter and bill needs from you, by when', page: 'pilot/index.html' },
