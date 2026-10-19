@@ -5,7 +5,10 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound']);
+// Sites (not billable tools) that may record anonymous outbound-link clicks, and the partner links they track.
+const SITES = new Set(['northstar']);
+const OUT_TARGETS = new Set(['freightsidekick']);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,200}\.[A-Za-z]{2,24}$/;
 const day = () => new Date().toISOString().slice(0, 10);
 
@@ -32,8 +35,16 @@ export async function POST(request) {
   if (Number(request.headers.get('content-length') || 0) > 2048) return fail(413, 'Too large.');
   let body; try { body = await request.json(); } catch { return fail(400, 'Bad request.'); }
   const tool = String(body.tool || ''); const event = String(body.event || '');
-  if (!known(tool) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
+  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   const run = override || store();
+  if (event === 'outbound') {
+    // Anonymous count of clicks from one of our sites to a partner link. No IP, no identity, no URL beyond the fixed target.
+    const target = String(body.target || '');
+    if (!SITES.has(tool) || !OUT_TARGETS.has(target)) return fail(400, 'Unknown event.');
+    if (!run) { console.log(JSON.stringify({ evt: 'outbound', site: tool, target })); return json({ ok: true }); }
+    await run(['INCR', `count:${tool}:${target}:clicks`], ['INCR', `count:${tool}:${target}:clicks:${day()}`]);
+    return json({ ok: true });
+  }
   if (event === 'check') {
     const n = Math.max(1, Math.min(10000, Number(body.plots) || 1));
     if (!run) { console.log(JSON.stringify({ evt: 'check', tool, items: n })); return json({ ok: true }); }

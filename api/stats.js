@@ -29,13 +29,23 @@ export async function GET() {
   if (!run) return json({ enabled: false, note: 'Usage counting is off until Upstash/KV is connected on this project.' });
   const ids = tools.map((t) => t.id).filter((id) => id !== 'plus');
   const today = day();
-  const cmds = ids.flatMap((id) => [['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`]]);
+  // Anonymous outbound-click counters from our other sites (counts only, no identity).
+  const OUTBOUND = [['northstar', 'freightsidekick']];
+  const cmds = [
+    ...ids.flatMap((id) => [['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`]]),
+    ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
+  ];
   let res;
   try { res = await run(cmds); } catch { return json({ enabled: true, error: 'unavailable' }, 200); }
   const num = (v) => { const n = Number(v && typeof v === 'object' && 'result' in v ? v.result : v); return Number.isFinite(n) ? n : 0; };
   const out = {};
   ids.forEach((id, i) => { out[id] = { checks: num(res[i * 2]), checks_today: num(res[i * 2 + 1]) }; });
   const total = Object.values(out).reduce((a, t) => a + t.checks, 0);
-  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, tools: out },
+  const outbound = {};
+  OUTBOUND.forEach(([site, target], i) => {
+    const b = ids.length * 2 + i * 2;
+    outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
+  });
+  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, tools: out, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }

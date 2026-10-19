@@ -20,6 +20,18 @@ test('with storage: counts and waitlist emails are written', async () => {
   setStoreForTests(null);
 });
 
+test('outbound clicks: a known site+target is counted, junk is refused, no PII is stored', async () => {
+  const seen = [];
+  setStoreForTests(async (...cmds) => { seen.push(...cmds); return []; });
+  assert.equal((await event(post({ tool: 'northstar', event: 'outbound', target: 'freightsidekick' }))).status, 200);
+  assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:northstar:freightsidekick:clicks'));
+  // every stored field is a fixed counter key — nothing visitor-specific
+  assert.ok(seen.every((c) => typeof c[1] === 'string' && c[1].startsWith('count:')));
+  assert.equal((await event(post({ tool: 'northstar', event: 'outbound', target: 'evil.example' }))).status, 400);
+  assert.equal((await event(post({ tool: 'notasite', event: 'outbound', target: 'freightsidekick' }))).status, 400);
+  setStoreForTests(null);
+});
+
 test('junk is refused', async () => {
   assert.equal((await event(post({ tool: 'nope', event: 'check' }))).status, 400);
   assert.equal((await event(post({ tool: 'plot-file-checker', event: 'drop-table' }))).status, 400);
