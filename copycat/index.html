@@ -223,7 +223,7 @@
   }
 
   var lastDish = null;
-  $("go").onclick = run;
+  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'copycat', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
   $("clear").onclick = function () {
     sel = { cuisine: null, format: null, protein: null, notes: {} };
     document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });

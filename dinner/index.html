@@ -213,7 +213,7 @@
     $("palette").appendChild(b);
   };
   $("add").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("addbtn").click(); } });
-  $("go").onclick = run;
+  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'dinner', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
   $("clear").onclick = function () { picks = {}; expiring = {}; rebuild(); palette(); $("out").hidden = true; if (PRO) renderExp(); };
 
   // ---- Quickwell Plus: the kitchen that thinks for you ----

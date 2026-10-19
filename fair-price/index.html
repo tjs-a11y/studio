@@ -165,7 +165,7 @@
     $("out").innerHTML = readHtml(text, c); $("out").hidden = false; $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   var lastText = "";
-  $("go").onclick = run;
+  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'fair-price', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
   $("clear").onclick = function () { $("text").value = ""; $("out").hidden = true; };
 
   // ---- Quickwell Plus: compare + negotiate ----

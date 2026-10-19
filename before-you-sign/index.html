@@ -250,7 +250,7 @@
 
   var SAMPLE = "MEMBERSHIP AGREEMENT. This Agreement shall automatically renew for successive twelve (12) month terms unless Member provides written notice of cancellation at least thirty (30) days prior to the end of the then-current term. Monthly dues are subject to change upon notice. If Member terminates early, Member shall pay an early termination fee equal to the remaining balance of the current term. Any dispute shall be settled by binding arbitration, and Member waives the right to participate in any class action. The Company may charge the payment method on file automatically each month. Member grants the Company a security interest in any personal property left on the premises.";
 
-  $("go").onclick = run;
+  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'before-you-sign', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
   $("sample").onclick = function () { $("text").value = SAMPLE; $("kind").value = "service"; run(); };
   $("print").onclick = function () { window.print(); };
   $("text").addEventListener("keydown", function (e) { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") run(); });

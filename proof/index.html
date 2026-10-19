@@ -140,7 +140,7 @@
     }
     $("go").disabled = false; $("go").textContent = "Stamp it →";
   }
-  $("go").onclick = run;
+  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'proof', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
   $("clear").onclick = function () { file = null; $("file").value = ""; $("preview").hidden = true; $("note").value = ""; $("out").hidden = true; };
 
   // ---- Quickwell Plus: saved log + printable report ----

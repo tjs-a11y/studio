@@ -212,7 +212,7 @@
     picks[v] = true; $("add").value = ""; persist(); palette(); rebuild(); if (PRO) renderExp();
   };
   $("add").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("addbtn").click(); } });
-  $("tonight").onclick = tonight;
+  $("tonight").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'kitchen', event: 'check' }) }).catch(function () {}); } catch (e) {} tonight(); };
   $("clear").onclick = function () { picks = {}; expiring = {}; persist(); palette(); rebuild(); $("out").hidden = true; if (PRO) renderExp(); };
 
   // ---- Quickwell Plus: the weekly planner ----

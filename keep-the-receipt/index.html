@@ -147,7 +147,7 @@
     ["store", "item", "price", "rdays", "wmonths"].forEach(function (k) { $(k).value = ""; });
     $("hint").textContent = "Added. Add another, or close the app — it's saved on this device.";
   }
-  $("add").onclick = addItem;
+  $("add").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'keep-the-receipt', event: 'check' }) }).catch(function () {}); } catch (e) {} addItem(); };
 
   document.addEventListener("click", function (e) {
     var del = e.target.closest("[data-del]");

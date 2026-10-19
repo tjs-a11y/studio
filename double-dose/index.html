@@ -151,7 +151,7 @@
     meds.push({ name: name || "(unnamed)", actives: actives }); save(); render();
     $("name").value = ""; $("actives").value = ""; $("name").focus();
   }
-  $("add").onclick = add;
+  $("add").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'double-dose', event: 'check' }) }).catch(function () {}); } catch (e) {} add(); };
   $("check").onclick = function () { render(); $("flags").scrollIntoView({ behavior: "smooth", block: "start" }); };
   document.addEventListener("click", function (e) {
     var del = e.target.closest("[data-del]");
