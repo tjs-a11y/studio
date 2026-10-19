@@ -1,0 +1,126 @@
+{
+ "brief": {
+  "subject": "CFPB targets large-bank debanking; secured card approval data",
+  "headline": "CFPB Opens New Push on Debanking by Large Banks",
+  "dek": "The CFPB is acting on debanking cases uncovered by the OCC, and new application data shows secured card approvals by credit score band.",
+  "lede": "The CFPB has announced a new initiative on debanking at large banks, building on findings from the OCC, the national bank regulator.",
+  "sections": [
+   {
+    "heading": "CFPB Takes Aim at Debanking",
+    "bullets": [
+     "The CFPB announced a new initiative on October 14 targeting debanking by large banks.",
+     "The effort builds on debanking cases the OCC uncovered, so it focuses on the biggest institutions.",
+     "Debanking means closing or refusing accounts; the CFPB's focus is on decisions tied to constitutionally protected rights.",
+     "The bureau calls this the next step in its work against debanking of businesses and individuals, signaling more action may follow."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Secured Card Approvals by Credit Score",
+    "bullets": [
+     "New application data breaks down secured credit card approval rates by credit score band.",
+     "Secured cards require a deposit and are a common tool for building or rebuilding credit.",
+     "Results come from real applications, giving a practical view of how scores affect approval odds."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "CFPB launches a new initiative on large-bank debanking uncovered by the OCC, plus data on secured credit card approvals by credit score band."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-19T17:28:50.654Z",
+  "date": "2026-10-19",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block PlayPower’s Acquisition of Rival Playground Manufacturer Burke",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-block-playpowers-acquisition-rival-playground-manufacturer-burke",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "FTC alleges the merger of close rivals would significantly reduce price and quality competition in already concentrated market for outdoor commercial playground equipment Today, the Federal Trade Commission sued to block Platinum Equity and its portfolio company PlayPower’s acquisition of BCI Burke, alleging the deal to combine two of the largest commercial outdoor playground equipment makers will",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "What Credit Score Do You Need for a Secured Credit Card? (Based on Real Applications)",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/real-applications-secured-credit-card-approval",
+    "published": "2026-10-15T17:09:00.000Z",
+    "snippet": "NerdWallet’s credit card application data shows the percentage of applicants approved for a secured credit card, by credit score band.",
+    "categories": [
+     "Credit Cards",
+     "Credit Cards for Bad Credit"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Early Look: Inside Southwest’s Upcoming Lounges",
+    "link": "https://www.nerdwallet.com/travel/learn/southwest-lounges",
+    "published": "2026-10-15T14:25:11.000Z",
+    "snippet": "For people who like low fares and hate fees, Southwest Airlines is one of the best airlines out there — and the Southwest Rapid Rewards program is one of the…",
+    "categories": [
+     "Airlines",
+     "Loyalty Programs",
+     "Travel"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CFPB Newsroom",
+    "title": "CFPB Announces New Initiative to Address OCC-Uncovered Debanking by Large Banks",
+    "link": "https://www.consumerfinance.gov/about-us/newsroom/cfpb-announces-new-initiative-to-address-occ-uncovered-debanking-by-large-banks/",
+    "published": "2026-10-14T04:00:00.000Z",
+    "snippet": "Today, the Consumer Financial Protection Bureau (CFPB) announced the next step in its work to advance President Trump’s fight against the debanking of businesses and individuals on the basis of their constitutionally protected rights",
+    "categories": [
+     "Press release",
+     "Consumer Financial Protection Bureau"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 1
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 3
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S3"
+   ]
+  }
+ ]
+}

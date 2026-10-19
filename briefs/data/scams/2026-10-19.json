@@ -1,0 +1,175 @@
+{
+ "brief": {
+  "subject": "Midterm election scams, a fake sextortion fix, and FTC refunds",
+  "headline": "FBI Flags Midterm Election Scams; FTC Halts Sextortion 'Relief' Scheme",
+  "dek": "The FBI warns of fraud tied to the 2026 midterms, a court halts a sextortion help service, and the FTC sends over $9.8 million to wire fraud victims.",
+  "lede": "The FBI says scammers are using the November 2026 midterm election to run multiple fraud schemes. Expect election-themed pitches to rise in the weeks ahead.",
+  "sections": [
+   {
+    "heading": "Midterms Bring a Wave of Scams",
+    "bullets": [
+     "The FBI warned on October 15 that scammers are exploiting the 2026 midterm election with multiple fraud schemes.",
+     "A separate FBI alert warns voters about election crimes ahead of the November vote, so stay skeptical of unexpected election messages.",
+     "Election and campaign officials are also being targeted by cyber threat actors using a variety of techniques, the FBI said October 16.",
+     "Before acting on any election-related call, text or request, check it against official election sources first."
+    ],
+    "source_ids": [
+     "S2",
+     "S3",
+     "S1",
+     "S4"
+    ]
+   },
+   {
+    "heading": "Sextortion 'Help' Service Halted",
+    "bullets": [
+     "A federal court temporarily halted Digital Forensics Corporation LLC and its CEO at the FTC's request.",
+     "The FTC alleges the firm took millions of dollars from victims with false promises of sextortion assistance.",
+     "It allegedly claimed it could identify the criminals and stop the attacks, preying on people already being threatened.",
+     "Sextortion is a rapidly growing threat, often run by foreign scammers, so be wary of paid services promising to make it disappear."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "Wire Fraud Victims Get Refunds",
+    "bullets": [
+     "The FTC is sending more than $9.8 million to people scammed through Walmart's wire transfer services.",
+     "Scammers used those services to take hundreds of millions of dollars from U.S. consumers, the FTC said.",
+     "Walmart settled FTC charges in June 2025 over allegedly ineffective anti-fraud policies and procedures.",
+     "Anyone pressured to pay a stranger by wire transfer should treat it as a red flag."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "FBI warns of 2026 midterm election scams, FTC halts a sextortion relief scheme, and wire fraud victims receive more than $9.8 million in refunds."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-19T17:28:50.654Z",
+  "date": "2026-10-19",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FBI IC3 alerts",
+    "title": "Cyber Threat Actors Use a Variety of Techniques to Target Election and Campaign Officials",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261016",
+    "published": "2026-10-16T14:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FBI IC3 alerts",
+    "title": "Scammers Exploit 2026 U.S. Midterm Election to Perpetrate Multiple Fraud Schemes",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-3",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Warns Voters on Election Crimes Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-2",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Cautions About Threats to Election Workers Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC Sends More than $9.8 Million to Consumers Harmed by Walmart’s Failure to Stop Scammers that Used its Wire Transfer Services to Take Millions from Customers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sends-more-98-million-consumers-harmed-walmarts-failure-stop-scammers-used-its-wire-transfer",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is sending payments totaling more than $9.8 million to consumers harmed by Walmart’s alleged failure to stop scammers that took hundreds of millions of dollars from U.S. consumers using the company’s wire transfer services. In June 2025, Walmart settled FTC charges that the company failed to implement effective anti-fraud policies and procedures, did not properly train",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "FTC press releases",
+    "title": "FTC Sues Ticket Broker Over Unlawful Tactics Used to Buy Millions of Tickets to Popular Live Events",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-ticket-broker-over-unlawful-tactics-used-buy-millions-tickets-popular-live-events",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission sued REPS & Company Inc., alleging the ticket broker illegally circumvents measures designed to limit the number of tickets that can be purchased for a single event, purchasing millions of tickets to high-demand events that it later resells at a significant profit. The complaint, filed by the Department of Justice upon notification and referral from the FTC, alleges RE",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "FBI IC3 alerts",
+    "title": "North Korean IT Workers Expanding Use of Facilitators, Broadening Recruitment",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261013",
+    "published": "2026-10-13T19:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "FTC press releases",
+    "title": "FTC Sues Operator of Sextortion Relief Scheme for Misleading Consumers into Believing it Would Identify Criminals and End Sextortion Attacks",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-operator-sextortion-relief-scheme-misleading-consumers-believing-it-would-identify",
+    "published": "2026-10-13T12:00:00.000Z",
+    "snippet": "A federal court has granted the Federal Trade Commission’s request to temporarily halt the activities of Digital Forensics Corporation LLC and its CEO for allegedly defrauding consumers out of millions of dollars using false and deceptive promises relating to “sextortion assistance services.” Sextortion is a rapidly growing threat to Americans, routinely carried out by foreign scammers who threate",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 5
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S2",
+    "S5",
+    "S8"
+   ]
+  }
+ ]
+}
