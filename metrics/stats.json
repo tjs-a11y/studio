@@ -1,0 +1,7 @@
+{
+  "fetched": null,
+  "date": null,
+  "source": "https://quickwell.app/api/stats",
+  "enabled": null,
+  "note": "Pending the first snapshot from .github/workflows/metrics.yml. Counts only; never any name or email."
+}
