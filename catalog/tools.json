@@ -3,13 +3,13 @@
     {
       "id": "dinner",
       "name": "What's for Dinner?",
-      "tagline": "Tap what's in your fridge and get three dinners you can make tonight \u2014 plus the one thing to grab. Nothing is uploaded.",
+      "tagline": "Tap what's in your fridge and get three dinners you can make tonight — plus the one thing to grab. Nothing is uploaded.",
       "plans": []
     },
     {
       "id": "copycat",
       "name": "Copycat Kitchen",
-      "tagline": "Had something amazing out? Tell us what you saw and get a close home recipe \u2014 plus the trick restaurants use. Nothing is uploaded.",
+      "tagline": "Had something amazing out? Tell us what you saw and get a close home recipe — plus the trick restaurants use. Nothing is uploaded.",
       "plans": []
     },
     {
@@ -21,19 +21,19 @@
     {
       "id": "fair-price",
       "name": "Fair Price",
-      "tagline": "Paste any estimate \u2014 auto repair, contractor, dental, vet, moving \u2014 and see the padding, what a fair quote includes, and the questions to ask. Nothing is uploaded.",
+      "tagline": "Paste any estimate — auto repair, contractor, dental, vet, moving — and see the padding, what a fair quote includes, and the questions to ask. Nothing is uploaded.",
       "plans": []
     },
     {
       "id": "proof",
       "name": "Proof",
-      "tagline": "Add a photo and get a timestamp and a fingerprint you keep \u2014 so later you can show it wasn't altered. For move-outs, damage and disputes. Nothing is uploaded.",
+      "tagline": "Add a photo and get a timestamp and a fingerprint you keep — so later you can show it wasn't altered. For move-outs, damage and disputes. Nothing is uploaded.",
       "plans": []
     },
     {
       "id": "keep-the-receipt",
       "name": "Keep the Receipt",
-      "tagline": "Log what you buy and never miss a return window or a warranty again \u2014 it tracks the deadlines and flags what's closing soon. Nothing is uploaded.",
+      "tagline": "Log what you buy and never miss a return window or a warranty again — it tracks the deadlines and flags what's closing soon. Nothing is uploaded.",
       "plans": []
     },
     {
@@ -45,7 +45,7 @@
     {
       "id": "before-you-sign",
       "name": "Before You Sign",
-      "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
+      "tagline": "Paste any contract — a lease, loan, gym, phone, medical consent or freelance deal — and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
       "plans": []
     },
     {
@@ -58,13 +58,23 @@
       "id": "vigless",
       "name": "Vigless",
       "tagline": "Track the bets you actually placed and see your real ROI, win rate, and where you lose money. On-device; nothing uploaded. 21+. Not betting advice.",
-      "plans": []
+      "plans": [
+        {
+          "id": "pro",
+          "trialDays": 7
+        }
+      ]
     },
     {
       "id": "tradepath",
       "name": "Tradepath",
       "tagline": "Drop your broker CSV and see your real trading profit/loss, win rate, and where you leak money, in seconds. On-device. Not investment advice.",
-      "plans": []
+      "plans": [
+        {
+          "id": "pro",
+          "trialDays": 7
+        }
+      ]
     },
     {
       "id": "rate-con-checker",
@@ -96,7 +106,7 @@
     },
     {
       "id": "permit-watch",
-      "name": "Permit Watch \u2014 Texas",
+      "name": "Permit Watch — Texas",
       "tagline": "See new drilling permits filed in your Texas county and get free alerts by RSS.",
       "plans": []
     },

@@ -150,6 +150,32 @@
 
   <div id="coach" class="coach" hidden></div>
 
+  <div id="pro-section" hidden>
+    <div class="section-h"><h2>Tradepath Pro</h2><span class="mini" id="pro-plan"></span></div>
+    <div class="panel">
+      <div id="pro-locked">
+        <p style="margin-top:0;">Go deeper on your own results — still 100% on your device:</p>
+        <ul class="mini" style="margin:0 0 12px; padding-left:18px; line-height:1.9;">
+          <li>Expectancy per trade, max drawdown, best and worst trade</li>
+          <li>Your longest winning and losing streaks</li>
+          <li>Export every trade to a CSV</li>
+        </ul>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="up-month">Unlock Pro — $9.99/mo</button>
+          <button class="btn ghost" id="up-year">or $99/year</button>
+        </div>
+        <p class="mini" style="margin:12px 0 0;">7-day free trial · cancel anytime · nothing leaves your device. Not investment advice.</p>
+      </div>
+      <div id="pro-unlocked" hidden>
+        <div class="grid-stats" id="pro-stats" style="margin-bottom:14px;"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn ghost" id="export-csv">Export CSV</button>
+          <a href="#" id="manage" class="mini">Manage subscription</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p><b>Tradepath is a journal, not advice.</b> It records trades you enter and reflects your own history back to you. It does not tell you what to buy or sell, does not forecast markets, does not place orders, and does not log in to any account. Trading involves risk, including loss of principal; past results don't predict future ones.</p>
     <p>Everything you enter stays on this device (your browser's local storage). It is never uploaded, shared, or sold.</p>
@@ -158,6 +184,7 @@
 
 </div>
 
+<script src="/js/pro.js"></script>
 <script>
   // Trueline / Vigless shared engine — the one honest-tracker core, powering both apps.
 // Pure functions, no DOM. Each app supplies its own plFn (profit/loss), baseFn (cost basis /
@@ -213,6 +240,45 @@ function leak(net, groups) {
   var worst = keys.reduce(function (a, b) { return groups[b].net < groups[a].net ? b : a; });
   var best = keys.reduce(function (a, b) { return groups[b].net > groups[a].net ? b : a; });
   return { keys: keys, worst: worst, best: best, dir: net > 0 ? 'up' : (net < 0 ? 'down' : '') };
+}
+
+// --- Pro metrics (on-device; power features behind the paywall) ---
+
+// Longest consecutive win and loss runs, over chronologically-ordered settled items.
+function streaks(chrono, plFn) {
+  var win = 0, loss = 0, w = 0, l = 0;
+  chrono.forEach(function (it) {
+    var p = plFn(it);
+    if (p > 0) { w++; l = 0; if (w > win) win = w; }
+    else if (p < 0) { l++; w = 0; if (l > loss) loss = l; }
+    else { w = 0; l = 0; }
+  });
+  return { win: win, loss: loss };
+}
+
+// Biggest single win and loss (signed) over settled items.
+function extremes(items, plFn) {
+  var best = 0, worst = 0;
+  items.forEach(function (it) { var p = plFn(it); if (p > best) best = p; if (p < worst) worst = p; });
+  return { best: best, worst: worst };
+}
+
+// Expectancy: average profit/loss per settled bet/trade (net / decided count).
+function expectancy(s) { return s.decided > 0 ? (s.grossWin - s.grossLoss) / s.decided : 0; }
+
+// Max drawdown: largest peak-to-trough drop of the cumulative P/L curve, over chronological settled items.
+function maxDrawdown(chrono, plFn) {
+  var equity = 0, peak = 0, maxDD = 0;
+  chrono.forEach(function (it) { equity += plFn(it); if (equity > peak) peak = equity; var dd = peak - equity; if (dd > maxDD) maxDD = dd; });
+  return maxDD;
+}
+
+// CSV export: rows is an array of objects, cols is [[header, key|fn], ...]. RFC-4180-ish quoting.
+function toCSV(rows, cols) {
+  var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  var head = cols.map(function (c) { return q(c[0]); }).join(',');
+  var body = rows.map(function (r) { return cols.map(function (c) { return q(typeof c[1] === 'function' ? c[1](r) : r[c[1]]); }).join(','); }).join('\n');
+  return head + '\n' + body + '\n';
 }
 
 // Per-viewer local persistence, safe in private windows / blocked storage (returns defaults, never throws).
@@ -300,6 +366,7 @@ function makeStore(key) {
 
     renderHero(s.net, closed, byClass);
     coachCheck(s, byClass);
+    renderProIfActive();
     store.save(trades);
   }
 
@@ -441,6 +508,42 @@ function makeStore(key) {
     var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if (!f) return;
     var rd = new FileReader(); rd.onload = function () { ingest(String(rd.result), f.name); }; rd.readAsText(f);
   });
+
+  // ---- Tradepath Pro: on-device power features behind the Quickwell paywall ----
+  var PRO_ACTIVE = false;
+  function chrono(list) { return list.slice().sort(function (a, b) { return (a.date || '').localeCompare(b.date || ''); }); }
+  function renderPro() {
+    var cl = trades.filter(isClosed), s = summarize(cl, pl, cost), c = chrono(cl);
+    var st = streaks(c, pl), ex = extremes(cl, pl), e = expectancy(s);
+    var tiles = [
+      ['Expectancy / trade', money(e), e > 0 ? 'up' : (e < 0 ? 'down' : '')],
+      ['Max drawdown', money(-maxDrawdown(c, pl)), 'down'],
+      ['Best trade', money(ex.best), 'up'],
+      ['Worst trade', money(ex.worst), 'down'],
+      ['Longest win streak', String(st.win), ''],
+      ['Longest loss streak', String(st.loss), '']
+    ];
+    $('#pro-stats').innerHTML = tiles.map(function (x) { return '<div class="stat"><div class="k">' + x[0] + '</div><div class="v ' + x[2] + '">' + x[1] + '</div></div>'; }).join('');
+  }
+  function renderProIfActive() { if (PRO_ACTIVE) renderPro(); }
+  function exportCSV() {
+    var rows = trades.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    var csv = toCSV(rows, [['Date', 'date'], ['Symbol', 'sym'], ['Class', 'cls'], ['Side', 'side'], ['Qty', 'qty'], ['Entry', 'entry'], ['Exit', function (t) { return isClosed(t) ? t.exit : ''; }], ['P/L', function (t) { return isClosed(t) ? pl(t).toFixed(2) : ''; }], ['Strategy', 'tag']]);
+    try { var blob = new Blob([csv], { type: 'text/csv' }), u = URL.createObjectURL(blob), a = document.createElement('a'); a.href = u; a.download = 'tradepath-trades.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 1000); } catch (e) {}
+  }
+  if (window.Studio) {
+    $('#pro-section').hidden = false;
+    Studio.init({ tool: 'tradepath', onChange: function (stt) {
+      PRO_ACTIVE = !!stt.pro;
+      $('#pro-locked').hidden = !!stt.pro; $('#pro-unlocked').hidden = !stt.pro;
+      $('#pro-plan').textContent = stt.pro ? 'Pro active' : '';
+      if (stt.pro) renderPro();
+    } });
+    $('#up-month').addEventListener('click', function () { Studio.upgrade('pro', 'month'); });
+    $('#up-year').addEventListener('click', function () { Studio.upgrade('pro', 'year'); });
+    $('#manage').addEventListener('click', function (e) { e.preventDefault(); Studio.manage(); });
+    $('#export-csv').addEventListener('click', exportCSV);
+  }
 
   $('#t-date').value = new Date().toISOString().slice(0, 10);
   trades = store.load(EXAMPLES); render();

@@ -144,6 +144,32 @@
   <div class="section-h"><h2>By sport</h2></div>
   <div class="panel" id="by-sport"></div>
 
+  <div id="pro-section" hidden>
+    <div class="section-h"><h2>Vigless Pro</h2><span class="mini" id="pro-plan"></span></div>
+    <div class="panel">
+      <div id="pro-locked">
+        <p style="margin-top:0;">Go deeper on your own numbers — still 100% on your device:</p>
+        <ul class="mini" style="margin:0 0 12px; padding-left:18px; line-height:1.9;">
+          <li>Expectancy per bet, max drawdown, biggest win and loss</li>
+          <li>Your longest winning and losing streaks</li>
+          <li>Export every bet to a CSV</li>
+        </ul>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="up-month">Unlock Pro — $9.99/mo</button>
+          <button class="btn ghost" id="up-year">or $99/year</button>
+        </div>
+        <p class="mini" style="margin:12px 0 0;">7-day free trial · cancel anytime · nothing leaves your device.</p>
+      </div>
+      <div id="pro-unlocked" hidden>
+        <div class="grid-stats" id="pro-stats" style="margin-bottom:14px;"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn ghost" id="export-csv">Export CSV</button>
+          <a href="#" id="manage" class="mini">Manage subscription</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p><b>Vigless is not betting advice.</b> It tracks bets you choose to enter and shows your own results. It does not predict outcomes, guarantee anything, take wagers, or connect to any sportsbook account. You must be 21+ (or legal age where you live). Everything you enter stays on this device.</p>
     <p>If gambling stops being fun, it's time to stop. <b>Call 1-800-GAMBLER</b> or visit <a href="https://www.ncpgambling.org/" target="_blank" rel="noopener">ncpgambling.org</a> — free, confidential, 24/7.</p>
@@ -152,6 +178,7 @@
 
 </div>
 
+<script src="/js/pro.js"></script>
 <script>
   // Trueline / Vigless shared engine — the one honest-tracker core, powering both apps.
 // Pure functions, no DOM. Each app supplies its own plFn (profit/loss), baseFn (cost basis /
@@ -207,6 +234,45 @@ function leak(net, groups) {
   var worst = keys.reduce(function (a, b) { return groups[b].net < groups[a].net ? b : a; });
   var best = keys.reduce(function (a, b) { return groups[b].net > groups[a].net ? b : a; });
   return { keys: keys, worst: worst, best: best, dir: net > 0 ? 'up' : (net < 0 ? 'down' : '') };
+}
+
+// --- Pro metrics (on-device; power features behind the paywall) ---
+
+// Longest consecutive win and loss runs, over chronologically-ordered settled items.
+function streaks(chrono, plFn) {
+  var win = 0, loss = 0, w = 0, l = 0;
+  chrono.forEach(function (it) {
+    var p = plFn(it);
+    if (p > 0) { w++; l = 0; if (w > win) win = w; }
+    else if (p < 0) { l++; w = 0; if (l > loss) loss = l; }
+    else { w = 0; l = 0; }
+  });
+  return { win: win, loss: loss };
+}
+
+// Biggest single win and loss (signed) over settled items.
+function extremes(items, plFn) {
+  var best = 0, worst = 0;
+  items.forEach(function (it) { var p = plFn(it); if (p > best) best = p; if (p < worst) worst = p; });
+  return { best: best, worst: worst };
+}
+
+// Expectancy: average profit/loss per settled bet/trade (net / decided count).
+function expectancy(s) { return s.decided > 0 ? (s.grossWin - s.grossLoss) / s.decided : 0; }
+
+// Max drawdown: largest peak-to-trough drop of the cumulative P/L curve, over chronological settled items.
+function maxDrawdown(chrono, plFn) {
+  var equity = 0, peak = 0, maxDD = 0;
+  chrono.forEach(function (it) { equity += plFn(it); if (equity > peak) peak = equity; var dd = peak - equity; if (dd > maxDD) maxDD = dd; });
+  return maxDD;
+}
+
+// CSV export: rows is an array of objects, cols is [[header, key|fn], ...]. RFC-4180-ish quoting.
+function toCSV(rows, cols) {
+  var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  var head = cols.map(function (c) { return q(c[0]); }).join(',');
+  var body = rows.map(function (r) { return cols.map(function (c) { return q(typeof c[1] === 'function' ? c[1](r) : r[c[1]]); }).join(','); }).join('\n');
+  return head + '\n' + body + '\n';
 }
 
 // Per-viewer local persistence, safe in private windows / blocked storage (returns defaults, never throws).
@@ -273,6 +339,7 @@ function makeStore(key) {
 
     renderHero(s.net, settled);
     responsibleCheck(s.net, settled);
+    renderProIfActive();
     store.save(bets);
   }
 
@@ -344,6 +411,42 @@ function makeStore(key) {
   $('#clear-examples').addEventListener('click', function (e) { e.preventDefault(); bets = []; store.save(bets); render(); });
 
   $('#b-date').value = new Date().toISOString().slice(0, 10);
+
+  // ---- Vigless Pro: on-device power features behind the Quickwell paywall ----
+  var PRO_ACTIVE = false;
+  function chrono(list) { return list.slice().sort(function (a, b) { return (a.date || '').localeCompare(b.date || ''); }); }
+  function renderPro() {
+    var settled = settledList(), s = summarize(settled, pl, base), c = chrono(settled);
+    var st = streaks(c, pl), ex = extremes(settled, pl), e = expectancy(s);
+    var tiles = [
+      ['Expectancy / bet', money(e), e > 0 ? 'up' : (e < 0 ? 'down' : '')],
+      ['Max drawdown', money(-maxDrawdown(c, pl)), 'down'],
+      ['Biggest win', money(ex.best), 'up'],
+      ['Biggest loss', money(ex.worst), 'down'],
+      ['Longest win streak', String(st.win), ''],
+      ['Longest loss streak', String(st.loss), '']
+    ];
+    $('#pro-stats').innerHTML = tiles.map(function (x) { return '<div class="stat"><div class="k">' + x[0] + '</div><div class="v ' + x[2] + '">' + x[1] + '</div></div>'; }).join('');
+  }
+  function renderProIfActive() { if (PRO_ACTIVE) renderPro(); }
+  function exportCSV() {
+    var rows = bets.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    var csv = toCSV(rows, [['Date', 'date'], ['Sport', 'sport'], ['Type', 'type'], ['Description', 'desc'], ['Stake', function (b) { return b.stake; }], ['Odds', function (b) { return b.odds; }], ['Result', 'result'], ['P/L', function (b) { return pl(b).toFixed(2); }]]);
+    try { var blob = new Blob([csv], { type: 'text/csv' }), u = URL.createObjectURL(blob), a = document.createElement('a'); a.href = u; a.download = 'vigless-bets.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 1000); } catch (e) {}
+  }
+  if (window.Studio) {
+    $('#pro-section').hidden = false;
+    Studio.init({ tool: 'vigless', onChange: function (stt) {
+      PRO_ACTIVE = !!stt.pro;
+      $('#pro-locked').hidden = !!stt.pro; $('#pro-unlocked').hidden = !stt.pro;
+      $('#pro-plan').textContent = stt.pro ? 'Pro active' : '';
+      if (stt.pro) renderPro();
+    } });
+    $('#up-month').addEventListener('click', function () { Studio.upgrade('pro', 'month'); });
+    $('#up-year').addEventListener('click', function () { Studio.upgrade('pro', 'year'); });
+    $('#manage').addEventListener('click', function (e) { e.preventDefault(); Studio.manage(); });
+    $('#export-csv').addEventListener('click', exportCSV);
+  }
 
   // age gate
   function openApp() { $('#gate').hidden = true; $('#app').hidden = false; bets = store.load(EXAMPLES); render(); }
