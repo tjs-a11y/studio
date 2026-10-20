@@ -10,6 +10,25 @@
     clear(t) { try { localStorage.removeItem(KEY(t)); } catch (e) { /* ignore */ } },
   };
   let tool = null, onChange = () => {}, state = { pro: false, plan: null };
+  // Visible banner so nothing fails silently (in-app browsers suppress alert() AND scripted redirects).
+  function banner(msg, opts) {
+    opts = opts || {};
+    try {
+      var b = document.getElementById('studio-pro-banner');
+      if (!b) {
+        b = document.createElement('div'); b.id = 'studio-pro-banner';
+        b.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:2147483647;padding:13px 40px 13px 16px;font:600 14px system-ui,-apple-system,sans-serif;color:#fff;text-align:center;box-shadow:0 2px 14px rgba(0,0,0,.35)';
+        (document.body || document.documentElement).appendChild(b);
+      }
+      b.style.background = opts.error ? '#b4231d' : '#1457d6';
+      b.textContent = msg + ' ';
+      if (opts.href) { var a = document.createElement('a'); a.href = opts.href; a.textContent = opts.label || 'Continue →'; a.style.cssText = 'color:#fff;text-decoration:underline;font-weight:800'; b.appendChild(a); }
+      var x = document.createElement('button'); x.type = 'button'; x.textContent = '✕'; x.setAttribute('aria-label', 'Dismiss');
+      x.style.cssText = 'position:absolute;right:10px;top:9px;background:transparent;border:0;color:#fff;font-size:16px;line-height:1;cursor:pointer'; x.onclick = function () { b.remove(); };
+      b.appendChild(x);
+    } catch (e) { try { alert(msg); } catch (e2) {} }
+  }
+  try { window.addEventListener('error', function (e) { banner('This page hit an error: ' + ((e && e.message) || 'script error') + '. Tell support.', { error: true }); }); } catch (e) {}
   // Where did this visitor come from? Links we share carry ?ref=<channel>; it rides along to checkout so
   // we learn which channels bring buyers. A short label only: no cookies, no tracking across sites.
   const REF = 'studio-ref';
@@ -40,10 +59,14 @@
     else { if (!(key === 'plus' && r.reason === 'no_access')) store.clear(key); set({ pro: false, plan: null }); }
   }
   async function post(path, body) {
-    const r = await fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    let r;
+    try { r = await fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }); }
+    catch (e) { banner('Could not reach the server — check your connection and try again.', { error: true }); throw e; }
     const j = await r.json().catch(() => ({}));
-    if (!r.ok || !j.url) { const m = j.error || 'Something went wrong. Please try again.'; try { alert(m); } catch (e) {} throw new Error(m); }
-    location.href = j.url;
+    if (!r.ok || !j.url) { const m = j.error || 'Something went wrong. Please try again.'; banner(m, { error: true }); throw new Error(m); }
+    // Always give a real, tappable link first — some in-app browsers block scripted redirects — then try to go.
+    banner('Opening secure checkout…', { href: j.url, label: 'Continue to checkout →' });
+    try { window.location.assign(j.url); } catch (e) { try { window.location.href = j.url; } catch (e2) {} }
   }
   window.Studio = {
     init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
