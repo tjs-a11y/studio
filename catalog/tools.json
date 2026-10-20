@@ -55,6 +55,18 @@
       "plans": []
     },
     {
+      "id": "vigless",
+      "name": "Vigless",
+      "tagline": "Track the bets you actually placed and see your real ROI, win rate, and where you lose money. On-device; nothing uploaded. 21+. Not betting advice.",
+      "plans": []
+    },
+    {
+      "id": "tradepath",
+      "name": "Tradepath",
+      "tagline": "Drop your broker CSV and see your real trading profit/loss, win rate, and where you leak money, in seconds. On-device. Not investment advice.",
+      "plans": []
+    },
+    {
       "id": "rate-con-checker",
       "name": "Rate Con Checker",
       "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",
