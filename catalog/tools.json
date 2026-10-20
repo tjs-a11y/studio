@@ -96,6 +96,25 @@
       ]
     },
     {
+      "id": "lotwise",
+      "name": "Lotwise",
+      "tagline": "Drop your used-car inventory and see which units are aging, how much capital is stuck past 60 days, and which cars are upside down. On-device.",
+      "plans": [
+        {
+          "id": "pro-small",
+          "trialDays": 14
+        },
+        {
+          "id": "pro-mid",
+          "trialDays": 14
+        },
+        {
+          "id": "pro-large",
+          "trialDays": 14
+        }
+      ]
+    },
+    {
       "id": "rate-con-checker",
       "name": "Rate Con Checker",
       "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",

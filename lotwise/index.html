@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lotwise — dealership inventory analytics</title>
+<meta name="description" content="Drop your used-car inventory and see which units are aging, how much capital is stuck past 60 days, and which cars are upside down. On-device.">
+<link rel="canonical" href="https://quickwell.app/lotwise/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/lotwise/">
+<meta property="og:title" content="Lotwise — see what's aging on your lot">
+<meta property="og:description" content="Drop your inventory, see aged capital, days on lot, and upside-down units in seconds. On-device; nothing uploaded.">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Lotwise","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Dealership inventory analytics: drop your inventory, see aging, capital stuck past 60 days, and upside-down units. On-device; not advice."}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f16; --panel:#131a24; --panel2:#1b2432; --line:#273343; --fg:#eef3f8; --dim:#92a2b6;
+    --up:#3bb5f2; --down:#f2663e; --accent:#3b82f2; --accent2:#7fb2ff; --warn:#f2a93b; --radius:12px;
+    --display:'Sora',system-ui,sans-serif; --body:'Public Sans',system-ui,-apple-system,sans-serif;
+  }
+  :root{color-scheme:dark;}
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--body); line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); padding-block:24px 60px;}
+  h1,h2,h3{font-family:var(--display); margin:0; letter-spacing:-.01em;}
+  a{color:var(--accent2);}
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:4px;}
+  .brand .mk{width:30px; height:30px; border-radius:7px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; color:#061226;}
+  .brand h1{font-size:22px;}
+  .brand .wn{font-size:11px; color:var(--dim); border:1px solid var(--line); border-radius:999px; padding:2px 8px; font-weight:700; letter-spacing:.04em;}
+  .tagline{color:var(--dim); font-size:14px; margin:0 0 16px;}
+  .notice{display:flex; gap:9px; align-items:flex-start; background:color-mix(in srgb,var(--accent) 9%, var(--panel)); border:1px solid var(--line); border-radius:10px; padding:10px 13px; font-size:12.5px; color:var(--dim); margin-bottom:16px;} .notice b{color:var(--fg);}
+  .panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:18px;}
+  .grid-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:18px;}
+  .stat{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px 16px;}
+  .stat .k{font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:700;}
+  .stat .v{font-family:var(--display); font-size:24px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:4px;}
+  .v.up{color:var(--up);} .v.down{color:var(--down);}
+  .hero{background:linear-gradient(135deg,var(--panel2),var(--panel)); border:1px solid var(--line); border-radius:var(--radius); padding:22px 22px 20px; margin-bottom:18px;}
+  .hero .lab{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); font-weight:700;}
+  .hero .num{font-family:var(--display); font-size:44px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.04; margin:6px 0 8px;}
+  .hero .num.up{color:var(--up);} .hero .num.down{color:var(--down);}
+  .hero .truth{font-size:15px; color:var(--fg); max-width:66ch;} .hero .truth b{color:var(--fg);}
+  @media (max-width:560px){ .hero .num{font-size:36px;} }
+  .drop{border:1.5px dashed var(--line); border-radius:var(--radius); padding:16px; text-align:center; color:var(--dim); font-size:13.5px; margin-bottom:18px; transition:border-color .15s, background .15s;}
+  .drop.over{border-color:var(--accent); background:color-mix(in srgb,var(--accent) 10%, var(--panel));}
+  .drop b{color:var(--fg);} .drop .ctl{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;}
+  .drop-status{margin-top:9px; font-size:13px; color:var(--accent2); font-weight:600; min-height:1em;}
+  form .row{display:grid; gap:10px; grid-template-columns:repeat(3,1fr); margin-bottom:10px;}
+  label{display:block; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--dim); font-weight:700; margin-bottom:4px;}
+  input,select{width:100%; background:var(--panel2); border:1px solid var(--line); color:var(--fg); border-radius:8px; padding:9px 11px; font:inherit;}
+  input:focus,select:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .btn{border:none; border-radius:9px; padding:10px 15px; font:inherit; font-weight:700; cursor:pointer; background:var(--accent); color:#fff;}
+  .btn.ghost{background:transparent; border:1px solid var(--line); color:var(--fg);}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; font-variant-numeric:tabular-nums;}
+  th,td{text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); white-space:nowrap;}
+  th{font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--dim);}
+  td.amt{text-align:right;} .pos{color:var(--up);} .neg{color:var(--down);} .warn{color:var(--warn);}
+  .tbl-scroll{overflow-x:auto;}
+  .res-btn{border:1px solid var(--line); background:var(--panel2); color:var(--fg); border-radius:6px; padding:3px 7px; font-size:12px; cursor:pointer;}
+  .pill{font-size:11px; padding:1px 7px; border-radius:999px; border:1px solid var(--line);}
+  .pill.hot{color:var(--down); border-color:color-mix(in srgb,var(--down) 50%, var(--line));}
+  .mini{color:var(--dim); font-size:12px;}
+  .section-h{display:flex; justify-content:space-between; align-items:center; margin:24px 0 10px;} .section-h h2{font-size:16px;}
+  .byrow{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;} .byrow:last-child{border-bottom:none;}
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:16px;} @media (max-width:640px){ .cols{grid-template-columns:1fr;} }
+  .example-note{background:color-mix(in srgb,var(--accent) 10%, var(--panel)); border:1px solid var(--line); border-radius:8px; padding:9px 12px; font-size:12.5px; color:var(--dim); margin-bottom:14px;}
+  footer{margin-top:26px; color:var(--dim); font-size:12px; line-height:1.6; border-top:1px solid var(--line); padding-top:16px;} footer b{color:var(--fg);}
+  @media (max-width:620px){ form .row{grid-template-columns:1fr 1fr;} }
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="mk">L</span><h1>Lotwise</h1><span class="wn">working name</span></div>
+  <p class="tagline">Which cars on your lot are quietly costing you money? Drop your inventory — see what's aging, how much capital is stuck past 60 days, and which units are upside down.</p>
+
+  <div class="notice"><span>🚗</span><span><b>A read-your-own-inventory analytics tool.</b> Lotwise reflects the numbers you already have back to you, clearly. It doesn't set prices, list cars, move money, or connect to your DMS. Everything stays on this device — nothing is uploaded.</span></div>
+
+  <div class="example-note" id="example-note">Showing an example lot so you can see how it works. <a href="#" id="clear-examples">Clear it and start fresh →</a></div>
+
+  <div class="hero" id="hero"></div>
+  <div class="grid-stats" id="stats"></div>
+
+  <div class="drop" id="drop">
+    <div><b>Drop your inventory CSV here</b> — one row per unit. Parsed on your device; nothing leaves it.</div>
+    <div class="ctl">
+      <input type="file" id="file" accept=".csv,text/csv" hidden>
+      <button class="btn ghost" id="pick">Choose CSV file</button>
+      <button class="btn ghost" id="sample">Try a sample CSV</button>
+    </div>
+    <div class="drop-status" id="drop-status"></div>
+    <div class="mini" style="margin-top:8px;">Columns (loose match): <b>stock, vehicle, cost, list, days</b> (days on lot). <b>year</b> optional.</div>
+  </div>
+
+  <div class="section-h"><h2>Add a unit</h2></div>
+  <div class="panel">
+    <form id="row-form">
+      <div class="row">
+        <div><label for="u-stock">Stock #</label><input id="u-stock" placeholder="A109" autocomplete="off"></div>
+        <div style="grid-column:span 2;"><label for="u-vehicle">Vehicle</label><input id="u-vehicle" placeholder="2021 Toyota RAV4" autocomplete="off"></div>
+      </div>
+      <div class="row">
+        <div><label for="u-cost">Cost (incl. recon) $</label><input id="u-cost" type="number" min="0" step="any" inputmode="decimal" placeholder="24500"></div>
+        <div><label for="u-list">List price $</label><input id="u-list" type="number" min="0" step="any" inputmode="decimal" placeholder="27995"></div>
+        <div><label for="u-days">Days on lot</label><input id="u-days" type="number" min="0" step="1" inputmode="numeric" placeholder="18"></div>
+      </div>
+      <button class="btn" type="submit">Add unit</button>
+    </form>
+  </div>
+
+  <div class="section-h"><h2>Inventory</h2><span class="mini" id="count"></span></div>
+  <div class="panel tbl-scroll">
+    <table>
+      <thead><tr><th>Stock</th><th>Vehicle</th><th class="amt">Cost</th><th class="amt">List</th><th class="amt">Gross</th><th class="amt">Days</th><th></th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="cols">
+    <div><div class="section-h"><h2>By age</h2></div><div class="panel" id="by-age"></div></div>
+    <div><div class="section-h"><h2>By make</h2></div><div class="panel" id="by-make"></div></div>
+  </div>
+
+  <div id="pro-section" hidden>
+    <div class="section-h"><h2>Lotwise Pro</h2><span class="mini" id="pro-plan"></span></div>
+    <div class="panel">
+      <div id="pro-locked">
+        <p style="margin-top:0;">Run the whole lot deeper — still 100% on your device:</p>
+        <ul class="mini" style="margin:0 0 12px; padding-left:18px; line-height:1.9;">
+          <li>Estimated floorplan cost bleeding on aged units, upside-down total</li>
+          <li>Units 90+ days and the capital frozen in them, by-make turn speed</li>
+          <li>Export the whole lot (with gross &amp; aging) to a CSV</li>
+        </ul>
+        <p class="mini" id="band-note" style="margin:0 0 10px;"></p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn" id="up-month">Unlock Pro</button>
+          <button class="btn ghost" id="up-year">Pay yearly</button>
+        </div>
+        <p class="mini" style="margin:12px 0 0;">Priced by lot size · 14-day free trial · cancel anytime · nothing leaves your device.</p>
+      </div>
+      <div id="pro-unlocked" hidden>
+        <div class="grid-stats" id="pro-stats" style="margin-bottom:14px;"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn ghost" id="export-csv">Export CSV</button>
+          <a href="#" id="manage" class="mini">Manage subscription</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center;margin:18px 0 0;font-size:12px;"><a href="/" style="color:var(--dim)">More free tools at Quickwell →</a></p>
+
+  <footer>
+    <p><b>Lotwise is analytics, not advice.</b> It reflects the inventory numbers you enter. It does not set or recommend prices, list vehicles, move money, or connect to any DMS or marketplace. Figures are only as good as the data you enter. Everything stays on this device.</p>
+  </footer>
+</div>
+
+<script src="/js/pro.js"></script>
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var KEY = 'lotwise-inv-v1';
+  var inv = [];
+
+  var EXAMPLES = [
+    { id:1, stock:'A101', vehicle:'2021 Toyota RAV4', cost:24500, list:27995, days:18 },
+    { id:2, stock:'A102', vehicle:'2019 Ford F-150', cost:31000, list:31400, days:96 },
+    { id:3, stock:'A103', vehicle:'2022 Honda Civic', cost:19000, list:21995, days:9 },
+    { id:4, stock:'A104', vehicle:'2018 BMW X5', cost:28000, list:33995, days:74 },
+    { id:5, stock:'A105', vehicle:'2020 Chevy Silverado', cost:33000, list:32500, days:61 },
+    { id:6, stock:'A106', vehicle:'2023 Kia Telluride', cost:36000, list:41995, days:22 },
+    { id:7, stock:'A107', vehicle:'2017 Nissan Altima', cost:9500, list:11995, days:120 },
+    { id:8, stock:'A108', vehicle:'2021 Tesla Model 3', cost:29000, list:33995, days:34 }
+  ];
+  var SAMPLE_CSV = [
+    'stock,vehicle,cost,list,days',
+    'A101,2021 Toyota RAV4,24500,27995,18',
+    'A102,2019 Ford F-150,31000,31400,96',
+    'A103,2022 Honda Civic,19000,21995,9',
+    'A104,2018 BMW X5,28000,33995,74',
+    'A105,2020 Chevy Silverado,33000,32500,61',
+    'A106,2023 Kia Telluride,36000,41995,22',
+    'A107,2017 Nissan Altima,9500,11995,120',
+    'A108,2021 Tesla Model 3,29000,33995,34'
+  ].join('\n');
+
+  function money0(n){ return (n<0?'-$':'$')+Math.abs(n).toLocaleString('en-US',{maximumFractionDigits:0}); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+  function toCSV(rows, cols){ var q=function(v){ v=v==null?'':String(v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }; return cols.map(function(c){return q(c[0]);}).join(',')+'\n'+rows.map(function(r){return cols.map(function(c){return q(typeof c[1]==='function'?c[1](r):r[c[1]]);}).join(',');}).join('\n')+'\n'; }
+  function gross(u){ return Number(u.list||0)-Number(u.cost||0); }
+  function aged(u){ return Number(u.days||0) > 60; }
+  function makeOf(u){ var p=String(u.vehicle||'').trim().split(/\s+/); return (/^\d{4}$/.test(p[0])?p[1]:p[0])||'Other'; }
+
+  function load(){ try{ var raw=localStorage.getItem(KEY); if(raw){ inv=JSON.parse(raw); return; } }catch(e){} inv=EXAMPLES.slice(); }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(inv)); }catch(e){} }
+  function usingExamples(){ try{ return !localStorage.getItem(KEY); }catch(e){ return false; } }
+
+  function render(){
+    $('#example-note').hidden = !usingExamples();
+    var units = inv.length;
+    var tied = inv.reduce(function(a,u){ return a+Number(u.cost||0); },0);
+    var avgDays = units? inv.reduce(function(a,u){ return a+Number(u.days||0); },0)/units : 0;
+    var over60 = inv.filter(aged);
+    var agedCap = over60.reduce(function(a,u){ return a+Number(u.cost||0); },0);
+    var potGross = inv.reduce(function(a,u){ return a+gross(u); },0);
+    var upside = inv.filter(function(u){ return gross(u) < 0; });
+
+    var tiles = [
+      ['Units in stock', String(units), ''],
+      ['Capital tied up', money0(tied), ''],
+      ['Avg days on lot', avgDays.toFixed(0), avgDays>45?'down':''],
+      ['Aged 60+ days', String(over60.length), over60.length?'down':''],
+      ['Potential gross', money0(potGross), potGross>0?'up':'down'],
+      ['Upside-down units', String(upside.length), upside.length?'down':'']
+    ];
+    $('#stats').innerHTML = tiles.map(function(x){ return '<div class="stat"><div class="k">'+x[0]+'</div><div class="v '+x[2]+'">'+x[1]+'</div></div>'; }).join('');
+
+    $('#rows').innerHTML = inv.slice().sort(function(a,b){ return Number(b.days||0)-Number(a.days||0); }).map(function(u){
+      var g=gross(u), cls=g>0?'pos':(g<0?'neg':''), hot=aged(u);
+      return '<tr><td>'+esc(u.stock)+'</td><td>'+esc(u.vehicle)+'</td><td class="amt">'+money0(u.cost)+'</td><td class="amt">'+money0(u.list)+'</td>'
+        +'<td class="amt '+cls+'">'+money0(g)+'</td><td class="amt '+(hot?'warn':'')+'">'+Number(u.days||0)+'</td>'
+        +'<td>'+(hot?'<span class="pill hot">aging</span>':'')+(g<0?' <span class="pill hot">upside down</span>':'')+'</td>'
+        +'<td class="amt"><button class="res-btn" data-del="'+u.id+'">✕</button></td></tr>';
+    }).join('');
+    $('#count').textContent = units+' unit'+(units===1?'':'s');
+
+    // by age bucket
+    var buckets=[['0–30 days',0,30],['31–60 days',31,60],['61–90 days',61,90],['90+ days',91,1e9]];
+    var byAge = buckets.map(function(b){ var g=inv.filter(function(u){ var d=Number(u.days||0); return d>=b[1]&&d<=b[2]; }); return { label:b[0], n:g.length, cap:g.reduce(function(a,u){return a+Number(u.cost||0);},0) }; });
+    $('#by-age').innerHTML = byAge.map(function(b){ return '<div class="byrow"><span>'+b.label+' <span class="mini">('+b.n+')</span></span><span class="'+(b.label.indexOf('0–30')===0?'':'warn')+'">'+money0(b.cap)+'</span></div>'; }).join('');
+
+    // by make
+    var mk={}; inv.forEach(function(u){ var k=makeOf(u); if(!mk[k])mk[k]={n:0,days:0,cap:0}; mk[k].n++; mk[k].days+=Number(u.days||0); mk[k].cap+=Number(u.cost||0); });
+    var keys=Object.keys(mk).sort(function(a,b){ return (mk[b].days/mk[b].n)-(mk[a].days/mk[a].n); });
+    $('#by-make').innerHTML = keys.length? keys.map(function(k){ var m=mk[k]; return '<div class="byrow"><span>'+esc(k)+' <span class="mini">('+m.n+')</span></span><span class="'+((m.days/m.n)>60?'warn':'')+'">'+(m.days/m.n).toFixed(0)+' days avg</span></div>'; }).join('') : '<p class="mini">Add units to see makes.</p>';
+
+    renderHero(agedCap, over60, upside, tied);
+    renderProIfActive();
+    updateBandUI();
+    save();
+  }
+
+  function renderHero(agedCap, over60, upside, tied){
+    var el=$('#hero');
+    if(!inv.length){ el.innerHTML='<div class="lab">Capital stuck in aging inventory</div><div class="num">—</div><div class="truth">Drop your inventory list to see how much of your money is tied up in cars that have sat too long — and which units are upside down.</div>'; return; }
+    var oldest = inv.slice().sort(function(a,b){ return Number(b.days||0)-Number(a.days||0); })[0];
+    var pctAged = tied>0 ? (agedCap/tied*100) : 0;
+    var truth = '<b>'+money0(agedCap)+'</b> of your capital ('+pctAged.toFixed(0)+'%) is sitting in '+over60.length+' unit'+(over60.length===1?'':'s')+' over 60 days — floorplan interest and depreciation eat these daily. Oldest: <b>'+esc(oldest.stock)+' '+esc(oldest.vehicle)+'</b> at '+Number(oldest.days||0)+' days.';
+    if(upside.length) truth += ' '+upside.length+' unit'+(upside.length===1?' is':'s are')+' already upside down (list below cost).';
+    el.innerHTML='<div class="lab">Capital stuck in aging inventory</div><div class="num '+(over60.length?'down':'up')+'">'+money0(agedCap)+'</div><div class="truth">'+truth+'</div>';
+  }
+
+  function splitLine(line){ var o=[],c='',q=false; for(var i=0;i<line.length;i++){ var ch=line[i]; if(ch==='"'){ if(q&&line[i+1]==='"'){c+='"';i++;}else q=!q; } else if(ch===','&&!q){o.push(c);c='';} else c+=ch; } o.push(c); return o; }
+  function parseCSV(text){
+    var rx=text.replace(/^﻿/,'').trim().split(/\r?\n/).filter(function(l){return l.trim();});
+    if(rx.length<2) throw new Error('empty');
+    var head=splitLine(rx[0]).map(function(h){return h.trim().toLowerCase();});
+    function col(names){ for(var i=0;i<head.length;i++)for(var j=0;j<names.length;j++)if(head[i].indexOf(names[j])>=0)return i; return -1; }
+    var ci={ stock:col(['stock','vin','unit','id']), vehicle:col(['vehicle','description','ymm','model','desc']), cost:col(['cost','acv','book','paid']), list:col(['list','price','asking','retail']), days:col(['days','age','dol']) };
+    if(ci.cost<0||ci.list<0||ci.days<0) throw new Error('columns');
+    var out=[];
+    for(var r=1;r<rx.length;r++){ var f=splitLine(rx[r]); if(!f.length) continue; var num=function(i){ return i<0?NaN:parseFloat(String(f[i]).replace(/[$,%\s]/g,'')); };
+      var cost=num(ci.cost),list=num(ci.list),days=num(ci.days); if(!Number.isFinite(cost)||!Number.isFinite(list)||!Number.isFinite(days)) continue;
+      out.push({ id:Date.now()+r, stock:(ci.stock>=0?f[ci.stock]:'').trim()||('#'+r), vehicle:(ci.vehicle>=0?f[ci.vehicle]:'').trim()||'Unit', cost:cost, list:list, days:days }); }
+    if(!out.length) throw new Error('rows'); return out;
+  }
+  function ingest(text,label){ var st=$('#drop-status'); try{ var p=parseCSV(text); inv=p; save(); render(); st.textContent='✓ Read '+p.length+' unit'+(p.length===1?'':'s')+' from '+label+' — your aged capital is above ↑'; }catch(e){ var w=e.message==='columns'?'couldn\'t find cost / list / days columns':(e.message==='rows'?'no usable rows':'that didn\'t look like a CSV'); st.textContent='⚠ '+w+'. Columns: stock, vehicle, cost, list, days.'; } }
+
+  $('#row-form').addEventListener('submit', function(e){ e.preventDefault();
+    var cost=parseFloat($('#u-cost').value), list=parseFloat($('#u-list').value), days=parseInt($('#u-days').value,10);
+    if(!(cost>=0)||!(list>=0)||!(days>=0)) return;
+    if(usingExamples()) inv=[];
+    inv.push({ id:Date.now(), stock:$('#u-stock').value.trim()||('#'+(inv.length+1)), vehicle:$('#u-vehicle').value.trim()||'Unit', cost:cost, list:list, days:days });
+    save(); render(); $('#u-stock').value='';$('#u-vehicle').value='';$('#u-cost').value='';$('#u-list').value='';$('#u-days').value='';
+  });
+  $('#rows').addEventListener('click', function(e){ var t=e.target; if(t.dataset&&t.dataset.del){ inv=inv.filter(function(x){return x.id!=t.dataset.del;}); save(); render(); } });
+  $('#clear-examples').addEventListener('click', function(e){ e.preventDefault(); inv=[]; save(); render(); $('#drop-status').textContent=''; });
+  $('#sample').addEventListener('click', function(){ ingest(SAMPLE_CSV,'the sample'); });
+  $('#pick').addEventListener('click', function(){ $('#file').click(); });
+  $('#file').addEventListener('change', function(e){ var f=e.target.files&&e.target.files[0]; if(!f)return; var rd=new FileReader(); rd.onload=function(){ ingest(String(rd.result),f.name); }; rd.readAsText(f); });
+  var drop=$('#drop'); ['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over');}); }); ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over');}); });
+  drop.addEventListener('drop', function(e){ var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; if(!f)return; var rd=new FileReader(); rd.onload=function(){ ingest(String(rd.result),f.name); }; rd.readAsText(f); });
+
+  // ---- Lotwise Pro: on-device power features behind the Quickwell paywall ----
+  // Priced by lot size (unit count) so the price scales with the size of the dealership.
+  var BANDS = [
+    { id:'pro-small', label:'Small lot (under 100 units)', max:99, mo:99, yr:999 },
+    { id:'pro-mid',   label:'Mid lot (100–300 units)',     max:300, mo:199, yr:1999 },
+    { id:'pro-large', label:'Large lot (300+ units)',      max:Infinity, mo:349, yr:3499 }
+  ];
+  function currentBand(){ var n=inv.length; for(var i=0;i<BANDS.length;i++) if(n<=BANDS[i].max) return BANDS[i]; return BANDS[BANDS.length-1]; }
+  function updateBandUI(){ var el=$('#band-note'); if(!el) return; var b=currentBand();
+    el.textContent = 'Based on your '+inv.length+' units, you\'re on the '+b.label+' plan — $'+b.mo+'/mo.';
+    var m=$('#up-month'), y=$('#up-year'); if(m) m.textContent='Unlock Pro — $'+b.mo+'/mo'; if(y) y.textContent='or $'+b.yr+'/yr'; }
+  var PRO_ACTIVE = false;
+  function renderPro(){
+    var over60=inv.filter(aged), over90=inv.filter(function(u){ return Number(u.days||0)>90; });
+    var agedCap=over60.reduce(function(a,u){ return a+Number(u.cost||0); },0);
+    var cap90=over90.reduce(function(a,u){ return a+Number(u.cost||0); },0);
+    var upside=inv.filter(function(u){ return gross(u)<0; });
+    var upsideTot=upside.reduce(function(a,u){ return a+gross(u); },0);
+    var floorplan=agedCap*0.09/12; // est. floorplan interest on aged units, 9%/yr
+    var grs=inv.map(gross); var avgGross=inv.length?grs.reduce(function(a,b){return a+b;},0)/inv.length:0;
+    var tiles=[
+      ['Floorplan $/mo on aged', money0(-floorplan)+' (est 9%)', 'down'],
+      ['Upside-down total', money0(upsideTot), upsideTot<0?'down':''],
+      ['Units 90+ days', String(over90.length), over90.length?'down':''],
+      ['Capital in 90+ units', money0(cap90), cap90?'down':''],
+      ['Avg gross / unit', money0(avgGross), avgGross>=0?'up':'down'],
+      ['Upside-down units', String(upside.length), upside.length?'down':'']
+    ];
+    $('#pro-stats').innerHTML=tiles.map(function(x){return '<div class="stat"><div class="k">'+x[0]+'</div><div class="v '+x[2]+'">'+x[1]+'</div></div>';}).join('');
+  }
+  function renderProIfActive(){ if(PRO_ACTIVE) renderPro(); }
+  function exportCSV(){
+    var rows=inv.slice().sort(function(a,b){ return Number(b.days||0)-Number(a.days||0); });
+    var csv=toCSV(rows,[['Stock','stock'],['Vehicle','vehicle'],['Cost','cost'],['List','list'],['Gross',function(u){return gross(u).toFixed(0);}],['Days','days'],['Aged',function(u){return aged(u)?'yes':'';}],['UpsideDown',function(u){return gross(u)<0?'yes':'';}]]);
+    try{ var blob=new Blob([csv],{type:'text/csv'}),u=URL.createObjectURL(blob),a=document.createElement('a'); a.href=u; a.download='lotwise-inventory.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},1000);}catch(e){}
+  }
+  if(window.Studio){
+    $('#pro-section').hidden=false;
+    Studio.init({ tool:'lotwise', onChange:function(stt){ PRO_ACTIVE=!!stt.pro; $('#pro-locked').hidden=!!stt.pro; $('#pro-unlocked').hidden=!stt.pro; $('#pro-plan').textContent=stt.pro?'Pro active':''; if(stt.pro) renderPro(); } });
+    $('#up-month').addEventListener('click', function(){ Studio.upgrade(currentBand().id,'month'); });
+    $('#up-year').addEventListener('click', function(){ Studio.upgrade(currentBand().id,'year'); });
+    $('#manage').addEventListener('click', function(e){ e.preventDefault(); Studio.manage(); });
+    $('#export-csv').addEventListener('click', exportCSV);
+  }
+
+  load(); render();
+</script>
+
+</body>
+</html>
