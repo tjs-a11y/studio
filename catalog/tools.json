@@ -77,6 +77,17 @@
       ]
     },
     {
+      "id": "fuelgauge",
+      "name": "Fuelgauge",
+      "tagline": "Drop your fuel deliveries and sales and see your real gross margin, cents per gallon, and which product or site is leaking money. On-device.",
+      "plans": [
+        {
+          "id": "pro",
+          "trialDays": 7
+        }
+      ]
+    },
+    {
       "id": "rate-con-checker",
       "name": "Rate Con Checker",
       "tagline": "Catch costly fine print in a broker rate confirmation before you sign.",
