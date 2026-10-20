@@ -20,6 +20,7 @@ export const TOOLS = [
   { id: 'keep-the-receipt', name: 'Keep the Receipt', text: 'Never miss a return window or a warranty again', page: 'keep-the-receipt/index.html' },
   { id: 'double-dose', name: 'Double Dose', text: 'Catch two medicines that share an active ingredient', page: 'double-dose/index.html' },
   { id: 'before-you-sign', name: 'Before You Sign', text: 'Spot the costly clauses in any contract before you sign', page: 'before-you-sign/index.html' },
+  { id: 'roadside-sos', name: 'Roadside Medical SOS Kit', text: "A glovebox medical card and your phone's real SOS, for the road", page: 'roadside-sos/index.html' },
   { id: 'saver', name: 'Quickwell Saver', text: 'Find and stop the money leaks in your bank export', page: 'saver/index.html' },
   { id: 'pilot', name: 'Quickwell Pilot', text: 'What every letter and bill needs from you, by when', page: 'pilot/index.html' },
   { id: 'shield', name: 'Quickwell Shield', text: 'Is this message a scam? See the warning signs', page: 'shield/index.html' },

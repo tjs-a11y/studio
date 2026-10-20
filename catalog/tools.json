@@ -21,19 +21,19 @@
     {
       "id": "fair-price",
       "name": "Fair Price",
-      "tagline": "Paste any estimate — auto repair, contractor, dental, vet, moving — and see the padding, what a fair quote includes, and the questions to ask. Nothing is uploaded.",
+      "tagline": "Paste any estimate \u2014 auto repair, contractor, dental, vet, moving \u2014 and see the padding, what a fair quote includes, and the questions to ask. Nothing is uploaded.",
       "plans": []
     },
     {
       "id": "proof",
       "name": "Proof",
-      "tagline": "Add a photo and get a timestamp and a fingerprint you keep — so later you can show it wasn't altered. For move-outs, damage and disputes. Nothing is uploaded.",
+      "tagline": "Add a photo and get a timestamp and a fingerprint you keep \u2014 so later you can show it wasn't altered. For move-outs, damage and disputes. Nothing is uploaded.",
       "plans": []
     },
     {
       "id": "keep-the-receipt",
       "name": "Keep the Receipt",
-      "tagline": "Log what you buy and never miss a return window or a warranty again — it tracks the deadlines and flags what's closing soon. Nothing is uploaded.",
+      "tagline": "Log what you buy and never miss a return window or a warranty again \u2014 it tracks the deadlines and flags what's closing soon. Nothing is uploaded.",
       "plans": []
     },
     {
@@ -46,6 +46,12 @@
       "id": "before-you-sign",
       "name": "Before You Sign",
       "tagline": "Paste any contract \u2014 a lease, loan, gym, phone, medical consent or freelance deal \u2014 and see the clauses that cost you, each with a line to ask for a fix. Nothing is uploaded.",
+      "plans": []
+    },
+    {
+      "id": "roadside-sos",
+      "name": "Roadside Medical SOS Kit",
+      "tagline": "Build a free printable glovebox medical card, arm your phone's real hands-free SOS, and get a one-tap screen that shows your live location. Nothing is uploaded.",
       "plans": []
     },
     {
