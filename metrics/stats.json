@@ -1,9 +1,9 @@
 {
-  "fetched": "2026-10-19T15:22:02.779Z",
-  "date": "2026-10-19",
+  "fetched": "2026-10-20T15:20:52.478Z",
+  "date": "2026-10-20",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-10-19T15:22:02.753Z",
+  "generated": "2026-10-20T15:20:52.417Z",
   "total_checks": 0,
   "tools": {
     "dinner": {
@@ -35,6 +35,10 @@
       "checks_today": 0
     },
     "before-you-sign": {
+      "checks": 0,
+      "checks_today": 0
+    },
+    "roadside-sos": {
       "checks": 0,
       "checks_today": 0
     },
@@ -85,6 +89,12 @@
     "shield": {
       "checks": 0,
       "checks_today": 0
+    }
+  },
+  "outbound": {
+    "northstar:freightsidekick": {
+      "clicks": 0,
+      "clicks_today": 0
     }
   }
 }
