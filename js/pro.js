@@ -42,7 +42,7 @@
   async function post(path, body) {
     const r = await fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok || !j.url) throw new Error(j.error || 'Something went wrong. Please try again.');
+    if (!r.ok || !j.url) { const m = j.error || 'Something went wrong. Please try again.'; try { alert(m); } catch (e) {} throw new Error(m); }
     location.href = j.url;
   }
   window.Studio = {
