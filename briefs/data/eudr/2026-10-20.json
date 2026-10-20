@@ -1,0 +1,112 @@
+{
+ "brief": {
+  "subject": "JRC releases Version 4 of its 2020 Global Forest Cover map",
+  "headline": "JRC Publishes Version 4 of 2020 Global Forest Cover Map; Cocoa Crisis May Be Easing",
+  "dek": "The EU's Joint Research Centre updated its 2020 forest cover map, and Barry Callebaut signals the worst of the cocoa crisis may be over.",
+  "lede": "The EU's Joint Research Centre has released Version 4 of its Global Forest Cover map for 2020. Teams that screen plots against forest data should note the update.",
+  "sections": [
+   {
+    "heading": "JRC updates 2020 forest map",
+    "bullets": [
+     "Version 4 of the JRC Global Forest Cover map for 2020 is now out, so screening teams should note which version they use.",
+     "The European Commission's environment newsroom announced the release on 2026-10-19, flagging it as an official EU update.",
+     "Exporters and cooperatives should confirm which map version their geolocation checks rely on, since results may differ between versions."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Cocoa: worst may be past",
+    "bullets": [
+     "Barry Callebaut says the cocoa crisis has likely peaked, offering cautious relief to buyers and suppliers.",
+     "APAC cocoa players still face major market shifts and challenges, so supply-chain risk has not gone away."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: JRC releases Version 4 of its 2020 Global Forest Cover map, and Barry Callebaut says the worst of the cocoa crisis is likely over."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-20T15:39:32.147Z",
+  "date": "2026-10-20",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "Creamers move beyond coffee with flavors, cold foams and café-inspired experiences",
+    "link": "https://www.foodnavigator.com/Article/2026/10/20/creamers-move-beyond-coffee-with-flavors-cold-foams-and-cafe-inspired-experiences/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-20T10:40:23.000Z",
+    "snippet": "SPINS data shows consumers gravitating toward flavored creamers and cold foams that deliver café-inspired flavors and textures, while dairy-focused brands balance indulgence with simpler ingredient lists.",
+    "categories": [
+     "Brands"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "APAC cocoa trends: ‘Worst is past’, but risks remain",
+    "link": "https://www.foodnavigator.com/Article/2026/10/20/apac-cocoa-trends-worst-is-past-but-risks-remain/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-20T05:47:45.000Z",
+    "snippet": "Cocoa giant Barry Callebaut says the worst of the cocoa crisis is likely over, but the APAC cocoa industry continues to navigate major market shifts and challenges",
+    "categories": [
+     "Ingredients"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "European Commission: Environment newsroom",
+    "title": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/961165",
+    "published": "2026-10-19T10:40:51.000Z",
+    "snippet": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 2
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

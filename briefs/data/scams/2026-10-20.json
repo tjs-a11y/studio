@@ -1,0 +1,183 @@
+{
+ "brief": {
+  "subject": "FBI: Scammers are exploiting the 2026 midterm election",
+  "headline": "FBI Warns of Midterm Election Scams; FTC Sends $9.8 Million in Wire Fraud Refunds",
+  "dek": "Election-themed fraud is rising before November, Walmart wire transfer victims get refunds, and the FTC reports on scams hitting older adults.",
+  "lede": "The FBI warns that scammers are using the November 2026 midterm election to run multiple fraud schemes. Treat any election-themed message asking for money or personal details with extra caution.",
+  "sections": [
+   {
+    "heading": "Midterm election scams are here",
+    "bullets": [
+     "On October 15, the FBI flagged several fraud schemes built around the 2026 U.S. midterm election.",
+     "Election season gives scammers a timely hook, so politically themed calls, texts and emails deserve a second look.",
+     "The FBI also issued a separate warning to voters about election crimes ahead of the November vote.",
+     "Before you donate or share personal details, confirm the request on your own, not through the message that asked."
+    ],
+    "source_ids": [
+     "S3",
+     "S4"
+    ]
+   },
+   {
+    "heading": "Refunds for wire transfer fraud victims",
+    "bullets": [
+     "The FTC is sending payments totaling more than $9.8 million to people harmed by scams that used Walmart's wire transfer services.",
+     "The FTC says scammers took hundreds of millions of dollars from U.S. consumers through those services.",
+     "Walmart settled FTC charges in June 2025 that it lacked effective anti-fraud policies and did not properly train staff.",
+     "Wire transfers are a favorite scammer payment method, so be wary of anyone who insists you pay that way."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   },
+   {
+    "heading": "FTC reports on scams targeting seniors",
+    "bullets": [
+     "The FTC sent Congress its report, Protecting Older Consumers 2025-2026, on fraud affecting older Americans.",
+     "It draws on fraud reports filed by older adults to spot key scam trends.",
+     "It also outlines FTC enforcement against unfair or deceptive practices that harm older consumers, which is useful context for families helping aging parents."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Ticket broker sued over bulk buying",
+    "bullets": [
+     "The FTC has sued ticket broker REPS & Company Inc., alleging it illegally got around per-event ticket purchase limits.",
+     "According to the complaint, the broker bought millions of tickets to high-demand events and resold them at a significant profit.",
+     "Practices like this can push fans toward resale markets, where inflated prices and fake tickets are common risks."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   }
+  ],
+  "seo_description": "FBI warns of 2026 midterm election scams, the FTC sends $9.8 million to wire fraud victims, and a new FTC report covers fraud against older adults."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-20T15:39:32.147Z",
+  "date": "2026-10-20",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC Issues Annual Report to Congress on Agency’s Actions to Protect Older Adults",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-issues-annual-report-congress-agencys-actions-protect-older-adults",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission issued its latest report to Congress on protecting older adults, which highlights key trends based on fraud reports submitted by older adults and the FTC’s efforts to combat the problem. The report, Protecting Older Consumers 2025-2026, details the FTC’s efforts to stop unfair or deceptive acts or practices that impact older Americans through law enforcement actions, c",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FBI IC3 alerts",
+    "title": "Cyber Threat Actors Use a Variety of Techniques to Target Election and Campaign Officials",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261016",
+    "published": "2026-10-16T14:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FBI IC3 alerts",
+    "title": "Scammers Exploit 2026 U.S. Midterm Election to Perpetrate Multiple Fraud Schemes",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-3",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Warns Voters on Election Crimes Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015-2",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FBI IC3 alerts",
+    "title": "FBI Cautions About Threats to Election Workers Ahead of the November 2026 Midterm Election",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261015",
+    "published": "2026-10-15T13:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "FTC press releases",
+    "title": "FTC Sends More than $9.8 Million to Consumers Harmed by Walmart’s Failure to Stop Scammers that Used its Wire Transfer Services to Take Millions from Customers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sends-more-98-million-consumers-harmed-walmarts-failure-stop-scammers-used-its-wire-transfer",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is sending payments totaling more than $9.8 million to consumers harmed by Walmart’s alleged failure to stop scammers that took hundreds of millions of dollars from U.S. consumers using the company’s wire transfer services. In June 2025, Walmart settled FTC charges that the company failed to implement effective anti-fraud policies and procedures, did not properly train",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "FTC press releases",
+    "title": "FTC Sues Ticket Broker Over Unlawful Tactics Used to Buy Millions of Tickets to Popular Live Events",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-ticket-broker-over-unlawful-tactics-used-buy-millions-tickets-popular-live-events",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission sued REPS & Company Inc., alleging the ticket broker illegally circumvents measures designed to limit the number of tickets that can be purchased for a single event, purchasing millions of tickets to high-demand events that it later resells at a significant profit. The complaint, filed by the Department of Justice upon notification and referral from the FTC, alleges RE",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "FBI IC3 alerts",
+    "title": "North Korean IT Workers Expanding Use of Facilitators, Broadening Recruitment",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261013",
+    "published": "2026-10-13T19:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 5
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S1",
+    "S3",
+    "S6"
+   ]
+  }
+ ]
+}
