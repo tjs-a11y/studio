@@ -137,11 +137,12 @@
           <li>Count of lines selling under cost (the silent leaks)</li>
           <li>Export every line to a CSV</li>
         </ul>
+        <p class="mini" id="band-note" style="margin:0 0 10px;"></p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn" id="up-month">Unlock Pro — $49/mo per site</button>
-          <button class="btn ghost" id="up-year">or $499/year</button>
+          <button class="btn" id="up-month">Unlock Pro</button>
+          <button class="btn ghost" id="up-year">Pay yearly</button>
         </div>
-        <p class="mini" style="margin:12px 0 0;">14-day free trial · cancel anytime · nothing leaves your device.</p>
+        <p class="mini" style="margin:12px 0 0;">Priced by your monthly volume · 14-day free trial · cancel anytime · nothing leaves your device.</p>
       </div>
       <div id="pro-unlocked" hidden>
         <div class="grid-stats" id="pro-stats" style="margin-bottom:14px;"></div>
@@ -235,6 +236,7 @@
     renderGroup('#by-site', groupNet(lines, margin, function(r){return r.site;}, costBasis));
     renderHero(gross, gal, groupNet(lines, margin, function(r){return r.product;}, costBasis));
     renderProIfActive();
+    updateBandUI();
     save();
   }
 
@@ -294,6 +296,18 @@
   drop.addEventListener('drop', function(e){ var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; if(!f)return; var rd=new FileReader(); rd.onload=function(){ ingest(String(rd.result),f.name); }; rd.readAsText(f); });
 
   // ---- Fuelgauge Pro: on-device power features behind the Quickwell paywall ----
+  // Volume-banded pricing: the plan (and price) is set by the operator's monthly gallons, so what we
+  // charge rises with their throughput. The right band id goes to Stripe checkout via Studio.upgrade().
+  var BANDS = [
+    { id:'pro-small', label:'Small (under 150K gal/mo)', max:150000, mo:49, yr:499 },
+    { id:'pro-mid',   label:'Mid (150K–500K gal/mo)',    max:500000, mo:99, yr:999 },
+    { id:'pro-large', label:'Large (500K+ gal/mo)',      max:Infinity, mo:199, yr:1999 }
+  ];
+  function totalGal(){ return lines.reduce(function(a,r){ return a+Number(r.gallons||0); },0); }
+  function currentBand(){ var g=totalGal(); for(var i=0;i<BANDS.length;i++) if(g<=BANDS[i].max) return BANDS[i]; return BANDS[BANDS.length-1]; }
+  function updateBandUI(){ var el=$('#band-note'); if(!el) return; var g=totalGal(), b=currentBand();
+    el.textContent = 'Based on ~'+g.toLocaleString('en-US')+' gal this period, you\'re on the '+b.label+' plan — $'+b.mo+'/mo.';
+    var m=$('#up-month'), y=$('#up-year'); if(m) m.textContent='Unlock Pro — $'+b.mo+'/mo'; if(y) y.textContent='or $'+b.yr+'/yr'; }
   var PRO_ACTIVE = false;
   function renderPro(){
     var gal=lines.reduce(function(a,r){return a+Number(r.gallons||0);},0);
@@ -322,8 +336,8 @@
   if(window.Studio){
     $('#pro-section').hidden=false;
     Studio.init({ tool:'fuelgauge', onChange:function(stt){ PRO_ACTIVE=!!stt.pro; $('#pro-locked').hidden=!!stt.pro; $('#pro-unlocked').hidden=!stt.pro; $('#pro-plan').textContent=stt.pro?'Pro active':''; if(stt.pro) renderPro(); } });
-    $('#up-month').addEventListener('click', function(){ Studio.upgrade('pro','month'); });
-    $('#up-year').addEventListener('click', function(){ Studio.upgrade('pro','year'); });
+    $('#up-month').addEventListener('click', function(){ Studio.upgrade(currentBand().id,'month'); });
+    $('#up-year').addEventListener('click', function(){ Studio.upgrade(currentBand().id,'year'); });
     $('#manage').addEventListener('click', function(e){ e.preventDefault(); Studio.manage(); });
     $('#export-csv').addEventListener('click', exportCSV);
   }

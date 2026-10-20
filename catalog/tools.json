@@ -82,8 +82,16 @@
       "tagline": "Drop your fuel deliveries and sales and see your real gross margin, cents per gallon, and which product or site is leaking money. On-device.",
       "plans": [
         {
-          "id": "pro",
-          "trialDays": 7
+          "id": "pro-small",
+          "trialDays": 14
+        },
+        {
+          "id": "pro-mid",
+          "trialDays": 14
+        },
+        {
+          "id": "pro-large",
+          "trialDays": 14
         }
       ]
     },
