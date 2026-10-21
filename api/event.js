@@ -5,7 +5,7 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade']);
 // Sites (not billable tools) that may record anonymous outbound-link clicks, and the partner links they track.
 const SITES = new Set(['northstar']);
 const OUT_TARGETS = new Set(['freightsidekick']);
@@ -43,6 +43,12 @@ export async function POST(request) {
     if (!SITES.has(tool) || !OUT_TARGETS.has(target)) return fail(400, 'Unknown event.');
     if (!run) { console.log(JSON.stringify({ evt: 'outbound', site: tool, target })); return json({ ok: true }); }
     await run(['INCR', `count:${tool}:${target}:clicks`], ['INCR', `count:${tool}:${target}:clicks:${day()}`]);
+    return json({ ok: true });
+  }
+  if (event === 'upgrade') {
+    // Anonymous count of "Unlock Pro" clicks (purchase intent) per tool. No identity; fired before Stripe checkout.
+    if (!run) { console.log(JSON.stringify({ evt: 'upgrade', tool })); return json({ ok: true }); }
+    await run(['INCR', `count:${tool}:upgrade_clicks`], ['INCR', `count:${tool}:upgrade_clicks:${day()}`]);
     return json({ ok: true });
   }
   if (event === 'check') {

@@ -70,7 +70,11 @@
   }
   window.Studio = {
     init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
-    upgrade(plan, interval) { return post('/api/checkout', { tool, plan, interval, ref: ref() }); },
+    upgrade(plan, interval) {
+      // Anonymous purchase-intent ping (survives the redirect); never blocks checkout.
+      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'upgrade', plan: plan }), keepalive: true }).catch(function () {}); } catch (e) {}
+      return post('/api/checkout', { tool, plan, interval, ref: ref() });
+    },
     manage() {
       const own = store.get(tool); const plus = !own && store.get('plus');
       return post('/api/portal', own ? { tool, token: own.token } : { tool: 'plus', token: plus && plus.token });

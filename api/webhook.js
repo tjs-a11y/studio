@@ -12,6 +12,22 @@ async function sync(sub, created) {
   return r;
 }
 
+// Best-effort anonymous purchase counter for the growth scoreboard (/api/stats reads count:<tool>:subs).
+// Never throws: a counter miss must not fail the webhook or affect entitlement. Approximate (Stripe may redeliver).
+async function countPurchase(tool) {
+  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token || !tool) return;
+  const day = new Date().toISOString().slice(0, 10);
+  try {
+    await fetch(`${url.replace(/\/$/, '')}/pipeline`, {
+      method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+      body: JSON.stringify([['INCR', `count:${tool}:subs`], ['INCR', `count:${tool}:subs:${day}`]]),
+      signal: AbortSignal.timeout(1500),
+    });
+  } catch { /* scoreboard only */ }
+}
+
 export async function POST(request) {
   const s = stripe();
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -31,6 +47,7 @@ export async function POST(request) {
         if (obj.payment_status === 'unpaid') break; // delayed payment methods: wait for async_payment_succeeded
         const v = await verifySession(s, obj.id, obj.metadata?.tool);
         if (v.ok && v.subscription) await sync({ ...v.subscription, customer: v.customer }, event.created);
+        if (v.ok) await countPurchase(obj.metadata?.tool); // scoreboard; after entitlement so a counter error can't block access
         console.log(JSON.stringify({ evt: event.type, tool: obj.metadata?.tool, ok: v.ok, reason: v.reason || null }));
         break;
       }

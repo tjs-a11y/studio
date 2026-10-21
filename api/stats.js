@@ -31,21 +31,35 @@ export async function GET() {
   const today = day();
   // Anonymous outbound-click counters from our other sites (counts only, no identity).
   const OUTBOUND = [['northstar', 'freightsidekick']];
+  // Per tool: free uses (checks), purchase intent (upgrade_clicks), and purchases (subs) — the funnel the growth sprint optimizes.
+  const PER = 6;
   const cmds = [
-    ...ids.flatMap((id) => [['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`]]),
+    ...ids.flatMap((id) => [
+      ['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`],
+      ['GET', `count:${id}:upgrade_clicks`], ['GET', `count:${id}:upgrade_clicks:${today}`],
+      ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
+    ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
   ];
   let res;
   try { res = await run(cmds); } catch { return json({ enabled: true, error: 'unavailable' }, 200); }
   const num = (v) => { const n = Number(v && typeof v === 'object' && 'result' in v ? v.result : v); return Number.isFinite(n) ? n : 0; };
   const out = {};
-  ids.forEach((id, i) => { out[id] = { checks: num(res[i * 2]), checks_today: num(res[i * 2 + 1]) }; });
+  ids.forEach((id, i) => {
+    const b = i * PER;
+    out[id] = {
+      checks: num(res[b]), checks_today: num(res[b + 1]),
+      upgrade_clicks: num(res[b + 2]), upgrade_clicks_today: num(res[b + 3]),
+      subs: num(res[b + 4]), subs_today: num(res[b + 5]),
+    };
+  });
   const total = Object.values(out).reduce((a, t) => a + t.checks, 0);
+  const total_subs = Object.values(out).reduce((a, t) => a + t.subs, 0);
   const outbound = {};
   OUTBOUND.forEach(([site, target], i) => {
-    const b = ids.length * 2 + i * 2;
+    const b = ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, tools: out, outbound },
+  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, total_subs, tools: out, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }
