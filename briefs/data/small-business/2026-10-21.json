@@ -1,0 +1,275 @@
+{
+ "brief": {
+  "subject": "IRS final rules clear the way for direct card payments",
+  "headline": "IRS Finalizes Rules Letting It Take Card Tax Payments Directly",
+  "dek": "Final IRS card-payment rules, a proposed premium tax credit overhaul, Ohio use tax on untaxed wine orders, and retirement distribution reporting.",
+  "lede": "The IRS has issued final rules under the Taxpayer First Act that let it take credit and debit card tax payments itself, without a third-party processor.",
+  "sections": [
+   {
+    "heading": "IRS can now take cards directly",
+    "bullets": [
+     "Final regulations let the IRS accept credit and debit card tax payments itself, cutting out the third-party processor step.",
+     "The rules carry out Taxpayer First Act changes, so how businesses pay by card could shift.",
+     "Restrictions on the IRS paying fees under card-payment contracts are removed, which could change who bears processing costs."
+    ],
+    "source_ids": [
+     "S10"
+    ]
+   },
+   {
+    "heading": "Premium tax credit rules under review",
+    "bullets": [
+     "The IRS proposed changes to who qualifies for the premium tax credit and how the credit is calculated.",
+     "Self-employed owners buying Exchange coverage for themselves or family should watch closely; the rules reach eligibility and credit amounts.",
+     "The proposal also covers liability for excess advance credit payments, which can mean a bigger bill at filing time."
+    ],
+    "source_ids": [
+     "S12"
+    ]
+   },
+   {
+    "heading": "Ohio: no tax charged isn't tax-free",
+    "bullets": [
+     "Ohio treats a seller's duty to collect tax separately from a buyer's duty to pay it.",
+     "A wine order with no Ohio tax on the receipt can still leave the buyer owing it.",
+     "Exemptions and credits can reduce the amount due, so check before assuming nothing is owed."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Retirement distributions must be reported",
+    "bullets": [
+     "The IRS is rejecting claims that IRA and qualified plan recipients didn't know they had to report distributions.",
+     "Owners and freelancers drawing on retirement accounts should report every distribution to avoid disputes with the IRS."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "IRS finalizes direct card payment rules, proposes premium tax credit changes; plus Ohio use tax and retirement distribution reporting for small businesses."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-21T15:57:53.918Z",
+  "date": "2026-10-21",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Tax Pros: After the Oct. 15 Deadline, Time to Update Your Security Plan to Include AI",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/tax-pros-after-the-oct-15-deadline-time-to-update-your-security-plan-to-include-ai/192121/",
+    "published": "2026-10-21T14:57:16.000Z",
+    "snippet": "Tax professionals are being urged to preview their security plans and IT readiness.",
+    "categories": [
+     "Income Taxes",
+     "information security",
+     "IRS",
+     "Security",
+     "tax firms",
+     "tax pros",
+     "Taxes",
+     "Technology",
+     "WISP"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "No Ohio Tax on Your Wine Order? You Could Still Owe It",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/no-ohio-tax-on-your-wine-order-you-could-still-owe-it/192106/",
+    "published": "2026-10-21T13:31:00.000Z",
+    "snippet": "Ohio law separates a seller's duty to collect tax from a buyer's responsibility to pay it. Exemptions and credits can affect what's owed.",
+    "categories": [
+     "alcoholic beverages",
+     "Ohio",
+     "retailers",
+     "Sales Tax",
+     "Taxes",
+     "use tax",
+     "wine"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "MNCPA Tax Conference Brings Leading Tax Experts to Minnesota Nov. 16-17",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/mncpa-tax-conference-brings-leading-tax-experts-to-minnesota-nov-16-17/192102/",
+    "published": "2026-10-21T13:22:00.000Z",
+    "snippet": "The event will be held at the Minneapolis Convention Center with a livestream option for virtual attendees.",
+    "categories": [
+     "cpa conference",
+     "Minnesota",
+     "state society",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "GruntWorx Hosts Tax Season Readiness Event Series",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/gruntworx-hosts-tax-season-readiness-event-series/192111/",
+    "published": "2026-10-21T12:33:00.000Z",
+    "snippet": "Tax automation platform GruntWorx announced a new series of partner‑driven educational events designed to help firms streamline tax workflows, strengthen compliance, and expand their capacity.",
+    "categories": [
+     "gruntworx",
+     "tax season",
+     "Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Don’t Try to Skip Reporting on Retirement Distributions",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/dont-try-to-skip-reporting-on-retirement-distributions/191866/",
+    "published": "2026-10-21T12:28:00.000Z",
+    "snippet": "The IRS doesn’t take kindly to arguments that IRA and qualified plan recipients are not aware of their responsibilities.",
+    "categories": [
+     "2027 income tax refnds",
+     "2027 income tax refunds",
+     "2027 income taxes",
+     "2027 irs deadline",
+     "required minimum distributions",
+     "RMDs",
+     "tax preparation",
+     "tax refunds",
+     "tax reporting",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "Blue J’s Tax Research is Now Available in Legora",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/blue-js-tax-research-is-now-available-in-legora/192124/",
+    "published": "2026-10-21T12:18:00.000Z",
+    "snippet": "\"Bringing Blue J into Legora means tax professionals can get cited analysis where they already work, check the source materials themselves, and keep their judgment at the center of their advice,\" Blue J CEO Benjamin Alarie said.",
+    "categories": [
+     "blue j",
+     "lawyers",
+     "legal industry",
+     "Legora",
+     "tax research",
+     "Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Intuit Offers Free Federal Tax Filing with Credit Karma Tax",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/20/intuit-offers-free-federal-tax-filing-with-credit-karma-tax/192063/",
+    "published": "2026-10-20T19:23:49.000Z",
+    "snippet": "Global financial technology company Intuit is re-launching Credit Karma Tax, providing users with free federal tax filing and a $15 flat rate for state filing, no matter their tax complexity.",
+    "categories": [
+     "Credit Karma",
+     "Credit Karma Tax",
+     "Income Taxes",
+     "intuit",
+     "tax filing",
+     "tax filing platform",
+     "Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "The CPA Journal",
+    "title": "Bridging the Gap Between Students and Practitioners",
+    "link": "https://www.cpajournal.com/2026/10/20/bridging-the-gap-between-students-and-practitioners/",
+    "published": "2026-10-20T14:00:48.000Z",
+    "snippet": "IN BRIEF The challenge of attracting students to the profession is not uniform across all areas of practice. This article presents the result of the authors’ project to bring students into real world professional settings by showing them “a day in the life” of a tax professional. This experiential project can enhance student awareness of […] The post Bridging the Gap Between Students and Practitio",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Education",
+     "Next Gen",
+     "Taxation"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Regulations Regarding Payment of Tax by Commercially Acceptable Means",
+    "link": "https://www.federalregister.gov/documents/2026/10/19/2026-21267/regulations-regarding-payment-of-tax-by-commercially-acceptable-means",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "This document contains final regulations regarding the payment of tax by commercially acceptable means. The final regulations reflect changes to the law made by the Taxpayer First Act that would allow the IRS to directly accept payments of tax by credit or debit card, without having to connect taxpayers to third-party payment processors. These final regulations remove restrictions on the payment of any fee by the IRS under any contracts related to payment of taxes by credit, debit, or charge car",
+    "categories": []
+   },
+   {
+    "id": "S11",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Non-Applicability of Section 357(c) to Consolidated Groups",
+    "link": "https://www.federalregister.gov/documents/2026/10/16/2026-21253/non-applicability-of-section-357c-to-consolidated-groups",
+    "published": "2026-10-16T12:00:00.000Z",
+    "snippet": "This document contains final regulations clarifying that, in the case of certain transfers between members of a consolidated group, a transferee's assumption of certain liabilities will not reduce the transferor's basis in the transferee's stock received in the transfer. These final regulations affect consolidated groups and their members.",
+    "categories": []
+   },
+   {
+    "id": "S12",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Premium Tax Credit",
+    "link": "https://www.federalregister.gov/documents/2026/10/15/2026-21056/premium-tax-credit",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "This document contains proposed regulations that would amend regulations regarding an individual taxpayer's eligibility for a premium tax credit (PTC), the computation of a PTC, and an individual's tax liability due to excess advance payments of the PTC. The proposed regulations would affect taxpayers who enroll themselves or a family member in individual health insurance coverage through a Health Insurance Exchange and may be allowed a PTC for this coverage. This document also provides a notice",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 4,
+    "kept": 4
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 7
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S10"
+   ]
+  }
+ ]
+}

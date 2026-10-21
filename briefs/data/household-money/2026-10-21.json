@@ -1,0 +1,109 @@
+{
+ "brief": {
+  "subject": "Bills due before payday? Ask to move the date",
+  "headline": "Shifting Bill Due Dates Can Ease Cash Crunch; FTC Sues to Block Playground Deal",
+  "dek": "Asking billers to change due dates may smooth cash flow, and the FTC moves to stop a playground equipment merger over price concerns.",
+  "lede": "If bills land before your paycheck does, asking billers to change your due dates is one way to ease the squeeze.",
+  "sections": [
+   {
+    "heading": "Line Up Due Dates With Payday",
+    "bullets": [
+     "Billers can be asked to move your due date, a simple fix when payments hit before paychecks.",
+     "Matching due dates to payday can make monthly cash flow easier to manage.",
+     "This step targets timing, not the amount owed, so it helps most when money arrives a bit too late."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "FTC Challenges Playground Equipment Merger",
+    "bullets": [
+     "The FTC filed suit to stop PlayPower, owned by Platinum Equity, from acquiring rival BCI Burke.",
+     "The agency says the two firms are among the largest makers of commercial outdoor playground equipment.",
+     "Regulators argue the merger would weaken competition on price and quality in an already concentrated market."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "Bills due before payday? Requesting new due dates can ease cash flow. Plus: the FTC sues to block a major playground equipment merger."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-21T15:57:53.918Z",
+  "date": "2026-10-21",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "Asked on Reddit: My Bills Are Due Before Payday — What Do I Do?",
+    "link": "https://www.nerdwallet.com/finance/news/how-can-i-time-my-paycheck-with-my-bills",
+    "published": "2026-10-21T13:00:21.000Z",
+    "snippet": "Requesting changes to bill due dates can ease cash flow management.",
+    "categories": [
+     "Personal Finance"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "Discover it Cash Back Card Sweetens Its Welcome Bonus With $200 Offer",
+    "link": "https://www.nerdwallet.com/credit-cards/news/discover-it-cash-back-sweetens-welcome-bonus-october-2026",
+    "published": "2026-10-20T23:06:11.000Z",
+    "snippet": "One of Discover's signature benefits — the company's \"cash back match\" bonus offer for new credit card holders — is getting even sweeter on the Discover it® Cash Back card.",
+    "categories": [
+     "Cash Back Credit Cards",
+     "Credit Cards"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block PlayPower’s Acquisition of Rival Playground Manufacturer Burke",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-block-playpowers-acquisition-rival-playground-manufacturer-burke",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "FTC alleges the merger of close rivals would significantly reduce price and quality competition in already concentrated market for outdoor commercial playground equipment Today, the Federal Trade Commission sued to block Platinum Equity and its portfolio company PlayPower’s acquisition of BCI Burke, alleging the deal to combine two of the largest commercial outdoor playground equipment makers will",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
