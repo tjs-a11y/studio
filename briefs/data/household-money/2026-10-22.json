@@ -1,0 +1,109 @@
+{
+ "brief": {
+  "subject": "Bills due before payday? Ask to move the date",
+  "headline": "Bills Due Before Payday? Asking to Shift Due Dates Can Help",
+  "dek": "Moving bill due dates can smooth cash flow, and the FTC sues to stop a playground equipment merger over price concerns.",
+  "lede": "If your bills come due before your paycheck lands, asking billers for a new due date can ease the squeeze.",
+  "sections": [
+   {
+    "heading": "Fix the payday timing gap",
+    "bullets": [
+     "Changing a bill's due date is an option worth requesting when payments arrive before payday.",
+     "Lining up due dates with your pay schedule can make monthly cash flow easier to manage.",
+     "The tip came in response to a common reader question about bills landing ahead of paychecks."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "FTC moves to block merger",
+    "bullets": [
+     "The FTC sued to stop PlayPower, owned by Platinum Equity, from buying rival playground maker BCI Burke.",
+     "The agency says the two are among the largest makers of commercial outdoor playground equipment.",
+     "Regulators argue the deal would weaken competition on price and quality in an already concentrated market."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "Bills due before payday? Asking to change due dates can ease cash flow. Plus: the FTC sues to block a playground equipment merger."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-22T15:53:25.320Z",
+  "date": "2026-10-22",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "Asked on Reddit: My Bills Are Due Before Payday — What Do I Do?",
+    "link": "https://www.nerdwallet.com/finance/news/how-can-i-time-my-paycheck-with-my-bills",
+    "published": "2026-10-21T13:00:21.000Z",
+    "snippet": "Requesting changes to bill due dates can ease cash flow management.",
+    "categories": [
+     "Personal Finance"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "Discover it Cash Back Card Sweetens Its Welcome Bonus With $200 Offer",
+    "link": "https://www.nerdwallet.com/credit-cards/news/discover-it-cash-back-sweetens-welcome-bonus-october-2026",
+    "published": "2026-10-20T23:06:11.000Z",
+    "snippet": "One of Discover's signature benefits — the company's \"cash back match\" bonus offer for new credit card holders — is getting even sweeter on the Discover it® Cash Back card.",
+    "categories": [
+     "Cash Back Credit Cards",
+     "Credit Cards"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block PlayPower’s Acquisition of Rival Playground Manufacturer Burke",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-block-playpowers-acquisition-rival-playground-manufacturer-burke",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "FTC alleges the merger of close rivals would significantly reduce price and quality competition in already concentrated market for outdoor commercial playground equipment Today, the Federal Trade Commission sued to block Platinum Equity and its portfolio company PlayPower’s acquisition of BCI Burke, alleging the deal to combine two of the largest commercial outdoor playground equipment makers will",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

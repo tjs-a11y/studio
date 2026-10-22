@@ -1,0 +1,102 @@
+{
+ "brief": {
+  "subject": "JRC releases Version 4 of 2020 Global Forest Cover map",
+  "headline": "JRC Publishes Version 4 of Its Global Forest Cover Map for 2020",
+  "dek": "The EU's Joint Research Centre updated its 2020 forest cover map, while heat pressures add a new strain on cocoa supply and chocolate demand.",
+  "lede": "The EU's Joint Research Centre has released Version 4 of its Global Forest Cover map for 2020. Teams that check plots against 2020 forest status should note the new version.",
+  "sections": [
+   {
+    "heading": "JRC updates 2020 forest map",
+    "bullets": [
+     "The JRC released Version 4 of its Global Forest Cover map for 2020, announced on 2026-10-19.",
+     "The map shows forest cover for 2020, so teams using it in plot-level geolocation checks should note the update.",
+     "Compliance staff should confirm which map version their screening tools and supplier assessments currently reference."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Heat adds pressure on cocoa",
+    "bullets": [
+     "Rising temperatures are affecting both cocoa supplies and consumer demand for chocolate, FoodNavigator reports.",
+     "More frequent heatwaves are pushing manufacturers to adjust product formats, strategies and retail approaches.",
+     "Cocoa exporters and cooperatives face climate-driven supply risk alongside price pressure."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: JRC releases Version 4 of its 2020 Global Forest Cover map, and rising heat strains cocoa supply and chocolate demand."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-22T15:53:25.320Z",
+  "date": "2026-10-22",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "Chocolate has a new problem. And it’s not cocoa prices",
+    "link": "https://www.foodnavigator.com/Article/2026/10/21/how-heatwaves-are-reshaping-the-future-of-chocolate/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-21T11:41:59.000Z",
+    "snippet": "Rising temperatures are reshaping the chocolate industry, impacting both cocoa supplies and consumer demand. As heatwaves become more frequent, manufacturers are adapting formats, product strategies and retail approaches to protect sales in a warming world.",
+    "categories": [
+     "Ingredients"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/961165",
+    "published": "2026-10-19T10:40:51.000Z",
+    "snippet": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

@@ -1,0 +1,351 @@
+{
+ "brief": {
+  "subject": "IRS can now take card payments directly, plus a premium credit rewrite",
+  "headline": "IRS finalizes rules to accept card tax payments without third-party processors",
+  "dek": "Final IRS card-payment rules, proposed premium tax credit changes, a red diesel recordkeeping waiver, and new state and city tax moves.",
+  "lede": "Final IRS regulations let the agency accept credit and debit card tax payments itself, without routing payers through outside processors.",
+  "sections": [
+   {
+    "heading": "IRS Takes Cards Directly",
+    "bullets": [
+     "Final regulations let the IRS process credit and debit card tax payments itself, cutting out third-party payment processors.",
+     "The rules carry out changes from the Taxpayer First Act, which could simplify how owners pay estimated and balance-due taxes.",
+     "They also lift limits on the IRS paying fees under card-payment contracts, a change that could shape what card payers face."
+    ],
+    "source_ids": [
+     "S14"
+    ]
+   },
+   {
+    "heading": "Premium Tax Credit Rules Revisited",
+    "bullets": [
+     "Proposed IRS regulations would change who qualifies for the premium tax credit and how it is calculated.",
+     "They would also revise how taxpayers owe back excess advance credit payments, a key issue at filing time.",
+     "Freelancers and owners buying family coverage through a Health Insurance Exchange are the ones affected."
+    ],
+    "source_ids": [
+     "S16"
+    ]
+   },
+   {
+    "heading": "Red Diesel Paperwork Eased",
+    "bullets": [
+     "The administration is waiving recordkeeping requirements tied to tax-exempt red diesel.",
+     "The aim is to get farmers, truck-stop operators and other businesses buying more of the untaxed fuel.",
+     "Fewer records could lower compliance work for these businesses."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "State and City Tax Moves",
+    "bullets": [
+     "Chicago Mayor Brandon Johnson plans to again propose an employee head tax on big corporations, exempting less wealthy areas.",
+     "New York's volunteer firefighter and ambulance worker credit rises from $200 to $800 for individuals starting tax year 2027.",
+     "Married couples in New York will see that credit go from $400 to $1,600, worth flagging for clients who volunteer."
+    ],
+    "source_ids": [
+     "S7",
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "IRS finalizes direct card tax payments, proposes premium tax credit changes; red diesel records waived; Chicago head tax and NY credit updates."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-22T15:53:25.320Z",
+  "date": "2026-10-22",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Meta Strikes Deal with Zuckerberg to Keep Him in California Over Billionaire Tax",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/22/meta-strikes-deal-with-zuckerberg-to-keep-him-in-california-over-billionaire-tax/192226/",
+    "published": "2026-10-22T14:34:20.000Z",
+    "snippet": "Meta negotiated a new stock deal to keep CEO Mark Zuckerberg in the state in case the wealth tax passes.",
+    "categories": [
+     "ballot measures",
+     "billionaire tax",
+     "billionaires",
+     "california",
+     "Income Taxes",
+     "Mark Zuckerberg",
+     "Meta",
+     "tax on billionaires",
+     "Taxes",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "‘Millionaires Tax’ Repeal Would Threaten Childcare Subsidies, Washington Gov. Warns",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/22/millionaires-tax-repeal-would-threaten-childcare-subsidies-washington-gov-warns/192222/",
+    "published": "2026-10-22T14:14:37.000Z",
+    "snippet": "Washington Gov. Bob Ferguson warned Tuesday that repealing Washington’s new “millionaires tax” would make childcare even less affordable for all families.",
+    "categories": [
+     "ballot measures",
+     "childcare",
+     "Income Taxes",
+     "millionaire's tax",
+     "millionaires",
+     "tax on millionaires",
+     "Taxes",
+     "Washington state",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Column: Small Business Owners, Now is the Time to Offer Health Insurance Coverage",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/22/column-small-business-owners-now-is-the-time-to-offer-health-insurance-coverage/192219/",
+    "published": "2026-10-22T13:34:35.000Z",
+    "snippet": "If you work for a small business, there is a once-a-year chance to get the same affordable group health plan coverage that is offered to big businesses in your state—at absolutely no cost to your employer.",
+    "categories": [
+     "employees",
+     "employers",
+     "health care",
+     "health insurance",
+     "healthcare",
+     "Small Business",
+     "small business owners"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "New York Quadruples Tax Credits for Volunteer Firefighters and Ambulance Workers",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/22/new-york-quadruples-tax-credits-for-volunteer-firefighters-and-ambulance-workers/192229/",
+    "published": "2026-10-22T12:08:00.000Z",
+    "snippet": "The legislation will increase the annual personal income tax credit from $200 to $800 for individuals and from $400 to $1,600 for married couples beginning in tax year 2027.",
+    "categories": [
+     "ambulance workers",
+     "Income Taxes",
+     "New York state",
+     "tax credit",
+     "tax credits",
+     "Taxes",
+     "volunteer firefighters"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "U.S. Waives Red Diesel Tax Record Requirements to Entice Buyers",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/u-s-waives-red-diesel-tax-record-requirements-to-entice-buyers/192205/",
+    "published": "2026-10-21T22:37:12.000Z",
+    "snippet": "The Trump administration is waiving recordkeeping requirements in a bid to encourage farmers, truck-stop operators and other companies to buy tax-exempt red diesel.",
+    "categories": [
+     "diesel fuel",
+     "dyed fuel",
+     "farmers",
+     "IRS",
+     "red-dyed diesel fuel",
+     "tax relief",
+     "Taxes",
+     "Trump administration"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "How to Make More Tax-Savvy Investments",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/how-to-make-more-tax-savvy-investments/192202/",
+    "published": "2026-10-21T20:35:00.000Z",
+    "snippet": "Knowing which investments to keep in and out of your taxable accounts will make your money go further.",
+    "categories": [
+     "Financial Planning",
+     "Illinois CPA Society",
+     "Income Taxes",
+     "investments",
+     "Tax Planning",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "Chicago Mayor Proposing Corporate Head Tax Again, Sources Say",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/chicago-mayor-proposing-corporate-head-tax-again-sources-say/192152/",
+    "published": "2026-10-21T17:37:04.000Z",
+    "snippet": "Mayor Brandon Johnson will again propose Chicago hit big corporations with an employee head tax—with an exemption in less wealthy parts of the city—when he unveils his budget proposal Wednesday.",
+    "categories": [
+     "Brandon Johnson",
+     "budget",
+     "Chicago",
+     "corporate head tax",
+     "corporate tax",
+     "corporate taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Xero and Bookkeeper360 Partner on Custom Integration for SMBs",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/xero-and-bookkeeper360-partner-on-custom-integration-for-smbs/192145/",
+    "published": "2026-10-21T17:05:41.000Z",
+    "snippet": "Custom integration uses Melio capabilities to cover accounts payable, accounts receivable, and configurable workflows under the Bookkeeper360 brand.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "accounts payable",
+     "accounts receivable",
+     "Bookkeeper360",
+     "Melio",
+     "Small Business",
+     "Technology",
+     "xero"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "The Canadian Tax Number Your U.S. Ecommerce Clients May Already Need",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/the-canadian-tax-number-your-u-s-ecommerce-clients-may-already-need/192138/",
+    "published": "2026-10-21T16:19:50.000Z",
+    "snippet": "When a U.S. seller moves inventory into a Canadian warehouse, Canada's GST/HST rules can require it to register, charge, and file, often without anyone on the U.S. side knowing.",
+    "categories": [
+     "Canada",
+     "ecommerce",
+     "goods and services tax",
+     "harmonized sales tax",
+     "Sales Tax",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "CPA Practice Advisor",
+    "title": "Tax Pros: After the Oct. 15 Deadline, Time to Update Your Security Plan to Include AI",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/21/tax-pros-after-the-oct-15-deadline-time-to-update-your-security-plan-to-include-ai/192121/",
+    "published": "2026-10-21T14:57:16.000Z",
+    "snippet": "Tax professionals are being urged to preview their security plans and IT readiness.",
+    "categories": [
+     "Income Taxes",
+     "information security",
+     "IRS",
+     "Security",
+     "tax firms",
+     "tax pros",
+     "Taxes",
+     "Technology",
+     "WISP"
+    ]
+   },
+   {
+    "id": "S11",
+    "source": "The CPA Journal",
+    "title": "The Tax Impacts of Asset Forfeiture",
+    "link": "https://www.cpajournal.com/2026/10/21/the-tax-impacts-of-asset-forfeiture/",
+    "published": "2026-10-21T13:00:13.000Z",
+    "snippet": "Asset forfeiture is a common tool in the modern fight against crime, meant to deter and remove any economic benefits of wrongdoing. In fiscal year 2025, the United States disposed of nearly $2 billion in forfeited assets by sale, transfer of funds, and other mechanisms (US Department of Justice, “Assets Forfeiture Fund and Seized Asset […] The post The Tax Impacts of Asset Forfeiture appeared firs",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Taxation"
+    ]
+   },
+   {
+    "id": "S12",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   },
+   {
+    "id": "S13",
+    "source": "The CPA Journal",
+    "title": "Bridging the Gap Between Students and Practitioners",
+    "link": "https://www.cpajournal.com/2026/10/20/bridging-the-gap-between-students-and-practitioners/",
+    "published": "2026-10-20T14:00:48.000Z",
+    "snippet": "IN BRIEF The challenge of attracting students to the profession is not uniform across all areas of practice. This article presents the result of the authors’ project to bring students into real world professional settings by showing them “a day in the life” of a tax professional. This experiential project can enhance student awareness of […] The post Bridging the Gap Between Students and Practitio",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Education",
+     "Next Gen",
+     "Taxation"
+    ]
+   },
+   {
+    "id": "S14",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Regulations Regarding Payment of Tax by Commercially Acceptable Means",
+    "link": "https://www.federalregister.gov/documents/2026/10/19/2026-21267/regulations-regarding-payment-of-tax-by-commercially-acceptable-means",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "This document contains final regulations regarding the payment of tax by commercially acceptable means. The final regulations reflect changes to the law made by the Taxpayer First Act that would allow the IRS to directly accept payments of tax by credit or debit card, without having to connect taxpayers to third-party payment processors. These final regulations remove restrictions on the payment of any fee by the IRS under any contracts related to payment of taxes by credit, debit, or charge car",
+    "categories": []
+   },
+   {
+    "id": "S15",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Non-Applicability of Section 357(c) to Consolidated Groups",
+    "link": "https://www.federalregister.gov/documents/2026/10/16/2026-21253/non-applicability-of-section-357c-to-consolidated-groups",
+    "published": "2026-10-16T12:00:00.000Z",
+    "snippet": "This document contains final regulations clarifying that, in the case of certain transfers between members of a consolidated group, a transferee's assumption of certain liabilities will not reduce the transferor's basis in the transferee's stock received in the transfer. These final regulations affect consolidated groups and their members.",
+    "categories": []
+   },
+   {
+    "id": "S16",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Premium Tax Credit",
+    "link": "https://www.federalregister.gov/documents/2026/10/15/2026-21056/premium-tax-credit",
+    "published": "2026-10-15T12:00:00.000Z",
+    "snippet": "This document contains proposed regulations that would amend regulations regarding an individual taxpayer's eligibility for a premium tax credit (PTC), the computation of a PTC, and an individual's tax liability due to excess advance payments of the PTC. The proposed regulations would affect taxpayers who enroll themselves or a family member in individual health insurance coverage through a Health Insurance Exchange and may be allowed a PTC for this coverage. This document also provides a notice",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 4,
+    "kept": 4
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 10
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S14"
+   ]
+  }
+ ]
+}
