@@ -1,9 +1,9 @@
 {
-  "fetched": "2026-10-21T15:32:54.667Z",
-  "date": "2026-10-21",
+  "fetched": "2026-10-22T15:33:38.231Z",
+  "date": "2026-10-22",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-10-21T15:32:54.610Z",
+  "generated": "2026-10-22T15:33:38.170Z",
   "total_checks": 0,
   "total_subs": 0,
   "tools": {
@@ -72,6 +72,14 @@
       "subs_today": 0
     },
     "roadside-sos": {
+      "checks": 0,
+      "checks_today": 0,
+      "upgrade_clicks": 0,
+      "upgrade_clicks_today": 0,
+      "subs": 0,
+      "subs_today": 0
+    },
+    "bill-radar": {
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
