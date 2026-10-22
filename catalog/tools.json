@@ -55,6 +55,12 @@
       "plans": []
     },
     {
+      "id": "bill-radar",
+      "name": "Bill Radar",
+      "tagline": "Enter your electricity rate and usage and see your fixed-rate roll-off date plus a 12-month bill forecast, with every assumption in your hands. On your device; nothing uploaded.",
+      "plans": []
+    },
+    {
       "id": "vigless",
       "name": "Vigless",
       "tagline": "Track the bets you actually placed and see your real ROI, win rate, and where you lose money. On-device; nothing uploaded. 21+. Not betting advice.",

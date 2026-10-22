@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill Radar: your power bill, a year out</title>
+<meta name="description" content="See your electricity rate roll-off date and a 12-month power-bill forecast, with every assumption in your hands. On your device; nothing uploaded.">
+<link rel="canonical" href="https://quickwell.app/bill-radar/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/bill-radar/">
+<meta property="og:title" content="Bill Radar: your power bill, a year out">
+<meta property="og:description" content="See your electricity contract roll-off date and a 12-month bill forecast, with every assumption in your hands. Runs on your device; nothing is uploaded.">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bill Radar","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Enter your electricity rate and usage and see your contract roll-off date plus a 12-month bill forecast. Every assumption is adjustable. Runs on your device; nothing is uploaded."}</script>
+<style>
+  :root{
+    --bg:#f3f5f7; --surface:#ffffff; --ink:#152130; --ink-dim:#5a6775; --line:#dfe5ea;
+    --accent:#1f5fbf; --accent-dark:#164a99; --warn:#b4531d; --warn-dark:#8a3f14; --go:#1f7a4d;
+    --radius:12px; --sans:'Public Sans',system-ui,-apple-system,sans-serif; --display:'Sora',var(--sans);
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#0e141a; --surface:#172029; --ink:#eef2f5; --ink-dim:#9fb0bd; --line:#27333e;
+    --accent:#5fa0ff; --accent-dark:#3d7fe0; --warn:#e0843f; --warn-dark:#f0a667; --go:#4fbf85; color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0e141a; --surface:#172029; --ink:#eef2f5; --ink-dim:#9fb0bd; --line:#27333e;
+    --accent:#5fa0ff; --accent-dark:#3d7fe0; --warn:#e0843f; --warn-dark:#f0a667; --go:#4fbf85; color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:780px; margin:0 auto; padding:0 20px;}
+  h1,h2,h3{font-family:var(--display); margin:0; line-height:1.15; text-wrap:balance;}
+  a{color:var(--accent);}
+  header.top{padding:40px 0 6px;}
+  .eyebrow{font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--warn); margin-bottom:12px;}
+  header.top h1{font-size:clamp(28px,5vw,42px);}
+  header.top p.lede{color:var(--ink-dim); font-size:17px; max-width:62ch; margin:14px 0 0;}
+  section{padding:24px 0; border-top:1px solid var(--line); margin-top:24px;}
+  section:first-of-type{border-top:none; margin-top:10px;}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px;}
+  label{display:block; font-weight:600; font-size:14px; margin:14px 0 5px;}
+  label .hint{font-weight:400; color:var(--ink-dim);}
+  input, select{width:100%; font:inherit; padding:11px 12px; border:1px solid var(--line); border-radius:9px; background:var(--bg); color:var(--ink);}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:520px){ .row{grid-template-columns:1fr;} }
+  .assume{background:transparent; border:1px dashed var(--line); border-radius:var(--radius); padding:6px 16px 16px; margin-top:16px;}
+  .assume summary{font-family:var(--display); font-weight:600; cursor:pointer; padding:12px 0 4px;}
+  button.go{font:600 16px var(--display); background:var(--accent); color:#fff; border:0; border-radius:10px; padding:13px 22px; cursor:pointer; margin-top:18px;}
+  button.go:hover{background:var(--accent-dark);}
+  #out{margin-top:8px;}
+  .headline{background:var(--surface); border:1px solid var(--line); border-left:5px solid var(--warn); border-radius:var(--radius); padding:18px 18px;}
+  .headline .big{font-family:var(--display); font-size:clamp(26px,6vw,36px); font-weight:700; line-height:1.1; margin:4px 0;}
+  .headline .delta{font-weight:700;}
+  .up{color:var(--warn);} .down{color:var(--go);}
+  .rolloff{margin-top:14px; background:color-mix(in srgb, var(--warn) 10%, var(--surface)); border:1px solid color-mix(in srgb, var(--warn) 30%, var(--line)); border-radius:var(--radius); padding:14px 16px;}
+  table{width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; font-variant-numeric:tabular-nums;}
+  th,td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--line);} th:first-child,td:first-child{text-align:left;}
+  .muted{color:var(--ink-dim); font-size:14px;}
+  .pill{display:inline-block; font-size:12px; font-weight:700; padding:2px 10px; border-radius:999px; background:color-mix(in srgb,var(--accent) 14%, var(--surface)); color:var(--accent);}
+  ul.what{padding-left:18px;} ul.what li{margin:7px 0;}
+  .soon{opacity:.75;}
+  footer{padding:30px 0 50px; color:var(--ink-dim); font-size:14px; border-top:1px solid var(--line); margin-top:30px;}
+  .qw-also{margin-top:28px;} .qw-also p{font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-dim); margin:0 0 10px;}
+  .qw-also ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:10px;} @media (max-width:520px){ .qw-also ul{grid-template-columns:1fr;} }
+  .qw-also a{display:block; border:1px solid var(--line); border-radius:10px; padding:11px 13px; text-decoration:none; color:var(--ink); background:var(--surface);}
+  .qw-also a:hover{border-color:var(--accent);} .qw-also b{display:block; font-size:14px;} .qw-also span{color:var(--ink-dim); font-size:12.5px;}
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Power bills</div>
+    <h1>Bill Radar</h1>
+    <p class="lede">Read your power bill and see what's coming for it: the date your fixed rate rolls off, a 12-month forecast, and the moves to make before it hits. Every number is an estimate you control — nothing is uploaded.</p>
+  </header>
+
+  <section>
+    <div class="card">
+      <div class="row">
+        <div>
+          <label for="kwh">Average monthly use <span class="hint">(kWh — it's on your bill)</span></label>
+          <input id="kwh" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 1000">
+        </div>
+        <div>
+          <label for="rate">Your rate <span class="hint">(¢ per kWh)</span></label>
+          <input id="rate" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 14.5">
+        </div>
+      </div>
+      <p class="muted" style="margin:10px 0 0">Not sure of the rate? Divide last month's total $ by the kWh used (both on the bill), then move the decimal: $150 ÷ 1000 kWh = $0.15 = <b>15¢</b>.</p>
+      <label for="end" style="margin-top:18px">Fixed-rate contract ends <span class="hint">(optional — the date on your plan)</span></label>
+      <input id="end" type="month">
+
+      <details class="assume">
+        <summary>Assumptions (estimates — adjust them)</summary>
+        <label for="chg">Expected rate change per year <span class="hint">(%; estimate — set your own)</span></label>
+        <input id="chg" type="number" inputmode="decimal" step="0.5" value="8">
+        <label for="bump">When a fixed rate ends, how much higher the new/variable rate runs <span class="hint">(%; estimate)</span></label>
+        <input id="bump" type="number" inputmode="decimal" step="1" value="20">
+        <p class="muted" style="margin:12px 0 0">Both are rough defaults, not your utility's real numbers — change them to whatever you expect. A fixed plan that lapses usually rolls to a month-to-month or variable "default" rate, which is typically higher; that's what the second number estimates.</p>
+      </details>
+
+      <button class="go" id="run">Show my forecast</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="headline" style="margin-top:20px">
+        <span class="pill">Estimate</span>
+        <div class="big" id="next12"></div>
+        <div id="deltaLine"></div>
+      </div>
+      <div class="rolloff" id="rolloff" hidden></div>
+      <table id="tbl"><thead><tr><th>Month</th><th>Rate (¢)</th><th>Est. bill</th></tr></thead><tbody></tbody></table>
+      <p class="muted" style="margin-top:12px">Estimates only, from the numbers and assumptions you entered — not a quote, a prediction, or financial advice. Your real bill depends on usage, weather, taxes and fees, and your utility's actual rates.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 style="font-size:20px">What to do before your rate rolls off</h2>
+    <ul class="what">
+      <li><b>Find your end date.</b> It's on your electricity plan's "Electricity Facts Label" or contract. Put it above to see the month it lands.</li>
+      <li><b>Don't auto-roll.</b> Letting a fixed plan lapse usually drops you onto a higher month-to-month or variable "default" rate. Shop a new fixed plan 2–4 weeks before the end date.</li>
+      <li><b>Compare apples to apples</b> at your usage level (e.g. ~1000 kWh) — the headline rate often hides fees that only show up at certain usage.</li>
+      <li><b>In a deregulated state</b> (Texas, Ohio, Pennsylvania, Illinois and others) you can switch supplier without changing wires or losing power.</li>
+    </ul>
+    <p class="muted">General information, not financial advice.</p>
+  </section>
+
+  <section>
+    <h2 style="font-size:20px" class="soon">Monthly watch + roll-off alert <span class="pill">Coming soon</span></h2>
+    <p class="soon muted">We're building a free reminder that emails you ~30 days before your fixed rate ends, plus a monthly check-in — so the roll-off never catches you. It needs email delivery we haven't switched on yet; this page stays fully free either way. For now, note your end date above.</p>
+  </section>
+
+  <!-- xlinks:bill-radar -->
+<nav class="qw-also" aria-label="Also from Quickwell"><p>Also from Quickwell</p><ul><li><a href="/dinner/?ref=xlink-bill-radar"><b>What's for Dinner?</b><span>Dinners from what you already have in the fridge</span></a></li><li><a href="/copycat/?ref=xlink-bill-radar"><b>Copycat Kitchen</b><span>Rebuild a restaurant dish at home, with the trick behind it</span></a></li><li><a href="/kitchen/?ref=xlink-bill-radar"><b>Weekly Kitchen</b><span>Plan a week of dinners from your saved pantry</span></a></li><li><a href="/fair-price/?ref=xlink-bill-radar"><b>Fair Price</b><span>Is this quote fair? Spot the padding before you pay</span></a></li><li><a href="/proof/?ref=xlink-bill-radar"><b>Proof</b><span>Timestamp and fingerprint a photo for a dispute</span></a></li><li><a href="/keep-the-receipt/?ref=xlink-bill-radar"><b>Keep the Receipt</b><span>Never miss a return window or a warranty again</span></a></li><li><a href="/double-dose/?ref=xlink-bill-radar"><b>Double Dose</b><span>Catch two medicines that share an active ingredient</span></a></li><li><a href="/before-you-sign/?ref=xlink-bill-radar"><b>Before You Sign</b><span>Spot the costly clauses in any contract before you sign</span></a></li><li><a href="/roadside-sos/?ref=xlink-bill-radar"><b>Roadside Medical SOS Kit</b><span>A glovebox medical card and your phone's real SOS, for the road</span></a></li><li><a href="/saver/?ref=xlink-bill-radar"><b>Quickwell Saver</b><span>Find and stop the money leaks in your bank export</span></a></li><li><a href="/pilot/?ref=xlink-bill-radar"><b>Quickwell Pilot</b><span>What every letter and bill needs from you, by when</span></a></li><li><a href="/shield/?ref=xlink-bill-radar"><b>Quickwell Shield</b><span>Is this message a scam? See the warning signs</span></a></li><li><a href="/footsure/?ref=xlink-bill-radar"><b>Footsure</b><span>The CDC's strength and balance tests at home</span></a></li><li><a href="/play/?ref=xlink-bill-radar"><b>Quickwell Play</b><span>Three free daily brain games</span></a></li><li><a href="/spare-key/?ref=xlink-bill-radar"><b>Spare Key</b><span>A lost-phone plan for your accounts</span></a></li><li><a href="/commodities/?ref=xlink-bill-radar"><b>Commodity Desk</b><span>Commodity prices from official sources</span></a></li><li><a href="/plus/?ref=xlink-bill-radar"><b>Quickwell Plus</b><span>One subscription for every everyday tool</span></a></li></ul></nav>
+<!-- /xlinks -->
+
+  <footer>
+    <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+    <p style="margin-top:10px">Runs entirely in your browser. Nothing you type is uploaded or saved anywhere but your own device.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  function run(){
+    var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
+    if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
+    var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
+    var endVal=$('end').value; // YYYY-MM or ''
+    var now=new Date(); now.setDate(1);
+    var endIdx=-1;
+    if(endVal){ var p=endVal.split('-'); var ed=new Date(+p[0],(+p[1])-1,1);
+      endIdx=(ed.getFullYear()-now.getFullYear())*12+(ed.getMonth()-now.getMonth()); }
+    var baseMonthly=kwh*rate/100;
+    var monthsName=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var tb=$('tbl').querySelector('tbody'); tb.innerHTML='';
+    var next12=0, rolledAt=null;
+    for(var i=0;i<12;i++){
+      var r=rate*Math.pow(1+chg,i/12);
+      if(endIdx>=0 && i>=endIdx){ r=r*(1+bump); if(rolledAt===null) rolledAt=i; }
+      var bill=kwh*r/100; next12+=bill;
+      var d=new Date(now.getFullYear(),now.getMonth()+i,1);
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+monthsName[d.getMonth()]+' '+d.getFullYear()+(i===rolledAt?' ⚠︎':'')+'</td><td>'+r.toFixed(1)+'</td><td>'+money(bill)+'</td>';
+      tb.appendChild(tr);
+    }
+    var currentYear=baseMonthly*12;
+    var delta=next12-currentYear;
+    $('next12').textContent='Next 12 months: about '+money(next12);
+    var dl=$('deltaLine');
+    if(Math.abs(delta)<1){ dl.innerHTML='About the same as the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    else { var up=delta>0; dl.innerHTML='<span class="delta '+(up?'up':'down')+'">'+(up?'▲ '+money(delta)+' more':'▼ '+money(-delta)+' less')+'</span> than the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    var ro=$('rolloff');
+    if(rolledAt!==null){
+      var rd=new Date(now.getFullYear(),now.getMonth()+rolledAt,1);
+      ro.hidden=false;
+      ro.innerHTML='<b>⚠︎ Your fixed rate rolls off around '+monthsName[rd.getMonth()]+' '+rd.getFullYear()+'.</b> After that, this forecast assumes your rate runs about '+Math.round(bump*100)+'% higher (a typical month-to-month/variable "default" rate — an estimate). Shop a new fixed plan 2–4 weeks before that month.';
+    } else { ro.hidden=true; }
+    $('out').hidden=false;
+    $('out').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('run').addEventListener('click',run);
+})();
+</script>
+</body>
+</html>
