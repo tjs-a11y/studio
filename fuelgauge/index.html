@@ -299,9 +299,9 @@
   // Volume-banded pricing: the plan (and price) is set by the operator's monthly gallons, so what we
   // charge rises with their throughput. The right band id goes to Stripe checkout via Studio.upgrade().
   var BANDS = [
-    { id:'pro-small', label:'Small (under 150K gal/mo)', max:150000, mo:49, yr:499 },
-    { id:'pro-mid',   label:'Mid (150K–500K gal/mo)',    max:500000, mo:99, yr:999 },
-    { id:'pro-large', label:'Large (500K+ gal/mo)',      max:Infinity, mo:199, yr:1999 }
+    { id:'pro-small', label:'Small (under 150K gal/mo)', max:150000, mo:149, yr:1490 },
+    { id:'pro-mid',   label:'Mid (150K–500K gal/mo)',    max:500000, mo:299, yr:2990 },
+    { id:'pro-large', label:'Large (500K+ gal/mo)',      max:Infinity, mo:499, yr:4990 }
   ];
   function totalGal(){ return lines.reduce(function(a,r){ return a+Number(r.gallons||0); },0); }
   function currentBand(){ var g=totalGal(); for(var i=0;i<BANDS.length;i++) if(g<=BANDS[i].max) return BANDS[i]; return BANDS[BANDS.length-1]; }

@@ -289,9 +289,9 @@
   // ---- Lotwise Pro: on-device power features behind the Quickwell paywall ----
   // Priced by lot size (unit count) so the price scales with the size of the dealership.
   var BANDS = [
-    { id:'pro-small', label:'Small lot (under 100 units)', max:99, mo:99, yr:999 },
-    { id:'pro-mid',   label:'Mid lot (100–300 units)',     max:300, mo:199, yr:1999 },
-    { id:'pro-large', label:'Large lot (300+ units)',      max:Infinity, mo:349, yr:3499 }
+    { id:'pro-small', label:'Small lot (under 100 units)', max:99, mo:199, yr:1990 },
+    { id:'pro-mid',   label:'Mid lot (100–300 units)',     max:300, mo:399, yr:3990 },
+    { id:'pro-large', label:'Large lot (300+ units)',      max:Infinity, mo:699, yr:6990 }
   ];
   function currentBand(){ var n=inv.length; for(var i=0;i<BANDS.length;i++) if(n<=BANDS[i].max) return BANDS[i]; return BANDS[BANDS.length-1]; }
   function updateBandUI(){ var el=$('#band-note'); if(!el) return; var b=currentBand();
