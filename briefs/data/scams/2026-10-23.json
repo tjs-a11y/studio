@@ -1,0 +1,136 @@
+{
+ "brief": {
+  "subject": "Fake passport help sites, a $106.8M debt relief ruling",
+  "headline": "FTC Targets Fake Passport Help Sites; Court Shuts Debt Relief Scheme",
+  "dek": "Regulators act against government impersonators selling passport services and a debt relief operation that targeted seniors and veterans.",
+  "lede": "The FTC has sued operators accused of posing as the government to sell passport services through paid search ads. Before paying for any passport help, confirm you are on an official government site.",
+  "sections": [
+   {
+    "heading": "Fake Government Passport Help",
+    "bullets": [
+     "The FTC sued GovAssist LLC, Entry LLC and Scott Zuckerman over an alleged government impersonation scheme.",
+     "Consumers seeking passport services were allegedly misled into thinking the operation was, or was tied to, the federal government.",
+     "Paid search ads were allegedly used to impersonate the government, so top search results are not proof a site is official.",
+     "The FTC also cites misleading promises and fake reviews, so glowing ratings alone should not earn your trust."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Debt Relief Scheme Banned",
+    "bullets": [
+     "A federal court permanently banned operators of an alleged debt relief scheme, following an FTC request.",
+     "The scheme allegedly targeted seniors and veterans, groups worth warning in your family.",
+     "Operators allegedly impersonated banks, credit card companies and government agencies to gain trust.",
+     "On October 14, 2026, the court entered a $106.8 million default judgment against corporate defendants."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "FTC Report on Older Adults",
+    "bullets": [
+     "The FTC sent Congress its report Protecting Older Consumers 2025-2026, built on fraud reports from older adults.",
+     "It highlights key fraud trends affecting older Americans, useful context for anyone helping aging parents.",
+     "The report details law enforcement actions against unfair or deceptive practices aimed at older consumers."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "FTC sues alleged fake government passport help operators, a court bans a debt relief scheme targeting seniors, and a new FTC report on older adult fraud."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-23T15:45:13.598Z",
+  "date": "2026-10-23",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC Sues Perpetrators of Government Impersonation Scheme Over Deceptive Ads, Misleading Promises and Fake Reviews",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-perpetrators-government-impersonation-scheme-over-deceptive-ads-misleading-promises-fake",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is taking action against GovAssist LLC, Entry LLC and Scott Zuckerman, for their alleged involvement in a government impersonation scheme that deceived consumers seeking passport services by purporting to be the federal government or affiliated with the federal government. The FTC alleges the operation uses deceptive paid search ads to impersonate the government or pre",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "Court Permanently Shuts Down Illegal Debt Relief Operation Following FTC Allegation That Scheme’s Operators Impersonated Government and Business Entities",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/court-permanently-shuts-down-illegal-debt-relief-operation-following-ftc-allegation-schemes",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "At the Federal Trade Commission’s request, a federal court has permanently banned the operators of an alleged debt relief scheme that targeted seniors and veterans by impersonating banks, credit card companies and government agencies. On October 14, 2026, the court entered a default judgment of $106.8 million against corporate defendants Accelerated Debt Settlement Inc., ADS Resolve LLC, Financial",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Issues Annual Report to Congress on Agency’s Actions to Protect Older Adults",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-issues-annual-report-congress-agencys-actions-protect-older-adults",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission issued its latest report to Congress on protecting older adults, which highlights key trends based on fraud reports submitted by older adults and the FTC’s efforts to combat the problem. The report, Protecting Older Consumers 2025-2026, details the FTC’s efforts to stop unfair or deceptive acts or practices that impact older Americans through law enforcement actions, c",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S1",
+    "S2",
+    "S3"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

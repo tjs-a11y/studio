@@ -1,0 +1,110 @@
+{
+ "brief": {
+  "subject": "EUDR: JRC forest map Version 4 and November IS training",
+  "headline": "JRC Releases Version 4 of 2020 Global Forest Cover Map; EUDR System Training Set for November",
+  "dek": "The Commission publishes a new 2020 forest cover map version and announces November training dates for the EUDR Information System.",
+  "lede": "The EU's Joint Research Centre has released Version 4 of its Global Forest Cover map for 2020, a reference layer many EUDR teams use when checking plot locations.",
+  "sections": [
+   {
+    "heading": "New 2020 Forest Map Version",
+    "bullets": [
+     "The JRC released Version 4 of its Global Forest Cover map for 2020, published by the Commission on 2026-10-19.",
+     "Teams that screen plot geolocation against this map should confirm which version their tools and suppliers currently use.",
+     "Results from earlier versions may differ, so past risk checks could need a fresh look."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "November Information System Training",
+    "bullets": [
+     "The Commission has announced November training dates for the EUDR Information System.",
+     "Staff who file due-diligence statements can use the sessions to learn the system before submissions pile up.",
+     "Check the Commission's environment newsroom for the session schedule and details."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: JRC publishes Version 4 of the 2020 Global Forest Cover map; Commission sets November EUDR Information System training dates."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-23T15:45:13.598Z",
+  "date": "2026-10-23",
+  "items": [
+   {
+    "id": "S1",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/961165",
+    "published": "2026-10-19T10:40:51.000Z",
+    "snippet": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 0
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
