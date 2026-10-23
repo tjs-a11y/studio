@@ -127,6 +127,12 @@
 - [Who doesn't get a 1099: card payments, corporations and the attorney and medical exceptions](https://quickwell.app/learn/1099/who-does-not-get-a-1099/): Card and payment-network payments, most corporations, goods and employees usually need no 1099 from you. Attorneys and medical providers are exceptions.
 - [1099 deadlines for 2026 payments (filed in early 2027)](https://quickwell.app/learn/1099/deadlines-2026-payments/): 1099-NEC forms for 2026 payments are due Feb 1, 2027, because Jan 31 is a Sunday (26 U.S.C. 6071(c), 7503). Other e-filed 1099s: Mar 31, 2027.
 
+## Power bills
+
+- [Understanding your electricity bill and rate](https://quickwell.app/learn/power-bills/): Plain-English pages on what happens when a fixed electricity rate ends, why the roll-off rate is usually higher, and what the average U.S. price is in 2026.
+- [What happens when your fixed-rate electricity plan ends](https://quickwell.app/learn/power-bills/when-a-fixed-rate-plan-ends/): When a fixed-rate electricity plan expires, most providers move you to a month-to-month variable rate that is usually higher. How the roll-off works and how to avoid it.
+- [The average U.S. electricity price in 2026 — and how to read your own](https://quickwell.app/learn/power-bills/average-electricity-price-2026/): The U.S. average residential electricity rate is about 18 cents per kWh in 2026, up from 2025. What the figure means, its limits, and how to read your own rate.
+
 ## Health and everyday reference pages
 
 - [Fall-risk tests explained: the CDC's chair stand, balance and Timed Up and Go](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.

@@ -11,7 +11,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin.replace(/\/$/, '');
 
 // Each module exports SECTION and PAGES (or TERMS). Missing modules are skipped.
-const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas', 'business-costs', '1099'];
+const MODULES = ['rate-con', 'audit', 'eudr-en', 'eudr-fr', 'texas', 'business-costs', '1099', 'power-bills'];
 const sections = [];
 for (const m of MODULES) {
   const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');
