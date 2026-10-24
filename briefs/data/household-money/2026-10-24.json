@@ -1,0 +1,132 @@
+{
+ "brief": {
+  "subject": "Shift bill due dates to match payday; FTC fights playground deal",
+  "headline": "Bills Due Before Payday? Ask to Move the Due Date. Plus: FTC Sues to Block Merger",
+  "dek": "Changing bill due dates can smooth cash flow, and the FTC is suing to stop a playground-equipment merger it says would hurt competition.",
+  "lede": "If your bills land before your paycheck, asking billers to change the due date is one simple way to ease the cash crunch.",
+  "sections": [
+   {
+    "heading": "Bills Due Before Payday",
+    "bullets": [
+     "Requesting a new due date from billers can help align payments with when your paycheck arrives.",
+     "Better-timed due dates can make monthly cash flow easier to manage and reduce last-minute scrambles."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "FTC Sues to Block Playground Merger",
+    "bullets": [
+     "The FTC sued to stop PlayPower, owned by Platinum Equity, from acquiring rival playground maker BCI Burke.",
+     "The agency says the two are among the largest makers of commercial outdoor playground equipment.",
+     "Regulators argue the deal would weaken price and quality competition in an already concentrated market."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "Daily household money brief: how changing bill due dates can ease cash flow, and the FTC's lawsuit to block a playground-equipment merger."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-24T14:33:34.782Z",
+  "date": "2026-10-24",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "Atmos Credit Cards Increase Welcome Offers Up to 100,000 Points",
+    "link": "https://www.nerdwallet.com/credit-cards/news/atmos-cards-bonus-increase-2026",
+    "published": "2026-10-22T21:15:11.000Z",
+    "snippet": "The Atmos™ Rewards Ascent Visa Signature® credit card and Atmos™ Rewards Summit Visa Infinite® credit card increased their welcome offers. Find out how they compare.",
+    "categories": [
+     "Airline Credit Cards",
+     "Credit Cards",
+     "Promos",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "I Opened an EverBank Savings Account: It Went Well Except For One Thing",
+    "link": "https://www.nerdwallet.com/banking/learn/opening-everbank-savings-account",
+    "published": "2026-10-22T20:19:13.000Z",
+    "snippet": "Opening an EverBank savings account was an easy and straightforward process. But the APY policy left me with unanswered questions.",
+    "categories": [
+     "Banking",
+     "Savings Accounts"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Asked on Reddit: My Bills Are Due Before Payday — What Do I Do?",
+    "link": "https://www.nerdwallet.com/finance/news/how-can-i-time-my-paycheck-with-my-bills",
+    "published": "2026-10-21T13:00:21.000Z",
+    "snippet": "Requesting changes to bill due dates can ease cash flow management.",
+    "categories": [
+     "Personal Finance"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block PlayPower’s Acquisition of Rival Playground Manufacturer Burke",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-block-playpowers-acquisition-rival-playground-manufacturer-burke",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "FTC alleges the merger of close rivals would significantly reduce price and quality competition in already concentrated market for outdoor commercial playground equipment Today, the Federal Trade Commission sued to block Platinum Equity and its portfolio company PlayPower’s acquisition of BCI Burke, alleging the deal to combine two of the largest commercial outdoor playground equipment makers will",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

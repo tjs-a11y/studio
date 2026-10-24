@@ -1,0 +1,272 @@
+{
+ "brief": {
+  "subject": "IRS finalizes rules for paying taxes directly by card",
+  "headline": "IRS Final Rules Clear the Way to Take Card Payments Directly",
+  "dek": "New IRS regs on card payments, a preparer charged over 4,335 returns, Colorado's tax ballot fight and two corporate tax updates.",
+  "lede": "The IRS has finalized regulations letting it accept credit and debit card tax payments directly, without routing taxpayers through outside processors.",
+  "sections": [
+   {
+    "heading": "IRS Can Now Take Cards Directly",
+    "bullets": [
+     "Final regulations published 2026-10-19 implement Taxpayer First Act changes on paying tax by commercially acceptable means.",
+     "The IRS may accept credit or debit card payments itself, rather than connecting payers to third-party processors.",
+     "The rules also lift limits on the IRS paying fees under contracts tied to card-based tax payments.",
+     "For owners who pay estimates by card, watch for changes in how card payments are handled."
+    ],
+    "source_ids": [
+     "S10"
+    ]
+   },
+   {
+    "heading": "Preparer Charged Over 4,335 Returns",
+    "bullets": [
+     "Yuridia Trujillo, 43, of Meriden, CT, was arrested and accused of filing 4,335 fraudulent returns through her tax business.",
+     "The charges are allegations; the case is a reminder to vet any preparer handling your business or personal filings."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "heading": "Colorado Tax Measure Stays on Ballot",
+    "bullets": [
+     "A Denver District Court judge ruled Wednesday that a graduated income tax proposal can remain on Colorado's November ballot.",
+     "The measure would replace the state's flat income tax rate, affecting pass-through owners who pay tax at individual rates.",
+     "The legal challenge to the measure is not over."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "Corporate and Court Tax Watch",
+    "bullets": [
+     "The IRS partially withdrew proposed Section 355 rules on the device test and active trade or business requirement.",
+     "Those rules govern tax-free distributions of controlled corporation stock, so corporations planning spinoffs should check with advisors.",
+     "The Tax Court disallowed deductions for historic structure conservation easements, another setback for easement write-offs."
+    ],
+    "source_ids": [
+     "S9",
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "IRS finalizes direct card payment rules, preparer accused over 4,335 fraudulent returns, Colorado graduated tax stays on ballot, and Section 355 update."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-24T14:33:34.782Z",
+  "date": "2026-10-24",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "The Future of Your Tax Practice is Connected. Here’s Your Path Forward",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/the-future-of-your-tax-practice-is-connected-heres-your-path-forward/192379/",
+    "published": "2026-10-23T20:01:18.000Z",
+    "snippet": "Connect your team, clarify next steps, and cut the chase—so your practice grows. Here’s how.",
+    "categories": [
+     "Firm Management",
+     "Income Taxes",
+     "IRS",
+     "tax firm",
+     "tax news",
+     "tax preparation",
+     "tax preparation firm",
+     "tax team",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "CCH Axcess Adds Agentic AI for Tax Preparation",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/cch-axcess-adds-agentic-ai-for-tax-preparation/192395/",
+    "published": "2026-10-23T19:42:15.000Z",
+    "snippet": "Agentic tax preparation helps firms reduce repetitive preparation work, increase capacity, and give tax professionals a stronger starting point for review.",
+    "categories": [
+     "agentic ai",
+     "agentic tax",
+     "agentic tax prep",
+     "ai for tax prep",
+     "ai tax",
+     "CCH Axcess",
+     "tax ai",
+     "tax preparation ai",
+     "Wolters Kluwer"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Tax Court Tears Down Deductions for Historic Structure Easements",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/tax-court-tears-down-deductions-for-historic-structure-easements/192377/",
+    "published": "2026-10-23T18:15:05.000Z",
+    "snippet": "Specifically, a taxpayer may be able to write off the value of the conservation easement for any one of these reasons.",
+    "categories": [
+     "deductions",
+     "easements",
+     "historic structures",
+     "IRS",
+     "tax court",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "MYCPE ONE Rolls Out Tax Preparation Services Support for Canadian CPA Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/mycpe-one-rolls-out-tax-preparation-services-support-for-canadian-cpa-firms/192375/",
+    "published": "2026-10-23T18:10:11.000Z",
+    "snippet": "MYCPE ONE's offshore tax teams handle preparation work from document intake to review-ready drafts.",
+    "categories": [
+     "Firm Management",
+     "Income Taxes",
+     "off shoring",
+     "outsourcing"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Klarna and TaxDome Partner for Payment Flexibility for Accounting Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/klarna-and-taxdome-partner-for-payment-flexibility-for-accounting-firms/192360/",
+    "published": "2026-10-23T17:51:45.000Z",
+    "snippet": "The integration makes Klarna available as a payment option for TaxDome’s 15,000+ firm customers and their 6 million clients.",
+    "categories": [
+     "Firm Management",
+     "flexible payments",
+     "integraiton",
+     "klarna",
+     "online payments",
+     "payments",
+     "practice management",
+     "TaxDome",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "Americans Once Distilled Liquor at Home. Could a Court Fight Bring the Tradition Back?",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/americans-once-distilled-liquor-at-home-could-a-court-fight-bring-the-tradition-back/192315/",
+    "published": "2026-10-23T14:17:02.000Z",
+    "snippet": "The legal question at the center of two court cases is how far Congress’ power to collect federal alcohol taxes extends.",
+    "categories": [
+     "home distilling",
+     "Supreme Court",
+     "Taxes",
+     "whiskey"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "Ex-Connecticut Tax Business Owner Accused of Filing 4,335 Fraudulent Returns",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/ex-connecticut-tax-business-owner-accused-of-filing-4335-fraudulent-returns/192322/",
+    "published": "2026-10-23T13:36:00.000Z",
+    "snippet": "Yuridia Trujillo, 43, of Meriden, CT, has been arrested for filing fraudulent income tax returns with the IRS while running a tax business.",
+    "categories": [
+     "false tax returns",
+     "filing false tax returns",
+     "fraudulent tax return",
+     "Income Taxes",
+     "IRS",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Denver Judge Rules Graduated Income Tax Can Stay on Colorado Ballot",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/denver-judge-rules-graduated-income-tax-can-stay-on-colorado-ballot/192318/",
+    "published": "2026-10-23T13:22:00.000Z",
+    "snippet": "A Denver District Court judge ruled Wednesday that the measure to change Colorado’s flat rate into a graduated income tax can stay on the November ballot, though the legal challenge is far from over.",
+    "categories": [
+     "ballot measures",
+     "Colorado",
+     "graduated income tax",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Regulations Regarding Payment of Tax by Commercially Acceptable Means",
+    "link": "https://www.federalregister.gov/documents/2026/10/19/2026-21267/regulations-regarding-payment-of-tax-by-commercially-acceptable-means",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "This document contains final regulations regarding the payment of tax by commercially acceptable means. The final regulations reflect changes to the law made by the Taxpayer First Act that would allow the IRS to directly accept payments of tax by credit or debit card, without having to connect taxpayers to third-party payment processors. These final regulations remove restrictions on the payment of any fee by the IRS under any contracts related to payment of taxes by credit, debit, or charge car",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 8
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 2,
+    "kept": 2
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 0,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": [
+   {
+    "source": "The CPA Journal",
+    "message": "Invalid character in entity name\nLine: 0\nColumn: 120\nChar: ="
+   }
+  ]
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S10"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

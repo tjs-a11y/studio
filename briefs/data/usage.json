@@ -198,5 +198,29 @@
   "input_tokens": 1619,
   "output_tokens": 983,
   "usd": 0.0261
+ },
+ {
+  "date": "2026-10-24",
+  "desk": "small-business",
+  "model": "claude-opus-5-5",
+  "input_tokens": 2383,
+  "output_tokens": 1329,
+  "usd": 0.0361
+ },
+ {
+  "date": "2026-10-24",
+  "desk": "scams",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1890,
+  "output_tokens": 1286,
+  "usd": 0.0333
+ },
+ {
+  "date": "2026-10-24",
+  "desk": "household-money",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1619,
+  "output_tokens": 927,
+  "usd": 0.025
  }
 ]
