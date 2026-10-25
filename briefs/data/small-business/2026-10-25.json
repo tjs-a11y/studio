@@ -1,0 +1,288 @@
+{
+ "brief": {
+  "subject": "IRS finalizes rules on paying taxes by card",
+  "headline": "IRS Finalizes Card-Payment Rules Under the Taxpayer First Act",
+  "dek": "Final IRS rules on card tax payments, MFA expectations for firms, a Tax Court easement ruling, and a partial withdrawal of spinoff rules.",
+  "lede": "The IRS has issued final regulations that reflect a law change allowing it to take credit and debit card tax payments directly, without routing taxpayers to outside processors.",
+  "sections": [
+   {
+    "heading": "IRS Card Payments Get Final Rules",
+    "bullets": [
+     "Final IRS regulations on paying tax by commercially acceptable means were published October 19.",
+     "They reflect Taxpayer First Act changes allowing the IRS to accept credit or debit card payments directly.",
+     "That could cut out third-party payment processors when you pay federal tax by card.",
+     "The rules also lift restrictions on the IRS paying fees under card-payment contracts."
+    ],
+    "source_ids": [
+     "S11"
+    ]
+   },
+   {
+    "heading": "MFA Is Expected, Not Optional",
+    "bullets": [
+     "The FTC Safeguards Rule and the IRS expect multifactor authentication on every system holding client data.",
+     "Tax and accounting firms that disable MFA over user fatigue risk falling short of that expectation.",
+     "Attackers are designing schemes specifically to get around MFA prompts, so staff training matters too."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Tax Court Rejects Easement Deductions",
+    "bullets": [
+     "The Tax Court disallowed deductions tied to historic structure conservation easements.",
+     "Owners weighing easement write-offs on historic buildings should expect close scrutiny of their claims."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "heading": "Spinoff Rule Proposal Partly Pulled",
+    "bullets": [
+     "The IRS partially withdrew proposed Section 355 regulations on the device prohibition and active trade or business test.",
+     "Those rules govern tax-free distributions of a controlled corporation's stock.",
+     "Closely held corporations planning a split-up should check which proposed provisions remain in play."
+    ],
+    "source_ids": [
+     "S10"
+    ]
+   }
+  ],
+  "seo_description": "IRS finalizes rules to accept card tax payments directly, MFA expectations for firms, a Tax Court easement ruling and Section 355 changes."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-25T14:57:02.534Z",
+  "date": "2026-10-25",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "A Corrected Tax Document Arrived After Review. What Needs to Reopen?",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/24/a-corrected-tax-document-arrived-after-review-what-needs-to-reopen/192442/",
+    "published": "2026-10-24T20:16:30.000Z",
+    "snippet": "The operational question is not whether the upload succeeded. It is whether the change reached the person responsible for deciding what happens next.",
+    "categories": [
+     "1099",
+     "1099 nec",
+     "amended returns",
+     "corrected documents",
+     "Income Taxes",
+     "source documents",
+     "tax prep",
+     "Taxes",
+     "w2"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "Offer in Compromise, Installment Agreement or Currently Not Collectible: Helping Clients Pick the Right IRS Path",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/24/offer-in-compromise-installment-agreement-or-currently-not-collectible-helping-clients-pick-the-right-irs-path/192438/",
+    "published": "2026-10-24T20:05:26.000Z",
+    "snippet": "An offer in compromise is the right tool for a smaller group of clients than most people think.",
+    "categories": [
+     "business tax debt",
+     "Income Taxes",
+     "installment agreements",
+     "irs collections",
+     "irs debt",
+     "offer in compromise",
+     "small business debt",
+     "small business owners",
+     "tax debt"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "MFA Fatigue is Real. Turning It Off is Not an Option for Tax and Accounting Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/24/mfa-fatigue-is-real-turning-it-off-is-not-an-option-for-tax-and-accounting-firms/192424/",
+    "published": "2026-10-24T19:32:56.000Z",
+    "snippet": "The FTC Safeguards Rule and the IRS expect multifactor authentication on every system that holds client data. Here’s how firms can meet that expectation and stop the attacks designed to get around it.",
+    "categories": [
+     "busy season",
+     "data security",
+     "Firm Management",
+     "ftc safeguards rule",
+     "information systems",
+     "it headaches",
+     "mfa",
+     "mfa headaches",
+     "number matching",
+     "passwords",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "Three Rules for Junior Accountants Competing With AI",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/24/three-rules-for-junior-accountants-competing-with-ai/192349/",
+    "published": "2026-10-24T17:29:52.000Z",
+    "snippet": "Junior accountants might find their usual workload of reconciliation, categorization, document collection, and tax prep has been taken over by AI.",
+    "categories": [
+     "Accounting",
+     "Artificial Intelligence",
+     "Firm Management"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "The Future of Your Tax Practice is Connected. Here’s Your Path Forward",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/the-future-of-your-tax-practice-is-connected-heres-your-path-forward/192379/",
+    "published": "2026-10-23T20:01:18.000Z",
+    "snippet": "Connect your team, clarify next steps, and cut the chase—so your practice grows. Here’s how.",
+    "categories": [
+     "Firm Management",
+     "Income Taxes",
+     "IRS",
+     "tax firm",
+     "tax news",
+     "tax preparation",
+     "tax preparation firm",
+     "tax team",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "CCH Axcess Adds Agentic AI for Tax Preparation",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/cch-axcess-adds-agentic-ai-for-tax-preparation/192395/",
+    "published": "2026-10-23T19:42:15.000Z",
+    "snippet": "Agentic tax preparation helps firms reduce repetitive preparation work, increase capacity, and give tax professionals a stronger starting point for review.",
+    "categories": [
+     "agentic ai",
+     "agentic tax",
+     "agentic tax prep",
+     "ai for tax prep",
+     "ai tax",
+     "CCH Axcess",
+     "tax ai",
+     "tax preparation ai",
+     "Wolters Kluwer"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "Tax Court Tears Down Deductions for Historic Structure Easements",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/tax-court-tears-down-deductions-for-historic-structure-easements/192377/",
+    "published": "2026-10-23T18:15:05.000Z",
+    "snippet": "Specifically, a taxpayer may be able to write off the value of the conservation easement for any one of these reasons.",
+    "categories": [
+     "deductions",
+     "easements",
+     "historic structures",
+     "IRS",
+     "tax court",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "MYCPE ONE Rolls Out Tax Preparation Services Support for Canadian CPA Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/mycpe-one-rolls-out-tax-preparation-services-support-for-canadian-cpa-firms/192375/",
+    "published": "2026-10-23T18:10:11.000Z",
+    "snippet": "MYCPE ONE's offshore tax teams handle preparation work from document intake to review-ready drafts.",
+    "categories": [
+     "Firm Management",
+     "Income Taxes",
+     "off shoring",
+     "outsourcing"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "Klarna and TaxDome Partner for Payment Flexibility for Accounting Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/23/klarna-and-taxdome-partner-for-payment-flexibility-for-accounting-firms/192360/",
+    "published": "2026-10-23T17:51:45.000Z",
+    "snippet": "The integration makes Klarna available as a payment option for TaxDome’s 15,000+ firm customers and their 6 million clients.",
+    "categories": [
+     "Firm Management",
+     "flexible payments",
+     "integraiton",
+     "klarna",
+     "online payments",
+     "payments",
+     "practice management",
+     "TaxDome",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   },
+   {
+    "id": "S11",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Regulations Regarding Payment of Tax by Commercially Acceptable Means",
+    "link": "https://www.federalregister.gov/documents/2026/10/19/2026-21267/regulations-regarding-payment-of-tax-by-commercially-acceptable-means",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "This document contains final regulations regarding the payment of tax by commercially acceptable means. The final regulations reflect changes to the law made by the Taxpayer First Act that would allow the IRS to directly accept payments of tax by credit or debit card, without having to connect taxpayers to third-party payment processors. These final regulations remove restrictions on the payment of any fee by the IRS under any contracts related to payment of taxes by credit, debit, or charge car",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 9
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 2,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": [
+   {
+    "source": "The CPA Journal",
+    "message": "Invalid character in entity name\nLine: 0\nColumn: 120\nChar: ="
+   }
+  ]
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S11"
+   ]
+  }
+ ]
+}

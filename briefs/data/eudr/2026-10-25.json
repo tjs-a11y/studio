@@ -1,0 +1,101 @@
+{
+ "brief": {
+  "subject": "EUDR brief: JRC forest map v4 out, November IS training set",
+  "headline": "JRC Releases Version 4 of 2020 Global Forest Cover Map; Commission Sets November Training",
+  "dek": "The JRC has updated its Global Forest Cover map for 2020, and the Commission has posted November dates for EUDR Information System training.",
+  "lede": "The JRC has released Version 4 of its Global Forest Cover map for the year 2020. Teams that screen plots against it should note which version they are using.",
+  "sections": [
+   {
+    "heading": "JRC forest map reaches Version 4",
+    "bullets": [
+     "Version 4 of the Global Forest Cover map for 2020 has been released by the JRC.",
+     "The update was announced in the Commission's environment newsroom on 2026-10-19.",
+     "If your geolocation checks reference this map, record the version used in your due-diligence files.",
+     "The announcement does not detail what changed from earlier versions, so compare outputs before relying on past results."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "November training for the Information System",
+    "bullets": [
+     "The Commission has published November training dates for the EUDR Information System.",
+     "The notice was posted on 2026-10-22 as an EUDR update.",
+     "Staff who submit due-diligence statements should check the Commission's EUDR pages for the session schedule."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "EUDR update: JRC releases Version 4 of the 2020 Global Forest Cover map, and the Commission sets November Information System training dates."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-25T14:57:02.534Z",
+  "date": "2026-10-25",
+  "items": [
+   {
+    "id": "S1",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/961165",
+    "published": "2026-10-19T10:40:51.000Z",
+    "snippet": "The JRC released new Version 4 of the Global Forest Cover map for the year 2020",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 0
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

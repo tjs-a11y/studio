@@ -1,0 +1,144 @@
+{
+ "brief": {
+  "subject": "Fake government passport helpers and a $106.8M debt relief ban",
+  "headline": "FTC Targets Government Impersonators in Passport and Debt Relief Schemes",
+  "dek": "A court shut down a debt relief scheme that preyed on seniors and veterans, and the FTC sued an alleged fake-government passport service.",
+  "lede": "Scammers posing as banks and government agencies are a top FTC target this week. A court entered a $106.8 million judgment against a debt relief operation aimed at seniors and veterans.",
+  "sections": [
+   {
+    "heading": "Debt Relief Scheme Permanently Shut Down",
+    "bullets": [
+     "A federal court permanently banned operators of an alleged debt relief scheme, acting at the FTC's request.",
+     "The scheme targeted seniors and veterans, so older relatives and former service members are prime marks for this pitch.",
+     "Callers allegedly posed as banks, credit card companies and government agencies to seem trustworthy.",
+     "On October 14, 2026, the court entered a $106.8 million default judgment against the corporate defendants."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Passport Service Posed as the Government",
+    "bullets": [
+     "The FTC sued GovAssist LLC, Entry LLC and Scott Zuckerman over an alleged government impersonation scheme.",
+     "The operation allegedly targeted people seeking passport services by claiming to be, or be tied to, the federal government.",
+     "Paid search ads were allegedly used to mimic the government, so a top search result is not proof of an official site.",
+     "The FTC also cites misleading promises and fake reviews, meaning glowing ratings can be manufactured."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "FTC Reports to Congress on Older Adults",
+    "bullets": [
+     "The FTC released Protecting Older Consumers 2025-2026, its latest report to Congress on fraud against older adults.",
+     "It highlights trends drawn from fraud reports filed by older adults themselves.",
+     "The report also details enforcement actions against unfair or deceptive practices hitting older Americans."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "FTC wins $106.8M judgment against a debt relief scheme targeting seniors and sues an alleged fake-government passport service."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-25T14:57:02.534Z",
+  "date": "2026-10-25",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FBI IC3 alerts",
+    "title": "Suspicious Letters Containing White Powder Mailed to State and Local Election Officials, Media Organizations, and Public and Private Polling Companies",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023-2",
+    "published": "2026-10-23T18:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FBI IC3 alerts",
+    "title": "Critical Vulnerability Alert: PHP Core",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023",
+    "published": "2026-10-23T17:30:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "Court Permanently Shuts Down Illegal Debt Relief Operation Following FTC Allegation That Scheme’s Operators Impersonated Government and Business Entities",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/court-permanently-shuts-down-illegal-debt-relief-operation-following-ftc-allegation-schemes",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "At the Federal Trade Commission’s request, a federal court has permanently banned the operators of an alleged debt relief scheme that targeted seniors and veterans by impersonating banks, credit card companies and government agencies. On October 14, 2026, the court entered a default judgment of $106.8 million against corporate defendants Accelerated Debt Settlement Inc., ADS Resolve LLC, Financial",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Sues Perpetrators of Government Impersonation Scheme Over Deceptive Ads, Misleading Promises and Fake Reviews",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-perpetrators-government-impersonation-scheme-over-deceptive-ads-misleading-promises-fake",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is taking action against GovAssist LLC, Entry LLC and Scott Zuckerman, for their alleged involvement in a government impersonation scheme that deceived consumers seeking passport services by purporting to be the federal government or affiliated with the federal government. The FTC alleges the operation uses deceptive paid search ads to impersonate the government or pre",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC Issues Annual Report to Congress on Agency’s Actions to Protect Older Adults",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-issues-annual-report-congress-agencys-actions-protect-older-adults",
+    "published": "2026-10-19T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission issued its latest report to Congress on protecting older adults, which highlights key trends based on fraud reports submitted by older adults and the FTC’s efforts to combat the problem. The report, Protecting Older Consumers 2025-2026, details the FTC’s efforts to stop unfair or deceptive acts or practices that impact older Americans through law enforcement actions, c",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S3",
+    "S4",
+    "S5"
+   ]
+  }
+ ]
+}
