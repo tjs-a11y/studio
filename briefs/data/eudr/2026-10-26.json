@@ -1,0 +1,102 @@
+{
+ "brief": {
+  "subject": "EUDR Brief: November Information System training dates posted",
+  "headline": "Commission Posts November EUDR Information System Training Schedule",
+  "dek": "Brussels posts November training dates for the EUDR Information System, and chocolate makers look beyond cocoa amid supply strain.",
+  "lede": "The European Commission has published November training dates for the EUDR Information System, the platform operators use to file due-diligence statements.",
+  "sections": [
+   {
+    "heading": "November EUDR system training announced",
+    "bullets": [
+     "The Commission's environment newsroom posted an EUDR update on 22 October listing November training dates for the Information System.",
+     "Exporters, importers and compliance teams filing due-diligence statements should check the schedule and book seats early.",
+     "The update gives no further detail on content, so watch for follow-up guidance from the Commission."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Chocolate makers hedge against cocoa strain",
+    "bullets": [
+     "Manufacturers are testing cocoa alternatives, AI and new ingredients to cope with volatility, affordability and supply problems.",
+     "For cocoa cooperatives and traders, this signals buyers seeking ways to reduce reliance on beans.",
+     "Supply pressure makes reliable, traceable sourcing a stronger selling point for compliant cocoa origins."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "EUDR update: the Commission posts November Information System training dates, and chocolate makers explore cocoa alternatives amid supply volatility."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-26T17:23:46.635Z",
+  "date": "2026-10-26",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "Beyond cocoa: The race to futureproof chocolate",
+    "link": "https://www.foodnavigator.com/Article/2026/10/26/the-future-of-chocolate-how-cocoa-alternatives-are-reshaping-confectionery/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-26T12:32:51.000Z",
+    "snippet": "The future of chocolate is evolving as cocoa alternatives, AI and new ingredient solutions help manufacturers navigate volatility, affordability and supply challenges.",
+    "categories": [
+     "Flavours & colours"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
