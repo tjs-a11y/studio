@@ -1,0 +1,262 @@
+{
+ "brief": {
+  "subject": "IRS withdraws part of spin-off proposal; year-end tax rule checks",
+  "headline": "IRS Partially Withdraws Section 355 Proposal; Key Year-End Tax Rules to Check",
+  "dek": "The IRS pulled back part of its proposed spin-off rules, plus reminders on installment sales, fuel tax records and disaster losses.",
+  "lede": "The IRS has partially withdrawn proposed regulations on tax-free corporate stock distributions under Section 355. Closely held corporations weighing a split should watch for revised guidance.",
+  "sections": [
+   {
+    "heading": "IRS Scales Back Spin-Off Proposal",
+    "bullets": [
+     "The IRS partially withdrew proposed Section 355 rules on the device prohibition and active trade or business test.",
+     "Those tests decide whether a corporation can distribute a controlled subsidiary's stock without recognizing income, gain or loss.",
+     "Corporations and their shareholders and security holders are affected, so owners planning a split should revisit their timelines."
+    ],
+    "source_ids": [
+     "S11"
+    ]
+   },
+   {
+    "heading": "Big Installment Sales Carry Interest",
+    "bullets": [
+     "Section 453A adds an annual interest charge on deferred tax once a seller's installment obligations for the year top $5 million.",
+     "Owners selling a business on payment terms should model this cost before closing, not after."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Truckers: Keep Four Years of Records",
+    "bullets": [
+     "The IFTA Procedures Manual requires licensees to keep distance and fuel records behind each return for four years.",
+     "Missing mileage or fuel logs can leave trucking businesses exposed if a fuel tax audit arrives."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Disaster Losses Can Move Back a Year",
+    "bullets": [
+     "Losses suffered in a federal disaster area may be claimed on the return for the year before the event.",
+     "That option can speed up a refund, though not every casualty loss qualifies for relief."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "IRS partially withdraws Section 355 spin-off rules, plus the $5 million installment sale interest rule, IFTA record-keeping and disaster loss timing."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-27T16:39:31.970Z",
+  "date": "2026-10-27",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "How Year-End Tax-Loss Harvesting Helps Your April Tax Bill",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/how-year-end-tax-loss-harvesting-helps-your-april-tax-bill/192596/",
+    "published": "2026-10-27T16:29:03.000Z",
+    "snippet": "Tax-loss harvesting is a strategy that potentially lowers the taxable income of investment returns held in taxable accounts.",
+    "categories": [
+     "Income Taxes",
+     "tax harvesting",
+     "tax loss harvesting",
+     "tax losses",
+     "tax reporting",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "Seven Lessons From An FBAR Penalty: Reckless Disregard Can Trigger Willful Penalties for Foreign Account Holders",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/seven-lessons-from-an-fbar-penalty-reckless-disregard-can-trigger-willful-penalties-for-foreign-account-holders/192592/",
+    "published": "2026-10-27T16:07:14.000Z",
+    "snippet": "Taxpayers with foreign accounts, foreign entities, or signature authority over accounts abroad should not wait for an IRS examination to find out where they stand.",
+    "categories": [
+     "bank reporting",
+     "fbar",
+     "foreign accounts",
+     "Income Taxes",
+     "reporting"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Structured Installment Sales Over $5 Million: What CPAs Should Model Before Closing",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/structured-installment-sales-over-5-million-what-cpas-should-model-before-closing/192590/",
+    "published": "2026-10-27T16:05:36.000Z",
+    "snippet": "Once a seller’s installment obligations for the year top $5 million, Section 453A imposes an annual interest charge on the deferred tax.",
+    "categories": [
+     "closing",
+     "firm",
+     "installment sale"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "The Fuel Tax Audit Your Trucking Client Is Not Ready For",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/the-fuel-tax-audit-your-trucking-client-is-not-ready-for/192588/",
+    "published": "2026-10-27T16:01:44.000Z",
+    "snippet": "The IFTA Procedures Manual requires a licensee to keep the distance and fuel records behind a return for four years.",
+    "categories": [
+     "freight",
+     "fuel taxes",
+     "otr",
+     "owner operatore",
+     "shipping",
+     "Taxes",
+     "truckers",
+     "trucking"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "No Tax Relief for These Casualty Loss Victims",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/no-tax-relief-for-these-casualty-loss-victims/192586/",
+    "published": "2026-10-27T15:44:25.000Z",
+    "snippet": "If a loss is suffered in a federal disaster area, an individual may claim the loss on the tax return for the year preceding the year of the event.",
+    "categories": [
+     "casualty loss",
+     "disasters",
+     "Income Taxes",
+     "tax court",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "5 Key Steps for the 2026 Year-End Payroll Close",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/year-end-payroll-functions-can-expose-employer-problems-says-expert/192459/",
+    "published": "2026-10-27T14:55:00.000Z",
+    "snippet": "The final payroll of 2026 may be weeks away, but many of the mistakes that can complicate year-end have already happened.",
+    "categories": [
+     "Payroll",
+     "payroll close",
+     "payroll processing",
+     "payroll reporting",
+     "Thomson Reuters",
+     "year-end"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "Black Ore Unveils Robust Tax Automation for Small Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/black-ore-unveils-robust-tax-automation-for-small-firms/192560/",
+    "published": "2026-10-27T13:01:00.000Z",
+    "snippet": "Black Ore for Small Firms gives practices of any size the autonomous return preparation that the largest firms in the country have run in production for three tax seasons.",
+    "categories": [
+     "artificial inteligence audit",
+     "Artificial Intelligence",
+     "artificial intelligence and accounting",
+     "Automation",
+     "black ore",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Before You Add Clients, Fix the Bookkeeping Workflow",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/before-you-add-clients-fix-the-bookkeeping-workflow/192422/",
+    "published": "2026-10-27T12:47:00.000Z",
+    "snippet": "Take the ten clients who cause the most late nights, document their close, change one handoff, and see whether turnaround improves.",
+    "categories": [
+     "bookkeeping",
+     "Firm Management",
+     "workflow",
+     "workflow automation"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "Numeral Introduces Program to Help Support Partners’ Growth",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/26/numeral-introduces-program-to-help-support-partners-growth/192550/",
+    "published": "2026-10-26T20:44:59.000Z",
+    "snippet": "The Numeral Partner Program provides partners with multiyear rewards, dedicated technology support, and new ways to expand the services they offer, the sales tax compliance platform says.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "Numeral",
+     "partnerships",
+     "sales tax compliance",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "The CPA Journal",
+    "title": "The Tax Impacts of Asset Forfeiture",
+    "link": "https://www.cpajournal.com/2026/10/21/the-tax-impacts-of-asset-forfeiture/",
+    "published": "2026-10-21T13:00:13.000Z",
+    "snippet": "Asset forfeiture is a common tool in the modern fight against crime, meant to deter and remove any economic benefits of wrongdoing. In fiscal year 2025, the United States disposed of nearly $2 billion in forfeited assets by sale, transfer of funds, and other mechanisms (US Department of Justice, “Assets Forfeiture Fund and Seized Asset […] The post The Tax Impacts of Asset Forfeiture appeared firs",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Taxation"
+    ]
+   },
+   {
+    "id": "S11",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 1,
+    "kept": 1
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 9
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

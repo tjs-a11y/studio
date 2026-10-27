@@ -1,0 +1,132 @@
+{
+ "brief": {
+  "subject": "AAdvantage card fee jumps to $150; holiday budgets climb",
+  "headline": "Popular Airline Card Raises Annual Fee to $150 as Holiday Budgets Swell",
+  "dek": "An American Airlines co-branded card adds $51 to its yearly fee, and shoppers expect to spend nearly $200 more on gifts.",
+  "lede": "The Citi / AAdvantage Platinum Select card's annual fee is going up $51, to $150. Cardholders should check whether the new perks offset the higher charge.",
+  "sections": [
+   {
+    "heading": "Airline Card Fee Rises to $150",
+    "bullets": [
+     "The Citi / AAdvantage Platinum Select World Elite Mastercard is raising its annual fee by $51.",
+     "The new yearly fee is $150, a cost cardholders pay whether or not they fly.",
+     "New perks include a $100 in-flight credit each year, worth it only if you actually buy onboard.",
+     "Compare the added benefits to your real spending before your renewal date hits."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Holiday Gift Budgets Climb",
+    "bullets": [
+     "Shoppers expect to spend nearly $200 more on gifts, on average, than last year, a NerdWallet survey found.",
+     "Tariff-related price increases may be part of the reason, so the same gifts could simply cost more.",
+     "Setting a firm gift budget now can help avoid card balances that linger into the new year."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Bigger Sign-Up Bonuses on Atmos Cards",
+    "bullets": [
+     "Two Atmos Rewards Visa cards raised their welcome offers to as much as 100,000 points.",
+     "Large bonuses usually require meeting a spending threshold, which can push households to overspend.",
+     "Weigh any annual fee against the bonus before applying for a new card."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "AAdvantage Platinum Select annual fee rises $51 to $150, holiday gift budgets up nearly $200, and Atmos cards boost welcome offers."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-10-27T16:39:31.970Z",
+  "date": "2026-10-27",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "American Airlines Revamps Platinum Select Credit Card, Increases Annual Fee to $150",
+    "link": "https://www.nerdwallet.com/credit-cards/news/american-airlines-revamps-platinum-select-card",
+    "published": "2026-10-27T13:01:03.000Z",
+    "snippet": "The Citi / AAdvantage Platinum Select World Elite Mastercard is increasing its annual fee by $51 and adding new benefits like an annual $100 in-flight credit.",
+    "categories": [
+     "Airline Credit Cards",
+     "Credit Cards",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "2025 Holiday Spending Report",
+    "link": "https://www.nerdwallet.com/credit-cards/studies/2025-holiday-spending-report",
+    "published": "2026-10-27T12:13:52.000Z",
+    "snippet": "Holiday shoppers plan to spend nearly $200 more, on average, on gifts this year than last year, potentially due to tariff-related price increases, a new NerdWallet survey finds.",
+    "categories": [
+     "Holiday Tips & News",
+     "Shopping",
+     "Travel"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Atmos Credit Cards Increase Welcome Offers Up to 100,000 Points",
+    "link": "https://www.nerdwallet.com/credit-cards/news/atmos-cards-bonus-increase-2026",
+    "published": "2026-10-22T21:15:11.000Z",
+    "snippet": "The Atmos™ Rewards Ascent Visa Signature® credit card and Atmos™ Rewards Summit Visa Infinite® credit card increased their welcome offers. Find out how they compare.",
+    "categories": [
+     "Airline Credit Cards",
+     "Credit Cards",
+     "Promos",
+     "Travel Credit Cards"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S1",
+    "S2"
+   ]
+  }
+ ]
+}

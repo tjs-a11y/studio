@@ -1,0 +1,131 @@
+{
+ "brief": {
+  "subject": "EUDR: November system training dates out, readiness gaps probed",
+  "headline": "Commission Posts November EUDR Information System Training as Readiness Gaps Surface",
+  "dek": "Brussels schedules November system training while a new investigation looks at how soy, cocoa and palm oil supply chains are coping.",
+  "lede": "The European Commission has released November training dates for the EUDR Information System, a practical step for anyone preparing due-diligence filings as enforcement nears.",
+  "sections": [
+   {
+    "heading": "November Information System training scheduled",
+    "bullets": [
+     "The Commission published November training dates for the EUDR Information System on 2026-10-22.",
+     "Compliance teams should check the official schedule now to get staff familiar with the platform before enforcement.",
+     "The Commissioner also attended an EUDR event on 2026-10-27, though no details of announcements were released."
+    ],
+    "source_ids": [
+     "S4",
+     "S1"
+    ]
+   },
+   {
+    "heading": "Who is actually ready to comply?",
+    "bullets": [
+     "Mongabay launched a special issue tracking how industries are adapting to EUDR traceability demands and where they fall short.",
+     "Coverage spans soy traders in Brazil, cocoa firms in Ghana and palm oil smallholders in Southeast Asia.",
+     "The series lands as the regulation edges toward enforcement following multiple delays, making peer benchmarks timely for exporters."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Chocolate makers hedge on cocoa supply",
+    "bullets": [
+     "Manufacturers are turning to cocoa alternatives, AI and new ingredients to manage volatility and supply strain.",
+     "For cocoa exporters and cooperatives, shifting buyer strategies could reshape demand alongside EUDR traceability pressure."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: Commission sets November Information System training; Mongabay examines soy, cocoa and palm oil compliance readiness and gaps."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-27T16:39:31.970Z",
+  "date": "2026-10-27",
+  "items": [
+   {
+    "id": "S1",
+    "source": "European Commission: Environment newsroom",
+    "title": "EUDR & Commissioner",
+    "link": "https://environment.ec.europa.eu/index_en",
+    "published": "2026-10-27T14:46:12.000Z",
+    "snippet": "Comissioner goes to EUDR event.",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "Mongabay",
+    "title": "Who’s implementing EUDR?",
+    "link": "https://news.mongabay.com/specials/2026/10/whos-implementing-eudr/",
+    "published": "2026-10-27T02:44:35.000Z",
+    "snippet": "As the EU’s deforestation regulation (EUDR) approaches enforcement after multiple delays, Mongabay’s Solutions Desk is examining how industries are working to comply, and where the shortfalls are. From soy traders in Brazil to cocoa companies in Ghana and palm oil farmers in Southeast Asia, this Special Issue examines how businesses are adapting to new traceability […]",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FoodNavigator",
+    "title": "Beyond cocoa: The race to futureproof chocolate",
+    "link": "https://www.foodnavigator.com/Article/2026/10/26/the-future-of-chocolate-how-cocoa-alternatives-are-reshaping-confectionery/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-26T12:32:51.000Z",
+    "snippet": "The future of chocolate is evolving as cocoa alternatives, AI and new ingredient solutions help manufacturers navigate volatility, affordability and supply challenges.",
+    "categories": [
+     "Flavours & colours"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
