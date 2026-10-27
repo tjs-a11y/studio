@@ -1,9 +1,9 @@
 {
-  "fetched": "2026-10-26T16:56:17.647Z",
-  "date": "2026-10-26",
+  "fetched": "2026-10-27T15:59:18.421Z",
+  "date": "2026-10-27",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-10-26T16:56:17.622Z",
+  "generated": "2026-10-27T15:59:18.389Z",
   "total_checks": 0,
   "total_subs": 0,
   "tools": {
@@ -218,8 +218,8 @@
   },
   "outbound": {
     "northstar:freightsidekick": {
-      "clicks": 0,
-      "clicks_today": 0
+      "clicks": 1,
+      "clicks_today": 1
     }
   }
 }
