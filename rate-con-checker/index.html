@@ -268,15 +268,27 @@
   function quota() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
   function showQuota() { $('quota').textContent = PRO ? 'Pro: unlimited checks' : `${Math.max(0, 3 - quota().n)} free checks left today`; }
 
-  function run() {
+  function run(isSample = false) {
     const text = $('text').value.trim();
     if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
     if (!PRO) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Get Pro for unlimited.'; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
     const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
     render(analyze(text, extra)); showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Count a completed, user-submitted check only. Never send rate-con text, broker details, or results.
+    // Analytics is best-effort and must not block the checker if the endpoint is unavailable.
+    if (!isSample) {
+      try {
+        fetch('/api/event', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ tool: TOOL, event: 'check' }),
+          keepalive: true
+        }).catch(() => {});
+      } catch (e) { /* usage analytics must never break a completed check */ }
+    }
   }
-  $('check').onclick = run;
-  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(); };
+  $('check').onclick = () => run(false);
+  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(true); };
   $('copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('msg').textContent).then(() => { $('copy').textContent = 'Copied'; setTimeout(() => { $('copy').textContent = 'Copy'; }, 1500); }); };
   $('print').onclick = () => window.print();
 
