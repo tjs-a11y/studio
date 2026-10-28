@@ -1,0 +1,296 @@
+{
+ "brief": {
+  "subject": "Pittsburgh eyes 2% tax on investment and rental income",
+  "headline": "Pittsburgh Proposal Would Tax Investment and Rental Income at 2%",
+  "dek": "A Pittsburgh tax plan targets dividends and rents, trucking clients face IFTA record rules, and big installment sales carry an interest charge.",
+  "lede": "A Pittsburgh council member has proposed a 2% tax on unearned income such as dividends, royalties, property sales and some rental profits.",
+  "sections": [
+   {
+    "heading": "Pittsburgh Floats New 2% Tax",
+    "bullets": [
+     "Councilwoman Barb Warwick introduced a bill adding a 2% levy on dividends, royalties and property sale proceeds.",
+     "Some rental property income could also be taxed, a concern for local landlords and real estate investors.",
+     "The proposal comes as the city faces a dire financial outlook, so the debate may move quickly."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "Trucking Clients: Keep IFTA Records",
+    "bullets": [
+     "The IFTA Procedures Manual requires licensees to keep the distance and fuel records behind each return for four years.",
+     "Missing mileage or fuel logs can leave carriers exposed if a fuel tax audit arrives.",
+     "Bookkeepers serving trucking firms should confirm those records are complete and retrievable now."
+    ],
+    "source_ids": [
+     "S10"
+    ]
+   },
+   {
+    "heading": "Big Installment Sales Carry a Cost",
+    "bullets": [
+     "Once a seller's installment obligations for the year exceed $5 million, Section 453A adds an annual interest charge on deferred tax.",
+     "Owners selling a business on installment terms should model that charge before closing the deal."
+    ],
+    "source_ids": [
+     "S9"
+    ]
+   },
+   {
+    "heading": "IRS Regulatory Watch",
+    "bullets": [
+     "The IRS partially withdrew proposed Section 355 rules on the device test and active trade or business requirement.",
+     "Those rules govern tax-free spin-offs of controlled corporation stock, affecting corporations and their shareholders.",
+     "The IRS Advisory Council has announced a public meeting, per a Federal Register notice."
+    ],
+    "source_ids": [
+     "S13",
+     "S6"
+    ]
+   }
+  ],
+  "seo_description": "Pittsburgh weighs a 2% tax on dividends and rents, IFTA's four-year record rule, the $5 million installment sale threshold, and IRS updates."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-28T17:10:22.622Z",
+  "date": "2026-10-28",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Poll: California Billionaire Tax Loses Majority Support Ahead of Election",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/poll-california-billionaire-tax-loses-majority-support-ahead-of-election/192672/",
+    "published": "2026-10-28T14:58:00.000Z",
+    "snippet": "Support for California’s proposed one-time billionaire tax has fallen to 46%, with 52% opposed, as a new PPIC poll finds several closely watched ballot measures struggling ahead of Election Day.",
+    "categories": [
+     "ballot measures",
+     "billionaire tax",
+     "billionaires",
+     "california",
+     "Income Taxes",
+     "tax on billionaires",
+     "Taxes",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "The CPA Journal",
+    "title": "What Dies with the Taxpayer?",
+    "link": "https://www.cpajournal.com/2026/10/28/what-dies-with-the-taxpayer/",
+    "published": "2026-10-28T14:00:45.000Z",
+    "snippet": "Death can provide significant tax benefits through the step-up in basis, but it can also permanently eliminate valuable tax attributes that, if not properly planned for, disappear with the taxpayer. From charitable contributions and capital loss carryforwards, to net operating losses (NOL) and passive activity losses, understanding which provisions expire and which survive can help […] The post Wh",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Columns",
+     "Financial Planning"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "How to Unlock Mortgage Interest Deductions for Home Improvements",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/how-to-unlock-mortgage-interest-deductions-for-home-improvements/192426/",
+    "published": "2026-10-28T13:34:00.000Z",
+    "snippet": "Despite these crackdowns, you still may be able to deduct mortgage interest paid on a home equity loan or line of credit.",
+    "categories": [
+     "2026 income tax deductions",
+     "2026 taxes",
+     "Income Taxes",
+     "tax deductions",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "When AI Starts Taking Action: 4 Accountability Questions for Tax and Accounting Professionals",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/when-ai-starts-taking-action-4-accountability-questions-for-tax-and-accounting-professionals/192647/",
+    "published": "2026-10-28T12:47:00.000Z",
+    "snippet": "Effective AI governance does not require resisting technological progress. It requires recognizing that assistance, delegation, and autonomous execution create different accountability demands.",
+    "categories": [
+     "accountants",
+     "Accounting",
+     "AI governance",
+     "Artificial Intelligence",
+     "practice management",
+     "tax professionals",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "With Pittsburgh Facing a Dire Financial Future, One Council Member Wants to Enact a New Tax",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/with-pittsburgh-facing-a-dire-financial-future-one-council-member-wants-to-enact-a-new-tax/192658/",
+    "published": "2026-10-28T12:08:34.000Z",
+    "snippet": "Councilwoman Barb Warwick introduced legislation that would add a 2% tax to income sources like dividends, royalties, the sale of property and in some instances money made from rental properties.",
+    "categories": [
+     "budget",
+     "Pittsburgh",
+     "Taxes",
+     "unearned income tax"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Internal Revenue Service Advisory Council; Public Meeting",
+    "link": "https://www.federalregister.gov/documents/2026/10/28/2026-21966/internal-revenue-service-advisory-council-public-meeting",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Internal Revenue Service Advisory Council will hold a public meeting.",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "How Year-End Tax-Loss Harvesting Helps Your April Tax Bill",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/how-year-end-tax-loss-harvesting-helps-your-april-tax-bill/192596/",
+    "published": "2026-10-27T16:29:03.000Z",
+    "snippet": "Tax-loss harvesting is a strategy that potentially lowers the taxable income of investment returns held in taxable accounts.",
+    "categories": [
+     "Income Taxes",
+     "tax harvesting",
+     "tax loss harvesting",
+     "tax losses",
+     "tax reporting",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Seven Lessons From An FBAR Penalty: Reckless Disregard Can Trigger Willful Penalties for Foreign Account Holders",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/seven-lessons-from-an-fbar-penalty-reckless-disregard-can-trigger-willful-penalties-for-foreign-account-holders/192592/",
+    "published": "2026-10-27T16:07:14.000Z",
+    "snippet": "Taxpayers with foreign accounts, foreign entities, or signature authority over accounts abroad should not wait for an IRS examination to find out where they stand.",
+    "categories": [
+     "bank reporting",
+     "fbar",
+     "foreign accounts",
+     "Income Taxes",
+     "reporting"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "Structured Installment Sales Over $5 Million: What CPAs Should Model Before Closing",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/structured-installment-sales-over-5-million-what-cpas-should-model-before-closing/192590/",
+    "published": "2026-10-27T16:05:36.000Z",
+    "snippet": "Once a seller’s installment obligations for the year top $5 million, Section 453A imposes an annual interest charge on the deferred tax.",
+    "categories": [
+     "closing",
+     "firm",
+     "installment sale"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "CPA Practice Advisor",
+    "title": "The Fuel Tax Audit Your Trucking Client is Not Ready For",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/the-fuel-tax-audit-your-trucking-client-is-not-ready-for/192588/",
+    "published": "2026-10-27T16:01:44.000Z",
+    "snippet": "The IFTA Procedures Manual requires a licensee to keep the distance and fuel records behind a return for four years.",
+    "categories": [
+     "freight",
+     "fuel taxes",
+     "otr",
+     "owner operatore",
+     "shipping",
+     "Taxes",
+     "truckers",
+     "trucking"
+    ]
+   },
+   {
+    "id": "S11",
+    "source": "CPA Practice Advisor",
+    "title": "Crowe Expands Alteryx Use to Help Tax Departments Operationalize AI",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/crowe-expands-alteryx-use-to-help-tax-departments-operationalize-ai/192611/",
+    "published": "2026-10-27T15:55:00.000Z",
+    "snippet": "Through Alteryx’s analytics and automation platform, Crowe says it's helping tax departments deploy artificial intelligence in ways that are repeatable, trusted, and scalable.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "Alteryx",
+     "Artificial Intelligence",
+     "Automation",
+     "Crowe",
+     "tax departments",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S12",
+    "source": "CPA Practice Advisor",
+    "title": "No Tax Relief for These Casualty Loss Victims",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/27/no-tax-relief-for-these-casualty-loss-victims/192586/",
+    "published": "2026-10-27T15:44:25.000Z",
+    "snippet": "If a loss is suffered in a federal disaster area, an individual may claim the loss on the tax return for the year preceding the year of the event.",
+    "categories": [
+     "casualty loss",
+     "disasters",
+     "Income Taxes",
+     "tax court",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S13",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance Under Section 355 Concerning Device and Active Trade or Business; Partial Withdrawal",
+    "link": "https://www.federalregister.gov/documents/2026/10/21/2026-21568/guidance-under-section-355-concerning-device-and-active-trade-or-business-partial-withdrawal",
+    "published": "2026-10-21T12:00:00.000Z",
+    "snippet": "This document partially withdraws a notice of proposed rulemaking containing proposed regulations regarding the application of the device prohibition and the active trade or business requirement for distributions of controlled corporation stock (or stock and securities) by a distributing corporation without income, gain, or loss. The proposed regulations would affect corporations and their shareholders and security holders.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 2,
+    "kept": 2
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 10
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

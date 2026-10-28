@@ -1,0 +1,143 @@
+{
+ "brief": {
+  "subject": "Fake passport help sites and a $106.8M debt relief ruling",
+  "headline": "FTC Targets Fake Passport Help Sites and Shuts Down Debt Relief Scheme Aimed at Seniors",
+  "dek": "Regulators act on government impostors in search ads, a debt relief scheme hitting seniors and veterans, and alleged register overcharges at Dollar General.",
+  "lede": "Scammers posing as the government are a top regulator target this week. The FTC sued a passport services operation, and a court shut down a debt relief scheme.",
+  "sections": [
+   {
+    "heading": "Fake Passport Help in Search Ads",
+    "bullets": [
+     "The FTC sued GovAssist LLC, Entry LLC and Scott Zuckerman over an alleged government impersonation scheme.",
+     "The operation allegedly targeted people seeking passport services by posing as, or claiming ties to, the federal government.",
+     "Paid search ads were allegedly the hook, so a top search result is not proof a site is official.",
+     "The complaint also cites misleading promises and fake reviews, so glowing ratings alone shouldn't earn your trust."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Debt Relief Scheme Banned for Good",
+    "bullets": [
+     "A federal court permanently banned the operators of an alleged debt relief scheme, at the FTC's request.",
+     "Seniors and veterans were the alleged targets, which matters if an older parent gets unexpected debt relief calls.",
+     "The operators allegedly impersonated banks, credit card companies and government agencies to seem legitimate.",
+     "On October 14, 2026, the court entered a $106.8 million default judgment against the corporate defendants."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "Dollar General Sued Over Register Prices",
+    "bullets": [
+     "The FTC and 20 states sued Dollar General over alleged long-running deceptive pricing.",
+     "Shoppers were allegedly charged more at checkout than shelf tags, price labels and ads showed.",
+     "The alleged overcharges cost consumers millions of dollars, so comparing your receipt to posted prices is worth the extra moment."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "FTC sues fake passport help sites, a court bans a debt relief scheme aimed at seniors and veterans, and 20 states sue Dollar General over pricing."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-28T17:10:22.622Z",
+  "date": "2026-10-28",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC and State Partners Sue Dollar General for Charging Consumers More than Advertised for Many Products",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-state-partners-sue-dollar-general-charging-consumers-more-advertised-many-products",
+    "published": "2026-10-26T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, joined by 20 states, sued Dollar General Corporation for engaging in long-running deceptive pricing practices by routinely charging customers more at the register than the prices displayed on shelves, price tags and advertisements, costing consumers millions of dollars. Twenty states joined the FTC in filing a complaint, alleging that Dollar General has, for years, re",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FBI IC3 alerts",
+    "title": "Suspicious Letters Containing White Powder Mailed to State and Local Election Officials, Media Organizations, and Public and Private Polling Companies",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023-2",
+    "published": "2026-10-23T18:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FBI IC3 alerts",
+    "title": "Critical Vulnerability Alert: PHP Core",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023",
+    "published": "2026-10-23T17:30:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Sues Perpetrators of Government Impersonation Scheme Over Deceptive Ads, Misleading Promises and Fake Reviews",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-sues-perpetrators-government-impersonation-scheme-over-deceptive-ads-misleading-promises-fake",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission is taking action against GovAssist LLC, Entry LLC and Scott Zuckerman, for their alleged involvement in a government impersonation scheme that deceived consumers seeking passport services by purporting to be the federal government or affiliated with the federal government. The FTC alleges the operation uses deceptive paid search ads to impersonate the government or pre",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "Court Permanently Shuts Down Illegal Debt Relief Operation Following FTC Allegation That Scheme’s Operators Impersonated Government and Business Entities",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/court-permanently-shuts-down-illegal-debt-relief-operation-following-ftc-allegation-schemes",
+    "published": "2026-10-22T12:00:00.000Z",
+    "snippet": "At the Federal Trade Commission’s request, a federal court has permanently banned the operators of an alleged debt relief scheme that targeted seniors and veterans by impersonating banks, credit card companies and government agencies. On October 14, 2026, the court entered a default judgment of $106.8 million against corporate defendants Accelerated Debt Settlement Inc., ADS Resolve LLC, Financial",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 2
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S4",
+    "S5"
+   ]
+  }
+ ]
+}

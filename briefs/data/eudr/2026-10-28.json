@@ -1,0 +1,139 @@
+{
+ "brief": {
+  "subject": "EUDR Brief: November system training and a compliance reality check",
+  "headline": "EUDR Brief: Commission sets November system training as industry readiness is examined",
+  "dek": "The Commission flags November training for the EUDR Information System, while new reporting looks at how commodity sectors are preparing to comply.",
+  "lede": "The European Commission has announced November training dates for the EUDR Information System, the platform for due-diligence filings. Operators who will file should prepare now.",
+  "sections": [
+   {
+    "heading": "Information System training set for November",
+    "bullets": [
+     "The Commission has published November training dates for the EUDR Information System.",
+     "The system is the gateway for submitting due-diligence statements, so filing teams should prepare before enforcement.",
+     "Exact session dates were not given in this update; check the Commission's official channels."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "How industries are really preparing",
+    "bullets": [
+     "Mongabay has launched a special issue examining how companies are moving toward EUDR compliance and where they fall short.",
+     "Coverage spans Brazilian soy traders, Ghanaian cocoa firms and Southeast Asian palm oil farmers.",
+     "The focus is traceability, the core challenge for exporters and cooperatives facing the rule after repeated delays."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "EU forest and habitat snapshot",
+    "bullets": [
+     "EU forest cover has stabilised at approximately 39% of total land, per the Commission.",
+     "Also, 26.4% of EU land is protected, yet 81% of protected habitats have poor or bad conservation status.",
+     "These figures frame the EU's environmental case behind its deforestation rules."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Commissioner joins EUDR event",
+    "bullets": [
+     "The Commission reports that a Commissioner attended an EUDR event.",
+     "No policy announcements or guidance changes were disclosed in the notice."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR update: Commission sets November Information System training, plus reporting on soy, cocoa and palm oil compliance readiness."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-28T17:10:22.622Z",
+  "date": "2026-10-28",
+  "items": [
+   {
+    "id": "S1",
+    "source": "European Commission: Environment newsroom",
+    "title": "Did you know?",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/963103",
+    "published": "2026-10-28T12:33:42.000Z",
+    "snippet": "26.4% of total EU land is designated as protected 81% of protected EU habitats have a poor or bad conservation status EU forest cover has stabilised at approximately 39% of total land",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "EUDR & Commissioner",
+    "link": "https://environment.ec.europa.eu/index_en",
+    "published": "2026-10-27T14:46:12.000Z",
+    "snippet": "Comissioner goes to EUDR event.",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "Mongabay",
+    "title": "Who’s implementing EUDR?",
+    "link": "https://news.mongabay.com/specials/2026/10/whos-implementing-eudr/",
+    "published": "2026-10-27T02:44:35.000Z",
+    "snippet": "As the EU’s deforestation regulation (EUDR) approaches enforcement after multiple delays, Mongabay’s Solutions Desk is examining how industries are working to comply, and where the shortfalls are. From soy traders in Brazil to cocoa companies in Ghana and palm oil farmers in Southeast Asia, this Special Issue examines how businesses are adapting to new traceability […]",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 0
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
