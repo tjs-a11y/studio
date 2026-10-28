@@ -268,15 +268,29 @@
   function quota() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
   function showQuota() { $('quota').textContent = PRO ? 'Pro: unlimited checks' : `${Math.max(0, 3 - quota().n)} free checks left today`; }
 
-  function run() {
+  // Aggregate-only analytics. Never send rate-con text, files, broker/carrier names, or user-entered fields.
+  function recordCompletedCheck() {
+    try {
+      fetch('/api/event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tool: TOOL, event: 'check' }),
+        keepalive: true,
+      }).catch(() => {}); // Analytics must never block a completed check.
+    } catch (_) { /* Analytics must never block a completed check. */ }
+  }
+  function run(options = {}) {
     const text = $('text').value.trim();
     if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
     if (!PRO) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Get Pro for unlimited.'; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
     const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
-    render(analyze(text, extra)); showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    render(analyze(text, extra));
+    if (!options.sample) recordCompletedCheck();
+    showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  $('check').onclick = run;
-  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(); };
+  $('check').onclick = () => run();
+  // Demo/sample runs are intentionally excluded from usage metrics.
+  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run({ sample: true }); };
   $('copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('msg').textContent).then(() => { $('copy').textContent = 'Copied'; setTimeout(() => { $('copy').textContent = 'Copy'; }, 1500); }); };
   $('print').onclick = () => window.print();
 
