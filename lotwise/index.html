@@ -269,7 +269,7 @@
       out.push({ id:Date.now()+r, stock:(ci.stock>=0?f[ci.stock]:'').trim()||('#'+r), vehicle:(ci.vehicle>=0?f[ci.vehicle]:'').trim()||'Unit', cost:cost, list:list, days:days }); }
     if(!out.length) throw new Error('rows'); return out;
   }
-  function ingest(text,label){ var st=$('#drop-status'); try{ var p=parseCSV(text); inv=p; save(); render(); st.textContent='✓ Read '+p.length+' unit'+(p.length===1?'':'s')+' from '+label+' — your aged capital is above ↑'; }catch(e){ var w=e.message==='columns'?'couldn\'t find cost / list / days columns':(e.message==='rows'?'no usable rows':'that didn\'t look like a CSV'); st.textContent='⚠ '+w+'. Columns: stock, vehicle, cost, list, days.'; } }
+  function ingest(text,label){ var st=$('#drop-status'); try{ var p=parseCSV(text); inv=p; save(); render(); if(label!=='the sample'){ try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'lotwise',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){} } st.textContent='✓ Read '+p.length+' unit'+(p.length===1?'':'s')+' from '+label+' — your aged capital is above ↑'; }catch(e){ var w=e.message==='columns'?'couldn\'t find cost / list / days columns':(e.message==='rows'?'no usable rows':'that didn\'t look like a CSV'); st.textContent='⚠ '+w+'. Columns: stock, vehicle, cost, list, days.'; } }
 
   $('#row-form').addEventListener('submit', function(e){ e.preventDefault();
     var cost=parseFloat($('#u-cost').value), list=parseFloat($('#u-list').value), days=parseInt($('#u-days').value,10);

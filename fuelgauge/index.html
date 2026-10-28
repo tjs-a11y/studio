@@ -280,7 +280,7 @@
       out.push({ id:Date.now()+r, date:ci.date>=0?(f[ci.date]||'').trim():'', site:(ci.site>=0?f[ci.site]:'').trim()||'Site', product:(ci.product>=0?f[ci.product]:'').trim()||'Fuel', gallons:g, cost:cost, sell:sell }); }
     if(!out.length) throw new Error('rows'); return out;
   }
-  function ingest(text,label){ var st=$('#drop-status'); try{ var p=parseCSV(text); lines=p; save(); render(); st.textContent='✓ Read '+p.length+' line'+(p.length===1?'':'s')+' from '+label+' — your margin is above ↑'; }catch(e){ var w=e.message==='columns'?'couldn\'t find product / gallons / cost / sell columns':(e.message==='rows'?'no usable rows':'that didn\'t look like a CSV'); st.textContent='⚠ '+w+'. Columns: date, site, product, gallons, cost, sell.'; } }
+  function ingest(text,label){ var st=$('#drop-status'); try{ var p=parseCSV(text); lines=p; save(); render(); if(label!=='the sample'){ try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'fuelgauge',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){} } st.textContent='✓ Read '+p.length+' line'+(p.length===1?'':'s')+' from '+label+' — your margin is above ↑'; }catch(e){ var w=e.message==='columns'?'couldn\'t find product / gallons / cost / sell columns':(e.message==='rows'?'no usable rows':'that didn\'t look like a CSV'); st.textContent='⚠ '+w+'. Columns: date, site, product, gallons, cost, sell.'; } }
 
   // events
   $('#row-form').addEventListener('submit', function(e){ e.preventDefault();

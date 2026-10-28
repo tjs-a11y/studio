@@ -191,6 +191,8 @@
     } else { ro.hidden=true; }
     $('out').hidden=false;
     $('out').scrollIntoView({behavior:'smooth',block:'start'});
+    // Anonymous usage: one count after a completed forecast (invalid input returns earlier). No input values sent.
+    try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){}
   }
   $('run').addEventListener('click',run);
 })();
