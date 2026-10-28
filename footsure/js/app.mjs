@@ -417,6 +417,8 @@ async function enterResults() {
     if (done) {
       await store.addCheck({ id: store.newId(), personId: p.id, date: c.date, age: c.age, sex: c.sex, mode: c.mode, stands: c.stands, standsAuto: c.standsAuto, armsUsed: c.armsUsed, balanceStages: c.balanceStages, tugSeconds: c.tugSeconds, tugAuto: c.tugAuto, stopped: c.stopped });
       c.saved = true;
+      // Anonymous usage: one count when a real fall-risk check is completed + saved. No health data, no identity — only {tool,event}.
+      try { if (typeof fetch === 'function') fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {}
     }
   }
   stopCamera();

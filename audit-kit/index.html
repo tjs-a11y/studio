@@ -229,6 +229,7 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   const TOOL = 'audit-kit';
+  let auditSent = false; // one anonymous usage count per session, on an explicit self-check
   let PRO = false;
   const ls = {
     get(k, d) { try { const v = localStorage.getItem('auditkit:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -349,6 +350,9 @@
       : '<li>Nothing flagged. Keep every record current. The kit below helps you build the binder the auditor will ask for.</li>';
     $('result').hidden = false;
     ls.set('scored', true);
+    // Anonymous usage: count a deliberate self-check (the button sets scroll=true), once per session.
+    // Live recomputes on input change pass scroll=false and never count. Only {tool,event} sent.
+    if (scroll && !auditSent) { auditSent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
     if (scroll) $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   $('score').onclick = () => score(true);
