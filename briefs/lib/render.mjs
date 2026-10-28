@@ -37,6 +37,7 @@ function shell({ title, description, canonical, head = '', crumbs, body }) {
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(canonical)}">
 <link rel="icon" href="data:,">
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
 <style>${STYLE}</style>
 ${head}
 </head>
