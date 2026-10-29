@@ -1,9 +1,9 @@
 {
-  "fetched": "2026-10-28T16:48:14.325Z",
-  "date": "2026-10-28",
+  "fetched": "2026-10-29T17:03:29.449Z",
+  "date": "2026-10-29",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-10-28T16:48:14.308Z",
+  "generated": "2026-10-29T17:03:29.385Z",
   "total_checks": 0,
   "total_subs": 0,
   "tools": {
@@ -124,6 +124,22 @@
       "checks_today": 0,
       "upgrade_clicks": 0,
       "upgrade_clicks_today": 0,
+      "subs": 0,
+      "subs_today": 0
+    },
+    "haul-audit": {
+      "checks": 0,
+      "checks_today": 0,
+      "upgrade_clicks": 1,
+      "upgrade_clicks_today": 1,
+      "subs": 0,
+      "subs_today": 0
+    },
+    "royalty-check": {
+      "checks": 0,
+      "checks_today": 0,
+      "upgrade_clicks": 1,
+      "upgrade_clicks_today": 1,
       "subs": 0,
       "subs_today": 0
     },
