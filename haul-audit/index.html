@@ -17,8 +17,8 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Haul Audit","url":"https://quickwell.app/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Check a trucking broker settlement and factoring deposit against agreed amounts. Calculations run on your device; values you enter are not uploaded. A review checklist, not legal, financial or accounting advice.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"}},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
 <style>
-  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--radius:12px}
-  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d}}
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--chip:#f0f2f6;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d;--chip:#20242c}}
   *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
   main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
   h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
@@ -28,9 +28,11 @@
   input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
   .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
   button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
-  button.ghost{background:transparent;color:var(--accent)}
+  button.ghost{background:transparent;color:var(--accent)}button.small{padding:6px 10px;font-size:.9rem;margin-top:0}
   .big{font-size:2rem;font-weight:800}.ok{color:var(--green)}.bad{color:var(--red)}
   .num{font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}td,th{text-align:left;padding:6px;border-top:1px solid var(--line)}
+  .pro-lock{border:1px dashed var(--accent)}
   footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
   [hidden]{display:none!important}
 </style>
@@ -66,24 +68,44 @@
   </section>
 
   <div><button id="run">Audit</button> <button class="ghost" id="sample">Try a sample</button></div>
+  <p class="num" id="quota" style="color:var(--dim);font-size:.85rem;margin-top:10px"></p>
 
   <section id="out" class="card" hidden aria-live="polite">
     <h2>Result</h2>
     <div id="settle"></div>
     <div id="factor" style="margin-top:14px"></div>
+    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Your result is always free and always visible — it's computed on your device.</p>
   </section>
+
+  <section class="card" id="pro"></section>
 
   <footer>
     A checklist, not legal, financial or accounting advice: check the full settlement and your factoring agreement, and raise any gap with the broker or factor. Nothing you enter leaves your browser. · <a href="/rate-con-checker/">Rate Con Checker</a> · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
   </footer>
 </main>
+<script src="/js/pro.js"></script>
 <script type="module">
 import { audit } from './js/engine.mjs';
 const $ = (id) => document.getElementById(id);
+const TOOL = 'haul-audit';
+const FREE_PER_DAY = 3;
+let PRO = false, sent = false;
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(TOOL + ':' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(TOOL + ':' + k, JSON.stringify(v)); } catch (e) {} },
+};
+const today = () => new Date().toISOString().slice(0, 10);
 const list = (s) => String(s || '').split(',').map((x) => parseFloat(x.trim())).filter((n) => !Number.isNaN(n));
 const money = (n) => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let sent = false;
 
+function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
+function showQuota() {
+  if (PRO) { $('quota').textContent = 'Pro: unlimited checks, saved history and CSV export.'; return; }
+  const left = Math.max(0, FREE_PER_DAY - quotaState().n);
+  $('quota').textContent = left > 0
+    ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
+    : `You've used today's ${FREE_PER_DAY} free checks — your results stay free and visible; Pro adds saved history and CSV export.`;
+}
 function vline(label, v) {
   const cls = v < 0 ? 'bad' : (v > 0 ? 'ok' : '');
   const word = v < 0 ? 'short' : (v > 0 ? 'over' : 'exact');
@@ -91,32 +113,55 @@ function vline(label, v) {
 }
 function run(isSample) {
   const input = {
-    linehaul: parseFloat($('linehaul').value) || 0,
-    fuelSurcharge: parseFloat($('fuel').value) || 0,
-    approvedAccessorials: list($('acc').value),
-    reportedSettlementGross: parseFloat($('reported').value) || 0,
-    fundedInvoiceAmount: parseFloat($('funded').value) || 0,
-    factorFees: parseFloat($('fees').value) || 0,
-    factorAdjustments: list($('adj').value),
-    reportedFactorDeposit: parseFloat($('deposit').value) || 0,
+    linehaul: parseFloat($('linehaul').value) || 0, fuelSurcharge: parseFloat($('fuel').value) || 0,
+    approvedAccessorials: list($('acc').value), reportedSettlementGross: parseFloat($('reported').value) || 0,
+    fundedInvoiceAmount: parseFloat($('funded').value) || 0, factorFees: parseFloat($('fees').value) || 0,
+    factorAdjustments: list($('adj').value), reportedFactorDeposit: parseFloat($('deposit').value) || 0,
   };
   const r = audit(input);
+  // Core result: always computed, always shown — free, on-device. Never veiled.
   $('settle').innerHTML = `<b>Broker settlement</b><p class="num">Expected gross: ${money(r.settlement.expectedGross)} · Reported: ${money(r.settlement.reportedSettlementGross)}</p>${vline('Gross variance', r.settlement.grossVariance)}`;
-  const f = r.factoring;
   $('factor').innerHTML = (input.fundedInvoiceAmount || input.reportedFactorDeposit)
-    ? `<b>Factoring deposit</b><p class="num">Expected deposit: ${money(f.expectedFactorDeposit)} · Reported: ${money(f.reportedFactorDeposit)}</p>${vline('Deposit variance', f.depositVariance)}`
-    : '';
+    ? `<b>Factoring deposit</b><p class="num">Expected deposit: ${money(f0(r))} · Reported: ${money(r.factoring.reportedFactorDeposit)}</p>${vline('Deposit variance', r.factoring.depositVariance)}` : '';
   $('out').hidden = false;
   $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Anonymous usage: one count per session on a real audit (the sample never counts). Only {tool,event} sent.
-  if (!isSample && !sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'haul-audit', event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+  if (!isSample) {
+    const q = quotaState(); q.n++; ls.set('quota', q); showQuota();
+    const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), gross: r.settlement.grossVariance, deposit: r.factoring.depositVariance }); ls.set('history', h.slice(0, 200)); renderPro();
+    if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+  }
 }
+function f0(r) { return r.factoring.expectedFactorDeposit; }
 $('run').addEventListener('click', () => run(false));
 $('sample').addEventListener('click', () => {
   $('linehaul').value = 2000; $('fuel').value = 300; $('acc').value = '100, 50'; $('reported').value = 2300;
-  $('funded').value = 2450; $('fees').value = 73.50; $('adj').value = '25'; $('deposit').value = 2300;
-  run(true);
+  $('funded').value = 2450; $('fees').value = 73.50; $('adj').value = '25'; $('deposit').value = 2300; run(true);
 });
+
+// ---- Pro: saved history + CSV export (the upgrade value). Core audit stays free. ----
+function renderPro() {
+  const h = ls.get('history', []);
+  if (PRO) {
+    const rows = h.slice(0, 20).map((x) => `<tr><td>${x.at.slice(0, 16).replace('T', ' ')}</td><td class="num">${money(x.gross)}</td><td class="num">${money(x.deposit)}</td></tr>`).join('');
+    $('pro').className = 'card'; $('pro').innerHTML = `<h2>Saved history (Pro)</h2>
+      ${h.length ? `<table><tr><th>When</th><th>Gross variance</th><th>Deposit variance</th></tr>${rows}</table>
+      <button class="small" id="csv">Download CSV</button>` : '<p class="num" style="color:var(--dim)">Your audits will be saved here, on this device.</p>'}
+      <button class="small ghost" id="manage">Manage subscription</button>`;
+    const csv = $('csv'); if (csv) csv.onclick = () => {
+      const body = 'when,gross_variance,deposit_variance\n' + h.map((x) => [x.at, x.gross, x.deposit].join(',')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([body], { type: 'text/csv' })); a.download = 'haul-audit-history.csv'; a.click();
+    };
+    $('manage').onclick = () => window.Studio && window.Studio.manage().catch((e) => alert(e.message));
+  } else {
+    $('pro').className = 'card pro-lock'; $('pro').innerHTML = `<h2>Pro — saved history &amp; CSV export</h2>
+      <p style="color:var(--dim);margin:.2em 0 0">Every audit stays free and fully visible. Pro adds a saved on-device history of your audits and a one-click CSV export — handy for a dispute file or your bookkeeper.</p>
+      <div><button class="small" id="buyM">Get Pro monthly</button> <button class="small ghost" id="buyY">Yearly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
+    const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; (window.Studio ? window.Studio.upgrade('pro', interval) : Promise.reject(new Error('not on sale'))).catch((e) => { $('buyNote').textContent = /not switched on|not on sale|404|409/i.test(e.message) ? 'Pro opens soon — check back shortly.' : e.message; }); };
+    $('buyM').onclick = () => buy('month'); $('buyY').onclick = () => buy('year');
+  }
+}
+if (window.Studio) window.Studio.init({ tool: TOOL, onChange: (s) => { PRO = !!s.pro; showQuota(); renderPro(); } });
+showQuota(); renderPro();
 </script>
 </body>
 </html>
