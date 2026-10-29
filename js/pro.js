@@ -68,8 +68,59 @@
     banner('Opening secure checkout…', { href: j.url, label: 'Continue to checkout →' });
     try { window.location.assign(j.url); } catch (e) { try { window.location.href = j.url; } catch (e2) {} }
   }
+  function showUpgradeModal(config) {
+    config = config || {};
+    // Render copy as text, not HTML, so caller-supplied content cannot inject markup.
+    const old = document.getElementById('studio-pro-upgrade-modal');
+    if (old) old.remove();
+    const overlay = document.createElement('div');
+    overlay.id = 'studio-pro-upgrade-modal';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'studio-pro-upgrade-title');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:2147483646;background:rgba(10,14,22,.72);display:flex;align-items:center;justify-content:center;padding:18px;font:16px/1.5 system-ui,-apple-system,sans-serif;color:#171a20';
+    const panel = document.createElement('section');
+    panel.style.cssText = 'position:relative;width:min(100%,520px);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:26px;box-shadow:0 18px 70px rgba(0,0,0,.32)';
+    const close = document.createElement('button');
+    close.type = 'button'; close.textContent = '×'; close.setAttribute('aria-label', 'Close upgrade dialog');
+    close.style.cssText = 'position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:28px;line-height:1;cursor:pointer;color:#4b5563';
+    close.onclick = () => overlay.remove();
+    const title = document.createElement('h2');
+    title.id = 'studio-pro-upgrade-title'; title.textContent = config.header || 'Upgrade to Pro';
+    title.style.cssText = 'font-size:1.45rem;line-height:1.2;margin:0 32px 12px 0;color:#111827';
+    const body = document.createElement('p');
+    body.textContent = config.body || '';
+    body.style.cssText = 'margin:0 0 20px;color:#374151';
+    const actions = document.createElement('div');
+    actions.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;align-items:center';
+    const upgrade = document.createElement('button');
+    upgrade.type = 'button'; upgrade.textContent = 'Upgrade — $15/month';
+    upgrade.style.cssText = 'border:0;border-radius:8px;background:#2457d6;color:#fff;font-weight:700;padding:11px 16px;cursor:pointer';
+    upgrade.onclick = () => {
+      upgrade.disabled = true; upgrade.textContent = 'Opening secure checkout…';
+      Promise.resolve(window.Studio.upgrade('pro', 'month')).catch(() => {
+        upgrade.disabled = false; upgrade.textContent = 'Upgrade — $15/month';
+      });
+    };
+    const later = document.createElement('button');
+    later.type = 'button'; later.textContent = 'Not now';
+    later.style.cssText = 'border:1px solid #d1d5db;border-radius:8px;background:#fff;color:#374151;padding:10px 14px;cursor:pointer';
+    later.onclick = () => overlay.remove();
+    actions.append(upgrade, later);
+    panel.append(close, title, body, actions);
+    overlay.appendChild(panel);
+    overlay.addEventListener('click', (event) => { if (event.target === overlay) overlay.remove(); });
+    document.addEventListener('keydown', function onKey(event) {
+      if (event.key === 'Escape' && document.getElementById('studio-pro-upgrade-modal') === overlay) {
+        overlay.remove(); document.removeEventListener('keydown', onKey);
+      }
+    });
+    (document.body || document.documentElement).appendChild(overlay);
+    close.focus();
+  }
   window.Studio = {
     init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
+    showUpgradeModal(config) { showUpgradeModal(config); },
     upgrade(plan, interval) {
       // Anonymous purchase-intent ping (survives the redirect); never blocks checkout.
       try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'upgrade', plan: plan }), keepalive: true }).catch(function () {}); } catch (e) {}
