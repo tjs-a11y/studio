@@ -126,8 +126,14 @@ function run(isSample) {
   $('out').hidden = false;
   $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
   if (!isSample) {
-    const q = quotaState(); q.n++; ls.set('quota', q); showQuota();
+    const q = quotaState(); const priorCount = q.n; q.n++; ls.set('quota', q); showQuota();
     const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), gross: r.settlement.grossVariance, deposit: r.factoring.depositVariance }); ls.set('history', h.slice(0, 200)); renderPro();
+    if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
+      window.Studio.showUpgradeModal({
+        header: 'Upgrade to Haul Audit Pro',
+        body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily settlement reconciliations, saved on-device audit history, and CSV exports. Your calculations and saved history stay on your device.'
+      });
+    }
     if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
   }
 }
