@@ -20,7 +20,7 @@ for (const m of MODULES) {
   sections.push({ id: m, S: mod.SECTION, pages: mod.PAGES || mod.TERMS });
 }
 // Standalone articles (one page each, any language, at their own path): modules export ARTICLES and a HUB tile.
-const ARTICLE_MODULES = ['footsure'];
+const ARTICLE_MODULES = ['footsure', 'factoring-shortpay'];
 const articles = []; const articleTiles = [];
 for (const m of ARTICLE_MODULES) {
   const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');

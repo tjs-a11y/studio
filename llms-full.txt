@@ -137,3 +137,4 @@
 
 - [Fall-risk tests explained: the CDC's chair stand, balance and Timed Up and Go](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.
 - [Pruebas de riesgo de caídas: levantarse de la silla, equilibrio y Timed Up and Go (Spanish)](https://quickwell.app/es/learn/fall-risk-tests/): Cómo funcionan las tres pruebas STEADI de los CDC (silla de 30 segundos, equilibrio en 4 posiciones y Timed Up and Go) y sus valores de corte.
+- [Factoring fee or broker short-pay? Telling two deductions apart](https://quickwell.app/learn/factoring-vs-broker-shortpay/): A factoring fee and a broker short-pay can look identical on your bank deposit but are two separate gaps, with different paperwork. How to tell them apart.

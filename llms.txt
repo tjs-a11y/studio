@@ -32,6 +32,7 @@ All tools run in the browser; files and text people check are not uploaded. Refe
 - [Power bills](https://quickwell.app/learn/power-bills/): Plain-English pages on what happens when a fixed electricity rate ends, why the roll-off rate is usually higher, and what the average U.S. price is in 2026. (2 pages)
 - [Fall-risk tests explained](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.
 - [Pruebas de riesgo de caídas (Spanish)](https://quickwell.app/es/learn/fall-risk-tests/): Cómo funcionan las tres pruebas STEADI de los CDC (silla de 30 segundos, equilibrio en 4 posiciones y Timed Up and Go) y sus valores de corte.
+- [Factoring fee vs broker short-pay](https://quickwell.app/learn/factoring-vs-broker-shortpay/): A factoring fee and a broker short-pay can look identical on your bank deposit but are two separate gaps, with different paperwork. How to tell them apart.
 - [Guides](https://quickwell.app/guides/): Longer how-to guides for the same audiences.
 
 ## Optional
