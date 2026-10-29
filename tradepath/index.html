@@ -471,6 +471,8 @@ function makeStore(key) {
     try {
       var parsed = parseCSV(text);
       trades = parsed; store.save(trades); render();
+      // Anonymous usage: count a real CSV import (the sample passes label 'the sample' and never counts). Only {tool,event} sent.
+      if (label !== 'the sample') { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'tradepath', event: 'check' }), keepalive: true }).catch(function () {}); } catch (e) {} }
       status.textContent = '✓ Read ' + parsed.length + ' trade' + (parsed.length === 1 ? '' : 's') + ' from ' + label + ' — your number is above ↑';
     } catch (e) {
       var why = e.message === 'columns' ? 'couldn\'t find symbol / qty / entry columns' : (e.message === 'rows' ? 'no usable rows' : 'that didn\'t look like a CSV');

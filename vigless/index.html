@@ -391,6 +391,7 @@ function makeStore(key) {
   }
 
   // events
+  var vigSent = false; // one anonymous usage count per session, on the first real bet logged
   $('#bet-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var stake = parseFloat($('#b-stake').value), odds = parseInt($('#b-odds').value, 10);
@@ -398,6 +399,8 @@ function makeStore(key) {
     if (store.fresh()) bets = [];
     bets.push({ id: Date.now(), date: $('#b-date').value || new Date().toISOString().slice(0, 10), sport: $('#b-sport').value, type: $('#b-type').value, desc: $('#b-desc').value.trim(), stake: stake, odds: odds, result: 'pending' });
     store.save(bets); render();
+    // Anonymous usage: count once per session when a real bet is logged (validation above returns on bad input). No bet data, no identity — only {tool,event}.
+    if (!vigSent) { vigSent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'vigless', event: 'check' }), keepalive: true }).catch(function () {}); } catch (e) {} }
     $('#b-desc').value = ''; $('#b-stake').value = '';
   });
   $('#rows').addEventListener('click', function (e) {
