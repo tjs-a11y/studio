@@ -80,7 +80,7 @@ const ls = {
   get(k, d) { try { const v = localStorage.getItem(TOOL + ':' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(TOOL + ':' + k, JSON.stringify(v)); } catch (e) {} },
 };
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 function frac(s) { s = String(s || '').trim(); if (s.includes('/')) { const [a, b] = s.split('/').map(Number); return b ? a / b : NaN; } return Number(s); }
 function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
 function showQuota() {
@@ -88,7 +88,7 @@ function showQuota() {
   const left = Math.max(0, FREE_PER_DAY - quotaState().n);
   $('quota').textContent = left > 0
     ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
-    : `You've used today's ${FREE_PER_DAY} free checks — your result stays free and visible; Pro adds saved history and CSV export.`;
+    : `You've reached the ${FREE_PER_DAY}-check daily counter on this device. Your result stays free and visible; Pro adds saved history and CSV export.`;
 }
 function run(isSample) {
   $('err').hidden = true;
