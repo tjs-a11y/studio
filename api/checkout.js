@@ -8,14 +8,31 @@ export async function POST(request) {
   let body; try { body = await request.json(); } catch { return fail(400, 'Bad request.'); }
   const tool = toolById(String(body.tool || ''));
   if (!tool) return fail(404, 'Unknown tool.');
-  const plan = tool.plans.find((p) => p.id === body.plan) || tool.plans[0];
-  if (!plan) return fail(409, 'This tool is free.');
+  // Never silently substitute the first plan or default an invalid interval.
+  const plan = tool.plans.find((p) => p.id === body.plan);
+  if (!plan) return fail(tool.plans.length ? 400 : 409, tool.plans.length ? 'Invalid plan.' : 'This tool is free.');
   const once = !!plan.once;
-  const interval = once ? 'once' : body.interval === 'year' ? 'year' : 'month';
-  const lookup = `${tool.id}__${plan.id}__${interval}`;
+  const interval = once ? 'once' : body.interval;
+  if (!once && !['month', 'year'].includes(interval)) return fail(400, 'Invalid billing interval.');
+
+  // These two professional B2B subscriptions have fixed monthly SKUs and price terms.
+  // Keep them separate from the consumer Quickwell Plus bundle.
+  const fixedB2B = {
+    'haul-audit': { plan: 'pro', interval: 'month', lookup: 'haul-audit__pro__month' },
+    'royalty-check': { plan: 'pro', interval: 'month', lookup: 'royalty-check__pro__month' },
+  };
+  const fixed = fixedB2B[tool.id];
+  if (fixed && (plan.id !== fixed.plan || interval !== fixed.interval || once)) {
+    return fail(400, 'This professional plan is available monthly only.');
+  }
+  const lookup = fixed ? fixed.lookup : `${tool.id}__${plan.id}__${interval}`;
   const prices = await s.prices.list({ lookup_keys: [lookup], active: true, limit: 1 });
   const price = prices.data[0];
   if (!price) return fail(409, 'This plan is not on sale yet.');
+  if (fixed && (price.type !== 'recurring' || price.recurring?.interval !== 'month' ||
+      (price.recurring?.interval_count ?? 1) !== 1)) {
+    return fail(409, 'The configured price is not a monthly recurring subscription.');
+  }
   const base = originOf(request);
   // Marketing attribution: a short channel label from ?ref= links (e.g. 'reddit-owneroperators'), never personal data.
   const ref = /^[a-z0-9_-]{1,40}$/.test(String(body.ref || '')) ? String(body.ref) : '';
