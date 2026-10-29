@@ -1,0 +1,140 @@
+{
+ "brief": {
+  "subject": "FTC sues Dollar General over register overcharges",
+  "headline": "Dollar General Sued for Charging More Than Shelf Prices; FTC Targets Toast Fees",
+  "dek": "The FTC and 20 states accuse Dollar General of overcharging at checkout, while a new suit targets hidden restaurant software fees.",
+  "lede": "The FTC and 20 states say Dollar General routinely charged shoppers more at the register than its shelf tags and ads showed. Check your receipt before you leave the store.",
+  "sections": [
+   {
+    "heading": "Dollar General accused of checkout overcharges",
+    "bullets": [
+     "The FTC and 20 states sued Dollar General on October 26 over deceptive pricing.",
+     "Regulators allege register prices often topped shelf tags, price labels and ads for years.",
+     "The alleged practice cost shoppers millions of dollars, according to the complaint.",
+     "Compare your receipt against shelf prices, especially on frequent small purchases where gaps are easy to miss."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Toast sued over hidden fees",
+    "bullets": [
+     "The FTC, California officials and seven state attorneys general sued Toast Inc. today.",
+     "The suit alleges hidden and unauthorized fees plus deceptive subscription and cancellation practices.",
+     "Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah joined the case.",
+     "Restaurant owners using the platform should review statements for charges they never agreed to."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "FTC probes data-driven pricing",
+    "bullets": [
+     "The FTC ordered nine major airlines, ride-sharing and food-delivery firms to hand over detailed information.",
+     "The agency wants to know how personal data may shape what consumers pay and what gig workers earn.",
+     "If you see different prices than others for the same ride or flight, this inquiry targets that practice."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "FTC and 20 states sue Dollar General over register overcharges, Toast faces hidden fee suit, and FTC probes personalized pricing."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-29T17:26:26.214Z",
+  "date": "2026-10-29",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC and States Take Action Against Toast Inc. over Hidden and Unauthorized Fees, Deceptive Subscription and Cancellation Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-states-take-action-against-toast-inc-over-hidden-unauthorized-fees-deceptive-subscription",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, the People of the State of California by and through the Los Angeles County Counsel and San Francisco City Attorney, and the Attorneys General of the States of Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah, filed a lawsuit today against Toast Inc. and affiliated entities, alleging the restaurant software and fintech company saddles restaurants with hi",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Launches Personalized Pricing and Compensation Inquiry",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-launches-personalized-pricing-compensation-inquiry",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission today ordered nine major airlines, ride-sharing companies and food-delivery firms to provide detailed information that will allow the agency to study the use of personal data to set prices and compensation. “We intend to scrutinize the opaque methodology that some companies in these industries may be using to determine how much consumers pay or how much gig workers are",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC and State Partners Sue Dollar General for Charging Consumers More than Advertised for Many Products",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-state-partners-sue-dollar-general-charging-consumers-more-advertised-many-products",
+    "published": "2026-10-26T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, joined by 20 states, sued Dollar General Corporation for engaging in long-running deceptive pricing practices by routinely charging customers more at the register than the prices displayed on shelves, price tags and advertisements, costing consumers millions of dollars. Twenty states joined the FTC in filing a complaint, alleging that Dollar General has, for years, re",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FBI IC3 alerts",
+    "title": "Suspicious Letters Containing White Powder Mailed to State and Local Election Officials, Media Organizations, and Public and Private Polling Companies",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023-2",
+    "published": "2026-10-23T18:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FBI IC3 alerts",
+    "title": "Critical Vulnerability Alert: PHP Core",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023",
+    "published": "2026-10-23T17:30:00.000Z",
+    "snippet": "",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 2
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

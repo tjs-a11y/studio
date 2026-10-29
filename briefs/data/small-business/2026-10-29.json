@@ -1,0 +1,267 @@
+{
+ "brief": {
+  "subject": "State tax ballot fights heat up in Colorado, Florida, California",
+  "headline": "State Tax Measures Head to Voters in Colorado, Florida and California",
+  "dek": "Colorado weighs several overlapping tax measures, Florida's property tax amendment looks close, and the IRS Advisory Council schedules a public meeting.",
+  "lede": "Tax questions are on several state ballots, and the results could change what owners pay locally. Colorado alone has four tax-related measures that interact with one another.",
+  "sections": [
+   {
+    "heading": "Colorado's Stacked Tax Ballot",
+    "bullets": [
+     "Amendment 87 and propositions NN, 136 and 137 all address taxes or tax refunds, each in a different way.",
+     "How they combine depends on which pass, so owners should watch the full set rather than any single measure.",
+     "The income tax proposal has faced bipartisan criticism and survived a legal challenge, signaling a contested vote."
+    ],
+    "source_ids": [
+     "S6",
+     "S7"
+    ]
+   },
+   {
+    "heading": "Florida Property Tax Vote Looks Tight",
+    "bullets": [
+     "The amendment needs 60% support to pass, a high bar for any ballot measure.",
+     "Only one poll so far has shown it reaching that level, and polling overall is limited.",
+     "Property owners and commercial tenants should plan for either outcome until results are in."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "California Billionaire Tax Goes Social",
+    "bullets": [
+     "California voters are deciding whether to impose a special tax on billionaires.",
+     "Paid social media influencers are increasingly involved in campaigning on the measure, so expect heavy online messaging.",
+     "The tax targets billionaires, not typical small businesses, but it shapes the state's broader tax debate."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "IRS Advisory Council to Meet Publicly",
+    "bullets": [
+     "The Internal Revenue Service Advisory Council has announced a public meeting in the Federal Register.",
+     "These sessions can preview IRS priorities, so bookkeepers and tax pros may want to track the agenda."
+    ],
+    "source_ids": [
+     "S11"
+    ]
+   }
+  ],
+  "seo_description": "Small-business tax brief: Colorado's overlapping tax measures, Florida's close property tax vote, California's billionaire tax and an IRS council meeting."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-10-29T17:26:26.214Z",
+  "date": "2026-10-29",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Finding Your Next Clients in Public Business Filings",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/finding-your-next-clients-in-public-business-filings/192690/",
+    "published": "2026-10-29T17:15:40.000Z",
+    "snippet": "For firms that want to grow, state formation filings are one of the few prospect lists that is public.",
+    "categories": [
+     "entity formation",
+     "Small Business",
+     "state formation filings"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "Why Tax Software Slows Down in February: 5 Checks Before You Blame the Software",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/why-tax-software-slows-down-in-february-5-checks-before-you-blame-the-software/192796/",
+    "published": "2026-10-29T16:29:35.000Z",
+    "snippet": "Each one of these checks protects your clients’ turnaround time, because a slowdown that goes undiagnosed during busy season costs the firm hours, and clients feel those hours.",
+    "categories": [
+     "busy season",
+     "tax season",
+     "tax software",
+     "Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Accounting Firms’ Cybersecurity Confidence is Outpacing Their Protections",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/accounting-firms-cybersecurity-confidence-is-outpacing-their-protections/192800/",
+    "published": "2026-10-29T16:25:23.000Z",
+    "snippet": "Three cybersecurity priorities accounting firms should should focus on before tax season.",
+    "categories": [
+     "cybersecurity",
+     "data security",
+     "Firm Management",
+     "firm security",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "California’s Billionaire Tax Battle is Playing Out on Instagram—with Paid Influencers",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/californias-billionaire-tax-battle-is-playing-out-on-instagram-with-paid-influencers/192792/",
+    "published": "2026-10-29T15:53:32.000Z",
+    "snippet": "As California decides whether to slap billionaires with a special tax, the Golden State's swarm of social media stars is chiming in—and increasingly getting paid to influence voters.",
+    "categories": [
+     "ballot measures",
+     "billionaire tax",
+     "billionaires",
+     "california",
+     "Income Taxes",
+     "instagram",
+     "social media",
+     "social media influencers",
+     "tax on billionaires",
+     "Taxes",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Polls Point to a Close Call on Florida Property Tax Amendment",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/polls-point-to-a-close-call-on-florida-property-tax-amendment/192781/",
+    "published": "2026-10-29T15:21:16.000Z",
+    "snippet": "Among the limited polling available, only one survey has shown the 60% support needed to pass.",
+    "categories": [
+     "ballot measures",
+     "Florida",
+     "property tax",
+     "property taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "How the Tax Measures on Colorado’s Ballot Would Interact if Voters Pass All of Them—or Just Some",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/how-the-tax-measures-on-colorados-ballot-would-interact-if-voters-pass-all-of-them-or-just-some/192774/",
+    "published": "2026-10-29T14:10:54.000Z",
+    "snippet": "Amendment 87 and propositions NN, 136 and 137 deal with taxes and tax refunds in differing ways.",
+    "categories": [
+     "ballot measures",
+     "Colorado",
+     "graduated income tax",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "Court Battles, Big Money and False Claims Swirl Around Colorado’s Income Tax Ballot Proposal",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/29/court-battles-big-money-and-false-claims-swirl-around-colorados-income-tax-ballot-proposal/192767/",
+    "published": "2026-10-29T13:45:53.000Z",
+    "snippet": "Tax measure, one of several on the ballot, has drawn bipartisan attacks and an unsuccessful legal challenge.",
+    "categories": [
+     "ballot measures",
+     "Colorado",
+     "graduated income tax",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Wolters Kluwer Names Tomàs Font General Manager of Corporate Tax",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/wolters-kluwer-names-tomas-font-general-manager-of-corporate-tax/192733/",
+    "published": "2026-10-28T20:40:36.000Z",
+    "snippet": "Experienced Wolters Kluwer executive to lead corporate tax as business expands its global indirect tax capabilities.",
+    "categories": [
+     "tax software",
+     "Taxes",
+     "Wolters Kluwer",
+     "Wolters Kluwer Tax & Accounting"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "CPA Practice Advisor",
+    "title": "Wolters Kluwer Expands Agentic Tax and Audit Capabilities in CCH Axcess",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/28/wolters-kluwer-expands-agentic-tax-and-audit-capabilities-in-cch-axcess/192725/",
+    "published": "2026-10-28T20:30:25.000Z",
+    "snippet": "With recently announced agentic tax preparation, work can move in one platform from client documents to a prepared return.",
+    "categories": [
+     "agentic ai",
+     "Artificial Intelligence",
+     "artificial intelligence and accounting",
+     "cch",
+     "CCH Axcess",
+     "Wolters Kluwer"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "The CPA Journal",
+    "title": "What Dies with the Taxpayer?",
+    "link": "https://www.cpajournal.com/2026/10/28/what-dies-with-the-taxpayer/",
+    "published": "2026-10-28T14:00:45.000Z",
+    "snippet": "Death can provide significant tax benefits through the step-up in basis, but it can also permanently eliminate valuable tax attributes that, if not properly planned for, disappear with the taxpayer. From charitable contributions and capital loss carryforwards, to net operating losses (NOL) and passive activity losses, understanding which provisions expire and which survive can help […] The post Wh",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Columns",
+     "Financial Planning"
+    ]
+   },
+   {
+    "id": "S11",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Internal Revenue Service Advisory Council; Public Meeting",
+    "link": "https://www.federalregister.gov/documents/2026/10/28/2026-21966/internal-revenue-service-advisory-council-public-meeting",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Internal Revenue Service Advisory Council will hold a public meeting.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 1,
+    "kept": 1
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 9
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

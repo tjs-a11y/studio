@@ -1,0 +1,130 @@
+{
+ "brief": {
+  "subject": "EUDR brief: Information System training set for November",
+  "headline": "Commission schedules November training on the EUDR Information System",
+  "dek": "Brussels publishes November training dates for the EUDR Information System, while new figures show EU forest cover holding at about 39%.",
+  "lede": "The European Commission has published November training dates for the EUDR Information System. Operators and traders filing due-diligence statements should check the schedule now.",
+  "sections": [
+   {
+    "heading": "November training for EUDR filings",
+    "bullets": [
+     "The Commission released November training dates for the EUDR Information System on 2026-10-22.",
+     "The Information System is where due-diligence statements are filed, so compliance teams should plan attendance early.",
+     "The notice did not list specific session details, so check the official schedule directly."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Commissioner joins EUDR event",
+    "bullets": [
+     "An EU Commissioner attended an EUDR event, the Commission's environment newsroom reported on 2026-10-27.",
+     "No policy changes or new guidance were announced in the item, so current obligations stand unchanged."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "EU forest and habitat snapshot",
+    "bullets": [
+     "EU forest cover has stabilised at approximately 39% of total land, according to Commission figures.",
+     "26.4% of EU land is protected, yet 81% of protected habitats show poor or bad conservation status.",
+     "These figures frame the EU's environmental case behind deforestation-linked trade rules."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR update: Commission sets November Information System training dates; EU forest cover holds near 39% of land area."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-29T17:26:26.214Z",
+  "date": "2026-10-29",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "New cocoa powder alternative targets GLP-1 trends and supply risks",
+    "link": "https://www.foodnavigator.com/Article/2026/10/29/planet-a-foods-launches-cocoa-booster-replacer/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-29T14:03:02.000Z",
+    "snippet": "Planet A Foods launches Cocoa Booster, a high-fiber cocoa powder replacer that can replace up to 100% of cocoa in select applications amid rising costs and GLP-1-driven demand shifts.",
+    "categories": [
+     "Flavours & colours"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "European Commission: Environment newsroom",
+    "title": "Did you know?",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/963103",
+    "published": "2026-10-28T12:33:42.000Z",
+    "snippet": "26.4% of total EU land is designated as protected 81% of protected EU habitats have a poor or bad conservation status EU forest cover has stabilised at approximately 39% of total land",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "European Commission: Environment newsroom",
+    "title": "EUDR & Commissioner",
+    "link": "https://environment.ec.europa.eu/index_en",
+    "published": "2026-10-27T14:46:12.000Z",
+    "snippet": "Comissioner goes to EUDR event.",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "European Commission: Environment newsroom",
+    "title": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/962112",
+    "published": "2026-10-22T21:35:43.000Z",
+    "snippet": "EU Deforestation Regulation Update - Information System Training dates for November",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
