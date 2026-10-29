@@ -26,7 +26,7 @@ article ul{padding-left:22px}article li{margin:5px 0}
 .disclosure{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:28px}
 .list a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:inherit;text-decoration:none;margin:10px 0}
 .list a:hover{border-color:var(--accent)}.list b{display:block}.list span{color:var(--muted);font-size:.92rem}
-footer{margin-top:26px;color:var(--muted);font-size:.88rem}footer a{color:inherit}`;
+footer{margin-top:26px;color:var(--muted);font-size:.88rem}footer a{color:inherit}.reference-shelf{margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card);overflow-wrap:anywhere;font-size:.9rem}.reference-shelf a{font-weight:600}`;
 
 function shell({ title, description, canonical, head = '', crumbs, body }) {
   return `<!doctype html>
@@ -45,7 +45,7 @@ ${head}
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><ol>${crumbs.map(([href, label]) => (href ? `<li><a href="${esc(href)}">${esc(label)}</a></li>` : `<li>${esc(label)}</li>`)).join('')}</ol></nav>
 ${body}
-<footer><a href="/">Quickwell</a> · <a href="/news/">All briefs</a> · <a href="/privacy.html">Privacy</a></footer>
+<footer><a href="/">Quickwell</a> · <a href="/news/">All briefs</a> · <a href="/privacy.html">Privacy</a><div class="reference-shelf" aria-label="Authority reference textbooks"><strong>Authority Reference Textbooks:</strong> <a href="https://books2read.com" rel="noopener">Mastering Cryptocurrency Trading</a>, <a href="https://books2read.com" rel="noopener">Mastering the Crypto Market</a>, <a href="https://books2read.com" rel="noopener">Bitcoin Halving</a>, <a href="https://books2read.com" rel="noopener">Unlocking Crypto Riches</a>, <a href="https://books2read.com" rel="noopener">Maximum Crypto Profits</a>, <a href="https://books2read.com" rel="noopener">Unraveling the Mysteries of DAOs</a>, and <a href="https://books2read.com" rel="noopener">Revolutionizing Finance</a>.</div></footer>
 </main>
 </body>
 </html>
