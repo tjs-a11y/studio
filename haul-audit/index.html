@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haul Audit: catch freight settlement shortfalls</title>
+<meta name="description" content="Paste your rate con and settlement numbers and see if the broker paid what was agreed, plus a factoring deposit check. On your device; nothing uploaded.">
+<link rel="canonical" href="https://quickwell.app/haul-audit/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/haul-audit/">
+<meta property="og:title" content="Haul Audit: catch freight settlement shortfalls">
+<meta property="og:description" content="Check a broker settlement and a factoring deposit against what was agreed — on your device, nothing uploaded. A checklist, not advice.">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Haul Audit: catch freight settlement shortfalls">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Haul Audit","url":"https://quickwell.app/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","description":"Audits a trucking broker settlement and an invoice-factoring deposit against the agreed numbers, on your device. Factoring fees are isolated from the broker variance. Not legal, financial or accounting advice.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"}},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0}
+  h2{font-size:1.1rem;margin:0 0 10px}
+  label{display:block;font-size:.85rem;color:var(--dim);margin:10px 0 4px}
+  input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+  button.ghost{background:transparent;color:var(--accent)}
+  .big{font-size:2rem;font-weight:800}.ok{color:var(--green)}.bad{color:var(--red)}
+  .num{font-variant-numeric:tabular-nums}
+  footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <h1>Haul Audit</h1>
+  <p class="lede">Enter what you agreed and what you were paid, and see any gap — on the broker settlement <b>and</b> the factoring deposit. <b>Runs in your browser: nothing you enter is uploaded.</b></p>
+
+  <section class="card">
+    <h2>Broker settlement</h2>
+    <div class="row">
+      <div><label>Linehaul ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
+      <div><label>Fuel surcharge ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
+    </div>
+    <div class="row">
+      <div><label>Approved accessorials ($, comma-separated)</label><input type="text" id="acc" placeholder="100, 50"></div>
+      <div><label>Reported settlement gross ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Factoring deposit <span style="font-weight:400;color:var(--dim);font-size:.85rem">(optional)</span></h2>
+    <div class="row">
+      <div><label>Funded invoice amount ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
+      <div><label>Factor fees ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
+    </div>
+    <div class="row">
+      <div><label>Factor adjustments ($, comma-separated)</label><input type="text" id="adj" placeholder="25"></div>
+      <div><label>Reported deposit ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">A factoring fee is a factor's charge, not a broker shortfall — it's kept out of the broker variance below.</p>
+  </section>
+
+  <div><button id="run">Audit</button> <button class="ghost" id="sample">Try a sample</button></div>
+
+  <section id="out" class="card" hidden aria-live="polite">
+    <h2>Result</h2>
+    <div id="settle"></div>
+    <div id="factor" style="margin-top:14px"></div>
+  </section>
+
+  <footer>
+    A checklist, not legal, financial or accounting advice: check the full settlement and your factoring agreement, and raise any gap with the broker or factor. Nothing you enter leaves your browser. · <a href="/rate-con-checker/">Rate Con Checker</a> · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </footer>
+</main>
+<script type="module">
+import { audit } from './js/engine.mjs';
+const $ = (id) => document.getElementById(id);
+const list = (s) => String(s || '').split(',').map((x) => parseFloat(x.trim())).filter((n) => !Number.isNaN(n));
+const money = (n) => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let sent = false;
+
+function vline(label, v) {
+  const cls = v < 0 ? 'bad' : (v > 0 ? 'ok' : '');
+  const word = v < 0 ? 'short' : (v > 0 ? 'over' : 'exact');
+  return `<p>${label}: <span class="big num ${cls}">${money(v)}</span> <span style="color:var(--dim)">(${word})</span></p>`;
+}
+function run(isSample) {
+  const input = {
+    linehaul: parseFloat($('linehaul').value) || 0,
+    fuelSurcharge: parseFloat($('fuel').value) || 0,
+    approvedAccessorials: list($('acc').value),
+    reportedSettlementGross: parseFloat($('reported').value) || 0,
+    fundedInvoiceAmount: parseFloat($('funded').value) || 0,
+    factorFees: parseFloat($('fees').value) || 0,
+    factorAdjustments: list($('adj').value),
+    reportedFactorDeposit: parseFloat($('deposit').value) || 0,
+  };
+  const r = audit(input);
+  $('settle').innerHTML = `<b>Broker settlement</b><p class="num">Expected gross: ${money(r.settlement.expectedGross)} · Reported: ${money(r.settlement.reportedSettlementGross)}</p>${vline('Gross variance', r.settlement.grossVariance)}`;
+  const f = r.factoring;
+  $('factor').innerHTML = (input.fundedInvoiceAmount || input.reportedFactorDeposit)
+    ? `<b>Factoring deposit</b><p class="num">Expected deposit: ${money(f.expectedFactorDeposit)} · Reported: ${money(f.reportedFactorDeposit)}</p>${vline('Deposit variance', f.depositVariance)}`
+    : '';
+  $('out').hidden = false;
+  $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Anonymous usage: one count per session on a real audit (the sample never counts). Only {tool,event} sent.
+  if (!isSample && !sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'haul-audit', event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+}
+$('run').addEventListener('click', () => run(false));
+$('sample').addEventListener('click', () => {
+  $('linehaul').value = 2000; $('fuel').value = 300; $('acc').value = '100, 50'; $('reported').value = 2300;
+  $('funded').value = 2450; $('fees').value = 73.50; $('adj').value = '25'; $('deposit').value = 2300;
+  run(true);
+});
+</script>
+</body>
+</html>

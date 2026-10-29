@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royalty Check: is your mineral decimal right?</title>
+<meta name="description" content="Recompute your expected royalty decimal from net acres, unit size and lease fraction, and see if your statement matches. On your device; nothing uploaded.">
+<link rel="canonical" href="https://quickwell.app/royalty-check/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/royalty-check/">
+<meta property="og:title" content="Royalty Check: is your mineral decimal right?">
+<meta property="og:description" content="Recompute the royalty decimal an operator should be paying you and compare it to your statement, on your device. A checklist, not advice.">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Royalty Check: is your mineral decimal right?">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Royalty Check","url":"https://quickwell.app/royalty-check/","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","description":"Recomputes a mineral owner's expected royalty decimal from net mineral acres, spacing unit size and lease royalty fraction, and flags a mismatch with the statement decimal. On your device. Not legal, title or financial advice.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"}},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--amber:#a86b00;--green:#1d7a46;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--amber:#f0b43c;--green:#5fd38d}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:680px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0}
+  label{display:block;font-size:.85rem;color:var(--dim);margin:10px 0 4px}
+  input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+  button.ghost{background:transparent;color:var(--accent)}
+  .big{font-size:1.9rem;font-weight:800;font-variant-numeric:tabular-nums}
+  .ok{color:var(--green)}.bad{color:var(--red)}.warn{color:var(--amber)}
+  footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <h1>Royalty Check</h1>
+  <p class="lede">Your royalty decimal is how your share is calculated. Enter the three inputs and see the decimal you'd expect, next to the one on your statement. <b>Runs in your browser: nothing you enter is uploaded.</b></p>
+
+  <section class="card">
+    <div class="row">
+      <div><label>Net mineral acres</label><input type="number" id="nma" inputmode="decimal" placeholder="20"></div>
+      <div><label>Spacing / unit acres</label><input type="number" id="sua" inputmode="decimal" placeholder="640"></div>
+    </div>
+    <div class="row">
+      <div><label>Lease royalty (fraction or decimal, e.g. 3/16 or 0.1875)</label><input type="text" id="rf" placeholder="3/16"></div>
+      <div><label>Decimal on your statement</label><input type="text" id="stmt" inputmode="decimal" placeholder="0.00585938"></div>
+    </div>
+    <div><button id="run">Check</button> <button class="ghost" id="sample">Try a sample</button></div>
+    <p class="warn" id="err" hidden style="margin-top:12px"></p>
+  </section>
+
+  <section id="out" class="card" hidden aria-live="polite">
+    <p style="color:var(--dim);margin:0">Expected decimal (8 places)</p>
+    <p class="big" id="expected"></p>
+    <p id="verdict"></p>
+    <p style="color:var(--dim);font-size:.9rem" id="detail"></p>
+  </section>
+
+  <footer>
+    A checklist, not legal, title or financial advice: a difference means re-check the inputs with the operator, and if it stands, a landman or attorney — not that anything is wrong. Nothing you enter leaves your browser. · <a href="/permit-watch/">Permit Watch</a> · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </footer>
+</main>
+<script type="module">
+import { checkRoyalty } from './js/engine.mjs';
+const $ = (id) => document.getElementById(id);
+let sent = false;
+function frac(s) {
+  s = String(s || '').trim();
+  if (s.includes('/')) { const [a, b] = s.split('/').map(Number); return b ? a / b : NaN; }
+  return Number(s);
+}
+function run(isSample) {
+  $('err').hidden = true;
+  try {
+    const r = checkRoyalty({
+      netMineralAcres: Number($('nma').value),
+      spacingUnitAcres: Number($('sua').value),
+      royaltyFraction: frac($('rf').value),
+      statementOwnerDecimal: Number($('stmt').value),
+    });
+    $('expected').textContent = r.expectedDecimal.toFixed(8);
+    const good = r.flag === 'ok';
+    $('verdict').innerHTML = good
+      ? '<span class="big ok">✓ Matches</span>'
+      : '<span class="big warn">⚠ Differs</span>';
+    $('detail').textContent = (good ? '' : `Statement: ${r.statementOwnerDecimal} · difference ${r.decimalVariance.toExponential(2)}. `) + r.message;
+    $('out').hidden = false;
+    $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!isSample && !sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'royalty-check', event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+  } catch (e) {
+    $('out').hidden = true;
+    $('err').hidden = false;
+    $('err').textContent = 'Check your inputs: ' + e.message;
+  }
+}
+$('run').addEventListener('click', () => run(false));
+$('sample').addEventListener('click', () => {
+  $('nma').value = 20; $('sua').value = 640; $('rf').value = '3/16'; $('stmt').value = '0.00585938';
+  run(true);
+});
+</script>
+</body>
+</html>

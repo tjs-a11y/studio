@@ -132,6 +132,18 @@
       ]
     },
     {
+      "id": "haul-audit",
+      "name": "Haul Audit",
+      "tagline": "Check a broker settlement and a factoring deposit against what you agreed — on your device. A checklist, not advice.",
+      "plans": []
+    },
+    {
+      "id": "royalty-check",
+      "name": "Royalty Check",
+      "tagline": "Recompute your expected mineral-royalty decimal and see if your statement matches. On-device; not title or financial advice.",
+      "plans": []
+    },
+    {
       "id": "audit-kit",
       "name": "New Authority Audit Kit",
       "tagline": "Get ready for your FMCSA new entrant safety audit, with every form filled in.",
