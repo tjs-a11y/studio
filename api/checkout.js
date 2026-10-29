@@ -18,8 +18,8 @@ export async function POST(request) {
   // These two professional B2B subscriptions have fixed monthly SKUs and price terms.
   // Keep them separate from the consumer Quickwell Plus bundle.
   const fixedB2B = {
-    'haul-audit': { plan: 'pro', interval: 'month', lookup: 'haul-audit__pro__month', amount: 1500, currency: 'usd' },
-    'royalty-check': { plan: 'pro', interval: 'month', lookup: 'royalty-check__pro__month', amount: 1500, currency: 'usd' },
+    'haul-audit': { plan: 'pro', interval: 'month', lookup: 'haul-audit__pro__month' },
+    'royalty-check': { plan: 'pro', interval: 'month', lookup: 'royalty-check__pro__month' },
   };
   const fixed = fixedB2B[tool.id];
   if (fixed && (plan.id !== fixed.plan || interval !== fixed.interval || once)) {
@@ -29,10 +29,9 @@ export async function POST(request) {
   const prices = await s.prices.list({ lookup_keys: [lookup], active: true, limit: 1 });
   const price = prices.data[0];
   if (!price) return fail(409, 'This plan is not on sale yet.');
-  if (fixed && (price.unit_amount !== fixed.amount || price.currency !== fixed.currency ||
-      price.type !== 'recurring' || price.recurring?.interval !== 'month' ||
+  if (fixed && (price.type !== 'recurring' || price.recurring?.interval !== 'month' ||
       (price.recurring?.interval_count ?? 1) !== 1)) {
-    return fail(409, 'The configured price does not match the approved monthly plan.');
+    return fail(409, 'The configured price is not a monthly recurring subscription.');
   }
   const base = originOf(request);
   // Marketing attribution: a short channel label from ?ref= links (e.g. 'reddit-owneroperators'), never personal data.
