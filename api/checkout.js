@@ -28,8 +28,8 @@ export async function POST(request) {
     client_reference_id: tool.id,
     metadata: { tool: tool.id, plan: plan.id, ...(ref ? { ref } : {}) },
     ...(once
-      ? { customer_creation: 'always', payment_intent_data: { metadata: { tool: tool.id, plan: plan.id } } }
-      : { subscription_data: { metadata: { tool: tool.id, plan: plan.id }, ...(plan.trialDays ? { trial_period_days: plan.trialDays } : {}) } }),
+      ? { customer_creation: 'always', payment_intent_data: { metadata: { tool: tool.id, plan: plan.id, ...(ref ? { ref } : {}) } } }
+      : { subscription_data: { metadata: { tool: tool.id, plan: plan.id, ...(ref ? { ref } : {}) }, ...(plan.trialDays ? { trial_period_days: plan.trialDays } : {}) } }),
     allow_promotion_codes: true,
     integration_identifier: `${tool.id}_${randomLetters(8)}`,
     // Tax is only switched on once a tax registration exists (TAX_ENABLED=1); otherwise Stripe would silently collect $0.
