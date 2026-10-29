@@ -177,3 +177,38 @@ A niche is not launch-ready until it has:
 8. Pilot acceptance criteria, error-rate targets, and a support/incident process.
 
 **Roadmap principle:** Validate the pain and source-data access before committing to implementation. “Low competition,” “high margin,” and “zero-human-input” are hypotheses to test, not established market facts.
+
+
+---
+
+## Pre-launch Telemetry Cold Storage — Baseline (2026-10-29)
+
+**Freeze window:** No backend/API changes and no merge to the production default branch before 2026-11-03. This entry is committed only to branch `telemetry/prelaunch-cold-storage-2026-10-29`; it is not a production deployment.
+
+### Baseline telemetry health
+
+| Check | Observation | Status |
+|---|---|---|
+| `js/pro.js` outbound tier click events | Static source review found an anonymous `/api/event` payload with `event: "upgrade"` inside `Studio.upgrade()`. No `click_operator` or `click_manager` event names were present in the reviewed file. | **FAIL — requested click events not implemented in reviewed source** |
+| Operator/manager tier CTAs on the three B2B pages | Source links use `href="#pricing"` / in-page navigation; no click telemetry handler was visible in the reviewed page excerpts. | **FAIL — no click event verified** |
+| Expected payload coverage | Required pairs are `port-watcher`, `hydro-flow`, `scale-audit` × `click_operator`, `click_manager`. No evidence that these six events are currently emitted. | **BLOCKED / not instrumented** |
+| `/api/stats` interest counters | The prior read-only attempt could not access `https://quickwell.app/api/stats`; existence/value of `port-watcher.interest`, `hydro-flow.interest`, and `scale-audit.interest` is unverified. | **BLOCKED — unknown, not zero** |
+| Vercel route-specific analytics | Prior query for 2026-10-22 through 2026-10-29 returned no rows for filtered route pageviews/custom events. This does not establish zero visitors or zero demand. | **UNKNOWN / not instrumented or not returned** |
+| Google Search Console traction | No authenticated GSC query data was available during this check. No impressions, clicks, CTR, or average positions are asserted. | **BLOCKED — connection/data unavailable** |
+| Runtime event delivery / fire-and-forget reliability | No browser interaction test, network request capture, or automated test run was performed in this check. | **NOT RUN** |
+| Test suite / build checks | `npm test` and `node scripts/sitemap.mjs` were not run in this check. | **NOT RUN** |
+
+### Required GSC queries
+
+Track exact-query data independently from Vercel analytics:
+- `FMC Part 541 container billing rules drayage`
+- `fracking water meter CSV flow-rate reconciliation`
+- `timber mill scale ticket cull deduction verification`
+
+### Daily evidence record template
+
+For each shift, append a new dated record with: retrieval timestamp and timezone; source URL/system; exact query/event/counter name; query window; observed count or `UNKNOWN/BLOCKED`; comparison window; source link or evidence reference; test status; blockers; and the commit SHA containing the log. Keep raw business inputs and personal identifiers out of telemetry and logs. Never interpret missing rows as zero demand.
+
+### Freeze compliance
+
+As of this baseline, no code or API files were changed. The only repository change for this task is this cold-storage log on a non-production branch. Do not merge or deploy it before the freeze lift on 2026-11-03.
