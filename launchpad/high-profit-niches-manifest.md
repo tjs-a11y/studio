@@ -177,3 +177,38 @@ A niche is not launch-ready until it has:
 8. Pilot acceptance criteria, error-rate targets, and a support/incident process.
 
 **Roadmap principle:** Validate the pain and source-data access before committing to implementation. “Low competition,” “high margin,” and “zero-human-input” are hypotheses to test, not established market facts.
+
+
+---
+
+## 2026-10-30 — Morning telemetry / traction cold-storage record
+
+**Retrieval timestamp:** 2026-10-30 09:02 America/Chicago (14:02 UTC)  
+**Repository source:** `tjs-a11y/studio`, default branch at `4ee69abcb09c59950295db96629b547f072ab065`; comparison source: draft PR #4, `refs/pull/4/head`.  
+**Code-freeze status:** INTACT. This is a log-only commit on `ops/cold-storage-2026-10-30-morning`; no API or production code changed.
+
+| Check | Source / window | Observed result | Status |
+|---|---|---|---|
+| Port Watcher page discovery | `port-watcher/index.html`, current main | Canonical `https://quickwell.app/port-watcher/`; Vercel Web Analytics script present. | PASS — source |
+| Hydro Flow page discovery | `hydro-flow/index.html`, current main | Canonical `https://quickwell.app/hydro-flow/`; Vercel Web Analytics script present. | PASS — source |
+| Scale Audit page discovery | `scale-audit/index.html`, current main | Canonical `https://quickwell.app/scale-audit/`; Vercel Web Analytics script present. | PASS — source |
+| Required tier-click events on production source | Current main pages + `js/pro.js` | The three current-main pages do not contain `data-tier-click` tier labels and do not load `/js/pro.js`. | FAIL — production source |
+| Tier-click implementation in PR #4 | PR #4 source: `js/pro.js`, all three landing pages, `api/event.js` | Exact anonymous `{tool,event}` payload for `click_operator` / `click_manager`; server rejects extra fields for these events. | PASS — static source review; not production |
+| Aggregate interest counters | PR #4 `api/stats.js` | PR source exposes total and UTC-day `interest`, `click_operator`, and `click_manager` counters for all three routes. Current main does not expose these counters. | PASS — PR source; production BLOCKED |
+| PR regression tests | PR #4 `test/b2b-launch-gates.test.mjs` | Regression tests exist for payload allow-list, counters, checkout price guard, browser event hooks, page labels and local history gating. Not executed in this shift. | BLOCKED — runtime test evidence |
+| Vercel Web Analytics counts | Required windows: 2026-10-23–29 vs 2026-10-16–22; exact route filters | Route-level pageviews, visitors and custom events were not retrieved in this shift. | UNKNOWN — not queried |
+| `/api/stats` live snapshot | Retrieval timestamp above; aggregate interest counters | Live endpoint was not queried. Current-main `api/stats.js` source has no pre-launch interest vector. Do not interpret missing fields as zero. | BLOCKED / UNKNOWN |
+| Google Search Console | Exact three CEO queries; last 7 days vs previous 7 days | No authenticated GSC query export/connection available in this shift. | BLOCKED — impressions/clicks/CTR/position UNKNOWN |
+| Search/index status | Three exact landing routes | Canonical and sitemap presence were not independently rechecked against a search-engine index. | UNKNOWN — no indexing claim |
+| Stripe configuration | Haul Audit / Royalty Check monthly lookup keys | PR #4 source pins `haul-audit__pro__month` and `royalty-check__pro__month`, and rejects prices not recurring monthly, USD 1500 minor units. Authenticated Stripe-side prices not verified. | PASS — source guard; live config BLOCKED |
+
+**Comparable niche ranking:** Not rankable. No route-level event counts and no comparable click-through denominator were retrieved.  
+**Observed counts:** UNKNOWN for all three routes and all six tier-click events; no zero is inferred.  
+**Source URLs:**  
+- https://github.com/tjs-a11y/studio/commit/4ee69abcb09c59950295db96629b547f072ab065  
+- https://github.com/tjs-a11y/studio/pull/4  
+- https://quickwell.app/port-watcher/  
+- https://quickwell.app/hydro-flow/  
+- https://quickwell.app/scale-audit/  
+
+**Smallest next action:** after the 2026-11-03 freeze lift, run the PR regression suite in a checked-out environment, obtain authenticated Stripe-side price verification, then request review/merge only if every release gate passes. Until then, keep PR #4 draft and do not deploy the backend changes.
