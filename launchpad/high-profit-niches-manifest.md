@@ -212,3 +212,77 @@ For each shift, append a new dated record with: retrieval timestamp and timezone
 ### Freeze compliance
 
 As of this baseline, no code or API files were changed. The only repository change for this task is this cold-storage log on a non-production branch. Do not merge or deploy it before the freeze lift on 2026-11-03.
+
+
+---
+
+## Quickwell Community Watch & Acquisition Gate Log — 2026-10-29
+
+**Run timestamp:** 2026-10-29 19:03 America/Chicago  
+**Observed production source commit:** `dbc09a8f0aa12694a6f76017ee3866a74631cdd5`  
+**Community search window:** 2026-10-20 through 2026-10-29 inclusive.  
+**Repository log branch:** `telemetry/prelaunch-cold-storage-2026-10-29`  
+**Policy:** passive public research only; no posts, replies, DMs, account creation, or external outreach.
+
+### Community signals (indexed search snippets; thread pages were not opened live in this run)
+
+Four newly surfaced, relevant public discussion candidates were retained by topic and URL only. No usernames, handles, contact details, or consumer profiles were retained. Search-engine raw row counts were not exposed consistently, so they are **UNKNOWN** rather than estimated.
+
+1. **Freight/accessorial exposure** — Reddit, r/FreightBrokers, “What is a shipper ‘red flag’ that makes you run away from a quote request immediately?”, dated 2026-10-18. URL: https://www.reddit.com/r/FreightBrokers/comments/1x9fts9/what_is_a_shipper_red_flag_that_makes_you_run/ . Snippet: a tight appointment window can create “$2,000 in detention/layover headaches for a $50 margin.” Relevance: written appointment/accessorial terms and detention exposure. Best matching guide: https://quickwell.app/guides/trucking-settlement-disputes.html. Draft direction: clarify appointment windows, free time, notice requirements, evidence, approval authority, and written detention/layover rates before dispatch. No Quickwell link because current community promotion rules were not verified.
+2. **Lease renewal/early termination** — Reddit, r/Tenant, “How can I get out of this renewal lease?”, dated 2026-10-22. URL: https://www.reddit.com/r/Tenant/comments/1xcsmpx/how_can_i_get_out_of_this_renewal_lease/ . Snippet concerns a signed renewal and an early-termination clause. Draft direction: review termination, assignment/subletting, notice, buyout and mitigation language; jurisdiction and the exact lease matter; preserve written communications and consult local tenant legal aid. No product link or legal conclusion.
+3. **Post-expiration rent dispute** — Reddit, r/Renters, “[CA] Lease Expired, But Landlord Says We Still Owe Rent”, dated 2026-10-27. URL: https://www.reddit.com/r/Renters/comments/1xggknw/ca_lease_expired_but_landlord_says_we_still_owe/ . Snippet concerns a demand for rent after move-out tied to a claimed notice period. Draft direction: compare the lease notice clause, written notice/acknowledgment, move-out timeline and local California tenant guidance; ask for an itemized written basis and obtain qualified local advice. No product link.
+4. **Repair documentation** — Reddit, r/NYCapartments, “Rent stabilized unit - landlord refusing to do repairs!”, dated 2026-10-27. URL: https://www.reddit.com/r/NYCapartments/comments/1xgs5h1/rent_stabilized_unit_landlord_refusing_to_do/ . Snippet concerns recurring leaks and an upcoming renewal. Draft direction: keep dated photos, written repair requests, replies and 311/HPD reference numbers; ask the local housing agency about the proper inspection/complaint route. No product link.
+
+**Dedupe:** previously alerted threads re-surfaced in search and were not counted as new: r/OwnerOperators detention/rate-con discussion (2026-10-22), r/HotShotTrucking broker nonpayment discussion (2026-10-25), and r/mineralrights “Mineral Royalty Decimal Miscalculations” (2026-10-27). The mineral-rights thread remains relevant but is not a new alert. No new qualifying royalty-decimal thread was found in the searched results. The specified TheTruckersReport Freight Broker Forum, Freight Relocators Owner Operators, r/Truckers, r/Trucking, Mineral Rights Forum categories, and GoHaynesvilleShale searches yielded no additional newly qualified thread in the accessible indexed results. United Mineral Network was excluded. All community candidates are **snippet-only, not live-open confirmed**; re-open the thread and check current rules before any human-approved response.
+
+### Pre-launch telemetry
+
+| Check | Result |
+|---|---|
+| `js/pro.js` | Blob SHA `ed6b2b8691dada808bade8fa8c7331b615df2c89`. It emits an anonymous `upgrade` event with tool/plan, but contains no `click_operator` or `click_manager` hooks. |
+| Port Watcher page | Blob SHA `157ee7ffa728b5e561218d42e2aa61fb70019d54`; no requested click event or `/api/event` handler found in source. Tier buttons are in-page anchors. **FAIL**. |
+| Hydro Flow page | Blob SHA `53c5a38b456f380f1fc4a53551a9fb07f878064d`; same finding. **FAIL**. |
+| Scale Audit page | Blob SHA `3e238970f151e6bc8a0e2c0a2017d3ef43b2e56d`; same finding. **FAIL**. |
+| `api/event.js` | Blob SHA `6699559890ccfc9b017c456084b81cc099a11203`. Accepted event names are `check`, `waitlist`, `outbound`, `upgrade`; allowed non-catalog site is only `northstar`, with target `freightsidekick`. The required B2B tool IDs and `click_operator`/`click_manager` event names would be rejected by the current API contract. **FAIL / API contract mismatch**. |
+| `api/stats.js` | Blob SHA `1381be3e6877d52a7afc6da1a82a0f357e7ee31a`. It reports catalog-tool checks/upgrades/subscriptions and the `northstar:freightsidekick` outbound pair; it does not define `port-watcher.interest`, `hydro-flow.interest`, or `scale-audit.interest`. It returns `enabled:false` when KV/Upstash credentials are absent. Live configuration and endpoint response remain **UNKNOWN/BLOCKED**. |
+| Vercel Web Analytics, 2026-10-22 through 2026-10-29 | Filtered route pageviews for `/port-watcher/`, `/hydro-flow/`, `/scale-audit/` returned 0; custom event count for `click_operator` and `click_manager` returned 0. This is the observed Vercel analytics result only, **not evidence of zero market demand**. |
+| Google Search Console | No connected/authenticated GSC query data available. Impressions, clicks, CTR, and positions are **UNKNOWN/BLOCKED**. Exact-query list retained in the prior monitoring instructions. |
+| Live `/api/stats` | Not successfully retrieved through the available read-only interface. Do not infer counter values. |
+
+### Local processing / quota privacy gate
+
+- Haul Audit source and Royalty Check source each define `FREE_PER_DAY = 3`, store the daily counter in tool-specific `localStorage`, key the date using local year/month/day, keep results visible after the third check, and show a $15/month Pro modal. Source-level check only; runtime interaction was **NOT RUN**.
+- Their anonymous check payload is only `{tool, event:"check"}`; `js/pro.js` upgrade payload is `{tool, event:"upgrade", plan}`. No calculation inputs or file contents appear in these payloads.
+- Year-End Vendor Check source exists at canonical `https://quickwell.app/vendor-check/` (not `/year-end-vendor-check/`), blob SHA `afc45b2942f3b25d0fc8b7bbe60be5e2081437cd`. The source reads CSV/text files in-browser and its check event contains only tool/event labels. The live page was not confirmed open in this run, so no promotional claim is approved yet.
+- Bill Radar, Before You Sign, Fair Price, Proof, and Fuelgauge pages were live-opened and their current copy states on-device processing. Bill Radar is a user-input forecast; the page says its monthly watch/roll-off email feature is “Coming soon,” not active. Proof's current marketing wording about an “untouched original” must not be repeated as a guarantee; describe only local timestamp/fingerprint evidence if needed.
+
+### Stripe checkout release gate
+
+`api/checkout.js` blob SHA `d448f5c568b7a3298221476197506a1af5c65303` hard-codes `haul-audit__pro__month` and `royalty-check__pro__month`, rejects invalid plan/interval combinations, requires an active lookup result, and checks recurring monthly interval/count. However, it does **not** fail closed on `price.unit_amount !== 1500` or `price.currency !== "usd"`. Stripe-side existence/active status/amount/currency could not be verified with authenticated Stripe access. **BLOCKED**.
+
+**Post-freeze minimal guard proposal (not implemented):** for these two fixed SKUs require `price.type === "recurring"`, `price.unit_amount === 1500`, `price.currency === "usd"`, `price.recurring.interval === "month"`, and `interval_count === 1`; reject otherwise with 409. Test exact $15 USD/month pass; missing price; wrong amount below/above $15; wrong currency; one-time price; yearly price; interval_count other than 1; wrong plan; wrong interval; and arbitrary/fallback lookup attempts. Do not change API files or deploy before the freeze lift.
+
+### Sitemap, build, and test gate
+
+- `sitemap.xml` references `sitemap-main.xml`, `sitemap-briefs.xml`, and `sitemap-learn.xml`. Static source counts: 57 main URLs, 52 briefs URLs, 95 learn URLs. `/vendor-check/` is included in the main sitemap and its page canonical matches that URL. The main generator `scripts/sitemap.mjs` reads canonical links for main pages and indexes other root `sitemap-*.xml` files; source for generating the briefs/learn maps was not located through the available file search, so exhaustive path/canonical validation remains **BLOCKED**.
+- A repository checkout was attempted, but `git clone --depth 1 https://github.com/tjs-a11y/studio.git /tmp/studio` failed with exit code 128 because this runtime could not resolve `github.com`. Therefore `npm test`, `node scripts/sitemap.mjs`, full link checks, and browser/runtime tests were **NOT RUN**. IndexNow handshake was not checked in this run; search-engine indexing is **UNKNOWN**.
+
+### Acquisition tracks A–G
+
+**A — FMCSA new authority:** Official FMCSA Open Data documentation confirms daily modern MOTUS operating-authority datasets and a daily `Motus AuthHist` change feed. The historical Daily Decisions page now covers only 2022-09-27 through 2026-05-15. The current daily data records could not be retrieved and cross-checked in this run. Qualified carriers: 0; verified contacts: 0; outreach drafts/sent: 0. No carrier names or authority grants are asserted. Official sources: https://www.fmcsa.dot.gov/registration/fmcsa-data-dissemination-program and https://www.fmcsa.dot.gov/registration/daily-fmcsa-registration-decisions-letters-certificates-permits-and-licenses .
+**B — Texas permits:** RRC's official download page identifies a nightly Drilling Permit Master and Trailer daily file with permit numbers, issue/amend/extend dates, lease/location and coordinates. The file retrieval timed out; no approved permits from the last 7 days were extracted, so raw/unique permit counts are **UNKNOWN**, not zero. No interactive high-volume scraping was performed. Source: https://www.rrc.texas.gov/resource-center/research/data-sets-available-for-download/ . RRC explicitly warns automated high-volume queries may degrade its query system: https://www.rrc.texas.gov/resource-center/research/research-queries/ .
+**C — Small fleets/dispatch firms:** No approved connected B2B CRM/prospecting source was available and no fresh public-company contact-page shortlist was completed. Identified/verified prospects: 0; personalized drafts: 0; sent/accepted/bounced/replied/opt-outs: 0. No bulk or automated outreach.
+**D — 1099/vendor check:** IRS official guidance confirms the $2,000 reporting threshold for Form 1099-NEC services and certain other payments made after 2025-12-31; payment type and exceptions still matter. Sources: https://www.irs.gov/faqs/small-business-self-employed-other-business/form-1099-nec-independent-contractors/form-1099-nec-independent-contractors and https://www.irs.gov/irb/2026-19_IRB . Correct source canonical is `/vendor-check/`; live behavior not verified in this run, so do not promote yet.
+**E — Bill Radar:** CPUC's SDG&E TY2028 General Rate Case A.26-06-015 is an active **request**, filed 2026-06-15, seeking an 8.1% increase over the authorized 2027 revenue requirement, requested for 2028-01-01; it is not an approved rate change. Source: https://webproda.cpuc.ca.gov/industries-and-topics/electrical-energy/electric-rates/general-rate-case/san-diego-gas-and-electric-grc-proceedings . No newly confirmed effective rate order was established in this run.
+**F — Before You Sign:** Live page confirmed; source states contract text stays in-browser and it is not legal advice. No promotional links added to lease discussions because current community rules were not verified.
+**G — Fair Price/Proof:** Both live pages confirmed and state on-device processing. No new suitable active repair/contractor/moving estimate question was found in the accessible result set; no promotion or claims about quote padding, fraud, legality, or guaranteed authenticity.
+
+### Funnel and run status
+
+- Newly surfaced relevant community candidates: 4 (snippet-only, not live-open confirmed); previously alerted duplicates suppressed: 3.
+- Educational response drafts prepared: 4; promotional links included in drafts: 0; posts/replies/DMs published: 0.
+- Carrier prospects: 0; verified business contacts: 0; outreach drafts: 0; sent/accepted/bounced/replied/opt-outs: 0.
+- Texas permit records extracted: 0; qualifying permit count: **UNKNOWN** because source retrieval timed out.
+- Vercel filtered pageviews: 0 observed; required click events: 0 observed; this does not prove zero demand.
+- GSC impressions/clicks/CTR/positions, live stats counters, Stripe-side price state, live vendor-check behavior, indexing, and IndexNow status: **UNKNOWN/BLOCKED**.
+- Production code/API files changed: **0**. Production merges/deployments performed: **0**. Freeze remains intact through 2026-11-02 inclusive.
