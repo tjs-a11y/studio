@@ -29,6 +29,24 @@
     } catch (e) { try { alert(msg); } catch (e2) {} }
   }
   try { window.addEventListener('error', function (e) { banner('This page hit an error: ' + ((e && e.message) || 'script error') + '. Tell support.', { error: true }); }); } catch (e) {}
+  // Pre-launch B2B tier clicks: only the tool and tier event are sent; never read form fields or business records.
+  const PRELAUNCH_TIER_TOOLS = new Set(['port-watcher', 'hydro-flow', 'scale-audit']);
+  function trackTierClick(event) {
+    try {
+      const link = event.target && event.target.closest ? event.target.closest('[data-tier-click]') : null;
+      if (!link) return;
+      const tierTool = link.getAttribute('data-tool') || '';
+      const tier = link.getAttribute('data-tier') || '';
+      if (!PRELAUNCH_TIER_TOOLS.has(tierTool) || (tier !== 'operator' && tier !== 'manager')) return;
+      fetch('/api/event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tool: tierTool, event: 'click_' + tier }),
+        keepalive: true,
+      }).catch(function () {});
+    } catch (e) { /* analytics must never interrupt navigation */ }
+  }
+  try { document.addEventListener('click', trackTierClick, true); } catch (e) {}
   // Where did this visitor come from? Links we share carry ?ref=<channel>; it rides along to checkout so
   // we learn which channels bring buyers. A short label only: no cookies, no tracking across sites.
   const REF = 'studio-ref';
