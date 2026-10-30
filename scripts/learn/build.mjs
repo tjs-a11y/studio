@@ -117,6 +117,16 @@ const TOOLS = [
   ['Footsure', '/footsure/', 'Runs the three CDC STEADI fall-risk screening tests (30-second chair stand, 4-stage balance, Timed Up and Go) with a phone and a helper, and compares each result with the CDC cutoffs from the official 2017 forms. Optional on-device camera counting (beta); the video never leaves the phone. Free checks; Family plan $2.99/month or $24.99/year (or Quickwell Plus) adds monthly re-checks, a trend chart, encrypted family sharing and a printable summary. General wellness, not a medical device or diagnosis.'],
   ['Quickwell Play (Echo, Swift, Linkr)', '/play/', 'Three short daily browser games: Echo (repeat growing tile sequences; memory), Swift (fast attention challenges with combo multipliers; focus) and Linkr (draw a path whose numbers add up to a target; logic). A free daily challenge in each, the same for everyone, plus 3 free practice runs a day; Brain Pass ($2.99/month, $19.99/year or $29.99 once) adds unlimited practice, all difficulties and extra modes. Installable, works offline, progress stays on the device. The games train the skills they practise; no claim that they raise general intelligence.'],
 ];
+// Auto-include every catalog tool that isn't already given a rich blurb above, so llms.txt
+// advertises the whole catalog to AI-search assistants and never goes stale as tools launch.
+try {
+  const catalogTools = JSON.parse(readFileSync(join(root, 'catalog', 'tools.json'), 'utf8')).tools;
+  const have = new Set(TOOLS.map((t) => t[1]));
+  for (const t of catalogTools) {
+    const path = `/${t.id}/`;
+    if (!have.has(path)) { TOOLS.push([t.name, path, t.tagline || '']); have.add(path); }
+  }
+} catch { /* catalog optional */ }
 const secs = sections;
 const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
 const llms = `# Quickwell
