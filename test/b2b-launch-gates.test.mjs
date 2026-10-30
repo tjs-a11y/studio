@@ -142,7 +142,10 @@ test('Haul Audit and Royalty Check preserve visible results and save history onl
     assert.ok(html.includes('const FREE_PER_DAY = 3'));
     assert.ok(html.includes('getFullYear()') && html.includes('getMonth()') && html.includes('getDate()'));
     assert.ok(html.includes('Your result is always free and always visible'));
-    assert.match(html, /if \\(PRO\\) \\{\\s*const h = ls\\.get\\('pro-history', \\[\\]\\);[\\s\\S]*?ls\\.set\\('pro-history'/);
+    const historyWrite = html.indexOf("ls.set('pro-history'");
+    const proGuard = html.lastIndexOf("if (PRO) {", historyWrite);
+    assert.ok(proGuard >= 0 && historyWrite > proGuard && historyWrite - proGuard < 300);
+    assert.ok(html.slice(proGuard, historyWrite).includes("const h = ls.get('pro-history'"));
     assert.ok(html.includes("ls.get('pro-history'"));
     assert.ok(!html.includes("ls.set('history'"));
     assert.ok(!html.includes('id="buyY"'));
