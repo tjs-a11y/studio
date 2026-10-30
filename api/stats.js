@@ -4,6 +4,8 @@
 import { json, tools } from './_lib/core.js';
 
 const day = () => new Date().toISOString().slice(0, 10);
+const PRELAUNCH_TIER_TOOLS = ['port-watcher', 'hydro-flow', 'scale-audit'];
+const INTEREST_PER = 6;
 
 function store() {
   const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
@@ -33,6 +35,7 @@ export async function GET() {
   const OUTBOUND = [['northstar', 'freightsidekick']];
   // Per tool: free uses (checks), purchase intent (upgrade_clicks), and purchases (subs) — the funnel the growth sprint optimizes.
   const PER = 6;
+  const interestStart = ids.length * PER + OUTBOUND.length * 2;
   const cmds = [
     ...ids.flatMap((id) => [
       ['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`],
@@ -40,6 +43,11 @@ export async function GET() {
       ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
     ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
+    ...PRELAUNCH_TIER_TOOLS.flatMap((id) => [
+      ['GET', `count:${id}:interest`], ['GET', `count:${id}:interest:${today}`],
+      ['GET', `count:${id}:click_operator`], ['GET', `count:${id}:click_operator:${today}`],
+      ['GET', `count:${id}:click_manager`], ['GET', `count:${id}:click_manager:${today}`],
+    ]),
   ];
   let res;
   try { res = await run(cmds); } catch { return json({ enabled: true, error: 'unavailable' }, 200); }
@@ -60,6 +68,15 @@ export async function GET() {
     const b = ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, total_subs, tools: out, outbound },
+  const interest = {};
+  PRELAUNCH_TIER_TOOLS.forEach((id, i) => {
+    const b = interestStart + i * INTEREST_PER;
+    interest[id] = {
+      interest: num(res[b]), interest_today: num(res[b + 1]),
+      click_operator: num(res[b + 2]), click_operator_today: num(res[b + 3]),
+      click_manager: num(res[b + 4]), click_manager_today: num(res[b + 5]),
+    };
+  });
+  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, total_subs, tools: out, interest, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }
