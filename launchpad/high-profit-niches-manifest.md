@@ -286,3 +286,60 @@ Four newly surfaced, relevant public discussion candidates were retained by topi
 - Vercel filtered pageviews: 0 observed; required click events: 0 observed; this does not prove zero demand.
 - GSC impressions/clicks/CTR/positions, live stats counters, Stripe-side price state, live vendor-check behavior, indexing, and IndexNow status: **UNKNOWN/BLOCKED**.
 - Production code/API files changed: **0**. Production merges/deployments performed: **0**. Freeze remains intact through 2026-11-02 inclusive.
+
+
+---
+
+## Pre-launch Telemetry Daily Vector — 2026-10-29
+
+**Retrieved:** 2026-10-29 19:23:43 America/Chicago  
+**Production project:** `quickwell.app` / Vercel project `prj_kJzxHJOsGda7XJ24vTbYwPUA3I0N`  
+**Observation windows:** last 7 days = 2026-10-22 19:23:43–2026-10-29 19:23:43 America/Chicago; prior 7 days = 2026-10-15 19:23:43–2026-10-22 19:23:43 America/Chicago.
+
+### Aggregate measurements
+
+| Source / metric | Last 7 days | Prior 7 days | Interpretation |
+|---|---:|---:|---|
+| Vercel site-wide visitors / pageviews (route dimension returned blank route) | 18 / 20 | 43 / 132 | Overall project traffic only; cannot attribute to a niche. |
+| Vercel pageviews for `/port-watcher/` | no row | no row | No path record returned; not evidence of zero demand. |
+| Vercel pageviews for `/hydro-flow/` | no row | no row | No path record returned; not evidence of zero demand. |
+| Vercel pageviews for `/scale-audit/` | no row | no row | No path record returned; not evidence of zero demand. |
+| Vercel custom events on the three B2B routes | no rows | no rows | No valid event numerator; CTR velocity cannot be calculated. |
+
+Vercel queries used route-filtered `requestPath` and `eventName` dimensions. Aggregate site totals were returned with an empty `route` dimension; they are not route-level traffic.
+
+### `/api/stats` snapshot
+
+Source: `metrics/stats.json` (blob `1ba1de20bc867811b5a9ddb3cbc521dc806b7d98`), fetched timestamp `2026-10-29T17:03:29.449Z`, endpoint `https://quickwell.app/api/stats`, `enabled:true`.
+
+- `total_checks=0`; `total_subs=0`.
+- Haul Audit: `checks=0`, `upgrade_clicks=1`, `subs=0`.
+- Royalty Check: `checks=0`, `upgrade_clicks=1`, `subs=0`.
+- `port-watcher`, `hydro-flow`, and `scale-audit` are absent from the returned tool map. Their `.interest` counters are **UNKNOWN / not instrumented**, not zero.
+- The two upgrade clicks are purchase-intent events, not paid conversions.
+
+### Search Console and path discovery
+
+- GSC exact-query impressions/clicks/CTR/position for the three required freight, water-volume, and timber queries: **BLOCKED**; no authenticated query-data connector/export was available.
+- `sitemap-main.xml` contains all three B2B landing URLs, and root `sitemap.xml` indexes `sitemap-main.xml`. This verifies sitemap inclusion only, not Google indexing.
+- No indexing status is asserted.
+
+### Source-level launch gates
+
+| Gate | Evidence | Status |
+|---|---|---|
+| Tier-click hooks | `js/pro.js` emits generic `upgrade`, not `click_operator` / `click_manager`; the three landing pages do not load `js/pro.js` and their tier CTAs are in-page `#pricing` anchors. | **FAIL** |
+| Event API support | `api/event.js` accepts `check`, `waitlist`, `outbound`, `upgrade`; no prelaunch tool IDs or requested tier events are accepted. | **BLOCKED** |
+| Stats counters | `api/stats.js` enumerates catalog tools only; no prelaunch `.interest` counters. | **BLOCKED** |
+| Local daily quota | Haul Audit and Royalty Check use localStorage and the visitor's local calendar date; results remain visible. | **PASS — source review only** |
+| Saved-history gating | Both pages write every free check into localStorage history even when `PRO=false`; saved-history feature is not properly gated. | **FAIL** |
+| Checkout lookup keys | Code pins Haul Audit to `haul-audit__pro__month` and Royalty Check to `royalty-check__pro__month`, monthly only. | **PASS — source review only** |
+| Checkout price guard | Code checks active recurring monthly interval but not `unit_amount=1500` and `currency=usd`; Stripe-side price configuration was not accessible. | **BLOCKED** |
+| Referral attribution | Client accepts only a short `?ref=` label (1–40 alphanumeric/underscore/hyphen), stores it in sessionStorage, and checkout code passes it to Session and subscription/payment-intent metadata. No entered commercial data is included. | **PASS — source review only** |
+| Runtime/build/tests | No checked-out Studio repository/runtime was available; `npm test`, `node scripts/sitemap.mjs`, and `node scripts/learn/build.mjs --check` were not run. | **NOT RUN** |
+
+### Niches and next evidence
+
+No defensible niche ranking by CTR velocity: all three routes lack returned route-level visits and click events, and no denominator/numerator pair exists. Keep the three tied as **undetermined**. Next action after freeze: implement and test the six anonymous tier-click events, expose aggregate interest counters, and fix free-history persistence plus the $15 USD checkout price guard.
+
+**Freeze:** intact. No production source/API files were changed for this record. This log remains on `telemetry/prelaunch-cold-storage-2026-10-29`; do not merge or deploy before 2026-11-03.
