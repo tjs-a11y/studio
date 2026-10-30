@@ -344,4 +344,4 @@ No defensible niche ranking by CTR velocity: all three routes lack returned rout
 
 **Freeze:** intact. No production source/API files were changed for this record. This log remains on `telemetry/prelaunch-cold-storage-2026-10-29`; do not merge or deploy before 2026-11-03.
 
-**Implementation prepared:** [Draft Studio PR #4](https://github.com/tjs-a11y/studio/pull/4) contains the proposed tier-click instrumentation, aggregate interest counters, daily history capture, Pro-only local history, monthly-only UI, and $15 USD checkout guard. It remains draft, unmerged, and undeployed; tests are added but `npm test` was not run in this environment.
+**Implementation prepared:** [Draft Studio PR #4](https://github.com/tjs-a11y/studio/pull/4) contains the proposed tier-click instrumentation, aggregate interest counters, daily history capture, Pro-only local history, monthly-only UI, and $15 USD checkout guard. It remains draft and unmerged. Vercel created a preview for the latest branch commit (still BUILDING, target=null) and a prior branch preview is READY; neither has a production alias. Tests are added but `npm test` was not run in this environment.
