@@ -1,9 +1,9 @@
 {
-  "fetched": "2026-10-29T17:03:29.449Z",
-  "date": "2026-10-29",
+  "fetched": "2026-10-30T16:48:24.062Z",
+  "date": "2026-10-30",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-10-29T17:03:29.385Z",
+  "generated": "2026-10-30T16:48:24.035Z",
   "total_checks": 0,
   "total_subs": 0,
   "tools": {
@@ -131,7 +131,7 @@
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 1,
-      "upgrade_clicks_today": 1,
+      "upgrade_clicks_today": 0,
       "subs": 0,
       "subs_today": 0
     },
@@ -139,7 +139,7 @@
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 1,
-      "upgrade_clicks_today": 1,
+      "upgrade_clicks_today": 0,
       "subs": 0,
       "subs_today": 0
     },
