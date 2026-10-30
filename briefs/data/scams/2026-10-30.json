@@ -1,0 +1,178 @@
+{
+ "brief": {
+  "subject": "FTC strikes back at imposters; health plan pitches under fire",
+  "headline": "FTC Removes 19 Fake FTC Websites as Imposter Scams Stay on Top",
+  "dek": "The FTC reports progress against impersonators, warns health plan marketers during open enrollment, and sues Dollar General over register prices.",
+  "lede": "The FTC says it has taken down 19 websites pretending to be the agency. Its enforcement has returned more than $80 million to consumers since its Impersonation Rule took effect in 2024.",
+  "sections": [
+   {
+    "heading": "Fake FTC Sites Taken Down",
+    "bullets": [
+     "19 websites posing as the FTC have been removed, so scammers keep borrowing the agency's name to look official.",
+     "More than $80 million in consumer refunds came from FTC impersonation cases since the 2024 rule took effect.",
+     "The FTC calls imposter scams the top reported fraud category, so treat surprise calls from 'officials' with suspicion.",
+     "Hang up and contact the agency yourself using a number you look up independently, never one the caller provides."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Health Plan Pitches Get Warnings",
+    "bullets": [
+     "25 companies selling or generating leads for health plans received FTC warning letters during open enrollment.",
+     "The letters flag claims about plan terms that may be deceptive, so double-check coverage details before signing up.",
+     "More letters will follow on a rolling basis, signaling the FTC is still watching this busy sales season."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Dollar General Sued Over Prices",
+    "bullets": [
+     "The FTC and 20 states allege Dollar General charged more at checkout than shelf tags and ads showed.",
+     "Regulators say the overcharges cost shoppers millions of dollars, so comparing your receipt to posted prices is worth the effort."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "Your Data May Set Your Price",
+    "bullets": [
+     "Nine airlines, ride-share and food-delivery firms were ordered to explain how personal data shapes what customers pay.",
+     "The FTC inquiry could reveal whether two shoppers see different prices for the same service."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "FTC removes 19 fake FTC websites, warns 25 health plan marketers during open enrollment, and sues Dollar General with 20 states over pricing."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-10-30T17:01:47.256Z",
+  "date": "2026-10-30",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC Staff Warn Marketers of Healthcare Plans and Lead Generators Not to Deceive Consumers about the Terms of the Advertised Plans",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-staff-warn-marketers-healthcare-plans-lead-generators-not-deceive-consumers-about-terms",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "With open enrollment season for healthcare plans in progress, Federal Trade Commission staff are sending warning letters to 25 companies that market or generate sales leads for healthcare plans. The letters put the companies on notice about deceptive or unfair claims that likely violate laws enforced by the Commission. The agency expects to send additional letters on a rolling basis. The letters a",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Highlights Efforts to Combat Imposter Scams and Protect Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-highlights-efforts-combat-imposter-scams-protect-consumers",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission released the following highlights from the agency’s ongoing efforts to combat impersonation scams and protect consumers, including removal of 19 FTC-imposter websites and enforcement actions resulting in more than $80 million in consumer redress since the FTC’s Impersonation Rule went into effect in 2024. “Imposter scams have been the top reported fraud category over t",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC and States Take Action Against Toast Inc. over Hidden and Unauthorized Fees, Deceptive Subscription and Cancellation Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-states-take-action-against-toast-inc-over-hidden-unauthorized-fees-deceptive-subscription",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, the People of the State of California by and through the Los Angeles County Counsel and San Francisco City Attorney, and the Attorneys General of the States of Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah, filed a lawsuit today against Toast Inc. and affiliated entities, alleging the restaurant software and fintech company saddles restaurants with hi",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Launches Personalized Pricing and Compensation Inquiry",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-launches-personalized-pricing-compensation-inquiry",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission today ordered nine major airlines, ride-sharing companies and food-delivery firms to provide detailed information that will allow the agency to study the use of personal data to set prices and compensation. “We intend to scrutinize the opaque methodology that some companies in these industries may be using to determine how much consumers pay or how much gig workers are",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC and State Partners Sue Dollar General for Charging Consumers More than Advertised for Many Products",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-state-partners-sue-dollar-general-charging-consumers-more-advertised-many-products",
+    "published": "2026-10-26T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, joined by 20 states, sued Dollar General Corporation for engaging in long-running deceptive pricing practices by routinely charging customers more at the register than the prices displayed on shelves, price tags and advertisements, costing consumers millions of dollars. Twenty states joined the FTC in filing a complaint, alleging that Dollar General has, for years, re",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "FBI IC3 alerts",
+    "title": "Suspicious Letters Containing White Powder Mailed to State and Local Election Officials, Media Organizations, and Public and Private Polling Companies",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023-2",
+    "published": "2026-10-23T18:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "FBI IC3 alerts",
+    "title": "Critical Vulnerability Alert: PHP Core",
+    "link": "https://www.ic3.gov/PSA/2026/PSA261023",
+    "published": "2026-10-23T17:30:00.000Z",
+    "snippet": "",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 2
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 5
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S2"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
