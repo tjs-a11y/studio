@@ -15,10 +15,14 @@ test('tier-click events accept only anonymous tool/event pairs', async () => {
   const seen = [];
   setEventStore(async (...commands) => { seen.push(...commands); return []; });
   try {
-    const response = await postEvent(req({ tool: 'port-watcher', event: 'click_operator' }));
-    assert.equal(response.status, 200);
-    assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:port-watcher:interest'));
-    assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:port-watcher:click_operator'));
+    for (const tool of ['port-watcher', 'hydro-flow', 'scale-audit']) {
+      for (const event of ['click_operator', 'click_manager']) {
+        const response = await postEvent(req({ tool, event }));
+        assert.equal(response.status, 200);
+        assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:' + tool + ':interest'));
+        assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:' + tool + ':' + event));
+      }
+    }
     assert.ok(seen.every((c) => typeof c[1] === 'string' && c[1].startsWith('count:')));
     assert.equal((await postEvent(req({ tool: 'haul-audit', event: 'click_operator' }))).status, 400);
     assert.equal((await postEvent(req({ tool: 'port-watcher', event: 'click_manager', email: 'a@b.co' }))).status, 400);
@@ -107,12 +111,16 @@ test('js/pro.js sends only the fire-and-forget tier event payload', () => {
     URL, Promise, console,
   };
   vm.runInNewContext(code, context);
-  const el = { getAttribute: (k) => ({ 'data-tool': 'port-watcher', 'data-tier': 'operator' }[k] || null) };
-  listeners.click({ target: { closest: (selector) => selector === '[data-tier-click]' ? el : null } });
-  assert.equal(calls.length, 1);
+  for (const [tool, tier] of [['port-watcher', 'operator'], ['hydro-flow', 'manager'], ['scale-audit', 'operator']]) {
+    const el = { getAttribute: (k) => ({ 'data-tool': tool, 'data-tier': tier }[k] || null) };
+    listeners.click({ target: { closest: (selector) => selector === '[data-tier-click]' ? el : null } });
+  }
+  assert.equal(calls.length, 3);
   assert.equal(calls[0].url, '/api/event');
   assert.deepEqual(calls[0].body, { tool: 'port-watcher', event: 'click_operator' });
-  assert.equal(calls[0].keepalive, true);
+  assert.deepEqual(calls[1].body, { tool: 'hydro-flow', event: 'click_manager' });
+  assert.deepEqual(calls[2].body, { tool: 'scale-audit', event: 'click_operator' });
+  assert.ok(calls.every((call) => call.keepalive === true));
 });
 
 test('landing pages load shared tier-click listener and label both tiers', () => {
