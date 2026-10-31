@@ -1,13 +1,13 @@
 // Power-bill reference pages beside Bill Radar. The latest national benchmark was checked against EIA's
-// Electric Power Monthly, Table 5.6.A, released 2026-10-23 with August 2026 data. The 2026 values are
+// Electric Power Monthly, Table 5.3, released 2026-10-23 with August 2026 data. The 2026 values are
 // preliminary estimates based on a cutoff-model sample; 2025 values are final. Contract roll-off guidance
 // is checked against the PUCT consumer Electricity Plans page. No page claims to know a reader's utility rate.
 
-const EIA_MONTHLY = { label: 'U.S. Energy Information Administration, Electric Power Monthly, Table 5.6.A — August 2026 residential prices (released 2026-10-23; 2026 estimates preliminary)', url: 'https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a' };
+const EIA_MONTHLY = { label: 'U.S. Energy Information Administration, Electric Power Monthly, Table 5.3 — August 2026 residential prices (released 2026-10-23; 2026 estimates preliminary)', url: 'https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03' };
 const PUCT = { label: 'Public Utility Commission of Texas — Electricity plans (fixed vs. variable; what happens when a plan ends), consumer page checked 2026-10-31', url: 'https://www.puc.texas.gov/industry/electric/plans' };
 
 const TOOL = (text) => `<a href="/bill-radar/?ref=learn-power-bills">${text || 'Bill Radar'}</a>`;
-const eia = (text) => `<a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a" rel="noopener">${text}</a>`;
+const eia = (text) => `<a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_03" rel="noopener">${text}</a>`;
 const puct = (text) => `<a href="https://www.puc.texas.gov/industry/electric/plans" rel="noopener">${text}</a>`;
 
 export const SECTION = {
