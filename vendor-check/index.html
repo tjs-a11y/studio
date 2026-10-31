@@ -711,15 +711,15 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
 
   function deadlines(year) {
     const r = VC.RULES[year]; if (!r) return null; const ny = year + 1;
-    const jan31 = `${ny}-01-31`, mar31 = `${ny}-03-31`;
-    const nec = dueDate(jan31), miscE = dueDate(mar31);
+    const jan31 = `${ny}-01-31`, feb28 = `${ny}-02-28`, mar31 = `${ny}-03-31`;
+    const nec = dueDate(jan31), miscPaper = dueDate(feb28), miscE = dueDate(mar31);
     const rolled = (orig, d) => (orig === d ? '' : ` ${fmtDate(orig)} falls on a ${dow(orig) % 6 === 0 ? DOW[dow(orig)] : 'legal holiday'}, so the deadline moves to the next business day, ${fmtLong(d)} (26 U.S.C. §7503).`);
     return [
       { id: 'w9', date: `${year}-12-15`, title: 'Send W-9 requests to everyone on your chase list', note: 'Our suggestion, not a legal deadline: it leaves time to get answers before January.', suggestion: true, cites: [] },
       { id: 'nec', date: nec, title: 'Form 1099-NEC: file with the IRS and give each recipient their copy', note: `The law says January 31.${rolled(jan31, nec)}`, cites: ['6071c', '6041Ae', '7503'] },
       { id: 'miscRecipient', date: nec, title: 'Form 1099-MISC (rent, royalties): give each recipient their copy', note: `The law says January 31 (26 U.S.C. §6041(d), §6050N(b)).${rolled(jan31, nec)} Check the IRS instructions as well.`, cites: ['6041d', '6050N', '7503'] },
       { id: 'miscE', date: miscE, title: 'Form 1099-MISC: file with the IRS electronically', note: 'March 31 for information returns filed electronically, other than nonemployee compensation.', cites: ['6071b'] },
-      { id: 'miscPaper', date: null, title: 'Form 1099-MISC filed on paper', note: 'See the IRS instructions for Forms 1099-MISC and 1099-NEC for the paper filing date.', link: VC.IRS.instructions, cites: [] },
+      { id: 'miscPaper', date: miscPaper, title: 'Form 1099-MISC filed on paper', note: `IRS Publication 1099 lists February 28; the weekend rule moves it to the next business day.${rolled(feb28, miscPaper)}`, link: VC.IRS.publication, cites: ['irspub', '7503'] },
     ];
   }
   VC.deadlines = deadlines;
