@@ -202,3 +202,5 @@ A niche is not launch-ready until it has:
 
 **Build/test/indexing:** npm test, node scripts/sitemap.mjs, node scripts/learn/build.mjs --check NOT RUN because no checked-out Node/dependency runtime is available through the connected GitHub content tools. Content updates are branch-only. **Code freeze intact through 2026-11-02; no production deployment.**
 
+
+- Additional ready-to-publish asset: marketing/distribution/quickwell-weekend-organic-kit-2026-10-31.md (consumer and specialist short-form drafts with channel-tagged links; draft only, not published).
