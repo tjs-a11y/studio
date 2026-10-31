@@ -31,36 +31,36 @@ const TOOL = (text) => `<a href="/vendor-check/?ref=learn-1099">${text}</a>`;
 export const SECTION = {
   path: '/learn/1099/',
   name: '1099 reporting',
-  h1: 'Form 1099 for small businesses: the 2026 rules in plain English',
-  title: 'Form 1099 Guides for Small Businesses (2026 Rules)',
+  h1: 'Form 1099 for small businesses: 2026 thresholds and exceptions',
+  title: 'Form 1099 for Small Businesses: 2026 Thresholds',
   description: 'IRS confirms $2,000 for many 2026 Form 1099 payments, but exceptions vary by payment type. Official IRS sources and deadlines.',
   lang: 'en', crumbs: [{ name: 'Quickwell', path: '/' }, { name: 'Learn', path: '/learn/' }],
   checked: { iso: '2026-10-31', en: 'October 31, 2026' },
   lede: 'For covered payments made in 2026, the IRS lists a $2,000 threshold for 1099-NEC services and many 1099-MISC categories. Some payment types still have different thresholds, so check the IRS table before classifying a payee.',
-  hubText: 'The new $2,000 threshold, who is excluded, and the early-2027 deadlines.',
+  hubText: 'The $2,000 threshold for covered 2026 payments, payment-type exceptions, and early-2027 filing dates.',
   intro: `<h2>Why 2026 is different</h2>
 <p>A law signed on July 4, 2025 (Pub. L. 119-21) raised the threshold for covered information returns. The IRS's current 2026 guidance confirms $2,000 for nonemployee services reported on Form 1099-NEC and many Form 1099-MISC categories, including rent. The 2026 IRS table also preserves different amounts for some categories: for example, $10 for royalties and $600 for gross proceeds paid to attorneys. Do not apply one threshold to every vendor payment.</p>
 <p>Older web pages and some Treasury regulation text may still display $600 for categories now covered by the $2,000 rule. Use the current IRS page and Publication 1099 for 2026 payments, and check the specific payment type, payee and payment method. Card/network payments, corporations, backup withholding, goods and employee wages have separate rules.</p>
 <p>Each page below links the current IRS guidance alongside the statute and regulation text. Check the current instructions before filing a form or deciding a payment is excluded.</p>`,
   outro: `<p class="note">Want the list for your own business? The free ${TOOL('Year-End Vendor Check')} reads your 2026 bank, card, QuickBooks or Xero export in your browser and sorts each payee into "likely needs a 1099", "near the line", "probably not needed" and "need info". Nothing is uploaded.</p>`,
-  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line and the card and corporation exceptions, and lists the W-9s to collect. Nothing is uploaded. Not tax advice.', href: '/vendor-check/?ref=learn-1099', label: 'Open the Vendor Check' },
+  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee and flags covered $2,000 payments plus common card and corporation exclusions. Use the IRS table for payment-type exceptions. Nothing is uploaded. Not tax advice.', href: '/vendor-check/?ref=learn-1099', label: 'Open the Vendor Check' },
   disclaimer: 'Not tax, legal or accounting advice. These pages explain federal rules in plain English from the statute and regulation text linked on each page. They do not cover state rules, which can differ. Check the current IRS instructions for Forms 1099-NEC and 1099-MISC, or ask a tax professional, before you file.',
 };
 
 export const PAGES = [
 {
   slug: 'threshold-2026',
-  h1: '1099 threshold for 2026: the new $2,000 rule',
+  h1: '1099 threshold for 2026: $2,000 for covered payments, with exceptions',
   crumbName: '1099 threshold for 2026',
-  short: 'From 2026 payments, the 1099 line for contractors and rent is $2,000, not $600. What changed, what did not, and why some pages still say $600.',
-  title: '1099 Threshold for 2026: The New $2,000 Rule Explained',
-  description: 'For covered 2026 payments, IRS guidance sets $2,000 for 1099-NEC services and many 1099-MISC categories. Some payment types retain different thresholds.',
+  short: 'The $2,000 threshold for covered 2026 Form 1099 payments, plus exceptions such as $10 royalties and $600 gross proceeds to attorneys.',
+  title: '1099 Threshold for 2026: $2,000 and Exceptions',
+  description: 'IRS confirms $2,000 for many 2026 1099 payments, but exceptions include $10 royalties and $600 gross proceeds paid to attorneys.',
   lede: 'If your business pays a contractor or landlord in 2026, the federal threshold is generally $2,000 for covered services and rent. The IRS keeps separate thresholds for some other payment types, so classify the payment before applying the number.',
   related: ['who-does-not-get-a-1099', 'deadlines-2026-payments', { href: '/learn/business-costs/find-recurring-charges-bank-csv/', title: 'Find recurring charges in a CSV', text: 'Pull a year of payments out of a bank or accounting export in a spreadsheet.' }],
   sources: [IRS1099, IRSPub1099, S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
   body: `
 <h2>The short answer</h2>
-<p>For payments made <b>after December 31, 2025</b>, a business generally files a Form 1099 for a payee only when it pays that payee <b>$2,000 or more</b> during the calendar year, for services (Form 1099-NEC) or for rent and similar income (Form 1099-MISC). Below $2,000 for the whole year, the federal rule does not require the form. Payments made in 2025 still used the old $600 line.</p>
+<p>For payments made in 2026, the $2,000 threshold applies to covered services reported on Form 1099-NEC and many Form 1099-MISC categories, including rent. It does not apply to every payment type: royalties remain reportable from $10, and gross proceeds paid to attorneys remain reportable at $600 or more. Check the IRS table for the category before deciding a payment is below the reporting threshold.</p>
 
 <h2>What the law says now</h2>
 <p>The basic rule is in ${u('6041')}(a). It applies to anyone "engaged in a trade or business" who pays another person rent, compensation, fees and similar income "of $2,000 or more in any calendar year". The heading of that subsection used to read "of $600 or more"; the 2025 law (Pub. L. 119-21, §70433) changed it to "Payments exceeding threshold" and replaced "$600" with "$2,000".</p>
@@ -109,7 +109,7 @@ export const PAGES = [
   crumbName: "Who doesn't get a 1099",
   short: 'Card and payment-network payments, most corporations, goods, phone and freight bills, and employees. Plus the two corporate exceptions: lawyers and medical providers.',
   title: "Who Doesn't Get a 1099: Cards, Corporations, Exceptions",
-  description: 'Card and payment-network payments, most corporations, goods and employees usually need no 1099 from you. Attorneys and medical providers are exceptions.',
+  description: 'Understand 1099 exclusions and exceptions: card payments, most corporations, $10 royalties, $600 gross proceeds to attorneys, and 2026 service thresholds.',
   lede: 'Crossing $2,000 is only half the question. Many payments never need a Form 1099 from you, because someone else reports them or because the payee is exempt. Here are the main exclusions from the regulation text, and the two exceptions that catch people out.',
   related: ['threshold-2026', 'deadlines-2026-payments'],
   sources: [IRS1099, IRSPub1099, R6041_1, R6050W, S6050W, R6041_3, R6049_4, S6045, S6041A],
