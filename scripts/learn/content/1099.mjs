@@ -1,9 +1,7 @@
 // Form 1099 basics for small businesses under the 2026 rules: the $2,000 threshold, who is excluded, and the deadlines
-// for 2026 payments. Every rule here was read on 2026-10-12 in the primary text:
-//  - U.S. Code, Title 26, from the Law Revision Counsel's USLM release via a public GitHub mirror (uscode.house.gov
-//    itself was not reachable from our network, so the in-text links point to it but the Sources list the mirror we read);
-//  - Treasury regulations (26 CFR) through the eCFR versioner API, Title 26 as of Oct 6, 2026.
-// IRS instructions (irs.gov) could not be opened, so these pages never state form box numbers or paper filing dates.
+// for 2026 payments. Rechecked 2026-10-31 against the current IRS "Am I required to file" page and 2026 Publication 1099,
+// alongside Title 26 and eCFR text. The IRS sources confirm $2,000 for covered 2026 service/rent categories while preserving
+// separate thresholds for some payment types (including $10 royalties and $600 gross proceeds paid to attorneys).
 const USC = (s) => `https://raw.githubusercontent.com/TheJoshuaEvans/united-states-code/HEAD/usc/26/${s}.xml`;
 const usc = (s, what) => ({ label: `26 U.S.C. ${s}${what ? ` (${what})` : ''}, U.S. Code text (Law Revision Counsel USLM release, public mirror)`, url: USC(s) });
 const CFR = (s) => `https://www.ecfr.gov/api/versioner/v1/full/2026-10-06/title-26.xml?part=1&section=${s}`;
@@ -22,28 +20,30 @@ const R6041_1 = cfrSrc('1.6041-1', 'information returns; card and payment networ
 const R6041_3 = cfrSrc('1.6041-3', 'payments for which no return is required');
 const R6049_4 = cfrSrc('1.6049-4', 'who counts as a corporation for the exemption');
 const R6050W = cfrSrc('1.6050W-1', 'payment card and third party network reporting');
+const IRS1099 = { label: 'Internal Revenue Service — Am I required to file a Form 1099 or other information return? (2026 thresholds and payment-type exceptions)', url: 'https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return' };
+const IRSPub1099 = { label: 'Internal Revenue Service — Publication 1099 (2026), General Instructions for Certain Information Returns (thresholds and due dates)', url: 'https://www.irs.gov/publications/p1099' };
 
 // Human-readable links in the text (official sites).
 const u = (sec, text) => `<a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section${sec}&amp;num=0&amp;edition=prelim" rel="noopener">${text || `26 U.S.C. §${sec}`}</a>`;
 const r = (sec, text) => `<a href="https://www.ecfr.gov/current/title-26/section-${sec}" rel="noopener">${text || `26 CFR ${sec}`}</a>`;
-const TOOL = (text) => `<a href="/vendor-check/">${text}</a>`;
+const TOOL = (text) => `<a href="/vendor-check/?ref=learn-1099">${text}</a>`;
 
 export const SECTION = {
   path: '/learn/1099/',
   name: '1099 reporting',
   h1: 'Form 1099 for small businesses: the 2026 rules in plain English',
   title: 'Form 1099 Guides for Small Businesses (2026 Rules)',
-  description: 'The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027.',
+  description: 'IRS confirms $2,000 for many 2026 Form 1099 payments, but exceptions vary by payment type. Official IRS sources and deadlines.',
   lang: 'en', crumbs: [{ name: 'Quickwell', path: '/' }, { name: 'Learn', path: '/learn/' }],
-  checked: { iso: '2026-10-12', en: 'October 12, 2026' },
-  lede: 'For payments made in 2026, the federal 1099 line for contractors and rent moved from $600 to $2,000. These pages explain the new rule from the law itself, who usually does not get a form, and when the forms are due.',
+  checked: { iso: '2026-10-31', en: 'October 31, 2026' },
+  lede: 'For covered payments made in 2026, the IRS lists a $2,000 threshold for 1099-NEC services and many 1099-MISC categories. Some payment types still have different thresholds, so check the IRS table before classifying a payee.',
   hubText: 'The new $2,000 threshold, who is excluded, and the early-2027 deadlines.',
   intro: `<h2>Why 2026 is different</h2>
-<p>A law signed on July 4, 2025 (Pub. L. 119-21) raised the amount that triggers the most common small-business information returns. For payments made after December 31, 2025, a business generally reports payments to a non-employee for services, or payments of rent, only when the year's total to that payee reaches <b>$2,000</b>. For 2025 payments the figure was still $600. From 2027 the $2,000 will rise with inflation.</p>
-<p>That change is simple to state but easy to get wrong in practice, for three reasons. Many web pages, and the Treasury regulations themselves, still show $600. The exceptions (card payments, corporations, goods, employees) did not change, but they matter more now. And the deadlines for 2026 payments land on unusual dates because January 31, 2027 is a Sunday.</p>
-<p>Each page below answers one question and links the exact statute or regulation we read. Where we could not verify something, such as the box numbers on the IRS forms, we say so instead of guessing.</p>`,
+<p>A law signed on July 4, 2025 (Pub. L. 119-21) raised the threshold for covered information returns. The IRS's current 2026 guidance confirms $2,000 for nonemployee services reported on Form 1099-NEC and many Form 1099-MISC categories, including rent. The 2026 IRS table also preserves different amounts for some categories: for example, $10 for royalties and $600 for gross proceeds paid to attorneys. Do not apply one threshold to every vendor payment.</p>
+<p>Older web pages and some Treasury regulation text may still display $600 for categories now covered by the $2,000 rule. Use the current IRS page and Publication 1099 for 2026 payments, and check the specific payment type, payee and payment method. Card/network payments, corporations, backup withholding, goods and employee wages have separate rules.</p>
+<p>Each page below links the current IRS guidance alongside the statute and regulation text. Check the current instructions before filing a form or deciding a payment is excluded.</p>`,
   outro: `<p class="note">Want the list for your own business? The free ${TOOL('Year-End Vendor Check')} reads your 2026 bank, card, QuickBooks or Xero export in your browser and sorts each payee into "likely needs a 1099", "near the line", "probably not needed" and "need info". Nothing is uploaded.</p>`,
-  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line and the card and corporation exceptions, and lists the W-9s to collect. Nothing is uploaded. Not tax advice.', href: '/vendor-check/', label: 'Open the Vendor Check' },
+  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line and the card and corporation exceptions, and lists the W-9s to collect. Nothing is uploaded. Not tax advice.', href: '/vendor-check/?ref=learn-1099', label: 'Open the Vendor Check' },
   disclaimer: 'Not tax, legal or accounting advice. These pages explain federal rules in plain English from the statute and regulation text linked on each page. They do not cover state rules, which can differ. Check the current IRS instructions for Forms 1099-NEC and 1099-MISC, or ask a tax professional, before you file.',
 };
 
@@ -54,10 +54,10 @@ export const PAGES = [
   crumbName: '1099 threshold for 2026',
   short: 'From 2026 payments, the 1099 line for contractors and rent is $2,000, not $600. What changed, what did not, and why some pages still say $600.',
   title: '1099 Threshold for 2026: The New $2,000 Rule Explained',
-  description: 'For payments after Dec 31, 2025, the 1099-NEC and 1099-MISC threshold is $2,000, not $600 (26 U.S.C. 6041). What changed and why some rules still say $600.',
-  lede: 'If your business pays a contractor or a landlord in 2026, the federal line for sending a Form 1099 is now $2,000 for the year, up from $600. Here is the rule as the law states it, with worked examples and the parts that did not change.',
+  description: 'For covered 2026 payments, IRS guidance sets $2,000 for 1099-NEC services and many 1099-MISC categories. Some payment types retain different thresholds.',
+  lede: 'If your business pays a contractor or landlord in 2026, the federal threshold is generally $2,000 for covered services and rent. The IRS keeps separate thresholds for some other payment types, so classify the payment before applying the number.',
   related: ['who-does-not-get-a-1099', 'deadlines-2026-payments', { href: '/learn/business-costs/find-recurring-charges-bank-csv/', title: 'Find recurring charges in a CSV', text: 'Pull a year of payments out of a bank or accounting export in a spreadsheet.' }],
-  sources: [S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
+  sources: [IRS1099, IRSPub1099, S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
   body: `
 <h2>The short answer</h2>
 <p>For payments made <b>after December 31, 2025</b>, a business generally files a Form 1099 for a payee only when it pays that payee <b>$2,000 or more</b> during the calendar year, for services (Form 1099-NEC) or for rent and similar income (Form 1099-MISC). Below $2,000 for the whole year, the federal rule does not require the form. Payments made in 2025 still used the old $600 line.</p>
@@ -77,15 +77,16 @@ export const PAGES = [
 </tbody></table></div>
 <p>These examples assume the payee is not a corporation and was paid by check, bank transfer or cash. Card payments, payments through some payment apps, and payments to most corporations follow different rules; see <a href="/learn/1099/who-does-not-get-a-1099/">who doesn't get a 1099</a>.</p>
 
-<h2>Why the IRS regulations still say $600</h2>
-<p>The Treasury regulation that implements this section, ${r('1.6041-1')}, is still titled "Return of information as to payments of $600 or more" in the eCFR text dated October 6, 2026, and its examples use $600. That is not a contradiction you need to resolve: regulations are written to carry out the statute, and when Congress changes a dollar amount in the statute, the statute controls even before the regulations are rewritten. Expect some IRS pages, form instructions, software screens and older articles to show $600 for a while. Check the date on anything you read, and whether it is talking about 2025 payments or 2026 payments.</p>
+<h2>How to read older $600 references</h2>
+<p>Some older Treasury regulation text and older articles still display $600. The current IRS page and 2026 Publication 1099 confirm $2,000 for covered 2026 service and rent categories. They also show that the threshold is not universal: royalties remain reportable from $10, and gross proceeds paid to attorneys remain at $600. Check the IRS table for the exact payment type rather than treating every $600 reference as either current or obsolete.</p>
 
 <h2>From 2027 the amount moves with inflation</h2>
-<p>A new ${u('6041')}(h) says that for "any calendar year after 2026" the $2,000 is increased by a cost-of-living adjustment that uses 2025 as the base year, rounded to the nearest $100. So the 2027 figure is not fixed in the law; the IRS will publish it. We could not open irs.gov while writing this page, so we have not seen a 2027 figure and do not quote one. Until it is published, plan with $2,000 and check again before your 2027 year-end.</p>
+<p>A new ${u('6041')}(h) says that for "any calendar year after 2026" the $2,000 is increased by a cost-of-living adjustment that uses 2025 as the base year, rounded to the nearest $100. So the 2027 figure is not fixed in the law; the IRS will publish it. The IRS's 2026 Publication 1099 says the $2,000 amount will be adjusted for inflation beginning in calendar year 2027. The 2027 amount is not listed in the current 2026 publication; check the next IRS update before applying a 2027 threshold.</p>
 
 <h2>What did not change</h2>
 <ul>
-<li><b>Royalties</b> are reported from <b>$10</b> a year, under a separate rule (${u('6050N')}(a)).</li>
+<li><b>Royalties</b> are reported from <b>$10</b> a year under a separate rule (${u('6050N')}(a)); do not apply the general $2,000 line to royalty payments.</li>
+<li><b>Gross proceeds paid to attorneys</b> are listed by the IRS at <b>$600 or more</b> on Form 1099-MISC. This is a different payment category from attorney fees for services reported on Form 1099-NEC.</li>
 <li><b>Card and payment-network payments</b> are reported by the processor, not by you, under ${u('6050W')}. The 2025 law set that processor threshold at more than $20,000 and more than 200 transactions for third party networks (§6050W(e)), but that threshold is about the processor's own form, not yours.</li>
 <li><b>Backup withholding</b> uses the same line: under ${u('3406')}(b)(6), a payment counts as reportable once the year's total to the payee reaches the amount in effect under §6041(a). If a payee above the line has not given you a taxpayer identification number, ask for a Form W-9 before you pay again.</li>
 <li><b>Penalties</b> still apply. ${u('6721')}(a) sets $250 per late or incorrect return, before the inflation adjustment in §6721(f), with lower amounts if you correct within 30 days or by August 1.</li>
@@ -111,7 +112,7 @@ export const PAGES = [
   description: 'Card and payment-network payments, most corporations, goods and employees usually need no 1099 from you. Attorneys and medical providers are exceptions.',
   lede: 'Crossing $2,000 is only half the question. Many payments never need a Form 1099 from you, because someone else reports them or because the payee is exempt. Here are the main exclusions from the regulation text, and the two exceptions that catch people out.',
   related: ['threshold-2026', 'deadlines-2026-payments'],
-  sources: [R6041_1, R6050W, S6050W, R6041_3, R6049_4, S6045, S6041A],
+  sources: [IRS1099, IRSPub1099, R6041_1, R6050W, S6050W, R6041_3, R6049_4, S6045, S6041A],
   body: `
 <h2>1. Payments by credit card, debit card or a payment network</h2>
 <p>If you paid a contractor with a credit or debit card, the card processor reports the payment, not you. The regulation, ${r('1.6041-1')}(a)(1)(iv), says that payments by payment card or through a third party payment network that would otherwise be reportable under both §6041 and §6050W "are reported under section 6050W and not section 6041". Section 6050W is the rule that makes processors file Form 1099-K.</p>
@@ -134,7 +135,7 @@ export const PAGES = [
 <li><b>Attorneys' fees.</b> Payments made to a corporation after December 31, 1997 for attorneys' fees are <b>not</b> exempt. A law firm organized as a corporation, a professional corporation or an LLC still gets a 1099 if you pay it $2,000 or more in fees for 2026.</li>
 <li><b>Medical and health care.</b> A corporation "engaged in providing medical and health care services or engaged in the billing and collecting of payments" for them is not exempt either. The regulation then excludes tax-exempt hospitals and extended care facilities, and government-owned ones.</li>
 </ul>
-<p>Lawyers have a second rule. ${u('6045')}(f) requires a return for "any payment to an attorney in connection with legal services", for example a settlement paid to a claimant's lawyer, except for the part already reported under §6041(a) or that would be but for its dollar limit. Which form and box each kind of attorney payment goes on is set by the IRS instructions, which we could not open, so check them before you file.</p>
+<p>Lawyers have a second rule. ${u('6045')}(f) requires a return for "any payment to an attorney in connection with legal services", for example a settlement paid to a claimant's lawyer, except for the part already reported under §6041(a) or that would be but for its dollar limit. The IRS's current Publication 1099 distinguishes attorney fees reported on Form 1099-NEC (generally $2,000 or more for 2026 services) from gross proceeds paid to attorneys reported on Form 1099-MISC ($600 or more). Check the instructions for the exact transaction and box.</p>
 
 <h2>4. Goods, utilities, freight and storage</h2>
 <p>§1.6041-3(c) excludes "payments of bills for merchandise, telegrams, telephone, freight, storage, and similar charges". Buying supplies, inventory or equipment from a sole proprietor is not a payment for services. If one invoice mixes parts and labor, ask the vendor to show them separately so you know the services amount.</p>
@@ -167,7 +168,7 @@ export const PAGES = [
   description: '1099-NEC forms for 2026 payments are due Feb 1, 2027, because Jan 31 is a Sunday (26 U.S.C. 6071(c), 7503). Other e-filed 1099s: Mar 31, 2027.',
   lede: 'Forms for payments made in 2026 are due in early 2027, and the main date moves this year: January 31, 2027 falls on a Sunday, so the 1099-NEC deadline is Monday, February 1, 2027. Here is where each date comes from, and a plan that works backward from it.',
   related: ['threshold-2026', 'who-does-not-get-a-1099', { href: '/learn/business-costs/auto-renewal-notice-window/', title: 'Auto-renewal notice windows', text: 'The other year-end calendar job: cancel-by dates for contracts that renew on their own.' }],
-  sources: [S6071, S7503, S6041A, S6041, S6721, S3406],
+  sources: [IRSPub1099, IRS1099, S6071, S7503, S6041A, S6041, S6721, S3406],
   body: `
 <h2>The dates for 2026 payments</h2>
 <div class="tbl"><table><thead><tr><th>What</th><th>Due</th><th>Where the date comes from</th></tr></thead><tbody>
@@ -200,8 +201,8 @@ export const PAGES = [
 <h2>If you miss a date</h2>
 <p>${u('6721')}(a) sets a penalty of $250 per late or incorrect information return, with a yearly cap. It drops to $50 per return if the failure is corrected within 30 days of the due date, and to $100 if corrected by August 1. These are the base amounts written in the statute. §6721(f) increases them for inflation, so the amounts that actually apply are higher; check the IRS for the current figures. The practical lesson is the same: if you find a missed contractor in February, file right away instead of waiting.</p>
 
-<h2>What we did not verify</h2>
-<p>We could not open the IRS website while writing this page. So we do not state the paper filing date for 1099-MISC, the box numbers on either form, the electronic filing requirements, or the IRS filing portal's steps. All of those are in the current IRS instructions for Forms 1099-MISC and 1099-NEC. Everything else on this page comes from the statute text linked in the Sources.</p>
+<h2>Confirm the filing details before you submit</h2>
+<p>The IRS's 2026 Publication 1099 lists the applicable form categories, recipient-copy dates and filing deadlines. For 2026 payments, 1099-NEC is due January 31, 2027 (moved to February 1 because the date is Sunday); paper 1099-MISC is due February 28, 2027 (moved to March 1), and electronic 1099-MISC is due March 31. Check the current IRS instructions for the precise box, payee category, e-file requirements and any later updates before filing.</p>
 <p>The free ${TOOL('Year-End Vendor Check')} shows these deadlines with your results and, in the paid packs, saves them to your calendar with W-9 reminders.</p>`,
 },
 ];
