@@ -146,7 +146,7 @@
 
 ## Power bills
 
-- [Understanding your electricity bill and rate](https://quickwell.app/learn/power-bills/): Plain-English pages on what happens when a fixed electricity rate ends, why the roll-off rate is usually higher, and what the average U.S. price is in 2026.
+- [Understanding your electricity bill and rate](https://quickwell.app/learn/power-bills/): Plain-English pages on fixed-rate plan endings, how to compare your own bill, and the latest EIA U.S. residential electricity price data.
 - [What happens when your fixed-rate electricity plan ends](https://quickwell.app/learn/power-bills/when-a-fixed-rate-plan-ends/): When a fixed-rate term ends, the next step depends on your plan and market. Check the renewal notice before the price changes.
 - [The average U.S. residential electricity price in August 2026](https://quickwell.app/learn/power-bills/average-electricity-price-2026/): EIA reports an August 2026 U.S. residential average of 18.16¢/kWh, 3.4% above August 2025. Understand the benchmark and its limits.
 
