@@ -98,11 +98,11 @@
 
       <details class="assume">
         <summary>Assumptions (estimates — adjust them)</summary>
-        <label for="chg">Expected rate change per year <span class="hint">(%; estimate — set your own)</span></label>
-        <input id="chg" type="number" inputmode="decimal" step="0.5" value="8">
-        <label for="bump">When a fixed rate ends, how much higher the new/variable rate runs <span class="hint">(%; estimate)</span></label>
-        <input id="bump" type="number" inputmode="decimal" step="1" value="20">
-        <p class="muted" style="margin:12px 0 0">Both are rough defaults, not your utility's real numbers — change them to whatever you expect. A fixed plan that lapses usually rolls to a month-to-month or variable "default" rate, which is typically higher; that's what the second number estimates.</p>
+        <label for="chg">Assumed annual rate change <span class="hint">(%; estimate — positive or negative)</span></label>
+        <input id="chg" type="number" inputmode="decimal" step="0.5" min="-100" max="100" value="0">
+        <label for="bump">Assumed rate change when your plan ends <span class="hint">(%; estimate — positive or negative)</span></label>
+        <input id="bump" type="number" inputmode="decimal" step="0.5" min="-100" max="100" value="0">
+        <p class="muted" style="margin:12px 0 0">These are scenario assumptions, not utility data or predictions. Zero means no change; a positive number models an increase and a negative number models a decrease. What happens when a plan ends depends on your contract, provider and local rules; check the renewal notice for the actual next rate.</p>
       </details>
 
       <button class="go" id="run">Show my forecast</button>
@@ -124,7 +124,7 @@
     <h2 style="font-size:20px">What to do before your rate rolls off</h2>
     <ul class="what">
       <li><b>Find your end date.</b> It's on your electricity plan's "Electricity Facts Label" or contract. Put it above to see the month it lands.</li>
-      <li><b>Don't auto-roll.</b> Letting a fixed plan lapse usually drops you onto a higher month-to-month or variable "default" rate. Shop a new fixed plan 2–4 weeks before the end date.</li>
+      <li><b>Check the renewal terms.</b> Depending on your contract and market, the provider may offer a renewal, move you to a variable product or require you to choose a new plan. Compare the actual next rate and fees; do not assume it will be higher.</li>
       <li><b>Compare apples to apples</b> at your usage level (e.g. ~1000 kWh) — the headline rate often hides fees that only show up at certain usage.</li>
       <li><b>In a deregulated state</b> (Texas, Ohio, Pennsylvania, Illinois and others) you can switch supplier without changing wires or losing power.</li>
     </ul>
@@ -133,7 +133,7 @@
 
   <section>
     <h2 style="font-size:20px" class="soon">Monthly watch + roll-off alert <span class="pill">Coming soon</span></h2>
-    <p class="soon muted">We're building a free reminder that emails you ~30 days before your fixed rate ends, plus a monthly check-in — so the roll-off never catches you. It needs email delivery we haven't switched on yet; this page stays fully free either way. For now, note your end date above.</p>
+    <p class="soon muted">We're building a free reminder that emails you ~30 days before your fixed rate ends, plus a monthly check-in — so you can review the date ahead of time. It needs email delivery we haven't switched on yet; this page stays fully free either way. For now, note your end date above.</p>
   </section>
 
   <section>
