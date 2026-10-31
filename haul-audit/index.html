@@ -100,10 +100,10 @@ const money = (n) => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', 
 
 function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
 function showQuota() {
-  if (PRO) { $('quota').textContent = 'Pro: unlimited checks, saved history and CSV export.'; return; }
+  if (PRO) { $('quota').textContent = 'Pro: saved history and CSV export.'; return; }
   const left = Math.max(0, FREE_PER_DAY - quotaState().n);
   $('quota').textContent = left > 0
-    ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
+    ? `${left} of ${FREE_PER_DAY} checks before the Pro reminder today. Calculations stay free and visible.`
     : `You've reached the ${FREE_PER_DAY}-check daily counter on this device. Your results stay free and visible; Pro adds saved history and CSV export.`;
 }
 function vline(label, v) {
@@ -136,7 +136,7 @@ function run(isSample) {
     if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
       window.Studio.showUpgradeModal({
         header: 'Upgrade to Haul Audit Pro',
-        body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily settlement reconciliations, saved on-device audit history, and CSV exports. Your calculations and saved history stay on your device.'
+        body: 'You've completed 3 checks today. Your calculations remain free and visible. Pro is $15/month for saved on-device audit history and CSV export; it does not lock the calculator.'
       });
     }
     if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
