@@ -37,6 +37,10 @@ All tools run in the browser; files and text people check are not uploaded. Refe
 - [Royalty Check](https://quickwell.app/royalty-check/): Recompute your expected mineral-royalty decimal and see if your statement matches. On-device; not title or financial advice.
 - [Brain Pass](https://quickwell.app/brain-pass/): Unlimited play in Echo, Swift and Linkr: every difficulty, extra modes, full stats and streak freezes. Daily challenges are always free.
 
+## Collections
+
+- [Weekend Toolkit](https://quickwell.app/weekend/): A curated starting point for everyday tasks—dinner planning, household bills, quotes, contracts, receipts, scam checks, and small-business paperwork. Each tool page states its own limits, free/paid features, and privacy behavior.
+
 ## Reference pages
 
 - [Rate con glossary](https://quickwell.app/learn/rate-con/): Plain-English definitions of rate confirmation terms: detention, TONU, layover, lumper, setoff, quick pay, factoring and NOA, double brokering, claims and more, with what to ask a broker before you sign. (24 pages)
