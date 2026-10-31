@@ -43,10 +43,20 @@ async function main() {
   mkdirSync(metricsDir, { recursive: true });
   writeFileSync(join(metricsDir, 'stats.json'), JSON.stringify(snapshot, null, 2) + '\n');
 
-  // Append-only daily history: date, enabled flag, total, and per-tool totals (counts only).
+  // Append-only daily history: date, enabled flag, per-tool checks, and pre-launch interest counters (integers only).
   const toolTotals = {};
   if (stats && stats.tools) for (const [id, t] of Object.entries(stats.tools)) toolTotals[id] = (t && t.checks) || 0;
-  const row = { date: today, enabled: stats.enabled ?? null, total_checks: stats.total_checks ?? null, tools: toolTotals };
+  const interest = {};
+  if (stats && stats.interest) {
+    for (const [id, t] of Object.entries(stats.interest)) {
+      interest[id] = {
+        interest: Number(t.interest) || 0, interest_today: Number(t.interest_today) || 0,
+        click_operator: Number(t.click_operator) || 0, click_operator_today: Number(t.click_operator_today) || 0,
+        click_manager: Number(t.click_manager) || 0, click_manager_today: Number(t.click_manager_today) || 0,
+      };
+    }
+  }
+  const row = { date: today, enabled: stats.enabled ?? null, total_checks: stats.total_checks ?? null, tools: toolTotals, interest };
   const histPath = join(metricsDir, 'history.jsonl');
   // One row per day: if today's row already exists, rewrite the file without it, then append the fresh one.
   if (existsSync(histPath)) {

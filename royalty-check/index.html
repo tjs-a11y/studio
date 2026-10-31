@@ -84,10 +84,10 @@ const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(
 function frac(s) { s = String(s || '').trim(); if (s.includes('/')) { const [a, b] = s.split('/').map(Number); return b ? a / b : NaN; } return Number(s); }
 function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
 function showQuota() {
-  if (PRO) { $('quota').textContent = 'Pro: unlimited checks, saved history and CSV export.'; return; }
+  if (PRO) { $('quota').textContent = 'Pro: saved history and CSV export.'; return; }
   const left = Math.max(0, FREE_PER_DAY - quotaState().n);
   $('quota').textContent = left > 0
-    ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
+    ? `${left} of ${FREE_PER_DAY} checks before the Pro reminder today. Calculations stay free and visible.`
     : `You've reached the ${FREE_PER_DAY}-check daily counter on this device. Your result stays free and visible; Pro adds saved history and CSV export.`;
 }
 function run(isSample) {
@@ -105,11 +105,16 @@ function run(isSample) {
     $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (!isSample) {
       const q = quotaState(); const priorCount = q.n; q.n++; ls.set('quota', q); showQuota();
-      const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), expected: r.expectedDecimal, statement: r.statementOwnerDecimal, flag: r.flag }); ls.set('history', h.slice(0, 200)); renderPro();
+      if (PRO) {
+        const h = ls.get('pro-history', []);
+        h.unshift({ at: new Date().toISOString(), expected: r.expectedDecimal, statement: r.statementOwnerDecimal, flag: r.flag });
+        ls.set('pro-history', h.slice(0, 200));
+      }
+      renderPro();
       if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
         window.Studio.showUpgradeModal({
           header: 'Upgrade to Royalty Check Pro',
-          body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily decimal calculations, saved on-device check history, and downloadable CSV reports. Your ownership documentation and land records stay in your browser; calculator inputs are processed locally.'
+          body: 'You've completed 3 checks today. Your result remains free and visible. Pro is $15/month for saved on-device check history and CSV export; it does not lock the calculator.'
         });
       }
       if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
@@ -123,7 +128,7 @@ $('sample').addEventListener('click', () => { $('nma').value = 20; $('sua').valu
 
 // ---- Pro: saved history + CSV export. The decimal check itself stays free. ----
 function renderPro() {
-  const h = ls.get('history', []);
+  const h = ls.get('pro-history', []);
   if (PRO) {
     const rows = h.slice(0, 20).map((x) => `<tr><td>${x.at.slice(0, 16).replace('T', ' ')}</td><td class="num">${Number(x.expected).toFixed(8)}</td><td class="num">${x.statement}</td><td>${x.flag}</td></tr>`).join('');
     $('pro').className = 'card'; $('pro').innerHTML = `<h3 style="margin:0 0 6px">Saved history (Pro)</h3>
@@ -137,9 +142,9 @@ function renderPro() {
   } else {
     $('pro').className = 'card pro-lock'; $('pro').innerHTML = `<h3 style="margin:0 0 6px">Pro — saved history &amp; CSV export</h3>
       <p style="color:var(--dim);margin:.2em 0 0">Every check stays free and fully visible. Pro adds a saved on-device history of your checks across wells and a one-click CSV export.</p>
-      <div><button class="small" id="buyM">Get Pro monthly</button> <button class="small ghost" id="buyY">Yearly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
+      <div><button class="small" id="buyM">Get Pro — $15/month</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
     const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; (window.Studio ? window.Studio.upgrade('pro', interval) : Promise.reject(new Error('not on sale'))).catch((e) => { $('buyNote').textContent = /not switched on|not on sale|404|409/i.test(e.message) ? 'Pro opens soon — check back shortly.' : e.message; }); };
-    $('buyM').onclick = () => buy('month'); $('buyY').onclick = () => buy('year');
+    $('buyM').onclick = () => buy('month');
   }
 }
 if (window.Studio) window.Studio.init({ tool: TOOL, onChange: (s) => { PRO = !!s.pro; showQuota(); renderPro(); } });

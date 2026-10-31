@@ -5,7 +5,8 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'click_operator', 'click_manager']);
+const PRELAUNCH_TIER_TOOLS = new Set(['port-watcher', 'hydro-flow', 'scale-audit']);
 // Sites (not billable tools) that may record anonymous outbound-link clicks, and the partner links they track.
 const SITES = new Set(['northstar']);
 const OUT_TARGETS = new Set(['freightsidekick']);
@@ -35,8 +36,21 @@ export async function POST(request) {
   if (Number(request.headers.get('content-length') || 0) > 2048) return fail(413, 'Too large.');
   let body; try { body = await request.json(); } catch { return fail(400, 'Bad request.'); }
   const tool = String(body.tool || ''); const event = String(body.event || '');
-  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   const run = override || store();
+  if (event === 'click_operator' || event === 'click_manager') {
+    // Pre-launch tier CTA: exact two-field anonymous payload; no user-entered data is accepted.
+    if (!PRELAUNCH_TIER_TOOLS.has(tool) || Object.keys(body).some((k) => k !== 'tool' && k !== 'event')) return fail(400, 'Unknown event.');
+    if (!run) { console.log(JSON.stringify({ evt: event, tool })); return json({ ok: true }); }
+    const date = day();
+    await run(
+      ['INCR', `count:${tool}:interest`],
+      ['INCR', `count:${tool}:interest:${date}`],
+      ['INCR', `count:${tool}:${event}`],
+      ['INCR', `count:${tool}:${event}:${date}`],
+    );
+    return json({ ok: true });
+  }
+  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   if (event === 'outbound') {
     // Anonymous count of clicks from one of our sites to a partner link. No IP, no identity, no URL beyond the fixed target.
     const target = String(body.target || '');

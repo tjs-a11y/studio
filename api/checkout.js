@@ -30,8 +30,8 @@ export async function POST(request) {
   const price = prices.data[0];
   if (!price) return fail(409, 'This plan is not on sale yet.');
   if (fixed && (price.type !== 'recurring' || price.recurring?.interval !== 'month' ||
-      (price.recurring?.interval_count ?? 1) !== 1)) {
-    return fail(409, 'The configured price is not a monthly recurring subscription.');
+      (price.recurring?.interval_count ?? 1) !== 1 || price.currency !== 'usd' || price.unit_amount !== 1500)) {
+    return fail(409, 'The configured price must be $15 USD per month.');
   }
   const base = originOf(request);
   // Marketing attribution: a short channel label from ?ref= links (e.g. 'reddit-owneroperators'), never personal data.

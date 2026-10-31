@@ -12,3 +12,6 @@ separate store that `/api/stats` does not read, so nothing personal can reach he
 
 `enabled: false` means usage counting is off (Upstash/KV not connected); `enabled: null`
 with an `error` means the snapshot couldn't be fetched that day.
+
+
+The latest `stats.json` snapshot also includes anonymous pre-launch tier interest for Port Watcher, Hydro Flow and Scale Audit. The `interest` map contains aggregate `interest`, `click_operator`, and `click_manager` counters (total and UTC-day values). Payloads contain only `tool` and `event`; no commercial inputs or files are accepted for these events. Daily `history.jsonl` preserves the same integer-only interest vector.
