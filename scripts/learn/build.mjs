@@ -131,9 +131,9 @@ const secs = sections;
 const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
 const llms = `# Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English, French and Spanish), a Texas drilling permit watcher and a year-end vendor check for small businesses (1099 list, renewals and price increases). Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. Two reference sections help small businesses manage auto-renewals, vendor price increases and recurring charges, and apply the 2026 Form 1099 rules ($2,000 threshold, exclusions, deadlines).
+> Quickwell is a collection of single-purpose browser tools for households, everyday money, consumer decisions, owner-operators, small fleets, Texas mineral and royalty owners, EUDR exporters, and small businesses. Consumer tools help plan dinners, forecast electricity bills, find recurring charges, review suspicious messages, compare estimates, track receipts and understand notices. Business tools include rate-confirmation and settlement checks, FMCSA audit preparation, EUDR plot-file checks, Texas permit and royalty tools, and vendor-renewal reviews. Each tool page explains its own capabilities and data handling.
 
-All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
+Many tools process inputs locally in the browser; check the individual page for its privacy, storage and anonymous-event details. Reference pages are educational, not legal, tax, medical or financial advice, and list the date their sources were checked.
 
 ## Tools
 
