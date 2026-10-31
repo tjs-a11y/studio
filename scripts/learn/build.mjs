@@ -148,6 +148,9 @@ ${existsSync(join(root, 'guides', 'index.html')) ? line('Guides', '/guides/', 'L
 
 - [Full page list](${SITE}/llms-full.txt): every reference page with its one-line summary.
 `;
+const guideEntries = existsSync(join(root, 'guides', 'index.html'))
+  ? [...readFileSync(join(root, 'guides', 'index.html'), 'utf8').matchAll(/<li[^>]*><a href="(\/guides\/[^"]+)">([^<]+)<\/a><span>([^<]+)<\/span><\/li>/g)].map((m) => [m[2], m[1], m[3]])
+  : [];
 const full = `# Quickwell: full page list
 
 > Every reference page on Quickwell with a one-line summary. See ${SITE}/llms.txt for the overview.
@@ -160,6 +163,10 @@ ${secs.map(({ S, pages }) => `
 
 ${line(S.h1, S.path, S.description)}
 ${pages.map((p) => line(p.h1 || p.term, S.path + p.slug + '/', p.description)).join('\n')}`).join('\n')}
+
+## Guides
+
+${guideEntries.map(([title, path, description]) => line(title, path, description)).join('\n')}
 
 ## Health and everyday reference pages
 
