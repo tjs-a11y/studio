@@ -98,7 +98,7 @@ export const PAGES = [
 <li>Export every 2026 payment from your bank accounts (and your accounting software, if you use one).</li>
 <li>Total the year by payee. Merge the different spellings of the same person, and count checks that have no name in the description.</li>
 <li>Set aside card payments and payments to corporations (with the attorney and medical exceptions), goods and employee wages.</li>
-<li>Flag every remaining payee at $2,000 or more, and watch anyone between $1,500 and $1,999 who may get another payment before December 31.</li>
+<li>Flag covered service and rent payments at $2,000 or more, and watch anyone between $1,500 and $1,999 who may get another payment before December 31. Review royalties, gross proceeds paid to attorneys and 1099-K transactions under their separate rules.</li>
 <li>Collect a W-9 from each flagged payee now, not in January.</li>
 </ol>
 <p>The free ${TOOL('Year-End Vendor Check')} does steps 2 to 4 from a bank, card, QuickBooks or Xero export, in your browser, and shows the rule behind each result. A spreadsheet pivot table works too; the <a href="/learn/business-costs/find-recurring-charges-bank-csv/">recurring charges guide</a> shows the export and grouping steps.</p>`,
