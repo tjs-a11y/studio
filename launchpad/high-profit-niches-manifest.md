@@ -204,3 +204,5 @@ A niche is not launch-ready until it has:
 
 
 - Additional ready-to-publish asset: marketing/distribution/quickwell-weekend-organic-kit-2026-10-31.md (consumer and specialist short-form drafts with channel-tagged links; draft only, not published).
+
+- **PR/action ledger:** Draft PR #8 https://github.com/tjs-a11y/studio/pull/8 opened 2026-10-31. PR head at opening: 3102a3e138326bee1c4f768d0d33016df41df6a5. Branch-only; no production deployment.
