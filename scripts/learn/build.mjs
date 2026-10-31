@@ -139,6 +139,9 @@ Many tools process inputs locally in the browser; check the individual page for 
 
 ${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
 
+## Collections
+
+${existsSync(join(root, 'weekend', 'index.html')) ? line('Weekend Toolkit', '/weekend/', 'A curated starting point for everyday tasks—dinner planning, household bills, quotes, contracts, receipts, scam checks and small-business paperwork. Each tool page states its own limits, free/paid features and privacy behavior.') + '\n' : ''}
 ## Reference pages
 
 ${secs.map(({ S, pages }) => line(S.name + (S.lang === 'fr' ? ' (French)' : ''), S.path, `${S.description} (${pages.length} pages)`)).join('\n')}
@@ -158,6 +161,10 @@ const full = `# Quickwell: full page list
 ## Tools
 
 ${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
+
+## Collections
+
+${existsSync(join(root, 'weekend', 'index.html')) ? line('Weekend Toolkit', '/weekend/', 'A curated starting point for everyday tasks—dinner planning, household bills, quotes, contracts, receipts, scam checks and small-business paperwork. Each tool page states its own limits, free/paid features and privacy behavior.') + '\n' : ''}
 ${secs.map(({ S, pages }) => `
 ## ${S.name}${S.lang === 'fr' ? ' (French)' : ''}
 
