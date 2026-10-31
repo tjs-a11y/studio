@@ -1,0 +1,142 @@
+{
+ "brief": {
+  "subject": "EUDR Brief: EU forest cover data and cocoa supply shifts",
+  "headline": "EU forest cover holds near 39% as Commission keeps EUDR in focus",
+  "dek": "New Commission land and habitat figures, a Commissioner at an EUDR event, and a cocoa replacer pitched against supply risk.",
+  "lede": "The Commission says EU forest cover has stabilised at approximately 39% of land. That baseline frames the EUDR's push to curb deforestation linked to imports.",
+  "sections": [
+   {
+    "heading": "EU land and forest snapshot",
+    "bullets": [
+     "Forest covers approximately 39% of EU land and has stabilised, according to the Commission's environment newsroom.",
+     "Protected areas make up 26.4% of total EU land, showing how much territory falls under conservation rules.",
+     "81% of protected EU habitats are in poor or bad condition, a figure that underlines the environmental case behind the EUDR."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Commissioner joins EUDR event",
+    "bullets": [
+     "A Commissioner attended an EUDR event, the Commission's environment newsroom reported.",
+     "The item gave no remarks, dates or new guidance, so compliance teams have nothing new to act on yet."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Cocoa replacers target supply risk",
+    "bullets": [
+     "Planet A Foods launched Cocoa Booster, a high-fiber powder that can replace up to 100% of cocoa in select applications.",
+     "The launch cites rising cocoa costs, a sign that buyers are seeking ways to reduce exposure to tight, regulated supply chains.",
+     "GLP-1-driven demand shifts are also cited, so cocoa exporters may face changing product demand alongside EUDR requirements."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: EU forest cover stable near 39%, a Commissioner at an EUDR event, and a cocoa replacer launched amid rising costs."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-10-31T16:06:20.563Z",
+  "date": "2026-10-31",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "From cultivated beef to fermented soy: Bezos-backed protein innovators target cost and scale",
+    "link": "https://www.foodnavigator.com/Article/2026/10/30/aleph-farms-among-bezos-backed-protein-innovators-targeting-scale/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-30T02:49:37.000Z",
+    "snippet": "Aleph Farms and Mottainai Food Tech secure S$1m each to scale cultivated meat and fermented protein, targeting cost, resilience and commercial growth.",
+    "categories": [
+     "News"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "New cocoa powder alternative targets GLP-1 trends and supply risks",
+    "link": "https://www.foodnavigator.com/Article/2026/10/29/planet-a-foods-launches-cocoa-booster-replacer/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-29T14:03:02.000Z",
+    "snippet": "Planet A Foods launches Cocoa Booster, a high-fiber cocoa powder replacer that can replace up to 100% of cocoa in select applications amid rising costs and GLP-1-driven demand shifts.",
+    "categories": [
+     "Flavours & colours"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "European Commission: Environment newsroom",
+    "title": "Did you know?",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/963103",
+    "published": "2026-10-28T12:33:42.000Z",
+    "snippet": "26.4% of total EU land is designated as protected 81% of protected EU habitats have a poor or bad conservation status EU forest cover has stabilised at approximately 39% of total land",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "European Commission: Environment newsroom",
+    "title": "EUDR & Commissioner",
+    "link": "https://environment.ec.europa.eu/index_en",
+    "published": "2026-10-27T14:46:12.000Z",
+    "snippet": "Comissioner goes to EUDR event.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 2
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
