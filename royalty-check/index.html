@@ -84,10 +84,10 @@ const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(
 function frac(s) { s = String(s || '').trim(); if (s.includes('/')) { const [a, b] = s.split('/').map(Number); return b ? a / b : NaN; } return Number(s); }
 function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
 function showQuota() {
-  if (PRO) { $('quota').textContent = 'Pro: unlimited checks, saved history and CSV export.'; return; }
+  if (PRO) { $('quota').textContent = 'Pro: saved history and CSV export.'; return; }
   const left = Math.max(0, FREE_PER_DAY - quotaState().n);
   $('quota').textContent = left > 0
-    ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
+    ? `${left} of ${FREE_PER_DAY} checks before the Pro reminder today. Calculations stay free and visible.`
     : `You've reached the ${FREE_PER_DAY}-check daily counter on this device. Your result stays free and visible; Pro adds saved history and CSV export.`;
 }
 function run(isSample) {
@@ -114,7 +114,7 @@ function run(isSample) {
       if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
         window.Studio.showUpgradeModal({
           header: 'Upgrade to Royalty Check Pro',
-          body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily decimal calculations, saved on-device check history, and downloadable CSV reports. Your ownership documentation and land records stay in your browser; calculator inputs are processed locally.'
+          body: 'You've completed 3 checks today. Your result remains free and visible. Pro is $15/month for saved on-device check history and CSV export; it does not lock the calculator.'
         });
       }
       if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
