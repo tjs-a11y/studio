@@ -140,6 +140,9 @@ test('Haul Audit and Royalty Check preserve visible results and save history onl
   for (const path of ['haul-audit/index.html', 'royalty-check/index.html']) {
     const html = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
     assert.ok(html.includes('const FREE_PER_DAY = 3'));
+    assert.ok(html.includes('checks before the Pro reminder today'));
+    assert.ok(!html.includes('unlimited daily settlement reconciliations'));
+    assert.ok(!html.includes('unlimited daily decimal calculations'));
     assert.ok(html.includes('getFullYear()') && html.includes('getMonth()') && html.includes('getDate()'));
     assert.ok(html.includes('Your result is always free and always visible'));
     const historyWrite = html.indexOf("ls.set('pro-history'");
