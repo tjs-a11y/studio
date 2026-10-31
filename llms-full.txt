@@ -150,6 +150,46 @@
 - [What happens when your fixed-rate electricity plan ends](https://quickwell.app/learn/power-bills/when-a-fixed-rate-plan-ends/): When a fixed-rate electricity plan expires, most providers move you to a month-to-month variable rate that is usually higher. How the roll-off works and how to avoid it.
 - [The average U.S. electricity price in 2026 — and how to read your own](https://quickwell.app/learn/power-bills/average-electricity-price-2026/): The U.S. average residential electricity rate is about 18 cents per kWh in 2026, up from 2025. What the figure means, its limits, and how to read your own rate.
 
+## Guides
+
+- [How long do cooked leftovers last?](https://quickwell.app/guides/food-leftovers-dinner-planning/): FoodSafety.gov storage times, safe cooling and reheating, then dinner ideas from ingredients you already have.
+- [Read your electricity bill before forecasting](https://quickwell.app/guides/read-electricity-bill-rate-usage/): Find kWh usage, plan rates, delivery charges and the fixed-plan end date for Bill Radar.
+- [Find and cancel recurring charges](https://quickwell.app/guides/find-cancel-recurring-charges/): Review statement patterns, cancel with the merchant, keep proof and monitor the next bill.
+- [Check an unexpected text for scam signs](https://quickwell.app/guides/check-unexpected-text-scam/): Verify account alerts, delivery notices and payment requests without clicking suspicious links.
+- [Compare contractor and repair estimates](https://quickwell.app/guides/compare-repair-estimates/): Compare written scope, parts, labor, timing and approval terms with Fair Price.
+- [TONU, detention and layover: what your rate con should say](https://quickwell.app/guides/tonu-detention-layover-rate-con/): Understand accessorial terms and what to ask a broker to put in writing.
+- [Red flags in a broker rate confirmation](https://quickwell.app/guides/rate-confirmation-red-flags/): Review broker identity, pay terms, deductions and contract language.
+- [New entrant safety audit: automatic-fail violations](https://quickwell.app/guides/new-entrant-audit-automatic-fail-violations/): Understand the safety records and violations that can fail a new entrant audit.
+- [New authority checklist: your first 18 months](https://quickwell.app/guides/new-authority-checklist-first-18-months/): Set up insurance, drug-testing, driver qualification, logs and maintenance records.
+- [Small-carrier settlement audit](https://quickwell.app/guides/carrier-settlement-audit-checklist/): Reconcile broker gross, factoring fees, reserves and the bank deposit with Haul Audit.
+- [Before you sign: carrier rate-confirmation checklist](https://quickwell.app/guides/rate-con-before-you-sign-checklist/): Review pay, miles, accessorials, deductions and payment terms with Rate Con Checker.
+- [New carrier FMCSA audit binder](https://quickwell.app/guides/new-carrier-fmcsa-audit-binder-checklist/): Organize driver, vehicle, maintenance and operating records with New Authority Audit Kit.
+- [Carrier photo evidence for PODs and accessorials](https://quickwell.app/guides/carrier-photo-proof-pod-accessorials/): Document pickup, delivery, cargo condition and time-based charges with Proof.
+- [Truck repair estimate checklist](https://quickwell.app/guides/truck-repair-estimate-fair-price-checklist/): Review parts, labor, diagnostics and warranty terms with Fair Price.
+- [Carrier maintenance receipts and warranties](https://quickwell.app/guides/carrier-maintenance-receipt-warranty-tracker/): Track repair receipts, parts warranties and return deadlines with Keep the Receipt.
+- [Before signing lease-on, factoring or equipment agreements](https://quickwell.app/guides/carrier-lease-on-factoring-contract-review/): Identify fees, deductions, liability and termination terms with Before You Sign.
+- [Roadside emergency readiness for drivers](https://quickwell.app/guides/carrier-roadside-driver-emergency-preparedness/): Prepare emergency contacts, phone SOS settings and a glovebox medical card.
+- [Carrier year-end vendor review](https://quickwell.app/guides/carrier-vendor-1099-renewal-cost-review/): Review vendor payments, renewal dates and price increases with Vendor Check.
+- [Carrier recurring-cost and bank-fee audit](https://quickwell.app/guides/carrier-bank-fee-subscription-audit/): Find subscriptions, price hikes and duplicate charges with Quickwell Saver.
+- [Handling FMCSA, insurance and tax notices](https://quickwell.app/guides/carrier-fmcsa-insurance-notice-deadline-workflow/): Extract deadlines, actions and response tasks from official notices with Quickwell Pilot.
+- [Carrier fraud prevention checklist](https://quickwell.app/guides/carrier-broker-load-board-payment-scam-checklist/): Spot suspicious broker messages, altered payment instructions and fake load offers with Quickwell Shield.
+- [Intermodal drayage demurrage reconciliation](https://quickwell.app/guides/intermodal-drayage-demurrage-terminal-in-out-records/): Match terminal gate events, free time and invoice charges with Port Watcher.
+- [Timber hauling scale-ticket reconciliation](https://quickwell.app/guides/timber-hauler-scale-ticket-settlement-checklist/): Compare truck weight tickets with mill settlements using Scale Audit.
+- [Oilfield water-hauling volume reconciliation](https://quickwell.app/guides/oilfield-water-hauling-volume-ticket-reconciliation/): Match meter readings, delivery tickets and billed volumes with Hydro Flow.
+- [EUDR geolocation: what the GeoJSON file must contain](https://quickwell.app/guides/eudr-geolocation-geojson/): What an EUDR plot GeoJSON file must contain, from the EU Information System docs: WGS 84, 6 decimals, allowed shapes, the 4 ha rule, properties, limits.
+- [EUDR simplified declaration: when a postal address can replace GeoJSON](https://quickwell.app/guides/eudr-simplified-declaration-postal-address/): Who can file an EUDR simplified declaration, and when a postal address or cadastral ID can replace GeoJSON plot coordinates, per the EU Information System.
+- [Common reasons EUDR plot files get rejected](https://quickwell.app/guides/eudr-plot-file-rejected/): The common GeoJSON errors the EU Information System lists, grouped by cause: crossing lines, holes, open polygons, swapped or truncated coordinates, size.
+- [What to do if a freight broker short pays your settlement](https://quickwell.app/guides/trucking-settlement-disputes.html): Reconcile the rate confirmation, POD, approved accessorials, broker remittance and factoring statement.
+- [Factoring fee or broker short-pay? Reconcile your settlement](https://quickwell.app/guides/factoring-fee-vs-broker-short-pay/): Separate broker remittance differences from factoring fees, reserves, advances and other listed adjustments, then match each amount to its source document.
+- [How to find drilling permits near your Texas mineral rights](https://quickwell.app/guides/find-texas-drilling-permits/): Find new drilling permits near your Texas mineral rights with the RRC W-1 Query, the Public GIS Viewer and RRC data files, then set up a free alert.
+- [What a new drilling permit near your land means for royalty owners](https://quickwell.app/guides/new-drilling-permit-royalty-owners/): What a Texas drilling permit does and doesn’t tell a mineral owner, what to check next, and the royalty payment deadlines in Texas law, per the RRC.
+- [How to check if your oil and gas royalty check is correct](https://quickwell.app/guides/understanding-mineral-royalty-deductions.html): Verify net mineral acres, lease royalty fraction, spacing-unit acreage, reported decimal, production and deductions.
+- [Martin County, Texas](https://quickwell.app/guides/texas-martin-county-permit-royalty-guide/): County permit snapshot and tract/royalty statement verification steps.
+- [Upton County, Texas](https://quickwell.app/guides/texas-upton-county-permit-royalty-guide/): County permit snapshot and tract/royalty statement verification steps.
+- [Midland County, Texas](https://quickwell.app/guides/texas-midland-county-permit-royalty-guide/): County permit snapshot and tract/royalty statement verification steps.
+- [Loving County, Texas](https://quickwell.app/guides/texas-loving-county-permit-royalty-guide/): County permit snapshot and tract/royalty statement verification steps.
+- [Reeves County, Texas](https://quickwell.app/guides/texas-reeves-county-permit-royalty-guide/): County permit snapshot and tract/royalty statement verification steps.
+
 ## Health and everyday reference pages
 
 - [Fall-risk tests explained: the CDC's chair stand, balance and Timed Up and Go](https://quickwell.app/learn/fall-risk-tests/): How the CDC STEADI 30-second chair stand, 4-stage balance test and Timed Up and Go work, the cutoffs on the 2017 forms, and how to do them safely.
