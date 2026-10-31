@@ -5,25 +5,25 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; frame-src https://*.stripe.com; form-action 'self' https://*.stripe.com; base-uri 'self'">
 <!-- seo -->
 <title>2026 1099 and Renewal Check from Your Bank Export</title>
-<meta name="description" content="Find who likely needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.">
+<meta name="description" content="Review 2026 vendor payments against the $2,000 threshold for covered 1099 categories, with payment-type exceptions, renewals and price increases. Nothing is uploaded.">
 <link rel="canonical" href="https://quickwell.app/vendor-check/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Quickwell">
 <meta property="og:title" content="Year-End Vendor Check: 2026 1099 list and renewal finder">
-<meta property="og:description" content="Find who likely needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.">
+<meta property="og:description" content="Review 2026 vendor payments against the $2,000 threshold for covered 1099 categories, with payment-type exceptions, renewals and price increases. Nothing is uploaded.">
 <meta property="og:url" content="https://quickwell.app/vendor-check/">
 <meta property="og:image" content="https://quickwell.app/vendor-check/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Year-End Vendor Check: who likely needs a 1099 under the $2,000 rule, and every renewal">
+<meta property="og:image:alt" content="Year-End Vendor Check: 2026 1099 threshold and payment-type exceptions">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Year-End Vendor Check: 2026 1099 list and renewal finder">
-<meta name="twitter:description" content="Find who likely needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.">
+<meta name="twitter:description" content="Review 2026 vendor payments against the $2,000 threshold for covered 1099 categories, with payment-type exceptions, renewals and price increases. Nothing is uploaded.">
 <meta name="twitter:image" content="https://quickwell.app/vendor-check/og.png">
 <meta name="theme-color" content="#f6f6f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101215" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:,">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Year-End Vendor Check","url":"https://quickwell.app/vendor-check/","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"description":"Find who likely needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.","offers":[{"@type":"Offer","name":"Free check","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Owner Pack (one-time)","price":"19.00","priceCurrency":"USD"},{"@type":"Offer","name":"Bookkeeper Pack (one-time)","price":"59.00","priceCurrency":"USD"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Year-End Vendor Check","url":"https://quickwell.app/vendor-check/","applicationCategory":"BusinessApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"description":"Review 2026 vendor payments against the $2,000 threshold for covered 1099 categories, with payment-type exceptions, renewals and price increases. Nothing is uploaded.","offers":[{"@type":"Offer","name":"Free check","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Owner Pack (one-time)","price":"19.00","priceCurrency":"USD"},{"@type":"Offer","name":"Bookkeeper Pack (one-time)","price":"59.00","priceCurrency":"USD"}]}]}</script>
 <!-- /seo -->
 <style>
   :root { --bg:#f6f6f2; --ink:#16181c; --muted:#5b6270; --card:#fff; --line:#e2e2dc; --accent:#1f5ed8; --red:#c2341f; --amber:#a86b00; --green:#1d7a46; --chip:#f0f2f6; --on:#fff;
@@ -682,6 +682,8 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
     '3406': { label: '26 U.S.C. §3406', url: USC('3406') },
     '6050N': { label: '26 U.S.C. §6050N', url: USC('6050N') },
     '6050W': { label: '26 U.S.C. §6050W', url: USC('6050W') },
+    'irs2026': { label: 'IRS — Am I required to file a Form 1099 or other information return? (2026)', url: 'https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return' },
+    'irspub': { label: 'IRS Publication 1099 (2026), General Instructions for Certain Information Returns', url: 'https://www.irs.gov/publications/p1099' },
     '6071b': { label: '26 U.S.C. §6071(b)', url: USC('6071') },
     '6071c': { label: '26 U.S.C. §6071(c)', url: USC('6071') },
     '7503': { label: '26 U.S.C. §7503', url: USC('7503') },
@@ -692,12 +694,14 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
   VC.IRS = {
     instructions: 'https://www.irs.gov/instructions/i1099mec',
     w9: 'https://www.irs.gov/forms-pubs/about-form-w-9',
+    requiredToFile: 'https://www.irs.gov/businesses/small-businesses-self-employed/am-i-required-to-file-a-form-1099-or-other-information-return',
+    publication: 'https://www.irs.gov/publications/p1099',
   };
   VC.RULES = {
     2026: {
-      year: 2026, threshold: 2000, near: 1500, royalty: 10,
-      sources: ['6041', '6041A', '70433', '6050N', 'reg1', 'reg3p'],
-      summary: 'Based on federal law for payments made in 2026: a 1099-NEC or 1099-MISC is generally required when you pay a non-corporate payee $2,000 or more in the year for services or rent (26 U.S.C. §6041, §6041A, as amended by Pub. L. 119-21 §70433). The IRS regulations still show the old $600 figure; the statute controls. Your state may have its own rule.',
+      year: 2026, threshold: 2000, near: 1500, royalty: 10, attorneyGross: 600,
+      sources: ['irs2026', 'irspub', '6041', '6041A', '70433', '6050N', 'reg1', 'reg3p'],
+      summary: 'Based on current IRS guidance for payments made in 2026: the $2,000 threshold applies to covered nonemployee-service payments reported on Form 1099-NEC and many Form 1099-MISC categories, including rent. It is not universal: royalties remain reportable from $10, and gross proceeds paid to attorneys remain reportable at $600 or more. Payment-card and third-party network payments follow separate Form 1099-K rules; backup withholding can require reporting regardless of the amount. Older regulation text may still show $600 for categories covered by the new threshold. Check the IRS payment-type table and your state's rules.',
     },
     2027: null,
   };
@@ -707,15 +711,15 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
 
   function deadlines(year) {
     const r = VC.RULES[year]; if (!r) return null; const ny = year + 1;
-    const jan31 = `${ny}-01-31`, mar31 = `${ny}-03-31`;
-    const nec = dueDate(jan31), miscE = dueDate(mar31);
+    const jan31 = `${ny}-01-31`, feb28 = `${ny}-02-28`, mar31 = `${ny}-03-31`;
+    const nec = dueDate(jan31), miscPaper = dueDate(feb28), miscE = dueDate(mar31);
     const rolled = (orig, d) => (orig === d ? '' : ` ${fmtDate(orig)} falls on a ${dow(orig) % 6 === 0 ? DOW[dow(orig)] : 'legal holiday'}, so the deadline moves to the next business day, ${fmtLong(d)} (26 U.S.C. §7503).`);
     return [
       { id: 'w9', date: `${year}-12-15`, title: 'Send W-9 requests to everyone on your chase list', note: 'Our suggestion, not a legal deadline: it leaves time to get answers before January.', suggestion: true, cites: [] },
       { id: 'nec', date: nec, title: 'Form 1099-NEC: file with the IRS and give each recipient their copy', note: `The law says January 31.${rolled(jan31, nec)}`, cites: ['6071c', '6041Ae', '7503'] },
       { id: 'miscRecipient', date: nec, title: 'Form 1099-MISC (rent, royalties): give each recipient their copy', note: `The law says January 31 (26 U.S.C. §6041(d), §6050N(b)).${rolled(jan31, nec)} Check the IRS instructions as well.`, cites: ['6041d', '6050N', '7503'] },
       { id: 'miscE', date: miscE, title: 'Form 1099-MISC: file with the IRS electronically', note: 'March 31 for information returns filed electronically, other than nonemployee compensation.', cites: ['6071b'] },
-      { id: 'miscPaper', date: null, title: 'Form 1099-MISC filed on paper', note: 'See the IRS instructions for Forms 1099-MISC and 1099-NEC for the paper filing date.', link: VC.IRS.instructions, cites: [] },
+      { id: 'miscPaper', date: miscPaper, title: 'Form 1099-MISC filed on paper', note: `IRS Publication 1099 lists February 28; the weekend rule moves it to the next business day.${rolled(feb28, miscPaper)}`, link: VC.IRS.publication, cites: ['irspub', '7503'] },
     ];
   }
   VC.deadlines = deadlines;

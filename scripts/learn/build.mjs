@@ -131,14 +131,17 @@ const secs = sections;
 const line = (title, path, desc) => `- [${title}](${SITE}${path}): ${desc}`;
 const llms = `# Quickwell
 
-> Quickwell is a studio of small, single-purpose web tools: a trucking rate confirmation checker, an FMCSA new entrant audit self-check and kit, an EUDR plot file checker (English, French and Spanish), a Texas drilling permit watcher and a year-end vendor check for small businesses (1099 list, renewals and price increases). Each tool has plain-English reference pages that explain the rules it checks, with official sources linked on every page. Two reference sections help small businesses manage auto-renewals, vendor price increases and recurring charges, and apply the 2026 Form 1099 rules ($2,000 threshold, exclusions, deadlines).
+> Quickwell is a collection of single-purpose browser tools for households, everyday money, consumer decisions, owner-operators, small fleets, Texas mineral and royalty owners, EUDR exporters, and small businesses. Consumer tools help plan dinners, forecast electricity bills, find recurring charges, review suspicious messages, compare estimates, track receipts and understand notices. Business tools include rate-confirmation and settlement checks, FMCSA audit preparation, EUDR plot-file checks, Texas permit and royalty tools, and vendor-renewal reviews. Each tool page explains its own capabilities and data handling.
 
-All tools run in the browser; files and text people check are not uploaded. Reference pages are educational, not legal advice, and list the date their sources were checked.
+Many tools process inputs locally in the browser; check the individual page for its privacy, storage and anonymous-event details. Reference pages are educational, not legal, tax, medical or financial advice, and list the date their sources were checked.
 
 ## Tools
 
 ${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
 
+## Collections
+
+${existsSync(join(root, 'weekend', 'index.html')) ? line('Weekend Toolkit', '/weekend/', 'A curated starting point for everyday tasks—dinner planning, household bills, quotes, contracts, receipts, scam checks and small-business paperwork. Each tool page states its own limits, free/paid features and privacy behavior.') + '\n' : ''}
 ## Reference pages
 
 ${secs.map(({ S, pages }) => line(S.name + (S.lang === 'fr' ? ' (French)' : ''), S.path, `${S.description} (${pages.length} pages)`)).join('\n')}
@@ -148,6 +151,9 @@ ${existsSync(join(root, 'guides', 'index.html')) ? line('Guides', '/guides/', 'L
 
 - [Full page list](${SITE}/llms-full.txt): every reference page with its one-line summary.
 `;
+const guideEntries = existsSync(join(root, 'guides', 'index.html'))
+  ? [...readFileSync(join(root, 'guides', 'index.html'), 'utf8').matchAll(/<li[^>]*><a href="(\/guides\/[^"]+)">([^<]+)<\/a><span>([^<]+)<\/span><\/li>/g)].map((m) => [m[2], m[1], m[3]])
+  : [];
 const full = `# Quickwell: full page list
 
 > Every reference page on Quickwell with a one-line summary. See ${SITE}/llms.txt for the overview.
@@ -155,11 +161,19 @@ const full = `# Quickwell: full page list
 ## Tools
 
 ${TOOLS.map(([t, p, d]) => line(t, p, d)).join('\n')}
+
+## Collections
+
+${existsSync(join(root, 'weekend', 'index.html')) ? line('Weekend Toolkit', '/weekend/', 'A curated starting point for everyday tasks—dinner planning, household bills, quotes, contracts, receipts, scam checks and small-business paperwork. Each tool page states its own limits, free/paid features and privacy behavior.') + '\n' : ''}
 ${secs.map(({ S, pages }) => `
 ## ${S.name}${S.lang === 'fr' ? ' (French)' : ''}
 
 ${line(S.h1, S.path, S.description)}
 ${pages.map((p) => line(p.h1 || p.term, S.path + p.slug + '/', p.description)).join('\n')}`).join('\n')}
+
+## Guides
+
+${guideEntries.map(([title, path, description]) => line(title, path, description)).join('\n')}
 
 ## Health and everyday reference pages
 
