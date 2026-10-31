@@ -33,10 +33,10 @@ export const PAGES = [
   slug: 'when-a-fixed-rate-plan-ends',
   h1: 'What happens when your fixed-rate electricity plan ends',
   crumbName: 'When a fixed-rate plan ends',
-  short: 'When a fixed plan expires, most providers roll you onto a month-to-month variable rate that is usually higher. What that means and how to get ahead of it.',
+  short: 'When a fixed plan expires, your contract may move you to a month-to-month variable plan. Check the renewal terms and compare the rate before it changes.',
   title: 'When Your Fixed Electricity Rate Ends: The Roll-Off',
   description: 'When a fixed-rate electricity plan expires, most providers move you to a month-to-month variable rate that is usually higher. How the roll-off works and how to avoid it.',
-  lede: 'The riskiest day in the life of an electricity plan is the day it ends. If you do nothing, you are not cut off — you are moved onto a month-to-month rate that is usually higher than the deal you had. Here is how that works and how to stay ahead of it.',
+  lede: 'When a fixed-rate term ends, the next step depends on the plan terms and the rules in your market. Some plans move to a month-to-month variable rate that can change; do not assume the new price will be higher or that every provider follows the same process. Here is what to check before the date arrives.',
   related: ['average-electricity-price-2026'],
   sources: [PUCT],
   body: `
@@ -44,16 +44,16 @@ export const PAGES = [
 <p>A fixed-rate plan locks your price per kilowatt-hour for a set term — often 12, 24 or 36 months. When that term ends and you have not signed a new plan or switched provider, your service does not stop. Instead, in deregulated retail markets, the provider rolls you onto a <b>month-to-month, variable "default" plan</b>, and that rate is typically higher than the fixed deal you just left.</p>
 
 <h2>What the rules say</h2>
-<p>The ${puct('Public Utility Commission of Texas consumer page')} describes the two plan types and the end-of-term behaviour plainly: a variable-rate plan has no fixed term or cancellation fee, but the rate per kilowatt-hour "can vary from month to month," moving up or down with the market and the provider. The same consumer guidance is clear that if your plan ends and you have not chosen a new one, your provider keeps serving you — on that month-to-month plan — rather than disconnecting you. Texas is the clearest example because its retail market is fully open, but the same renewal pattern appears across deregulated markets.</p>
+<p>The ${puct('Public Utility Commission of Texas consumer page')} explains that a variable-rate plan has no fixed term and that its price per kilowatt-hour can vary from month to month. That is Texas consumer guidance, not a rule for every state or every utility. Read your own contract and renewal notice to see whether the plan changes automatically, what rate applies next and whether any fee or action deadline applies.</p>
 
-<h2>Why the roll-off usually costs more</h2>
-<p>Two things push the default rate up. First, a variable rate is not protected by a contract, so it tracks wholesale costs and the provider's discretion — and providers have little reason to make the "do nothing" rate their cheapest. Second, renewal offers sent to existing customers are often priced above the rates advertised to brand-new customers. The result is that the households least likely to shop — the ones who let a plan lapse — tend to pay the most.</p>
+<h2>Why the next rate can change</h2>
+<p>A variable rate can move up or down from month to month. A renewal offer may also differ from a new-customer offer, but the direction and amount depend on the provider, market and contract. Compare the actual next rate and all recurring charges rather than assuming a plan end date automatically means a price increase.</p>
 
 <h2>How to get ahead of it</h2>
-<p>The fix is a date, not a decision made under pressure. Find your plan's end date (it is on your contract or "facts" document), and mark a reminder <b>60 to 90 days before</b> it. That window is enough to compare offers and re-sign or switch before the roll-off rate ever applies. On a month-to-month plan there is generally no cancellation fee, so leaving is cheap once you are already on it — the cost is the weeks or months you spend on the higher rate before you notice.</p>
+<p>The fix is to read the notice early. Find your plan's end date in the contract or electricity facts label, check how and when the provider will notify you, and compare available plans before the deadline. Review any cancellation fee, renewal term, variable-rate formula and action required. If you are already on a month-to-month plan, check its actual cancellation terms before switching.</p>
 
 <h2>See your own roll-off month</h2>
-<p>This is exactly what the free ${TOOL()} tool is for: enter your current rate, your typical usage and your plan's end date, and it marks the month the roll-off hits and estimates the 12 months around it, with the "default rate" assumption adjustable to whatever you expect. It runs on your device and uploads nothing. It is an estimate from your inputs, not a quote or financial advice.</p>`,
+<p>This is exactly what the free ${TOOL()} tool is for: enter your current rate, your typical usage and your plan's end date, and it marks the month the roll-off hits and estimates the 12 months around it, with the "default rate" assumption adjustable to whatever you expect. Runs entirely in your local browser — nothing you enter leaves your device. It is an estimate from your inputs, not a quote or financial advice.</p>`,
 },
 {
   slug: 'average-electricity-price-2026',
