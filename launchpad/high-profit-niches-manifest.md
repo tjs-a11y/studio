@@ -177,3 +177,28 @@ A niche is not launch-ready until it has:
 8. Pilot acceptance criteria, error-rate targets, and a support/incident process.
 
 **Roadmap principle:** Validate the pain and source-data access before committing to implementation. “Low competition,” “high margin,” and “zero-human-input” are hypotheses to test, not established market facts.
+
+
+## Shift evidence log — 2026-10-31
+
+**Source/time:** Vercel production Web Analytics, retrieved 2026-10-31 17:10–17:20 US Central. Comparison windows: 2026-10-24–31 vs 2026-10-17–24 (UTC date boundaries).
+
+- Site total: **22 visitors / 25 pageviews** vs **39 / 126**.
+- Consumer routes, pageviews current/prior: Dinner **0/4**; Bill Radar **1/0**; Saver **0/1**; Shield **0/0**; Fair Price **0/0**.
+- Specialist routes: Haul Audit **1/0**; Royalty Check **1/0**.
+- Prelaunch routes: Port Watcher **0/0**; Hydro Flow **0/0**; Scale Audit **0/0**.
+- These are pageviews only, not impressions, completed checks, leads, sales or revenue. Vercel custom-event aggregation was empty in both windows.
+
+**Measurement gates:** /api/stats live response BLOCKED (direct read failed; 7-day runtime-log query timed out; scoped 24-hour query returned no matching logs). Tool completion counts UNKNOWN, not zero. GSC impressions/clicks/indexing BLOCKED: no authenticated GSC source connected. Stripe sales/revenue UNKNOWN: no authenticated Stripe-side report. No IndexNow submission or indexing claim.
+
+**Source inspection:**
+- js/pro.js retains a short ?ref= channel label locally and passes it to checkout; api/checkout.js writes it to Checkout Session and subscription/payment-intent metadata.
+- Haul Audit and Royalty Check: localStorage quota, visitor-local calendar date, storage clearing resets quota, calculated results remain visible after check three, Pro gates saved history/CSV only. Source-level PASS.
+- api/checkout.js hard-codes haul-audit__pro__month and royalty-check__pro__month and enforces recurring monthly, but does not verify $15 USD amount/currency. Stripe-side price verification unavailable. Checkout release gate BLOCKED; no API edit during freeze.
+- Port Watcher, Hydro Flow and Scale Audit lack required click_operator / click_manager event handlers in the inspected page source and js/pro.js. Telemetry gate FAIL; no backend edit during freeze.
+- Saver sends only {tool:"saver",event:"check"}; Shield currently has no check-event call. No entered content is sent in the inspected generic event payloads.
+
+**Primary-source watch:** FMCSA CSA portal showed data current 2026-09-25, website updated 2026-10-05, next update week of 2026-11-09 (https://csa.fmcsa.dot.gov/). RRC dataset catalog says its drilling-permit daily file updates nightly; this shift did not download/parse it, so no new permit count is asserted (https://www.rrc.texas.gov/resource-center/research/data-sets-available-for-download/). No new article justified by a verified change this shift.
+
+**Build/test/indexing:** npm test, node scripts/sitemap.mjs, node scripts/learn/build.mjs --check NOT RUN because no checked-out Node/dependency runtime is available through the connected GitHub content tools. Content updates are branch-only. **Code freeze intact through 2026-11-02; no production deployment.**
+
