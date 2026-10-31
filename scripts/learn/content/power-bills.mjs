@@ -35,13 +35,13 @@ export const PAGES = [
   crumbName: 'When a fixed-rate plan ends',
   short: 'When a fixed plan expires, your contract may move you to a month-to-month variable plan. Check the renewal terms and compare the rate before it changes.',
   title: 'When Your Fixed Electricity Rate Ends: The Roll-Off',
-  description: 'When a fixed-rate electricity plan expires, most providers move you to a month-to-month variable rate that is usually higher. How the roll-off works and how to avoid it.',
+  description: 'When a fixed-rate term ends, the next step depends on your plan and market. What to check in the renewal notice before the price changes.',
   lede: 'When a fixed-rate term ends, the next step depends on the plan terms and the rules in your market. Some plans move to a month-to-month variable rate that can change; do not assume the new price will be higher or that every provider follows the same process. Here is what to check before the date arrives.',
   related: ['average-electricity-price-2026'],
   sources: [PUCT],
   body: `
 <h2>The short answer</h2>
-<p>A fixed-rate plan locks your price per kilowatt-hour for a set term — often 12, 24 or 36 months. When that term ends and you have not signed a new plan or switched provider, your service does not stop. Instead, in deregulated retail markets, the provider rolls you onto a <b>month-to-month, variable "default" plan</b>, and that rate is typically higher than the fixed deal you just left.</p>
+<p>A fixed-rate plan locks a price per kilowatt-hour for a stated term. When the term ends, the next step depends on your contract and market rules. Some retail plans move to a <b>month-to-month variable plan</b>, where the price can change. Check the renewal notice and plan documents rather than assuming every provider follows the same process.</p>
 
 <h2>What the rules say</h2>
 <p>The ${puct('Public Utility Commission of Texas consumer page')} explains that a variable-rate plan has no fixed term and that its price per kilowatt-hour can vary from month to month. That is Texas consumer guidance, not a rule for every state or every utility. Read your own contract and renewal notice to see whether the plan changes automatically, what rate applies next and whether any fee or action deadline applies.</p>
@@ -57,8 +57,8 @@ export const PAGES = [
 },
 {
   slug: 'average-electricity-price-2026',
-  h1: 'The average U.S. electricity price in 2026 — and how to read your own',
-  crumbName: 'Average price in 2026',
+  h1: 'The average U.S. residential electricity price in August 2026',
+  crumbName: 'Average price in August 2026',
   short: 'EIA reports a U.S. residential average of 18.16¢/kWh for August 2026, 3.4% above August 2025. What the national benchmark does and does not tell you.',
   title: 'Average U.S. Residential Electricity Price: Aug 2026',
   description: 'EIA reports an August 2026 U.S. residential average of 18.16¢/kWh, 3.4% above August 2025. Understand the benchmark and its limits.',
