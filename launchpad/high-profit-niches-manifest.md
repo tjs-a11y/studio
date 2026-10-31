@@ -183,7 +183,7 @@ A niche is not launch-ready until it has:
 
 **Source/time:** Vercel production Web Analytics, retrieved 2026-10-31 17:10–17:20 US Central. Comparison windows: 2026-10-24–31 vs 2026-10-17–24 (UTC date boundaries).
 
-- Site total: **22 visitors / 25 pageviews** vs **39 / 126**.
+- Site total: **20 visitors / 23 pageviews** vs **39 / 126**.
 - Consumer routes, pageviews current/prior: Dinner **0/4**; Bill Radar **1/0**; Saver **0/1**; Shield **0/0**; Fair Price **0/0**.
 - Specialist routes: Haul Audit **1/0**; Royalty Check **1/0**.
 - Prelaunch routes: Port Watcher **0/0**; Hydro Flow **0/0**; Scale Audit **0/0**.
