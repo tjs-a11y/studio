@@ -1,9 +1,7 @@
 name: Quickwell validation
 on:
   push:
-    branches:
-      - growth/specialist-discovery-2026-10-31
-      - growth/consumer-search-guides-2026-10-31
+    branches: ['growth/**']
   pull_request:
     branches: [main]
 jobs:
