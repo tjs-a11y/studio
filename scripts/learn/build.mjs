@@ -20,7 +20,7 @@ for (const m of MODULES) {
   sections.push({ id: m, S: mod.SECTION, pages: mod.PAGES || mod.TERMS });
 }
 // Standalone articles (one page each, any language, at their own path): modules export ARTICLES and a HUB tile.
-const ARTICLE_MODULES = ['footsure', 'factoring-shortpay'];
+const ARTICLE_MODULES = ['footsure', 'factoring-shortpay', 'trucking-detention-law-disputes'];
 const articles = []; const articleTiles = [];
 for (const m of ARTICLE_MODULES) {
   const f = join(root, 'scripts', 'learn', 'content', m + '.mjs');
@@ -89,9 +89,9 @@ if (en.length) {
 }
 
 for (const o of out) {
-  const dir = join(root, o.path);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), o.html);
+  const target = o.path.endsWith('.html') ? join(root, o.path) : join(root, o.path, 'index.html');
+  mkdirSync(dirname(target), { recursive: true });
+  writeFileSync(target, o.html);
 }
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
