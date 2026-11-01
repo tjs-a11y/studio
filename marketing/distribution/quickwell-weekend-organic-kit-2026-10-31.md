@@ -95,6 +95,30 @@ Status: READY-TO-PUBLISH DRAFTS. Nothing in this file has been posted, sent, or 
 
 **Shot list:** use sample values only → show net acres, unit acres and lease fraction → show expected and statement decimals → remind viewers to confirm original documents.
 
+## Context-specific community reply drafts — November 1, 2026
+
+These are drafts only. No reply or post was published. Check each community's rules and the thread's current status before any human-approved use.
+
+### r/OwnerOperators — detention terms before booking
+Public thread: https://www.reddit.com/r/OwnerOperators/comments/1xcl5bh/detention_payrate_cons/ (October 22, 2026; discussion asks whether to negotiate detention and get it written into the rate confirmation).
+
+**Draft reply:**
+
+"Before you accept the load, ask the broker to put the free-time trigger, hourly rate, billing increments, cap, notice deadline and required proof/approval in the rate con or incorporated broker-carrier agreement. If the broker says it is covered elsewhere, ask which clause and keep a copy. Save the appointment confirmation, gate-in/out timestamps, signed BOL and the message you sent before free time expired. A two-hour dwell convention is not a federal guarantee of detention pay; if the paperwork is silent, request a written exception or price the waiting-time risk into the load and decide whether it still works. Rate Con Checker flags missing detention language before you sign: https://quickwell.app/rate-con-checker/?ref=reddit-owneroperators. After delivery, Haul Audit can compare approved accessorials with the settlement: https://quickwell.app/haul-audit/?ref=reddit-owneroperators."
+
+**Disclosure:** "Disclosure: we built these free, on-device tools and we'd love feedback. Nothing you enter is uploaded."
+
+### TheTruckersReport — detention denied for lack of proof
+Public thread: https://www.thetruckersreport.com/truckingindustryforum/threads/lost-detention-pay-again-because-broker-said-no-proof.2540236/page-2 (started April 20, 2026; recent search result shows continued discussion about proof and notice procedures).
+
+**Draft reply:**
+
+"Use the exact notice and documentation steps in the rate con or broker-carrier agreement. Keep the appointment, gate receipt, signed BOL or receiver in/out stamp, ELD/GPS timestamps, and every broker message showing when you reported the delay and requested approval. A handwritten BOL note alone may leave gaps, so ask the facility for a timestamped gate or dock record when possible. 49 CFR 371.3 gives each party a right to review the broker's required transaction record, but it does not create a detention rate or prove an unapproved charge is owed. Haul Audit can compare an approved accessorial amount with the settlement; it does not generate or certify detention timestamps: https://quickwell.app/haul-audit/?ref=truckersreport-detention."
+
+**Disclosure:** "Disclosure: we built these free, on-device tools and we'd love feedback. Nothing you enter is uploaded."
+
+No qualifying recent Freight Relocators thread surfaced in this search pass. Do not treat search-result absence as proof that no relevant discussion exists.
+
 ## Publishing and measurement guardrails
 
 - These are drafts, not published posts. No social account connection or posting authorization was used.
