@@ -191,3 +191,12 @@ A niche is not launch-ready until it has:
 - Added a GitHub Actions validation workflow for specialist and consumer branches (`npm ci`, `npm test`, sitemap generator, learn-content check) and a focused specialist source-contract test. Workflow run results are not yet available.
 - GSC query/page performance, production `/api/stats` counters, and Stripe subscription/revenue records remain UNKNOWN/BLOCKED without authenticated source access. Vercel pageviews, tool completions, upgrade clicks, paid subscriptions and revenue must remain separate metrics.
 - Code changes are branch/PR only. No customer data, calculator inputs, personal information or ownership records are sent in telemetry.
+
+## 2026-10-31 — consumer discovery release candidate
+
+- Rebuilt the consumer guide work on current main after specialist discovery PR #9 merged, avoiding a stale branch base.
+- Added five sourced household/money guides and their guide-hub, homepage and sitemap discovery links.
+- Corrected guide disclaimers, referral-query CTA recognition in SEO tests, and a hard-coded Shield test path that prevented CI from running outside the original developer machine.
+- Added repeatable growth-branch validation workflow: `npm ci`, `npm test`, sitemap generation, and learn-content build check.
+- Weekend TikTok/YouTube campaign assets remain drafts; no public posts, DMs, or outbound messages sent.
+- Release is blocked until CI and Vercel preview pass. No production deployment performed for this consumer batch.
