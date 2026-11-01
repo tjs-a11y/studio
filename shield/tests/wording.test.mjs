@@ -74,7 +74,7 @@ test('nothing is loaded from or sent to third parties; no analytics; messages ne
 test('the xlinks placeholder, the site CSP and the share target are in place', () => {
   assert.match(html, /<!-- xlinks:shield -->[\s\S]*?<!-- \/xlinks -->/);
   const csp = /http-equiv="Content-Security-Policy" content="([^"]+)"/.exec(html)[1];
-  const site = JSON.parse(readFileSync('/home/user/studio/vercel.json', 'utf8')).headers[0].headers.find((h) => h.key === 'Content-Security-Policy').value;
+  const site = JSON.parse(readFileSync(join(root, '..', 'vercel.json'), 'utf8')).headers[0].headers.find((h) => h.key === 'Content-Security-Policy').value;
   assert.equal(csp.replace("img-src 'self' data: blob:", "img-src 'self' data:").replace("; object-src 'none'", ''), site.replace("; frame-ancestors 'self'", ''));
   const man = JSON.parse(readFileSync(join(root, 'manifest.webmanifest'), 'utf8'));
   assert.deepEqual(man.share_target, { action: '/shield/share-target', method: 'POST', enctype: 'multipart/form-data', params: { title: 'title', text: 'text', url: 'url' } });
