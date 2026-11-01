@@ -1,4 +1,5 @@
 name: Quickwell validation
+run-name: Quickwell consumer guide checks
 on:
   push:
     branches:
