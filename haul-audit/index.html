@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haul Audit: catch freight settlement shortfalls</title>
-<meta name="description" content="Paste your rate con and settlement numbers and see if the broker paid what was agreed, plus a factoring deposit check. On your device; nothing uploaded.">
+<title>Freight Settlement Audit | Haul Audit</title>
+<meta name="description" content="Compare a trucking rate confirmation, broker settlement and factoring deposit. Check linehaul, fuel and accessorials privately in your browser.">
 <link rel="canonical" href="https://quickwell.app/haul-audit/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quickwell.app/haul-audit/">
-<meta property="og:title" content="Haul Audit: catch freight settlement shortfalls">
-<meta property="og:description" content="Check a broker settlement and a factoring deposit against what was agreed — on your device, nothing uploaded. A checklist, not advice.">
+<meta property="og:title" content="Freight Settlement Audit | Haul Audit">
+<meta property="og:description" content="Compare a trucking rate confirmation, broker settlement and factoring deposit privately in your browser.">
 <meta property="og:image" content="https://quickwell.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Haul Audit: catch freight settlement shortfalls">
+<meta name="twitter:title" content="Freight Settlement Audit | Haul Audit">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Haul Audit","url":"https://quickwell.app/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Check a trucking broker settlement and factoring deposit against agreed amounts. Calculations run on your device; values you enter are not uploaded. A review checklist, not legal, financial or accounting advice.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"}},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
@@ -77,6 +77,19 @@
     <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Your result is always free and always visible — it's computed on your device.</p>
   </section>
 
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">How to audit a trucking settlement</h2>
+    <p>Start with the signed rate confirmation and written amendments. Add linehaul, fuel surcharge and approved accessorials to calculate the expected broker gross. Compare that total with the settlement statement before reviewing the factoring statement.</p>
+    <p>Keep broker deductions separate from factoring fees, reserves, advances and other factor adjustments. A difference is a reason to inspect the source documents; it is not, by itself, proof of a short-pay.</p>
+    <h2>What Haul Audit checks</h2>
+    <ul><li>Rate confirmation amounts against broker settlement gross</li><li>Linehaul, fuel surcharge and approved accessorials</li><li>Factoring fees and adjustments against the expected deposit</li><li>Settlement and deposit variances, shown immediately and privately</li></ul>
+    <p><a href="/guides/carrier-settlement-audit-checklist/">Read the freight settlement audit checklist</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Understand factoring fees vs. broker short-pays</a></p>
+    <h2>Frequently asked questions</h2>
+    <h3>How do I check if a freight broker short-paid a load?</h3><p>Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance.</p>
+    <h3>Are factoring fees the same as broker deductions?</h3><p>No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance.</p>
+    <h3>Does Haul Audit upload my rate confirmation or settlement?</h3><p>No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator.</p>
+  </section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check if a freight broker short-paid a load?","acceptedAnswer":{"@type":"Answer","text":"Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance."}},{"@type":"Question","name":"Are factoring fees the same as broker deductions?","acceptedAnswer":{"@type":"Answer","text":"No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance."}},{"@type":"Question","name":"Does Haul Audit upload my rate confirmation or settlement?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator."}}]}</script>
   <section class="card" id="pro"></section>
 
   <footer>
@@ -89,7 +102,7 @@ import { audit } from './js/engine.mjs';
 const $ = (id) => document.getElementById(id);
 const TOOL = 'haul-audit';
 const FREE_PER_DAY = 3;
-let PRO = false, sent = false;
+let PRO = false;
 const ls = {
   get(k, d) { try { const v = localStorage.getItem(TOOL + ':' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(TOOL + ':' + k, JSON.stringify(v)); } catch (e) {} },
@@ -134,7 +147,7 @@ function run(isSample) {
         body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily settlement reconciliations, saved on-device audit history, and CSV exports. Your calculations and saved history stay on your device.'
       });
     }
-    if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+    try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
   }
 }
 function f0(r) { return r.factoring.expectedFactorDeposit; }
@@ -161,9 +174,9 @@ function renderPro() {
   } else {
     $('pro').className = 'card pro-lock'; $('pro').innerHTML = `<h2>Pro — saved history &amp; CSV export</h2>
       <p style="color:var(--dim);margin:.2em 0 0">Every audit stays free and fully visible. Pro adds a saved on-device history of your audits and a one-click CSV export — handy for a dispute file or your bookkeeper.</p>
-      <div><button class="small" id="buyM">Get Pro monthly</button> <button class="small ghost" id="buyY">Yearly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
+      <div><button class="small" id="buyM">Get Pro monthly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
     const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; (window.Studio ? window.Studio.upgrade('pro', interval) : Promise.reject(new Error('not on sale'))).catch((e) => { $('buyNote').textContent = /not switched on|not on sale|404|409/i.test(e.message) ? 'Pro opens soon — check back shortly.' : e.message; }); };
-    $('buyM').onclick = () => buy('month'); $('buyY').onclick = () => buy('year');
+    $('buyM').onclick = () => buy('month');
   }
 }
 if (window.Studio) window.Studio.init({ tool: TOOL, onChange: (s) => { PRO = !!s.pro; showQuota(); renderPro(); } });

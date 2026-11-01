@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Royalty Check: is your mineral decimal right?</title>
-<meta name="description" content="Recompute your expected royalty decimal from net acres, unit size and lease fraction, and see if your statement matches. On your device; nothing uploaded.">
+<title>Mineral Royalty Decimal Calculator | Royalty Check</title>
+<meta name="description" content="Calculate an expected oil and gas royalty decimal from net mineral acres, unit acres and lease fraction, then compare your statement privately.">
 <link rel="canonical" href="https://quickwell.app/royalty-check/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quickwell.app/royalty-check/">
-<meta property="og:title" content="Royalty Check: is your mineral decimal right?">
-<meta property="og:description" content="Recompute the royalty decimal an operator should be paying you and compare it to your statement, on your device. A checklist, not advice.">
+<meta property="og:title" content="Mineral Royalty Decimal Calculator | Royalty Check">
+<meta property="og:description" content="Calculate an expected oil and gas royalty decimal from net mineral acres, unit acres and lease fraction, then compare your statement privately.">
 <meta property="og:image" content="https://quickwell.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Royalty Check: is your mineral decimal right?">
+<meta name="twitter:title" content="Mineral Royalty Decimal Calculator | Royalty Check">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Royalty Check","url":"https://quickwell.app/royalty-check/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Compare an expected mineral royalty decimal calculated from net mineral acres, spacing-unit acreage and lease royalty fraction with the decimal on a statement. Calculations run on your device; values you enter are not uploaded. A review checklist, not legal, title or financial advice.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"}},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
@@ -63,6 +63,19 @@
     <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Your result is always free and always visible — it's computed on your device.</p>
   </section>
 
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">How to calculate a mineral royalty decimal</h2>
+    <p>A common starting calculation is net mineral acres divided by spacing-unit acres, multiplied by the lease royalty fraction. Compare the resulting decimal with the decimal printed on your royalty statement or division order.</p>
+    <p>The result depends on correct ownership, unit, lease and pooling information. This calculator does not determine title, validate a division order, or establish that an operator owes money.</p>
+    <h2>What to check before questioning a royalty statement</h2>
+    <ul><li>Net mineral acres and your ownership fraction</li><li>Spacing or pooled-unit acreage shown in the relevant records</li><li>Lease royalty fraction and any applicable amendments</li><li>Statement decimal and the property or well identifier</li></ul>
+    <p><a href="/guides/understanding-mineral-royalty-deductions.html">Read the mineral royalty statement checklist</a> · <a href="/guides/new-drilling-permit-royalty-owners/">What a new Texas drilling permit means for royalty owners</a> · <a href="/permit-watch/">Track Texas drilling permits</a></p>
+    <h2>Frequently asked questions</h2>
+    <h3>How do I calculate my oil and gas royalty decimal?</h3><p>As a basic estimate, divide net mineral acres by spacing-unit acres and multiply by the lease royalty fraction. Confirm the actual unit, ownership and lease terms before relying on the result.</p>
+    <h3>What if my royalty statement decimal is different?</h3><p>Re-check the inputs and the division order, pooled-unit documents and title records. A difference is a prompt to ask the payor for an explanation, not proof of an underpayment.</p>
+    <h3>Does Royalty Check upload my mineral ownership information?</h3><p>No. The calculator runs in your browser and does not upload the values you enter.</p>
+  </section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate my oil and gas royalty decimal?","acceptedAnswer":{"@type":"Answer","text":"As a basic estimate, divide net mineral acres by spacing-unit acres and multiply by the lease royalty fraction. Confirm the actual unit, ownership and lease terms before relying on the result."}},{"@type":"Question","name":"What if my royalty statement decimal is different?","acceptedAnswer":{"@type":"Answer","text":"Re-check the inputs and the division order, pooled-unit documents and title records. A difference is a prompt to ask the payor for an explanation, not proof of an underpayment."}},{"@type":"Question","name":"Does Royalty Check upload my mineral ownership information?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator runs in your browser and does not upload the values you enter."}}]}</script>
   <section class="card" id="pro"></section>
 
   <footer>
@@ -75,7 +88,7 @@ import { checkRoyalty } from './js/engine.mjs';
 const $ = (id) => document.getElementById(id);
 const TOOL = 'royalty-check';
 const FREE_PER_DAY = 3;
-let PRO = false, sent = false;
+let PRO = false;
 const ls = {
   get(k, d) { try { const v = localStorage.getItem(TOOL + ':' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(TOOL + ':' + k, JSON.stringify(v)); } catch (e) {} },
@@ -112,7 +125,7 @@ function run(isSample) {
           body: 'You have used your 3 free checks for today. Upgrade to the Pro tier for $15/month to unlock unlimited daily decimal calculations, saved on-device check history, and downloadable CSV reports. Your ownership documentation and land records stay in your browser; calculator inputs are processed locally.'
         });
       }
-      if (!sent) { sent = true; try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
     }
   } catch (e) {
     $('out').hidden = true; $('err').hidden = false; $('err').textContent = 'Check your inputs: ' + e.message;
@@ -137,9 +150,9 @@ function renderPro() {
   } else {
     $('pro').className = 'card pro-lock'; $('pro').innerHTML = `<h3 style="margin:0 0 6px">Pro — saved history &amp; CSV export</h3>
       <p style="color:var(--dim);margin:.2em 0 0">Every check stays free and fully visible. Pro adds a saved on-device history of your checks across wells and a one-click CSV export.</p>
-      <div><button class="small" id="buyM">Get Pro monthly</button> <button class="small ghost" id="buyY">Yearly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
+      <div><button class="small" id="buyM">Get Pro monthly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
     const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; (window.Studio ? window.Studio.upgrade('pro', interval) : Promise.reject(new Error('not on sale'))).catch((e) => { $('buyNote').textContent = /not switched on|not on sale|404|409/i.test(e.message) ? 'Pro opens soon — check back shortly.' : e.message; }); };
-    $('buyM').onclick = () => buy('month'); $('buyY').onclick = () => buy('year');
+    $('buyM').onclick = () => buy('month');
   }
 }
 if (window.Studio) window.Studio.init({ tool: TOOL, onChange: (s) => { PRO = !!s.pro; showQuota(); renderPro(); } });
