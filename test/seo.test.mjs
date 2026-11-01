@@ -66,7 +66,7 @@ test('guides end with a disclaimer and sources, and link to a tool', () => {
     const h = read(`guides/${g}/index.html`);
     assert.match(h, /Not legal advice|Ceci n’est pas un avis juridique|No es asesoría legal/, `${g}: disclaimer`);
     assert.match(h, /<h2>(?:Sources|Fuentes)<\/h2>\s*<ul>\s*<li>/, `${g}: sources`);
-    assert.ok(tools.some((t) => (h.includes(`href="/${t}/"`) || h.includes(`href="/${t}/?lang=`))) || h.includes('href="/shield/'), `${g}: no tool link`);
+    assert.ok(tools.some((t) => h.includes(`href="/${t}/`)) || h.includes('href="/shield/'), `${g}: no tool link`);
   }
 });
 
