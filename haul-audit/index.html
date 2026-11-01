@@ -140,7 +140,8 @@ function run(isSample) {
   $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
   if (!isSample) {
     const q = quotaState(); const priorCount = q.n; q.n++; ls.set('quota', q); showQuota();
-    const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), gross: r.settlement.grossVariance, deposit: r.factoring.depositVariance }); ls.set('history', h.slice(0, 200)); renderPro();
+    if (PRO) { const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), gross: r.settlement.grossVariance, deposit: r.factoring.depositVariance }); ls.set('history', h.slice(0, 200)); }
+    renderPro();
     if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
       window.Studio.showUpgradeModal({
         header: 'Upgrade to Haul Audit Pro',
