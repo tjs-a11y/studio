@@ -1,0 +1,21 @@
+name: Quickwell validation
+on:
+  push:
+    branches:
+      - growth/specialist-discovery-2026-10-31
+      - growth/consumer-search-guides-2026-10-31
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: node scripts/sitemap.mjs
+      - run: node scripts/learn/build.mjs --check
