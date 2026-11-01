@@ -1,0 +1,135 @@
+{
+ "brief": {
+  "subject": "EUDR Brief: Quiet week, cocoa substitutes and EU forest data",
+  "headline": "Quiet EUDR week: Commission data on forests, cocoa replacers gain ground",
+  "dek": "No new EUDR rules this week, but EU forest data and cocoa cost pressures offer context for commodity supply chains.",
+  "lede": "No new EUDR deadlines or guidance surfaced this week. The Commission's own figures put EU forest cover at approximately 39% of land.",
+  "sections": [
+   {
+    "heading": "Commission keeps EUDR in view",
+    "bullets": [
+     "A Commissioner attended an EUDR event, per a 2026-10-27 Commission environment notice; no new rules or guidance were reported.",
+     "EU forest cover has stabilised at approximately 39% of total land, according to the Commission.",
+     "26.4% of EU land is designated as protected, yet 81% of protected habitats are in poor or bad condition.",
+     "These figures frame the EU's push to curb deforestation, including through import rules on commodities."
+    ],
+    "source_ids": [
+     "S4",
+     "S3"
+    ]
+   },
+   {
+    "heading": "Cocoa substitutes target cost pressure",
+    "bullets": [
+     "A new high-fiber cocoa powder replacer can substitute up to 100% of cocoa in select uses.",
+     "Its maker cites rising cocoa costs and supply risks as drivers for the launch.",
+     "Cocoa exporters and cooperatives should watch whether such substitutes erode demand as compliance and price pressures grow."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Alternative proteins chase scale",
+    "bullets": [
+     "Aleph Farms and Mottainai Food Tech each secured S$1m to scale cultivated meat and fermented protein.",
+     "Both target lower costs and supply resilience, relevant to cattle and soy markets under EUDR scrutiny.",
+     "Funding remains small, so near-term impact on traditional cattle and soy trade is limited."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: no new rules this week, EU forest cover at about 39%, cocoa replacers and alt-protein funding."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-11-01T17:07:55.413Z",
+  "date": "2026-11-01",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FoodNavigator",
+    "title": "From cultivated beef to fermented soy: Bezos-backed protein innovators target cost and scale",
+    "link": "https://www.foodnavigator.com/Article/2026/10/30/aleph-farms-among-bezos-backed-protein-innovators-targeting-scale/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-30T02:49:37.000Z",
+    "snippet": "Aleph Farms and Mottainai Food Tech secure S$1m each to scale cultivated meat and fermented protein, targeting cost, resilience and commercial growth.",
+    "categories": [
+     "News"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "New cocoa powder alternative targets GLP-1 trends and supply risks",
+    "link": "https://www.foodnavigator.com/Article/2026/10/29/planet-a-foods-launches-cocoa-booster-replacer/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-10-29T14:03:02.000Z",
+    "snippet": "Planet A Foods launches Cocoa Booster, a high-fiber cocoa powder replacer that can replace up to 100% of cocoa in select applications amid rising costs and GLP-1-driven demand shifts.",
+    "categories": [
+     "Flavours & colours"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "European Commission: Environment newsroom",
+    "title": "Did you know?",
+    "link": "https://ec.europa.eu/newsroom/env/redirection/item/963103",
+    "published": "2026-10-28T12:33:42.000Z",
+    "snippet": "26.4% of total EU land is designated as protected 81% of protected EU habitats have a poor or bad conservation status EU forest cover has stabilised at approximately 39% of total land",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "European Commission: Environment newsroom",
+    "title": "EUDR & Commissioner",
+    "link": "https://environment.ec.europa.eu/index_en",
+    "published": "2026-10-27T14:46:12.000Z",
+    "snippet": "Comissioner goes to EUDR event.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 2
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
