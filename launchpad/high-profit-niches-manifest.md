@@ -177,3 +177,17 @@ A niche is not launch-ready until it has:
 8. Pilot acceptance criteria, error-rate targets, and a support/incident process.
 
 **Roadmap principle:** Validate the pain and source-data access before committing to implementation. “Low competition,” “high margin,” and “zero-human-input” are hypotheses to test, not established market facts.
+
+
+## 2026-10-31 — specialist customer discovery sprint
+
+- User explicitly authorized lifting the November 2 code freeze for this scoped growth sprint. No production deployment or merge was made.
+- Opened specialist discovery PR #9: https://github.com/tjs-a11y/studio/pull/9
+- Updated Haul Audit and Royalty Check search titles/descriptions, explanatory copy, FAQs, FAQPage structured data, and guide cross-links; surfaced both tools from the guides hub.
+- Corrected usage measurement: each successful non-sample calculation now emits one anonymous `check` event (tool ID + event only). Prior behavior emitted only once per page session and undercounted repeat calculations.
+- Removed unsupported yearly upgrade buttons from both monthly-only specialist tools.
+- Added a fail-closed checkout condition requiring the exact lookup key, active recurring monthly price, `unit_amount=1500`, and `currency=usd`. Live Stripe price configuration remains unverified; checkout must remain blocked unless the Stripe record matches.
+- Vercel preview for specialist branch was observed READY before the final metadata/workflow commits. Latest preview build status is pending at time of this log; re-check before review.
+- Added a GitHub Actions validation workflow for specialist and consumer branches (`npm ci`, `npm test`, sitemap generator, learn-content check) and a focused specialist source-contract test. Workflow run results are not yet available.
+- GSC query/page performance, production `/api/stats` counters, and Stripe subscription/revenue records remain UNKNOWN/BLOCKED without authenticated source access. Vercel pageviews, tool completions, upgrade clicks, paid subscriptions and revenue must remain separate metrics.
+- Code changes are branch/PR only. No customer data, calculator inputs, personal information or ownership records are sent in telemetry.
