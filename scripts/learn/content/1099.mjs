@@ -20,6 +20,7 @@ const S7503 = usc('7503', 'deadlines on a weekend or legal holiday');
 const S6721 = usc('6721', 'penalty for late or incorrect information returns');
 const R6041_1 = cfrSrc('1.6041-1', 'information returns; card and payment network rule');
 const R6041_3 = cfrSrc('1.6041-3', 'payments for which no return is required');
+const R6045_5 = cfrSrc('1.6045-5', 'information reporting on payments to attorneys');
 const R6049_4 = cfrSrc('1.6049-4', 'who counts as a corporation for the exemption');
 const R6050W = cfrSrc('1.6050W-1', 'payment card and third party network reporting');
 
@@ -33,17 +34,17 @@ export const SECTION = {
   name: '1099 reporting',
   h1: 'Form 1099 for small businesses: the 2026 rules in plain English',
   title: 'Form 1099 Guides for Small Businesses (2026 Rules)',
-  description: 'The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027.',
+  description: '2026 1099 rules: $2,000 for covered service and rent payments, with separate royalty and attorney-payment rules, exceptions and filing dates.',
   lang: 'en', crumbs: [{ name: 'Quickwell', path: '/' }, { name: 'Learn', path: '/learn/' }],
-  checked: { iso: '2026-10-12', en: 'October 12, 2026' },
-  lede: 'For payments made in 2026, the federal 1099 line for contractors and rent moved from $600 to $2,000. These pages explain the new rule from the law itself, who usually does not get a form, and when the forms are due.',
-  hubText: 'The new $2,000 threshold, who is excluded, and the early-2027 deadlines.',
+  checked: { iso: '2026-11-01', en: 'November 1, 2026' },
+  lede: 'For payments made in 2026, the federal line for covered services and rent moved from $600 to $2,000. Royalties and some attorney payments follow separate rules; these pages explain the law, exclusions and early-2027 deadlines.',
+  hubText: 'The $2,000 line for covered services and rent, separate reporting rules, exclusions and early-2027 deadlines.',
   intro: `<h2>Why 2026 is different</h2>
 <p>A law signed on July 4, 2025 (Pub. L. 119-21) raised the amount that triggers the most common small-business information returns. For payments made after December 31, 2025, a business generally reports payments to a non-employee for services, or payments of rent, only when the year's total to that payee reaches <b>$2,000</b>. For 2025 payments the figure was still $600. From 2027 the $2,000 will rise with inflation.</p>
-<p>That change is simple to state but easy to get wrong in practice, for three reasons. Many web pages, and the Treasury regulations themselves, still show $600. The exceptions (card payments, corporations, goods, employees) did not change, but they matter more now. And the deadlines for 2026 payments land on unusual dates because January 31, 2027 is a Sunday.</p>
+<p>That change is simple to state but easy to get wrong in practice, for three reasons. Many web pages, and the Treasury regulations themselves, still show $600. The $2,000 line is not universal: royalties and some attorney payments follow separate rules. Card payments, most corporations, goods and employee wages also have different treatment. And the deadlines for 2026 payments land on unusual dates because January 31, 2027 is a Sunday.</p>
 <p>Each page below answers one question and links the exact statute or regulation we read. Where we could not verify something, such as the box numbers on the IRS forms, we say so instead of guessing.</p>`,
   outro: `<p class="note">Want the list for your own business? The free ${TOOL('Year-End Vendor Check')} reads your 2026 bank, card, QuickBooks or Xero export in your browser and sorts each payee into "likely needs a 1099", "near the line", "probably not needed" and "need info". Nothing is uploaded.</p>`,
-  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line and the card and corporation exceptions, and lists the W-9s to collect. Nothing is uploaded. Not tax advice.', href: '/vendor-check/', label: 'Open the Vendor Check' },
+  cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line to covered services and rent, and flags categories that need separate review before you file. Nothing is uploaded. Not tax advice.', href: '/vendor-check/', label: 'Open the Vendor Check' },
   disclaimer: 'Not tax, legal or accounting advice. These pages explain federal rules in plain English from the statute and regulation text linked on each page. They do not cover state rules, which can differ. Check the current IRS instructions for Forms 1099-NEC and 1099-MISC, or ask a tax professional, before you file.',
 };
 
@@ -52,15 +53,15 @@ export const PAGES = [
   slug: 'threshold-2026',
   h1: '1099 threshold for 2026: the new $2,000 rule',
   crumbName: '1099 threshold for 2026',
-  short: 'From 2026 payments, the 1099 line for contractors and rent is $2,000, not $600. What changed, what did not, and why some pages still say $600.',
+  short: 'For 2026 payments, the $2,000 line covers specified services and rent; royalties and some attorney payments follow separate rules.',
   title: '1099 Threshold for 2026: The New $2,000 Rule Explained',
-  description: 'For payments after Dec 31, 2025, the 1099-NEC and 1099-MISC threshold is $2,000, not $600 (26 U.S.C. 6041). What changed and why some rules still say $600.',
-  lede: 'If your business pays a contractor or a landlord in 2026, the federal line for sending a Form 1099 is now $2,000 for the year, up from $600. Here is the rule as the law states it, with worked examples and the parts that did not change.',
+  description: 'For 2026 payments, the $2,000 line covers specified services and rent; royalties and attorney payments have separate rules. Why older pages still say $600.',
+  lede: 'If your business pays a contractor or landlord in 2026, the federal line for covered services and rent is generally $2,000 for the year, up from $600. Royalties and some attorney payments follow separate rules.',
   related: ['who-does-not-get-a-1099', 'deadlines-2026-payments', { href: '/learn/business-costs/find-recurring-charges-bank-csv/', title: 'Find recurring charges in a CSV', text: 'Pull a year of payments out of a bank or accounting export in a spreadsheet.' }],
-  sources: [S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
+  sources: [S6041, S6041A, S3406, R6041_1, S6050N, S6050W, R6045_5, S6721],
   body: `
 <h2>The short answer</h2>
-<p>For payments made <b>after December 31, 2025</b>, a business generally files a Form 1099 for a payee only when it pays that payee <b>$2,000 or more</b> during the calendar year, for services (Form 1099-NEC) or for rent and similar income (Form 1099-MISC). Below $2,000 for the whole year, the federal rule does not require the form. Payments made in 2025 still used the old $600 line.</p>
+<p>For payments made <b>after December 31, 2025</b>, the $2,000 line applies to covered service payments (Form 1099-NEC) and specified Form 1099-MISC categories such as rent. It is not a universal threshold for every 1099 category. Payments made in 2025 still used the old $600 line for the covered categories described here.</p>
 
 <h2>What the law says now</h2>
 <p>The basic rule is in ${u('6041')}(a). It applies to anyone "engaged in a trade or business" who pays another person rent, compensation, fees and similar income "of $2,000 or more in any calendar year". The heading of that subsection used to read "of $600 or more"; the 2025 law (Pub. L. 119-21, §70433) changed it to "Payments exceeding threshold" and replaced "$600" with "$2,000".</p>
@@ -86,6 +87,7 @@ export const PAGES = [
 <h2>What did not change</h2>
 <ul>
 <li><b>Royalties</b> are reported from <b>$10</b> a year, under a separate rule (${u('6050N')}(a)).</li>
+<li><b>Some payments to attorneys</b> follow a separate rule under <a href="https://www.ecfr.gov/current/title-26/section-1.6045-5" rel="noopener">26 CFR §1.6045-5</a>. The current regulation generally uses a $600 annual threshold for payments to an attorney in connection with legal services, subject to exceptions. Do not apply the $2,000 service-and-rent line to every attorney payment; check whether the specific payment is covered.</li>
 <li><b>Card and payment-network payments</b> are reported by the processor, not by you, under ${u('6050W')}. The 2025 law set that processor threshold at more than $20,000 and more than 200 transactions for third party networks (§6050W(e)), but that threshold is about the processor's own form, not yours.</li>
 <li><b>Backup withholding</b> uses the same line: under ${u('3406')}(b)(6), a payment counts as reportable once the year's total to the payee reaches the amount in effect under §6041(a). If a payee above the line has not given you a taxpayer identification number, ask for a Form W-9 before you pay again.</li>
 <li><b>Penalties</b> still apply. ${u('6721')}(a) sets $250 per late or incorrect return, before the inflation adjustment in §6721(f), with lower amounts if you correct within 30 days or by August 1.</li>
