@@ -20,6 +20,7 @@ const S7503 = usc('7503', 'deadlines on a weekend or legal holiday');
 const S6721 = usc('6721', 'penalty for late or incorrect information returns');
 const R6041_1 = cfrSrc('1.6041-1', 'information returns; card and payment network rule');
 const R6041_3 = cfrSrc('1.6041-3', 'payments for which no return is required');
+const R6045_5 = cfrSrc('1.6045-5', 'information reporting on payments to attorneys');
 const R6049_4 = cfrSrc('1.6049-4', 'who counts as a corporation for the exemption');
 const R6050W = cfrSrc('1.6050W-1', 'payment card and third party network reporting');
 
@@ -33,7 +34,7 @@ export const SECTION = {
   name: '1099 reporting',
   h1: 'Form 1099 for small businesses: the 2026 rules in plain English',
   title: 'Form 1099 Guides for Small Businesses (2026 Rules)',
-  description: 'The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027.',
+  description: '2026 1099 rules: $2,000 for covered service and rent payments, with separate royalty and attorney-payment rules, exceptions and filing dates.',
   lang: 'en', crumbs: [{ name: 'Quickwell', path: '/' }, { name: 'Learn', path: '/learn/' }],
   checked: { iso: '2026-10-12', en: 'October 12, 2026' },
   lede: 'For payments made in 2026, the federal 1099 line for contractors and rent moved from $600 to $2,000. These pages explain the new rule from the law itself, who usually does not get a form, and when the forms are due.',
