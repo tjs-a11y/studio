@@ -39,3 +39,16 @@ test('junk is refused', async () => {
   assert.equal((await event(post({ tool: 'plot-file-checker', event: 'waitlist', email: 'not-an-email' }))).status, 400);
   setStoreForTests(null);
 });
+
+test('homepage visits and tool opens use anonymous aggregate counters', async () => {
+  const seen = [];
+  setStoreForTests(async (...cmds) => { seen.push(...cmds); return []; });
+  assert.equal((await event(post({ tool: 'quickwell', event: 'visit' }))).status, 200);
+  assert.equal((await event(post({ tool: 'shield', event: 'open' }))).status, 200);
+  assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:quickwell:visits'));
+  assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:shield:opens'));
+  assert.ok(seen.every((c) => typeof c[1] === 'string' && c[1].startsWith('count:')));
+  assert.equal((await event(post({ tool: 'nope', event: 'open' }))).status, 400);
+  assert.equal((await event(post({ tool: 'northstar', event: 'visit' }))).status, 400);
+  setStoreForTests(null);
+});
