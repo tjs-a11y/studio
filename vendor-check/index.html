@@ -277,11 +277,12 @@
   <section class="card" id="faq">
     <h2>How it works</h2>
     <details><summary>What changed for 2026?</summary>
-      <p>For payments made after December 31, 2025, the federal line for Form 1099-NEC (services) and Form 1099-MISC (rent and similar payments) is <b>$2,000</b> paid to one payee in the year. It used to be $600. The change is in 26 U.S.C. §6041(a) and §6041A(a), made by Pub. L. 119-21 §70433. From 2027 the amount is indexed for inflation (§6041(h)); the 2027 figure isn't published yet. Royalties still count from $10 (§6050N).</p>
-      <p>The IRS regulations still show the old $600 figure because they haven't been rewritten yet; the statute controls. Your state may have its own rule.</p>
+      <p>For payments made after December 31, 2025, the IRS confirms a <b>$2,000</b> threshold for covered services, rents and specified payments on Forms 1099-NEC and 1099-MISC. Royalties remain separate at <b>$10</b> (§6050N). Consumer products sold to a person for resale on a buy-sell, deposit-commission or other commission basis have a separate <b>$5,000</b> threshold; this check does not classify that category. From 2027 the $2,000 amount is indexed for inflation (§6041(h)); check current IRS guidance for the 2027 figure.</p>
+      <p>The eCFR text for 26 CFR 1.6041-1 still shows the old $600 wording, while the current IRS FAQ confirms the 2026 threshold. The amended statute controls. Your state may have its own rule.</p>
     </details>
     <details><summary>What can't a bank file tell us?</summary>
       <p>Whether a payee is a corporation, whether you paid for services or goods, and who a check went to (most bank exports show only the check number). That's why we ask, and why every result says "likely". Card payments are left out because card processors report them on Form 1099-K. Payment-app payments are counted but flagged, because it depends on how they were sent.</p>
+      <p>This check does not classify the separate $5,000 consumer-product resale/commission category. If you paid a person to resell consumer products on a buy-sell or commission basis, check the current IRS instructions.</p>
     </details>
     <details><summary>How are renewals and price increases found?</summary>
       <p>We group charges by vendor and look for a regular rhythm: weekly, monthly, quarterly or yearly, with amounts that stay within 15% or step up. An increase of 5% or more is marked amber, 15% or more red. The next renewal is the last charge plus the rhythm, so it's a guess: check the vendor's terms.</p>
@@ -291,7 +292,7 @@
     </details>
     <details><summary>Sources</summary>
       <ul class="contents small" id="srcList"></ul>
-      <p class="note">U.S. Code text was read from the Office of the Law Revision Counsel's release; regulation text from eCFR (as of October 2026). Check the current IRS instructions for Forms 1099-MISC and 1099-NEC (<a href="https://www.irs.gov/instructions/i1099mec" rel="noopener">irs.gov</a>) before you file.</p>
+      <p class="note">U.S. Code text was read from the Office of the Law Revision Counsel's release; regulation text from eCFR (as of October 2026). The IRS FAQ was checked November 1, 2026. Check the current IRS instructions for Forms 1099-MISC and 1099-NEC (<a href="https://www.irs.gov/instructions/i1099mec" rel="noopener">irs.gov</a>) before you file.</p>
     </details>
   </section>
 
@@ -681,6 +682,7 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
     '70433': { label: 'Pub. L. 119-21 §70433 (note under 26 U.S.C. §3406)', url: USC('3406') },
     '3406': { label: '26 U.S.C. §3406', url: USC('3406') },
     '6050N': { label: '26 U.S.C. §6050N', url: USC('6050N') },
+    'irsFAQ': { label: 'IRS FAQ: Form 1099-NEC and independent contractors (accessed Nov. 1, 2026)', url: 'https://www.irs.gov/faqs/small-business-self-employed-other-business/form-1099-nec-independent-contractors/form-1099-nec-independent-contractors' },
     '6050W': { label: '26 U.S.C. §6050W', url: USC('6050W') },
     '6071b': { label: '26 U.S.C. §6071(b)', url: USC('6071') },
     '6071c': { label: '26 U.S.C. §6071(c)', url: USC('6071') },
@@ -696,8 +698,8 @@ This Business Phone and Internet Service Agreement (the "Agreement") is entered 
   VC.RULES = {
     2026: {
       year: 2026, threshold: 2000, near: 1500, royalty: 10,
-      sources: ['6041', '6041A', '70433', '6050N', 'reg1', 'reg3p'],
-      summary: 'Based on federal law for payments made in 2026: a 1099-NEC or 1099-MISC is generally required when you pay a non-corporate payee $2,000 or more in the year for services or rent (26 U.S.C. §6041, §6041A, as amended by Pub. L. 119-21 §70433). The IRS regulations still show the old $600 figure; the statute controls. Your state may have its own rule.',
+      sources: ['irsFAQ', '6041', '6041A', '70433', '6050N', 'reg1', 'reg3p'],
+      summary: 'Based on federal law and the IRS FAQ for payments made in 2026: a 1099-NEC or 1099-MISC is generally required at $2,000 or more for covered services, rent and specified payments. Royalties are separate at $10. The tool does not classify the separate $5,000 consumer-product resale/commission category. Your state may have its own rule.',
     },
     2027: null,
   };
