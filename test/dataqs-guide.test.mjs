@@ -21,7 +21,8 @@ test('DataQs guide is source-backed, discoverable, and does not overpromise', ()
   assert.ok(html.includes('burden of providing a factual or legal reason'));
   assert.ok(html.includes('Crash Preventability Determination Program'));
   assert.ok(html.includes('Runs entirely in your local browser — nothing you enter leaves your device.'));
-  assert.ok(html.includes('General educational information only, not legal, accounting, tax, or financial advice. Confirm parameters with original deeds or contractual terms.'));
+  assert.ok(html.includes('General educational information only, not legal advice. Confirm current requirements with FMCSA’s DataQs Help Center and the applicable State DataQs Implementation Plan.'));
+  assert.ok(!html.includes('original deeds or contractual terms'));
   assert.ok(html.includes('fmcsa.dot.gov/newsroom/fmcsa-announces-all-50-states'));
   assert.ok(html.includes('dataqs.fmcsa.dot.gov/HelpCenter/Faqs'));
   assert.ok(mod.includes('2026-10-31'));
