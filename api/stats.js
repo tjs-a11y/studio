@@ -1,5 +1,5 @@
 // GET /api/stats  — anonymous, aggregate usage counts per tool, so the growth scoreboard can read them.
-// No personal data: only the integer counters that /api/event increments (count:<tool>:checks[:YYYY-MM-DD]).
+// No personal data: only aggregate integer counters for visits, tool opens, checks, trials and purchases.
 // Public and cacheable. Returns { enabled:false } until Upstash/KV is connected on the project.
 import { json, tools } from './_lib/core.js';
 
@@ -31,12 +31,15 @@ export async function GET() {
   const today = day();
   // Anonymous outbound-click counters from our other sites (counts only, no identity).
   const OUTBOUND = [['northstar', 'freightsidekick']];
-  // Per tool: free uses (checks), purchase intent (upgrade_clicks), and purchases (subs) — the funnel the growth sprint optimizes.
-  const PER = 6;
+  // Per tool: opens, checks, upgrade intent, trial starts, and completed paid/one-time purchases.
+  const PER = 10;
   const cmds = [
+    ['GET', 'count:quickwell:visits'], ['GET', `count:quickwell:visits:${today}`],
     ...ids.flatMap((id) => [
+      ['GET', `count:${id}:opens`], ['GET', `count:${id}:opens:${today}`],
       ['GET', `count:${id}:checks`], ['GET', `count:${id}:checks:${today}`],
       ['GET', `count:${id}:upgrade_clicks`], ['GET', `count:${id}:upgrade_clicks:${today}`],
+      ['GET', `count:${id}:trials`], ['GET', `count:${id}:trials:${today}`],
       ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
     ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
@@ -45,21 +48,25 @@ export async function GET() {
   try { res = await run(cmds); } catch { return json({ enabled: true, error: 'unavailable' }, 200); }
   const num = (v) => { const n = Number(v && typeof v === 'object' && 'result' in v ? v.result : v); return Number.isFinite(n) ? n : 0; };
   const out = {};
+  const visits = { total: num(res[0]), today: num(res[1]) };
   ids.forEach((id, i) => {
-    const b = i * PER;
+    const b = 2 + i * PER;
     out[id] = {
-      checks: num(res[b]), checks_today: num(res[b + 1]),
-      upgrade_clicks: num(res[b + 2]), upgrade_clicks_today: num(res[b + 3]),
-      subs: num(res[b + 4]), subs_today: num(res[b + 5]),
+      opens: num(res[b]), opens_today: num(res[b + 1]),
+      checks: num(res[b + 2]), checks_today: num(res[b + 3]),
+      upgrade_clicks: num(res[b + 4]), upgrade_clicks_today: num(res[b + 5]),
+      trials: num(res[b + 6]), trials_today: num(res[b + 7]),
+      subs: num(res[b + 8]), subs_today: num(res[b + 9]),
     };
   });
   const total = Object.values(out).reduce((a, t) => a + t.checks, 0);
+  const total_trials = Object.values(out).reduce((a, t) => a + t.trials, 0);
   const total_subs = Object.values(out).reduce((a, t) => a + t.subs, 0);
   const outbound = {};
   OUTBOUND.forEach(([site, target], i) => {
-    const b = ids.length * PER + i * 2;
+    const b = 2 + ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), total_checks: total, total_subs, tools: out, outbound },
+  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, tools: out, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }
