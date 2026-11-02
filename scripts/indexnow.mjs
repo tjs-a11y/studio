@@ -39,7 +39,7 @@ export function pagePaths(dir = root) {
 export function changedPageUrls(dir = root) {
   let files;
   try {
-    files = execFileSync('git', ['diff', '--name-only', 'HEAD^', 'HEAD', '--', '*.html'], { cwd: dir, encoding: 'utf8' }).trim().split(/\\r?\\n/).filter(Boolean);
+    files = execFileSync('git', ['diff', '--name-only', 'HEAD^', 'HEAD', '--', '*.html'], { cwd: dir, encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
   } catch {
     throw new Error('IndexNow needs the previous commit available. Set actions/checkout fetch-depth to 2.');
   }
@@ -50,8 +50,8 @@ export function changedPageUrls(dir = root) {
     catch {
       try { html = execFileSync('git', ['show', `HEAD^:${file}`], { cwd: dir, encoding: 'utf8' }); } catch { continue; }
     }
-    if (/<meta\\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
-    const canonical = /<link\\s+rel=["']canonical["']\\s+href=["']([^"']+)["']/i.exec(html)?.[1];
+    if (/<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
+    const canonical = /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i.exec(html)?.[1];
     if (canonical) urls.add(canonical);
   }
   return [...urls].sort();
