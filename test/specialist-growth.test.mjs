@@ -32,3 +32,22 @@ test('specialist checkout fails closed unless Stripe price is exactly $15 USD mo
   assert.ok(checkout.includes("'haul-audit__pro__month'"));
   assert.ok(checkout.includes("'royalty-check__pro__month'"));
 });
+
+test('free specialist checks keep results visible and save history only for Pro', () => {
+  for (const path of ['haul-audit/index.html', 'royalty-check/index.html']) {
+    const html = read(path);
+    const runStart = html.indexOf('function run(');
+    assert.ok(runStart >= 0, path + ': run function');
+    const run = html.slice(runStart);
+    const resultAt = run.indexOf("$('out').hidden = false;");
+    const quotaAt = run.indexOf('const q = quotaState()');
+    const gateAt = run.indexOf('if (PRO) { const h = ls.get(\'history\', []);');
+    const historyAt = run.indexOf("ls.set('history', h.slice(0, 200))");
+    assert.ok(resultAt >= 0 && quotaAt > resultAt, path + ': results appear before quota handling');
+    assert.ok(gateAt >= 0 && historyAt > gateAt, path + ': history persistence is Pro-gated');
+    assert.ok(html.includes("localStorage.getItem(TOOL + ':' + k)"), path + ': quota/history remain browser-local');
+    assert.ok(html.includes('const FREE_PER_DAY = 3;'), path + ': three free checks');
+    assert.ok(html.includes('d.getFullYear()') && html.includes('d.getMonth()') && html.includes('d.getDate()'), path + ': local calendar day');
+    assert.ok(html.includes("body: JSON.stringify({ tool: TOOL, event: 'check' })"), path + ': anonymous event only');
+  }
+});
