@@ -200,3 +200,62 @@ A niche is not launch-ready until it has:
 - Added repeatable growth-branch validation workflow: `npm ci`, `npm test`, sitemap generation, and learn-content build check.
 - Weekend TikTok/YouTube campaign assets remain drafts; no public posts, DMs, or outbound messages sent.
 - Release is blocked until CI and Vercel preview pass. No production deployment performed for this consumer batch.
+
+
+## 2026-11-01 — nightly growth evidence (retrieved 2026-11-02T05:01Z)
+
+### Repository and deployment baseline
+- Studio main at start of run: `466a0bf01f2748eca4949bdc044cbdf4dd4e571f`.
+- Current production Vercel deployment for Studio: READY at main commit `466a0bf01f2748eca4949bdc044cbdf4dd4e571f`; production target confirmed. No production code change made in this run.
+- Evidence is recorded on non-production branch `ops/nightly-growth-evidence-2026-11-01` only. Code freeze remains intact through 2026-11-02 inclusive.
+
+### Vercel Web Analytics — exact UTC windows
+- Current 7 days: 2026-10-25T00:00:00Z through 2026-11-02T00:00:00Z.
+- Previous 7 days: 2026-10-18T00:00:00Z through 2026-10-25T00:00:00Z.
+- Project pageviews: 30 current vs 114 previous (-73.7%); these are pageviews, not unique people, tool completions, conversions or revenue.
+- Current route groups: 13. Haul Audit: 1 pageview; Royalty Check: 1 pageview.
+- `/port-watcher`, `/hydro-flow`, `/scale-audit`: no matching pageview rows in either 7-day window.
+- Vercel custom-event aggregation for those three paths: no matching rows in current 7 days. No valid click-through denominator exists; do not rank these niches by CTR.
+- The project-wide pageview aggregation is not a substitute for `/api/stats` tool-completion counters.
+
+### Google Search Console
+- Authenticated Search Console connector returned 0 rows for each exact query over the last 30 days:
+  - `FMC Part 541 container billing rules drayage`
+  - `fracking water meter CSV flow-rate reconciliation`
+  - `timber mill scale ticket cull deduction verification`
+- Page filter for the three prelaunch routes returned 0 rows in 2026-10-25 through 2026-10-31.
+- This is no matching query/page performance data, not proof that a URL is absent from the index. URL inspection/indexing status remains UNKNOWN.
+
+### Prelaunch telemetry and stats gates
+- Source review: `js/pro.js` emits generic `upgrade` telemetry only; the three prelaunch pages do not contain the required `click_operator` / `click_manager` events.
+- `api/event.js` accepts catalog tool IDs plus `plot-file-checker`; `port-watcher`, `hydro-flow`, and `scale-audit` are not in the catalog and would be rejected. Telemetry gate: FAIL.
+- Public read-only `/api/stats` fetch was inaccessible; Vercel runtime-log query for `/api/stats` timed out. Exact counter names/counts and live KV state: BLOCKED/UNKNOWN.
+- No API files changed. Keep the backend/API freeze intact until 2026-11-03; do not merge or deploy a telemetry fix before then.
+
+### Haul Audit / Royalty Check privacy and checkout
+- Source review confirms three free checks per visitor-local calendar day are counted in localStorage; calculated results are rendered before quota handling and remain visible. Successful checks send only `{tool: TOOL, event: 'check'}`, not calculation inputs.
+- Main still persists free-check history in localStorage. PR #14 contains the minimal Pro-only history-write fix and a regression test; it remains open and unmerged. CI run #59: 355 tests, 354 pass, 0 fail, 1 skipped; `node scripts/sitemap.mjs` reported 83 main pages and all three sitemap indexes; `node scripts/learn/build.mjs --check` built 95 pages and passed.
+- PR #12 CI run #52: 355 tests, 354 pass, 0 fail, 1 skipped; sitemap reported 83 main pages; learn build generated 96 pages and passed. PR #12 remains an open draft. PR #17 has no workflow run; do not treat its preview as a passing test.
+- `api/checkout.js` hard-pins Haul Audit and Royalty Check to `haul-audit__pro__month` and `royalty-check__pro__month`, and fails closed unless the active price is recurring monthly, one interval, 1500 USD cents, currency USD. `js/pro.js` accepts only short anonymous `?ref=` labels in sessionStorage and passes the label to Checkout Session plus subscription/payment-intent metadata. Code-level check: PASS; authenticated live Stripe price verification: BLOCKED. No checkout or revenue claim.
+
+### Primary-source watch — freight
+- FMCSA information bulletin, 2026-10-16: all 50 states, Washington, D.C. and U.S. territories had implemented the revised standardized multi-level DataQs review process. DataQs states revised state-review requirements took effect 2026-09-18. Sources: https://www.fmcsa.dot.gov/newsroom/fmcsa-announces-all-50-states-have-implemented-reformed-dataqs-review-process-enhancing ; https://dataqs.fmcsa.dot.gov/
+- CSA portal reports data current 2026-09-25, site updated 2026-10-05, next update week of 2026-11-09. No newer CSA release found in this check. Source: https://csa.fmcsa.dot.gov/
+- No new guide generated; existing DataQs/new-entrant work is already in the repository/PR queue.
+
+### Primary-source watch — Texas mineral / permits
+- RRC proposed amendments to 16 TAC §§3.15 and 3.58 relating to SB 1150 were published 2026-10-23; comment deadline is 2026-11-13 at 5:00 p.m. CT. The RRC page explicitly says proposals are not adopted unless and until adoption is recorded. The proposal covers inactive “15/25 wells” (inactive at least 15 years and completed at least 25 years ago), plugging-extension options, testing and inactive-well transfers. Sources: https://www.rrc.texas.gov/general-counsel/rules/proposed-rules/ ; https://www.rrc.texas.gov/media/teiotqns/prop-amend-315-and-358-sb1150-100626-sign.pdf
+- RRC drilling-permit master/trailer daily file listing showed `daf420.dat` last modified 2026-11-01 9:45:12 a.m. and 3.00 MB. RRC describes it as a current-month file that accumulates daily; pending-approval data is a separate twice-daily file. Dataset listing: https://www.rrc.texas.gov/resource-center/research/data-sets-available-for-download/
+- The daily file was not downloaded/parsed in this run; permit rows, approved-permit counts, county/operator totals and qualified prospects are UNKNOWN. No owner-level prospect list created. No new article generated: the proposed rule is not a Royalty Check calculation issue, and the existing permit/spacing guide work is already queued for review.
+
+### Community, outreach and books
+- Public community search found an older r/OwnerOperators detention discussion dated 2026-03-03; no current high-intent thread was verified on TheTruckersReport or Freight Relocators in this check. Existing organic kit remains draft-only; no posts, replies, DMs or emails sent.
+- Books hub GSC (last 30 days): 5 impressions, 0 clicks, all five query rows landed on the homepage; no title-specific page query rows. Draft2Digital sales/royalty data is not connected, so no sales-based book ranking or book-specific campaign was made.
+- Separate completed book-hub fix this run: merged PR #1 in `tjs-a11y/tjs-a11y-books` at `d5f5cbb422e7de532ce7e7675c963c08b440a924`; removed literal `\\n` text from the homepage and sitemap. GitHub Pages build run #42 succeeded; IndexNow run #28 succeeded with HTTP 200 (submission accepted, not indexing confirmation). The books sitemap contains 20 URLs.
+
+### Release and verification status
+- Production release: NOT performed for Studio in this run.
+- IndexNow for Quickwell: no submission performed or verified in this run.
+- Search indexing: UNKNOWN; no URL Inspection result available.
+- Tests/builds above are GitHub Actions results for the named PR heads, not a local run on main.
+- Next action after the freeze lifts: add and test the exact prelaunch tier-click events and API allowlist, then re-run privacy/checkout/sitemap gates before any production release.
