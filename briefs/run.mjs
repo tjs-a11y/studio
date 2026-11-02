@@ -69,7 +69,7 @@ export async function rebuildIndexes(root, origin) {
   }
   await writeFile(path.join(root, 'news', 'index.html'), renderHub({ origin, desks }), 'utf8');
   const today = new Date().toISOString().slice(0, 10);
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => { const published = /\/(\d{4}-\d{2}-\d{2})\/$/.exec(u)?.[1]; return `  <url><loc>${u}</loc><lastmod>${published || today}</lastmod></url>`; }).join('\n')}\n</urlset>\n`;
   await writeFile(path.join(root, 'sitemap-briefs.xml'), xml, 'utf8');
 }
 
