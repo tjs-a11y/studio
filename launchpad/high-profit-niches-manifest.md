@@ -267,3 +267,7 @@ A niche is not launch-ready until it has:
 - Added the official IRS FAQ to the 2026 threshold source list; corrected stale wording that IRS material was inaccessible; distinguished the $2,000 covered-payment threshold, $10 royalty rule, and separate $5,000 consumer-product resale/commission category; disclosed that Vendor Check does not classify the latter. No calculator logic or API code changed.
 - GitHub Actions validation run #100 succeeded: `npm test` = 354 tests, 353 pass, 0 fail, 1 skipped; `node scripts/sitemap.mjs` = 84 main pages and all three sitemap indexes; `node scripts/learn/build.mjs --check` = 95 pages, check passed.
 - PR #18 remains draft/unmerged and is not deployed. It is content/source maintenance only; keep production release gates intact.
+
+### Prelaunch path discovery verification
+- Current main source check: `/port-watcher/`, `/hydro-flow/`, and `/scale-audit/` each exist as standalone HTML pages, have self-canonical URLs, are not marked noindex, and are included in `sitemap-main.xml`; `scripts/sitemap.mjs` contains all three routes. This confirms crawl-path configuration, not Google indexing.
+- GSC still returned no page/query rows for these routes in the checked 7-day window; URL Inspection remains unavailable.
