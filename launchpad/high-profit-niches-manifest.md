@@ -259,3 +259,11 @@ A niche is not launch-ready until it has:
 - Sitemap source check on current main: `sitemap.xml` indexes `sitemap-main.xml`, `sitemap-briefs.xml`, and `sitemap-learn.xml`; `sitemap-main.xml` contains 84 URLs and `sitemap-learn.xml` contains 95 URLs. Search indexing: UNKNOWN; no URL Inspection result available.
 - Tests/builds above are GitHub Actions results for the named PR heads, not a local run on main.
 - Next action after the freeze lifts: add and test the exact prelaunch tier-click events and API allowlist, then re-run privacy/checkout/sitemap gates before any production release.
+
+
+### Additional source-verified acquisition action — 2026-11-01
+- Opened draft PR #18: https://github.com/tjs-a11y/studio/pull/18
+- Updated `scripts/learn/content/1099.mjs` and `vendor-check/index.html` after checking the current IRS FAQ on 2026-11-01: https://www.irs.gov/faqs/small-business-self-employed-other-business/form-1099-nec-independent-contractors/form-1099-nec-independent-contractors
+- Added the official IRS FAQ to the 2026 threshold source list; corrected stale wording that IRS material was inaccessible; distinguished the $2,000 covered-payment threshold, $10 royalty rule, and separate $5,000 consumer-product resale/commission category; disclosed that Vendor Check does not classify the latter. No calculator logic or API code changed.
+- GitHub Actions validation run #100 succeeded: `npm test` = 354 tests, 353 pass, 0 fail, 1 skipped; `node scripts/sitemap.mjs` = 84 main pages and all three sitemap indexes; `node scripts/learn/build.mjs --check` = 95 pages, check passed.
+- PR #18 remains draft/unmerged and is not deployed. It is content/source maintenance only; keep production release gates intact.
