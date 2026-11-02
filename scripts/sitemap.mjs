@@ -19,7 +19,7 @@ const guides = existsSync(join(root, 'guides'))
 // Sections that aren't billed tools (so aren't in the catalog): their index page plus every sub-page with an index.html,
 // e.g. play/ -> play/index.html, play/echo/index.html … Standalone pages are listed one by one.
 const SECTIONS = ['play'];
-const STANDALONE = ['brain-pass/index.html', 'guides/trucking-settlement-disputes.html', 'guides/understanding-mineral-royalty-deductions.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html'];
+const STANDALONE = ['weekend/index.html', 'brain-pass/index.html', 'guides/trucking-settlement-disputes.html', 'guides/understanding-mineral-royalty-deductions.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html'];
 const sections = SECTIONS.filter((s) => existsSync(join(root, s, 'index.html'))).flatMap((s) => [`${s}/index.html`, ...subPages(s)]);
 const standalone = STANDALONE.filter((f) => existsSync(join(root, f)));
 export const MAIN_PAGES = [...new Set(['index.html', ...tools, ...sections, ...standalone, ...guides, 'privacy.html', 'terms.html'])];
@@ -30,7 +30,9 @@ const entries = MAIN_PAGES.map((f) => {
   const canon = /<link rel="canonical" href="([^"]+)">/.exec(html);
   if (!canon) throw new Error(`${f} has no canonical link`);
   const alts = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)];
-  return `  <url><loc>${xml(canon[1])}</loc><lastmod>${today}</lastmod>${alts.map((a) => `\n    <xhtml:link rel="alternate" hreflang="${a[1]}" href="${xml(a[2])}"/>`).join('')}</url>`;
+  const modified = /\"dateModified\"\s*:\s*\"(\d{4}-\d{2}-\d{2})\"/.exec(html)?.[1];
+  const lastmod = modified ? `<lastmod>${modified}</lastmod>` : '';
+  return `  <url><loc>${xml(canon[1])}</loc>${lastmod}${alts.map((a) => `\n    <xhtml:link rel="alternate" hreflang="${a[1]}" href="${xml(a[2])}"/>`).join('')}</url>`;
 });
 writeFileSync(join(root, 'sitemap-main.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
