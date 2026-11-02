@@ -255,7 +255,7 @@ A niche is not launch-ready until it has:
 
 ### Release and verification status
 - Production release: NOT performed for Studio in this run.
-- IndexNow for Quickwell: no submission performed or verified in this run.
-- Search indexing: UNKNOWN; no URL Inspection result available.
+- Quickwell IndexNow workflow run #41390560753 completed successfully on the production main commit: key file check passed and the script reported `IndexNow: 200 OK for 11 URLs` (submission accepted; not proof of search indexing).
+- Sitemap source check on current main: `sitemap.xml` indexes `sitemap-main.xml`, `sitemap-briefs.xml`, and `sitemap-learn.xml`; `sitemap-main.xml` contains 84 URLs and `sitemap-learn.xml` contains 95 URLs. Search indexing: UNKNOWN; no URL Inspection result available.
 - Tests/builds above are GitHub Actions results for the named PR heads, not a local run on main.
 - Next action after the freeze lifts: add and test the exact prelaunch tier-click events and API allowlist, then re-run privacy/checkout/sitemap gates before any production release.
