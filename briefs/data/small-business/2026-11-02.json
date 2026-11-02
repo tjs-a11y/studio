@@ -1,0 +1,253 @@
+{
+ "brief": {
+  "subject": "Wealthy-earner tax votes advance in California and Colorado",
+  "headline": "State Tax Votes on High Earners Advance as Supreme Court Takes Up Distilling Ban",
+  "dek": "California and Colorado tax measures move forward, the Supreme Court reviews a federal distilling ban, and a film credit push hits the lame duck.",
+  "lede": "Voters in California and Colorado are weighing higher taxes on top earners. Colorado's highest court just cleared the way for its measure to proceed.",
+  "sections": [
+   {
+    "heading": "High-Earner Tax Measures Move Forward",
+    "bullets": [
+     "Colorado's Supreme Court threw out a suit to void the vote on Amendment 87, a tax hike on the wealthiest residents.",
+     "California's Proposition 3 would make higher rates permanent above $371,000 for singles and $742,000 for couples.",
+     "Prop 3 looks likely to pass, while California's separate billionaire wealth tax is struggling.",
+     "Owners of some top California sports teams would face the wealth tax if voters approve it."
+    ],
+    "source_ids": [
+     "S6",
+     "S2",
+     "S3"
+    ]
+   },
+   {
+    "heading": "Supreme Court Tests Federal Taxing Power",
+    "bullets": [
+     "The Supreme Court will hear a challenge to a 158-year-old federal ban on home distilling.",
+     "The core question is whether the ban goes beyond Congress's power to tax.",
+     "The ruling could clarify how far federal tax authority reaches into regulating activity."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Film Tax Credit Pushed in Lame Duck",
+    "bullets": [
+     "A bipartisan group is pressing to pass a proposed federal film tax credit before the 119th Congress ends.",
+     "Only weeks remain in the session, so the proposal faces a tight window."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Year-End Payroll and Rental Sales",
+    "bullets": [
+     "Many errors that complicate the final 2026 payroll close have already occurred, so reviewing records now matters.",
+     "Small landlords selling long-term rentals can lower taxable gain with documented improvements.",
+     "Missing improvement records can leave landlords paying tax on a larger gain than necessary."
+    ],
+    "source_ids": [
+     "S5",
+     "S7"
+    ]
+   }
+  ],
+  "seo_description": "California Prop 3 and Colorado Amendment 87 advance, the Supreme Court reviews a distilling ban, and a federal film tax credit push hits the lame duck."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-02T20:46:41.184Z",
+  "date": "2026-11-02",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Centuries-Old Whiskey Tax Law Faces New Supreme Court Challenge",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/02/centuries-old-whiskey-tax-law-faces-new-supreme-court-challenge/192978/",
+    "published": "2026-11-02T14:48:52.000Z",
+    "snippet": "The U.S. Supreme Court will weigh whether a 158-year-old federal ban on home distilling exceeds Congress's taxing power, a dispute rooted in America's earliest debates over federal authority and revenue enforcement.",
+    "categories": [
+     "home distilling",
+     "Supreme Court",
+     "Taxes",
+     "whiskey"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "While Billionaire Tax Flounders, Another Progressive Tax in California is Looking Likely",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/02/while-billionaire-tax-flounders-another-progressive-tax-in-california-is-looking-likely/192974/",
+    "published": "2026-11-02T14:23:50.000Z",
+    "snippet": "Proposition 3 is a tax measure that would make higher income tax rates permanent for single people who earn more than $371,000 or couples who earn more than $742,000.",
+    "categories": [
+     "ballot measures",
+     "california",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Proposed Billionaire Tax Could Impact California Sports Teams",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/02/proposed-billionaire-tax-could-impact-california-sports-teams/192970/",
+    "published": "2026-11-02T14:04:14.000Z",
+    "snippet": "The billionaires targeted by the wealth tax on the November ballot include owners of some of California's top sports teams and, among them, there will be winners and losers if voters approve the measure.",
+    "categories": [
+     "ballot measures",
+     "billionaire tax",
+     "billionaires",
+     "california",
+     "Income Taxes",
+     "tax on billionaires",
+     "Taxes",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "Backers of Federal Film Tax Credit Seek Action in Lame-Duck Session",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/30/backers-of-federal-film-tax-credit-seek-action-in-lame-duck-session/192962/",
+    "published": "2026-10-30T22:07:56.000Z",
+    "snippet": "With just weeks to go before the end of the 119th Congress, lawmakers and advocates are making a bipartisan push to get a proposed federal film tax credit over the finish line.",
+    "categories": [
+     "Congress",
+     "film and TV tax credits",
+     "Hollywood",
+     "Legislation",
+     "tax credit",
+     "tax credits",
+     "tax credits for movie production",
+     "Taxes",
+     "Trump administration"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "5 Key Steps for the 2026 Year-End Payroll Close",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/30/year-end-payroll-functions-can-expose-employer-problems-says-expert/192459/",
+    "published": "2026-10-30T20:55:00.000Z",
+    "snippet": "The final payroll of 2026 may be weeks away, but many of the mistakes that can complicate year-end have already happened.",
+    "categories": [
+     "Payroll",
+     "payroll close",
+     "payroll processing",
+     "payroll reporting",
+     "Thomson Reuters",
+     "year-end"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "Colorado Supreme Court Rejects Lawsuit Seeking to Stop Income Tax Measure",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/30/colorado-supreme-court-rejects-lawsuit-seeking-to-stop-income-tax-measure/192947/",
+    "published": "2026-10-30T20:47:08.000Z",
+    "snippet": "The Colorado Supreme Court on Friday shot down an attempt to nullify the vote on Amendment 87, allowing the proposal to raise taxes on the state’s wealthiest residents to proceed.",
+    "categories": [
+     "ballot measures",
+     "Colorado",
+     "graduated income tax",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "What Happens When a Long-Term Rental is Sold? The Taxes That Surprise Small Landlords",
+    "link": "https://www.cpapracticeadvisor.com/2026/10/30/what-happens-when-a-long-term-rental-is-sold-the-taxes-that-surprise-small-landlords/192927/",
+    "published": "2026-10-30T19:30:38.000Z",
+    "snippet": "Documented improvements can lower the gain, if the landlord has the records.",
+    "categories": [
+     "home sales",
+     "Income Taxes",
+     "real estate",
+     "realtor",
+     "rental properties",
+     "renters",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Quarterly Publication of Individuals, Who Have Chosen To Expatriate",
+    "link": "https://www.federalregister.gov/documents/2026/10/30/2026-22229/quarterly-publication-of-individuals-who-have-chosen-to-expatriate",
+    "published": "2026-10-30T12:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S9",
+    "source": "The CPA Journal",
+    "title": "What Dies with the Taxpayer?",
+    "link": "https://www.cpajournal.com/2026/10/28/what-dies-with-the-taxpayer/",
+    "published": "2026-10-28T14:00:45.000Z",
+    "snippet": "Death can provide significant tax benefits through the step-up in basis, but it can also permanently eliminate valuable tax attributes that, if not properly planned for, disappear with the taxpayer. From charitable contributions and capital loss carryforwards, to net operating losses (NOL) and passive activity losses, understanding which provisions expire and which survive can help […] The post Wh",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Columns",
+     "Financial Planning"
+    ]
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Internal Revenue Service Advisory Council; Public Meeting",
+    "link": "https://www.federalregister.gov/documents/2026/10/28/2026-21966/internal-revenue-service-advisory-council-public-meeting",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Internal Revenue Service Advisory Council will hold a public meeting.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 2,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 7
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

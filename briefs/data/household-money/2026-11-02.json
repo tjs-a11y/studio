@@ -1,0 +1,112 @@
+{
+ "brief": {
+  "subject": "FTC targets hidden fees and data-driven personalized pricing",
+  "headline": "FTC Sues Toast Over Hidden Fees, Probes Personalized Pricing at Nine Firms",
+  "dek": "Regulators sued Toast over hidden fees and cancellation tactics and ordered airlines, ride-hailing and delivery firms to explain data-based pricing.",
+  "lede": "Federal and state regulators are cracking down on hidden fees and hard-to-cancel subscriptions. The FTC is also asking whether your personal data shapes the prices you're charged.",
+  "sections": [
+   {
+    "heading": "FTC and States Sue Toast",
+    "bullets": [
+     "The FTC, California local officials and attorneys general from seven states sued Toast Inc., a restaurant software and fintech company.",
+     "The complaint alleges hidden and unauthorized fees, a pattern worth watching on any bill you receive.",
+     "Regulators also accuse Toast of deceptive subscription and cancellation practices, a growing enforcement focus.",
+     "The agencies say Toast misled customers about costs and its promised \"24/7/365\" customer support."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Is Your Data Setting Your Price?",
+    "bullets": [
+     "The FTC ordered nine major airlines, ride-sharing companies and food-delivery firms to hand over detailed information.",
+     "Regulators want to learn how these companies use personal data to set prices, which could mean different shoppers pay different amounts.",
+     "The inquiry also covers how personal data shapes compensation, such as what drivers and couriers are paid.",
+     "This is a study, not an enforcement action, so no company has been accused of wrongdoing yet."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "FTC and states sue Toast over hidden fees and cancellation practices; FTC orders nine airlines, ride-share and delivery firms to explain personalized pricing."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-02T20:46:41.184Z",
+  "date": "2026-11-02",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Fold Bitcoin Credit Card",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/fold-bitcoin-card",
+    "published": "2026-10-30T14:21:19.000Z",
+    "snippet": "It's light on fees and can snag you lucrative rewards on everyday spending — if you tie up large sums with the company.",
+    "categories": [
+     "Credit Cards",
+     "Rewards Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC and States Take Action Against Toast Inc. over Hidden and Unauthorized Fees, Deceptive Subscription and Cancellation Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-states-take-action-against-toast-inc-over-hidden-unauthorized-fees-deceptive-subscription",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "Agencies allege restaurant software and fintech firm deceptively touts costs and “24/7/365” customer support The Federal Trade Commission, the People of the State of California by and through the Los Angeles County Counsel and San Francisco City Attorney, and the Attorneys General of the States of Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah, filed a lawsuit today against Toast I",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Launches Personalized Pricing and Compensation Inquiry",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-launches-personalized-pricing-compensation-inquiry",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "Commission orders seek pricing and compensation methodology from major airlines, ride-sharing companies and food-delivery firms The Federal Trade Commission today ordered nine major airlines, ride-sharing companies and food-delivery firms to provide detailed information that will allow the agency to study the use of personal data to set prices and compensation. View Press Release",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 5
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S1",
+    "S2"
+   ]
+  }
+ ]
+}

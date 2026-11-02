@@ -1,0 +1,141 @@
+{
+ "brief": {
+  "subject": "FTC pulls 19 fake FTC sites as imposter scams top fraud list",
+  "headline": "FTC Takes Down 19 Fake FTC Websites in Imposter Scam Crackdown",
+  "dek": "Imposter scams remain the top reported fraud, health plan marketers get warnings during open enrollment, and a payment processor settles.",
+  "lede": "The FTC says it has removed 19 websites pretending to be the FTC. Its imposter-scam enforcement has returned more than $80 million to consumers since 2024.",
+  "sections": [
+   {
+    "heading": "Fake FTC Sites Taken Down",
+    "bullets": [
+     "The FTC removed 19 websites that impersonated the agency itself.",
+     "Scammers pose as regulators to seem trustworthy, so an official-looking site is no proof it's real.",
+     "Enforcement under the FTC's Impersonation Rule has returned more than $80 million in consumer redress since 2024.",
+     "The FTC says imposter scams have been the top reported fraud category."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Health Plan Ads Under Scrutiny",
+    "bullets": [
+     "FTC staff sent warning letters to 25 companies that market health plans or sell sales leads.",
+     "The letters flag deceptive or unfair claims about plan terms during open enrollment season.",
+     "More letters will go out on a rolling basis, so check plan details before signing up."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Payment Processor Settles for $600,000",
+    "bullets": [
+     "Riverside Payments Inc., Cascade Equipment Leasing LLC and their operators will pay $600,000 to settle FTC and Washington state claims.",
+     "Regulators say the firms falsely promised small businesses savings on payment processing.",
+     "Despite advertising risk-free cancellation, they allegedly made canceling nearly impossible, a red flag for family-run businesses."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "FTC removes 19 fake FTC websites, warns 25 health plan marketers during open enrollment, and settles with a payment processor for $600,000."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-02T20:46:41.184Z",
+  "date": "2026-11-02",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC, Washington Take Action Against Payment Processor for Deceiving Small Businesses About Costs and Cancellation Terms",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-washington-take-action-against-payment-processor-deceiving-small-businesses-about-costs",
+    "published": "2026-11-02T12:00:00.000Z",
+    "snippet": "Payment processor Riverside Payments Inc., its affiliate Cascade Equipment Leasing LLC and their operators will pay $600,000 to resolve Federal Trade Commission and Washington state allegations that the firms deceived small businesses by falsely promising to save them money on payment processing services and making it nearly impossible to cancel despite offering “risk-free” cancellation. Small bus",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC and States Take Action Against Toast Inc. over Hidden and Unauthorized Fees, Deceptive Subscription and Cancellation Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-states-take-action-against-toast-inc-over-hidden-unauthorized-fees-deceptive-subscription",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, the People of the State of California by and through the Los Angeles County Counsel and San Francisco City Attorney, and the Attorneys General of the States of Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah, filed a lawsuit today against Toast Inc. and affiliated entities, alleging the restaurant software and fintech company saddles restaurants with hi",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Staff Warn Marketers of Healthcare Plans and Lead Generators Not to Deceive Consumers about the Terms of the Advertised Plans",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-staff-warn-marketers-healthcare-plans-lead-generators-not-deceive-consumers-about-terms",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "With open enrollment season for healthcare plans in progress, Federal Trade Commission staff are sending warning letters to 25 companies that market or generate sales leads for healthcare plans. The letters put the companies on notice about deceptive or unfair claims that likely violate laws enforced by the Commission. The agency expects to send additional letters on a rolling basis. The letters a",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Highlights Efforts to Combat Imposter Scams and Protect Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-highlights-efforts-combat-imposter-scams-protect-consumers",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission released the following highlights from the agency’s ongoing efforts to combat impersonation scams and protect consumers, including removal of 19 FTC-imposter websites and enforcement actions resulting in more than $80 million in consumer redress since the FTC’s Impersonation Rule went into effect in 2024. “Imposter scams have been the top reported fraud category over t",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC Launches Personalized Pricing and Compensation Inquiry",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-launches-personalized-pricing-compensation-inquiry",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission today ordered nine major airlines, ride-sharing companies and food-delivery firms to provide detailed information that will allow the agency to study the use of personal data to set prices and compensation. “We intend to scrutinize the opaque methodology that some companies in these industries may be using to determine how much consumers pay or how much gig workers are",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 5
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S4"
+   ]
+  }
+ ]
+}
