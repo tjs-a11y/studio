@@ -1,10 +1,11 @@
-// Tell search engines that use IndexNow (Bing, Yandex, Seznam, Naver and others) about every public page.
+// Tell IndexNow engines about changed canonical, indexable HTML pages only.
 //   SITE_URL=https://your-domain.com node scripts/indexnow.mjs
 //   INDEXNOW_DRY_RUN=1 SITE_URL=... node scripts/indexnow.mjs   (print the request, send nothing)
 // Does nothing when SITE_URL is not set. No account is needed: the key is the <32 hex>.txt file at the site root,
 // which proves we control the host. Run by .github/workflows/indexnow.yml after each push to main.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, dirname, relative, sep } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -35,13 +36,35 @@ export function pagePaths(dir = root) {
   return out.sort();
 }
 
+export function changedPageUrls(dir = root) {
+  let files;
+  try {
+    files = execFileSync('git', ['diff', '--name-only', 'HEAD^', 'HEAD', '--', '*.html'], { cwd: dir, encoding: 'utf8' }).trim().split(/\\r?\\n/).filter(Boolean);
+  } catch {
+    throw new Error('IndexNow needs the previous commit available. Set actions/checkout fetch-depth to 2.');
+  }
+  const urls = new Set();
+  for (const file of files) {
+    let html = '';
+    try { html = readFileSync(join(dir, file), 'utf8'); }
+    catch {
+      try { html = execFileSync('git', ['show', `HEAD^:${file}`], { cwd: dir, encoding: 'utf8' }); } catch { continue; }
+    }
+    if (/<meta\\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
+    const canonical = /<link\\s+rel=["']canonical["']\\s+href=["']([^"']+)["']/i.exec(html)?.[1];
+    if (canonical) urls.add(canonical);
+  }
+  return [...urls].sort();
+}
+
 async function main() {
   const site = (process.env.SITE_URL || '').trim().replace(/\/+$/, '');
   if (!site) { console.log('SITE_URL is not set: nothing to do.'); return; }
   const u = new URL(site);
   if (u.protocol !== 'https:' || u.pathname !== '/') throw new Error('SITE_URL must look like https://your-domain.com');
   const key = findKey();
-  const urlList = pagePaths().map((p) => site + p);
+  const urlList = changedPageUrls();
+  if (!urlList.length) { console.log('IndexNow: no changed canonical HTML pages.'); return; }
   // IndexNow accepts up to 10,000 URLs per request.
   for (let i = 0; i < urlList.length; i += 10000) {
     const body = { host: u.host, key, keyLocation: `${site}/${key}.txt`, urlList: urlList.slice(i, i + 10000) };
