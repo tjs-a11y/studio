@@ -17,6 +17,10 @@ test('DataQs guide is source-backed, discoverable, and does not overpromise', ()
   assert.ok(html.includes('within 45 days'));
   assert.ok(html.includes('within 30 days'));
   assert.ok(html.includes('within 14 days'));
+  assert.ok(html.includes('multifactor authentication'));
+  assert.ok(html.includes('Login.gov'));
+  assert.ok(html.includes('same email address as your DataQs account'));
+  assert.ok(html.includes('FMCSA Portal account'));
   assert.ok(html.includes('three years from an inspection and five years from a crash'));
   assert.ok(html.includes('burden of providing a factual or legal reason'));
   assert.ok(html.includes('Crash Preventability Determination Program'));
@@ -25,7 +29,8 @@ test('DataQs guide is source-backed, discoverable, and does not overpromise', ()
   assert.ok(!html.includes('original deeds or contractual terms'));
   assert.ok(html.includes('fmcsa.dot.gov/newsroom/fmcsa-announces-all-50-states'));
   assert.ok(html.includes('dataqs.fmcsa.dot.gov/HelpCenter/Faqs'));
-  assert.ok(mod.includes('2026-10-31'));
+  assert.ok(mod.includes('2026-11-01'));
+  assert.ok(html.includes('2026-11-01'));
   assert.ok(sitemap.includes('https://quickwell.app/learn/dataqs-review-process/'));
   assert.ok(hub.includes('/learn/dataqs-review-process/'));
   assert.ok(audit.includes('/learn/dataqs-review-process/'));
