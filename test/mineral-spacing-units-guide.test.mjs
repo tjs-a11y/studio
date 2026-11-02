@@ -13,7 +13,9 @@ test('Texas pooled-unit guide answers the acreage question with primary sources 
   assert.match(html, /Natural Resources Code Chapter 102/);
   assert.match(html, /Expected decimal =/);
   assert.match(html, /surface acres/i);
-  assert.match(html, /spacing rules are not automatically the acreage denominator/i);
+  assert.match(html, /March 8, 1961/);
+  assert.match(html, /anonymous check event sends only the tool and event names/i);
+  assert.match(html, /not automatically the acreage denominator/i);
   assert.match(html, /Runs entirely in your local browser — nothing you enter leaves your device\./);
   assert.match(html, /General educational information only, not legal, accounting, tax, or financial advice\. Confirm parameters with original deeds or contractual terms\./);
   assert.match(html, /href="\/royalty-check\/\?ref=learn-spacing-units"/);
