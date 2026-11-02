@@ -67,7 +67,7 @@ const EN = {
     "en": "October 31, 2026"
   },
   "ogImage": "/og.png",
-  "disclaimer": "General educational information only, not legal, accounting, tax, or financial advice. Confirm parameters with original deeds or contractual terms."
+  "disclaimer": "General educational information only, not legal advice. Confirm current requirements with FMCSA’s DataQs Help Center and the applicable State DataQs Implementation Plan."
 };
 export const ARTICLES = [EN];
 export const HUB = { title: 'FMCSA DataQs review process', path: EN.path, text: '2026 state review stages, deadlines, evidence checklist and program exceptions.' };
