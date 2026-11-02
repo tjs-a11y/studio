@@ -119,7 +119,12 @@
     close.focus();
   }
   window.Studio = {
-    init(opts) { tool = opts.tool; onChange = opts.onChange || onChange; return check(); },
+    init(opts) {
+      tool = opts.tool; onChange = opts.onChange || onChange;
+      // Aggregate tool-open count only; do not send page URLs, content, or visitor identifiers.
+      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'open' }), keepalive: true }).catch(function () {}); } catch (e) {}
+      return check();
+    },
     showUpgradeModal(config) { showUpgradeModal(config); },
     upgrade(plan, interval) {
       // Anonymous purchase-intent ping (survives the redirect); never blocks checkout.
