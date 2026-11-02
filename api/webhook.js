@@ -20,7 +20,7 @@ async function countTrial(tool) {
   if (!url || !token || !tool) return;
   const day = new Date().toISOString().slice(0, 10);
   try {
-    await fetch(`${url.replace(/\\/$/, '')}/pipeline`, {
+    await fetch(`${url.replace(/\/$/, '')}/pipeline`, {
       method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
       body: JSON.stringify([['INCR', `count:${tool}:trials`], ['INCR', `count:${tool}:trials:${day}`]]),
       signal: AbortSignal.timeout(1500),
