@@ -56,6 +56,8 @@ function runCheck(text, { save = true } = {}) {
   if (clean.replace(/\s+/g, ' ').length < 6) { const m = $('#inMsg'); m.textContent = t('tooShort'); m.classList.remove('hidden'); return; }
   $('#inMsg').classList.add('hidden');
   state.result = check(clean);
+  // Anonymous usage count only: never send the message, result, URL, or other user content.
+  if (save) { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'shield', event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
   if (save && state.pro) { Kit.addEntry(state.store, state.result); renderHistory(); }
   renderResult();
   $('#results').classList.remove('hidden');
