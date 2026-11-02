@@ -5,9 +5,9 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade']);
-// Sites (not billable tools) that may record anonymous outbound-link clicks, and the partner links they track.
-const SITES = new Set(['northstar']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit']);
+// Sites (not billable tools) that may record anonymous outbound-link clicks or homepage visits.
+const SITES = new Set(['northstar', 'quickwell']);
 const OUT_TARGETS = new Set(['freightsidekick']);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,200}\.[A-Za-z]{2,24}$/;
 const day = () => new Date().toISOString().slice(0, 10);
@@ -37,6 +37,20 @@ export async function POST(request) {
   const tool = String(body.tool || ''); const event = String(body.event || '');
   if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   const run = override || store();
+  if (event === 'visit') {
+    // One aggregate homepage visit counter; no URL, referrer, IP, or visitor identifier is sent.
+    if (tool !== 'quickwell') return fail(400, 'Unknown event.');
+    if (!run) { console.log(JSON.stringify({ evt: 'visit', site: tool })); return json({ ok: true }); }
+    await run(['INCR', `count:${tool}:visits`], ['INCR', `count:${tool}:visits:${day()}`]);
+    return json({ ok: true });
+  }
+  if (event === 'open') {
+    // Anonymous count of a tool page being opened; no page URL or visitor identifier is retained.
+    if (!toolById(tool)) return fail(400, 'Unknown event.');
+    if (!run) { console.log(JSON.stringify({ evt: 'open', tool })); return json({ ok: true }); }
+    await run(['INCR', `count:${tool}:opens`], ['INCR', `count:${tool}:opens:${day()}`]);
+    return json({ ok: true });
+  }
   if (event === 'outbound') {
     // Anonymous count of clicks from one of our sites to a partner link. No IP, no identity, no URL beyond the fixed target.
     const target = String(body.target || '');
