@@ -349,3 +349,54 @@ No defensible niche ranking by CTR velocity: all three routes lack returned rout
 **Preview refresh:** after the final regression-test assertion commit `c380a5d0d8e229447d2464e00b28179f9c4413c1`, Vercel created a new preview is now READY; the immediately prior preview for `eca141346c2dcf6de0a33cff89a31c96342468fe` was also READY. Both have `target=null`; no production alias.
 
 **Production separation check:** the latest READY Vercel production deployment remains on `main` at commit `dbc09a8f0aa12694a6f76017ee3866a74631cdd5`; the B2B PR branch appears only in preview deployments with `target:null`. The production `api/event.js` and `js/pro.js` blobs remain unchanged from the baseline reviewed in this shift.
+
+## 2026-11-01 — daily telemetry and release-gate evidence
+
+**Run time:** 2026-11-01 19:17 CT. **Source branch reviewed:** `main`. **Source commit:** `3156f2513f808a5de5fbd370f39a8c2c3a6916aa`. **Window:** 2026-10-25 through 2026-11-01.
+
+### Required prelaunch tier-click events — FAIL
+- Reviewed `port-watcher/index.html`, `hydro-flow/index.html`, `scale-audit/index.html`, and `api/event.js`.
+- None of the three pages contains the required `click_operator` or `click_manager` event calls.
+- `api/event.js` currently allowlists only `check`, `waitlist`, `outbound`, and `upgrade`; it rejects both required event names.
+- Vercel custom-event count queries for `click_operator` and `click_manager` returned 0 in the requested window. These Vercel custom-event counts are not a substitute for the app's KV counters.
+- **Result:** required event instrumentation is absent; FAIL. No event counts are inferred from generic `upgrade` events.
+
+### `/api/stats` and named interest counters — BLOCKED / FAIL
+- The live `/api/stats` endpoint could not be read through an available authorized read-only GET path in this run; web fetch returned an access/tool error. No live API response was captured.
+- Source review of `api/stats.js` shows only per-tool `checks`, `checks_today`, `upgrade_clicks`, `upgrade_clicks_today`, `subs`, `subs_today`, plus the NorthStar/FreightSidekick outbound counter. The three required named interest counters are not present.
+- The current `num()` helper converts absent/unparseable counter values to 0, so missing values cannot be distinguished from a genuine zero.
+- **Result:** named interest counters are missing in source; live counts UNKNOWN, not zero. FAIL/BLOCKED.
+
+### GSC exact-query check — UNKNOWN
+Connected Search Console query for `sc-domain:quickwell.app`, 2026-10-25 through 2026-11-01, returned no rows for:
+1. `FMC Part 541 container billing rules drayage`
+2. `fracking water meter CSV flow-rate reconciliation`
+3. `timber mill scale ticket cull deduction verification`
+No rows are treated as UNKNOWN/BLOCKED, not zero impressions or clicks.
+
+### Haul Audit / Royalty Check privacy and quota — PASS (static source review only)
+- `haul-audit/index.html` and `royalty-check/index.html` each implement a page-level, localStorage-only three-check counter keyed to the browser's local calendar date. The UI computes and displays remaining checks.
+- After the third successful check, the result remains visible and the page calls the shared upgrade modal with the stated $15/month Pro offer.
+- Each page's check event sends only `{tool, event:'check'}`; no load details, broker names, files, ownership records, or calculation inputs are sent.
+- `js/pro.js` supplies the modal and upgrade event/checkout behavior; it does not implement the daily quota.
+- This is static inspection, not runtime testing.
+
+### Stripe checkout — CODE PASS / LIVE CONFIG BLOCKED
+- `api/checkout.js` fixes Haul Audit Pro to `haul-audit__pro__month` and Royalty Check Pro to `royalty-check__pro__month`.
+- The code fails closed unless the active Stripe price is recurring monthly, interval count 1, exactly 1500 USD cents, and USD currency. No arbitrary lookup fallback is used for these two tiers.
+- `catalog/tools.json` and `test/specialist-growth.test.mjs` contain the relevant plan/guard assertions.
+- No authenticated Stripe-side price lookup was available. Price existence/activation remains UNKNOWN; no live checkout was tested.
+
+### Sitemap hygiene — PARTIAL PASS (static inspection)
+- `sitemap.xml` references `sitemap-main.xml`, `sitemap-briefs.xml`, and `sitemap-learn.xml`.
+- Current generated files contain 83 main URLs, 61 briefs URLs, and 95 learn URLs; no duplicate URLs were found across the three files.
+- `scripts/sitemap.mjs`, `scripts/learn/build.mjs`, and `briefs/run.mjs` provide source-backed generation paths. The two standalone settlement/royalty guide source files have canonical tags and appear in the main sitemap.
+- The mineral-deductions guide is confirmed live. The supplied `trucking-settlement-disputes.html` file and sitemap entry exist, but direct live fetch was not confirmed; the linked `/guides/carrier-settlement-audit-checklist/` page is confirmed live.
+- Sitemap scripts were not executed locally; no indexing claim is made.
+
+### Tests, IndexNow, and production freeze
+- **Tests/build/link checks:** NOT RUN. GitHub file retrieval was available, but no checked-out repository/dependency runtime was available. GitHub/Vercel deployment success is not a test result. No 100%-green claim.
+- **IndexNow:** not checked in this run. Any prior submission/acceptance is not evidence of search-engine indexing. **Indexing:** UNKNOWN.
+- **Production deployment observation:** Vercel shows a READY production deployment on `main`, commit `3156f2513f808a5de5fbd370f39a8c2c3a6916aa`, created 2026-11-01 13:42:04 CT, with alias `quickwell.app`. This deployment predates the 2026-11-03 freeze lift and conflicts with the freeze instruction. It was already present; this run made no production deployment, merge, API/backend edit, or code change.
+
+**Smallest safe next action after 2026-11-03:** add the two required tier-click event types and page calls, expose the three named aggregate counters without collapsing missing values to zero, then run the complete local test/build/sitemap suite and verify the Stripe lookup keys against authenticated Stripe data before any release.
