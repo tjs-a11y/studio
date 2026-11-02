@@ -14,6 +14,7 @@ const S6041A = usc('6041A', 'payments for services');
 const S3406 = usc('3406', 'backup withholding; effective-date note for Pub. L. 119-21 §70433');
 const S6050W = usc('6050W', 'payment card and third party network transactions');
 const S6050N = usc('6050N', 'royalties');
+const IRSFAQ = { label: 'IRS: Form 1099-NEC and independent contractors (accessed November 1, 2026)', url: 'https://www.irs.gov/faqs/small-business-self-employed-other-business/form-1099-nec-independent-contractors/form-1099-nec-independent-contractors' };
 const S6045 = usc('6045', 'payments to attorneys in (f)');
 const S6071 = usc('6071', 'time for filing information returns');
 const S7503 = usc('7503', 'deadlines on a weekend or legal holiday');
@@ -35,12 +36,12 @@ export const SECTION = {
   title: 'Form 1099 Guides for Small Businesses (2026 Rules)',
   description: 'The new $2,000 Form 1099 threshold for 2026 payments, who is excluded (card payments, most corporations) and the deadlines in early 2027.',
   lang: 'en', crumbs: [{ name: 'Quickwell', path: '/' }, { name: 'Learn', path: '/learn/' }],
-  checked: { iso: '2026-10-12', en: 'October 12, 2026' },
+  checked: { iso: '2026-11-01', en: 'November 1, 2026' },
   lede: 'For payments made in 2026, the federal 1099 line for contractors and rent moved from $600 to $2,000. These pages explain the new rule from the law itself, who usually does not get a form, and when the forms are due.',
   hubText: 'The new $2,000 threshold, who is excluded, and the early-2027 deadlines.',
   intro: `<h2>Why 2026 is different</h2>
 <p>A law signed on July 4, 2025 (Pub. L. 119-21) raised the amount that triggers the most common small-business information returns. For payments made after December 31, 2025, a business generally reports payments to a non-employee for services, or payments of rent, only when the year's total to that payee reaches <b>$2,000</b>. For 2025 payments the figure was still $600. From 2027 the $2,000 will rise with inflation.</p>
-<p>That change is simple to state but easy to get wrong in practice, for three reasons. Many web pages, and the Treasury regulations themselves, still show $600. The exceptions (card payments, corporations, goods, employees) did not change, but they matter more now. And the deadlines for 2026 payments land on unusual dates because January 31, 2027 is a Sunday.</p>
+<p>That change is simple to state but easy to get wrong in practice, for three reasons. Some Treasury regulation text still shows $600, while the IRS FAQ now confirms the $2,000 line for covered 2026 payments. Other categories remain separate: royalties start at $10, and consumer products sold for resale on a commission basis have a $5,000 threshold. Card payments, corporations, goods and employees also follow different rules.</p>
 <p>Each page below answers one question and links the exact statute or regulation we read. Where we could not verify something, such as the box numbers on the IRS forms, we say so instead of guessing.</p>`,
   outro: `<p class="note">Want the list for your own business? The free ${TOOL('Year-End Vendor Check')} reads your 2026 bank, card, QuickBooks or Xero export in your browser and sorts each payee into "likely needs a 1099", "near the line", "probably not needed" and "need info". Nothing is uploaded.</p>`,
   cta: { title: 'Find who likely needs a 1099 from your own export', text: 'The free Year-End Vendor Check reads a 2026 bank, card, QuickBooks or Xero export in your browser, totals each payee, applies the $2,000 line and the card and corporation exceptions, and lists the W-9s to collect. Nothing is uploaded. Not tax advice.', href: '/vendor-check/', label: 'Open the Vendor Check' },
@@ -54,10 +55,11 @@ export const PAGES = [
   crumbName: '1099 threshold for 2026',
   short: 'From 2026 payments, the 1099 line for contractors and rent is $2,000, not $600. What changed, what did not, and why some pages still say $600.',
   title: '1099 Threshold for 2026: The New $2,000 Rule Explained',
+  checked: { iso: '2026-11-01', en: 'November 1, 2026' },
   description: 'For payments after Dec 31, 2025, the 1099-NEC and 1099-MISC threshold is $2,000, not $600 (26 U.S.C. 6041). What changed and why some rules still say $600.',
   lede: 'If your business pays a contractor or a landlord in 2026, the federal line for sending a Form 1099 is now $2,000 for the year, up from $600. Here is the rule as the law states it, with worked examples and the parts that did not change.',
   related: ['who-does-not-get-a-1099', 'deadlines-2026-payments', { href: '/learn/business-costs/find-recurring-charges-bank-csv/', title: 'Find recurring charges in a CSV', text: 'Pull a year of payments out of a bank or accounting export in a spreadsheet.' }],
-  sources: [S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
+  sources: [IRSFAQ, S6041, S6041A, S3406, R6041_1, S6050N, S6050W, S6721],
   body: `
 <h2>The short answer</h2>
 <p>For payments made <b>after December 31, 2025</b>, a business generally files a Form 1099 for a payee only when it pays that payee <b>$2,000 or more</b> during the calendar year, for services (Form 1099-NEC) or for rent and similar income (Form 1099-MISC). Below $2,000 for the whole year, the federal rule does not require the form. Payments made in 2025 still used the old $600 line.</p>
@@ -77,15 +79,16 @@ export const PAGES = [
 </tbody></table></div>
 <p>These examples assume the payee is not a corporation and was paid by check, bank transfer or cash. Card payments, payments through some payment apps, and payments to most corporations follow different rules; see <a href="/learn/1099/who-does-not-get-a-1099/">who doesn't get a 1099</a>.</p>
 
-<h2>Why the IRS regulations still say $600</h2>
-<p>The Treasury regulation that implements this section, ${r('1.6041-1')}, is still titled "Return of information as to payments of $600 or more" in the eCFR text dated October 6, 2026, and its examples use $600. That is not a contradiction you need to resolve: regulations are written to carry out the statute, and when Congress changes a dollar amount in the statute, the statute controls even before the regulations are rewritten. Expect some IRS pages, form instructions, software screens and older articles to show $600 for a while. Check the date on anything you read, and whether it is talking about 2025 payments or 2026 payments.</p>
+<h2>Why the eCFR regulation still shows $600</h2>
+<p>The Treasury regulation that implements this section, ${r('1.6041-1')}, still carries the old "$600 or more" title and examples in the eCFR text dated October 6, 2026. The IRS FAQ now explicitly confirms that the $2,000 line applies to covered payments made after December 31, 2025. For 2026, read the amended statute and current IRS FAQ together; do not apply the old regulatory example to 2026 payments.</p>
 
 <h2>From 2027 the amount moves with inflation</h2>
-<p>A new ${u('6041')}(h) says that for "any calendar year after 2026" the $2,000 is increased by a cost-of-living adjustment that uses 2025 as the base year, rounded to the nearest $100. So the 2027 figure is not fixed in the law; the IRS will publish it. We could not open irs.gov while writing this page, so we have not seen a 2027 figure and do not quote one. Until it is published, plan with $2,000 and check again before your 2027 year-end.</p>
+<p>A new ${u('6041')}(h) says that for "any calendar year after 2026" the $2,000 is increased by a cost-of-living adjustment that uses 2025 as the base year, rounded to the nearest $100. The IRS FAQ accessed November 1, 2026 confirms the 2026 categories but does not list a 2027 amount. The 2027 figure is not fixed in the statute; check current IRS guidance before making 2027 payments or filing.</p>
 
 <h2>What did not change</h2>
 <ul>
 <li><b>Royalties</b> are reported from <b>$10</b> a year, under a separate rule (${u('6050N')}(a)).</li>
+<li><b>Consumer products sold for resale on a buy-sell, deposit-commission or other commission basis</b> have a separate $5,000 annual reporting threshold in the IRS FAQ. The Year-End Vendor Check does not classify that category; check the current IRS instructions if it applies.</li>
 <li><b>Card and payment-network payments</b> are reported by the processor, not by you, under ${u('6050W')}. The 2025 law set that processor threshold at more than $20,000 and more than 200 transactions for third party networks (§6050W(e)), but that threshold is about the processor's own form, not yours.</li>
 <li><b>Backup withholding</b> uses the same line: under ${u('3406')}(b)(6), a payment counts as reportable once the year's total to the payee reaches the amount in effect under §6041(a). If a payee above the line has not given you a taxpayer identification number, ask for a Form W-9 before you pay again.</li>
 <li><b>Penalties</b> still apply. ${u('6721')}(a) sets $250 per late or incorrect return, before the inflation adjustment in §6721(f), with lower amounts if you correct within 30 days or by August 1.</li>
@@ -104,6 +107,7 @@ export const PAGES = [
 },
 {
   slug: 'who-does-not-get-a-1099',
+  checked: { iso: '2026-10-12', en: 'October 12, 2026' },
   h1: "Who doesn't get a 1099: card payments, corporations and the attorney and medical exceptions",
   crumbName: "Who doesn't get a 1099",
   short: 'Card and payment-network payments, most corporations, goods, phone and freight bills, and employees. Plus the two corporate exceptions: lawyers and medical providers.',
@@ -160,6 +164,7 @@ export const PAGES = [
 },
 {
   slug: 'deadlines-2026-payments',
+  checked: { iso: '2026-10-12', en: 'October 12, 2026' },
   h1: '1099 deadlines for 2026 payments (filed in early 2027)',
   crumbName: '1099 deadlines for 2026 payments',
   short: '1099-NEC and recipient copies are due Monday, February 1, 2027, because January 31 is a Sunday. Other e-filed 1099s: March 31, 2027.',
