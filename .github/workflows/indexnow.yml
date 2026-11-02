@@ -1,6 +1,6 @@
 name: IndexNow ping
 
-# After each push to main, tell IndexNow search engines which pages exist.
+# After each push to main, tell IndexNow engines about changed canonical, indexable pages.
 # The site address comes from site.config.json (or the repo variable SITE_URL, which wins if set). Stays off
 # while the address is still the placeholder. No account or secret is needed: the key file <32 hex>.txt sits at the site root.
 
@@ -22,6 +22,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v4
         with:
