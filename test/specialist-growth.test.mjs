@@ -49,5 +49,8 @@ test('free specialist checks keep results visible and save history only for Pro'
     assert.ok(html.includes('const FREE_PER_DAY = 3;'), path + ': three free checks');
     assert.ok(html.includes('d.getFullYear()') && html.includes('d.getMonth()') && html.includes('d.getDate()'), path + ': local calendar day');
     assert.ok(html.includes("body: JSON.stringify({ tool: TOOL, event: 'check' })"), path + ': anonymous event only');
+    assert.ok(!html.includes('unlimited daily'), path + ': no unsupported unlimited-check claim');
+    assert.ok(html.includes('Pro is $15/month and adds saved on-device'), path + ': truthful Pro value');
+    assert.ok(html.includes('Your current result remains visible'), path + ': result remains visible after the prompt');
   }
 });
