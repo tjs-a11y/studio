@@ -179,7 +179,7 @@
     {
       "id": "vendor-check",
       "name": "Year-End Vendor Check",
-      "tagline": "Find who needs a 1099 under the new $2,000 rule, plus every renewal and price increase, from your bank or QuickBooks export. Nothing is uploaded.",
+      "tagline": "Review 2026 vendor payments against the $2,000 threshold for covered services and specified 1099-MISC categories such as rent, with separate rules for royalties and attorney payments. Nothing is uploaded.",
       "plans": [
         {
           "id": "owner",
