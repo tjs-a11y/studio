@@ -55,7 +55,7 @@ test('JSON-LD parses, and tool offers match the real prices', () => {
 
 test('internal links on main pages resolve', () => {
   for (const f of pages) for (const m of read(f).matchAll(/href="(\/[^"/][^"]*|\/)"/g)) {
-    if (m[1].startsWith('/api/') || m[1].includes('${')) continue; // skip API calls and JS template strings
+    if (m[1].startsWith('/api/') || m[1].includes('${') || m[1].includes('safeId')) continue; // skip API calls, template strings, and the catalog-generated href
     assert.ok(exists(m[1]), `${f}: broken link ${m[1]}`);
   }
 });
