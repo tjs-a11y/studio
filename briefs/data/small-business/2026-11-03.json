@@ -1,0 +1,189 @@
+{
+ "brief": {
+  "subject": "Trucker tax dates, NOLs at death, IRS council meeting",
+  "headline": "Owner-Operator Tax Deadlines, Expiring Tax Attributes and an IRS Advisory Meeting",
+  "dek": "Eight filing dates for owner-operators before March 1, 2027, tax breaks that vanish at death, and new IRS notices in the Federal Register.",
+  "lede": "Owner-operators face eight tax dates before March 1, 2027, drawn from federal rules, four states and IFTA. Now is the time to map them out.",
+  "sections": [
+   {
+    "heading": "Owner-Operators: Eight Dates to Calendar",
+    "bullets": [
+     "Eight tax dates fall before March 1, 2027, for owner-operators, per a new calendar roundup.",
+     "The dates draw on federal rules, guidance from four states and the International Fuel Tax Agreement.",
+     "IFTA deadlines sit alongside federal ones, so fuel-tax filers juggle multiple deadline sets at once.",
+     "Mapping these dates now helps avoid penalties during the busy year-end and early-filing stretch."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Tax Breaks That Die With the Owner",
+    "bullets": [
+     "Net operating losses and passive activity losses can disappear permanently when a taxpayer dies.",
+     "Capital loss carryforwards and unused charitable contribution carryforwards face the same risk.",
+     "The step-up in basis can still deliver significant tax benefits to heirs.",
+     "Owners carrying business losses should review which attributes survive as part of succession planning."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   },
+   {
+    "heading": "Federal Register: IRS Notices",
+    "bullets": [
+     "The IRS Advisory Council will hold a public meeting, per a notice published Oct. 28.",
+     "Open meetings let practitioners track issues the council raises with IRS leadership.",
+     "The IRS also issued its quarterly list of individuals who have chosen to expatriate, dated Oct. 30."
+    ],
+    "source_ids": [
+     "S7",
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "Owner-operator tax dates before March 1, 2027, tax attributes lost at death, and the latest IRS Federal Register notices for small businesses."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-03T18:27:45.642Z",
+  "date": "2026-11-03",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Canopy Reveals General Availability of AI Tax Workflow Automation",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/03/canopy-reveals-general-availability-of-ai-tax-workflow-automation/193085/",
+    "published": "2026-11-03T16:55:31.000Z",
+    "snippet": "Canopy announced Tuesday the general availability of Tax Workflow Automation, described as an AI-powered suite that takes tax work from the first document request to the signed, paid return in one connected workflow.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "Automation",
+     "Canopy",
+     "practice management",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "QX Global Group Launches ‘QX TaxReady’ to US CPA and Tax Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/03/qx-global-group-launches-qx-taxready-to-us-cpa-and-tax-firms/193029/",
+    "published": "2026-11-03T14:17:00.000Z",
+    "snippet": "QX TaxReady is a fully managed tax preparation service, powered by AI and delivered by a team of more than 500 dedicated tax specialists.",
+    "categories": [
+     "Artificial Intelligence",
+     "Income Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Beat Financial Stress: 6 Essential Year-End Money Moves",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/02/beat-financial-stress-6-essential-year-end-money-moves/193020/",
+    "published": "2026-11-02T21:03:18.000Z",
+    "snippet": "Making these six money moves before Dec. 31 can help improve your finances, reduce stress, and lower your 2026 tax bill.",
+    "categories": [
+     "finances",
+     "Financial Planning",
+     "financial tips",
+     "personal finance",
+     "personal financial planning",
+     "year end"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "The Owner-Operator Tax Calendar: 8 Dates Before March 1, 2027",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/02/the-owner-operator-tax-calendar-8-dates-before-march-1-2027/193010/",
+    "published": "2026-11-02T20:48:36.000Z",
+    "snippet": "The dates below come from federal rules, guidance from four states and the International Fuel Tax Agreement, or IFTA.",
+    "categories": [
+     "Income Taxes",
+     "otr",
+     "owner operator",
+     "trucker tax",
+     "trucking",
+     "trucking clients"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Quarterly Publication of Individuals, Who Have Chosen To Expatriate",
+    "link": "https://www.federalregister.gov/documents/2026/10/30/2026-22229/quarterly-publication-of-individuals-who-have-chosen-to-expatriate",
+    "published": "2026-10-30T12:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "The CPA Journal",
+    "title": "What Dies with the Taxpayer?",
+    "link": "https://www.cpajournal.com/2026/10/28/what-dies-with-the-taxpayer/",
+    "published": "2026-10-28T14:00:45.000Z",
+    "snippet": "Death can provide significant tax benefits through the step-up in basis, but it can also permanently eliminate valuable tax attributes that, if not properly planned for, disappear with the taxpayer. From charitable contributions and capital loss carryforwards, to net operating losses (NOL) and passive activity losses, understanding which provisions expire and which survive can help […] The post Wh",
+    "categories": [
+     "July/August 2026",
+     "Featured",
+     "Columns",
+     "Financial Planning"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Internal Revenue Service Advisory Council; Public Meeting",
+    "link": "https://www.federalregister.gov/documents/2026/10/28/2026-21966/internal-revenue-service-advisory-council-public-meeting",
+    "published": "2026-10-28T12:00:00.000Z",
+    "snippet": "The Internal Revenue Service Advisory Council will hold a public meeting.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 2,
+    "kept": 2
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 4
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
