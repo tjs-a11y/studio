@@ -82,3 +82,17 @@ test('sitemap and robots list only real pages on the configured origin', () => {
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
   assert.match(robots, /Disallow: \/api\//);
 });
+
+
+test('homepage sends its primary CTA to Shield and attributes the five priority consumer paths', () => {
+  const h = read('index.html');
+  assert.match(h, /<a class="btn btn-primary" href="\\/shield\\/\\?ref=home-hero">Check a suspicious message/);
+  const start = h.indexOf('<div class="featured-grid">');
+  const end = h.indexOf('</div>', start);
+  const grid = h.slice(start, end);
+  const ids = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
+  const positions = ids.map((id) => grid.indexOf(`href="/${id}/?ref=home-featured-${id}"`));
+  assert.ok(positions.every((position) => position >= 0), 'all five featured paths carry source labels');
+  assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'featured tools follow the CEO priority order');
+  for (const id of ids) assert.ok(h.includes(`href="/${id}/?ref=home-tools-${id}"`), `${id}: searchable tool link carries a source label`);
+});
