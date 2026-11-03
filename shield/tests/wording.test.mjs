@@ -65,10 +65,14 @@ test('nothing is loaded from or sent to third parties; no analytics; messages ne
   for (const [p, s] of shipped) for (const m of s.matchAll(/(?:src|href|action)=["'](https?:\/\/[^"']+)/g)) assert.ok(/^https:\/\/quickwell\.app\//.test(m[1]), `${p}: ${m[1]}`);
   for (const [p, s] of shipped.filter(([p]) => /\.mjs$|sw\.js$/.test(p))) {
     assert.ok(!/https?:\/\/(?!quickwell\.app)[a-z]/i.test(s.replace(/\/\/.*$/gm, '').replace(/'(?:https?:\/\/)[^']*'/g, (m) => (/usps\.parcel|correos-entregas/.test(m) ? "''" : m))), `${p}: outside URL in code`);
-    assert.ok(!/\bfetch\(/.test(s) || p.endsWith('sw.js'), `${p}: page code must not call fetch`);
+    assert.ok(!/\bfetch\(/.test(s) || p.endsWith('sw.js') || p.endsWith('shield/js/app.mjs'), `${p}: only Shield's fixed first-party count request may call fetch`);
     assert.ok(!/XMLHttpRequest|sendBeacon|WebSocket|EventSource/.test(s), p);
   }
-  assert.ok(!/api\/event/.test(shipped.map(([, s]) => s).join('\n')), 'no usage counting');
+  const shieldApp = shipped.find(([p]) => p.endsWith('shield/js/app.mjs'))?.[1] || '';
+  assert.equal((shieldApp.match(/\bfetch\(/g) || []).length, 1, 'Shield sends one first-party anonymous check count');
+  assert.ok(shieldApp.includes("fetch('/api/event'"), 'Shield count is first-party');
+  assert.ok(shieldApp.includes("JSON.stringify({ tool: 'shield', event: 'check' })"), 'Shield count contains only fixed tool and event labels');
+  assert.ok(html.includes('<li data-i18n="priv4">Anonymous counts record Shield opens, completed checks and plan selections'), 'privacy copy discloses anonymous counts');
 });
 
 test('the xlinks placeholder, the site CSP and the share target are in place', () => {
