@@ -355,7 +355,10 @@ export const TERMS = [
 
 <h2>What to ask for</h2>
 <blockquote>Please strike the setoff/offset language. Any claim should be handled separately, not taken from freight pay.</blockquote>
-<p>If the broker won't strike it, narrower versions are better than nothing: limit setoff to this load only, to amounts both parties have agreed in writing, or to final judgments. Get any change in a revised rate con, not an email that says "don't worry about it".</p>`,
+<p>If the broker won't strike it, narrower versions are better than nothing: limit setoff to this load only, to amounts both parties have agreed in writing, or to final judgments. Get any change in a revised rate con, not an email that says "don't worry about it".</p>
+
+<h2>If a setoff already came out of your pay</h2>
+<p>The Rate Con Checker catches setoff wording <em>before</em> you sign. Once a setoff has already been deducted, the place to catch it is the settlement: rebuild what you agreed from the signed rate confirmation and approved accessorials, then compare it with what the broker actually paid. <a href="/haul-audit/">Haul Audit</a> does that math privately in your browser and keeps broker deductions separate from factoring fees, so a setoff shows up as a settlement variance instead of disappearing into the paperwork.</p>`,
   related: ['cargo-claims', 'fines-deductions', 'factoring-noa', 'indemnity'], sources: [ecfr('370.3', 'filing of claims'), ecfr('370.5', 'acknowledgment of claims'), ecfr('370.9', 'disposition of claims'), TOOL] },
 
 // ---------------------------------------------------------------------------------------------
