@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { calculateSpreadMath, coveredCall, cashSecuredPut, ironCondor } from '../utility-pipeline/js/engine.mjs';
+import { calculateSpreadMath, coveredCall, cashSecuredPut, ironCondor, longStraddle, longStrangle, collar } from '../utility-pipeline/js/engine.mjs';
 
 const root = new URL('..', import.meta.url).pathname;
 const origin = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin;
@@ -60,6 +60,15 @@ test('strategies: the Risk/Reward figures match the engine for each archetype', 
       const m = ironCondor({ putLong: e.putLong, putShort: e.putShort, callShort: e.callShort, callLong: e.callLong, netCredit: e.netCredit });
       assert.ok(has(h, m.max_profit) && has(h, m.max_loss), `${r.slug}: condor max profit/loss`);
       assert.ok(h.includes('>' + m.lower_breakeven + '<') && h.includes('>' + m.upper_breakeven + '<'), `${r.slug}: condor breakevens`);
+    } else if (r.archetype === 'long-straddle') {
+      const m = longStraddle({ strike: e.strike, debit: e.debit });
+      assert.ok(has(h, m.max_loss) && h.includes('>' + m.upper_breakeven + '<') && h.includes('>' + m.lower_breakeven + '<'), `${r.slug}: straddle`);
+    } else if (r.archetype === 'long-strangle') {
+      const m = longStrangle({ callStrike: e.callStrike, putStrike: e.putStrike, debit: e.debit });
+      assert.ok(has(h, m.max_loss) && h.includes('>' + m.upper_breakeven + '<') && h.includes('>' + m.lower_breakeven + '<'), `${r.slug}: strangle`);
+    } else if (r.archetype === 'protective-collar') {
+      const m = collar({ spot: e.spot, putStrike: e.putStrike, callStrike: e.callStrike, netCost: e.netCost });
+      assert.ok(has(h, m.max_gain_from_here) && has(h, m.max_loss_from_here) && h.includes('>' + m.floor + '<'), `${r.slug}: collar`);
     } else if (r.archetype === 'wheel') {
       const put = cashSecuredPut(e.put.strike, e.put.premium, 1);
       assert.ok(has(h, put.max_profit) && has(h, put.effective_buy_price), `${r.slug}: wheel put leg`);

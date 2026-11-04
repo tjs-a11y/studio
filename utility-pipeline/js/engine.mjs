@@ -262,3 +262,54 @@ export function ironCondor({ putLong, putShort, callShort, callLong, netCredit, 
     profit_zone: `${r2(ps - credit)} to ${r2(cs + credit)}`,
   };
 }
+
+/**
+ * Long straddle: buy a call and a put at the same strike for a net debit (per share).
+ * Loss is capped at the debit; profit opens up once price moves past either breakeven.
+ */
+export function longStraddle({ strike, debit, contracts = 1 } = {}) {
+  const k = parseFloat(strike), d = parseFloat(debit), n = parseInt(contracts, 10);
+  if (![k, d].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || k <= 0 || d <= 0) {
+    return { status: 'ERROR', message: 'longStraddle needs a positive strike, a positive net debit, and contracts >= 1.' };
+  }
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'long-straddle',
+    net_debit: r2(d * 100 * n), max_loss: r2(d * 100 * n),
+    upper_breakeven: r2(k + d), lower_breakeven: r2(k - d),
+    profit_beyond_breakevens: 'open-ended (large moves either way)',
+  };
+}
+
+/**
+ * Long strangle: buy an OTM call (callStrike) and an OTM put (putStrike) for a net debit.
+ */
+export function longStrangle({ callStrike, putStrike, debit, contracts = 1 } = {}) {
+  const kc = parseFloat(callStrike), kp = parseFloat(putStrike), d = parseFloat(debit), n = parseInt(contracts, 10);
+  if (![kc, kp, d].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || !(kp < kc) || d <= 0) {
+    return { status: 'ERROR', message: 'longStrangle needs putStrike < callStrike, a positive net debit, and contracts >= 1.' };
+  }
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'long-strangle',
+    net_debit: r2(d * 100 * n), max_loss: r2(d * 100 * n),
+    upper_breakeven: r2(kc + d), lower_breakeven: r2(kp - d),
+    profit_beyond_breakevens: 'open-ended (large moves either way)',
+  };
+}
+
+/**
+ * Protective collar on stock held at the current price `spot`: buy a put (floor) and sell a
+ * call (cap) for a net cost per share (0 for a zero-cost collar). Figures are from the CURRENT price.
+ */
+export function collar({ spot, putStrike, callStrike, netCost = 0, shares = 100 } = {}) {
+  const s = parseFloat(spot), kp = parseFloat(putStrike), kc = parseFloat(callStrike), c = parseFloat(netCost), n = parseInt(shares, 10);
+  if (![s, kp, kc, c].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || !(kp <= s && s <= kc)) {
+    return { status: 'ERROR', message: 'collar needs putStrike <= spot <= callStrike, a numeric net cost, and shares >= 1.' };
+  }
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'protective-collar',
+    floor: r2(kp), cap: r2(kc),
+    max_gain_from_here: r2((kc - s - c) * n),
+    max_loss_from_here: r2((s - kp + c) * n),
+    net_cost: r2(c * n),
+  };
+}

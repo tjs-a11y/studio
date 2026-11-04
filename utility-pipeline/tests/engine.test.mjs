@@ -182,3 +182,31 @@ test('ironCondor: credit, capped loss, two breakevens', () => {
   assert.equal(r.upper_breakeven, 107);
   assert.equal(ironCondor({ putLong: 95, putShort: 90, callShort: 105, callLong: 110, netCredit: 2 }).status, 'ERROR'); // bad ordering
 });
+
+// ---- volatility / protective strategies ----
+import { longStraddle, longStrangle, collar } from '../js/engine.mjs';
+
+test('longStraddle: loss capped at debit, two breakevens', () => {
+  const r = longStraddle({ strike: 225, debit: 22 });
+  assert.equal(r.max_loss, 2200);
+  assert.equal(r.upper_breakeven, 247);
+  assert.equal(r.lower_breakeven, 203);
+  assert.equal(longStraddle({ strike: 225, debit: 0 }).status, 'ERROR');
+});
+
+test('longStrangle: breakevens outside both strikes', () => {
+  const r = longStrangle({ callStrike: 455, putStrike: 425, debit: 8.5 });
+  assert.equal(r.max_loss, 850);
+  assert.equal(r.upper_breakeven, 463.5);
+  assert.equal(r.lower_breakeven, 416.5);
+  assert.equal(longStrangle({ callStrike: 425, putStrike: 455, debit: 8.5 }).status, 'ERROR');
+});
+
+test('collar: floor, cap and bounded P/L from the current price', () => {
+  const r = collar({ spot: 190, putStrike: 180, callStrike: 205, netCost: 0 });
+  assert.equal(r.floor, 180);
+  assert.equal(r.cap, 205);
+  assert.equal(r.max_gain_from_here, 1500);
+  assert.equal(r.max_loss_from_here, 1000);
+  assert.equal(collar({ spot: 190, putStrike: 200, callStrike: 205 }).status, 'ERROR'); // put above spot
+});

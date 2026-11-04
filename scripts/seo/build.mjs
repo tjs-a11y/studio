@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { calculateSpreadMath, spreadPayoff, coveredCall, cashSecuredPut, ironCondor } from '../../utility-pipeline/js/engine.mjs';
+import { calculateSpreadMath, spreadPayoff, coveredCall, cashSecuredPut, ironCondor, longStraddle, longStrangle, collar } from '../../utility-pipeline/js/engine.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const origin = JSON.parse(readFileSync(join(root, 'site.config.json'), 'utf8')).origin;
@@ -116,6 +116,37 @@ function compute(row) {
       calcNote: 'An iron condor is two vertical spreads; you can model each leg in the on-device spread calculator.',
     };
   }
+  if (row.archetype === 'long-straddle') {
+    const m = longStraddle({ strike: e.strike, debit: e.debit });
+    return {
+      setup: [['Strike (call + put)', e.strike], ['Net debit / share', money(e.debit)]],
+      reward: [['Net debit (maximum loss)', money(m.max_loss)], ['Upper breakeven', m.upper_breakeven], ['Lower breakeven', m.lower_breakeven], ['Beyond the breakevens', 'Open-ended, either direction']],
+      calcNote: 'A straddle is a long-volatility position; the on-device calculator covers vertical spreads, so the figures above are the straddle formulas for this illustrative setup.',
+    };
+  }
+  if (row.archetype === 'long-strangle') {
+    const m = longStrangle({ callStrike: e.callStrike, putStrike: e.putStrike, debit: e.debit });
+    return {
+      setup: [['Call strike (bought)', e.callStrike], ['Put strike (bought)', e.putStrike], ['Net debit / share', money(e.debit)]],
+      reward: [['Net debit (maximum loss)', money(m.max_loss)], ['Upper breakeven', m.upper_breakeven], ['Lower breakeven', m.lower_breakeven], ['Beyond the breakevens', 'Open-ended, either direction']],
+      calcNote: 'A strangle is a long-volatility position; the on-device calculator covers vertical spreads, so the figures above are the strangle formulas for this illustrative setup.',
+    };
+  }
+  if (row.archetype === 'protective-collar') {
+    const m = collar({ spot: e.spot, putStrike: e.putStrike, callStrike: e.callStrike, netCost: e.netCost });
+    return {
+      setup: [['Shares, at the current price', money(e.spot)], ['Protective put (floor)', e.putStrike], ['Covered call (cap)', e.callStrike], ['Net cost / share', money(e.netCost)]],
+      reward: [['Downside floor', m.floor], ['Upside cap', m.cap], ['Most you can gain from here', money(m.max_gain_from_here)], ['Most you can lose from here', money(m.max_loss_from_here)]],
+      calcNote: 'Figures are measured from the current price. The on-device calculator covers vertical spreads; the collar figures above use this illustrative setup.',
+    };
+  }
+  if (row.archetype === 'structural') {
+    return {
+      setup: (row.setup_rows || []).map((x) => [x[0], x[1]]),
+      reward: null,
+      calcNote: 'This structure has two expirations, so its profit at the near-term expiry depends on implied volatility and the longer-dated option’s remaining value — which needs an options-pricing model, not a fixed payoff. Model each leg’s risk separately; no single max-profit number is shown here on purpose.',
+    };
+  }
   if (row.archetype === 'wheel') {
     const put = cashSecuredPut(e.put.strike, e.put.premium, 1);
     const call = coveredCall(e.call.stock, e.call.strike, e.call.premium, 100);
@@ -128,7 +159,7 @@ function compute(row) {
   return { setup: [], reward: [], calcNote: '' };
 }
 
-function statTable(pairs) { return pairs.map(([k, v]) => `<div class="stat"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join(''); }
+function statTable(pairs) { return (pairs || []).map(([k, v]) => `<div class="stat"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join(''); }
 
 function page(row) {
   const c = compute(row);
@@ -191,6 +222,7 @@ function hub() {
 ${group('Vertical spreads', rows.filter((r) => r.archetype === 'vertical'))}
 ${group('Income strategies', rows.filter((r) => ['covered-call', 'cash-secured-put'].includes(r.archetype)))}
 ${group('Range &amp; multi-leg', rows.filter((r) => r.archetype === 'iron-condor'))}
+${group('Volatility &amp; protection', rows.filter((r) => ['long-straddle', 'long-strangle', 'protective-collar'].includes(r.archetype)))}
 ${group('Strategy loops', edu)}
 <div class="card" style="background:var(--soft);margin-top:16px"><h2>Run your own numbers</h2><p>The Quickwell spread calculator works any vertical on your device — nothing uploaded. Plus adds a payoff-at-expiration table.</p><p><a class="btn" href="${CALC}?ref=strategies-hub">Open the calculator →</a></p></div>`;
   return shell({ title, desc, path: '/strategies/', jsonld, body });

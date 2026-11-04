@@ -55,7 +55,31 @@
       "legs": "Sell a put spread below the market and a call spread above it, both for credit. The two spreads define a range you want price to stay inside.",
       "summary": "An iron condor is a defined-risk, range-bound credit strategy: you profit if the underlying finishes between your short strikes, and both wings cap your loss.",
       "when": "Broad index options (like SPY or QQQ) are a common home for condors: they are diversified so they gap less than single stocks, and they are deeply liquid, which keeps the four legs' costs tight. Traders put them on when they expect calm and want to be paid for it.",
-      "risk": "Maximum loss is larger than the credit and happens if the index runs past either short strike. A condor is short volatility — a sharp move either way, or a volatility spike, works against you, and there are two sides that can be breached." }
+      "risk": "Maximum loss is larger than the credit and happens if the index runs past either short strike. A condor is short volatility — a sharp move either way, or a volatility spike, works against you, and there are two sides that can be breached." },
+
+    { "slug": "long-straddle-biotech-fda-catalysts", "name": "Long Straddle for Biotech Catalysts", "strategy": "Long Straddle", "archetype": "long-straddle", "context": "Biotech FDA Decisions",
+      "outlook": "You expect a large move but not the direction — typical around a binary event.",
+      "example": { "strike": 225, "debit": 22.0 },
+      "legs": "Buy a call and a put at the same strike and expiration. You pay for both, so the position starts at a loss and needs a move to pay off.",
+      "summary": "A long straddle is a bet on a big move in either direction. You buy a call and a put at the same strike; your loss is capped at what you paid, and you profit only if the stock moves far enough past either breakeven.",
+      "when": "Traders use straddles ahead of binary events such as a biotech FDA decision, where the outcome can gap the stock sharply up or down. The catch is that options are priced for that uncertainty — implied volatility is high going in, so you pay up, and if the move is smaller than priced, or the decision slips, the position loses value.",
+      "risk": "Maximum loss is the full premium paid, realized if the stock sits near the strike at expiration. High implied volatility before the event means you're paying up; a muted reaction or a delay works against you quickly." },
+
+    { "slug": "trading-strangles-fed-rate-decisions", "name": "Long Strangle for Macro Rate Decisions", "strategy": "Long Strangle", "archetype": "long-strangle", "context": "Macro Rate Decisions",
+      "outlook": "You expect a large move but not the direction, and want a cheaper entry than a straddle.",
+      "example": { "callStrike": 455, "putStrike": 425, "debit": 8.5 },
+      "legs": "Buy an out-of-the-money call and an out-of-the-money put. Both cost less than at-the-money options, so the entry is cheaper — but the underlying has to travel further to pay off.",
+      "summary": "A long strangle is a lower-cost cousin of the straddle: you buy an OTM call and an OTM put, pay less, and need a bigger move to profit. Loss is capped at the premium paid.",
+      "when": "Used around macro events — an FOMC rate decision or a major data release — that can reprice a whole index. The lower entry cost is the appeal; the trade-off is wider breakevens, so a moderate move can still lose.",
+      "risk": "Maximum loss is the premium paid, in the zone between the two strikes. Because both options start out-of-the-money, a move that isn't big enough leaves both worthless." },
+
+    { "slug": "protective-collar-options-hedging-strategy", "name": "Protective Collar for Unrealized Gains", "strategy": "Protective Collar", "archetype": "protective-collar", "context": "Protecting Unrealized Gains",
+      "outlook": "You hold a stock that has risen, want to protect the gain, and will accept a capped upside to pay for it.",
+      "example": { "spot": 190, "putStrike": 180, "callStrike": 205, "netCost": 0 },
+      "legs": "Own the shares, buy a protective put below the price for a floor, and sell a call above the price whose premium pays for the put — often a 'zero-cost collar.'",
+      "summary": "A protective collar brackets a stock you own: a bought put sets a floor you can't fall below, and a sold call caps your upside and pays for the put. It locks a range around an unrealized gain without selling the shares.",
+      "when": "Long-term holders use collars to defend a large unrealized gain through an uncertain stretch without triggering a taxable sale. The cost is your upside — if the stock keeps running, you're capped at the call strike.",
+      "risk": "Below the put strike you're protected, but the cap means you forgo gains above the call strike, and a sold call can be assigned early, costing an upcoming dividend. 'Zero-cost' refers to the option premiums netting out, not to giving up nothing — you're trading away upside." }
   ],
   "educational": [
     { "slug": "wheel-strategy", "name": "The Wheel Strategy", "strategy": "Wheel Strategy", "archetype": "wheel", "context": "Blue-Chip Stocks",
