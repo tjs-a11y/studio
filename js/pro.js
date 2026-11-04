@@ -9,7 +9,7 @@
     set(t, v) { try { localStorage.setItem(KEY(t), JSON.stringify(v)); } catch (e) { /* private mode: Pro lasts this visit */ } },
     clear(t) { try { localStorage.removeItem(KEY(t)); } catch (e) { /* ignore */ } },
   };
-  let tool = null, onChange = () => {}, state = { pro: false, plan: null };
+  let tool = null, onChange = () => {}, state = { pro: false, plan: null }, telemetry = true;
   // Visible banner so nothing fails silently (in-app browsers suppress alert() AND scripted redirects).
   function banner(msg, opts) {
     opts = opts || {};
@@ -32,11 +32,7 @@
   // Where did this visitor come from? Links we share carry ?ref=<channel>; it rides along to checkout so
   // we learn which channels bring buyers. A short label only: no cookies, no tracking across sites.
   const REF = 'studio-ref';
-  try {
-    const r = new URL(location.href).searchParams.get('ref');
-    if (r && /^[a-z0-9_-]{1,40}$/i.test(r)) sessionStorage.setItem(REF, r.toLowerCase());
-  } catch (e) { /* storage blocked: no attribution */ }
-  const ref = () => { try { return sessionStorage.getItem(REF) || ''; } catch (e) { return ''; } };
+  const ref = () => { if (!telemetry) return ''; try { return sessionStorage.getItem(REF) || ''; } catch (e) { return ''; } };
   const set = (s) => { state = s; onChange(state); };
   async function check() {
     const url = new URL(location.href);
@@ -120,15 +116,21 @@
   }
   window.Studio = {
     init(opts) {
-      tool = opts.tool; onChange = opts.onChange || onChange;
-      // Aggregate tool-open count only; do not send page URLs, content, or visitor identifiers.
-      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'open' }), keepalive: true }).catch(function () {}); } catch (e) {}
+      tool = opts.tool; onChange = opts.onChange || onChange; telemetry = opts.telemetry !== false;
+      if (telemetry) {
+        try {
+          const r = new URL(location.href).searchParams.get('ref');
+          if (r && /^[a-z0-9_-]{1,40}$/i.test(r)) sessionStorage.setItem(REF, r.toLowerCase());
+        } catch (e) { /* storage blocked: no attribution */ }
+        // Aggregate tool-open count only; never send page URLs or user content.
+        try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'open' }), keepalive: true }).catch(function () {}); } catch (e) {}
+      }
       return check();
     },
     showUpgradeModal(config) { showUpgradeModal(config); },
     upgrade(plan, interval) {
       // Anonymous purchase-intent ping (survives the redirect); never blocks checkout.
-      try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'upgrade', plan: plan }), keepalive: true }).catch(function () {}); } catch (e) {}
+      if (telemetry) { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'upgrade', plan: plan }), keepalive: true }).catch(function () {}); } catch (e) {} }
       return post('/api/checkout', { tool, plan, interval, ref: ref() });
     },
     manage() {
