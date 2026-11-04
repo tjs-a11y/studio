@@ -293,6 +293,12 @@
           "id": "family"
         }
       ]
+    },
+    {
+      "id": "utility-pipeline",
+      "name": "Open-Source Utility Pipeline Matrix",
+      "tagline": "Normalize CSV data into a spreadsheet-ready matrix and calculate educational options spread arithmetic in your browser. CSV content stays on your device.",
+      "plans": []
     }
   ]
 }
