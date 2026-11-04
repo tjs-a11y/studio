@@ -67,18 +67,21 @@ const DISCLAIMER =
  */
 export function calculateSpreadMath(shortStrike, longStrike, opts = {}) {
   if (typeof opts === 'number') opts = { contracts: opts };
-  const short = parseFloat(shortStrike);
-  const long = parseFloat(longStrike);
-  const contracts = parseInt(opts.contracts ?? 1, 10);
+  const short = Number(shortStrike);
+  const long = Number(longStrike);
+  const contracts = Number(opts.contracts ?? 1);
   const optionType = String(opts.optionType || '').toLowerCase();
   const hasPremium = opts.netPremiumPerShare !== undefined && opts.netPremiumPerShare !== null && opts.netPremiumPerShare !== '';
-  const net = hasPremium ? parseFloat(opts.netPremiumPerShare) : null;
+  const net = hasPremium ? Number(opts.netPremiumPerShare) : null;
 
-  if (!Number.isFinite(short) || !Number.isFinite(long) || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
+  if (!Number.isFinite(short) || short <= 0 || !Number.isFinite(long) || long <= 0 || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
     return { status: 'ERROR', message: 'Invalid numeric inputs: strikes, contracts (>=1) and any premium must be numbers.' };
   }
 
   const width = Math.abs(short - long);
+  if (width === 0 || (hasPremium && Math.abs(net) > width)) {
+    return { status: 'ERROR', message: 'Invalid spread: strikes must differ, and the absolute net premium cannot exceed the spread width.' };
+  }
   const mult = 100 * contracts;
   const out = {
     status: 'SUCCESS',
