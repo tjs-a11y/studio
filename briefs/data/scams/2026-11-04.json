@@ -1,0 +1,137 @@
+{
+ "brief": {
+  "subject": "FTC: Imposter scams still the top reported fraud",
+  "headline": "FTC Removes 19 Fake FTC Websites as Imposter Scams Lead Fraud Reports",
+  "dek": "The FTC reports progress against impersonators, warns health plan marketers during open enrollment, and targets hidden business fees.",
+  "lede": "Imposter scams remain the top reported fraud category, and the FTC says it has removed 19 websites pretending to be the agency itself.",
+  "sections": [
+   {
+    "heading": "Fake FTC websites pulled offline",
+    "bullets": [
+     "19 websites posing as the FTC have been taken down, proving scammers will even impersonate fraud fighters.",
+     "More than $80 million in consumer redress has come from enforcement since the Impersonation Rule took effect in 2024.",
+     "Imposter scams lead all reported fraud, so treat unexpected contacts claiming government authority with suspicion."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Open enrollment: watch health plan pitches",
+    "bullets": [
+     "25 companies selling or generating leads for health plans received FTC warning letters during open enrollment.",
+     "The letters flag deceptive or unfair claims about plan terms that likely break laws the agency enforces.",
+     "More letters will follow on a rolling basis, so confirm coverage details before signing up."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Small businesses hit by hidden fees",
+    "bullets": [
+     "$600,000 settlement: Riverside Payments and an affiliate allegedly promised savings and blocked 'risk-free' cancellations.",
+     "The FTC and several states sued Toast Inc., alleging hidden fees and deceptive subscription and cancellation practices aimed at restaurants.",
+     "Small business owners should review processing contracts for cancellation terms and unexpected charges."
+    ],
+    "source_ids": [
+     "S1",
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "FTC removes 19 fake FTC websites, warns 25 health plan marketers during open enrollment, and acts on hidden fees aimed at small businesses."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-04T18:38:32.178Z",
+  "date": "2026-11-04",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC, Washington Take Action Against Payment Processor for Deceiving Small Businesses About Costs and Cancellation Terms",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-washington-take-action-against-payment-processor-deceiving-small-businesses-about-costs",
+    "published": "2026-11-02T12:00:00.000Z",
+    "snippet": "Payment processor Riverside Payments Inc., its affiliate Cascade Equipment Leasing LLC and their operators will pay $600,000 to resolve Federal Trade Commission and Washington state allegations that the firms deceived small businesses by falsely promising to save them money on payment processing services and making it nearly impossible to cancel despite offering “risk-free” cancellation. Small bus",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Staff Warn Marketers of Healthcare Plans and Lead Generators Not to Deceive Consumers about the Terms of the Advertised Plans",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-staff-warn-marketers-healthcare-plans-lead-generators-not-deceive-consumers-about-terms",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "With open enrollment season for healthcare plans in progress, Federal Trade Commission staff are sending warning letters to 25 companies that market or generate sales leads for healthcare plans. The letters put the companies on notice about deceptive or unfair claims that likely violate laws enforced by the Commission. The agency expects to send additional letters on a rolling basis. The letters a",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Highlights Efforts to Combat Imposter Scams and Protect Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-highlights-efforts-combat-imposter-scams-protect-consumers",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission released the following highlights from the agency’s ongoing efforts to combat impersonation scams and protect consumers, including removal of 19 FTC-imposter websites and enforcement actions resulting in more than $80 million in consumer redress since the FTC’s Impersonation Rule went into effect in 2024. “Imposter scams have been the top reported fraud category over t",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC and States Take Action Against Toast Inc. over Hidden and Unauthorized Fees, Deceptive Subscription and Cancellation Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/10/ftc-states-take-action-against-toast-inc-over-hidden-unauthorized-fees-deceptive-subscription",
+    "published": "2026-10-29T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission, the People of the State of California by and through the Los Angeles County Counsel and San Francisco City Attorney, and the Attorneys General of the States of Colorado, Florida, Illinois, Iowa, Nebraska, Oklahoma and Utah, filed a lawsuit today against Toast Inc. and affiliated entities, alleging the restaurant software and fintech company saddles restaurants with hi",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 4
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": [
+   {
+    "source": "CISA news",
+    "message": "Status code 403"
+   }
+  ]
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "anchor",
+   "signal": "match-shield",
+   "evidence": [
+    "S3"
+   ]
+  }
+ ]
+}
