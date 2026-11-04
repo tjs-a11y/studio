@@ -114,3 +114,63 @@ export function calculateSpreadMath(shortStrike, longStrike, opts = {}) {
   if (out.breakeven === null) out.breakeven_note = 'Set opts.optionType to "put" or "call" for the breakeven price.';
   return out;
 }
+
+/* ------------------------------------------------------------------ Plus extras
+   Pure, on-device, deterministic. Gated to Quickwell Plus in the UI; the free
+   tiers above stay free. Kept here (not in the page) so they are unit-tested. */
+
+/**
+ * Keep only chosen columns (in the given order) and optionally drop duplicate rows.
+ * @param {object} result  the object returned by normalizeOnDevicePayload
+ * @param {object} [opts]
+ * @param {string[]} [opts.columns]  header keys to keep, in order (default: all, original order)
+ * @param {boolean} [opts.dedupe]    drop rows identical across the kept columns
+ */
+export function projectRows(result, opts = {}) {
+  const rows = (result && Array.isArray(result.matrix)) ? result.matrix : [];
+  const all = rows.length ? Object.keys(rows[0].record_data) : [];
+  const cols = Array.isArray(opts.columns) && opts.columns.length ? opts.columns.filter((c) => all.includes(c)) : all;
+  const seen = new Set();
+  const matrix = [];
+  for (const row of rows) {
+    const record = {};
+    cols.forEach((c) => { record[c] = row.record_data[c] ?? null; });
+    if (opts.dedupe) {
+      const key = cols.map((c) => String(record[c] ?? '')).join('\u0001');
+      if (seen.has(key)) continue;
+      seen.add(key);
+    }
+    matrix.push({ local_sequence_index: matrix.length, record_data: record });
+  }
+  return { status: matrix.length ? 'SUCCESS' : 'EMPTY', columns: cols, total_records_processed: matrix.length, matrix };
+}
+
+/**
+ * Profit/loss of a vertical spread at expiration across a range of underlying prices.
+ * Requires the net premium. Pure payoff math; no advice.
+ * perShareP/L(S) = netPremium − payoff(short leg, S) + payoff(long leg, S)
+ * @returns {{status:string, informational_disclaimer:string, points:Array<{price:number,profit:number}>}}
+ */
+export function spreadPayoff(shortStrike, longStrike, opts = {}) {
+  const short = parseFloat(shortStrike);
+  const long = parseFloat(longStrike);
+  const contracts = parseInt(opts.contracts ?? 1, 10);
+  const net = parseFloat(opts.netPremiumPerShare);
+  const type = String(opts.optionType || '').toLowerCase();
+  const steps = Math.max(3, Math.min(25, parseInt(opts.steps ?? 9, 10)));
+  if (!Number.isFinite(short) || !Number.isFinite(long) || !Number.isFinite(net) || !Number.isInteger(contracts) || contracts < 1 || (type !== 'put' && type !== 'call')) {
+    return { status: 'ERROR', message: 'spreadPayoff needs numeric strikes, a net premium, contracts (>=1) and optionType "put"/"call".' };
+  }
+  const width = Math.abs(short - long) || 1;
+  const lo = Math.max(0, Math.min(short, long) - width);
+  const hi = Math.max(short, long) + width;
+  const leg = (K, S) => (type === 'call' ? Math.max(S - K, 0) : Math.max(K - S, 0));
+  const mult = 100 * contracts;
+  const points = [];
+  for (let i = 0; i < steps; i++) {
+    const S = r2(lo + ((hi - lo) * i) / (steps - 1));
+    const perShare = net - leg(short, S) + leg(long, S);
+    points.push({ price: S, profit: r2(perShare * mult) });
+  }
+  return { status: 'SUCCESS', informational_disclaimer: DISCLAIMER, points };
+}

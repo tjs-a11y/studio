@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeOnDevicePayload, calculateSpreadMath } from '../js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, projectRows, spreadPayoff } from '../js/engine.mjs';
 
 test('normalizer: basic rows keyed by lower-cased headers', () => {
   const r = normalizeOnDevicePayload('Date,Amount,Memo\n2026-11-04,12.50,Coffee\n2026-11-05,-9,Refund');
@@ -85,4 +85,51 @@ test('spread: invalid inputs return ERROR, never NaN math', () => {
   assert.equal(calculateSpreadMath('x', 95).status, 'ERROR');
   assert.equal(calculateSpreadMath(100, 95, { contracts: 0 }).status, 'ERROR');
   assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 'oops', optionType: 'put' }).status, 'ERROR');
+});
+
+// ---- Plus extras ----
+test('projectRows: keep/reorder chosen columns', () => {
+  const src = normalizeOnDevicePayload('a,b,c\n1,2,3\n4,5,6');
+  const r = projectRows(src, { columns: ['c', 'a'] });
+  assert.deepEqual(r.columns, ['c', 'a']);
+  assert.deepEqual(r.matrix[0].record_data, { c: '3', a: '1' });
+  assert.equal(r.total_records_processed, 2);
+});
+
+test('projectRows: dedupe on the kept columns only', () => {
+  const src = normalizeOnDevicePayload('a,b\nx,1\nx,2\nx,2');
+  assert.equal(projectRows(src, { columns: ['a'], dedupe: true }).total_records_processed, 1); // all "x"
+  assert.equal(projectRows(src, { dedupe: true }).total_records_processed, 2);                 // x,2 appears twice
+  assert.equal(projectRows(src).total_records_processed, 3);                                    // no dedupe
+});
+
+test('projectRows: ignores unknown column names, reindexes', () => {
+  const src = normalizeOnDevicePayload('a,b\n1,2');
+  const r = projectRows(src, { columns: ['b', 'nope'] });
+  assert.deepEqual(r.columns, ['b']);
+  assert.equal(r.matrix[0].local_sequence_index, 0);
+});
+
+test('spreadPayoff: put credit spread caps at max profit and max loss', () => {
+  // short 100 put / long 95 put, credit 1.50 -> max profit 150, max loss -350, BE 98.50
+  const r = spreadPayoff(100, 95, { netPremiumPerShare: 1.5, optionType: 'put', steps: 9 });
+  assert.equal(r.status, 'SUCCESS');
+  const profits = r.points.map((p) => p.profit);
+  assert.equal(Math.max(...profits), 150);   // above both strikes
+  assert.equal(Math.min(...profits), -350);  // below both strikes
+  // at/above the short strike the whole spread expires worthless -> full credit
+  assert.equal(r.points.find((p) => p.price >= 100).profit, 150);
+});
+
+test('spreadPayoff: call debit spread profit/loss extremes are right', () => {
+  // long 50 call / short 55 call, debit 2.00 -> max loss -200, max profit 300
+  const r = spreadPayoff(55, 50, { netPremiumPerShare: -2, optionType: 'call', steps: 9 });
+  const profits = r.points.map((p) => p.profit);
+  assert.equal(Math.min(...profits), -200);
+  assert.equal(Math.max(...profits), 300);
+});
+
+test('spreadPayoff: needs a premium and an option type', () => {
+  assert.equal(spreadPayoff(100, 95, { optionType: 'put' }).status, 'ERROR');
+  assert.equal(spreadPayoff(100, 95, { netPremiumPerShare: 1.5 }).status, 'ERROR');
 });

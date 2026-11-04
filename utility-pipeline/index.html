@@ -68,6 +68,14 @@
   .stat:last-child { border-bottom:0; } .stat b { font-variant-numeric:tabular-nums; }
   .callout { border-radius:12px; padding:12px 14px; margin:10px 0; font-size:.93rem; } .callout.warn { background:var(--soft-amber); } .callout.info { background:var(--soft); }
   .pill { font-size:.74rem; font-weight:700; padding:2px 9px; border-radius:999px; background:var(--chip); color:var(--muted); }
+  .pill.plus { background:var(--soft); color:var(--accent); }
+  .plusbox { border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line)); border-radius:12px; padding:14px; margin:12px 0 0; background:var(--soft); }
+  .plusbox h3 { margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  .lock { text-align:center; } .lock p { margin:6px 0 10px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .chip { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:var(--card); font-size:.86rem; cursor:pointer; }
+  .chip[aria-pressed=true] { border-color:var(--accent); background:var(--card); font-weight:600; }
+  .chip input { accent-color:var(--accent); }
   details { border-top:1px solid var(--line); padding:12px 0; } details:first-of-type { border-top:0; } summary { cursor:pointer; font-weight:600; min-height:28px; }
   footer { margin-top:36px; font-size:.88rem; color:var(--muted); }
   .qw-also { margin-top:32px; font-size:.88rem; color:var(--muted); } .qw-also > p { margin:0 0 8px; font-weight:600; }
@@ -115,6 +123,21 @@
       </div>
       <div class="tablewrap"><table id="csvTable"><thead></thead><tbody></tbody></table></div>
       <p class="note" id="csvMore"></p>
+
+      <div class="plusbox" id="csvPlus" hidden>
+        <h3>Column tools <span class="pill plus">Plus</span></h3>
+        <div class="lock" data-plus="lock" hidden>
+          <p class="note">With Quickwell Plus you can keep and reorder only the columns you want, and drop duplicate rows — then download the trimmed file.</p>
+          <a class="btn" href="/plus/?ref=utility-pipeline-csv">Unlock with Quickwell Plus</a>
+        </div>
+        <div data-plus="on" hidden>
+          <p class="note">Pick the columns to keep (click to toggle; they download in this order).</p>
+          <div class="chips" id="colChips" role="group" aria-label="Columns to keep"></div>
+          <label class="row small" style="margin:8px 0"><input type="checkbox" id="dedupe"> Drop duplicate rows (by the kept columns)</label>
+          <div class="row"><button type="button" class="small" id="dlProjJson">Download trimmed JSON</button><button type="button" class="small ghost" id="dlProjCsv">Download trimmed CSV</button></div>
+          <p class="note" id="projMsg" style="margin-top:6px"></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -134,6 +157,19 @@
     <div id="sOut" hidden>
       <div id="sStats"></div>
       <p class="note" id="sNote" style="margin-top:10px"></p>
+
+      <div class="plusbox" id="sPlus">
+        <h3>Payoff at expiration <span class="pill plus">Plus</span></h3>
+        <div class="lock" data-plus="lock" hidden>
+          <p class="note">Quickwell Plus adds a profit/loss table across a range of prices at expiration, so you can see the whole shape of the trade — not just the three numbers.</p>
+          <a class="btn" href="/plus/?ref=utility-pipeline-spread">Unlock with Quickwell Plus</a>
+        </div>
+        <div data-plus="on" hidden>
+          <p class="note">Profit or loss at expiration, by the price of the underlying (needs the net premium above).</p>
+          <div class="tablewrap"><table id="payTable"><thead><tr><th>Underlying price</th><th>Profit / loss</th></tr></thead><tbody></tbody></table></div>
+          <p class="note" id="payMsg"></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -164,12 +200,27 @@
   </footer>
 </main>
 
+<script src="/js/pro.js"></script>
 <script type="module">
-import { normalizeOnDevicePayload, calculateSpreadMath } from './js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, projectRows, spreadPayoff } from './js/engine.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (v) => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let lastResult = null;
+let pro = false;
+let keepCols = [];
+
+// Quickwell Plus gating. Free tiers above always work; these panels unlock with Plus.
+function paintPlus() {
+  for (const box of [$('csvPlus'), $('sPlus')]) {
+    if (!box) continue;
+    box.querySelector('[data-plus="lock"]').hidden = pro;
+    box.querySelector('[data-plus="on"]').hidden = !pro;
+  }
+  if (pro && !$('sOut').hidden) renderPayoff();
+}
+try { if (window.Studio) window.Studio.init({ tool: 'utility-pipeline', onChange: (s) => { pro = !!(s && s.pro); paintPlus(); } }); } catch (e) {}
+paintPlus();
 
 // ---------- CSV tidier ----------
 const SAMPLE = 'date,description,amount\n2026-11-01,"Grocers, Inc.","1,204.55"\n2026-11-02,Refund,-19.99\n2026-11-03,"Coffee ""to go""",4.25';
@@ -193,7 +244,28 @@ function renderCsv() {
     '<tr>' + headers.map((h) => '<td>' + esc(r.record_data[h]) + '</td>').join('') + '</tr>').join('');
   $('csvMore').textContent = res.matrix.length > 20 ? ('Showing the first 20 of ' + res.matrix.length + ' records. Downloads include all of them.') : '';
   $('csvOut').hidden = false;
+  keepCols = headers.slice();
+  buildChips(headers);
+  $('csvPlus').hidden = false;
 }
+
+function buildChips(headers) {
+  const wrap = $('colChips');
+  wrap.innerHTML = '';
+  headers.forEach((h) => {
+    const on = keepCols.includes(h);
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.textContent = (on ? (keepCols.indexOf(h) + 1) + ' · ' : '') + h;
+    b.addEventListener('click', () => {
+      const i = keepCols.indexOf(h);
+      if (i >= 0) keepCols.splice(i, 1); else keepCols.push(h);
+      buildChips(headers);
+    });
+    wrap.appendChild(b);
+  });
+}
+function projected() { return projectRows(lastResult, { columns: keepCols, dedupe: $('dedupe').checked }); }
 
 function download(name, type, data) {
   const url = URL.createObjectURL(new Blob([data], { type }));
@@ -208,9 +280,11 @@ function toCleanCsv(res) {
 
 $('csvRun').addEventListener('click', renderCsv);
 $('csvSample').addEventListener('click', () => { $('csvIn').value = SAMPLE; renderCsv(); });
-$('csvClear').addEventListener('click', () => { $('csvIn').value = ''; $('csvOut').hidden = true; $('csvMsg').textContent = ''; });
+$('csvClear').addEventListener('click', () => { $('csvIn').value = ''; $('csvOut').hidden = true; $('csvPlus').hidden = true; $('csvMsg').textContent = ''; lastResult = null; });
 $('dlJson').addEventListener('click', () => { if (lastResult) download('tidied.json', 'application/json', JSON.stringify(lastResult.matrix, null, 2)); });
 $('dlCsv').addEventListener('click', () => { if (lastResult) download('tidied.csv', 'text/csv', toCleanCsv(lastResult)); });
+$('dlProjJson').addEventListener('click', () => { if (!lastResult) return; const p = projected(); $('projMsg').textContent = p.total_records_processed + ' records · ' + p.columns.length + ' columns'; download('trimmed.json', 'application/json', JSON.stringify(p.matrix, null, 2)); });
+$('dlProjCsv').addEventListener('click', () => { if (!lastResult) return; const p = projected(); if (!p.matrix.length) { $('projMsg').textContent = 'Keep at least one column.'; return; } $('projMsg').textContent = p.total_records_processed + ' records · ' + p.columns.length + ' columns'; download('trimmed.csv', 'text/csv', toCleanCsv(p)); });
 
 const drop = $('drop');
 ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
@@ -242,6 +316,18 @@ function renderSpread() {
   $('sStats').innerHTML = rows.map(([k, v]) => '<div class="stat"><span>' + esc(k) + '</span><b>' + esc(v) + '</b></div>').join('');
   $('sNote').textContent = m.note || m.breakeven_note || m.informational_disclaimer;
   $('sOut').hidden = false;
+  renderPayoff();
+}
+const signed = (n) => (n < 0 ? '-$' : '$') + Math.abs(Number(n)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function renderPayoff() {
+  if (!pro) return;
+  const body = $('payTable').querySelector('tbody');
+  const prem = $('sPrem').value.trim();
+  if (prem === '' || !$('sType').value) { body.innerHTML = ''; $('payMsg').textContent = 'Add the net premium and option type above to see the payoff table.'; return; }
+  const r = spreadPayoff($('sShort').value, $('sLong').value, { contracts: $('sQty').value || 1, optionType: $('sType').value, netPremiumPerShare: prem, steps: 9 });
+  if (r.status !== 'SUCCESS') { body.innerHTML = ''; $('payMsg').textContent = r.message || ''; return; }
+  body.innerHTML = r.points.map((p) => '<tr><td>' + p.price + '</td><td>' + signed(p.profit) + '</td></tr>').join('');
+  $('payMsg').textContent = '';
 }
 $('sRun').addEventListener('click', renderSpread);
 </script>
