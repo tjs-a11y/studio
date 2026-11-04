@@ -1,10 +1,10 @@
 // Adds the shared Voiceflow overlay to every public static HTML page at build time.
 // This keeps the assistant site-wide even as new tool and SEO pages are added.
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const skip = new Set(['.git', 'node_modules', '.vercel', '.next', 'dist', 'coverage']);
 const excluded = (rel) => rel.startsWith('deals/admin/') || rel.startsWith('play/embed/');
 const tag = '<script defer src="/js/voiceflow.js"></script>';
@@ -17,17 +17,18 @@ function walk(dir) {
       if (!skip.has(entry.name)) walk(join(dir, entry.name));
       continue;
     }
-    if (!entry.isFile() || !/\.html?$/i.test(entry.name)) continue;
+    if (!entry.isFile() || !/\\.html?$/i.test(entry.name)) continue;
     const file = join(dir, entry.name);
-    const rel = relative(root, file).replaceAll('\\\\', '/');
+    const rel = relative(root, file).split(sep).join('/');
     if (excluded(rel)) { skipped++; continue; }
     const html = readFileSync(file, 'utf8');
     if (html.includes('/js/voiceflow.js')) { skipped++; continue; }
-    if (!/<\\/head>/i.test(html)) { console.warn('Voiceflow injection skipped (no head):', rel); continue; }
-    writeFileSync(file, html.replace(/<\\/head>/i, \`\${tag}\\n</head>\`));
+    const headEnd = html.toLowerCase().lastIndexOf('</head>');
+    if (headEnd < 0) { console.warn('Voiceflow injection skipped (no head): ' + rel); continue; }
+    writeFileSync(file, html.slice(0, headEnd) + tag + '\\n' + html.slice(headEnd));
     changed++;
   }
 }
 
 walk(root);
-console.log(\`Voiceflow site-wide injection: \${changed} HTML pages updated; \${skipped} skipped or already configured.\`);
+console.log('Voiceflow site-wide injection: ' + changed + ' HTML pages updated; ' + skipped + ' skipped or already configured.');
