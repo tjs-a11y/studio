@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<title>Leveraged Covered Calls on Dividend Stocks: How It Works</title>
+<meta name="description" content="Leveraged Covered Calls on Dividend Stocks: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/leveraged-covered-calls-dividend-stocks/">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Leveraged Covered Calls on Dividend Stocks: How It Works"><meta property="og:description" content="Leveraged Covered Calls on Dividend Stocks: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/leveraged-covered-calls-dividend-stocks/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Leveraged Covered Calls on Dividend Stocks: How It Works">
+<meta name="twitter:description" content="Leveraged Covered Calls on Dividend Stocks: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Leveraged Covered Calls on Dividend Stocks: How It Works","description":"Leveraged Covered Calls on Dividend Stocks: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.","inLanguage":"en","url":"https://quickwell.app/strategies/leveraged-covered-calls-dividend-stocks/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Poor Man's Covered Call options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Leveraged Covered Calls on Dividend Stocks","item":"https://quickwell.app/strategies/leveraged-covered-calls-dividend-stocks/"}]}]}</script>
+<style>
+*{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
+html{-webkit-text-size-adjust:100%}body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+main{max-width:760px;margin:0 auto;padding:8px 16px 64px}.top{max-width:760px;margin:0 auto;padding:12px 16px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.brand{font-weight:700;color:var(--ink);text-decoration:none}.brand span{color:var(--muted);font-weight:500}
+h1{font-size:clamp(1.8rem,6vw,2.5rem);margin:0;letter-spacing:-.03em;line-height:1.08}h2{font-size:1.2rem;margin:0 0 6px;letter-spacing:-.01em}
+p{margin:0 0 10px}.muted{color:var(--muted)}.note{font-size:.88rem;color:var(--muted)}a{color:var(--accent);overflow-wrap:anywhere}
+.crumb{font-size:.85rem;color:var(--muted);margin:10px 0 2px}.crumb a{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:var(--shadow);min-width:0}
+.pillar{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:11px 18px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;min-height:46px}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}.stat b{font-variant-numeric:tabular-nums;text-align:right}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left}th{background:var(--chip);font-weight:600}td{font-variant-numeric:tabular-nums}
+.pill{font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.tag{font-size:.78rem;padding:2px 10px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.grid a{display:block;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;color:var(--ink)}
+.grid a:hover{border-color:var(--accent)}.grid b{display:block;color:var(--ink);margin-bottom:3px}.grid span{color:var(--muted);font-size:.9rem}
+ol{margin:6px 0;padding-left:20px}ol li{margin:4px 0}
+footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
+<main>
+
+<p class="crumb"><a href="/strategies/">Options strategies</a> › Leveraged Covered Calls on Dividend Stocks</p>
+<h1>Leveraged Covered Calls on Dividend Stocks</h1>
+<p style="margin:8px 0 0"><span class="pill">Poor Man's Covered Call</span> <span class="tag">Dividend-Growth Stocks</span></p>
+<div class="card"><p>A LEAPS-backed covered call amplifies income on a dividend grower for less capital — but because an option holder collects no dividend, the premium you harvest has to outweigh the dividend you give up.</p><p class="note">You want covered-call income on a dividend name without paying full share price — and you accept giving up the dividend.</p></div>
+
+<div class="card">
+  <p class="pillar">Pillar 1 · Illustrative setup</p>
+  <h2>How this example is built</h2>
+  <p>Run a poor man's covered call on a dividend stock: a long-dated deep-ITM call stands in for the shares, and you sell near-term calls against it.</p>
+  <p class="note">Illustrative inputs only — not live prices.</p>
+  <div class="stat"><span>Long LEAPS call strike (deep ITM)</span><b>95</b></div><div class="stat"><span>Short call strike</span><b>120</b></div><div class="stat"><span>Illustrative LEAPS cost</span><b>~$24.50 / share</b></div><div class="stat"><span>Dividend you forgo</span><b>~$3.80 / year</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-leveraged-covered-calls-dividend-stocks">Open the on-device calculator →</a></p>
+  <p class="note">This structure has two expirations, so its profit at the near-term expiry depends on implied volatility and the longer-dated option’s remaining value — which needs an options-pricing model, not a fixed payoff. Model each leg’s risk separately; no single max-profit number is shown here on purpose.</p>
+</div>
+<div class="card">
+  <p class="pillar">Pillar 2 · When &amp; why</p>
+  <h2>Why this fits Dividend-Growth Stocks</h2>
+  <p>The key comparison is explicit: the call premiums you collect versus the cash dividend you'd have received owning the shares. It can be more capital-efficient, but only if the premium income clears the forgone dividend plus the LEAPS's time decay.</p>
+  <p>Same two-expiration caveat as any poor man's covered call — the payoff at the short expiry depends on the LEAPS's remaining value, set by volatility and time. And you give up the dividend, which is often the whole reason to hold the stock.</p>
+</div>
+<div class="card" style="background:var(--soft)">
+  <p class="pillar">Pillar 3 · Risk / reward</p>
+  <h2>Why there is no single payoff number here</h2>
+  <p>This structure has two expirations, so its profit at the near-term expiry depends on implied volatility and the longer-dated option’s remaining value — which needs an options-pricing model, not a fixed payoff. Model each leg’s risk separately; no single max-profit number is shown here on purpose.</p>
+</div>
+<footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
+<p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>
+</main>
+</body>
+</html>

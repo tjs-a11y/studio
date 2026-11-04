@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
+<title>The Options Wheel on Core Holdings: Payoff and Max Loss</title>
+<meta name="description" content="The Options Wheel on Core Holdings: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/wheel-strategy-long-term-investing/">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="The Options Wheel on Core Holdings: Payoff and Max Loss"><meta property="og:description" content="The Options Wheel on Core Holdings: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/wheel-strategy-long-term-investing/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Options Wheel on Core Holdings: Payoff and Max Loss">
+<meta name="twitter:description" content="The Options Wheel on Core Holdings: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"The Options Wheel on Core Holdings: Payoff and Max Loss","description":"The Options Wheel on Core Holdings: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/wheel-strategy-long-term-investing/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Wheel Strategy options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"The Options Wheel on Core Holdings","item":"https://quickwell.app/strategies/wheel-strategy-long-term-investing/"}]}]}</script>
+<style>
+*{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
+html{-webkit-text-size-adjust:100%}body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+main{max-width:760px;margin:0 auto;padding:8px 16px 64px}.top{max-width:760px;margin:0 auto;padding:12px 16px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.brand{font-weight:700;color:var(--ink);text-decoration:none}.brand span{color:var(--muted);font-weight:500}
+h1{font-size:clamp(1.8rem,6vw,2.5rem);margin:0;letter-spacing:-.03em;line-height:1.08}h2{font-size:1.2rem;margin:0 0 6px;letter-spacing:-.01em}
+p{margin:0 0 10px}.muted{color:var(--muted)}.note{font-size:.88rem;color:var(--muted)}a{color:var(--accent);overflow-wrap:anywhere}
+.crumb{font-size:.85rem;color:var(--muted);margin:10px 0 2px}.crumb a{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:var(--shadow);min-width:0}
+.pillar{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:11px 18px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;min-height:46px}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}.stat b{font-variant-numeric:tabular-nums;text-align:right}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left}th{background:var(--chip);font-weight:600}td{font-variant-numeric:tabular-nums}
+.pill{font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.tag{font-size:.78rem;padding:2px 10px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.grid a{display:block;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;color:var(--ink)}
+.grid a:hover{border-color:var(--accent)}.grid b{display:block;color:var(--ink);margin-bottom:3px}.grid span{color:var(--muted);font-size:.9rem}
+ol{margin:6px 0;padding-left:20px}ol li{margin:4px 0}
+footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
+</style>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
+<main>
+
+<p class="crumb"><a href="/strategies/">Options strategies</a> › The Options Wheel on Core Holdings</p>
+<h1>The Options Wheel on Core Holdings</h1>
+<p style="margin:8px 0 0"><span class="pill">Wheel Strategy</span> <span class="tag">Long-Term Core Holdings</span></p>
+<div class="card"><p>The Wheel is a loop, not a single trade. You sell cash-secured puts on a core holding you'd happily own; if assigned, you sell covered calls against the shares; if they're called away, you start again.</p><p class="note">A repeatable income loop on a high-conviction stock you're happy to own for the long run.</p></div>
+<div class="card"><p class="pillar">How the loop runs</p><ol><li>Sell a cash-secured put at a strike you'd buy at. Collect the premium.</li><li>If it expires worthless, repeat. If assigned, you own the shares at an effective price of strike minus premium.</li><li>Sell a covered call against the shares. Collect that premium too.</li><li>If the call expires worthless, sell another. If the shares are called away, return to step one.</li></ol></div>
+<div class="card">
+  <p class="pillar">Pillar 1 · Illustrative setup</p>
+  <h2>How this example is built</h2>
+  <p></p>
+  <p class="note">Illustrative inputs only — not live prices.</p>
+  <div class="stat"><span>Step 1 — sell put</span><b>120 strike, $3.50 credit</b></div><div class="stat"><span>Step 2 — if assigned, sell call</span><b>130 strike, $4.30 credit</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-wheel-strategy-long-term-investing">Open the on-device calculator →</a></p>
+  <p class="note">The Wheel is a loop, not one payoff — model the put leg and the call leg separately in the on-device calculator.</p>
+</div>
+<div class="card">
+  <p class="pillar">Pillar 2 · When &amp; why</p>
+  <h2>Why this fits Long-Term Core Holdings</h2>
+  <p>Run on long-term core holdings you genuinely want to own, because every step assumes you may end up holding the stock. Over multiple cycles the stacked premiums lower your effective cost basis — the number worth tracking across assignments.</p>
+  <p>You carry full ownership risk whenever you hold the shares; a serious decline is the Wheel's real danger, and no amount of premium fully offsets it. Assignments also create tax lots worth tracking. Only run it on stock you'd hold through a drawdown.</p>
+</div>
+<div class="card" style="background:var(--soft)">
+  <p class="pillar">Pillar 3 · Risk / reward</p>
+  <h2>The defined-risk math</h2>
+  <div class="stat"><span>Put premium (step 1)</span><b>$350.00</b></div><div class="stat"><span>Effective buy price if assigned</span><b>$116.50</b></div><div class="stat"><span>Call premium (step 2)</span><b>$1,780.00</b></div><div class="stat"><span>Called away at</span><b>130</b></div>
+  
+</div>
+<footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
+<p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>
+</main>
+</body>
+</html>

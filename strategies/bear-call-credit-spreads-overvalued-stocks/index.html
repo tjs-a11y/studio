@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
-<title>Cash-Secured Put on High-Volatility Stocks</title>
-<meta name="description" content="Cash-Secured Put on High-Volatility Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<link rel="canonical" href="https://quickwell.app/strategies/cash-secured-put-high-volatility-stocks/">
+<title>Bear Call Spreads on Overvalued Stocks: Payoff and Max Loss</title>
+<meta name="description" content="Bear Call Spreads on Overvalued Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/bear-call-credit-spreads-overvalued-stocks/">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
-<meta property="og:title" content="Cash-Secured Put on High-Volatility Stocks"><meta property="og:description" content="Cash-Secured Put on High-Volatility Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<meta property="og:url" content="https://quickwell.app/strategies/cash-secured-put-high-volatility-stocks/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:title" content="Bear Call Spreads on Overvalued Stocks: Payoff and Max Loss"><meta property="og:description" content="Bear Call Spreads on Overvalued Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/bear-call-credit-spreads-overvalued-stocks/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cash-Secured Put on High-Volatility Stocks">
-<meta name="twitter:description" content="Cash-Secured Put on High-Volatility Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Bear Call Spreads on Overvalued Stocks: Payoff and Max Loss">
+<meta name="twitter:description" content="Bear Call Spreads on Overvalued Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
 <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Cash-Secured Put on High-Volatility Stocks","description":"Cash-Secured Put on High-Volatility Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/cash-secured-put-high-volatility-stocks/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Cash-Secured Put options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Cash-Secured Put on High-Volatility Stocks","item":"https://quickwell.app/strategies/cash-secured-put-high-volatility-stocks/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Bear Call Spreads on Overvalued Stocks: Payoff and Max Loss","description":"Bear Call Spreads on Overvalued Stocks: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/bear-call-credit-spreads-overvalued-stocks/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Credit Spread options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Bear Call Spreads on Overvalued Stocks","item":"https://quickwell.app/strategies/bear-call-credit-spreads-overvalued-stocks/"}]}]}</script>
 <style>
 *{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
@@ -43,31 +43,31 @@ footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 <div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
 <main>
 
-<p class="crumb"><a href="/strategies/">Options strategies</a> › Cash-Secured Put on High-Volatility Stocks</p>
-<h1>Cash-Secured Put on High-Volatility Stocks</h1>
-<p style="margin:8px 0 0"><span class="pill">Cash-Secured Put</span> <span class="tag">High-Volatility Stocks</span></p>
-<div class="card"><p>A cash-secured put pays you to wait for a price you'd buy at. Your effective purchase price, if assigned, is the strike minus the premium you collected.</p><p class="note">You would be happy to own the stock lower, and you set aside the cash to buy it.</p></div>
+<p class="crumb"><a href="/strategies/">Options strategies</a> › Bear Call Spreads on Overvalued Stocks</p>
+<h1>Bear Call Spreads on Overvalued Stocks</h1>
+<p style="margin:8px 0 0"><span class="pill">Credit Spread</span> <span class="tag">Overvalued Growth Sectors</span></p>
+<div class="card"><p>A bear call spread sells premium above an overextended stock with a capped loss: you profit if it stays below your short strike, and the long call caps the damage on a squeeze.</p><p class="note">You expect an overextended stock to stall or fall, staying below a resistance level.</p></div>
 
 <div class="card">
   <p class="pillar">Pillar 1 · Illustrative setup</p>
   <h2>How this example is built</h2>
-  <p>Sell one put and hold strike x 100 in cash per contract. If assigned you buy the shares at the strike; if not, you keep the premium.</p>
+  <p>Sell an out-of-the-money call and buy a higher call, opening for a net credit above the price.</p>
   <p class="note">Illustrative inputs only — not live prices.</p>
-  <div class="stat"><span>Put strike (sold)</span><b>50</b></div><div class="stat"><span>Premium / share</span><b>$2.00</b></div><div class="stat"><span>Cash secured</span><b>$5,000.00</b></div>
-  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-cash-secured-put-high-volatility-stocks">Open the on-device calculator →</a></p>
-  <p class="note">The on-device calculator covers vertical spreads; the figures above are the cash-secured-put formulas for this illustrative setup.</p>
+  <div class="stat"><span>Short strike (sold)</span><b>920</b></div><div class="stat"><span>Long strike (bought)</span><b>940</b></div><div class="stat"><span>Type</span><b>Calls</b></div><div class="stat"><span>Net credit / share</span><b>$4.50</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-bear-call-credit-spreads-overvalued-stocks">Open the on-device calculator →</a></p>
+  <p class="note">Open the on-device calculator and enter your own strikes and premium — this exact math, with a Plus payoff table.</p>
 </div>
 <div class="card">
   <p class="pillar">Pillar 2 · When &amp; why</p>
-  <h2>Why this fits High-Volatility Stocks</h2>
-  <p>Higher-volatility names carry fatter premiums, so the income for standing ready to buy is larger — which is exactly why traders use cash-secured puts there. The flip side: higher volatility means a real chance you are assigned well above where the stock then trades.</p>
-  <p>Your downside is almost the same as owning the stock outright: if it falls hard you are assigned at the strike and ride it down from there, cushioned only by the premium. 'Cash-secured' means the cash is set aside, not that the trade is low-risk.</p>
+  <h2>Why this fits Overvalued Growth Sectors</h2>
+  <p>The short strike goes above a resistance ceiling on a high-beta name. The defining risk is a short squeeze — these stocks can rip higher violently — so the long call that caps the loss is the whole point.</p>
+  <p>Maximum loss is the width minus the credit, realized above the higher strike. Overvalued does not mean it can't go higher first; a squeeze is exactly what breaches this spread.</p>
 </div>
 <div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
   <h2>The defined-risk math</h2>
-  <div class="stat"><span>Maximum profit</span><b>$200.00</b></div><div class="stat"><span>Effective buy price (if assigned)</span><b>$48.00</b></div><div class="stat"><span>Breakeven</span><b>48</b></div><div class="stat"><span>Worst case (to zero)</span><b>$4,800.00</b></div>
-  
+  <div class="stat"><span>Spread width</span><b>20 ($2,000.00)</b></div><div class="stat"><span>Maximum profit</span><b>$450.00</b></div><div class="stat"><span>Maximum loss</span><b>$1,550.00</b></div><div class="stat"><span>Breakeven</span><b>924.5</b></div>
+  <div class="tablewrap"><table><thead><tr><th>Underlying price</th><th>Profit / loss</th></tr></thead><tbody><tr><td>900</td><td>$450.00</td></tr><tr><td>910</td><td>$450.00</td></tr><tr><td>920</td><td>$450.00</td></tr><tr><td>930</td><td>-$550.00</td></tr><tr><td>940</td><td>-$1,550.00</td></tr><tr><td>950</td><td>-$1,550.00</td></tr><tr><td>960</td><td>-$1,550.00</td></tr></tbody></table></div><p class="note">Profit/loss at expiration — the same numbers the Quickwell calculator produces.</p>
 </div>
 <footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
 <p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>

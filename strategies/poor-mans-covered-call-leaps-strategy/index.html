@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
-<title>The Wheel Strategy: Payoff, Max Loss, Breakeven</title>
-<meta name="description" content="The Wheel Strategy: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<link rel="canonical" href="https://quickwell.app/strategies/wheel-strategy/">
+<title>Poor Man's Covered Call with LEAPS: How It Works</title>
+<meta name="description" content="Poor Man's Covered Call with LEAPS: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/poor-mans-covered-call-leaps-strategy/">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
-<meta property="og:title" content="The Wheel Strategy: Payoff, Max Loss, Breakeven"><meta property="og:description" content="The Wheel Strategy: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<meta property="og:url" content="https://quickwell.app/strategies/wheel-strategy/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:title" content="Poor Man's Covered Call with LEAPS: How It Works"><meta property="og:description" content="Poor Man's Covered Call with LEAPS: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/poor-mans-covered-call-leaps-strategy/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Wheel Strategy: Payoff, Max Loss, Breakeven">
-<meta name="twitter:description" content="The Wheel Strategy: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Poor Man's Covered Call with LEAPS: How It Works">
+<meta name="twitter:description" content="Poor Man's Covered Call with LEAPS: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
 <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"The Wheel Strategy: Payoff, Max Loss, Breakeven","description":"The Wheel Strategy: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/wheel-strategy/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Wheel Strategy options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"The Wheel Strategy","item":"https://quickwell.app/strategies/wheel-strategy/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Poor Man's Covered Call with LEAPS: How It Works","description":"Poor Man's Covered Call with LEAPS: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.","inLanguage":"en","url":"https://quickwell.app/strategies/poor-mans-covered-call-leaps-strategy/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Poor Man's Covered Call options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Poor Man's Covered Call with LEAPS","item":"https://quickwell.app/strategies/poor-mans-covered-call-leaps-strategy/"}]}]}</script>
 <style>
 *{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
@@ -43,31 +43,30 @@ footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 <div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
 <main>
 
-<p class="crumb"><a href="/strategies/">Options strategies</a> › The Wheel Strategy</p>
-<h1>The Wheel Strategy</h1>
-<p style="margin:8px 0 0"><span class="pill">Wheel Strategy</span> <span class="tag">Blue-Chip Stocks</span></p>
-<div class="card"><p>The Wheel is not a single trade with one payoff — it is a loop. You sell cash-secured puts on a stock you'd be happy to own; if you're assigned, you then sell covered calls against those shares; if they're called away, you start again selling puts.</p><p class="note">A repeatable income loop on a stock you are willing to own.</p></div>
-<div class="card"><p class="pillar">How the loop runs</p><ol><li>Sell a cash-secured put on a stock you want to own at the strike. Collect the premium.</li><li>If the put expires worthless, keep the premium and repeat. If you're assigned, you now own the shares at an effective price of strike minus premium.</li><li>Sell a covered call against the shares you now hold. Collect that premium too.</li><li>If the call expires worthless, keep the premium and sell another. If the shares are called away, you've sold at the strike — go back to step one.</li></ol></div>
+<p class="crumb"><a href="/strategies/">Options strategies</a> › Poor Man's Covered Call with LEAPS</p>
+<h1>Poor Man's Covered Call with LEAPS</h1>
+<p style="margin:8px 0 0"><span class="pill">Poor Man's Covered Call</span> <span class="tag">High-Conviction LEAPS</span></p>
+<div class="card"><p>A poor man's covered call replaces the stock in a covered call with a long-dated deep-ITM call, cutting the capital outlay sharply while still letting you sell calls for income.</p><p class="note">You're bullish long-term but want stock-like exposure for a fraction of the cost.</p></div>
+
 <div class="card">
   <p class="pillar">Pillar 1 · Illustrative setup</p>
   <h2>How this example is built</h2>
-  <p></p>
+  <p>Buy a deep in-the-money, long-dated call (a LEAPS) to stand in for 100 shares, then sell near-term out-of-the-money calls against it, month after month.</p>
   <p class="note">Illustrative inputs only — not live prices.</p>
-  <div class="stat"><span>Step 1 — sell put</span><b>50 strike, $2.00 credit</b></div><div class="stat"><span>Step 2 — if assigned, sell call</span><b>55 strike, $1.50 credit</b></div>
-  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-wheel-strategy">Open the on-device calculator →</a></p>
-  <p class="note">The Wheel is a loop, not one payoff — model the put leg and the call leg separately in the on-device calculator.</p>
+  <div class="stat"><span>Long LEAPS call strike (deep ITM)</span><b>400, ~18 months out</b></div><div class="stat"><span>Short near-term call strike</span><b>505</b></div><div class="stat"><span>Illustrative cost to open</span><b>~$98 / share</b></div><div class="stat"><span>vs. buying 100 shares</span><b>~$480 / share</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-poor-mans-covered-call-leaps-strategy">Open the on-device calculator →</a></p>
+  <p class="note">This structure has two expirations, so its profit at the near-term expiry depends on implied volatility and the longer-dated option’s remaining value — which needs an options-pricing model, not a fixed payoff. Model each leg’s risk separately; no single max-profit number is shown here on purpose.</p>
 </div>
 <div class="card">
   <p class="pillar">Pillar 2 · When &amp; why</p>
-  <h2>Why this fits Blue-Chip Stocks</h2>
-  <p>Income traders run the Wheel on blue-chip names they genuinely want to hold, because every step assumes you may end up owning the stock. It stacks put and call premiums over time.</p>
-  <p>You carry full ownership risk whenever you hold the shares: a serious decline in the underlying is the Wheel's real danger, and no amount of premium fully offsets it. Only run it on stock you'd be comfortable owning through a drawdown.</p>
+  <h2>Why this fits High-Conviction LEAPS</h2>
+  <p>Traders pick a long call with a high delta (around 0.80+) so it tracks the stock closely, and structure the short call so its premium more than covers the long call's time decay. The appeal is capital efficiency; the cost is that the LEAPS has no dividend and does decay.</p>
+  <p>This is a two-expiration, diagonal position, so the profit at the short call's expiration depends on the LEAPS's remaining value — which is set by implied volatility and time, not a fixed formula. Your capital at risk is the LEAPS premium; a sharp drop can hurt a leveraged position more than owning shares outright.</p>
 </div>
 <div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
-  <h2>The defined-risk math</h2>
-  <div class="stat"><span>Put premium (step 1)</span><b>$200.00</b></div><div class="stat"><span>Effective buy price if assigned</span><b>$48.00</b></div><div class="stat"><span>Call premium (step 2)</span><b>$650.00</b></div><div class="stat"><span>Called away at</span><b>55</b></div>
-  
+  <h2>Why there is no single payoff number here</h2>
+  <p>This structure has two expirations, so its profit at the near-term expiry depends on implied volatility and the longer-dated option’s remaining value — which needs an options-pricing model, not a fixed payoff. Model each leg’s risk separately; no single max-profit number is shown here on purpose.</p>
 </div>
 <footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
 <p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>

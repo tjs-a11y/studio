@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
-<title>Iron Condor on Index Options: Payoff, Max Loss, Breakeven</title>
-<meta name="description" content="Iron Condor on Index Options: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<link rel="canonical" href="https://quickwell.app/strategies/iron-condor-index-options/">
+<title>The Options Wheel on Liquid ETFs: Payoff and Max Loss</title>
+<meta name="description" content="The Options Wheel on Liquid ETFs: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/options-wheel-strategy-liquid-etfs/">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
-<meta property="og:title" content="Iron Condor on Index Options: Payoff, Max Loss, Breakeven"><meta property="og:description" content="Iron Condor on Index Options: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<meta property="og:url" content="https://quickwell.app/strategies/iron-condor-index-options/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:title" content="The Options Wheel on Liquid ETFs: Payoff and Max Loss"><meta property="og:description" content="The Options Wheel on Liquid ETFs: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/options-wheel-strategy-liquid-etfs/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Iron Condor on Index Options: Payoff, Max Loss, Breakeven">
-<meta name="twitter:description" content="Iron Condor on Index Options: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Options Wheel on Liquid ETFs: Payoff and Max Loss">
+<meta name="twitter:description" content="The Options Wheel on Liquid ETFs: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
 <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Iron Condor on Index Options: Payoff, Max Loss, Breakeven","description":"Iron Condor on Index Options: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/iron-condor-index-options/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Iron Condor options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Iron Condor on Index Options","item":"https://quickwell.app/strategies/iron-condor-index-options/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"The Options Wheel on Liquid ETFs: Payoff and Max Loss","description":"The Options Wheel on Liquid ETFs: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/options-wheel-strategy-liquid-etfs/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Wheel Strategy options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"The Options Wheel on Liquid ETFs","item":"https://quickwell.app/strategies/options-wheel-strategy-liquid-etfs/"}]}]}</script>
 <style>
 *{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
@@ -43,30 +43,30 @@ footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 <div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
 <main>
 
-<p class="crumb"><a href="/strategies/">Options strategies</a> › Iron Condor on Index Options</p>
-<h1>Iron Condor on Index Options</h1>
-<p style="margin:8px 0 0"><span class="pill">Iron Condor</span> <span class="tag">Index Options (SPY / QQQ)</span></p>
-<div class="card"><p>An iron condor is a defined-risk, range-bound credit strategy: you profit if the underlying finishes between your short strikes, and both wings cap your loss.</p><p class="note">You expect the index to stay inside a range — neither a big rally nor a big drop.</p></div>
+<p class="crumb"><a href="/strategies/">Options strategies</a> › The Options Wheel on Liquid ETFs</p>
+<h1>The Options Wheel on Liquid ETFs</h1>
+<p style="margin:8px 0 0"><span class="pill">Wheel Strategy</span> <span class="tag">Liquid ETFs</span></p>
+<div class="card"><p>Running the Wheel on a highly liquid ETF trades the bigger premiums of single stocks for smoother behavior, tight bid-ask spreads and diversified exposure — easier to scale and roll.</p><p class="note">The same income loop, run on an ultra-liquid, broadly diversified fund.</p></div>
 
 <div class="card">
   <p class="pillar">Pillar 1 · Illustrative setup</p>
   <h2>How this example is built</h2>
-  <p>Sell a put spread below the market and a call spread above it, both for credit. The two spreads define a range you want price to stay inside.</p>
+  <p></p>
   <p class="note">Illustrative inputs only — not live prices.</p>
-  <div class="stat"><span>Put spread (sold)</span><b>95 / 90</b></div><div class="stat"><span>Call spread (sold)</span><b>105 / 110</b></div><div class="stat"><span>Net credit / share</span><b>$2.00</b></div>
-  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-iron-condor-index-options">Open the on-device calculator →</a></p>
-  <p class="note">An iron condor is two vertical spreads; you can model each leg in the on-device spread calculator.</p>
+  <div class="stat"><span>Step 1 — sell put</span><b>430 strike, $4.80 credit</b></div><div class="stat"><span>Step 2 — if assigned, sell call</span><b>445 strike, $4.60 credit</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-options-wheel-strategy-liquid-etfs">Open the on-device calculator →</a></p>
+  <p class="note">The Wheel is a loop, not one payoff — model the put leg and the call leg separately in the on-device calculator.</p>
 </div>
 <div class="card">
   <p class="pillar">Pillar 2 · When &amp; why</p>
-  <h2>Why this fits Index Options (SPY / QQQ)</h2>
-  <p>Broad index options (like SPY or QQQ) are a common home for condors: they are diversified so they gap less than single stocks, and they are deeply liquid, which keeps the four legs' costs tight. Traders put them on when they expect calm and want to be paid for it.</p>
-  <p>Maximum loss is larger than the credit and happens if the index runs past either short strike. A condor is short volatility — a sharp move either way, or a volatility spike, works against you, and there are two sides that can be breached.</p>
+  <h2>Why this fits Liquid ETFs</h2>
+  <p>Liquid ETFs fill at pennies-wide spreads, so you lose less to friction entering, rolling and scaling across many contracts. The smoother volatility profile means fewer gap shocks than single names, at the cost of smaller premiums.</p>
+  <p>A broad fund still falls in a market sell-off, and you're assigned into it — diversification removes company risk, not market risk. Premiums are thinner than on single stocks, so returns lean on consistency and turnover, not big individual credits.</p>
 </div>
 <div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
   <h2>The defined-risk math</h2>
-  <div class="stat"><span>Maximum profit</span><b>$200.00</b></div><div class="stat"><span>Maximum loss</span><b>$300.00</b></div><div class="stat"><span>Lower breakeven</span><b>93</b></div><div class="stat"><span>Upper breakeven</span><b>107</b></div><div class="stat"><span>Profit zone</span><b>93 to 107</b></div>
+  <div class="stat"><span>Put premium (step 1)</span><b>$480.00</b></div><div class="stat"><span>Effective buy price if assigned</span><b>$425.20</b></div><div class="stat"><span>Call premium (step 2)</span><b>$2,440.00</b></div><div class="stat"><span>Called away at</span><b>445</b></div>
   
 </div>
 <footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>

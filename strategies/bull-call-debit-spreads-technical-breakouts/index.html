@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
-<title>Bull Call Spread: Payoff, Max Loss, Breakeven</title>
-<meta name="description" content="Bull Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<link rel="canonical" href="https://quickwell.app/strategies/bull-call-spread/">
+<title>Bull Call Spreads on Breakouts: Payoff, Max Loss, Breakeven</title>
+<meta name="description" content="Bull Call Spreads on Breakouts: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/bull-call-debit-spreads-technical-breakouts/">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
-<meta property="og:title" content="Bull Call Spread: Payoff, Max Loss, Breakeven"><meta property="og:description" content="Bull Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<meta property="og:url" content="https://quickwell.app/strategies/bull-call-spread/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:title" content="Bull Call Spreads on Breakouts: Payoff, Max Loss, Breakeven"><meta property="og:description" content="Bull Call Spreads on Breakouts: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/bull-call-debit-spreads-technical-breakouts/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Bull Call Spread: Payoff, Max Loss, Breakeven">
-<meta name="twitter:description" content="Bull Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Bull Call Spreads on Breakouts: Payoff, Max Loss, Breakeven">
+<meta name="twitter:description" content="Bull Call Spreads on Breakouts: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
 <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Bull Call Spread: Payoff, Max Loss, Breakeven","description":"Bull Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/bull-call-spread/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Debit Spread options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Bull Call Spread","item":"https://quickwell.app/strategies/bull-call-spread/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Bull Call Spreads on Breakouts: Payoff, Max Loss, Breakeven","description":"Bull Call Spreads on Breakouts: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/bull-call-debit-spreads-technical-breakouts/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Debit Spread options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Bull Call Spreads on Breakouts","item":"https://quickwell.app/strategies/bull-call-debit-spreads-technical-breakouts/"}]}]}</script>
 <style>
 *{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
@@ -43,31 +43,31 @@ footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 <div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
 <main>
 
-<p class="crumb"><a href="/strategies/">Options strategies</a> › Bull Call Spread</p>
-<h1>Bull Call Spread</h1>
-<p style="margin:8px 0 0"><span class="pill">Debit Spread</span> <span class="tag">Bullish view</span></p>
-<div class="card"><p>A bull call spread is a defined-risk debit strategy for a bullish view — cheaper than an outright call, with profit capped at the higher strike.</p><p class="note">You expect the stock to rise toward or past the higher strike.</p></div>
+<p class="crumb"><a href="/strategies/">Options strategies</a> › Bull Call Spreads on Breakouts</p>
+<h1>Bull Call Spreads on Breakouts</h1>
+<p style="margin:8px 0 0"><span class="pill">Debit Spread</span> <span class="tag">Technical Breakouts</span></p>
+<div class="card"><p>A bull call spread backs a breakout with defined risk: cheaper than an outright call, with profit capped at the higher strike and loss limited to the debit if the breakout fails.</p><p class="note">You expect a stock breaking resistance to continue toward a target.</p></div>
 
 <div class="card">
   <p class="pillar">Pillar 1 · Illustrative setup</p>
   <h2>How this example is built</h2>
-  <p>Buy the lower-strike call and sell the higher-strike call in the same expiration, paying a net debit that caps the upside.</p>
+  <p>Buy a call near the breakout level and sell a higher call at your target, paying a net debit that caps the upside.</p>
   <p class="note">Illustrative inputs only — not live prices.</p>
-  <div class="stat"><span>Short strike (sold)</span><b>55</b></div><div class="stat"><span>Long strike (bought)</span><b>50</b></div><div class="stat"><span>Type</span><b>Calls</b></div><div class="stat"><span>Net debit / share</span><b>$2.00</b></div>
-  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-bull-call-spread">Open the on-device calculator →</a></p>
+  <div class="stat"><span>Short strike (sold)</span><b>160</b></div><div class="stat"><span>Long strike (bought)</span><b>150</b></div><div class="stat"><span>Type</span><b>Calls</b></div><div class="stat"><span>Net debit / share</span><b>$4.10</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-bull-call-debit-spreads-technical-breakouts">Open the on-device calculator →</a></p>
   <p class="note">Open the on-device calculator and enter your own strikes and premium — this exact math, with a Plus payoff table.</p>
 </div>
 <div class="card">
   <p class="pillar">Pillar 2 · When &amp; why</p>
-  <h2>Why this fits Bullish view</h2>
-  <p>Chosen when bullish but wanting to spend less than an outright call and comfortable capping the gain.</p>
-  <p>Maximum loss is the debit paid, below the lower strike. Time decay works against you.</p>
+  <h2>Why this fits Technical Breakouts</h2>
+  <p>The long strike sits near the breakout, the short strike near a technical target (a measured move or next resistance). Defining risk matters because breakouts fail and reverse often, trapping buyers — here the loss is fixed at the debit.</p>
+  <p>Maximum loss is the debit paid, if the stock falls back below the lower strike. Time decay works against the position, and a failed breakout is the classic way it loses.</p>
 </div>
 <div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
   <h2>The defined-risk math</h2>
-  <div class="stat"><span>Spread width</span><b>5 ($500.00)</b></div><div class="stat"><span>Maximum profit</span><b>$300.00</b></div><div class="stat"><span>Maximum loss</span><b>$200.00</b></div><div class="stat"><span>Breakeven</span><b>52</b></div>
-  <div class="tablewrap"><table><thead><tr><th>Underlying price</th><th>Profit / loss</th></tr></thead><tbody><tr><td>45</td><td>-$200.00</td></tr><tr><td>47.5</td><td>-$200.00</td></tr><tr><td>50</td><td>-$200.00</td></tr><tr><td>52.5</td><td>$50.00</td></tr><tr><td>55</td><td>$300.00</td></tr><tr><td>57.5</td><td>$300.00</td></tr><tr><td>60</td><td>$300.00</td></tr></tbody></table></div><p class="note">Profit/loss at expiration — the same numbers the Quickwell calculator produces.</p>
+  <div class="stat"><span>Spread width</span><b>10 ($1,000.00)</b></div><div class="stat"><span>Maximum profit</span><b>$590.00</b></div><div class="stat"><span>Maximum loss</span><b>$410.00</b></div><div class="stat"><span>Breakeven</span><b>154.1</b></div>
+  <div class="tablewrap"><table><thead><tr><th>Underlying price</th><th>Profit / loss</th></tr></thead><tbody><tr><td>140</td><td>-$410.00</td></tr><tr><td>145</td><td>-$410.00</td></tr><tr><td>150</td><td>-$410.00</td></tr><tr><td>155</td><td>$90.00</td></tr><tr><td>160</td><td>$590.00</td></tr><tr><td>165</td><td>$590.00</td></tr><tr><td>170</td><td>$590.00</td></tr></tbody></table></div><p class="note">Profit/loss at expiration — the same numbers the Quickwell calculator produces.</p>
 </div>
 <footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
 <p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>

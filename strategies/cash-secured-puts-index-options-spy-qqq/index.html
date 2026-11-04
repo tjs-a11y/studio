@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'">
-<title>Bear Call Spread: Payoff, Max Loss, Breakeven</title>
-<meta name="description" content="Bear Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<link rel="canonical" href="https://quickwell.app/strategies/bear-call-spread/">
+<title>Cash-Secured Puts on Range-Bound Indexes</title>
+<meta name="description" content="Cash-Secured Puts on Range-Bound Indexes: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<link rel="canonical" href="https://quickwell.app/strategies/cash-secured-puts-index-options-spy-qqq/">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Quickwell">
-<meta property="og:title" content="Bear Call Spread: Payoff, Max Loss, Breakeven"><meta property="og:description" content="Bear Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
-<meta property="og:url" content="https://quickwell.app/strategies/bear-call-spread/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
+<meta property="og:title" content="Cash-Secured Puts on Range-Bound Indexes"><meta property="og:description" content="Cash-Secured Puts on Range-Bound Indexes: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.">
+<meta property="og:url" content="https://quickwell.app/strategies/cash-secured-puts-index-options-spy-qqq/"><meta property="og:image" content="https://quickwell.app/strategies/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Bear Call Spread: Payoff, Max Loss, Breakeven">
-<meta name="twitter:description" content="Bear Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cash-Secured Puts on Range-Bound Indexes">
+<meta name="twitter:description" content="Cash-Secured Puts on Range-Bound Indexes: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice."><meta name="twitter:image" content="https://quickwell.app/strategies/og.png">
 <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M14 44l12-14 9 7 15-20' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Bear Call Spread: Payoff, Max Loss, Breakeven","description":"Bear Call Spread: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/bear-call-spread/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Credit Spread options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Bear Call Spread","item":"https://quickwell.app/strategies/bear-call-spread/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Cash-Secured Puts on Range-Bound Indexes","description":"Cash-Secured Puts on Range-Bound Indexes: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.","inLanguage":"en","url":"https://quickwell.app/strategies/cash-secured-puts-index-options-spy-qqq/","publisher":{"@id":"https://quickwell.app/#org"},"about":"Cash-Secured Put options strategy"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Options strategies","item":"https://quickwell.app/strategies/"},{"@type":"ListItem","position":2,"name":"Cash-Secured Puts on Range-Bound Indexes","item":"https://quickwell.app/strategies/cash-secured-puts-index-options-spy-qqq/"}]}]}</script>
 <style>
 *{box-sizing:border-box}:root{--bg:#f5f4ef;--ink:#14181a;--muted:#566069;--card:#fff;--line:#e1e0d8;--accent:#0f766e;--accent-ink:#fff;--soft:#e6f3f1;--chip:#eeefea;--shadow:0 1px 2px rgba(20,24,26,.06),0 6px 24px rgba(20,24,26,.05)}
 @media (prefers-color-scheme:dark){:root{--bg:#0f1413;--ink:#ecf0ef;--muted:#9aa6a4;--card:#171d1c;--line:#28302f;--accent:#4fd1c0;--accent-ink:#06211e;--soft:#12302c;--chip:#1f2725;--shadow:none}}
@@ -43,31 +43,31 @@ footer{margin-top:36px;font-size:.88rem;color:var(--muted)}
 <div class="top"><a class="brand" href="/">Quickwell <span>· Options strategies</span></a></div>
 <main>
 
-<p class="crumb"><a href="/strategies/">Options strategies</a> › Bear Call Spread</p>
-<h1>Bear Call Spread</h1>
-<p style="margin:8px 0 0"><span class="pill">Credit Spread</span> <span class="tag">Neutral-to-bearish view</span></p>
-<div class="card"><p>A bear call spread is the bearish mirror of the bull put spread: a defined-risk credit position that profits when the stock stays below your short strike.</p><p class="note">You expect the stock to stay below the lower strike through expiration.</p></div>
+<p class="crumb"><a href="/strategies/">Options strategies</a> › Cash-Secured Puts on Range-Bound Indexes</p>
+<h1>Cash-Secured Puts on Range-Bound Indexes</h1>
+<p style="margin:8px 0 0"><span class="pill">Cash-Secured Put</span> <span class="tag">Range-Bound Indexes</span></p>
+<div class="card"><p>Selling cash-secured puts on broad indexes collects time-decay income on the whole market, with none of the overnight gap risk of a single earnings report or lawsuit.</p><p class="note">You want steady premium income on the broad market without single-stock surprises.</p></div>
 
 <div class="card">
   <p class="pillar">Pillar 1 · Illustrative setup</p>
   <h2>How this example is built</h2>
-  <p>Sell the lower-strike call and buy the higher-strike call in the same expiration, opening for a net credit.</p>
+  <p>Sell puts on a broad index product and hold the collateral. Broad indexes diversify away single-company headline risk.</p>
   <p class="note">Illustrative inputs only — not live prices.</p>
-  <div class="stat"><span>Short strike (sold)</span><b>50</b></div><div class="stat"><span>Long strike (bought)</span><b>55</b></div><div class="stat"><span>Type</span><b>Calls</b></div><div class="stat"><span>Net credit / share</span><b>$1.00</b></div>
-  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-bear-call-spread">Open the on-device calculator →</a></p>
-  <p class="note">Open the on-device calculator and enter your own strikes and premium — this exact math, with a Plus payoff table.</p>
+  <div class="stat"><span>Put strike (sold)</span><b>495</b></div><div class="stat"><span>Premium / share</span><b>$5.10</b></div><div class="stat"><span>Cash secured</span><b>$49,500.00</b></div>
+  <p style="margin-top:14px"><a class="btn" href="/utility-pipeline/?ref=strategies-cash-secured-puts-index-options-spy-qqq">Open the on-device calculator →</a></p>
+  <p class="note">The on-device calculator covers vertical spreads; the figures above are the cash-secured-put formulas for this illustrative setup.</p>
 </div>
 <div class="card">
   <p class="pillar">Pillar 2 · When &amp; why</p>
-  <h2>Why this fits Neutral-to-bearish view</h2>
-  <p>Used when mildly bearish or neutral, to collect premium with a capped loss rather than shorting stock or selling a naked call.</p>
-  <p>Maximum loss (width minus credit) occurs above the higher strike. A strong rally is the risk.</p>
+  <h2>Why this fits Range-Bound Indexes</h2>
+  <p>Because an index rarely gaps the way one stock can, the focus shifts to turning the collateral over efficiently and choosing strikes with room below the range. It's an income approach for a market you expect to chop sideways, not rocket.</p>
+  <p>An index can still fall in a broad sell-off, and a short put goes in-the-money with it. The diversification removes company-specific shocks, not market risk; your collateral is committed the whole time.</p>
 </div>
 <div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
   <h2>The defined-risk math</h2>
-  <div class="stat"><span>Spread width</span><b>5 ($500.00)</b></div><div class="stat"><span>Maximum profit</span><b>$100.00</b></div><div class="stat"><span>Maximum loss</span><b>$400.00</b></div><div class="stat"><span>Breakeven</span><b>51</b></div>
-  <div class="tablewrap"><table><thead><tr><th>Underlying price</th><th>Profit / loss</th></tr></thead><tbody><tr><td>45</td><td>$100.00</td></tr><tr><td>47.5</td><td>$100.00</td></tr><tr><td>50</td><td>$100.00</td></tr><tr><td>52.5</td><td>-$150.00</td></tr><tr><td>55</td><td>-$400.00</td></tr><tr><td>57.5</td><td>-$400.00</td></tr><tr><td>60</td><td>-$400.00</td></tr></tbody></table></div><p class="note">Profit/loss at expiration — the same numbers the Quickwell calculator produces.</p>
+  <div class="stat"><span>Maximum profit</span><b>$510.00</b></div><div class="stat"><span>Effective buy price (if assigned)</span><b>$489.90</b></div><div class="stat"><span>Breakeven</span><b>489.9</b></div><div class="stat"><span>Worst case (to zero)</span><b>$48,990.00</b></div>
+  
 </div>
 <footer><p><b>Educational only — not financial advice.</b> Quickwell holds no funds and places no trades. Options involve risk, including the loss of the full amount at risk. Figures use clearly-labeled illustrative inputs, not live market prices.</p>
 <p><a href="/">More tools</a> · <a href="/utility-pipeline/">Spread calculator</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p></footer>

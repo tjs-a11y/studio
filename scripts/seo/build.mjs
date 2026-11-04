@@ -6,7 +6,7 @@
 // tested engine the Utility Pipeline tool uses, so pages can't disagree with it or invent numbers.
 // No live/real ticker data (no feed; fabrication is off-limits) — examples are clearly illustrative.
 //   node scripts/seo/build.mjs
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { calculateSpreadMath, spreadPayoff, coveredCall, cashSecuredPut, ironCondor, longStraddle, longStrangle, collar } from '../../utility-pipeline/js/engine.mjs';
@@ -163,11 +163,15 @@ function statTable(pairs) { return (pairs || []).map(([k, v]) => `<div class="st
 
 function page(row) {
   const c = compute(row);
+  const structural = row.archetype === 'structural';
+  const suffixes = structural
+    ? [': How It Works and the Risks', ': How It Works', ': The Setup and Risks']
+    : [': Payoff, Max Loss, Breakeven', ': Payoff and Max Loss', ': Max Loss and Breakeven'];
   let title = row.name; // names are unique; add the longest suffix that still fits 60 chars
-  for (const sfx of [': Payoff, Max Loss, Breakeven', ': Payoff and Max Loss', ': Max Loss and Breakeven']) {
-    if ((row.name + sfx).length <= 60) { title = row.name + sfx; break; }
-  }
-  const desc = `${row.name}: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.`;
+  for (const sfx of suffixes) { if ((row.name + sfx).length <= 60) { title = row.name + sfx; break; } }
+  const desc = structural
+    ? `${row.name}: how this two-expiration strategy works, the setup and the risks. Educational, not financial advice.`
+    : `${row.name}: how it works, max loss, breakeven and a free on-device options calculator. Educational, not advice.`;
   const jsonld = { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', headline: title, description: desc, inLanguage: 'en', url: origin + `/strategies/${row.slug}/`, publisher: { '@id': origin + '/#org' }, about: `${row.strategy} options strategy` },
     { '@type': 'BreadcrumbList', itemListElement: [
@@ -198,12 +202,16 @@ ${steps}
   <p>${esc(row.when)}</p>
   <p>${esc(row.risk)}</p>
 </div>
-<div class="card" style="background:var(--soft)">
+${c.reward ? `<div class="card" style="background:var(--soft)">
   <p class="pillar">Pillar 3 · Risk / reward</p>
   <h2>The defined-risk math</h2>
   ${statTable(c.reward)}
   ${payoff}
-</div>`;
+</div>` : `<div class="card" style="background:var(--soft)">
+  <p class="pillar">Pillar 3 · Risk / reward</p>
+  <h2>Why there is no single payoff number here</h2>
+  <p>${esc(c.calcNote)}</p>
+</div>`}`;
   return shell({ title, desc, path: `/strategies/${row.slug}/`, jsonld, body });
 }
 
@@ -221,8 +229,9 @@ function hub() {
 <p class="note">Educational only — not financial advice. Examples use illustrative inputs, not live market prices.</p></div>
 ${group('Vertical spreads', rows.filter((r) => r.archetype === 'vertical'))}
 ${group('Income strategies', rows.filter((r) => ['covered-call', 'cash-secured-put'].includes(r.archetype)))}
-${group('Range &amp; multi-leg', rows.filter((r) => r.archetype === 'iron-condor'))}
-${group('Volatility &amp; protection', rows.filter((r) => ['long-straddle', 'long-strangle', 'protective-collar'].includes(r.archetype)))}
+${group('Range & multi-leg', rows.filter((r) => r.archetype === 'iron-condor'))}
+${group('Volatility & protection', rows.filter((r) => ['long-straddle', 'long-strangle', 'protective-collar'].includes(r.archetype)))}
+${group('Time & leverage (two expirations)', rows.filter((r) => r.archetype === 'structural'))}
 ${group('Strategy loops', edu)}
 <div class="card" style="background:var(--soft);margin-top:16px"><h2>Run your own numbers</h2><p>The Quickwell spread calculator works any vertical on your device — nothing uploaded. Plus adds a payoff-at-expiration table.</p><p><a class="btn" href="${CALC}?ref=strategies-hub">Open the calculator →</a></p></div>`;
   return shell({ title, desc, path: '/strategies/', jsonld, body });
@@ -233,6 +242,11 @@ const outRoot = join(root, 'strategies');
 // migrate: remove the old /spreads/ section (now redirected to /strategies/)
 if (existsSync(join(root, 'spreads'))) rmSync(join(root, 'spreads'), { recursive: true, force: true });
 mkdirSync(outRoot, { recursive: true });
+// remove stale slug directories no longer in the matrix (keeps og.png, index.html)
+const keep = new Set(all.map((r) => r.slug));
+for (const d of readdirSync(outRoot, { withFileTypes: true })) {
+  if (d.isDirectory() && !keep.has(d.name)) rmSync(join(outRoot, d.name), { recursive: true, force: true });
+}
 writeFileSync(join(outRoot, 'index.html'), hub());
 for (const row of all) {
   mkdirSync(join(outRoot, row.slug), { recursive: true });
