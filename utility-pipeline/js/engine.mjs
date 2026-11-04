@@ -67,18 +67,21 @@ const DISCLAIMER =
  */
 export function calculateSpreadMath(shortStrike, longStrike, opts = {}) {
   if (typeof opts === 'number') opts = { contracts: opts };
-  const short = parseFloat(shortStrike);
-  const long = parseFloat(longStrike);
-  const contracts = parseInt(opts.contracts ?? 1, 10);
+  const short = Number(shortStrike);
+  const long = Number(longStrike);
+  const contracts = Number(opts.contracts ?? 1);
   const optionType = String(opts.optionType || '').toLowerCase();
   const hasPremium = opts.netPremiumPerShare !== undefined && opts.netPremiumPerShare !== null && opts.netPremiumPerShare !== '';
-  const net = hasPremium ? parseFloat(opts.netPremiumPerShare) : null;
+  const net = hasPremium ? Number(opts.netPremiumPerShare) : null;
 
-  if (!Number.isFinite(short) || !Number.isFinite(long) || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
+  if (!Number.isFinite(short) || short <= 0 || !Number.isFinite(long) || long <= 0 || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
     return { status: 'ERROR', message: 'Invalid numeric inputs: strikes, contracts (>=1) and any premium must be numbers.' };
   }
 
   const width = Math.abs(short - long);
+  if (width === 0 || (hasPremium && Math.abs(net) > width)) {
+    return { status: 'ERROR', message: 'Invalid spread: strikes must differ, and the absolute net premium cannot exceed the spread width.' };
+  }
   const mult = 100 * contracts;
   const out = {
     status: 'SUCCESS',
@@ -113,4 +116,25 @@ export function calculateSpreadMath(shortStrike, longStrike, opts = {}) {
   }
   if (out.breakeven === null) out.breakeven_note = 'Set opts.optionType to "put" or "call" for the breakeven price.';
   return out;
+}
+
+
+/**
+ * Export a normalized matrix as spreadsheet-safe CSV.
+ * Formula-like text is prefixed with an apostrophe so spreadsheet apps treat
+ * it as text. Negative numeric values remain numeric.
+ */
+export function toSpreadsheetCSV(result) {
+  if (!result || !Array.isArray(result.matrix) || result.matrix.length === 0) return '';
+  const headers = Object.keys(result.matrix[0]?.record_data || {});
+  const cell = (value) => {
+    let text = value == null ? '' : String(value);
+    const trimmed = text.replace(/^[\\t\\r ]+/, '');
+    const formulaLike = /^[=+@]/.test(trimmed) ||
+      (trimmed.startsWith('-') && !/^-?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:e[+-]?\\d+)?$/i.test(trimmed));
+    if (formulaLike) text = "'" + text;
+    return /[",\\r\\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+  };
+  return [headers, ...result.matrix.map((row) => headers.map((header) => row.record_data[header]))]
+    .map((row) => row.map(cell).join(',')).join('\\r\\n');
 }
