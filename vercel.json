@@ -18,7 +18,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com wss://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
         },
         {
           "key": "X-Frame-Options",
@@ -39,7 +39,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors *;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com wss://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors *;"
         }
       ]
     },
@@ -60,7 +60,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.voiceflow.com https://runtime-api.voiceflow.com 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; connect-src 'self' https://cdn.jsdelivr.net https://storage.googleapis.com https://odml.pa.googleapis.com https://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.voiceflow.com https://runtime-api.voiceflow.com 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; connect-src 'self' https://cdn.jsdelivr.net https://storage.googleapis.com https://odml.pa.googleapis.com https://general-runtime.voiceflow.com wss://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
         }
       ]
     },
@@ -81,7 +81,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com 'wasm-unsafe-eval'; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data: blob:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.voiceflow.com https://runtime-api.voiceflow.com 'wasm-unsafe-eval'; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.voiceflow.com; font-src 'self' https://cdn.voiceflow.com; img-src 'self' data: blob:; connect-src 'self' https://cdnjs.cloudflare.com https://general-runtime.voiceflow.com wss://general-runtime.voiceflow.com https://runtime-api.voiceflow.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self';"
         }
       ]
     }
