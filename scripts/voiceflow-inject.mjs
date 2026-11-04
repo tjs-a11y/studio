@@ -17,7 +17,8 @@ function walk(dir) {
       if (!skip.has(entry.name)) walk(join(dir, entry.name));
       continue;
     }
-    if (!entry.isFile() || !/\\.html?$/i.test(entry.name)) continue;
+    const lowerName = entry.name.toLowerCase();
+    if (!entry.isFile() || !(lowerName.endsWith('.html') || lowerName.endsWith('.htm'))) continue;
     const file = join(dir, entry.name);
     const rel = relative(root, file).split(sep).join('/');
     if (excluded(rel)) { skipped++; continue; }
@@ -25,7 +26,7 @@ function walk(dir) {
     if (html.includes('/js/voiceflow.js')) { skipped++; continue; }
     const headEnd = html.toLowerCase().lastIndexOf('</head>');
     if (headEnd < 0) { console.warn('Voiceflow injection skipped (no head): ' + rel); continue; }
-    writeFileSync(file, html.slice(0, headEnd) + tag + '\\n' + html.slice(headEnd));
+    writeFileSync(file, html.slice(0, headEnd) + tag + String.fromCharCode(10) + html.slice(headEnd));
     changed++;
   }
 }
