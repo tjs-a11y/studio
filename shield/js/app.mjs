@@ -5,6 +5,17 @@ import * as Kit from './kit.mjs';
 import { EDITIONS } from './tips.mjs';
 
 const TOOL = 'shield';
+const countEvent = (event) => {
+  try {
+    fetch('/api/event', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ tool: TOOL, event }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {}
+};
+countEvent('open');
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

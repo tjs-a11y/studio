@@ -69,9 +69,13 @@ test('nothing is loaded from or sent to third parties; no analytics; messages ne
     assert.ok(!/XMLHttpRequest|sendBeacon|WebSocket|EventSource/.test(s), p);
   }
   const shieldApp = shipped.find(([p]) => p.endsWith('shield/js/app.mjs'))?.[1] || '';
-  assert.equal((shieldApp.match(/\bfetch\(/g) || []).length, 1, 'Shield sends one first-party anonymous check count');
-  assert.ok(shieldApp.includes("fetch('/api/event'"), 'Shield count is first-party');
-  assert.ok(shieldApp.includes("JSON.stringify({ tool: 'shield', event: 'check' })"), 'Shield count contains only fixed tool and event labels');
+  assert.equal((shieldApp.match(/\bfetch\(/g) || []).length, 2, 'Shield sends first-party anonymous open and completed-check counts');
+  assert.ok(shieldApp.includes("fetch('/api/event'"), 'Shield counts are first-party');
+  assert.ok(shieldApp.includes("const TOOL = 'shield'"), 'Shield uses a fixed tool label');
+  assert.ok(shieldApp.includes("JSON.stringify({ tool: TOOL, event })"), 'open count sends only the fixed tool name and event label');
+  assert.ok(shieldApp.includes("countEvent('open')"), 'Shield records page opens');
+  assert.ok(shieldApp.includes("JSON.stringify({ tool: 'shield', event: 'check' })"), 'completed checks send only fixed labels, never message data');
+  assert.ok(shieldApp.indexOf("if (clean.replace") < shieldApp.indexOf("if (save) { try { fetch('/api/event'"), 'completed-check count runs only after input validation');
   assert.ok(html.includes('<li data-i18n="priv4">Anonymous counts record Shield opens, completed checks and plan selections'), 'privacy copy discloses anonymous counts');
 });
 

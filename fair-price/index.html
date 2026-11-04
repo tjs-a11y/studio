@@ -160,14 +160,28 @@
     return html;
   }
 
+  var lastText = "";
+  function countEvent(event) {
+    try {
+      fetch('/api/event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tool: 'fair-price', event }),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  countEvent('open');
+
   function run() {
     var text = $("text").value, c = CATS[cat];
     if (text.trim().length < 3) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Paste or describe the quote first, then check it.</div>'; $("out").scrollIntoView({ behavior: "smooth" }); return; }
     lastText = text;
-    $("out").innerHTML = readHtml(text, c); $("out").hidden = false; $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("out").innerHTML = readHtml(text, c); $("out").hidden = false;
+    countEvent('check');
+    $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  var lastText = "";
-  $("go").onclick = function () { try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'fair-price', event: 'check' }) }).catch(function () {}); } catch (e) {} run(); };
+  $("go").onclick = run;
   $("clear").onclick = function () { $("text").value = ""; $("out").hidden = true; };
 
   // ---- Quickwell Plus: compare + negotiate ----
