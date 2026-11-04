@@ -164,7 +164,7 @@
 </main>
 
 <script type="module">
-import { normalizeOnDevicePayload, calculateSpreadMath, toSpreadsheetCSV } from './js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, toSpreadsheetCSV } from './js/infrastructure-matrix.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (v) => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
