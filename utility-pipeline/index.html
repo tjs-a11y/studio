@@ -75,7 +75,6 @@
   .qw-also a { display:flex; flex-direction:column; justify-content:center; min-height:48px; padding:8px 12px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--muted); text-decoration:none; }
   .qw-also a:hover { border-color:var(--accent); } .qw-also b { color:var(--ink); }
 </style>
-<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="top">
@@ -165,7 +164,7 @@
 </main>
 
 <script type="module">
-import { normalizeOnDevicePayload, calculateSpreadMath } from './js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, toSpreadsheetCSV } from './js/engine.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (v) => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -200,11 +199,7 @@ function download(name, type, data) {
   const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click();
   a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-function toCleanCsv(res) {
-  const headers = Object.keys(res.matrix[0].record_data);
-  const q = (v) => { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  return [headers.map(q).join(','), ...res.matrix.map((r) => headers.map((h) => q(r.record_data[h])).join(','))].join('\n');
-}
+function toCleanCsv(res) { return toSpreadsheetCSV(res); }
 
 $('csvRun').addEventListener('click', renderCsv);
 $('csvSample').addEventListener('click', () => { $('csvIn').value = SAMPLE; renderCsv(); });
