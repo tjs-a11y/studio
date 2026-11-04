@@ -86,3 +86,11 @@ test('spread: invalid inputs return ERROR, never NaN math', () => {
   assert.equal(calculateSpreadMath(100, 95, { contracts: 0 }).status, 'ERROR');
   assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 'oops', optionType: 'put' }).status, 'ERROR');
 });
+
+test('spread: rejects impossible premiums, equal strikes and malformed numeric strings', () => {
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 5.01, optionType: 'put' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: -5.01, optionType: 'call' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 100).status, 'ERROR');
+  assert.equal(calculateSpreadMath('100oops', 95).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { contracts: '2.5' }).status, 'ERROR');
+});
