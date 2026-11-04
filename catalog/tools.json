@@ -293,6 +293,12 @@
           "id": "family"
         }
       ]
+    },
+    {
+      "id": "utility-pipeline",
+      "name": "Utility Pipeline",
+      "tagline": "Tidy a messy CSV in your browser (quoted commas and amounts kept intact) and work the math of an options spread. On-device; nothing uploaded. Educational, not financial advice.",
+      "plans": []
     }
   ]
 }
