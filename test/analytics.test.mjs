@@ -1,5 +1,4 @@
-// Every public page carries Vercel Web Analytics (cookie-free page-visit counts), except Quickwell Shield,
-// which uses first-party anonymous event counters without the Vercel pageview script.
+// Public pages carry Vercel Web Analytics except Shield and the privacy-first Utility Pipeline.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -10,9 +9,9 @@ test('every public page loads Vercel Web Analytics', () => {
   assert.deepEqual(missing, []);
 });
 
-test('Quickwell Shield uses first-party anonymous counters without Vercel Web Analytics', () => {
-  for (const f of readdirSync(new URL('../shield/', import.meta.url)).filter((n) => n.endsWith('.html'))) {
-    assert.ok(!readFileSync(new URL(`../shield/${f}`, import.meta.url), 'utf8').includes('_vercel/insights'), f);
+test('Quickwell Shield and Utility Pipeline do not load Vercel Web Analytics', () => {
+  for (const folder of ['shield', 'utility-pipeline']) {
+    assert.ok(!readFileSync(new URL(`../${folder}/index.html`, import.meta.url), 'utf8').includes('_vercel/insights'), folder);
   }
 });
 
