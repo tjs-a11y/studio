@@ -129,12 +129,12 @@ export function toSpreadsheetCSV(result) {
   const headers = Object.keys(result.matrix[0]?.record_data || {});
   const cell = (value) => {
     let text = value == null ? '' : String(value);
-    const trimmed = text.replace(/^[\\t\\r ]+/, '');
+    const trimmed = text.replace(/^[\t\r ]+/, '');
     const formulaLike = /^[=+@]/.test(trimmed) ||
-      (trimmed.startsWith('-') && !/^-?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:e[+-]?\\d+)?$/i.test(trimmed));
+      (trimmed.startsWith('-') && !/^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(trimmed));
     if (formulaLike) text = "'" + text;
-    return /[",\\r\\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+    return /[",\r\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
   };
   return [headers, ...result.matrix.map((row) => headers.map((header) => row.record_data[header]))]
-    .map((row) => row.map(cell).join(',')).join('\\r\\n');
+    .map((row) => row.map(cell).join(',')).join('\r\n');
 }
