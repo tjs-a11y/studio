@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Normalize CSV data and explore defined-risk options spread arithmetic in your browser. Your pasted or selected data stays on this device.">
+<link rel="canonical" href="https://quickwell.app/utility-pipeline/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Quickwell Utility Pipeline Matrix">
+<meta property="og:description" content="On-device CSV normalization, spreadsheet-ready export and educational options spread calculations.">
+<meta property="og:url" content="https://quickwell.app/utility-pipeline/">
+<title>Quickwell Utility Pipeline Matrix — On-device CSV & spread math</title>
+<style>
+:root{color-scheme:light dark;--bg:#f6f4ef;--ink:#18211d;--muted:#65716b;--card:#fff;--line:#dce2dc;--accent:#176b50;--soft:#e9f3ed}
+@media(prefers-color-scheme:dark){:root{--bg:#111714;--ink:#edf3ee;--muted:#a5b1aa;--card:#1a231e;--line:#344239;--accent:#82c9a6;--soft:#24382d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--accent)}.wrap{max-width:980px;margin:auto;padding:22px 16px 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;text-decoration:none;color:var(--ink)}.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:.83rem;color:var(--muted)}h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.08;letter-spacing:-.04em;margin:22px 0 12px}.lede{font-size:1.1rem;max-width:760px;color:var(--muted)}.privacy{background:var(--soft);border-radius:12px;padding:13px 16px;margin:22px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}.card h2{margin-top:0}.full{grid-column:1/-1}label{display:block;font-weight:650;margin:12px 0 5px}input,textarea,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}textarea{min-height:150px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9rem}button{border:0;border-radius:9px;padding:11px 15px;background:var(--accent);color:white;font:inherit;font-weight:700;cursor:pointer;margin:10px 8px 0 0}button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}.muted,.small{color:var(--muted)}.small{font-size:.9rem}.result{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:14px;overflow:auto}.result table{border-collapse:collapse;width:100%;font-size:.9rem}.result th,.result td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:pre-wrap}.result pre{white-space:pre-wrap;overflow-wrap:anywhere}.status{min-height:1.5em;color:var(--accent)}.mathgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mathgrid .wide{grid-column:1/-1}.foot{border-top:1px solid var(--line);margin-top:30px;padding-top:18px;color:var(--muted);font-size:.9rem}@media(max-width:700px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.mathgrid{grid-template-columns:1fr}.mathgrid .wide{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="brand" href="/">Quickwell</a><span class="chip">On-device utility · No account required</span></header>
+<main>
+<section>
+<h1>Open-Source Utility Pipeline Matrix</h1>
+<p class="lede">Normalize comma-separated data into a clean, spreadsheet-ready matrix, then explore standard defined-risk options spread arithmetic. The calculations run in this browser tab.</p>
+<p class="privacy"><strong>🔒 Local processing:</strong> The CSV you paste or select is parsed in your browser. This page does not upload the file, send its rows to an API, or save the matrix to a server. Avoid entering passwords, account numbers or other secrets.</p>
+</section>
+<div class="grid">
+<section class="card" aria-labelledby="csv-title">
+<h2 id="csv-title">1. Normalize a CSV</h2>
+<p class="small">Paste CSV text or choose a .csv file. Quoted commas, escaped quotes and line breaks inside quoted fields are supported.</p>
+<label for="csvFile">Choose a CSV file</label><input id="csvFile" type="file" accept=".csv,text/csv">
+<label for="csvInput">Or paste CSV data</label><textarea id="csvInput" spellcheck="false" placeholder="Recipient,Group,Budget&#10;User 01,Staff,100.00&#10;User 02,Volunteer,50.00"></textarea>
+<button id="normalizeBtn" type="button">Normalize locally</button><button id="sampleBtn" class="secondary" type="button">Load sample</button>
+<p id="csvStatus" class="status" role="status" aria-live="polite"></p>
+<div id="csvResult" class="result" hidden></div>
+<button id="downloadBtn" type="button" hidden>Download normalized CSV</button>
+</section>
+<section class="card" aria-labelledby="spread-title">
+<h2 id="spread-title">2. Educational spread math</h2>
+<p class="small">Enter the sold (short) strike, protective (long) strike, contract count and optional net premium per share. Credit is positive; debit is negative.</p>
+<div class="mathgrid">
+<div><label for="shortStrike">Short strike ($)</label><input id="shortStrike" type="number" min="0" step="0.01" value="150"></div>
+<div><label for="longStrike">Long strike ($)</label><input id="longStrike" type="number" min="0" step="0.01" value="145"></div>
+<div><label for="contracts">Contracts</label><input id="contracts" type="number" min="1" step="1" value="2"></div>
+<div><label for="optionType">Option type</label><select id="optionType"><option value="put">Put</option><option value="call">Call</option></select></div>
+<div class="wide"><label for="premium">Net premium per share ($, optional)</label><input id="premium" type="number" step="0.01" placeholder="Leave blank to show width only"></div>
+</div>
+<button id="calculateBtn" type="button">Calculate spread</button>
+<div id="spreadResult" class="result" role="status" aria-live="polite">Spread width: $5.00 per share · $1,000.00 across 2 contracts. Add a net premium to calculate maximum profit, maximum loss and breakeven.</div>
+</section>
+<section class="card full">
+<h2>Privacy and limitations</h2>
+<ul class="small">
+<li>CSV parsing and calculations execute locally in this browser page. No CSV content is sent to Quickwell.</li>
+<li>The page does not request bank or brokerage credentials and does not execute trades or hold funds.</li>
+<li>Downloaded CSV files are created locally by your browser. Your browser's download settings determine where they are saved.</li>
+<li>Options results are simplified arithmetic for educational purposes. Fees, taxes, early assignment, liquidity, exercise and market conditions are not modeled.</li>
+</ul>
+<p class="small"><strong>Educational disclaimer:</strong> Nothing here is financial, investment, tax or legal advice, and no output is a recommendation to buy, sell or hold a security or options position.</p>
+</section>
+</div>
+</main>
+<footer class="foot"><a href="/">Quickwell home</a> · <a href="/privacy.html">Privacy policy</a> · <a href="/terms.html">Terms</a><p>© Quickwell. Use the results as a starting point for your own verification.</p></footer>
+</div>
+<script type="module" src="./js/app.mjs"></script>
+</body>
+</html>
