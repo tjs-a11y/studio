@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeOnDevicePayload, calculateSpreadMath } from '../js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, toSpreadsheetCSV } from '../js/engine.mjs';
 
 test('normalizer: basic rows keyed by lower-cased headers', () => {
   const r = normalizeOnDevicePayload('Date,Amount,Memo\n2026-11-04,12.50,Coffee\n2026-11-05,-9,Refund');
@@ -85,4 +85,22 @@ test('spread: invalid inputs return ERROR, never NaN math', () => {
   assert.equal(calculateSpreadMath('x', 95).status, 'ERROR');
   assert.equal(calculateSpreadMath(100, 95, { contracts: 0 }).status, 'ERROR');
   assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 'oops', optionType: 'put' }).status, 'ERROR');
+});
+
+test('spread: rejects impossible premiums, equal strikes and malformed numeric strings', () => {
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 5.01, optionType: 'put' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: -5.01, optionType: 'call' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 100).status, 'ERROR');
+  assert.equal(calculateSpreadMath('100oops', 95).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { contracts: '2.5' }).status, 'ERROR');
+});
+
+test('CSV export neutralizes formula cells but preserves negative numeric amounts', () => {
+  const matrix = normalizeOnDevicePayload('label,amount\\n=HYPERLINK("https://bad.example"),-19.99\\n@SUM(A1:A2),+4');
+  const csv = toSpreadsheetCSV(matrix);
+  assert.match(csv, /"'=HYPERLINK/);
+  assert.match(csv, /,-19\\.99/);
+  assert.match(csv, /"'@SUM/);
+  assert.match(csv, /,'\\+4/);
+  assert.match(csv, /\\r\\n/);
 });
