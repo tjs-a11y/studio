@@ -197,3 +197,68 @@ export function toSpreadsheetCSV(result) {
   return [headers, ...result.matrix.map((row) => headers.map((header) => row.record_data[header]))]
     .map((row) => row.map(cell).join(',')).join('\r\n');
 }
+
+/* ------------------------------------------------------------ more strategy math
+   Pure, deterministic payoff math for single-underlying strategies, so the
+   programmatic strategy pages can show a real, engine-computed Risk/Reward table.
+   Educational only; no advice. All figures are per the share counts given. */
+
+/**
+ * Covered call: own `shares` of stock at cost `stockPrice`, sell calls at `strike` for `premium`/share.
+ * @returns max profit (if called away), breakeven, the cap, and downside cushion.
+ */
+export function coveredCall(stockPrice, strike, premium, shares = 100) {
+  const s = parseFloat(stockPrice), k = parseFloat(strike), p = parseFloat(premium), n = parseInt(shares, 10);
+  if (![s, k, p].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || s <= 0 || k <= 0) {
+    return { status: 'ERROR', message: 'coveredCall needs positive stock price and strike, a premium, and shares >= 1.' };
+  }
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'covered-call',
+    net_cost_per_share: r2(s - p),
+    max_profit: r2(((k - s) + p) * n),           // called away at the strike
+    profit_capped_above: r2(k),
+    breakeven: r2(s - p),
+    downside_cushion: r2(p * n),                  // premium offsets the first bit of a drop
+    max_loss_to_zero: r2((s - p) * n),            // if the stock went to 0
+  };
+}
+
+/**
+ * Cash-secured put: sell puts at `strike` for `premium`/share, hold strike*100 cash per contract.
+ */
+export function cashSecuredPut(strike, premium, contracts = 1) {
+  const k = parseFloat(strike), p = parseFloat(premium), n = parseInt(contracts, 10);
+  if (![k, p].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || k <= 0) {
+    return { status: 'ERROR', message: 'cashSecuredPut needs a positive strike, a premium, and contracts >= 1.' };
+  }
+  const mult = 100 * n;
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'cash-secured-put',
+    max_profit: r2(p * mult),                     // put expires worthless
+    effective_buy_price: r2(k - p),               // if assigned
+    breakeven: r2(k - p),
+    cash_secured: r2(k * mult),
+    max_loss_to_zero: r2((k - p) * mult),         // if assigned and the stock went to 0
+  };
+}
+
+/**
+ * Iron condor: short put spread + short call spread for a net credit.
+ * putLong < putShort < callShort < callLong. netCredit is per share (total of both spreads).
+ */
+export function ironCondor({ putLong, putShort, callShort, callLong, netCredit, contracts = 1 } = {}) {
+  const pl = parseFloat(putLong), ps = parseFloat(putShort), cs = parseFloat(callShort), cl = parseFloat(callLong);
+  const credit = parseFloat(netCredit), n = parseInt(contracts, 10);
+  if (![pl, ps, cs, cl, credit].every(Number.isFinite) || !Number.isInteger(n) || n < 1 || !(pl < ps && ps < cs && cs < cl) || credit <= 0) {
+    return { status: 'ERROR', message: 'ironCondor needs putLong < putShort < callShort < callLong, a positive net credit, and contracts >= 1.' };
+  }
+  const putWidth = ps - pl, callWidth = cl - cs, mult = 100 * n;
+  return {
+    status: 'SUCCESS', informational_disclaimer: DISCLAIMER, strategy: 'iron-condor',
+    max_profit: r2(credit * mult),                // both spreads expire worthless
+    max_loss: r2((Math.max(putWidth, callWidth) - credit) * mult),
+    lower_breakeven: r2(ps - credit),
+    upper_breakeven: r2(cs + credit),
+    profit_zone: `${r2(ps - credit)} to ${r2(cs + credit)}`,
+  };
+}

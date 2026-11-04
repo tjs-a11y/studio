@@ -152,3 +152,33 @@ test('CSV export neutralizes formula cells but preserves negative numeric amount
   assert.ok(csv.includes(",'+4"));
   assert.ok(csv.includes("\r\n"));
 });
+
+// ---- single-underlying strategy math (Plus strategy pages) ----
+import { coveredCall, cashSecuredPut, ironCondor } from '../js/engine.mjs';
+
+test('coveredCall: profit capped at strike, cushion = premium', () => {
+  const r = coveredCall(100, 105, 2, 100);
+  assert.equal(r.max_profit, 700);          // (105-100+2)*100
+  assert.equal(r.breakeven, 98);
+  assert.equal(r.downside_cushion, 200);
+  assert.equal(r.profit_capped_above, 105);
+  assert.equal(coveredCall(0, 105, 2).status, 'ERROR');
+});
+
+test('cashSecuredPut: effective buy price = strike - premium', () => {
+  const r = cashSecuredPut(100, 3, 1);
+  assert.equal(r.max_profit, 300);
+  assert.equal(r.effective_buy_price, 97);
+  assert.equal(r.breakeven, 97);
+  assert.equal(r.cash_secured, 10000);
+  assert.equal(cashSecuredPut(100, 3, 0).status, 'ERROR');
+});
+
+test('ironCondor: credit, capped loss, two breakevens', () => {
+  const r = ironCondor({ putLong: 90, putShort: 95, callShort: 105, callLong: 110, netCredit: 2 });
+  assert.equal(r.max_profit, 200);
+  assert.equal(r.max_loss, 300);            // (5-2)*100
+  assert.equal(r.lower_breakeven, 93);
+  assert.equal(r.upper_breakeven, 107);
+  assert.equal(ironCondor({ putLong: 95, putShort: 90, callShort: 105, callLong: 110, netCredit: 2 }).status, 'ERROR'); // bad ordering
+});

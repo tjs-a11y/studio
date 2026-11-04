@@ -1,49 +1,74 @@
 {
-  "note": "Programmatic SEO matrix for quickwell.app. Each row renders a real, substantive options-spread strategy page under /spreads/<slug>/ via scripts/seo/build.mjs. The max-profit / max-loss / breakeven figures on every page are computed at BUILD TIME by the same tested engine the Utility Pipeline tool uses (utility-pipeline/js/engine.mjs), so the numbers can never drift from the calculator or be made up. Educational only; not financial advice. To scale: add rows with real content fields — never thin, keyword-only pages.",
+  "note": "Programmatic SEO matrix for quickwell.app, rendered to /strategies/<slug>/ by scripts/seo/build.mjs. Schema per CEO: each row = strategy (archetype) x asset_context. Every Risk/Reward figure is computed at BUILD TIME by the tested engine in utility-pipeline/js/engine.mjs, so pages can't drift from the calculator or invent numbers. HARD RULE: no real/live ticker data (no feed, no fabricated prices) — examples use clearly-labeled illustrative inputs; the live on-device tool is where a user enters real numbers. Educational only; not financial advice.",
   "rows": [
-    {
-      "slug": "bull-put-spread",
-      "name": "Bull Put Spread",
-      "kind": "Put credit spread",
-      "outlook": "Neutral-to-bullish — you expect the stock to stay above the higher strike.",
-      "short": 100, "long": 95, "type": "put", "premium": 1.5,
-      "legs": "Sell the higher-strike put and buy the lower-strike put in the same expiration. The sold put brings in more premium than the bought put costs, so you open for a net credit.",
-      "summary": "A bull put spread is a defined-risk, credit strategy used when you think a stock will hold above a level. You keep the credit if it does, and your loss is capped by the long put if it doesn't.",
-      "when": "Traders reach for it when they are mildly bullish or just not bearish, want to be paid up front, and want a known worst case instead of the open-ended risk of selling a naked put.",
-      "risk": "The maximum loss is larger than the credit you collect, and it happens if the stock falls below the lower strike at expiration. The spread is still a short-premium position: time decay helps you, a sharp drop hurts you."
-    },
-    {
-      "slug": "bear-call-spread",
-      "name": "Bear Call Spread",
-      "kind": "Call credit spread",
-      "outlook": "Neutral-to-bearish — you expect the stock to stay below the lower strike.",
-      "short": 50, "long": 55, "type": "call", "premium": 1.0,
-      "legs": "Sell the lower-strike call and buy the higher-strike call in the same expiration. You open for a net credit because the sold call is worth more than the protective long call.",
+    { "slug": "bull-put-spread", "name": "Bull Put Spread", "strategy": "Credit Spread", "archetype": "vertical", "context": "Neutral-to-bullish view",
+      "outlook": "You expect the stock to stay above the higher strike through expiration.",
+      "example": { "short": 100, "long": 95, "type": "put", "premium": 1.5 },
+      "legs": "Sell the higher-strike put and buy the lower-strike put in the same expiration, opening for a net credit.",
+      "summary": "A bull put spread is a defined-risk credit strategy: you keep the credit if the stock holds above your short strike, and the long put caps your loss if it doesn't.",
+      "when": "Chosen when mildly bullish or neutral, to be paid up front with a known worst case instead of the open-ended risk of a naked put.",
+      "risk": "Maximum loss is larger than the credit and occurs below the lower strike. Time decay helps; a sharp drop hurts." },
+
+    { "slug": "bear-call-spread", "name": "Bear Call Spread", "strategy": "Credit Spread", "archetype": "vertical", "context": "Neutral-to-bearish view",
+      "outlook": "You expect the stock to stay below the lower strike through expiration.",
+      "example": { "short": 50, "long": 55, "type": "call", "premium": 1.0 },
+      "legs": "Sell the lower-strike call and buy the higher-strike call in the same expiration, opening for a net credit.",
       "summary": "A bear call spread is the bearish mirror of the bull put spread: a defined-risk credit position that profits when the stock stays below your short strike.",
-      "when": "Used when you are mildly bearish or neutral and want to collect premium with a capped loss, rather than shorting stock or selling a naked call with unlimited risk.",
-      "risk": "The maximum loss, which is the width minus the credit, occurs if the stock closes above the higher strike. A strong rally is the risk; sideways or down is where you want it."
-    },
-    {
-      "slug": "bull-call-spread",
-      "name": "Bull Call Spread",
-      "kind": "Call debit spread",
-      "outlook": "Bullish — you expect the stock to rise toward or past the higher strike.",
-      "short": 55, "long": 50, "type": "call", "premium": -2.0,
-      "legs": "Buy the lower-strike call and sell the higher-strike call in the same expiration. You pay a net debit; selling the higher call lowers the cost of the long call and caps the upside.",
-      "summary": "A bull call spread is a defined-risk, debit strategy for a bullish view. It costs less than buying a call outright, in exchange for a capped maximum profit at the higher strike.",
-      "when": "Chosen when you are bullish but want to spend less than an outright call and are comfortable capping the gain. Your loss is limited to what you paid.",
-      "risk": "The maximum loss is the debit you paid, and it happens if the stock stays below the lower strike. Unlike the credit spreads, time decay works against you while the trade is open."
-    },
-    {
-      "slug": "bear-put-spread",
-      "name": "Bear Put Spread",
-      "kind": "Put debit spread",
-      "outlook": "Bearish — you expect the stock to fall toward or past the lower strike.",
-      "short": 95, "long": 100, "type": "put", "premium": -2.0,
-      "legs": "Buy the higher-strike put and sell the lower-strike put in the same expiration. You pay a net debit; the short put offsets part of the long put's cost and caps the downside profit.",
-      "summary": "A bear put spread is a defined-risk, debit strategy for a bearish view — cheaper than buying a put outright, with a maximum profit capped at the lower strike.",
-      "when": "Used when you are bearish but want to reduce the cost and time-decay drag of a long put, accepting a capped profit in return.",
-      "risk": "The maximum loss is the debit paid, realized if the stock closes above the higher strike. Like all debit spreads, it needs the move to happen before expiration."
-    }
+      "when": "Used when mildly bearish or neutral, to collect premium with a capped loss rather than shorting stock or selling a naked call.",
+      "risk": "Maximum loss (width minus credit) occurs above the higher strike. A strong rally is the risk." },
+
+    { "slug": "bull-call-spread", "name": "Bull Call Spread", "strategy": "Debit Spread", "archetype": "vertical", "context": "Bullish view",
+      "outlook": "You expect the stock to rise toward or past the higher strike.",
+      "example": { "short": 55, "long": 50, "type": "call", "premium": -2.0 },
+      "legs": "Buy the lower-strike call and sell the higher-strike call in the same expiration, paying a net debit that caps the upside.",
+      "summary": "A bull call spread is a defined-risk debit strategy for a bullish view — cheaper than an outright call, with profit capped at the higher strike.",
+      "when": "Chosen when bullish but wanting to spend less than an outright call and comfortable capping the gain.",
+      "risk": "Maximum loss is the debit paid, below the lower strike. Time decay works against you." },
+
+    { "slug": "bear-put-spread", "name": "Bear Put Spread", "strategy": "Debit Spread", "archetype": "vertical", "context": "Bearish view",
+      "outlook": "You expect the stock to fall toward or past the lower strike.",
+      "example": { "short": 95, "long": 100, "type": "put", "premium": -2.0 },
+      "legs": "Buy the higher-strike put and sell the lower-strike put in the same expiration, paying a net debit that caps the downside profit.",
+      "summary": "A bear put spread is a defined-risk debit strategy for a bearish view — cheaper than an outright put, with profit capped at the lower strike.",
+      "when": "Used when bearish but wanting to reduce the cost and time-decay drag of a long put.",
+      "risk": "Maximum loss is the debit paid, above the higher strike. The move must happen before expiration." },
+
+    { "slug": "covered-call-high-dividend-stocks", "name": "Covered Call on High-Dividend Stocks", "strategy": "Covered Call", "archetype": "covered-call", "context": "High-Dividend Stocks",
+      "outlook": "You own the shares, are neutral-to-mildly-bullish, and want extra income on top of the dividend.",
+      "example": { "stock": 100, "strike": 105, "premium": 2.0 },
+      "legs": "Hold 100 shares and sell one call against them. The call premium is income now; if the stock is called away you sell at the strike.",
+      "summary": "A covered call turns shares you already hold into an income position: you collect a premium, cap your upside at the strike, and keep any dividend paid before assignment.",
+      "when": "Income-focused holders pair covered calls with high-dividend, lower-volatility blue chips: the dividend plus the premium stack, and such names tend to grind rather than gap, so being capped hurts less. The trade-off is real — a takeover or a sharp rally leaves your gains capped at the strike.",
+      "risk": "The premium only cushions the first part of a decline; you still carry the stock's full downside below breakeven. Watch the ex-dividend date — a deep in-the-money call can be assigned early, costing you the dividend you sold it to keep." },
+
+    { "slug": "cash-secured-put-high-volatility-stocks", "name": "Cash-Secured Put on High-Volatility Stocks", "strategy": "Cash-Secured Put", "archetype": "cash-secured-put", "context": "High-Volatility Stocks",
+      "outlook": "You would be happy to own the stock lower, and you set aside the cash to buy it.",
+      "example": { "strike": 50, "premium": 2.0 },
+      "legs": "Sell one put and hold strike x 100 in cash per contract. If assigned you buy the shares at the strike; if not, you keep the premium.",
+      "summary": "A cash-secured put pays you to wait for a price you'd buy at. Your effective purchase price, if assigned, is the strike minus the premium you collected.",
+      "when": "Higher-volatility names carry fatter premiums, so the income for standing ready to buy is larger — which is exactly why traders use cash-secured puts there. The flip side: higher volatility means a real chance you are assigned well above where the stock then trades.",
+      "risk": "Your downside is almost the same as owning the stock outright: if it falls hard you are assigned at the strike and ride it down from there, cushioned only by the premium. 'Cash-secured' means the cash is set aside, not that the trade is low-risk." },
+
+    { "slug": "iron-condor-index-options", "name": "Iron Condor on Index Options", "strategy": "Iron Condor", "archetype": "iron-condor", "context": "Index Options (SPY / QQQ)",
+      "outlook": "You expect the index to stay inside a range — neither a big rally nor a big drop.",
+      "example": { "putLong": 90, "putShort": 95, "callShort": 105, "callLong": 110, "netCredit": 2.0 },
+      "legs": "Sell a put spread below the market and a call spread above it, both for credit. The two spreads define a range you want price to stay inside.",
+      "summary": "An iron condor is a defined-risk, range-bound credit strategy: you profit if the underlying finishes between your short strikes, and both wings cap your loss.",
+      "when": "Broad index options (like SPY or QQQ) are a common home for condors: they are diversified so they gap less than single stocks, and they are deeply liquid, which keeps the four legs' costs tight. Traders put them on when they expect calm and want to be paid for it.",
+      "risk": "Maximum loss is larger than the credit and happens if the index runs past either short strike. A condor is short volatility — a sharp move either way, or a volatility spike, works against you, and there are two sides that can be breached." }
+  ],
+  "educational": [
+    { "slug": "wheel-strategy", "name": "The Wheel Strategy", "strategy": "Wheel Strategy", "archetype": "wheel", "context": "Blue-Chip Stocks",
+      "outlook": "A repeatable income loop on a stock you are willing to own.",
+      "example": { "put": { "strike": 50, "premium": 2.0 }, "call": { "stock": 50, "strike": 55, "premium": 1.5 } },
+      "summary": "The Wheel is not a single trade with one payoff — it is a loop. You sell cash-secured puts on a stock you'd be happy to own; if you're assigned, you then sell covered calls against those shares; if they're called away, you start again selling puts.",
+      "steps": [
+        "Sell a cash-secured put on a stock you want to own at the strike. Collect the premium.",
+        "If the put expires worthless, keep the premium and repeat. If you're assigned, you now own the shares at an effective price of strike minus premium.",
+        "Sell a covered call against the shares you now hold. Collect that premium too.",
+        "If the call expires worthless, keep the premium and sell another. If the shares are called away, you've sold at the strike — go back to step one."
+      ],
+      "when": "Income traders run the Wheel on blue-chip names they genuinely want to hold, because every step assumes you may end up owning the stock. It stacks put and call premiums over time.",
+      "risk": "You carry full ownership risk whenever you hold the shares: a serious decline in the underlying is the Wheel's real danger, and no amount of premium fully offsets it. Only run it on stock you'd be comfortable owning through a drawdown." }
   ]
 }

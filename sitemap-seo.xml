@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://quickwell.app/spreads/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://quickwell.app/spreads/bull-put-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://quickwell.app/spreads/bear-call-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://quickwell.app/spreads/bull-call-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://quickwell.app/spreads/bear-put-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/bull-put-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/bear-call-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/bull-call-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/bear-put-spread/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/covered-call-high-dividend-stocks/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/cash-secured-put-high-volatility-stocks/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/iron-condor-index-options/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://quickwell.app/strategies/wheel-strategy/</loc><lastmod>2026-11-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
