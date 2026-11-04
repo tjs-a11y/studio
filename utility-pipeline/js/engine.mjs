@@ -67,18 +67,21 @@ const DISCLAIMER =
  */
 export function calculateSpreadMath(shortStrike, longStrike, opts = {}) {
   if (typeof opts === 'number') opts = { contracts: opts };
-  const short = parseFloat(shortStrike);
-  const long = parseFloat(longStrike);
-  const contracts = parseInt(opts.contracts ?? 1, 10);
+  const short = Number(shortStrike);
+  const long = Number(longStrike);
+  const contracts = Number(opts.contracts ?? 1);
   const optionType = String(opts.optionType || '').toLowerCase();
   const hasPremium = opts.netPremiumPerShare !== undefined && opts.netPremiumPerShare !== null && opts.netPremiumPerShare !== '';
-  const net = hasPremium ? parseFloat(opts.netPremiumPerShare) : null;
+  const net = hasPremium ? Number(opts.netPremiumPerShare) : null;
 
-  if (!Number.isFinite(short) || !Number.isFinite(long) || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
+  if (!Number.isFinite(short) || short <= 0 || !Number.isFinite(long) || long <= 0 || !Number.isInteger(contracts) || contracts < 1 || (hasPremium && !Number.isFinite(net))) {
     return { status: 'ERROR', message: 'Invalid numeric inputs: strikes, contracts (>=1) and any premium must be numbers.' };
   }
 
   const width = Math.abs(short - long);
+  if (width === 0 || (hasPremium && Math.abs(net) > width)) {
+    return { status: 'ERROR', message: 'Invalid spread: strikes must differ, and the absolute net premium cannot exceed the spread width.' };
+  }
   const mult = 100 * contracts;
   const out = {
     status: 'SUCCESS',
@@ -152,16 +155,17 @@ export function projectRows(result, opts = {}) {
  * @returns {{status:string, informational_disclaimer:string, points:Array<{price:number,profit:number}>}}
  */
 export function spreadPayoff(shortStrike, longStrike, opts = {}) {
-  const short = parseFloat(shortStrike);
-  const long = parseFloat(longStrike);
-  const contracts = parseInt(opts.contracts ?? 1, 10);
-  const net = parseFloat(opts.netPremiumPerShare);
+  const short = Number(shortStrike);
+  const long = Number(longStrike);
+  const contracts = Number(opts.contracts ?? 1);
+  const net = Number(opts.netPremiumPerShare);
   const type = String(opts.optionType || '').toLowerCase();
-  const steps = Math.max(3, Math.min(25, parseInt(opts.steps ?? 9, 10)));
-  if (!Number.isFinite(short) || !Number.isFinite(long) || !Number.isFinite(net) || !Number.isInteger(contracts) || contracts < 1 || (type !== 'put' && type !== 'call')) {
+  const steps = Number(opts.steps ?? 9);
+  if (!Number.isFinite(short) || short <= 0 || !Number.isFinite(long) || long <= 0 || !Number.isFinite(net) || !Number.isInteger(contracts) || contracts < 1 || !Number.isInteger(steps) || steps < 3 || steps > 25 || (type !== 'put' && type !== 'call')) {
     return { status: 'ERROR', message: 'spreadPayoff needs numeric strikes, a net premium, contracts (>=1) and optionType "put"/"call".' };
   }
-  const width = Math.abs(short - long) || 1;
+  const width = Math.abs(short - long);
+  if (width === 0 || Math.abs(net) > width) return { status: 'ERROR', message: 'Strikes must differ and the absolute net premium cannot exceed the spread width.' };
   const lo = Math.max(0, Math.min(short, long) - width);
   const hi = Math.max(short, long) + width;
   const leg = (K, S) => (type === 'call' ? Math.max(S - K, 0) : Math.max(K - S, 0));
@@ -173,4 +177,23 @@ export function spreadPayoff(shortStrike, longStrike, opts = {}) {
     points.push({ price: S, profit: r2(perShare * mult) });
   }
   return { status: 'SUCCESS', informational_disclaimer: DISCLAIMER, points };
+}
+
+/**
+ * Spreadsheet-safe CSV export. Formula-like text is prefixed with an apostrophe;
+ * negative numeric values remain numeric. Runs entirely in memory.
+ */
+export function toSpreadsheetCSV(result) {
+  if (!result || !Array.isArray(result.matrix) || result.matrix.length === 0) return '';
+  const headers = Object.keys(result.matrix[0]?.record_data || {});
+  const cell = (value) => {
+    let text = value == null ? '' : String(value);
+    const trimmed = text.replace(/^[\t\r ]+/, '');
+    const formulaLike = /^[=+@]/.test(trimmed) ||
+      (trimmed.startsWith('-') && !/^-?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(trimmed));
+    if (formulaLike) text = "'" + text;
+    return /[",\r\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+  };
+  return [headers, ...result.matrix.map((row) => headers.map((header) => row.record_data[header]))]
+    .map((row) => row.map(cell).join(',')).join('\r\n');
 }

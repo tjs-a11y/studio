@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeOnDevicePayload, calculateSpreadMath, projectRows, spreadPayoff } from '../js/engine.mjs';
+import { normalizeOnDevicePayload, calculateSpreadMath, projectRows, spreadPayoff, toSpreadsheetCSV } from '../js/engine.mjs';
 
 test('normalizer: basic rows keyed by lower-cased headers', () => {
   const r = normalizeOnDevicePayload('Date,Amount,Memo\n2026-11-04,12.50,Coffee\n2026-11-05,-9,Refund');
@@ -132,4 +132,23 @@ test('spreadPayoff: call debit spread profit/loss extremes are right', () => {
 test('spreadPayoff: needs a premium and an option type', () => {
   assert.equal(spreadPayoff(100, 95, { optionType: 'put' }).status, 'ERROR');
   assert.equal(spreadPayoff(100, 95, { netPremiumPerShare: 1.5 }).status, 'ERROR');
+});
+
+test('spread: rejects impossible premiums, equal strikes and malformed numeric strings', () => {
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: 5.01, optionType: 'put' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { netPremiumPerShare: -5.01, optionType: 'call' }).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 100).status, 'ERROR');
+  assert.equal(calculateSpreadMath('100oops', 95).status, 'ERROR');
+  assert.equal(calculateSpreadMath(100, 95, { contracts: '2.5' }).status, 'ERROR');
+  assert.equal(spreadPayoff(100, 95, { netPremiumPerShare: 5.01, optionType: 'put' }).status, 'ERROR');
+});
+
+test('CSV export neutralizes formula cells but preserves negative numeric amounts', () => {
+  const matrix = normalizeOnDevicePayload('label,amount\n=1+1,-19.99\n@SUM(A1:A2),+4');
+  const csv = toSpreadsheetCSV(matrix);
+  assert.ok(csv.includes("'=1+1"));
+  assert.ok(csv.includes(',-19.99'));
+  assert.ok(csv.includes("'@SUM"));
+  assert.ok(csv.includes(",'+4"));
+  assert.ok(csv.includes("\r\n"));
 });
