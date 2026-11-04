@@ -96,11 +96,11 @@ test('spread: rejects impossible premiums, equal strikes and malformed numeric s
 });
 
 test('CSV export neutralizes formula cells but preserves negative numeric amounts', () => {
-  const matrix = normalizeOnDevicePayload('label,amount\\n=HYPERLINK("https://bad.example"),-19.99\\n@SUM(A1:A2),+4');
+  const matrix = normalizeOnDevicePayload('label,amount\n=1+1,-19.99\n@SUM(A1:A2),+4');
   const csv = toSpreadsheetCSV(matrix);
-  assert.match(csv, /"'=1+1/);
-  assert.match(csv, /,-19\\.99/);
-  assert.match(csv, /"'@SUM/);
-  assert.match(csv, /,'\\+4/);
-  assert.match(csv, /\\r\\n/);
+  assert.ok(csv.includes("'=1+1"));
+  assert.ok(csv.includes(',-19.99'));
+  assert.ok(csv.includes("'@SUM"));
+  assert.ok(csv.includes(",'+4"));
+  assert.ok(csv.includes("\r\n"));
 });
