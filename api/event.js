@@ -5,10 +5,12 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit', 'click_operator', 'click_manager']);
 // Sites (not billable tools) that may record anonymous outbound-link clicks or homepage visits.
 const SITES = new Set(['northstar', 'quickwell']);
 const OUT_TARGETS = new Set(['freightsidekick']);
+const PRELAUNCH_TOOLS = new Set(['port-watcher', 'hydro-flow', 'scale-audit']);
+const TIER_CLICK_EVENTS = new Set(['click_operator', 'click_manager']);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,200}\.[A-Za-z]{2,24}$/;
 const day = () => new Date().toISOString().slice(0, 10);
 
@@ -35,7 +37,10 @@ export async function POST(request) {
   if (Number(request.headers.get('content-length') || 0) > 2048) return fail(413, 'Too large.');
   let body; try { body = await request.json(); } catch { return fail(400, 'Bad request.'); }
   const tool = String(body.tool || ''); const event = String(body.event || '');
-  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
+  if (!EVENTS.has(event)) return fail(400, 'Unknown event.');
+  if (TIER_CLICK_EVENTS.has(event)) {
+    if (!PRELAUNCH_TOOLS.has(tool)) return fail(400, 'Unknown event.');
+  } else if (!known(tool) && !SITES.has(tool)) return fail(400, 'Unknown event.');
   const run = override || store();
   if (event === 'visit') {
     // One aggregate homepage visit counter; no URL, referrer, IP, or visitor identifier is sent.
@@ -57,6 +62,12 @@ export async function POST(request) {
     if (!SITES.has(tool) || !OUT_TARGETS.has(target)) return fail(400, 'Unknown event.');
     if (!run) { console.log(JSON.stringify({ evt: 'outbound', site: tool, target })); return json({ ok: true }); }
     await run(['INCR', `count:${tool}:${target}:clicks`], ['INCR', `count:${tool}:${target}:clicks:${day()}`]);
+    return json({ ok: true });
+  }
+  if (TIER_CLICK_EVENTS.has(event)) {
+    // Fixed-label interest signal only; no account, file, record, or user-entered value is accepted or stored.
+    if (!run) { console.log(JSON.stringify({ evt: event, tool })); return json({ ok: true }); }
+    await run(['INCR', `count:${tool}:${event}`], ['INCR', `count:${tool}:${event}:${day()}`]);
     return json({ ok: true });
   }
   if (event === 'upgrade') {
