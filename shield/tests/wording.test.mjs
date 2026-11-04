@@ -75,7 +75,7 @@ test('nothing is loaded from or sent to third parties; no analytics; messages ne
   assert.ok(shieldApp.includes("JSON.stringify({ tool: TOOL, event })"), 'open count sends only the fixed tool name and event label');
   assert.ok(shieldApp.includes("countEvent('open')"), 'Shield records page opens');
   assert.ok(shieldApp.includes("JSON.stringify({ tool: 'shield', event: 'check' })"), 'completed checks send only fixed labels, never message data');
-  assert.match(shieldApp, /if \(save\)\s*\{[^}]*event: 'check'/s, 'completed-check count runs only after input validation');
+  assert.ok(shieldApp.indexOf("if (clean.replace") < shieldApp.indexOf("if (save) { try { fetch('/api/event'"), 'completed-check count runs only after input validation');
   assert.ok(html.includes('<li data-i18n="priv4">Anonymous counts record Shield opens, completed checks and plan selections'), 'privacy copy discloses anonymous counts');
 });
 
