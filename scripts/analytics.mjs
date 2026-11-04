@@ -1,12 +1,12 @@
 // Adds Vercel Web Analytics (cookie-free page-visit counts) to every public page, idempotently.
 //   node scripts/analytics.mjs          insert where missing
 //   node scripts/analytics.mjs --check  exit 1 if a page is missing it
-// Excluded: Quickwell Shield promises "No analytics" on its page; internal/test folders.
+// Excluded: Quickwell Shield and Utility Pipeline explicitly promise no pageview analytics; internal/test folders.
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const SKIP = new Set(['node_modules', '.git', '.github', '.vercel', 'api', 'scripts', 'test', 'tests', 'fixtures', 'vendor', '_template', 'shield']);
+const SKIP = new Set(['node_modules', '.git', '.github', '.vercel', 'api', 'scripts', 'test', 'tests', 'fixtures', 'vendor', '_template', 'shield', 'utility-pipeline']);
 export const TAG = '<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>';
 export function pages(dir = root, out = []) {
   for (const n of readdirSync(dir)) {
