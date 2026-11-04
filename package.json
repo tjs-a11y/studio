@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "node --test --test-concurrency=1 test/*.test.mjs play/test/*.test.mjs footsure/tests/*.test.mjs commodities/test/*.test.mjs saver/tests/*.test.mjs pilot/tests/*.test.mjs shield/tests/*.test.mjs plot-file-checker/test/*.test.mjs permit-watch/test/*.test.mjs spare-key/test/*.test.mjs utility-pipeline/tests/*.test.mjs",
-    "build": "node scripts/sitemap.mjs"
+    "build": "node scripts/seo/build.mjs && node scripts/sitemap.mjs"
   },
   "dependencies": {
     "stripe": "^23.0.0"

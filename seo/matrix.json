@@ -1,0 +1,49 @@
+{
+  "note": "Programmatic SEO matrix for quickwell.app. Each row renders a real, substantive options-spread strategy page under /spreads/<slug>/ via scripts/seo/build.mjs. The max-profit / max-loss / breakeven figures on every page are computed at BUILD TIME by the same tested engine the Utility Pipeline tool uses (utility-pipeline/js/engine.mjs), so the numbers can never drift from the calculator or be made up. Educational only; not financial advice. To scale: add rows with real content fields — never thin, keyword-only pages.",
+  "rows": [
+    {
+      "slug": "bull-put-spread",
+      "name": "Bull Put Spread",
+      "kind": "Put credit spread",
+      "outlook": "Neutral-to-bullish — you expect the stock to stay above the higher strike.",
+      "short": 100, "long": 95, "type": "put", "premium": 1.5,
+      "legs": "Sell the higher-strike put and buy the lower-strike put in the same expiration. The sold put brings in more premium than the bought put costs, so you open for a net credit.",
+      "summary": "A bull put spread is a defined-risk, credit strategy used when you think a stock will hold above a level. You keep the credit if it does, and your loss is capped by the long put if it doesn't.",
+      "when": "Traders reach for it when they are mildly bullish or just not bearish, want to be paid up front, and want a known worst case instead of the open-ended risk of selling a naked put.",
+      "risk": "The maximum loss is larger than the credit you collect, and it happens if the stock falls below the lower strike at expiration. The spread is still a short-premium position: time decay helps you, a sharp drop hurts you."
+    },
+    {
+      "slug": "bear-call-spread",
+      "name": "Bear Call Spread",
+      "kind": "Call credit spread",
+      "outlook": "Neutral-to-bearish — you expect the stock to stay below the lower strike.",
+      "short": 50, "long": 55, "type": "call", "premium": 1.0,
+      "legs": "Sell the lower-strike call and buy the higher-strike call in the same expiration. You open for a net credit because the sold call is worth more than the protective long call.",
+      "summary": "A bear call spread is the bearish mirror of the bull put spread: a defined-risk credit position that profits when the stock stays below your short strike.",
+      "when": "Used when you are mildly bearish or neutral and want to collect premium with a capped loss, rather than shorting stock or selling a naked call with unlimited risk.",
+      "risk": "The maximum loss, which is the width minus the credit, occurs if the stock closes above the higher strike. A strong rally is the risk; sideways or down is where you want it."
+    },
+    {
+      "slug": "bull-call-spread",
+      "name": "Bull Call Spread",
+      "kind": "Call debit spread",
+      "outlook": "Bullish — you expect the stock to rise toward or past the higher strike.",
+      "short": 55, "long": 50, "type": "call", "premium": -2.0,
+      "legs": "Buy the lower-strike call and sell the higher-strike call in the same expiration. You pay a net debit; selling the higher call lowers the cost of the long call and caps the upside.",
+      "summary": "A bull call spread is a defined-risk, debit strategy for a bullish view. It costs less than buying a call outright, in exchange for a capped maximum profit at the higher strike.",
+      "when": "Chosen when you are bullish but want to spend less than an outright call and are comfortable capping the gain. Your loss is limited to what you paid.",
+      "risk": "The maximum loss is the debit you paid, and it happens if the stock stays below the lower strike. Unlike the credit spreads, time decay works against you while the trade is open."
+    },
+    {
+      "slug": "bear-put-spread",
+      "name": "Bear Put Spread",
+      "kind": "Put debit spread",
+      "outlook": "Bearish — you expect the stock to fall toward or past the lower strike.",
+      "short": 95, "long": 100, "type": "put", "premium": -2.0,
+      "legs": "Buy the higher-strike put and sell the lower-strike put in the same expiration. You pay a net debit; the short put offsets part of the long put's cost and caps the downside profit.",
+      "summary": "A bear put spread is a defined-risk, debit strategy for a bearish view — cheaper than buying a put outright, with a maximum profit capped at the lower strike.",
+      "when": "Used when you are bearish but want to reduce the cost and time-decay drag of a long put, accepting a capped profit in return.",
+      "risk": "The maximum loss is the debit paid, realized if the stock closes above the higher strike. Like all debit spreads, it needs the move to happen before expiration."
+    }
+  ]
+}

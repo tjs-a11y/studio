@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node scripts/sitemap.mjs",
+  "buildCommand": "node scripts/seo/build.mjs && node scripts/sitemap.mjs",
   "functions": {"api/**/*.js": {"includeFiles": "catalog/**"}},
   "headers": [
     {"source": "/((?!play/embed/|footsure/|pilot/).*)", "headers": [
