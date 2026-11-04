@@ -96,3 +96,40 @@ test('homepage sends its primary CTA to Shield and attributes the five priority 
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'featured tools follow the CEO priority order');
   for (const id of ids) assert.ok(h.includes(`href="/${id}/?ref=home-tools-${id}"`), `${id}: searchable tool link carries a source label`);
 });
+
+
+test('priority consumer tools count page opens and completed checks anonymously', () => {
+  const shield = read('shield/js/app.mjs');
+  const saver = read('saver/js/app.mjs');
+  const billRadar = read('bill-radar/index.html');
+  const fairPrice = read('fair-price/index.html');
+  const dinner = read('dinner/index.html');
+  const eventApi = read('api/event.js');
+  const statsApi = read('api/stats.js');
+
+  assert.match(shield, /const TOOL = 'shield';[\\s\\S]*countEvent\\('open'\\)/);
+  assert.match(shield, /JSON\\.stringify\\(\\{\\s*tool:\\s*TOOL,\\s*event\\s*\\}\\)/);
+  assert.match(shield, /tool: 'shield', event: 'check'/);
+
+  assert.match(saver, /const TOOL = 'saver';[\\s\\S]*countEvent\\('open'\\)/);
+  assert.match(saver, /JSON\\.stringify\\(\\{\\s*tool:\\s*TOOL,\\s*event\\s*\\}\\)/);
+  assert.match(saver, /tool: TOOL, event: 'check'/);
+
+  assert.match(billRadar, /JSON\\.stringify\\(\\{tool:'bill-radar',event:'open'\\}\\)/);
+  assert.match(billRadar, /JSON\\.stringify\\(\\{tool:'bill-radar',event:'check'\\}\\)/);
+
+  assert.match(fairPrice, /JSON\\.stringify\\(\\{\\s*tool:\\s*'fair-price',\\s*event\\s*\\}\\)/);
+  assert.match(fairPrice, /countEvent\\('open'\\)/);
+  assert.match(fairPrice, /countEvent\\('check'\\)/);
+  assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent('check')"), 'Fair Price counts only after its minimum-input check');
+
+  assert.match(dinner, /JSON\\.stringify\\(\\{\\s*tool:\\s*'dinner',\\s*event\\s*\\}\\)/);
+  assert.match(dinner, /countEvent\\('open'\\)/);
+  assert.match(dinner, /countEvent\\('check'\\)/);
+  assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent('check')"), 'Dinner counts only after its minimum-ingredient check');
+
+  assert.match(eventApi, /if \\(event === 'open'\\)/);
+  assert.match(eventApi, /if \\(event === 'check'\\)/);
+  assert.match(statsApi, /opens:/);
+  assert.match(statsApi, /checks:/);
+});
