@@ -193,6 +193,7 @@
   }
 
   function countEvent(event) {
+    if (window.qwTrack) window.qwTrack('dinner', event);
     try {
       fetch('/api/event', {
         method: 'POST',
