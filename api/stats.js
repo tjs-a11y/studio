@@ -31,6 +31,7 @@ export async function GET() {
   const today = day();
   // Anonymous outbound-click counters from our other sites (counts only, no identity).
   const OUTBOUND = [['northstar', 'freightsidekick']];
+  const PRELAUNCH = ['port-watcher', 'hydro-flow', 'scale-audit'];
   // Per tool: opens, checks, upgrade intent, trial starts, and completed paid/one-time purchases.
   const PER = 10;
   const cmds = [
@@ -43,6 +44,10 @@ export async function GET() {
       ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
     ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
+    ...PRELAUNCH.flatMap((id) => [
+      ['GET', `count:${id}:click_operator`], ['GET', `count:${id}:click_operator:${today}`],
+      ['GET', `count:${id}:click_manager`], ['GET', `count:${id}:click_manager:${today}`],
+    ]),
   ];
   let res;
   try { res = await run(cmds); } catch { return json({ enabled: true, error: 'unavailable' }, 200); }
@@ -67,6 +72,15 @@ export async function GET() {
     const b = 2 + ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, tools: out, outbound },
+  const prelaunch = {};
+  const prelaunchBase = 2 + ids.length * PER + OUTBOUND.length * 2;
+  PRELAUNCH.forEach((id, i) => {
+    const b = prelaunchBase + i * 4;
+    prelaunch[id] = {
+      click_operator: num(res[b]), click_operator_today: num(res[b + 1]),
+      click_manager: num(res[b + 2]), click_manager_today: num(res[b + 3]),
+    };
+  });
+  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, tools: out, outbound, prelaunch },
     200, { 'cache-control': 'public, max-age=300' });
 }
