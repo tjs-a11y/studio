@@ -203,7 +203,7 @@
     try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){}
   }
   // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
-  try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
+
   $('run').addEventListener('click',run);
 })();
 </script>
