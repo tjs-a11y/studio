@@ -162,6 +162,7 @@
 
   var lastText = "";
   function countEvent(event) {
+    if (window.qwTrack) window.qwTrack('fair-price', event);
     try {
       fetch('/api/event', {
         method: 'POST',
