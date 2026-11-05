@@ -95,6 +95,7 @@ test('homepage sends its primary CTA to Shield and attributes the five priority 
   assert.ok(positions.every((position) => position >= 0), 'all five featured paths carry source labels');
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'featured tools follow the CEO priority order');
   for (const id of ids) assert.ok(h.includes(`href="/${id}/?ref=home-tools-${id}"`), `${id}: searchable tool link carries a source label`);
+  for (const id of ['saver', 'bill-radar', 'fair-price', 'dinner']) assert.ok(h.includes(`href="/${id}/?ref=home-hero-${id}"`), `${id}: direct hero shortcut carries a source label`);
 });
 
 
