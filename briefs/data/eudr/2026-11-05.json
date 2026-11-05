@@ -1,0 +1,126 @@
+{
+ "brief": {
+  "subject": "Ghana timber licensing in focus; Kraft Heinz exits US coffee",
+  "headline": "Ghana's EU Timber License Examined; Kraft Heinz Sells North American Coffee Unit",
+  "dek": "A look at Ghana's 16-year path to an EU timber licensing deal, plus a $650 million coffee divestment and new cocoa supply options.",
+  "lede": "It's a quiet day for EUDR news. The main item is a Mongabay analysis of how Ghana's EU timber partnership has strengthened forest governance and market access.",
+  "sections": [
+   {
+    "heading": "Ghana's EU timber deal under review",
+    "bullets": [
+     "Ghana spent 16 years negotiating a Voluntary Partnership Agreement with the EU before reaching its licensing milestone last year.",
+     "Europe is a key buyer of Ghanaian timber, so legality credentials directly shape access for wood exporters.",
+     "Beyond market access, the VPA brought support for stronger national forest governance, which the analysis says improved cooperation.",
+     "Note that this is an analysis piece, so treat its conclusions as interpretation rather than confirmed outcomes."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Kraft Heinz sells coffee unit for $650M",
+    "bullets": [
+     "Kraft Heinz is selling its North American coffee business to One Rock for $650 million.",
+     "Kraft Heinz will keep a 30% stake and use the cash to cut debt.",
+     "Coffee suppliers selling to this business should watch for a change in buyer ownership and possible shifts in sourcing contacts."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Cocoa alternatives gain ground",
+    "bullets": [
+     "Fermentation, cocoa alternatives and cultured cacao are giving bakery and snack makers new options for flavour, formulation and supply.",
+     "Cocoa exporters should track these substitutes because they could change long-term demand from snack manufacturers."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: Ghana's 16-year EU timber VPA journey, Kraft Heinz's $650M North American coffee sale, and new cocoa alternatives."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-11-05T18:45:16.873Z",
+  "date": "2026-11-05",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Mongabay",
+    "title": "How Ghana’s new license to sell sustainable timber improves institutions & cooperation (analysis)",
+    "link": "https://news.mongabay.com/2026/11/how-ghanas-new-license-to-sell-sustainable-timber-improves-institutions-collaboration-analysis/",
+    "published": "2026-11-05T14:16:40.000Z",
+    "snippet": "When Ghana began its Voluntary Partnership Agreement (VPA) process with the European Union, the attraction was clear. Europe is an important market for Ghanaian timber, international expectations around its legality were changing, and the VPA offered both market access and support for strengthening national forest governance. After a 16-year journey, last year Ghana became the […]",
+    "categories": [
+     "Uncategorized"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "Kraft Heinz to sell North American coffee business for $650M",
+    "link": "https://www.foodnavigator.com/Article/2026/11/04/kraft-heinz-to-sell-coffee-business-in-650m-deal/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-11-04T18:00:08.000Z",
+    "snippet": "Kraft Heinz will sell its North American coffee business to One Rock for $650 million, retain a 30% stake and use cash proceeds to reduce debt.",
+    "categories": [
+     "Markets"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "FoodNavigator",
+    "title": "Can science keep up with chocolate’s ambitions?",
+    "link": "https://www.bakeryandsnacks.com/Article/2026/11/04/chocolate-innovation-can-science-match-ambition/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-11-04T09:34:33.000Z",
+    "snippet": "Fermentation, cocoa alternatives and cultured cacao are giving bakery and snack makers new options for flavour, formulation and supply.",
+    "categories": [
+     "Ingredients"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 2
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "brief": {
+  "subject": "FTC hits payment processor over hidden fees and auto-renewals",
+  "headline": "Payment Processor Pays $600,000 Over Hidden Fees; New Details in Amazon Ads Case",
+  "dek": "Regulators target undisclosed fees and auto-renewing contracts, while unredacted filings detail alleged price inflation in Amazon's ad auctions.",
+  "lede": "A payment processor and its leasing affiliate will pay $600,000 to settle claims they hid fees and auto-renewing contracts from small businesses.",
+  "sections": [
+   {
+    "heading": "Hidden Fees Cost Processor $600,000",
+    "bullets": [
+     "$600,000 settlement: Riverside Payments, Cascade Equipment Leasing and their operators resolve FTC and Washington state allegations.",
+     "Regulators allege the firms promised small businesses savings on card processing but didn't disclose fees.",
+     "Auto-renewing contracts were also allegedly concealed, a trap that also catches consumers in service agreements.",
+     "Takeaway for anyone signing a contract: check fee schedules and cancellation terms before agreeing."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Amazon Ad Case Gets More Detail",
+    "bullets": [
+     "22 states and the FTC filed an updated complaint with previously redacted details against Amazon.",
+     "Regulators allege Amazon secretly manipulated its search ad auctions to inflate prices.",
+     "The filing claims auction results were adjusted to hit corporate financial targets.",
+     "These are allegations in an active case, not findings, so watch how the court responds."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "Payment processor pays $600,000 over hidden fees and auto-renewals; FTC and 22 states detail alleged Amazon ad price inflation."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-05T18:45:16.873Z",
+  "date": "2026-11-05",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "Newly unredacted material sheds light on Amazon’s alleged scheme to manipulate auction results to meet corporate financial targets The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. View",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC, Washington Take Action Against Payment Processor for Deceiving Small Businesses About Costs and Cancellation Terms",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-washington-take-action-against-payment-processor-deceiving-small-businesses-about-costs",
+    "published": "2026-11-02T12:00:00.000Z",
+    "snippet": "Riverside Payments falsely promised to save small businesses money on payment-processing services but failed to disclose fees and auto-renewing contracts, complaint alleges Payment processor Riverside Payments Inc., its affiliate Cascade Equipment Leasing LLC and their operators will pay $600,000 to resolve Federal Trade Commission and Washington state allegations that the firms deceived small bus",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Fold Bitcoin Credit Card",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/fold-bitcoin-card",
+    "published": "2026-10-30T14:21:19.000Z",
+    "snippet": "It's light on fees and can snag you lucrative rewards on everyday spending — if you tie up large sums with the company.",
+    "categories": [
+     "Credit Cards",
+     "Rewards Credit Cards"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 1
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S2",
+    "S3"
+   ]
+  }
+ ]
+}

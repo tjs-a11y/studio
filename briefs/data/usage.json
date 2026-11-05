@@ -510,5 +510,29 @@
   "input_tokens": 2699,
   "output_tokens": 864,
   "usd": 0.0281
+ },
+ {
+  "date": "2026-11-05",
+  "desk": "small-business",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1888,
+  "output_tokens": 986,
+  "usd": 0.0273
+ },
+ {
+  "date": "2026-11-05",
+  "desk": "eudr",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1546,
+  "output_tokens": 1098,
+  "usd": 0.0281
+ },
+ {
+  "date": "2026-11-05",
+  "desk": "household-money",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1597,
+  "output_tokens": 791,
+  "usd": 0.0222
  }
 ]
