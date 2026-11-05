@@ -47,9 +47,17 @@ export async function POST(request) {
   if (event === 'open') {
     // Anonymous count of a tool page being opened; no page URL or visitor identifier is retained.
     if (!toolById(tool)) return fail(400, 'Unknown event.');
-    if (!run) { console.log(JSON.stringify({ evt: 'open', tool })); return json({ ok: true }); }
-    await run(['INCR', `count:${tool}:opens`], ['INCR', `count:${tool}:opens:${day()}`]);
-    return json({ ok: true });
+    if (!run) {
+      console.log(JSON.stringify({ tag: 'qw_event_not_persisted', tool, event }));
+      return json({ ok: true, stored: false });
+    }
+    try {
+      await run(['INCR', `count:${tool}:opens`], ['INCR', `count:${tool}:opens:${day()}`]);
+      return json({ ok: true, stored: true });
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool, event }));
+      return fail(503, 'Event could not be recorded.');
+    }
   }
   if (event === 'outbound') {
     // Anonymous count of clicks from one of our sites to a partner link. No IP, no identity, no URL beyond the fixed target.
@@ -67,9 +75,17 @@ export async function POST(request) {
   }
   if (event === 'check') {
     const n = Math.max(1, Math.min(10000, Number(body.plots) || 1));
-    if (!run) { console.log(JSON.stringify({ evt: 'check', tool, items: n })); return json({ ok: true }); }
-    await run(['INCR', `count:${tool}:checks`], ['INCR', `count:${tool}:checks:${day()}`], ['INCRBY', `count:${tool}:items`, n]);
-    return json({ ok: true });
+    if (!run) {
+      console.log(JSON.stringify({ tag: 'qw_event_not_persisted', tool, event }));
+      return json({ ok: true, stored: false });
+    }
+    try {
+      await run(['INCR', `count:${tool}:checks`], ['INCR', `count:${tool}:checks:${day()}`], ['INCRBY', `count:${tool}:items`, n]);
+      return json({ ok: true, stored: true });
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool, event }));
+      return fail(503, 'Event could not be recorded.');
+    }
   }
   const email = String(body.email || '').trim().toLowerCase();
   if (!EMAIL.test(email)) return fail(400, 'Please enter a valid email.');
