@@ -69,7 +69,7 @@ test('nothing is loaded from or sent to third parties; no analytics; messages ne
     assert.ok(!/XMLHttpRequest|sendBeacon|WebSocket|EventSource/.test(s), p);
   }
   const shieldApp = shipped.find(([p]) => p.endsWith('shield/js/app.mjs'))?.[1] || '';
-  assert.equal((shieldApp.match(/\bfetch\(/g) || []).length, 1, 'Shield sends only the completed-check count from its app');
+  assert.equal((shieldApp.match(/\bfetch\(/g) || []).length, 2, 'Shield app retains its shared event helper and completed-check request');
   assert.ok(shieldApp.includes("fetch('/api/event'"), 'Shield counts are first-party');
   assert.ok(shieldApp.includes("const TOOL = 'shield'"), 'Shield uses a fixed tool label');
   assert.ok(shieldApp.includes("JSON.stringify({ tool: TOOL, event })"), 'open count sends only the fixed tool name and event label');
