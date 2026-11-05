@@ -6,6 +6,7 @@ import { EDITIONS } from './tips.mjs';
 
 const TOOL = 'shield';
 const countEvent = (event) => {
+  window.qwTrack?.(TOOL, event);
   try {
     fetch('/api/event', {
       method: 'POST',
