@@ -8,6 +8,7 @@ import { SAMPLE, SAMPLE_NAME } from './sample.mjs';
 const FREE_FILES = 2;
 const TOOL = 'saver';
 const countEvent = (event) => {
+  window.qwTrack?.(TOOL, event);
   try {
     fetch('/api/event', {
       method: 'POST',
