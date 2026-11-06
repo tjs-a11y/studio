@@ -26,3 +26,23 @@ test('Fair Price share text never includes the pasted quote', () => {
   assert.match(body, /c\.label/, 'shareText uses only the category label');
   assert.match(body, /f\.t\b/, 'shareText uses only the generic flag titles');
 });
+
+test('Dinner offers a built-in share action', () => {
+  const src = page('dinner/index.html');
+  assert.match(src, /id="shareBtn"/, 'Dinner has a Share button in its result');
+  assert.match(src, /navigator\.share/, 'Dinner uses the Web Share API');
+  assert.match(src, /navigator\.clipboard\.writeText/, 'Dinner has a clipboard fallback');
+  assert.match(src, /quickwell\.app\/dinner\//, 'the share carries the tool URL');
+});
+
+// Privacy: the shared text must be built only from the produced dinner ideas (recipe names) and
+// their count — never from the ingredients the user tapped (the `picks` object).
+test('Dinner share text never includes the tapped ingredients', () => {
+  const src = page('dinner/index.html');
+  const m = src.match(/function shareText\(nowCount, names, oneCount\) \{[\s\S]*?\n  \}\n  var lastShare/);
+  assert.ok(m, 'shareText builder is present and bounded');
+  const body = m[0];
+  assert.doesNotMatch(body, /\bpicks\b/, 'shareText must not read the tapped-ingredients object');
+  assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
+  assert.match(body, /names/, 'shareText uses only the produced recipe names');
+});

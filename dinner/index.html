@@ -101,6 +101,33 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
 
+  // Share text: built ONLY from the dinner ideas the tool produced (generic recipe names) and
+  // their count — never from the ingredients the user tapped. Nothing personal leaves the device.
+  var SHARE_URL = "https://quickwell.app/dinner/";
+  function shareText(nowCount, names, oneCount) {
+    if (nowCount) {
+      return "I tapped what was in my fridge and Quickwell Dinner found " + nowCount + " dinner" + (nowCount === 1 ? "" : "s") +
+        " I can make tonight (" + names.join(", ") + "). Turn your own fridge into dinner, free, nothing uploaded:";
+    }
+    if (oneCount) {
+      return "Quickwell Dinner found dinners I could make with one quick stop from what's in my fridge. Try it free, nothing uploaded:";
+    }
+    return "Turn what's in your fridge into tonight's dinner with Quickwell Dinner, free, nothing uploaded:";
+  }
+  var lastShare = "";
+  function doShare(btn) {
+    var text = lastShare || "Turn what's in your fridge into tonight's dinner with Quickwell Dinner, free, nothing uploaded:";
+    try {
+      if (navigator.share) { navigator.share({ text: text, url: SHARE_URL }).catch(function () {}); return; }
+    } catch (e) {}
+    try {
+      navigator.clipboard.writeText(text + " " + SHARE_URL);
+      if (btn) { btn.textContent = "Copied — paste anywhere ✓"; }
+    } catch (x) {
+      if (btn) { btn.textContent = "Copy this link: " + SHARE_URL; }
+    }
+  }
+
   // Ingredient palette: label -> tags. Tags are what recipes match on.
   var GROUPS = [
     ["Proteins", { "Chicken": ["protein"], "Beef": ["protein"], "Ground meat": ["protein"], "Pork": ["protein"], "Eggs": ["egg", "protein"], "Tofu": ["protein"], "Beans": ["protein", "beans"], "Chickpeas": ["protein", "beans"], "Canned tuna": ["protein"], "Shrimp": ["protein"], "Bacon": ["protein"], "Sausage": ["protein"] }],
@@ -212,8 +239,14 @@
     if (m.now.length) html += '<div class="grp" style="margin-top:4px">Make tonight</div>' + m.now.slice(0, 3).map(function (e) { return card(e, "now"); }).join("");
     if (m.now.length < 3 && m.one.length) html += '<div class="grp">One quick stop away</div>' + m.one.slice(0, Math.max(1, 4 - m.now.length)).map(function (e) { return card(e, "one"); }).join("");
     if (!html) html = '<div class="card">Nothing matched yet — add a carb (rice, pasta, bread, tortillas) or a protein and try again. Those unlock the most dinners.</div>';
+    if (m.now.length || m.one.length) {
+      lastShare = shareText(m.now.length, m.now.slice(0, 3).map(function (e) { return e.r.n; }), m.one.length);
+      html += '<div class="row noprint" style="margin-top:14px"><button type="button" class="ghost" id="shareBtn">Share these dinners</button></div>';
+      html += '<p class="small muted noprint" style="margin-top:4px">Shares only the dinner ideas — never what you tapped in.</p>';
+    }
     $("out").innerHTML = html; $("out").hidden = false;
     countEvent('check');
+    var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
