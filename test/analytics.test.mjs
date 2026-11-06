@@ -25,7 +25,7 @@ test('the privacy page discloses the analytics', () => {
 test('priority consumer event bridge runs before inline tool scripts', () => {
   const expected = '<script src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>';
   assert.equal(TAG, expected);
-  for (const path of ['saver/index.html', 'bill-radar/index.html', 'fair-price/index.html', 'dinner/index.html']) {
+  for (const path of ['saver/index.html', 'bill-radar/index.html', 'fair-price/index.html', 'dinner/index.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html']) {
     const html = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
     const bridge = html.indexOf(expected);
     assert.ok(bridge >= 0, path + ' loads the synchronous event bridge');

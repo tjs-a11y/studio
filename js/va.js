@@ -22,6 +22,36 @@ window.qwTrack = function (tool, event) {
   } catch (e) {}
 };
 
+ 
+// Pre-launch tier-interest telemetry. Only fixed tool/event labels are emitted;
+// no invoice, meter, volume, weight-ticket, contact, or other visitor-entered data is read.
+var qwInterestTools = ['port-watcher', 'hydro-flow', 'scale-audit'];
+var qwInterestEvents = ['click_operator', 'click_manager'];
+window.qwTrackInterest = function (tool, event) {
+  if (!qwInterestTools.includes(tool) || !qwInterestEvents.includes(event)) return;
+  var key = 'interest:' + tool + ':' + event;
+  var now = Date.now();
+  if (qwLastEvent[key] && now - qwLastEvent[key] < 250) return;
+  qwLastEvent[key] = now;
+  try {
+    window.va('event', {
+      name: tool + '.interest',
+      data: { tool: tool, event: event }
+    });
+  } catch (e) {}
+};
+
+document.addEventListener('click', function (event) {
+  var target = event.target && event.target.closest
+    ? event.target.closest('[data-qw-interest]')
+    : null;
+  if (!target) return;
+  window.qwTrackInterest(
+    target.getAttribute('data-qw-tool'),
+    target.getAttribute('data-qw-event')
+  );
+});
+
 // Observe first-party event responses without changing their payload or behavior.
 // Diagnostics contain only allowlisted tool/action names and HTTP status; never body, URL,
 // referrer, IP, entered text, or any other visitor-provided content.
