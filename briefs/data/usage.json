@@ -534,5 +534,21 @@
   "input_tokens": 1597,
   "output_tokens": 791,
   "usd": 0.0222
+ },
+ {
+  "date": "2026-11-06",
+  "desk": "small-business",
+  "model": "claude-opus-5-5",
+  "input_tokens": 2457,
+  "output_tokens": 1129,
+  "usd": 0.0324
+ },
+ {
+  "date": "2026-11-06",
+  "desk": "eudr",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1451,
+  "output_tokens": 991,
+  "usd": 0.0256
  }
 ]
