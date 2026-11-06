@@ -5,16 +5,21 @@ import vm from 'node:vm';
 
 function harness(fetchImpl) {
   const warnings = [];
+  const analyticsEvents = [];
+  const listeners = {};
+  const document = {
+    addEventListener(type, handler) { listeners[type] = handler; },
+  };
   const window = {
     location: { search: '', href: 'https://quickwell.app/shield/' },
     fetch: fetchImpl,
-    va: () => {},
+    va: (...args) => analyticsEvents.push(args),
   };
   vm.runInNewContext(readFileSync(new URL('../js/va.js', import.meta.url), 'utf8'), {
-    window, URL, URLSearchParams, Date,
+    window, document, URL, URLSearchParams, Date,
     console: { warn: (...args) => warnings.push(args) },
   });
-  return { window, warnings };
+  return { window, warnings, analyticsEvents, listeners };
 }
 
 test('event diagnostics report only safe metadata on HTTP failure', async () => {
@@ -44,4 +49,60 @@ test('successful persisted events do not emit diagnostics and preserve the respo
   await new Promise((resolve) => setImmediate(resolve));
   assert.equal(result, response);
   assert.equal(warnings.length, 0);
+});
+
+test('prelaunch tier interest emits the exact fixed tool/event payload', () => {
+  const { window, analyticsEvents } = harness(async () => ({ ok: true, status: 200 }));
+  for (const [tool, event] of [
+    ['port-watcher', 'click_operator'], ['port-watcher', 'click_manager'],
+    ['hydro-flow', 'click_operator'], ['hydro-flow', 'click_manager'],
+    ['scale-audit', 'click_operator'], ['scale-audit', 'click_manager'],
+  ]) window.qwTrackInterest(tool, event);
+
+  const actual = analyticsEvents.map(([type, payload]) => ({
+    type, name: payload.name, data: JSON.parse(JSON.stringify(payload.data))
+  }));
+  const expected = [
+    { type: 'event', name: 'port-watcher.interest', data: { tool: 'port-watcher', event: 'click_operator' } },
+    { type: 'event', name: 'port-watcher.interest', data: { tool: 'port-watcher', event: 'click_manager' } },
+    { type: 'event', name: 'hydro-flow.interest', data: { tool: 'hydro-flow', event: 'click_operator' } },
+    { type: 'event', name: 'hydro-flow.interest', data: { tool: 'hydro-flow', event: 'click_manager' } },
+    { type: 'event', name: 'scale-audit.interest', data: { tool: 'scale-audit', event: 'click_operator' } },
+    { type: 'event', name: 'scale-audit.interest', data: { tool: 'scale-audit', event: 'click_manager' } },
+  ];
+  assert.deepEqual(actual, expected);
+  window.qwTrackInterest('northstar', 'click_operator');
+  window.qwTrackInterest('port-watcher', 'open');
+  assert.equal(analyticsEvents.length, 6);
+});
+
+test('prelaunch tier click listener reads only the static data attributes', () => {
+  const { analyticsEvents, listeners } = harness(async () => ({ ok: true, status: 200 }));
+  const attributes = {
+    'data-qw-tool': 'hydro-flow',
+    'data-qw-event': 'click_manager',
+  };
+  const anchor = { getAttribute: (name) => attributes[name] ?? null };
+  const target = { closest: (selector) => selector === '[data-qw-interest]' ? anchor : null };
+  listeners.click({ target });
+  assert.deepEqual(analyticsEvents.map(([type, payload]) => ({
+    type, name: payload.name, data: JSON.parse(JSON.stringify(payload.data))
+  })), [{
+    type: 'event',
+    name: 'hydro-flow.interest',
+    data: { tool: 'hydro-flow', event: 'click_manager' },
+  }]);
+});
+
+test('each prelaunch page labels its two tier CTAs with fixed events only', () => {
+  for (const [path, tool] of [
+    ['port-watcher/index.html', 'port-watcher'],
+    ['hydro-flow/index.html', 'hydro-flow'],
+    ['scale-audit/index.html', 'scale-audit'],
+  ]) {
+    const html = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
+    assert.equal((html.match(/data-qw-interest="true"/g) || []).length, 2, path);
+    assert.ok(html.includes(`data-qw-tool="${tool}" data-qw-event="click_operator"`), path + ' operator CTA');
+    assert.ok(html.includes(`data-qw-tool="${tool}" data-qw-event="click_manager"`), path + ' manager CTA');
+  }
 });
