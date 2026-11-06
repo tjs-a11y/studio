@@ -55,5 +55,3 @@ jobs:
         env:
           SITE_URL: ${{ steps.site.outputs.url }}
           INDEXNOW_ALL: '1'
-        env:
-          SITE_URL: ${{ steps.site.outputs.url }}
