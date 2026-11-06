@@ -49,7 +49,6 @@ jobs:
           curl -fsS --retry 5 --retry-delay 30 --retry-all-errors "${SITE_URL%/}/${KEY_FILE}" > /dev/null
         env:
           SITE_URL: ${{ steps.site.outputs.url }}
-          INDEXNOW_ALL: '1'
       - name: Ping IndexNow
         if: steps.site.outputs.url != ''
         run: node scripts/indexnow.mjs
