@@ -108,11 +108,13 @@ test('priority consumer tools count page opens and completed checks anonymously'
   const eventApi = read('api/event.js');
   const statsApi = read('api/stats.js');
 
-  assert.match(shield, /const TOOL = 'shield';[\s\S]*countEvent\('open'\)/);
+  assert.match(shield, /const TOOL = 'shield';[\s\S]*Studio\.init\(/);
+  assert.doesNotMatch(shield, /countEvent\('open'\)/);
   assert.match(shield, /JSON\.stringify\(\{\s*tool:\s*TOOL,\s*event\s*\}\)/);
   assert.match(shield, /tool: 'shield', event: 'check'/);
 
-  assert.match(saver, /const TOOL = 'saver';[\s\S]*countEvent\('open'\)/);
+  assert.match(saver, /const TOOL = 'saver';[\s\S]*Studio\.init\(/);
+  assert.doesNotMatch(saver, /countEvent\('open'\)/);
   assert.match(saver, /JSON\.stringify\(\{\s*tool:\s*TOOL,\s*event\s*\}\)/);
   assert.match(saver, /tool: TOOL, event: 'check'/);
 
@@ -120,12 +122,14 @@ test('priority consumer tools count page opens and completed checks anonymously'
   assert.match(billRadar, /JSON\.stringify\(\{tool:'bill-radar',event:'check'\}\)/);
 
   assert.match(fairPrice, /JSON\.stringify\(\{\s*tool:\s*'fair-price',\s*event\s*\}\)/);
-  assert.match(fairPrice, /countEvent\('open'\)/);
+  assert.match(fairPrice, /Studio\.init\(/);
+  assert.doesNotMatch(fairPrice, /countEvent\('open'\)/);
   assert.match(fairPrice, /countEvent\('check'\)/);
   assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent('check')"), 'Fair Price counts only after its minimum-input check');
 
   assert.match(dinner, /JSON\.stringify\(\{\s*tool:\s*'dinner',\s*event\s*\}\)/);
-  assert.match(dinner, /countEvent\('open'\)/);
+  assert.match(dinner, /Studio\.init\(/);
+  assert.doesNotMatch(dinner, /countEvent\('open'\)/);
   assert.match(dinner, /countEvent\('check'\)/);
   assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent('check')"), 'Dinner counts only after its minimum-ingredient check');
 

@@ -22,17 +22,57 @@ window.qwTrack = function (tool, event) {
   } catch (e) {}
 };
 
-// Mirror the existing first-party /api/event actions into Web Analytics.
-// The request is passed through unchanged; only allowlisted tool/action fields are read.
+// Observe first-party event responses without changing their payload or behavior.
+// Diagnostics contain only allowlisted tool/action names and HTTP status; never body, URL,
+// referrer, IP, entered text, or any other visitor-provided content.
 var qwOriginalFetch = window.fetch;
 window.fetch = function (input, init) {
+  var url = '';
+  var payload = null;
   try {
-    var url = typeof input === 'string' ? input : input && input.url;
-    var body = init && init.body;
-    if (url && new URL(url, window.location.href).pathname === '/api/event' && typeof body === 'string') {
-      var payload = JSON.parse(body);
-      window.qwTrack(payload.tool, payload.event);
+    url = typeof input === 'string' ? input : input && input.url;
+    if (url && new URL(url, window.location.href).pathname === '/api/event' &&
+        (!init || !init.method || String(init.method).toUpperCase() === 'POST') &&
+        init && typeof init.body === 'string') {
+      var parsed = JSON.parse(init.body);
+      var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
+      if (tools.includes(parsed.tool) && ['open', 'check'].includes(parsed.event)) {
+        payload = { tool: parsed.tool, event: parsed.event };
+        window.qwTrack(payload.tool, payload.event);
+      }
     }
   } catch (e) {}
-  return qwOriginalFetch.apply(this, arguments);
+
+  var request = qwOriginalFetch.apply(this, arguments);
+  if (!payload || !request || typeof request.then !== 'function') return request;
+  return request.then(function (response) {
+    if (!response || !response.ok) {
+      try {
+        console.warn('[Quickwell event tracking] request failed', {
+          tool: payload.tool, event: payload.event,
+          status: response ? response.status : 'no-response'
+        });
+      } catch (e) {}
+    } else {
+      // A 2xx with stored:false means the endpoint accepted the event but had no counter store.
+      try {
+        var clone = response.clone();
+        clone.json().then(function (result) {
+          if (result && result.stored === false) {
+            console.warn('[Quickwell event tracking] accepted but not persisted', {
+              tool: payload.tool, event: payload.event, status: response.status
+            });
+          }
+        }).catch(function () {});
+      } catch (e) {}
+    }
+    return response;
+  }).catch(function (error) {
+    try {
+      console.warn('[Quickwell event tracking] network failure', {
+        tool: payload.tool, event: payload.event
+      });
+    } catch (e) {}
+    throw error;
+  });
 };
