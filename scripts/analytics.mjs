@@ -7,7 +7,8 @@ import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const SKIP = new Set(['node_modules', '.git', '.github', '.vercel', 'api', 'scripts', 'test', 'tests', 'fixtures', 'vendor', '_template', 'shield', 'utility-pipeline']);
-export const TAG = '<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>';
+// The small bridge must run synchronously before inline tool scripts emit open/check events.
+export const TAG = '<script src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>';
 export function pages(dir = root, out = []) {
   for (const n of readdirSync(dir)) {
     if (SKIP.has(n)) continue;
