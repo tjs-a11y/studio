@@ -95,6 +95,32 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
 
+  // Share text: built ONLY from the category label and the generic flag titles — never from the
+  // quote the user pasted. Nothing personal leaves the device. (Same privacy rule as Shield.)
+  var SHARE_URL = "https://quickwell.app/fair-price/";
+  function shareText(c, found) {
+    var what = c.label.toLowerCase();
+    if (found && found.length) {
+      var titles = found.map(function (f) { return f.t; }).join(", ");
+      return "I ran my " + what + " quote through Fair Price — it flagged " + found.length +
+        (found.length === 1 ? " thing" : " things") + " to watch (" + titles + "). Check your own quote free, nothing uploaded:";
+    }
+    return "I ran my " + what + " quote through Fair Price — no obvious red-flag phrases, and the checklist of what a fair quote should include. Check yours free, nothing uploaded:";
+  }
+  var lastShare = "";
+  function doShare(btn) {
+    var text = lastShare || "Check a quote for padding and red flags with Fair Price, free, nothing uploaded:";
+    try {
+      if (navigator.share) { navigator.share({ text: text, url: SHARE_URL }).catch(function () {}); return; }
+    } catch (e) {}
+    try {
+      navigator.clipboard.writeText(text + " " + SHARE_URL);
+      if (btn) { btn.textContent = "Copied — paste anywhere ✓"; }
+    } catch (x) {
+      if (btn) { btn.textContent = "Copy this link: " + SHARE_URL; }
+    }
+  }
+
   // Each category: what a fair quote includes, the padding to watch for, and the questions to ask.
   var CATS = {
     auto: { label: "Auto repair",
@@ -146,6 +172,7 @@
 
   function readHtml(text, c) {
     var found = scan(text);
+    lastShare = shareText(c, found);
     var html = "";
     if (found.length) {
       html += '<div class="grp" style="margin-top:4px">In what you pasted</div>';
@@ -157,6 +184,8 @@
     html += '<div class="grp">Padding to watch for</div><ul>' + c.watch.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
     html += '<div class="grp">Ask these before you say yes</div>' + c.ask.map(function (x) { return '<div class="ask">“' + esc(x) + '”</div>'; }).join("");
     html += '<p class="small muted" style="margin-top:12px">This is a structure check, not a price check — it never invents a market rate. The surest test of a fair price is a second, independent quote.</p>';
+    html += '<div class="row noprint" style="margin-top:14px"><button type="button" class="ghost" id="shareBtn">Share this result</button></div>';
+    html += '<p class="small muted noprint" style="margin-top:4px">Shares only what it’s for and which flags came up — never the quote you pasted.</p>';
     return html;
   }
 
@@ -179,6 +208,7 @@
     lastText = text;
     $("out").innerHTML = readHtml(text, c); $("out").hidden = false;
     countEvent('check');
+    var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   $("go").onclick = run;
