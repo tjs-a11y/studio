@@ -57,13 +57,26 @@ export function changedPageUrls(dir = root) {
   return [...urls].sort();
 }
 
+export function allCanonicalPageUrls(dir = root) {
+  const urls = new Set();
+  for (const route of pagePaths(dir)) {
+    const rel = route === '/' ? 'index.html' : route.endsWith('/') ? route.slice(1) + 'index.html' : route.slice(1);
+    let html = '';
+    try { html = readFileSync(join(dir, rel), 'utf8'); } catch { continue; }
+    if (/<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
+    const canonical = /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i.exec(html)?.[1];
+    if (canonical) urls.add(canonical);
+  }
+  return [...urls].sort();
+}
+
 async function main() {
   const site = (process.env.SITE_URL || '').trim().replace(/\/+$/, '');
   if (!site) { console.log('SITE_URL is not set: nothing to do.'); return; }
   const u = new URL(site);
   if (u.protocol !== 'https:' || u.pathname !== '/') throw new Error('SITE_URL must look like https://your-domain.com');
   const key = findKey();
-  const urlList = changedPageUrls();
+  const urlList = process.env.INDEXNOW_ALL === '1' ? allCanonicalPageUrls() : changedPageUrls();
   if (!urlList.length) { console.log('IndexNow: no changed canonical HTML pages.'); return; }
   // IndexNow accepts up to 10,000 URLs per request.
   for (let i = 0; i < urlList.length; i += 10000) {
