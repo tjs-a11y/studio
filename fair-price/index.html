@@ -191,7 +191,8 @@
     return html;
   }
 
-  var lastText = "";
+  var lastText = "", sampleActive = false;
+  $("text").addEventListener("input", function () { sampleActive = false; });
   function countEvent(event) {
     if (window.qwTrack) window.qwTrack('fair-price', event);
     try {
@@ -205,22 +206,23 @@
   }
 
   function run(isDemo) {
-    var text = $("text").value, c = CATS[cat];
+    var text = $("text").value, c = CATS[cat], demo = !!isDemo || sampleActive;
     if (text.trim().length < 3) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Paste or describe the quote first, then check it.</div>'; $("out").scrollIntoView({ behavior: "smooth" }); return; }
-    lastText = isDemo ? "" : text;
-    $("out").innerHTML = readHtml(text, c, !!isDemo); $("out").hidden = false;
-    countEvent(isDemo ? 'demo' : 'check');
+    lastText = demo ? "" : text;
+    $("out").innerHTML = readHtml(text, c, demo); $("out").hidden = false;
+    countEvent(demo ? 'demo' : 'check');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   $("go").onclick = function () { run(false); };
   $("sampleBtn").onclick = function () {
+    sampleActive = true;
     cat = "auto";
     [].forEach.call($("cat").children, function (c) { c.setAttribute("aria-pressed", c.dataset.k === cat ? "true" : "false"); });
     $("text").value = "Brake job — pads and rotors all four, $1,480. Shop supplies $95. Recommend coolant flush and cabin filter while we're in there. 50% deposit, today only.";
     run(true);
   };
-  $("clear").onclick = function () { $("text").value = ""; $("out").hidden = true; };
+  $("clear").onclick = function () { sampleActive = false; lastText = ""; $("text").value = ""; $("out").hidden = true; };
 
   // ---- Quickwell Plus: compare + negotiate ----
   var PRO = false;
