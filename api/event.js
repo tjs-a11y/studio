@@ -5,7 +5,7 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit']);
+const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit', 'demo']);
 // Sites (not billable tools) that may record anonymous outbound-link clicks or homepage visits.
 const SITES = new Set(['northstar', 'quickwell']);
 const OUT_TARGETS = new Set(['freightsidekick']);
@@ -72,6 +72,21 @@ export async function POST(request) {
     if (!run) { console.log(JSON.stringify({ evt: 'upgrade', tool })); return json({ ok: true }); }
     await run(['INCR', `count:${tool}:upgrade_clicks`], ['INCR', `count:${tool}:upgrade_clicks:${day()}`]);
     return json({ ok: true });
+  }
+  if (event === 'demo') {
+    // A demo is an example-only run. Count it separately from a visitor's own completed check.
+    // Only fixed aggregate keys are written; the sample text and all user-entered content stay local.
+    if (!run) {
+      console.log(JSON.stringify({ tag: 'qw_event_not_persisted', tool, event }));
+      return json({ ok: true, stored: false });
+    }
+    try {
+      await run(['INCR', `count:${tool}:demos`], ['INCR', `count:${tool}:demos:${day()}`]);
+      return json({ ok: true, stored: true });
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool, event }));
+      return fail(503, 'Event could not be recorded.');
+    }
   }
   if (event === 'check') {
     const n = Math.max(1, Math.min(10000, Number(body.plots) || 1));
