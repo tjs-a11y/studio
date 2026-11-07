@@ -1,0 +1,269 @@
+{
+ "brief": {
+  "subject": "IRS sets 2027 tax numbers; state ballots shake up taxes",
+  "headline": "IRS Releases 2027 Inflation Adjustments as Voters Reshape State Tax Rules",
+  "dek": "New 2027 brackets and deductions, big ballot outcomes in Florida, Colorado and Washington, and over 6,500 new opportunity zones.",
+  "lede": "The IRS has published tax year 2027 inflation adjustments for nearly 70 provisions, including brackets and the standard deduction. These are the figures for planning next year's withholding and estimated payments.",
+  "sections": [
+   {
+    "heading": "IRS Posts 2027 Inflation Adjustments",
+    "bullets": [
+     "Nearly 70 tax provisions got inflation updates for tax year 2027, the IRS says.",
+     "Income tax brackets and the standard deduction are among the items adjusted.",
+     "Owners and freelancers should use the new figures when planning 2027 estimated payments and payroll withholding."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "heading": "Election Day Rewrites State Tax Rules",
+    "bullets": [
+     "Florida voters approved Amendment 3, a property tax cut that forces local governments to decide which services to trim.",
+     "Colorado's Amendment 87 backers claim victory on a measure raising income taxes on high earners.",
+     "Washington's high-earner income tax stands after Initiative 645 backers conceded defeat.",
+     "Business owners in these states should watch for local fee, levy and service changes as rollouts begin."
+    ],
+    "source_ids": [
+     "S2",
+     "S4",
+     "S5",
+     "S6"
+    ]
+   },
+   {
+    "heading": "Over 6,500 Opportunity Zones Named",
+    "bullets": [
+     "Treasury and the IRS designated more than 6,500 communities as opportunity zones.",
+     "The designations span all 50 states, the District of Columbia and five U.S. territories.",
+     "Owners weighing new locations or investments should check whether their area made the list."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "AICPA Seeks Penalty Relief for Trusts",
+    "bullets": [
+     "The AICPA asked the IRS to waive 2026 estimated tax penalties for certain estates and trusts.",
+     "Open questions remain on how the provision fits with rules specific to estates and trusts.",
+     "Bookkeepers handling fiduciary returns should hold off on final penalty calculations until the IRS responds."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "IRS 2027 brackets and standard deduction, state tax ballot results, 6,500+ opportunity zones, and AICPA's call for estate and trust penalty relief."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-07T16:50:41.747Z",
+  "date": "2026-11-07",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "TaxDome Unveils Client MCP for Accounting Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/taxdome-unveils-client-mcp-for-accounting-firms/193347/",
+    "published": "2026-11-06T20:31:00.000Z",
+    "snippet": "Practice management platform TaxDome has released a client MCP, allowing a firm's clients to reach their accountant from inside their own AI assistant.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "ai assistant",
+     "ai assistants",
+     "Artificial Intelligence",
+     "mcp",
+     "Model Context Protocol",
+     "TaxDome",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "5 Questions After Florida Voters Approved Property Tax Ballot Amendment",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/5-questions-after-florida-voters-approved-property-tax-ballot-amendment/193425/",
+    "published": "2026-11-06T18:43:18.000Z",
+    "snippet": "As local officials prepare for the rollout of Amendment 3, here are five things to watch.",
+    "categories": [
+     "ballot measures",
+     "Florida",
+     "property tax",
+     "property tax cut",
+     "property taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "AICPA Calls on IRS to Waive 2026 Estimated Tax Penalties for Certain Estates and Trusts",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/aicpa-calls-on-irs-to-waive-2026-estimated-tax-penalties-for-certain-estates-and-trusts/193294/",
+    "published": "2026-11-06T17:24:27.000Z",
+    "snippet": "Questions remain about how the provision interacts with the tax rules that specifically govern estates and trusts.",
+    "categories": [
+     "AICPA",
+     "estate taxes",
+     "fiduciary",
+     "Income Taxes",
+     "IRS",
+     "trust taxes",
+     "trusts"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "‘We’re Going to Be Underwater’: What Florida’s Property Tax Cut Means for Flooding",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/were-going-to-be-underwater-what-floridas-property-tax-cut-means-for-flooding/193413/",
+    "published": "2026-11-06T17:07:10.000Z",
+    "snippet": "Florida voters resoundingly decided to slash their own property taxes on election day, sending shockwaves through the local governments who now have to figure out which services to cut.",
+    "categories": [
+     "ballot measures",
+     "Florida",
+     "property tax",
+     "property tax cut",
+     "property taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Supporters of Colorado’s Amendment 87 Declare Victory for Major Rewrite of State’s Tax Code",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/supporters-of-colorados-amendment-87-declare-victory-for-major-rewrite-of-states-tax-code/193409/",
+    "published": "2026-11-06T16:33:54.000Z",
+    "snippet": "Measure would raise income taxes on high earners in seismic change to state fiscal policy.",
+    "categories": [
+     "ballot measures",
+     "Colorado",
+     "graduated income tax",
+     "Income Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "Washington ‘Millionaires Tax’ is Upheld as Initiative 645 Fails",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/washington-millionaires-tax-is-upheld-as-initiative-645-fails/193397/",
+    "published": "2026-11-06T15:26:36.000Z",
+    "snippet": "Washington's high-earners income tax has withstood an effort to repeal it, as backers of Initiative 645 conceded defeat.",
+    "categories": [
+     "ballot measures",
+     "Income Taxes",
+     "millionaire's tax",
+     "millionaires",
+     "tax on millionaires",
+     "Taxes",
+     "Washington state",
+     "wealth tax",
+     "wealthy"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "CPA Practice Advisor",
+    "title": "IRS Adjusts Tax Brackets, Standard Deduction for Tax Year 2027",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/05/irs-adjusts-tax-brackets-standard-deduction-for-tax-year-2027/193358/",
+    "published": "2026-11-05T22:50:05.000Z",
+    "snippet": "The IRS has released the tax year 2027 annual inflation adjustments for nearly 70 tax provisions.",
+    "categories": [
+     "2027 income tax brackets",
+     "2027 tax brackets",
+     "earned income tax credit",
+     "eitc",
+     "Income Taxes",
+     "IRS",
+     "marginal tax rates",
+     "standard deduction",
+     "tax brackets",
+     "tax credits",
+     "tax deductions",
+     "tax rates",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S8",
+    "source": "CPA Practice Advisor",
+    "title": "Treasury, IRS Designate Over 6,500 Communities as Opportunity Zones",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/05/treasury-irs-designate-over-6500-communities-as-opportunity-zones/193373/",
+    "published": "2026-11-05T22:44:00.000Z",
+    "snippet": "More than 6,500 communities covering all 50 states, the District of Columbia, and five U.S. territories have been federally designated as opportunity zones, the Treasury Department and the IRS announced on Thursday.",
+    "categories": [
+     "IRS",
+     "low-income communities",
+     "qualified opportunity zones",
+     "rural areas",
+     "rural communities",
+     "Taxes",
+     "Treasury Department"
+    ]
+   },
+   {
+    "id": "S9",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance on Eligible Investments for Trump Accounts; Hearing",
+    "link": "https://www.federalregister.gov/documents/2026/11/04/2026-22506/guidance-on-eligible-investments-for-trump-accounts-hearing",
+    "published": "2026-11-04T12:00:00.000Z",
+    "snippet": "This document provides a notice of proposed rulemaking (CC- 00349938-26) published in the Federal Register on August 21, 2026. The proposed regulations provided guidance regarding eligible investments, which are the only assets in which the Trump account may be invested before the first day of the calendar year in which the account beneficiary attains 18.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 8
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 1,
+    "kept": 1
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

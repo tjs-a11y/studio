@@ -1,0 +1,132 @@
+{
+ "brief": {
+  "subject": "Rental pricing deception draws $49.75 million FTC settlement",
+  "headline": "Big Landlord Pays $49.75 Million Over Deceptive Rental Pricing",
+  "dek": "The FTC and four states settle with Progress Residential, a payment processor pays $600,000, and Amazon's ad case gets new details.",
+  "lede": "Progress Residential and owner Pretium Partners will pay $49.75 million to settle FTC and state charges of deceptive rental pricing. The FTC calls it its largest enforcement action against a landlord.",
+  "sections": [
+   {
+    "heading": "Landlord Settles Rental Pricing Charges",
+    "bullets": [
+     "$49.75 million: what Progress Residential and Pretium Partners will pay to settle FTC and state charges.",
+     "Four states joined the FTC in alleging that renters were misled by deceptive rental pricing.",
+     "Progress Residential is the largest U.S. manager of single-family rental homes, so many renters could be affected.",
+     "Renters should compare the advertised rent with the total costs in the lease before signing."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Payment Processor's 'Risk-Free' Cancellation Claims",
+    "bullets": [
+     "$600,000: what Riverside Payments, Cascade Equipment Leasing and their operators will pay the FTC and Washington state.",
+     "Regulators say the firms falsely promised small businesses lower payment processing costs.",
+     "Merchants were promised 'risk-free' cancellation, but regulators say canceling was made nearly impossible.",
+     "Small business owners should get cancellation terms in writing before signing any processing deal."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Amazon Ad Case Details Unsealed",
+    "bullets": [
+     "The FTC and 22 states filed an updated complaint against Amazon with previously redacted details.",
+     "Regulators allege Amazon used deceptive and unfair practices to secretly inflate prices in its search ad auction.",
+     "The new filing points to substantial harm to advertisers, including sellers who pay for placement on Amazon."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "Progress Residential pays $49.75 million over deceptive rental pricing, a payment processor pays $600,000, and Amazon's ad case gets new details."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-07T16:50:41.747Z",
+  "date": "2026-11-07",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "Progress Residential and Owner Pretium Partners to Pay $49.75 Million to Settle FTC and States’ Charges Over Deceptive Rental Pricing Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/progress-residential-owner-pretium-partners-pay-4975-million-settle-ftc-states-charges-over",
+    "published": "2026-11-06T12:00:00.000Z",
+    "snippet": "The nation’s largest property manager of single-family rental homes, Progress Residential, and its owner, private equity firm Pretium Partners, will pay $49.75 million to settle charges brought by the Federal Trade Commission and four states that the companies misled consumers with deceptive rental pricing practices. This is the largest enforcement matter taken against a landlord in the Commission",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. Details in the updated version of the complaint show substantial harm to advertisers as well as the direct statements Amazon made to mi",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC, Washington Take Action Against Payment Processor for Deceiving Small Businesses About Costs and Cancellation Terms",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-washington-take-action-against-payment-processor-deceiving-small-businesses-about-costs",
+    "published": "2026-11-02T12:00:00.000Z",
+    "snippet": "Payment processor Riverside Payments Inc., its affiliate Cascade Equipment Leasing LLC and their operators will pay $600,000 to resolve Federal Trade Commission and Washington state allegations that the firms deceived small businesses by falsely promising to save them money on payment processing services and making it nearly impossible to cancel despite offering “risk-free” cancellation. Small bus",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
