@@ -108,6 +108,26 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
 
+  // Share text: built ONLY from the generated dish name — never the photo the user added
+  // (the photo stays on the device and is never uploaded or shared).
+  var SHARE_URL = "https://quickwell.app/copycat/";
+  function shareText(title) {
+    return "I cracked a copycat " + title + " at home with Quickwell Copycat Kitchen — it even gives you the restaurant trick. Try it free, nothing uploaded:";
+  }
+  var lastShare = "";
+  function doShare(btn) {
+    var text = lastShare || "Rebuild a restaurant dish at home with Quickwell Copycat Kitchen, free, nothing uploaded:";
+    try {
+      if (navigator.share) { navigator.share({ text: text, url: SHARE_URL }).catch(function () {}); return; }
+    } catch (e) {}
+    try {
+      navigator.clipboard.writeText(text + " " + SHARE_URL);
+      if (btn) { btn.textContent = "Copied — paste anywhere ✓"; }
+    } catch (x) {
+      if (btn) { btn.textContent = "Copy this link: " + SHARE_URL; }
+    }
+  }
+
   // What the user tells us. We reverse-engineer from this, not from pixels.
   var CUISINES = {
     italian: { label: "Italian", pack: ["garlic", "good olive oil", "parmesan", "basil or oregano"], secret: "Finish the dish in the pan with a splash of the starchy pasta water — that one move is what makes restaurant pasta silky instead of dry." },
@@ -220,9 +240,14 @@
     if (!sel.protein) sel.protein = "no meat";
     var d = build();
     lastDish = d;
+    lastShare = shareText(d.title);
     $("out").innerHTML = '<div class="grp" style="margin-top:4px">Your copycat</div>' + dishHtml(d, false)
-      + '<p class="small muted">This is a close home version built from what you told us — taste and adjust the seasoning as you go. That\'s how copycat recipes always work.</p>';
-    $("out").hidden = false; $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+      + '<p class="small muted">This is a close home version built from what you told us — taste and adjust the seasoning as you go. That\'s how copycat recipes always work.</p>'
+      + '<div class="row noprint" style="margin-top:12px"><button type="button" class="ghost" id="shareBtn">Share this copycat</button></div>'
+      + '<p class="small muted noprint" style="margin-top:4px">Shares only the dish name — never your photo.</p>';
+    $("out").hidden = false;
+    var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
+    $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   var lastDish = null;

@@ -46,3 +46,23 @@ test('Dinner share text never includes the tapped ingredients', () => {
   assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
   assert.match(body, /names/, 'shareText uses only the produced recipe names');
 });
+
+test('Copycat offers a built-in share action', () => {
+  const src = page('copycat/index.html');
+  assert.match(src, /id="shareBtn"/, 'Copycat has a Share button in its result');
+  assert.match(src, /navigator\.share/, 'Copycat uses the Web Share API');
+  assert.match(src, /navigator\.clipboard\.writeText/, 'Copycat has a clipboard fallback');
+  assert.match(src, /quickwell\.app\/copycat\//, 'the share carries the tool URL');
+});
+
+// Privacy: the shared text must be built only from the generated dish name — never from the
+// photo the user added (the photo stays on-device and is never uploaded or shared).
+test('Copycat share text never includes the uploaded photo', () => {
+  const src = page('copycat/index.html');
+  const m = src.match(/function shareText\(title\) \{[\s\S]*?\n  \}\n  var lastShare/);
+  assert.ok(m, 'shareText builder is present and bounded');
+  const body = m[0];
+  assert.doesNotMatch(body, /readAsDataURL|FileReader|\.src|ref/, 'shareText must not touch the photo/reference image');
+  assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
+  assert.match(body, /title/, 'shareText uses only the generated dish title');
+});
