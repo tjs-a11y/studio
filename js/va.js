@@ -9,6 +9,9 @@ window.qwTrack = function (tool, event) {
   if (!allowedTools.includes(tool) || !allowedEvents.includes(event)) return;
   var key = tool + ':' + event;
   var now = Date.now();
+  // An open is a page-load signal: emit it once per page, even if the first-party
+  // /api/event request arrives later. Checks retain a short duplicate-click guard.
+  if (event === 'open' && qwLastEvent[key]) return;
   if (qwLastEvent[key] && now - qwLastEvent[key] < 250) return;
   qwLastEvent[key] = now;
   var source = 'direct';
@@ -22,7 +25,21 @@ window.qwTrack = function (tool, event) {
   } catch (e) {}
 };
 
- 
+// Record the page-open signal directly for the four priority consumer tools.
+// The first-party counter request may also call qwTrack; the per-page guard above
+// keeps that second path from double-counting. Shield stays out of Vercel Insights.
+(function trackPriorityConsumerOpen() {
+  var path = (window.location.pathname || '/').replace(/\/+$/, '') || '/';
+  var pageTools = {
+    '/saver': 'saver',
+    '/bill-radar': 'bill-radar',
+    '/fair-price': 'fair-price',
+    '/dinner': 'dinner'
+  };
+  var tool = pageTools[path];
+  if (tool) window.qwTrack(tool, 'open');
+})();
+
 // Pre-launch tier-interest telemetry. Only fixed tool/event labels are emitted;
 // no invoice, meter, volume, weight-ticket, contact, or other visitor-entered data is read.
 var qwInterestTools = ['port-watcher', 'hydro-flow', 'scale-audit'];
