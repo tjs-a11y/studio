@@ -57,6 +57,7 @@
     <textarea id="text" placeholder="e.g. Brake job — pads and rotors all four, $1,480. Shop supplies $95. Recommend coolant flush and cabin filter while we're in there. 50% deposit, today only."></textarea>
     <div class="row">
       <button id="go">Check it →</button>
+      <button class="ghost" id="sampleBtn">Try a sample quote</button>
       <button class="ghost" id="clear">Clear</button>
     </div>
     <p class="small muted" style="margin-bottom:0">Information, not financial or legal advice. It never invents a market price — for the real number, get a second quote.</p>
@@ -170,10 +171,11 @@
 
   function scan(text) { return RULES.filter(function (r) { return r.re.test(text); }); }
 
-  function readHtml(text, c) {
+  function readHtml(text, c, isDemo) {
     var found = scan(text);
-    lastShare = shareText(c, found);
+    lastShare = isDemo ? "See how Fair Price checks a sample quote. Try your own estimate free, nothing uploaded:" : shareText(c, found);
     var html = "";
+    if (isDemo) html += '<p class="small muted" style="margin-top:4px"><b>Sample only.</b> This is a demonstration, not a review of your quote. Paste your own estimate above for a real check.</p>';
     if (found.length) {
       html += '<div class="grp" style="margin-top:4px">In what you pasted</div>';
       html += found.map(function (f) { return '<div class="flag ' + f.k + '"><h3>' + (f.k === "red" ? "🚩 " : "⚠️ ") + esc(f.t) + "</h3><p>" + esc(f.d) + "</p></div>"; }).join("");
@@ -189,7 +191,8 @@
     return html;
   }
 
-  var lastText = "";
+  var lastText = "", sampleActive = false;
+  $("text").addEventListener("input", function () { sampleActive = false; });
   function countEvent(event) {
     if (window.qwTrack) window.qwTrack('fair-price', event);
     try {
@@ -202,22 +205,29 @@
     } catch (e) {}
   }
 
-  function run() {
-    var text = $("text").value, c = CATS[cat];
+  function run(isDemo) {
+    var text = $("text").value, c = CATS[cat], demo = !!isDemo || sampleActive;
     if (text.trim().length < 3) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Paste or describe the quote first, then check it.</div>'; $("out").scrollIntoView({ behavior: "smooth" }); return; }
-    lastText = text;
-    $("out").innerHTML = readHtml(text, c); $("out").hidden = false;
-    countEvent('check');
+    lastText = demo ? "" : text;
+    $("out").innerHTML = readHtml(text, c, demo); $("out").hidden = false;
+    countEvent(demo ? 'demo' : 'check');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  $("go").onclick = run;
-  $("clear").onclick = function () { $("text").value = ""; $("out").hidden = true; };
+  $("go").onclick = function () { run(false); };
+  $("sampleBtn").onclick = function () {
+    sampleActive = true;
+    cat = "auto";
+    [].forEach.call($("cat").children, function (c) { c.setAttribute("aria-pressed", c.dataset.k === cat ? "true" : "false"); });
+    $("text").value = "Brake job — pads and rotors all four, $1,480. Shop supplies $95. Recommend coolant flush and cabin filter while we're in there. 50% deposit, today only.";
+    run(true);
+  };
+  $("clear").onclick = function () { sampleActive = false; lastText = ""; $("text").value = ""; $("out").hidden = true; };
 
   // ---- Quickwell Plus: compare + negotiate ----
   var PRO = false;
   function compare() {
-    var a = lastText || $("text").value, b = $("text2").value, c = CATS[cat];
+    var a = lastText, b = $("text2").value, c = CATS[cat];
     if (!a.trim() || !b.trim()) { $("premout").innerHTML = '<div class="card">Check your first quote above, then paste a second quote here.</div>'; return; }
     var fa = scan(a), fb = scan(b);
     var row = function (label, f) { return '<div class="flag ' + (f.length ? (f.some(function (x) { return x.k === "red"; }) ? "red" : "amb") : "ok") + '"><h3>' + esc(label) + "</h3><p>" + (f.length ? f.map(function (x) { return x.t; }).join(", ") : "no red-flag phrases") + "</p></div>"; };

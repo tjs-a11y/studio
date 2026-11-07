@@ -1,5 +1,5 @@
 // GET /api/stats  — anonymous, aggregate usage counts per tool, so the growth scoreboard can read them.
-// No personal data: only aggregate integer counters for visits, tool opens, checks, trials and purchases.
+// No personal data: only aggregate integer counters for visits, tool opens, demos, checks, trials and purchases.
 // Public and cacheable. Returns { enabled:false } until Upstash/KV is connected on the project.
 import { json, tools } from './_lib/core.js';
 
@@ -32,7 +32,7 @@ export async function GET() {
   // Anonymous outbound-click counters from our other sites (counts only, no identity).
   const OUTBOUND = [['northstar', 'freightsidekick']];
   // Per tool: opens, checks, upgrade intent, trial starts, and completed paid/one-time purchases.
-  const PER = 10;
+  const PER = 12;
   const cmds = [
     ['GET', 'count:quickwell:visits'], ['GET', `count:quickwell:visits:${today}`],
     ...ids.flatMap((id) => [
@@ -41,6 +41,7 @@ export async function GET() {
       ['GET', `count:${id}:upgrade_clicks`], ['GET', `count:${id}:upgrade_clicks:${today}`],
       ['GET', `count:${id}:trials`], ['GET', `count:${id}:trials:${today}`],
       ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
+      ['GET', `count:${id}:demos`], ['GET', `count:${id}:demos:${today}`],
     ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
   ];
@@ -57,16 +58,18 @@ export async function GET() {
       upgrade_clicks: num(res[b + 4]), upgrade_clicks_today: num(res[b + 5]),
       trials: num(res[b + 6]), trials_today: num(res[b + 7]),
       subs: num(res[b + 8]), subs_today: num(res[b + 9]),
+      demos: num(res[b + 10]), demos_today: num(res[b + 11]),
     };
   });
   const total = Object.values(out).reduce((a, t) => a + t.checks, 0);
   const total_trials = Object.values(out).reduce((a, t) => a + t.trials, 0);
   const total_subs = Object.values(out).reduce((a, t) => a + t.subs, 0);
+  const total_demos = Object.values(out).reduce((a, t) => a + t.demos, 0);
   const outbound = {};
   OUTBOUND.forEach(([site, target], i) => {
     const b = 2 + ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, tools: out, outbound },
+  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, total_demos, tools: out, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }
