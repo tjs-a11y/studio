@@ -125,7 +125,7 @@ test('priority consumer tools count page opens and completed checks anonymously'
   assert.match(fairPrice, /Studio\.init\(/);
   assert.doesNotMatch(fairPrice, /countEvent\('open'\)/);
   assert.match(fairPrice, /countEvent\(isDemo \? 'demo' : 'check'\)/);
-  assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent(isDemo ? 'demo' : 'check')"), 'Fair Price counts demos separately and real checks only after its minimum-input check');
+  assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent(demo ? 'demo' : 'check')"), 'Fair Price counts demos separately and real checks only after its minimum-input check');
   assert.match(eventApi, /if \(event === 'demo'\)/);
   assert.match(statsApi, /demos:/);
 
