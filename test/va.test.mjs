@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-function harness(fetchImpl) {
+function harness(fetchImpl, path = '/shield/') {
   const warnings = [];
   const analyticsEvents = [];
   const listeners = {};
@@ -11,7 +11,7 @@ function harness(fetchImpl) {
     addEventListener(type, handler) { listeners[type] = handler; },
   };
   const window = {
-    location: { search: '', href: 'https://quickwell.app/shield/' },
+    location: { search: '', pathname: path, href: 'https://quickwell.app' + path },
     fetch: fetchImpl,
     va: (...args) => analyticsEvents.push(args),
   };
@@ -49,6 +49,41 @@ test('successful persisted events do not emit diagnostics and preserve the respo
   await new Promise((resolve) => setImmediate(resolve));
   assert.equal(result, response);
   assert.equal(warnings.length, 0);
+});
+
+test('priority consumer pages emit exactly one anonymous tool_open on page load', () => {
+  for (const [path, tool] of [
+    ['/saver/', 'saver'],
+    ['/bill-radar/', 'bill-radar'],
+    ['/fair-price/', 'fair-price'],
+    ['/dinner/', 'dinner'],
+  ]) {
+    const { analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), path);
+    const actual = analyticsEvents.map(([type, payload]) => ({
+      type, name: payload.name, data: JSON.parse(JSON.stringify(payload.data))
+    }));
+    assert.deepEqual(actual, [{
+      type: 'event',
+      name: 'tool_open',
+      data: { tool, source: 'direct' }
+    }], path);
+  }
+});
+
+test('first-party open request does not duplicate the page-load open event', async () => {
+  const { window, analyticsEvents } = harness(async () => ({
+    ok: true, status: 200, clone: () => ({ json: async () => ({ ok: true, stored: true }) })
+  }), '/dinner/');
+  await window.fetch('/api/event', {
+    method: 'POST',
+    body: JSON.stringify({ tool: 'dinner', event: 'open' })
+  });
+  assert.equal(analyticsEvents.filter(([, payload]) => payload.name === 'tool_open').length, 1);
+});
+
+test('Shield remains excluded from Vercel Web Analytics events', () => {
+  const { analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/shield/');
+  assert.equal(analyticsEvents.length, 0);
 });
 
 test('prelaunch tier interest emits the exact fixed tool/event payload', () => {
