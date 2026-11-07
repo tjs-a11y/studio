@@ -225,7 +225,7 @@
   // ---- Quickwell Plus: compare + negotiate ----
   var PRO = false;
   function compare() {
-    var a = lastText || $("text").value, b = $("text2").value, c = CATS[cat];
+    var a = lastText, b = $("text2").value, c = CATS[cat];
     if (!a.trim() || !b.trim()) { $("premout").innerHTML = '<div class="card">Check your first quote above, then paste a second quote here.</div>'; return; }
     var fa = scan(a), fb = scan(b);
     var row = function (label, f) { return '<div class="flag ' + (f.length ? (f.some(function (x) { return x.k === "red"; }) ? "red" : "amb") : "ok") + '"><h3>' + esc(label) + "</h3><p>" + (f.length ? f.map(function (x) { return x.t; }).join(", ") : "no red-flag phrases") + "</p></div>"; };
