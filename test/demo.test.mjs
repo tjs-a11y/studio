@@ -18,7 +18,7 @@ test('Fair Price sample quote is explicit and is not counted as a real check', (
   assert.match(page, /run\(true\)/);
   assert.match(page, /sampleActive = true/);
   assert.match(page, /demo = !!isDemo \\|\\| sampleActive/);
-  assert.match(page, /countEvent\(isDemo \? 'demo' : 'check'\)/);
+  assert.match(page, /countEvent\(demo \? 'demo' : 'check'\)/);
   assert.match(page, /Sample only\.<\/b> This is a demonstration, not a review of your quote/);
   assert.match(page, /See how Fair Price checks a sample quote/);
   assert.match(page, /var a = lastText, b = \$\("text2"\)\.value/, 'the sample is not treated as a checked first quote for Plus comparisons');
