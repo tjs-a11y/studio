@@ -217,3 +217,5 @@ A niche is not launch-ready until it has:
 - **Next concrete action:** restore an authorized read path for live `/api/stats` and Vercel Web Analytics queries; after a full post-deploy collection window, measure `share-bill-radar` source opens separately from checks and purchases.
 
 **Source URLs:** https://quickwell.app/api/stats · https://quickwell.app/sitemap.xml · https://quickwell.app/bill-radar/ · https://github.com/tjs-a11y/studio/pull/47 · https://github.com/tjs-a11y/studio/actions/runs/42452074273 · https://vercel.com/tjs-a11ys-projects/studio/7uj1LoSY89vrZRkkNCMapndrNurR
+
+- **IndexNow follow-through:** GitHub Actions run #42452175672 for production commit `2681bfe6a321e259c78b990ed39dfc727c53cfb9` completed successfully at 2026-11-08 05:51 UTC. The workflow confirmed the key file was live and logged `IndexNow: 200 OK for 301 URLs`. This is a successful IndexNow submission/acceptance handshake only; it does **not** prove Google or Bing indexed any URL.
