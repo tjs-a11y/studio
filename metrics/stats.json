@@ -1,16 +1,17 @@
 {
-  "fetched": "2026-11-07T16:36:26.487Z",
-  "date": "2026-11-07",
+  "fetched": "2026-11-08T16:46:14.154Z",
+  "date": "2026-11-08",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-07T16:36:26.457Z",
+  "generated": "2026-11-08T16:46:14.099Z",
   "visits": {
-    "total": 165,
-    "today": 8
+    "total": 178,
+    "today": 5
   },
   "total_checks": 0,
   "total_trials": 0,
   "total_subs": 0,
+  "total_demos": 0,
   "tools": {
     "dinner": {
       "opens": 8,
@@ -22,7 +23,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "copycat": {
       "opens": 2,
@@ -34,7 +37,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "kitchen": {
       "opens": 0,
@@ -46,7 +51,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "fair-price": {
       "opens": 8,
@@ -58,7 +65,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "proof": {
       "opens": 0,
@@ -70,7 +79,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "keep-the-receipt": {
       "opens": 0,
@@ -82,7 +93,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "double-dose": {
       "opens": 0,
@@ -94,7 +107,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "before-you-sign": {
       "opens": 0,
@@ -106,7 +121,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "roadside-sos": {
       "opens": 0,
@@ -118,7 +135,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "bill-radar": {
       "opens": 3,
@@ -130,7 +149,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "vigless": {
       "opens": 0,
@@ -142,7 +163,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "tradepath": {
       "opens": 0,
@@ -154,7 +177,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "fuelgauge": {
       "opens": 0,
@@ -166,7 +191,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "lotwise": {
       "opens": 0,
@@ -178,7 +205,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "rate-con-checker": {
       "opens": 0,
@@ -190,7 +219,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "haul-audit": {
       "opens": 0,
@@ -202,7 +233,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "royalty-check": {
       "opens": 0,
@@ -214,7 +247,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "audit-kit": {
       "opens": 0,
@@ -226,7 +261,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "plot-file-checker": {
       "opens": 0,
@@ -238,7 +275,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "permit-watch": {
       "opens": 0,
@@ -250,7 +289,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "vendor-check": {
       "opens": 0,
@@ -262,7 +303,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "spare-key": {
       "opens": 0,
@@ -274,7 +317,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "brain-pass": {
       "opens": 6,
@@ -286,7 +331,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "footsure": {
       "opens": 0,
@@ -298,7 +345,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "commodities": {
       "opens": 0,
@@ -310,7 +359,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "saver": {
       "opens": 6,
@@ -322,7 +373,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "pilot": {
       "opens": 0,
@@ -334,7 +387,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "shield": {
       "opens": 0,
@@ -346,7 +401,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     },
     "utility-pipeline": {
       "opens": 0,
@@ -358,7 +415,9 @@
       "trials": 0,
       "trials_today": 0,
       "subs": 0,
-      "subs_today": 0
+      "subs_today": 0,
+      "demos": 0,
+      "demos_today": 0
     }
   },
   "outbound": {
