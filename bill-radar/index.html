@@ -166,56 +166,7 @@
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
-  var money=function(n){return '
-  function run(){
-    var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
-    if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
-    var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
-    var endVal=$('end').value; // YYYY-MM or ''
-    var now=new Date(); now.setDate(1);
-    var endIdx=-1;
-    if(endVal){ var p=endVal.split('-'); var ed=new Date(+p[0],(+p[1])-1,1);
-      endIdx=(ed.getFullYear()-now.getFullYear())*12+(ed.getMonth()-now.getMonth()); }
-    var baseMonthly=kwh*rate/100;
-    var monthsName=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var tb=$('tbl').querySelector('tbody'); tb.innerHTML='';
-    var next12=0, rolledAt=null;
-    for(var i=0;i<12;i++){
-      var r=rate*Math.pow(1+chg,i/12);
-      if(endIdx>=0 && i>=endIdx){ r=r*(1+bump); if(rolledAt===null) rolledAt=i; }
-      var bill=kwh*r/100; next12+=bill;
-      var d=new Date(now.getFullYear(),now.getMonth()+i,1);
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+monthsName[d.getMonth()]+' '+d.getFullYear()+(i===rolledAt?' ⚠︎':'')+'</td><td>'+r.toFixed(1)+'</td><td>'+money(bill)+'</td>';
-      tb.appendChild(tr);
-    }
-    var currentYear=baseMonthly*12;
-    var delta=next12-currentYear;
-    $('next12').textContent='Next 12 months: about '+money(next12);
-    var dl=$('deltaLine');
-    if(Math.abs(delta)<1){ dl.innerHTML='About the same as the last 12 months at today’s rate ('+money(currentYear)+').'; }
-    else { var up=delta>0; dl.innerHTML='<span class="delta '+(up?'up':'down')+'">'+(up?'▲ '+money(delta)+' more':'▼ '+money(-delta)+' less')+'</span> than the last 12 months at today’s rate ('+money(currentYear)+').'; }
-    var ro=$('rolloff');
-    if(rolledAt!==null){
-      var rd=new Date(now.getFullYear(),now.getMonth()+rolledAt,1);
-      ro.hidden=false;
-      ro.innerHTML='<b>⚠︎ Your fixed rate rolls off around '+monthsName[rd.getMonth()]+' '+rd.getFullYear()+'.</b> After that, this forecast assumes your rate runs about '+Math.round(bump*100)+'% higher (a typical month-to-month/variable "default" rate — an estimate). Shop a new fixed plan 2–4 weeks before that month.';
-    } else { ro.hidden=true; }
-    $('out').hidden=false;
-    $('out').scrollIntoView({behavior:'smooth',block:'start'});
-    // Anonymous usage: one count after a completed forecast (invalid input returns earlier). No input values sent.
-    try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){}
-  }
-  // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
-  try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
-
-  $('run').addEventListener('click',run);
-  $('shareBtn').addEventListener('click',function(){doShare($('shareBtn'));});
-})();
-</script>
-</body>
-</html>
-+Math.round(n).toLocaleString('en-US');};
+  var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
   var SHARE_URL="https://quickwell.app/bill-radar/?ref=share-bill-radar";
   function shareText(){
     return "Estimate the energy-charge portion of your electric bill and model a rate change with Quickwell Bill Radar. Your entries stay in your browser; only this tool link is shared.";
@@ -284,6 +235,7 @@
   try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
 
   $('run').addEventListener('click',run);
+  $('shareBtn').addEventListener('click',function(){doShare($('shareBtn'));});
 })();
 </script>
 </body>
