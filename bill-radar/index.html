@@ -60,6 +60,8 @@
   .headline .delta{font-weight:700;}
   .up{color:var(--warn);} .down{color:var(--go);}
   .rolloff{margin-top:14px; background:color-mix(in srgb, var(--warn) 10%, var(--surface)); border:1px solid color-mix(in srgb, var(--warn) 30%, var(--line)); border-radius:var(--radius); padding:14px 16px;}
+  .share-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;}
+  button.share{font:600 14px var(--display);background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;cursor:pointer;}
   table{width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; font-variant-numeric:tabular-nums;}
   th,td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--line);} th:first-child,td:first-child{text-align:left;}
   .muted{color:var(--ink-dim); font-size:14px;}
@@ -119,6 +121,8 @@
       <div class="rolloff" id="rolloff" hidden></div>
       <table id="tbl"><thead><tr><th>Month</th><th>Rate (¢)</th><th>Est. bill</th></tr></thead><tbody></tbody></table>
       <p class="muted" style="margin-top:12px">Estimates only, from the numbers and assumptions you entered — not a quote, a prediction, or financial advice. Your real bill depends on usage, weather, taxes and fees, and your utility's actual rates.</p>
+      <div class="share-row noprint"><button type="button" class="share" id="shareBtn">Share Bill Radar</button></div>
+      <p class="muted" style="margin:6px 0 0">Shares only a link to this calculator — never your usage, rate, plan end date or forecast.</p>
     </div>
   </section>
 
@@ -163,6 +167,31 @@
 (function(){
   var $=function(id){return document.getElementById(id);};
   var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var SHARE_URL="https://quickwell.app/bill-radar/?ref=share-bill-radar";
+  function shareText(){
+    return "Estimate the energy-charge portion of your electric bill and model a rate change with Quickwell Bill Radar. Your entries stay in your browser; only this tool link is shared.";
+  }
+  function doShare(btn){
+    var text=shareText();
+    try{
+      if(navigator.share){
+        var result=navigator.share({title:"Quickwell Bill Radar",text:text,url:SHARE_URL});
+        if(result&&result.catch)result.catch(function(){});
+        return;
+      }
+    }catch(e){}
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text+" "+SHARE_URL).then(function(){
+          if(btn)btn.textContent="Copied — paste anywhere ✓";
+        }).catch(function(){
+          if(btn)btn.textContent="Copy this link: "+SHARE_URL;
+        });
+        return;
+      }
+    }catch(e){}
+    if(btn)btn.textContent="Copy this link: "+SHARE_URL;
+  }
   function run(){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
     if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
@@ -206,6 +235,7 @@
   try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
 
   $('run').addEventListener('click',run);
+  $('shareBtn').addEventListener('click',function(){doShare($('shareBtn'));});
 })();
 </script>
 </body>

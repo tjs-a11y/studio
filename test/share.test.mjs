@@ -66,3 +66,21 @@ test('Copycat share text never includes the uploaded photo', () => {
   assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
   assert.match(body, /title/, 'shareText uses only the generated dish title');
 });
+
+
+test('Bill Radar offers a built-in share action with a tagged tool link', () => {
+  const src = page('bill-radar/index.html');
+  assert.match(src, /id="shareBtn"/, 'Bill Radar has a Share button after the forecast');
+  assert.match(src, /navigator\.share/, 'Bill Radar uses the Web Share API');
+  assert.match(src, /navigator\.clipboard\.writeText/, 'Bill Radar has a clipboard fallback');
+  assert.match(src, /quickwell\.app\/bill-radar\/\?ref=share-bill-radar/, 'the share link carries a fixed referral label');
+});
+
+test('Bill Radar share text never includes bill inputs or forecast output', () => {
+  const src = page('bill-radar/index.html');
+  const m = src.match(/function shareText\(\)\s*\{[\s\S]*?\n  \}/);
+  assert.ok(m, 'the fixed shareText builder is present');
+  assert.doesNotMatch(m[0], /\.value|kwh|next12|deltaLine|rolloff|tbl|fetch/i,
+    'shareText must not read usage, rate, contract date, forecast output or send data');
+  assert.match(m[0], /Your entries stay in your browser/, 'privacy limit is stated in the share text');
+});
