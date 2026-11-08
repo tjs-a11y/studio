@@ -60,6 +60,8 @@
   .headline .delta{font-weight:700;}
   .up{color:var(--warn);} .down{color:var(--go);}
   .rolloff{margin-top:14px; background:color-mix(in srgb, var(--warn) 10%, var(--surface)); border:1px solid color-mix(in srgb, var(--warn) 30%, var(--line)); border-radius:var(--radius); padding:14px 16px;}
+  .share-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;}
+  button.share{font:600 14px var(--display);background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;cursor:pointer;}
   table{width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; font-variant-numeric:tabular-nums;}
   th,td{text-align:right; padding:6px 8px; border-bottom:1px solid var(--line);} th:first-child,td:first-child{text-align:left;}
   .muted{color:var(--ink-dim); font-size:14px;}
@@ -119,6 +121,8 @@
       <div class="rolloff" id="rolloff" hidden></div>
       <table id="tbl"><thead><tr><th>Month</th><th>Rate (¢)</th><th>Est. bill</th></tr></thead><tbody></tbody></table>
       <p class="muted" style="margin-top:12px">Estimates only, from the numbers and assumptions you entered — not a quote, a prediction, or financial advice. Your real bill depends on usage, weather, taxes and fees, and your utility's actual rates.</p>
+      <div class="share-row noprint"><button type="button" class="share" id="shareBtn">Share Bill Radar</button></div>
+      <p class="muted" style="margin:6px 0 0">Shares only a link to this calculator — never your usage, rate, plan end date or forecast.</p>
     </div>
   </section>
 
@@ -162,7 +166,81 @@
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
-  var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var money=function(n){return '
+  function run(){
+    var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
+    if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
+    var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
+    var endVal=$('end').value; // YYYY-MM or ''
+    var now=new Date(); now.setDate(1);
+    var endIdx=-1;
+    if(endVal){ var p=endVal.split('-'); var ed=new Date(+p[0],(+p[1])-1,1);
+      endIdx=(ed.getFullYear()-now.getFullYear())*12+(ed.getMonth()-now.getMonth()); }
+    var baseMonthly=kwh*rate/100;
+    var monthsName=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var tb=$('tbl').querySelector('tbody'); tb.innerHTML='';
+    var next12=0, rolledAt=null;
+    for(var i=0;i<12;i++){
+      var r=rate*Math.pow(1+chg,i/12);
+      if(endIdx>=0 && i>=endIdx){ r=r*(1+bump); if(rolledAt===null) rolledAt=i; }
+      var bill=kwh*r/100; next12+=bill;
+      var d=new Date(now.getFullYear(),now.getMonth()+i,1);
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+monthsName[d.getMonth()]+' '+d.getFullYear()+(i===rolledAt?' ⚠︎':'')+'</td><td>'+r.toFixed(1)+'</td><td>'+money(bill)+'</td>';
+      tb.appendChild(tr);
+    }
+    var currentYear=baseMonthly*12;
+    var delta=next12-currentYear;
+    $('next12').textContent='Next 12 months: about '+money(next12);
+    var dl=$('deltaLine');
+    if(Math.abs(delta)<1){ dl.innerHTML='About the same as the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    else { var up=delta>0; dl.innerHTML='<span class="delta '+(up?'up':'down')+'">'+(up?'▲ '+money(delta)+' more':'▼ '+money(-delta)+' less')+'</span> than the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    var ro=$('rolloff');
+    if(rolledAt!==null){
+      var rd=new Date(now.getFullYear(),now.getMonth()+rolledAt,1);
+      ro.hidden=false;
+      ro.innerHTML='<b>⚠︎ Your fixed rate rolls off around '+monthsName[rd.getMonth()]+' '+rd.getFullYear()+'.</b> After that, this forecast assumes your rate runs about '+Math.round(bump*100)+'% higher (a typical month-to-month/variable "default" rate — an estimate). Shop a new fixed plan 2–4 weeks before that month.';
+    } else { ro.hidden=true; }
+    $('out').hidden=false;
+    $('out').scrollIntoView({behavior:'smooth',block:'start'});
+    // Anonymous usage: one count after a completed forecast (invalid input returns earlier). No input values sent.
+    try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){}
+  }
+  // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
+  try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
+
+  $('run').addEventListener('click',run);
+  $('shareBtn').addEventListener('click',function(){doShare($('shareBtn'));});
+})();
+</script>
+</body>
+</html>
++Math.round(n).toLocaleString('en-US');};
+  var SHARE_URL="https://quickwell.app/bill-radar/?ref=share-bill-radar";
+  function shareText(){
+    return "Estimate the energy-charge portion of your electric bill and model a rate change with Quickwell Bill Radar. Your entries stay in your browser; only this tool link is shared.";
+  }
+  function doShare(btn){
+    var text=shareText();
+    try{
+      if(navigator.share){
+        var result=navigator.share({title:"Quickwell Bill Radar",text:text,url:SHARE_URL});
+        if(result&&result.catch)result.catch(function(){});
+        return;
+      }
+    }catch(e){}
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text+" "+SHARE_URL).then(function(){
+          if(btn)btn.textContent="Copied — paste anywhere ✓";
+        }).catch(function(){
+          if(btn)btn.textContent="Copy this link: "+SHARE_URL;
+        });
+        return;
+      }
+    }catch(e){}
+    if(btn)btn.textContent="Copy this link: "+SHARE_URL;
+  }
   function run(){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
     if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
