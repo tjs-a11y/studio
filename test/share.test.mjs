@@ -78,7 +78,7 @@ test('Bill Radar offers a built-in share action with a tagged tool link', () => 
 
 test('Bill Radar share text never includes bill inputs or forecast output', () => {
   const src = page('bill-radar/index.html');
-  const m = src.match(/function shareText\(\) \{[\s\S]*?\n  \}/);
+  const m = src.match(/function shareText\(\)\s*\{[\s\S]*?\n  \}/);
   assert.ok(m, 'the fixed shareText builder is present');
   assert.doesNotMatch(m[0], /\.value|kwh|next12|deltaLine|rolloff|tbl|fetch/i,
     'shareText must not read usage, rate, contract date, forecast output or send data');
