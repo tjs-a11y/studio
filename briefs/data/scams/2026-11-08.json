@@ -1,0 +1,122 @@
+{
+ "brief": {
+  "subject": "Landlord pays $49.75M over hidden rental pricing",
+  "headline": "FTC and states reach $49.75 million settlement with big rental landlord over deceptive pricing",
+  "dek": "A record landlord settlement, new Amazon ad-auction allegations, and a payment processor accused of trapping small businesses in contracts.",
+  "lede": "Progress Residential and owner Pretium Partners will pay $49.75 million to settle FTC and state charges of misleading renters about pricing. The FTC calls it its largest enforcement matter against a landlord.",
+  "sections": [
+   {
+    "heading": "Record landlord settlement over rent pricing",
+    "bullets": [
+     "$49.75 million: what Progress Residential and Pretium Partners will pay to settle deceptive rental pricing charges.",
+     "The FTC and four states brought the case against the largest U.S. manager of single-family rental homes.",
+     "The agency calls this its biggest enforcement action ever taken against a landlord.",
+     "Renters should compare the advertised rent against the full cost before signing a lease."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Payment processor accused of fake savings",
+    "bullets": [
+     "$600,000: what Riverside Payments, affiliate Cascade Equipment Leasing and their operators will pay to resolve FTC and Washington allegations.",
+     "Regulators say the firms falsely promised small businesses lower payment processing costs.",
+     "They also allegedly made cancelling nearly impossible despite advertising risk-free cancellation.",
+     "Family members running small shops should read cancellation terms closely before signing processing deals."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Amazon ad-auction case gets new details",
+    "bullets": [
+     "The FTC and 22 states filed an updated, unredacted complaint against Amazon over its search advertising auction.",
+     "Regulators allege Amazon used deceptive and unfair practices to secretly push up ad prices.",
+     "The new filing points to substantial harm to advertisers, according to the FTC."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "Landlord settles deceptive rent pricing charges for $49.75 million, a payment processor pays $600,000, and new details emerge in the Amazon ads case."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-08T17:04:14.029Z",
+  "date": "2026-11-08",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "Progress Residential and Owner Pretium Partners to Pay $49.75 Million to Settle FTC and States’ Charges Over Deceptive Rental Pricing Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/progress-residential-owner-pretium-partners-pay-4975-million-settle-ftc-states-charges-over",
+    "published": "2026-11-06T12:00:00.000Z",
+    "snippet": "The nation’s largest property manager of single-family rental homes, Progress Residential, and its owner, private equity firm Pretium Partners, will pay $49.75 million to settle charges brought by the Federal Trade Commission and four states that the companies misled consumers with deceptive rental pricing practices. This is the largest enforcement matter taken against a landlord in the Commission",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. Details in the updated version of the complaint show substantial harm to advertisers as well as the direct statements Amazon made to mi",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC, Washington Take Action Against Payment Processor for Deceiving Small Businesses About Costs and Cancellation Terms",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-washington-take-action-against-payment-processor-deceiving-small-businesses-about-costs",
+    "published": "2026-11-02T12:00:00.000Z",
+    "snippet": "Payment processor Riverside Payments Inc., its affiliate Cascade Equipment Leasing LLC and their operators will pay $600,000 to resolve Federal Trade Commission and Washington state allegations that the firms deceived small businesses by falsely promising to save them money on payment processing services and making it nearly impossible to cancel despite offering “risk-free” cancellation. Small bus",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

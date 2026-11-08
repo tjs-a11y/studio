@@ -1,0 +1,105 @@
+{
+ "brief": {
+  "subject": "Ghana's EU timber licensing path; Kraft Heinz sells coffee unit",
+  "headline": "Ghana's EU Timber Licence Path and a $650M North American Coffee Sale",
+  "dek": "A look at how Ghana's EU timber partnership reshaped forest governance, plus Kraft Heinz agrees to sell its North American coffee business.",
+  "lede": "Ghana's long-running timber legality partnership with the EU is drawing attention as a model for building forest governance. It is a relevant reference point for wood exporters facing EU legality and due-diligence demands.",
+  "sections": [
+   {
+    "heading": "Ghana's timber deal with the EU",
+    "bullets": [
+     "Ghana spent 16 years on its Voluntary Partnership Agreement process with the EU before reaching a milestone last year.",
+     "The deal offered EU market access plus support to strengthen national forest governance, giving exporters a clearer legality framework.",
+     "Europe is a key buyer of Ghanaian timber, so shifting EU legality expectations directly affect the country's wood trade.",
+     "A Mongabay analysis argues the new licence has improved institutions and cooperation in the sector."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Kraft Heinz exits North American coffee",
+    "bullets": [
+     "Kraft Heinz agreed to sell its North American coffee business to One Rock for $650 million.",
+     "The company will keep a 30% stake and use the cash to pay down debt.",
+     "Coffee suppliers and traders should watch for any changes in sourcing relationships under new majority ownership."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: Ghana's 16-year EU timber partnership and its governance gains, plus Kraft Heinz's $650 million North American coffee sale."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-11-08T17:04:14.029Z",
+  "date": "2026-11-08",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Mongabay",
+    "title": "How Ghana’s new license to sell sustainable timber improves institutions & cooperation (analysis)",
+    "link": "https://news.mongabay.com/2026/11/how-ghanas-new-license-to-sell-sustainable-timber-improves-institutions-collaboration-analysis/",
+    "published": "2026-11-05T14:16:40.000Z",
+    "snippet": "When Ghana began its Voluntary Partnership Agreement (VPA) process with the European Union, the attraction was clear. Europe is an important market for Ghanaian timber, international expectations around its legality were changing, and the VPA offered both market access and support for strengthening national forest governance. After a 16-year journey, last year Ghana became the […]",
+    "categories": [
+     "Uncategorized"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "Kraft Heinz to sell North American coffee business for $650M",
+    "link": "https://www.foodnavigator.com/Article/2026/11/04/kraft-heinz-to-sell-coffee-business-in-650m-deal/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-11-04T18:00:08.000Z",
+    "snippet": "Kraft Heinz will sell its North American coffee business to One Rock for $650 million, retain a 30% stake and use cash proceeds to reduce debt.",
+    "categories": [
+     "Markets"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 1
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
