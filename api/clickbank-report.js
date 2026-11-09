@@ -113,7 +113,7 @@ async function fetchOrders(requestFetch, apiKey, account, startDate, endDate) {
 }
 
 function commissionSummary(rows, apiStatus) {
-  if (apiStatus !== 'ok') return { byTid: new Map(), net: null, saleRows: null, refundRows: null, chargebackRows: null };
+  if (apiStatus !== 'ok') return { byTid: new Map(), gross: null, net: null, saleRows: null, refundRows: null, chargebackRows: null };
   const byTid = new Map();
   let gross = 0, net = 0, saleRows = 0, refundRows = 0, chargebackRows = 0;
   for (const row of rows) {
