@@ -291,7 +291,6 @@ export async function GET(request) {
         commands.push(['GET', `count:quickwell:clickbank:${offer.id}:clicks`]);
         commands.push(['GET', `count:quickwell:clickbank:${offer.id}:clicks:${endDate}`]);
       }
-      commands.push(['SET', 'report:quickwell:clickbank:latest', JSON.stringify(report)]);
       let results;
       if (storeOverride) {
         results = await storeOverride(commands);
@@ -317,6 +316,23 @@ export async function GET(request) {
   const centralPersistence = await persistToMonad(requestFetch, report, orderResult.rows, orderResult.status);
   report.centralPersistence = centralPersistence.status;
   report.centralPersistenceSummary = centralPersistence.summary || null;
+  if (kvUrl && kvToken) {
+    try {
+      const latestCommand = [['SET', 'report:quickwell:clickbank:latest', JSON.stringify(report)]];
+      if (storeOverride) {
+        await storeOverride(latestCommand);
+      } else {
+        const response = await requestFetch(`${kvUrl.replace(/\\/$/, '')}/pipeline`, {
+          method: 'POST',
+          headers: { authorization: `Bearer ${kvToken}`, 'content-type': 'application/json' },
+          body: JSON.stringify(latestCommand)
+        });
+        if (!response.ok) throw new Error(`kv ${response.status}`);
+      }
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_clickbank_report_latest_store_failed' }));
+    }
+  }
   console.log(JSON.stringify({
     tag: 'qw_clickbank_daily_report',
     period: report.period,
