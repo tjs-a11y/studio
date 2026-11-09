@@ -59,7 +59,6 @@ window.qwTrack = function (tool, event) {
     '/commodities': 'commodities',
     '/saver': 'saver',
     '/pilot': 'pilot',
-    '/shield': 'shield',
     '/utility-pipeline': 'utility-pipeline'
   };
   var tool = pageTools[path];
