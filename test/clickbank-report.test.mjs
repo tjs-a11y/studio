@@ -156,10 +156,12 @@ test('ClickBank report sends privacy-filtered snapshots and orders to the MONAD 
   process.env.SUPABASE_ANON_KEY = 'public-anon-test-key';
   process.env.MONAD_INGEST_SECRET = 'server-only-ingest-test-secret-123456789';
   let captured;
+  let capturedRequest;
   setClickBankFetchForTests(mockFetch());
   setClickBankStoreForTests(async () => []);
-  setClickBankIngestForTests(async (payload) => {
+  setClickBankIngestForTests(async (payload, requestOptions) => {
     captured = payload;
+    capturedRequest = requestOptions;
     return new Response(JSON.stringify({ batch_id: 'batch-test', commission_records_imported: 1 }), { status: 200 });
   });
   try {
@@ -167,7 +169,9 @@ test('ClickBank report sends privacy-filtered snapshots and orders to the MONAD 
     const body = await response.json();
     assert.equal(body.report.centralPersistence, 'stored');
     assert.equal(body.report.centralPersistenceSummary.batch_id, 'batch-test');
-    assert.equal(captured.p_secret, 'server-only-ingest-test-secret-123456789');
+    assert.equal('p_secret' in captured, false);
+    assert.equal(capturedRequest.endpoint, 'https://example.supabase.co/functions/v1/monad-clickbank-ingest');
+    assert.equal(capturedRequest.init.headers['x-monad-ingest-secret'], 'server-only-ingest-test-secret-123456789');
     assert.equal(captured.p_order_api_status, 'ok');
     assert.equal(captured.p_snapshots.find((s) => s.offer_slug === 'clickbank-genius-switch-original').tracking_id, 'qw_genius_switch_original');
     assert.equal(captured.p_orders[0].account_amount, 30);
