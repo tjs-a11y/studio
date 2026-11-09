@@ -19,7 +19,7 @@ const guides = existsSync(join(root, 'guides'))
 // Sections that aren't billed tools (so aren't in the catalog): their index page plus every sub-page with an index.html,
 // e.g. play/ -> play/index.html, play/echo/index.html … Standalone pages are listed one by one.
 const SECTIONS = ['play'];
-const STANDALONE = ['weekend/index.html', 'brain-pass/index.html', 'guides/trucking-settlement-disputes.html', 'guides/understanding-mineral-royalty-deductions.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html', 'discover/index.html', ...['shifting-vibrations-manifest','energy-revolution-system','phytomem-one','water-freedom-system','genius-switch-original','prodentim','ted-plans-diy','audisoothe'].map((id) => `offers/${id}/index.html`)];
+const STANDALONE = ['weekend/index.html', 'brain-pass/index.html', 'guides/trucking-settlement-disputes.html', 'guides/understanding-mineral-royalty-deductions.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html', 'discover/index.html', 'offers/index.html', ...['shifting-vibrations-manifest','energy-revolution-system','phytomem-one','water-freedom-system','genius-switch-original','prodentim','ted-plans-diy','audisoothe'].map((id) => `offers/${id}/index.html`)];
 const sections = SECTIONS.filter((s) => existsSync(join(root, s, 'index.html'))).flatMap((s) => [`${s}/index.html`, ...subPages(s)]);
 const standalone = STANDALONE.filter((f) => existsSync(join(root, f)));
 export const MAIN_PAGES = [...new Set(['index.html', ...tools, ...sections, ...standalone, ...guides, 'privacy.html', 'terms.html'])];
