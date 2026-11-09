@@ -322,7 +322,7 @@ export async function GET(request) {
       if (storeOverride) {
         await storeOverride(latestCommand);
       } else {
-        const response = await requestFetch(`${kvUrl.replace(/\\/$/, '')}/pipeline`, {
+        const response = await requestFetch(`${kvUrl.replace(/\/$/, '')}/pipeline`, {
           method: 'POST',
           headers: { authorization: `Bearer ${kvToken}`, 'content-type': 'application/json' },
           body: JSON.stringify(latestCommand)
