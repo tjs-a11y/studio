@@ -169,7 +169,6 @@ async function persistToMonad(requestFetch, report, orderRows, orderApiStatus) {
     order_form_sale_conversion: offer.ORDER_FORM_SALE_CONVERSION
   }));
   const payload = {
-    p_secret: ingestSecret,
     p_period_start: report.period.startDate,
     p_period_end: report.period.endDate,
     p_order_api_status: orderApiStatus,
@@ -177,17 +176,19 @@ async function persistToMonad(requestFetch, report, orderRows, orderApiStatus) {
     p_orders: orderRows
   };
   try {
+    const endpoint = `${supabaseUrl.replace(/\/$/, '')}/functions/v1/monad-clickbank-ingest`;
+    const init = {
+      method: 'POST',
+      headers: {
+        apikey: anonKey,
+        'x-monad-ingest-secret': ingestSecret,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    };
     const response = ingestOverride
-      ? await ingestOverride(payload)
-      : await requestFetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/monad_ingest_clickbank_report`, {
-          method: 'POST',
-          headers: {
-            apikey: anonKey,
-            Authorization: `Bearer ${anonKey}`,
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+      ? await ingestOverride(payload, { endpoint, init })
+      : await requestFetch(endpoint, init);
     if (!response?.ok) return { status: 'failed', httpStatus: response?.status || 0 };
     const summary = typeof response.json === 'function' ? await response.json() : response.summary || null;
     return { status: 'stored', summary };
