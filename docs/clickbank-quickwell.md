@@ -16,6 +16,13 @@ Before enabling an offer, verify its live vendor page, actual deliverables, pric
 ## ClickBank API key
 The `CLICKBANK_API_KEY` environment variable is not read by this first release. This implementation uses the manually supplied affiliate destinations and does not assume the ClickBank API key provides Marketplace product discovery. Keep the key in Vercel Sensitive environment variables; never put it in source code or a browser response.
 
+## ClickBank revenue reporting
+- Every enabled offer receives a stable ClickBank TID (`qw_<offer_id_with_underscores>`) so outbound visits can be reconciled with ClickBank hops, order-form impressions, sales, net sales, refunds and chargebacks.
+- `GET /api/clickbank-report` is protected by the Vercel Cron `CRON_SECRET` and queries the ClickBank Analytics API for the last 30 days using the affiliate `TRACKING_ID` dimension.
+- The daily report is written to `report:quickwell:clickbank:latest` in Upstash and emitted as the structured runtime log `qw_clickbank_daily_report`. It contains aggregate metrics only, no customer PII.
+- The account nickname defaults to `north88`, inferred from the supplied affiliate destinations; override with `CLICKBANK_ACCOUNT_NICKNAME` if the ClickBank nickname differs.
+- The API key must have ClickBank Analytics permission. A 401/403 is reported explicitly and is not represented as zero sales.
+
 ## Metrics
 Redis keys:
 - `count:quickwell:clickbank:<offer-id>:clicks`

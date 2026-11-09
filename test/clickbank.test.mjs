@@ -43,6 +43,13 @@ test('analytics outage does not break a valid affiliate redirect', async () => {
   }
 });
 
+test('all enabled offer HopLinks include a stable ClickBank TID', async () => {
+  const { offers } = await import('../api/_lib/clickbank-offers.js');
+  for (const offer of offers) {
+    assert.match(offer.destination, /[?&]tid=qw_[a-z_]+/);
+  }
+});
+
 test('public catalog exposes all eight enabled offers without leaking HopLinks', async () => {
   const response = await catalog(request('https://quickwell.app/api/clickbank-catalog'));
   assert.equal(response.status, 200);
