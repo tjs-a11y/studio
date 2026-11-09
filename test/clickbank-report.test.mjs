@@ -98,9 +98,11 @@ test('ClickBank report separates analytics sales from confirmed affiliate accoun
     assert.equal(genius.SALE_COUNT, 2);
     assert.equal(genius.NET_SALE_AMOUNT, 42.5);
     assert.equal(genius.confirmedCommission, 30);
+    assert.equal(genius.netCommissionAfterAdjustments, 30);
     assert.equal(genius.commissionTransactions, 1);
     assert.equal(body.report.total.SALE_COUNT, 2);
     assert.equal(body.report.total.confirmedAffiliateCommission, 30);
+    assert.equal(body.report.total.netAffiliateCommission, 30);
     assert.equal(body.report.orderReconciliation.status, 'ok');
     assert.equal(body.report.centralPersistence, 'not_configured');
     assert.equal(JSON.stringify(body).includes('API-test-key'), false);
