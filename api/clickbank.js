@@ -30,16 +30,21 @@ export async function GET(request) {
   const list = offersOverride || null;
   const offer = list ? list.find((item) => item.id === id) : offerById(id);
   if (!offer || offer.enabled !== true) return fail(404, 'Offer not available.');
-  const destination = new URL(offer.destination);
+  const variant = new URL(request.url).searchParams.get('variant') || 'primary';
+  if (!/^[a-z0-9-]{2,40}$/.test(variant)) return fail(400, 'Invalid offer variant.');
+  const alternate = variant === 'primary' ? null : (offer.alternateDestinations || []).find((item) => item.id === variant);
+  if (variant !== 'primary' && !alternate) return fail(404, 'Offer variant not available.');
+  const destination = new URL(alternate ? alternate.destination : offer.destination);
   if (destination.protocol !== 'https:' || !destination.hostname) return fail(500, 'Offer destination is not configured.');
 
   const run = storeOverride || store();
   const date = day();
+  const metricId = variant === 'primary' ? id : `${id}:${variant}`;
   if (run) {
     try {
       await run(
-        ['INCR', `count:quickwell:clickbank:${id}:clicks`],
-        ['INCR', `count:quickwell:clickbank:${id}:clicks:${date}`],
+        ['INCR', `count:quickwell:clickbank:${metricId}:clicks`],
+        ['INCR', `count:quickwell:clickbank:${metricId}:clicks:${date}`],
       );
     } catch {
       // Preserve the affiliate journey if analytics storage is temporarily unavailable.
