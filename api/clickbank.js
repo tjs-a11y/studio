@@ -1,6 +1,6 @@
 // GET /api/clickbank?id=<approved-offer-id>
 // Fixed allowlist redirect: no caller-supplied destination, no open redirect, no visitor identifiers.
-import { json, fail } from './_lib/core.js';
+import { fail } from './_lib/core.js';
 import { offerById } from './_lib/clickbank-offers.js';
 
 const day = () => new Date().toISOString().slice(0, 10);
