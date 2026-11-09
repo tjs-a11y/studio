@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-08T16:46:14.154Z",
-  "date": "2026-11-08",
+  "fetched": "2026-11-09T21:00:26.974Z",
+  "date": "2026-11-09",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-08T16:46:14.099Z",
+  "generated": "2026-11-09T21:00:26.916Z",
   "visits": {
-    "total": 178,
-    "today": 5
+    "total": 203,
+    "today": 21
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -56,8 +56,8 @@
       "demos_today": 0
     },
     "fair-price": {
-      "opens": 8,
-      "opens_today": 0,
+      "opens": 9,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -210,8 +210,8 @@
       "demos_today": 0
     },
     "rate-con-checker": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -322,8 +322,8 @@
       "demos_today": 0
     },
     "brain-pass": {
-      "opens": 6,
-      "opens_today": 0,
+      "opens": 7,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
