@@ -70,6 +70,27 @@ test('priority consumer pages emit exactly one anonymous tool_open on page load'
   }
 });
 
+test('all catalog tool pages except privacy-excluded Shield emit one anonymous tool_open', () => {
+  for (const [path, tool] of [
+    ['/dinner/', 'dinner'], ['/copycat/', 'copycat'], ['/kitchen/', 'kitchen'],
+    ['/fair-price/', 'fair-price'], ['/proof/', 'proof'], ['/keep-the-receipt/', 'keep-the-receipt'],
+    ['/double-dose/', 'double-dose'], ['/before-you-sign/', 'before-you-sign'],
+    ['/roadside-sos/', 'roadside-sos'], ['/bill-radar/', 'bill-radar'], ['/vigless/', 'vigless'],
+    ['/tradepath/', 'tradepath'], ['/fuelgauge/', 'fuelgauge'], ['/lotwise/', 'lotwise'],
+    ['/rate-con-checker/', 'rate-con-checker'], ['/haul-audit/', 'haul-audit'],
+    ['/royalty-check/', 'royalty-check'], ['/audit-kit/', 'audit-kit'],
+    ['/plot-file-checker/', 'plot-file-checker'], ['/permit-watch/', 'permit-watch'],
+    ['/vendor-check/', 'vendor-check'], ['/spare-key/', 'spare-key'], ['/brain-pass/', 'brain-pass'],
+    ['/footsure/', 'footsure'], ['/plus/', 'plus'], ['/commodities/', 'commodities'],
+    ['/saver/', 'saver'], ['/pilot/', 'pilot'], ['/utility-pipeline/', 'utility-pipeline'],
+  ]) {
+    const { analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), path);
+    assert.equal(analyticsEvents.length, 1, path);
+    assert.equal(analyticsEvents[0][1].name, 'tool_open', path);
+    assert.equal(analyticsEvents[0][1].data.tool, tool, path);
+  }
+});
+
 test('first-party open request does not duplicate the page-load open event', async () => {
   const { window, analyticsEvents } = harness(async () => ({
     ok: true, status: 200, clone: () => ({ json: async () => ({ ok: true, stored: true }) })
