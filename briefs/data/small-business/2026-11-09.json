@@ -1,0 +1,197 @@
+{
+ "brief": {
+  "subject": "IRS sets hearing on Trump account investment rules",
+  "headline": "IRS Moves Toward a Hearing on Trump Account Investment Rules",
+  "dek": "A Federal Register notice ties a hearing to proposed rules on Trump account investments, and the IRS posts online Tax Forum seminars.",
+  "lede": "The IRS has issued a Federal Register notice tied to a hearing on its proposed rules for Trump account investments. Advisers fielding client questions should track how the guidance develops.",
+  "sections": [
+   {
+    "heading": "Trump Account Rules Head to Hearing",
+    "bullets": [
+     "A Federal Register notice dated 2026-11-04 concerns a hearing on proposed Trump account investment rules.",
+     "The underlying proposal (CC- 00349938-26) first appeared in the Federal Register on August 21, 2026.",
+     "Only eligible investments may be held before the beginning of the calendar year in which the beneficiary turns 18.",
+     "This is still a proposal, so final investment limits could change before the rules take effect."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "heading": "IRS Tax Forum Seminars Go Online",
+    "bullets": [
+     "The IRS has launched its 2026 Nationwide Tax Forum Online for tax professionals.",
+     "More than a dozen seminars recorded at this year's in-person forum are included.",
+     "Tax pros can earn continuing education credits remotely, which matters for credential upkeep."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "IRS notice ties a hearing to proposed Trump account investment rules, and the 2026 Nationwide Tax Forum seminars go online with CE credits."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-09T21:26:20.573Z",
+  "date": "2026-11-09",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "IRS Offers Continuing Education Credits Via Nationwide Tax Forum Online Seminars",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/09/irs-offers-continuing-education-credits-via-nationwide-tax-forum-online-seminars/193536/",
+    "published": "2026-11-09T21:23:00.000Z",
+    "snippet": "The IRS has announced its 2026 IRS Nationwide Tax Forum Online, an opportunity for tax professionals to access more than a dozen seminars recorded at this year's IRS Nationwide Tax Forum and earn continuing education credits.",
+    "categories": [
+     "continuing education",
+     "CPE",
+     "IRS",
+     "IRS Nationwide Tax Forum",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "How to Get Breached, Step 6: Share Files However is Fastest",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/09/how-to-get-breached-step-6-share-files-however-is-fastest/193503/",
+    "published": "2026-11-09T19:21:00.000Z",
+    "snippet": "Emailing tax returns, W-2s, and bank statements is fast. Breach notification is not.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "cybersecurity",
+     "data breach",
+     "data security",
+     "Firm Management",
+     "Security",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "UBCC Rolls Out Human Resources Management Platform",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/09/ubcc-rolls-out-human-resources-management-platform/193520/",
+    "published": "2026-11-09T16:05:00.000Z",
+    "snippet": "Universal Business Computing Company has launched UBCC HRM, a new browser-based human resources management platform designed to help independent payroll processors and accounting firms expand their service offerings.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "HRM",
+     "Human Resources",
+     "human resources management",
+     "Payroll",
+     "payroll processors",
+     "Technology",
+     "UBCC",
+     "Universal Business Computing Company"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "Paychex Announces Tax Penalty Protection Service",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/09/paychex-announces-tax-penalty-protection-service/193530/",
+    "published": "2026-11-09T15:37:00.000Z",
+    "snippet": "Paychex recently introduced Paychex Tax Penalty Protection Service, designed to help businesses resolve eligible payroll tax issues more easily and with less financial risk.",
+    "categories": [
+     "Human Resources",
+     "paychex",
+     "Payroll",
+     "payroll tax",
+     "Payroll Taxes",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Three Avoidable IPO Filing Mistakes That Can Derail a Public Offering",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/09/three-avoidable-ipo-filing-mistakes-that-can-derail-a-public-offering/193488/",
+    "published": "2026-11-09T15:09:00.000Z",
+    "snippet": "For CFOs, controllers and accounting professionals, addressing these seemingly routine issues should be an essential part of IPO readiness.",
+    "categories": [
+     "accounting mistakes",
+     "filing mistakes",
+     "IPO",
+     "ipo mistakes",
+     "public stock",
+     "SEC",
+     "stock"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "TaxDome Unveils Client MCP for Accounting Firms",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/06/taxdome-unveils-client-mcp-for-accounting-firms/193347/",
+    "published": "2026-11-06T20:31:00.000Z",
+    "snippet": "Practice management platform TaxDome has released a client MCP, allowing a firm's clients to reach their accountant from inside their own AI assistant.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "ai assistant",
+     "ai assistants",
+     "Artificial Intelligence",
+     "mcp",
+     "Model Context Protocol",
+     "TaxDome",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Guidance on Eligible Investments for Trump Accounts; Hearing",
+    "link": "https://www.federalregister.gov/documents/2026/11/04/2026-22506/guidance-on-eligible-investments-for-trump-accounts-hearing",
+    "published": "2026-11-04T12:00:00.000Z",
+    "snippet": "This document provides a notice of proposed rulemaking (CC- 00349938-26) published in the Federal Register on August 21, 2026. The proposed regulations provided guidance regarding eligible investments, which are the only assets in which the Trump account may be invested before the first day of the calendar year in which the account beneficiary attains 18.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 1,
+    "kept": 1
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 6
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

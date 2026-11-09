@@ -598,5 +598,21 @@
   "input_tokens": 1738,
   "output_tokens": 946,
   "usd": 0.0259
+ },
+ {
+  "date": "2026-11-09",
+  "desk": "small-business",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1960,
+  "output_tokens": 979,
+  "usd": 0.0274
+ },
+ {
+  "date": "2026-11-09",
+  "desk": "scams",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1927,
+  "output_tokens": 814,
+  "usd": 0.024
  }
 ]
