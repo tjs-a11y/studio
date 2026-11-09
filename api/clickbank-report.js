@@ -96,20 +96,24 @@ export async function GET(request) {
         commands.push(['GET', `count:quickwell:clickbank:${offer.id}:clicks:${day(end)}`]);
       }
       commands.push(['SET', 'report:quickwell:clickbank:latest', JSON.stringify(report)]);
-      const requestFetch = fetchOverride || fetch;
-      const response = await requestFetch(`${kvUrl.replace(/\/$/, '')}/pipeline`, {
-        method: 'POST',
-        headers: { authorization: `Bearer ${kvToken}`, 'content-type': 'application/json' },
-        body: JSON.stringify(commands)
-      });
-      if (response.ok) {
-        const results = await response.json();
-        report.offers = reportOffers.map((o, i) => ({
-          ...o,
-          quickwellOutboundClicksLifetime: Number(results[i * 2]?.result || 0),
-          quickwellOutboundClicksToday: Number(results[i * 2 + 1]?.result || 0)
-        }));
-      } else console.error(JSON.stringify({ tag: 'qw_clickbank_report_storage_failed', status: response.status }));
+      let results;
+      if (storeOverride) {
+        results = await storeOverride(commands);
+      } else {
+        const requestFetch = fetchOverride || fetch;
+        const response = await requestFetch(`${kvUrl.replace(/\/$/, '')}/pipeline`, {
+          method: 'POST',
+          headers: { authorization: `Bearer ${kvToken}`, 'content-type': 'application/json' },
+          body: JSON.stringify(commands)
+        });
+        if (!response.ok) throw new Error(`kv ${response.status}`);
+        results = await response.json();
+      }
+      report.offers = reportOffers.map((o, i) => ({
+        ...o,
+        quickwellOutboundClicksLifetime: Number(results[i * 2]?.result || 0),
+        quickwellOutboundClicksToday: Number(results[i * 2 + 1]?.result || 0)
+      }));
     } catch {
       console.error(JSON.stringify({ tag: 'qw_clickbank_report_storage_failed' }));
     }
