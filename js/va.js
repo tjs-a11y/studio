@@ -4,7 +4,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 // Record only the tool, action and a validated static referral tag. Never pass user-entered content.
 var qwLastEvent = Object.create(null);
 window.qwTrack = function (tool, event) {
-  var allowedTools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
+  var allowedTools = ['dinner', 'copycat', 'kitchen', 'fair-price', 'proof', 'keep-the-receipt', 'double-dose', 'before-you-sign', 'roadside-sos', 'bill-radar', 'vigless', 'tradepath', 'fuelgauge', 'lotwise', 'rate-con-checker', 'haul-audit', 'royalty-check', 'audit-kit', 'plot-file-checker', 'permit-watch', 'vendor-check', 'spare-key', 'brain-pass', 'footsure', 'plus', 'commodities', 'saver', 'pilot', 'shield', 'utility-pipeline'];
   var allowedEvents = ['open', 'check'];
   if (!allowedTools.includes(tool) || !allowedEvents.includes(event)) return;
   var key = tool + ':' + event;
@@ -25,16 +25,41 @@ window.qwTrack = function (tool, event) {
   } catch (e) {}
 };
 
-// Record the page-open signal directly for the four priority consumer tools.
-// The first-party counter request may also call qwTrack; the per-page guard above
-// keeps that second path from double-counting. Shield stays out of Vercel Insights.
-(function trackPriorityConsumerOpen() {
+// Record one privacy-safe page-open event for every catalog tool.
+// The first-party counter request may also call qwTrack for the original consumer tools;
+// the per-page guard above prevents those paths from being counted twice.
+(function trackCatalogToolOpen() {
   var path = (window.location.pathname || '/').replace(/\/+$/, '') || '/';
   var pageTools = {
-    '/saver': 'saver',
-    '/bill-radar': 'bill-radar',
+    '/dinner': 'dinner',
+    '/copycat': 'copycat',
+    '/kitchen': 'kitchen',
     '/fair-price': 'fair-price',
-    '/dinner': 'dinner'
+    '/proof': 'proof',
+    '/keep-the-receipt': 'keep-the-receipt',
+    '/double-dose': 'double-dose',
+    '/before-you-sign': 'before-you-sign',
+    '/roadside-sos': 'roadside-sos',
+    '/bill-radar': 'bill-radar',
+    '/vigless': 'vigless',
+    '/tradepath': 'tradepath',
+    '/fuelgauge': 'fuelgauge',
+    '/lotwise': 'lotwise',
+    '/rate-con-checker': 'rate-con-checker',
+    '/haul-audit': 'haul-audit',
+    '/royalty-check': 'royalty-check',
+    '/audit-kit': 'audit-kit',
+    '/plot-file-checker': 'plot-file-checker',
+    '/permit-watch': 'permit-watch',
+    '/vendor-check': 'vendor-check',
+    '/spare-key': 'spare-key',
+    '/brain-pass': 'brain-pass',
+    '/footsure': 'footsure',
+    '/plus': 'plus',
+    '/commodities': 'commodities',
+    '/saver': 'saver',
+    '/pilot': 'pilot',
+    '/utility-pipeline': 'utility-pipeline'
   };
   var tool = pageTools[path];
   if (tool) window.qwTrack(tool, 'open');
