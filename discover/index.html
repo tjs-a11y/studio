@@ -49,7 +49,7 @@ fetch("/api/clickbank-catalog",{headers:{accept:"application/json"}})
     const grid=document.getElementById("offers");
     grid.innerHTML=items.map(item=>{
       const summary=item.summary||"Review the current product description, package details and seller terms before deciding.";
-      return '<article class="card"><span class="tag">'+esc(item.category||"Digital product")+'</span><h3>'+esc(item.title)+'</h3><p>'+esc(summary)+'</p><a href="/api/clickbank?id='+encodeURIComponent(item.id)+'" rel="sponsored nofollow noopener">View seller offer →</a></article>';
+      return '<article class="card" id="'+esc(item.id)+'"><span class="tag">'+esc(item.category||"Digital product")+'</span><h3>'+esc(item.title)+'</h3><p>'+esc(summary)+'</p><a href="/offers/'+encodeURIComponent(item.id)+'/">Read buyer guide →</a><a href="/api/clickbank?id='+encodeURIComponent(item.id)+'" rel="sponsored nofollow noopener">View seller offer →</a></article>';
     }).join("");
     document.getElementById("empty").hidden=items.length>0;
     if(data.affiliateDisclosure)document.querySelector(".disclosure").innerHTML="<strong>Affiliate disclosure:</strong> "+esc(data.affiliateDisclosure)+" We are not the product manufacturer or seller. Product availability, pricing, contents and refund terms can change; confirm the current details with the seller before purchasing.";
