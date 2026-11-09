@@ -24,3 +24,6 @@ HopLinks remain server-side and are never exposed by the public catalog API. Eve
 ## Release verification
 
 All eight records are enabled in the server-side registry. The public catalog is expected to return these eight approved entries and omit all HopLink query values. CI must pass before merge. After merge, verify production deployment and live catalog response before describing the offers as published.
+
+
+Final validation note: the complete eight-offer registry, catalog test, and publishing record were committed together on the release branch before the final CI run.
