@@ -115,26 +115,26 @@ async function fetchOrders(requestFetch, apiKey, account, startDate, endDate) {
 function commissionSummary(rows, apiStatus) {
   if (apiStatus !== 'ok') return { byTid: new Map(), net: null, saleRows: null, refundRows: null, chargebackRows: null };
   const byTid = new Map();
-  let net = 0, saleRows = 0, refundRows = 0, chargebackRows = 0;
+  let gross = 0, net = 0, saleRows = 0, refundRows = 0, chargebackRows = 0;
   for (const row of rows) {
     if (row.role !== 'AFFILIATE' || row.account_amount == null) continue;
     const type = row.transaction_type;
     if (!['SALE', 'BILL', 'RFND', 'CGBK', 'FEE'].includes(type)) continue;
     const delta = ['RFND', 'CGBK', 'FEE'].includes(type) ? -Math.abs(row.account_amount) : row.account_amount;
     net += delta;
-    if (type === 'SALE' || type === 'BILL') saleRows += 1;
+    if ((type === 'SALE' || type === 'BILL') && row.account_amount > 0) { gross += row.account_amount; saleRows += 1; }
     if (type === 'RFND') refundRows += 1;
     if (type === 'CGBK') chargebackRows += 1;
     const tid = String(row.tracking_id || '');
     if (!tid) continue;
-    const current = byTid.get(tid) || { net: 0, saleRows: 0, refundRows: 0, chargebackRows: 0 };
+    const current = byTid.get(tid) || { gross: 0, net: 0, saleRows: 0, refundRows: 0, chargebackRows: 0 };
     current.net += delta;
-    if (type === 'SALE' || type === 'BILL') current.saleRows += 1;
+    if ((type === 'SALE' || type === 'BILL') && row.account_amount > 0) { current.gross += row.account_amount; current.saleRows += 1; }
     if (type === 'RFND') current.refundRows += 1;
     if (type === 'CGBK') current.chargebackRows += 1;
     byTid.set(tid, current);
   }
-  return { byTid, net, saleRows, refundRows, chargebackRows };
+  return { byTid, gross, net, saleRows, refundRows, chargebackRows };
 }
 
 function totalMetrics(reportOffers) {
@@ -250,14 +250,16 @@ export async function GET(request) {
       trackingId: tid,
       ...emptyMetrics(),
       ...(byTid.get(tid) || {}),
-      confirmedCommission: commission ? commission.net : (orderResult.status === 'ok' ? 0 : null),
+      confirmedCommission: commission ? commission.gross : (orderResult.status === 'ok' ? 0 : null),
+      netCommissionAfterAdjustments: commission ? commission.net : (orderResult.status === 'ok' ? 0 : null),
       commissionTransactions: commission ? commission.saleRows : (orderResult.status === 'ok' ? 0 : null),
       refundTransactions: commission ? commission.refundRows : (orderResult.status === 'ok' ? 0 : null),
       chargebackTransactions: commission ? commission.chargebackRows : (orderResult.status === 'ok' ? 0 : null)
     };
   });
   const total = totalMetrics(reportOffers);
-  total.confirmedAffiliateCommission = commissions.net;
+  total.confirmedAffiliateCommission = commissions.gross;
+  total.netAffiliateCommission = commissions.net;
   total.confirmedCommissionTransactions = commissions.saleRows;
   total.refundCommissionTransactions = commissions.refundRows;
   total.chargebackCommissionTransactions = commissions.chargebackRows;
@@ -273,7 +275,8 @@ export async function GET(request) {
       confirmedCommissionTransactions: commissions.saleRows,
       refundTransactions: commissions.refundRows,
       chargebackTransactions: commissions.chargebackRows,
-      confirmedAffiliateCommission: commissions.net
+      confirmedAffiliateCommission: commissions.gross,
+      netAffiliateCommission: commissions.net
     },
     offers: reportOffers,
     total
