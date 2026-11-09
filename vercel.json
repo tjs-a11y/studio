@@ -28,5 +28,6 @@
   ],
   "redirects": [{"source": "/spreads", "destination": "/strategies", "permanent": true}, {"source": "/spreads/:path*", "destination": "/strategies/:path*", "permanent": true}],
   "rewrites": [{"source": "/shield/share-target", "destination": "/api/share-target"}],
+  "crons": [{ "path": "/api/clickbank-report", "schedule": "0 14 * * *" }],
   "outputDirectory": "."
 }
