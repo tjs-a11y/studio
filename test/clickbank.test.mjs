@@ -43,10 +43,12 @@ test('analytics outage does not break a valid affiliate redirect', async () => {
   }
 });
 
-test('public catalog is empty while every offer remains in draft', async () => {
+test('public catalog exposes only the first reviewed offer without leaking HopLinks', async () => {
   const response = await catalog(request('https://quickwell.app/api/clickbank-catalog'));
   assert.equal(response.status, 200);
   const body = await response.json();
-  assert.deepEqual(body.offers, []);
+  assert.deepEqual(body.offers.map((offer) => offer.id), ['genius-switch-original']);
+  assert.match(body.offers[0].summary, /audio-based personal development series/i);
+  assert.equal(JSON.stringify(body).includes('hopId='), false);
   assert.match(body.affiliateDisclosure, /commission/);
 });
