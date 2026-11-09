@@ -1,28 +1,29 @@
-# Quickwell ClickBank offer review
+# Quickwell ClickBank offer publishing record
 
-Review date: 2026-11-09
+Activation date: 2026-11-09
 
-## Publishing rule
+## Publishing and disclosure rules
 
-Only offers with a verified match between the seller/product and the stored affiliate destination are enabled. Public copy must distinguish seller statements from independently verified facts. HopLinks remain server-side. Affiliate disclosure appears beside recommendations. Health, safety, energy-output, water-quality, and performance claims are not repeated as established facts.
+The account owner confirms that all eight listed offers have been verified in their ClickBank account and authorizes their activation. This is recorded as owner-provided confirmation; Quickwell does not claim to have independently audited every seller's current checkout, affiliate terms, ingredients, or HopLink attribution.
 
-## Review decisions
+HopLinks remain server-side and are never exposed by the public catalog API. Every public offer includes the Quickwell affiliate commission disclosure. Public summaries are intentionally restrained: seller claims are not presented as independently verified facts. Supplement listings contain no diagnosis, prevention, treatment, dental, hearing, cognitive, or other efficacy promises. DIY energy and water listings do not guarantee output, savings, safety, or potability.
 
-| Offer | Review finding | Status |
-|---|---|---|
-| Shifting Vibrations Manifest | The supplied seller URL could not be retrieved and a reliable exact-product source was not found in the current review. Product contents and current terms remain unverified. | HOLD — disabled |
-| Energy Revolution System | The supplied affiliate destination could not be retrieved. Search results surfaced similarly named domains, not a confirmed match to the stored destination. Do not repeat energy-savings or generator-output claims. | HOLD — disabled |
-| PhytoMem One | The supplied affiliate destination could not be retrieved. Search results surfaced multiple lookalike domains and inconsistent product/ingredient descriptions. Supplement and cognitive-health claims require a label-matched review; do not imply treatment or prevention. | HOLD — disabled |
-| Water Freedom System | The supplied affiliate destination could not be retrieved. Several similar domains describe a digital atmospheric-water guide, not a ready-made machine. Any future page must disclose that distinction and avoid water-output or drinkability guarantees. | HOLD — disabled |
-| Genius Switch Original | The exact seller domain opened and describes an audio series. Cognitive-performance statements on the seller page are vendor claims, not established product outcomes; public copy is limited to the audio-series format. | ACTIVE — first offer |
-| ProDentim | The supplied seller page opened and describes an oral probiotic supplement. Broad dental and other health outcomes are vendor claims; label, ingredient amounts, and exact current terms need a more careful review. Do not claim FDA approval or disease treatment. | HOLD — disabled |
-| Ted Plans DIY | The supplied domain opens under the TedsWoodworking name, while the page includes unrelated machine-like/SEO text ahead of the product presentation. Identity and page integrity need confirmation before sending traffic. | HOLD — disabled |
-| AudiSoothe | The supplied domain and order page identify the product as Audifort; the seller page also references a different retailer. The product/retailer identity does not yet cleanly match the ClickBank offer record. | HOLD — disabled |
+## Offer status
 
-## First activation
+| Offer | Category | Status | Public-copy boundary |
+|---|---|---|---|
+| Shifting Vibrations Manifest | Personal development | ACTIVE | Digital audio/video/PDF format only; seller wealth claims not endorsed |
+| Energy Revolution System | DIY energy guide | ACTIVE | Information product only; no output or savings guarantee |
+| PhytoMem One | Supplement | ACTIVE | No medical or cognitive claims; direct buyers to current label and warnings |
+| Water Freedom System | DIY water guide | ACTIVE | Guide only; no device, production, safety, or potability guarantee |
+| Genius Switch Original | Personal development | ACTIVE | Audio-series format only; no cognitive/performance guarantee |
+| ProDentim | Supplement | ACTIVE | No dental or medical claims; direct buyers to current label and warnings |
+| Ted Plans DIY | DIY plans | ACTIVE | Plans/material requirements only; buyer checks safety and seller details |
+| AudiSoothe | Supplement / wellness | ACTIVE | Confirm product identity; no hearing or medical claims; current label and warnings |
 
-Genius Switch Original is enabled first with a restrained description: “An audio-based personal development series.” The Quickwell card links through the fixed server-side redirect at `/api/clickbank?id=genius-switch-original`. No cognitive benefit, efficacy, testimonial, price, or guarantee claim is made by Quickwell.
+## Release verification
 
-## Re-review requirements for held offers
+All eight records are enabled in the server-side registry. The public catalog is expected to return these eight approved entries and omit all HopLink query values. CI must pass before merge. After merge, verify production deployment and live catalog response before describing the offers as published.
 
-Before activation, confirm the exact HopLink resolves to the intended seller and product, inspect the current checkout and refund terms, match product name and label where relevant, and approve compliant, evidence-bounded public copy. Activate one offer at a time and verify its public catalog entry and redirect.
+
+Final validation note: the complete eight-offer registry, catalog test, and publishing record were committed together on the release branch before the final CI run.
