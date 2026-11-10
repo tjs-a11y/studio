@@ -1,0 +1,203 @@
+[
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "holiday-budget-calculator",
+  "title": "Holiday Budget Calculator: Set a Cap Per Person",
+  "h1": "Holiday budget calculator",
+  "desc": "Enter one total and how many people you buy for. Get a spending cap per person, with money held back for shipping and wrap.",
+  "lede": "Start with the one number you can afford, then split it before you shop.",
+  "preset": {
+   "total": 600,
+   "a": "Adults on your list",
+   "na": 6,
+   "b": "Kids on your list",
+   "nb": 3,
+   "w": 1.5,
+   "hold": 10,
+   "aOne": "adult",
+   "bOne": "kid"
+  },
+  "stepsTitle": "How to use the caps",
+  "steps": [
+   "Decide the total first, from what you can pay off in January.",
+   "Write each cap next to the person before you look at any gift.",
+   "Log every purchase the day you make it, shipping included."
+  ]
+ },
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "christmas-gift-budget-per-person",
+  "title": "Christmas Gift Budget Per Person Calculator",
+  "h1": "Christmas gift budget per person",
+  "desc": "Work out how much to spend on each person for Christmas from your total budget. Adjust the split between close family and everyone else.",
+  "lede": "Close family usually gets more. Set that ratio once and let the math do the rest.",
+  "preset": {
+   "total": 500,
+   "a": "Everyone else",
+   "na": 6,
+   "b": "Close family",
+   "nb": 4,
+   "w": 2,
+   "hold": 8,
+   "aOne": "person",
+   "bOne": "close family member"
+  },
+  "stepsTitle": "Three rules that hold the line",
+  "steps": [
+   "Give every person a number, even the small ones.",
+   "When one gift goes over, take it from another cap that same day.",
+   "Stop adding people after the caps are set."
+  ]
+ },
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "family-gift-budget-planner",
+  "title": "Family Gift Budget Planner for Kids and Adults",
+  "h1": "Family gift budget planner",
+  "desc": "Split a family gift budget between kids and adults. See a cap for each child and each adult before you start shopping.",
+  "lede": "For households where the kids get the bigger share.",
+  "preset": {
+   "total": 800,
+   "a": "Adults",
+   "na": 4,
+   "b": "Kids",
+   "nb": 3,
+   "w": 3,
+   "hold": 10,
+   "aOne": "adult",
+   "bOne": "kid"
+  },
+  "stepsTitle": "Keeping it fair",
+  "steps": [
+   "Agree the per-kid cap with the other adults before anyone buys.",
+   "Count stocking fillers and batteries inside the cap.",
+   "Track shared gifts once, against one person."
+  ]
+ },
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "secret-santa-budget-calculator",
+  "title": "Secret Santa and Coworker Gift Budget Calculator",
+  "h1": "Secret Santa and coworker gift budget",
+  "desc": "Budget for office gifts, Secret Santa and teachers. Enter your total and headcount to get a cap per coworker and per exchange gift.",
+  "lede": "Small gifts add up fast when there are many of them.",
+  "preset": {
+   "total": 150,
+   "a": "Coworkers and teachers",
+   "na": 6,
+   "b": "Secret Santa exchanges",
+   "nb": 2,
+   "w": 1.5,
+   "hold": 5,
+   "aOne": "coworker",
+   "bOne": "exchange gift"
+  },
+  "stepsTitle": "Before you buy",
+  "steps": [
+   "Check the exchange limit and use it as your cap.",
+   "Buy the same small gift in a batch where you can.",
+   "Keep work gifts on their own line so they do not eat the family budget."
+  ]
+ },
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "big-family-christmas-budget",
+  "title": "Big Family Christmas Budget: Cap Each Gift",
+  "h1": "Big family Christmas budget",
+  "desc": "Buying for a large family? Set one total, count nieces, nephews and adults, and get a cap for each so the list stays affordable.",
+  "lede": "Long lists need small, firm caps.",
+  "preset": {
+   "total": 900,
+   "a": "Adults",
+   "na": 10,
+   "b": "Nieces, nephews and kids",
+   "nb": 8,
+   "w": 1.25,
+   "hold": 12,
+   "aOne": "adult",
+   "bOne": "child"
+  },
+  "stepsTitle": "Ways to shorten the list",
+  "steps": [
+   "Suggest a name draw for the adults.",
+   "Give one gift per household where that fits.",
+   "Set the caps now, while there is still time to shop around."
+  ]
+ },
+ {
+  "group": "holiday",
+  "calc": "split",
+  "slug": "last-minute-gift-budget",
+  "title": "Last-Minute Gift Budget: What Is Left Per Person",
+  "h1": "Last-minute gift budget: what's left per person",
+  "desc": "Already started shopping? Enter the money you have left and the people still on your list to see what you can spend on each.",
+  "lede": "Enter what is left, not what you started with.",
+  "preset": {
+   "total": 200,
+   "a": "Other people still to buy for",
+   "na": 4,
+   "b": "Close family still to buy for",
+   "nb": 1,
+   "w": 2,
+   "hold": 15,
+   "aOne": "person",
+   "bOne": "close family member"
+  },
+  "stepsTitle": "Finishing without going over",
+  "steps": [
+   "Add up what you have already spent before buying anything else.",
+   "Hold back more for rush shipping this late.",
+   "If the cap is too small, combine a gift with someone else."
+  ]
+ },
+ {
+  "group": "carrier",
+  "calc": "diff",
+  "slug": "broker-short-pay-calculator",
+  "title": "Broker Short Pay Calculator for Carriers",
+  "h1": "Broker short pay calculator",
+  "desc": "Compare what the rate confirmation says you are owed with what the broker paid. See the shortfall in dollars and percent for one load.",
+  "lede": "Enter the agreed total, any approved extras and what arrived.",
+  "stepsTitle": "If the load came up short",
+  "steps": [
+   "Line the payment up against the signed rate confirmation, not the load board post.",
+   "Ask the broker in writing which line was reduced and why.",
+   "Keep the rate confirmation, proof of delivery and any approval emails together."
+  ]
+ },
+ {
+  "group": "carrier",
+  "calc": "factoring",
+  "slug": "factoring-deposit-calculator",
+  "title": "Factoring Deposit Calculator: Fee and Reserve",
+  "h1": "Factoring deposit calculator",
+  "desc": "Enter the invoice, your factoring fee and reserve to see the deposit you should expect, then compare it with what landed in your account.",
+  "lede": "Use the fee and reserve percentages written in your own factoring agreement.",
+  "stepsTitle": "When the deposit does not match",
+  "steps": [
+   "Check whether the broker short-paid the factor before blaming the fee.",
+   "Look for extra charges on the factoring statement, such as wire or same-day fees.",
+   "Ask the factor for the remittance detail for that invoice."
+  ]
+ },
+ {
+  "group": "carrier",
+  "calc": "detention",
+  "slug": "detention-pay-calculator",
+  "title": "Detention Pay Calculator for Truck Drivers",
+  "h1": "Detention pay calculator",
+  "desc": "Enter hours at the dock, free time and the hourly detention rate from your rate confirmation to see what is billable for the stop.",
+  "lede": "Use the free time and hourly rate written on your rate confirmation.",
+  "stepsTitle": "Getting detention paid",
+  "steps": [
+   "Record arrival and departure times at the stop, with the facility stamp or signature where you can.",
+   "Tell the broker while you are still waiting, in writing.",
+   "Bill detention on the invoice as its own line with the in and out times."
+  ]
+ }
+]

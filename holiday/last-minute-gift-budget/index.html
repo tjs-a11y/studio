@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last-Minute Gift Budget: What Is Left Per Person</title>
+<meta name="description" content="Already started shopping? Enter the money you have left and the people still on your list to see what you can spend on each.">
+<link rel="canonical" href="https://quickwell.app/holiday/last-minute-gift-budget/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Quickwell">
+<meta property="og:title" content="Last-Minute Gift Budget: What Is Left Per Person">
+<meta property="og:description" content="Already started shopping? Enter the money you have left and the people still on your list to see what you can spend on each.">
+<meta property="og:url" content="https://quickwell.app/holiday/last-minute-gift-budget/">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://quickwell.app/og.png">
+<style>:root{--bg:#f7f7f4;--ink:#15171a;--muted:#5d6470;--card:#fff;--line:#e3e3dd;--accent:#1d6f73;--soft:#e9f1f1}
+@media (prefers-color-scheme:dark){:root{--bg:#101414;--ink:#edf0f0;--muted:#9aa7a7;--card:#171c1c;--line:#283030;--accent:#5bb8bd;--soft:#19201f;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:28px 16px 56px}nav.crumbs{font-size:.9rem;color:var(--muted)}a{color:var(--accent)}
+h1{font-size:1.75rem;line-height:1.2;margin:10px 0 8px}h2{font-size:1.2rem;margin:26px 0 8px}.lede{color:var(--muted);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label{display:block;font-size:.85rem;color:var(--muted)}input{width:100%;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-top:4px}
+.out{background:var(--soft);border-radius:10px;padding:12px 14px;margin-top:14px}.out b{font-size:1.25rem}
+.cta{display:inline-block;margin-top:10px;padding:11px 18px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+.small{font-size:.88rem;color:var(--muted)}ul{padding-left:20px}li{margin:5px 0}
+.list a{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);margin:8px 0;text-decoration:none}
+footer{margin-top:30px;font-size:.88rem;color:var(--muted)}</style>
+<script src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main><nav class="crumbs"><a href="/">Quickwell</a> / <a href="/holiday/">Holiday budget</a></nav><h1>Last-minute gift budget: what's left per person</h1><p class="lede">Enter what is left, not what you started with.</p><section class="card"><div class="grid">
+<label>Total budget ($)<input id="t" type="number" inputmode="decimal" min="0" value="200"></label>
+<label>Other people still to buy for<input id="a" type="number" inputmode="numeric" min="0" value="4"></label>
+<label>Close family still to buy for<input id="b" type="number" inputmode="numeric" min="0" value="1"></label>
+<label>Held back for shipping and wrap (%)<input id="h" type="number" inputmode="decimal" min="0" max="90" value="15"></label></div>
+<div class="out" id="o" aria-live="polite"></div>
+<script>(function(){var W=2;function v(i){return Math.max(0,parseFloat(document.getElementById(i).value)||0)}
+function m(x){return '$'+(Math.round(x*100)/100).toFixed(2)}
+function run(){var t=v('t'),a=v('a'),b=v('b'),h=Math.min(90,v('h'))/100,pool=t*(1-h),u=a+b*W,o=document.getElementById('o');
+if(!t||!u){o.textContent='Enter a budget and at least one person.';return}
+var ca=pool/u,cb=ca*W;o.innerHTML='<b>'+m(ca)+'</b> cap per person'+(b?' · <b>'+m(cb)+'</b> cap per close family member':'')+'<br><span class="small">'+m(t*h)+' held back. Caps add up to '+m(pool)+'.</span>'}
+['t','a','b','h'].forEach(function(i){document.getElementById(i).addEventListener('input',run)});run()})();</script><p class="small" style="margin-bottom:0">Works in your browser. Nothing you type is uploaded.</p></section><h2>Finishing without going over</h2><ol><li>Add up what you have already spent before buying anything else.</li><li>Hold back more for rush shipping this late.</li><li>If the cap is too small, combine a gift with someone else.</li></ol><section class="card" aria-labelledby="gl"><h2 id="gl" style="margin-top:0">Keep the caps you just set</h2>
+<p>Nobody plans to overspend on the holidays. It happens because nobody is tracking the total. Gatherloom, our gift-list app, puts every person and every gift on one list with a spending cap for each, so you see planned against spent before you buy the next gift.</p>
+<a class="cta" href="/go/gatherloom/?from=holiday-last-minute-gift-budget">Start the 14-day free trial</a>
+<p class="small">Then $2.99/month or $24/year. Cancel anytime.</p></section><h2>Related calculators</h2><ul><li><a href="/holiday/holiday-budget-calculator/">Holiday budget calculator</a></li><li><a href="/holiday/christmas-gift-budget-per-person/">Christmas gift budget per person</a></li><li><a href="/holiday/family-gift-budget-planner/">Family gift budget planner</a></li><li><a href="/holiday/secret-santa-budget-calculator/">Secret Santa and coworker gift budget</a></li><li><a href="/holiday/big-family-christmas-budget/">Big family Christmas budget</a></li></ul><section class="card" aria-labelledby="books"><h2 id="books" style="margin-top:0">From our bookshelf</h2>
+<p class="small">We publish these books ourselves.</p>
+<ul><li><a href="https://books2read.com/u/mY9QMW" rel="noopener">Mindset Mastery</a>: a practical guide to habits and focus for the new year.</li>
+<li><a href="https://books2read.com/u/m26Ngr" rel="noopener">Mastering Cryptocurrency Trading</a>: order types, risk and position sizing in plain English, for learning how the market works before you risk money.</li></ul>
+<p class="small">Educational only. Not financial advice; no outcomes promised.</p></section><footer>A planning aid, not financial advice. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+</body>
+</html>
