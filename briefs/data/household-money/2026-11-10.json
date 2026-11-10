@@ -1,0 +1,112 @@
+{
+ "brief": {
+  "subject": "Poor credit is pushing car insurance costs up sharply",
+  "headline": "Drivers with poor credit see auto insurance premiums climb nearly 38%",
+  "dek": "Auto insurance costs keep rising for drivers with weak credit, and the FTC adds new details in its pricing case against Amazon.",
+  "lede": "Drivers with poor credit have seen auto insurance premiums rise nearly 38% over three years. That makes your credit score a real factor in a major monthly bill.",
+  "sections": [
+   {
+    "heading": "Weak credit, pricier car insurance",
+    "bullets": [
+     "Premiums for drivers with poor credit are up nearly 38% over the past three years, according to NerdWallet's 2026 rates report.",
+     "Many insurers factor credit into pricing, so a low score can quietly raise your renewal bill.",
+     "Check your renewal notice against last year's to spot how much your premium has moved."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "FTC unseals more in Amazon case",
+    "bullets": [
+     "The FTC and 22 states filed an updated complaint against Amazon with previously redacted details.",
+     "Regulators allege Amazon secretly manipulated its search-ad auctions to inflate prices and hit financial targets.",
+     "The claims are allegations for now; the case shows regulators are still pursuing hidden pricing tactics."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   }
+  ],
+  "seo_description": "Drivers with poor credit saw auto insurance premiums rise nearly 38% in three years; FTC and 22 states detail Amazon ad-pricing allegations."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-10T18:40:45.089Z",
+  "date": "2026-11-10",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "Car Insurance Soars for Drivers With Poor Credit; Here’s What to Do",
+    "link": "https://www.nerdwallet.com/insurance/auto/learn/credit-score-auto-insurance-rates",
+    "published": "2026-11-10T16:35:37.000Z",
+    "snippet": "Over the past three years, drivers with poor credit have seen auto insurance premiums go up nearly 38%, NerdWallet’s 2026 Auto Insurance Rates Report found.",
+    "categories": [
+     "Auto Insurance",
+     "Insurance"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "World of Hyatt Card Launches New ‘4 Free Nights’ Welcome Offer",
+    "link": "https://www.nerdwallet.com/credit-cards/news/hyatt-new-welcome-offer-november-2026",
+    "published": "2026-11-09T23:39:00.000Z",
+    "snippet": "The World of Hyatt Credit Card is updating its welcome offer. For a limited time, new cardholders are eligible for four free nights at after making eligible purchases.",
+    "categories": [
+     "Credit Cards",
+     "Hotel Credit Cards",
+     "Rewards Credit Cards",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "Newly unredacted material sheds light on Amazon’s alleged scheme to manipulate auction results to meet corporate financial targets The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. View",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 4
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
