@@ -26,7 +26,7 @@
       {"key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com 'wasm-unsafe-eval'; worker-src 'self' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://cdnjs.cloudflare.com; form-action 'self' https://*.stripe.com; base-uri 'self'; frame-ancestors 'self'"}
     ]}
   ],
-  "redirects": [{"source": "/spreads", "destination": "/strategies", "permanent": true}, {"source": "/spreads/:path*", "destination": "/strategies/:path*", "permanent": true}],
+  "redirects": [{"source": "/go/gatherloom", "destination": "https://gatherloom-theta.vercel.app/?ref=quickwell", "permanent": false}, {"source": "/go/gatherloom/", "destination": "https://gatherloom-theta.vercel.app/?ref=quickwell", "permanent": false}, {"source": "/spreads", "destination": "/strategies", "permanent": true}, {"source": "/spreads/:path*", "destination": "/strategies/:path*", "permanent": true}],
   "rewrites": [{"source": "/shield/share-target", "destination": "/api/share-target"}],
   "crons": [{ "path": "/api/clickbank-report", "schedule": "0 14 * * *" }],
   "outputDirectory": "."
