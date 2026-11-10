@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-09T21:00:26.974Z",
-  "date": "2026-11-09",
+  "fetched": "2026-11-10T18:10:03.216Z",
+  "date": "2026-11-10",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-09T21:00:26.916Z",
+  "generated": "2026-11-10T18:10:03.185Z",
   "visits": {
-    "total": 203,
-    "today": 21
+    "total": 217,
+    "today": 8
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -28,8 +28,8 @@
       "demos_today": 0
     },
     "copycat": {
-      "opens": 2,
-      "opens_today": 0,
+      "opens": 3,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -57,7 +57,7 @@
     },
     "fair-price": {
       "opens": 9,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -98,8 +98,8 @@
       "demos_today": 0
     },
     "double-dose": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -182,8 +182,8 @@
       "demos_today": 0
     },
     "fuelgauge": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -211,7 +211,7 @@
     },
     "rate-con-checker": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -252,8 +252,8 @@
       "demos_today": 0
     },
     "audit-kit": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -294,8 +294,8 @@
       "demos_today": 0
     },
     "vendor-check": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -308,8 +308,8 @@
       "demos_today": 0
     },
     "spare-key": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -322,7 +322,7 @@
       "demos_today": 0
     },
     "brain-pass": {
-      "opens": 7,
+      "opens": 8,
       "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
@@ -350,8 +350,8 @@
       "demos_today": 0
     },
     "commodities": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
