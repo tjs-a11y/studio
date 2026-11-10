@@ -88,7 +88,7 @@ test('homepage sends its primary CTA to Shield and attributes the five priority 
   const h = read('index.html');
   assert.ok(h.includes('<a class="btn btn-primary" href="/shield/?ref=home-hero">Check a suspicious message'), "primary CTA opens Shield directly");
   const popular = h.indexOf('<section class="section" id="popular">');
-  const partnerOffers = h.indexOf('<section class="offer-launch" id="featured-offers">');
+  const partnerOffers = h.indexOf('<section class="offer-launch" id="featured-offers"');
   assert.ok(popular >= 0 && partnerOffers > popular, 'priority consumer tools appear before partner offers');
   const start = h.indexOf('<div class="featured-grid">');
   const end = h.indexOf('</div>', start);
