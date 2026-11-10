@@ -119,6 +119,8 @@
       <div class="rolloff" id="rolloff" hidden></div>
       <table id="tbl"><thead><tr><th>Month</th><th>Rate (¢)</th><th>Est. bill</th></tr></thead><tbody></tbody></table>
       <p class="muted" style="margin-top:12px">Estimates only, from the numbers and assumptions you entered — not a quote, a prediction, or financial advice. Your real bill depends on usage, weather, taxes and fees, and your utility's actual rates.</p>
+      <div style="margin-top:12px"><button type="button" id="shareBtn" style="font:inherit;padding:10px 16px;border-radius:8px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer">Share this result</button></div>
+      <p class="muted" style="margin-top:4px">Shares only that you checked — never your usage, rate, or bill.</p>
     </div>
   </section>
 
@@ -172,6 +174,22 @@
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
+
+  // Share text: headline only. Built from a single boolean (was a roll-off found) and NEVER from
+  // the user's kWh, rate, dates or dollar amounts. Nothing personal leaves the device.
+  var SHARE_URL="https://quickwell.app/bill-radar/";
+  function shareText(rolled){
+    return rolled
+      ? "Bill Radar found the month my fixed electricity rate rolls off — so I can lock a new plan before the bill jumps. Check yours free, nothing uploaded:"
+      : "I mapped my next 12 months of electricity bills with Bill Radar, right on my phone — nothing uploaded. Check yours free:";
+  }
+  var lastShare="";
+  function doShare(btn){
+    var text=lastShare||"See when your fixed electricity rate rolls off with Bill Radar, free, nothing uploaded:";
+    try{ if(navigator.share){ navigator.share({text:text,url:SHARE_URL}).catch(function(){}); return; } }catch(e){}
+    try{ navigator.clipboard.writeText(text+" "+SHARE_URL); if(btn){btn.textContent="Copied — paste anywhere ✓";} }
+    catch(x){ if(btn){btn.textContent="Copy this link: "+SHARE_URL;} }
+  }
   var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
   function run(){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
@@ -207,6 +225,8 @@
       ro.hidden=false;
       ro.innerHTML='<b>⚠︎ Your fixed rate rolls off around '+monthsName[rd.getMonth()]+' '+rd.getFullYear()+'.</b> After that, this forecast assumes your rate runs about '+Math.round(bump*100)+'% higher (a typical month-to-month/variable "default" rate — an estimate). Shop a new fixed plan 2–4 weeks before that month.';
     } else { ro.hidden=true; }
+    lastShare=shareText(rolledAt!==null);
+    var sb=$('shareBtn'); if(sb) sb.onclick=function(){doShare(sb);};
     $('out').hidden=false;
     $('out').scrollIntoView({behavior:'smooth',block:'start'});
     // Anonymous usage: one count after a completed forecast (invalid input returns earlier). No input values sent.

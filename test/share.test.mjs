@@ -66,3 +66,22 @@ test('Copycat share text never includes the uploaded photo', () => {
   assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
   assert.match(body, /title/, 'shareText uses only the generated dish title');
 });
+
+test('Bill Radar offers a built-in share action', () => {
+  const src = page('bill-radar/index.html');
+  assert.match(src, /id="shareBtn"/, 'Bill Radar has a Share button in its result');
+  assert.match(src, /navigator\.share/, 'Bill Radar uses the Web Share API');
+  assert.match(src, /navigator\.clipboard\.writeText/, 'Bill Radar has a clipboard fallback');
+  assert.match(src, /quickwell\.app\/bill-radar\//, 'the share carries the tool URL');
+});
+
+// Privacy: headline only — the share text must be built from a single boolean (roll-off found or
+// not) and never from the user's kWh, rate, dates or dollar amounts.
+test('Bill Radar share text never includes the usage or bill numbers', () => {
+  const src = page('bill-radar/index.html');
+  const m = src.match(/function shareText\(rolled\)\{[\s\S]*?\n  \}\n  var lastShare/);
+  assert.ok(m, 'shareText builder is present and bounded');
+  const body = m[0];
+  assert.doesNotMatch(body, /\$\(|\.value|\bkwh\b|\bbump\b|money\(|rolledAt|next12|getFullYear/, 'shareText must not read any usage/bill value or the DOM');
+  assert.match(body, /rolled/, 'shareText uses only the roll-off boolean');
+});
