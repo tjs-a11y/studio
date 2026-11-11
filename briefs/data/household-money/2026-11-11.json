@@ -1,0 +1,136 @@
+{
+ "brief": {
+  "subject": "Poor credit is pushing car insurance up nearly 38%",
+  "headline": "Drivers With Poor Credit See Car Insurance Premiums Climb Nearly 38%",
+  "dek": "Credit scores weigh heavily on auto premiums, the FTC and 22 states detail Amazon ad-pricing claims, and a new balance transfer card launches.",
+  "lede": "Drivers with poor credit have seen auto insurance premiums rise nearly 38% over the past three years, according to a new rates report.",
+  "sections": [
+   {
+    "heading": "Weak credit, steeper car insurance",
+    "bullets": [
+     "Premiums for drivers with poor credit rose nearly 38% over three years, according to NerdWallet's 2026 Auto Insurance Rates Report.",
+     "Your credit history can shape your insurance bill, not just your loan rates.",
+     "Low-credit households facing renewals may be absorbing some of the sharpest increases."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "FTC adds detail to Amazon ad case",
+    "bullets": [
+     "The FTC and 22 states filed an updated complaint against Amazon with newly unredacted details.",
+     "Regulators allege Amazon secretly inflated prices in its search advertising auctions to hit financial targets.",
+     "The case alleges deceptive and unfair practices; the claims have not been proven."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "New balance transfer card",
+    "bullets": [
+     "Capital One launched a new VentureOne balance transfer credit card.",
+     "NerdWallet says it stays useful after the no-interest promotional window ends.",
+     "That matters because many transfer cards lose their value once the intro period expires."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "Poor-credit drivers face car insurance up nearly 38%, the FTC and 22 states expand the Amazon ad case, and a new balance transfer card launches."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-11T18:42:04.602Z",
+  "date": "2026-11-11",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "Capital One Launches New VentureOne Balance Transfer Card",
+    "link": "https://www.nerdwallet.com/credit-cards/news/capital-one-launches-ventureone-balance-transfer-card",
+    "published": "2026-11-10T21:27:05.000Z",
+    "snippet": "Capital One’s newest balance transfer credit card is one of the rare cards of its kind that’s useful beyond the no-interest promotional window.",
+    "categories": [
+     "Balance Transfer Credit Cards",
+     "Credit Cards",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "Car Insurance Soars for Drivers With Poor Credit; Here’s What to Do",
+    "link": "https://www.nerdwallet.com/insurance/auto/learn/credit-score-auto-insurance-rates",
+    "published": "2026-11-10T16:35:37.000Z",
+    "snippet": "Over the past three years, drivers with poor credit have seen auto insurance premiums go up nearly 38%, NerdWallet’s 2026 Auto Insurance Rates Report found.",
+    "categories": [
+     "Auto Insurance",
+     "Insurance"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "World of Hyatt Card Launches New ‘4 Free Nights’ Welcome Offer",
+    "link": "https://www.nerdwallet.com/credit-cards/news/hyatt-new-welcome-offer-november-2026",
+    "published": "2026-11-09T23:39:00.000Z",
+    "snippet": "The World of Hyatt Credit Card is updating its welcome offer. For a limited time, new cardholders are eligible for four free nights at after making eligible purchases.",
+    "categories": [
+     "Credit Cards",
+     "Hotel Credit Cards",
+     "Rewards Credit Cards",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "Newly unredacted material sheds light on Amazon’s alleged scheme to manipulate auction results to meet corporate financial targets The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. View",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 5
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 3
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "brief": {
+  "subject": "Dementia and firearm safety; what the midterms mean for Medicare",
+  "headline": "Experts Target Gun Safety as Dementia Emerges; Midterms Reopen Medicare Debate",
+  "dek": "Public health experts focus on firearm safety for older gun owners with cognitive decline, and a new Congress revives the Medicare for All question.",
+  "lede": "Public health experts are looking for ways to encourage safer firearm practices among older gun owners, especially when early signs of dementia appear.",
+  "sections": [
+   {
+    "heading": "Dementia and Guns at Home",
+    "bullets": [
+     "Public health experts are developing approaches that encourage firearm safety among older adults who own guns.",
+     "The effort centers on households where a gun owner shows signs of cognitive decline, a situation many family caregivers face.",
+     "Families with concerns about a loved one's memory and home safety can raise the topic with that person's doctor."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Medicare for All Back in Play",
+    "bullets": [
+     "Democrats took control of Congress in the midterms, helped by voter frustration over healthcare costs.",
+     "That shift has revived debate over Medicare for All, a key issue for current and future beneficiaries.",
+     "Democratic control does not guarantee Medicare for All will pass, despite hopes among some supporters."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "Healthy Aging Brief: firearm safety for older gun owners showing signs of dementia, and what Democrats' midterm win means for Medicare for All."
+ },
+ "harvest": {
+  "desk": "caregivers",
+  "generatedAt": "2026-11-11T18:42:04.602Z",
+  "date": "2026-11-11",
+  "items": [
+   {
+    "id": "S1",
+    "source": "KFF Health News",
+    "title": "When a Gun Owner Shows Early Signs of Dementia",
+    "link": "https://kffhealthnews.org/aging/new-old-age-guns-firearms-safety-dementia-weapons-suicide/",
+    "published": "2026-11-10T10:00:00.000Z",
+    "snippet": "Public health experts are finding ways to encourage firearm safety practices for older adults who own guns, especially when there are indications of cognitive decline.",
+    "categories": [
+     "Aging",
+     "Mental Health",
+     "Public Health",
+     "Dementia",
+     "Guns"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "KFF Health News",
+    "title": "Midterm Wave Sets a Course for ‘Medicare for All’ Fight",
+    "link": "https://kffhealthnews.org/insurance/medicare-for-all-single-payer-insurance-el-sayed-midterms-democratic-congress-voter-appeal/",
+    "published": "2026-11-06T10:00:00.000Z",
+    "snippet": "Voter frustration with healthcare costs helped fuel the Democrats’ midterm takeover of Congress. But Democratic control doesn’t mean “Medicare for All” will follow, as some hoped.",
+    "categories": [
+     "Health Industry",
+     "Healthcare Costs",
+     "Insurance",
+     "Medicare",
+     "Affordable Care Act",
+     "Drug Costs",
+     "Midwest Bureau",
+     "Nurses",
+     "Southern Bureau"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "NIH News Releases",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "CDC Newsroom",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: ACL",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "KFF Health News",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Next Avenue",
+    "fetched": 0,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": [
+   {
+    "source": "Next Avenue",
+    "message": "Feed not recognized as RSS 1 or 2."
+   }
+  ]
+ },
+ "ctas": [
+  {
+   "id": "footsure",
+   "product": "Quickwell Footsure",
+   "url": "https://quickwell.app/footsure/",
+   "ref": true,
+   "label": "Run the fall-risk check",
+   "copy": "Run the CDC's three fall-risk tests with your phone and a helper. Results stay on the phone.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

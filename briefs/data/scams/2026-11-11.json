@@ -1,0 +1,149 @@
+{
+ "brief": {
+  "subject": "Fake debt collectors halted, health data case grows",
+  "headline": "Court Freezes Phantom Debt Collectors; Five States Join Hims and Hers Privacy Suit",
+  "dek": "A fake debt collection operation is frozen, a telehealth privacy case expands, and renters and car buyers win against hidden pricing.",
+  "lede": "At the FTC's request, a federal court froze a debt collection operation accused of pressuring people to pay debts they often did not owe.",
+  "sections": [
+   {
+    "heading": "Phantom Debt Collectors Frozen",
+    "bullets": [
+     "A federal court temporarily halted the operation and froze its assets after an FTC request.",
+     "Collectors allegedly posed as a law firm or claimed ties to attorneys to scare people into paying.",
+     "They allegedly threatened to contact employers and family members, a pressure tactic worth recognizing.",
+     "Many targeted debts were allegedly not owed at all, so an unexpected demand deserves scrutiny before any payment."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Telehealth Privacy Case Expands",
+    "bullets": [
+     "Five states joined the FTC's lawsuit against telehealth provider Hims and Hers through an amended complaint.",
+     "The company allegedly shared sensitive health information with advertising platforms while promising privacy.",
+     "It is also accused of misleading users about billing and cancellation, a reason to review recurring charges."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Landlord Pays $49.75 Million",
+    "bullets": [
+     "Progress Residential and owner Pretium Partners will pay $49.75 million to settle FTC and four states' charges.",
+     "The single-family rental manager allegedly misled renters with deceptive rental pricing.",
+     "The FTC calls it the largest enforcement matter it has taken against a landlord."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Car Dealer Settles Over Ad Prices",
+    "bullets": [
+     "Long Island dealership group Stream Auto Outlet settled FTC claims over misleading advertised prices.",
+     "Buyers allegedly paid far more than the advertised figures, a reminder to confirm the full price before signing."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "Court freezes phantom debt collectors, five states join Hims and Hers privacy suit, and a $49.75 million rental pricing settlement."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-11T18:42:04.602Z",
+  "date": "2026-11-11",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "Five States Join FTC Lawsuit Alleging Hims and Hers Engaged in Deceptive and Unlawful Privacy Practices",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/five-states-join-ftc-lawsuit-alleging-hims-hers-engaged-deceptive-unlawful-privacy-practices",
+    "published": "2026-11-10T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission filed an amended complaint adding five states as co-plaintiffs in its lawsuit alleging that telehealth provider Hims and Hers shared consumers’ sensitive health information with third-party advertising platforms, despite claiming its services maintain consumers’ privacy, and it deceived users about its billing and cancellation practices. The amended complaint filed by ",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Secures Settlement with Stream Auto Outlet, Advancing Price Transparency for Auto-Buying Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-secures-settlement-stream-auto-outlet-advancing-price-transparency-auto-buying-consumers",
+    "published": "2026-11-09T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission announced an agreement today with Stream Auto Outlet, resolving claims that the Long Island, New York-based dealership group deceived consumers by advertising prices far lower than what consumers ultimately had to pay. “Buying a car is one of the largest purchases many consumers make, and they deserve clear, transparent information about what they will pay,” said Chris",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Action Results in Court Issuing Temporary Restraining Order Halting Phantom Debt Collection Operation",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-action-results-court-issuing-temporary-restraining-order-halting-phantom-debt-collection",
+    "published": "2026-11-09T12:00:00.000Z",
+    "snippet": "At the Federal Trade Commission’s request, a federal court has temporarily halted and frozen the assets of a debt collection operation that allegedly used deceptive and unlawful tactics to pressure consumers into paying debts that they frequently did not owe. “Pretending to be a law firm or affiliated with attorneys and threatening to contact consumers’ employers and family members to induce consu",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "Progress Residential and Owner Pretium Partners to Pay $49.75 Million to Settle FTC and States’ Charges Over Deceptive Rental Pricing Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/progress-residential-owner-pretium-partners-pay-4975-million-settle-ftc-states-charges-over",
+    "published": "2026-11-06T12:00:00.000Z",
+    "snippet": "The nation’s largest property manager of single-family rental homes, Progress Residential, and its owner, private equity firm Pretium Partners, will pay $49.75 million to settle charges brought by the Federal Trade Commission and four states that the companies misled consumers with deceptive rental pricing practices. This is the largest enforcement matter taken against a landlord in the Commission",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "New Details Emerge in Amazon Ads Auction-Rigging Case",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/new-details-emerge-amazon-ads-auction-rigging-case",
+    "published": "2026-11-05T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission and 22 states recently filed an updated version of their complaint against Amazon with unredacted details about Amazon’s alleged use of deceptive and unfair practices to secretly inflate prices in its online search advertising auction. Details in the updated version of the complaint show substantial harm to advertisers as well as the direct statements Amazon made to mi",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 5
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
