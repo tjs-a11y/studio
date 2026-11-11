@@ -87,6 +87,10 @@ test('sitemap and robots list only real pages on the configured origin', () => {
 test('homepage sends its primary CTA to Shield and attributes the five priority consumer paths', () => {
   const h = read('index.html');
   assert.ok(h.includes('<a class="btn btn-primary" href="/shield/?ref=home-hero">Check a suspicious message'), "primary CTA opens Shield directly");
+  const popular = h.indexOf('<section class="section" id="popular">');
+  const popularEnd = h.indexOf("</section>", popular);
+  const partnerOffers = h.indexOf('<section class="offer-launch" id="featured-offers"');
+  assert.ok(popular >= 0 && popularEnd > popular && partnerOffers > popularEnd, "priority consumer tools appear before partner offers");
   const start = h.indexOf('<div class="featured-grid">');
   const end = h.indexOf('</div>', start);
   const grid = h.slice(start, end);
