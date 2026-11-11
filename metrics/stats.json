@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-10T18:10:03.216Z",
-  "date": "2026-11-10",
+  "fetched": "2026-11-11T18:00:23.641Z",
+  "date": "2026-11-11",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-10T18:10:03.185Z",
+  "generated": "2026-11-11T18:00:23.605Z",
   "visits": {
-    "total": 217,
-    "today": 8
+    "total": 239,
+    "today": 14
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -29,7 +29,7 @@
     },
     "copycat": {
       "opens": 3,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -56,8 +56,8 @@
       "demos_today": 0
     },
     "fair-price": {
-      "opens": 9,
-      "opens_today": 0,
+      "opens": 10,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -99,7 +99,7 @@
     },
     "double-dose": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -183,7 +183,7 @@
     },
     "fuelgauge": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -253,7 +253,7 @@
     },
     "audit-kit": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -295,7 +295,7 @@
     },
     "vendor-check": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -309,7 +309,7 @@
     },
     "spare-key": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -322,8 +322,8 @@
       "demos_today": 0
     },
     "brain-pass": {
-      "opens": 8,
-      "opens_today": 1,
+      "opens": 11,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -351,7 +351,7 @@
     },
     "commodities": {
       "opens": 2,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
