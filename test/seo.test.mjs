@@ -55,17 +55,25 @@ test('JSON-LD parses, and tool offers match the real prices', () => {
 
 test('Fair Price FAQPage structured data matches visible FAQ copy', () => {
   const html = read('fair-price/index.html');
-  const body = html.slice(html.indexOf('<body>'));
-  const section = body.match(/<section class="card faq" aria-labelledby="fair-price-faq-title">([\\s\\S]*?)<\\/section>/);
-  assert.ok(section, 'Fair Price has a visible FAQ section');
-  const block = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)][0];
-  assert.ok(block, 'Fair Price has JSON-LD');
-  const graph = JSON.parse(block[1])['@graph'];
+  const bodyStart = html.indexOf('<body>');
+  assert.ok(bodyStart >= 0, 'Fair Price has a body');
+  const body = html.slice(bodyStart);
+  const sectionStart = body.indexOf('<section class="card faq" aria-labelledby="fair-price-faq-title">');
+  assert.ok(sectionStart >= 0, 'Fair Price has a visible FAQ section');
+  const sectionEnd = body.indexOf('</section>', sectionStart);
+  assert.ok(sectionEnd > sectionStart, 'Fair Price FAQ section closes');
+  const visible = body.slice(sectionStart, sectionEnd);
+  const jsonStart = html.indexOf('<script type="application/ld+json">');
+  assert.ok(jsonStart >= 0, 'Fair Price has JSON-LD');
+  const jsonContentStart = jsonStart + '<script type="application/ld+json">'.length;
+  const jsonEnd = html.indexOf('</script>', jsonContentStart);
+  assert.ok(jsonEnd > jsonContentStart, 'Fair Price JSON-LD closes');
+  const graph = JSON.parse(html.slice(jsonContentStart, jsonEnd))['@graph'];
   const faq = graph.find((node) => node['@type'] === 'FAQPage');
   assert.ok(faq && faq.mainEntity.length === 2, 'Fair Price has two FAQ schema entries');
   for (const question of faq.mainEntity) {
-    assert.ok(section[1].includes(question.name), 'visible FAQ includes schema question: ' + question.name);
-    assert.ok(section[1].includes(question.acceptedAnswer.text), 'visible FAQ includes schema answer: ' + question.name);
+    assert.ok(visible.includes(question.name), 'visible FAQ includes schema question: ' + question.name);
+    assert.ok(visible.includes(question.acceptedAnswer.text), 'visible FAQ includes schema answer: ' + question.name);
   }
 });
 
