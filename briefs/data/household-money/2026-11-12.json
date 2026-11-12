@@ -1,0 +1,139 @@
+{
+ "brief": {
+  "subject": "Poor credit is pushing car insurance premiums up nearly 38%",
+  "headline": "Car insurance costs climb nearly 38% for drivers with poor credit",
+  "dek": "Auto premiums jumped for drivers with weak credit, plus a new balance transfer card and a store card that requires a membership.",
+  "lede": "Drivers with poor credit have seen auto insurance premiums rise nearly 38% over the past three years. Your credit score may be shaping your car insurance bill.",
+  "sections": [
+   {
+    "heading": "Weak credit, steeper car insurance",
+    "bullets": [
+     "Premiums rose nearly 38% over three years for drivers with poor credit, according to a 2026 auto insurance rates report.",
+     "A credit score can affect more than loan rates; it can also raise a recurring household bill.",
+     "Drivers whose credit has slipped may face higher renewal quotes than they expect."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "New balance transfer card arrives",
+    "bullets": [
+     "Capital One has launched a new VentureOne card built for balance transfers.",
+     "It is described as one of the few balance transfer cards that stays useful after the no-interest promo period ends.",
+     "For anyone carrying card debt, the terms after the promo window matter as much as the interest-free period itself."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "A store card with a membership catch",
+    "bullets": [
+     "The Fabletics credit card is open only to people who are Fabletics VIP members.",
+     "That requirement adds a hurdle and ties the card to an ongoing retailer relationship.",
+     "The membership decision comes before the card decision, which narrows who can realistically apply."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "Drivers with poor credit saw car insurance premiums rise nearly 38% in three years. Also: a new balance transfer card and a membership-only store card."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-12T18:56:24.136Z",
+  "date": "2026-11-12",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Fabletics Credit Card",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/fabletics-credit-card",
+    "published": "2026-11-12T15:27:20.000Z",
+    "snippet": "You must be a Fabletics VIP member to get this credit card, which will certainly be a barrier to entry for many people.",
+    "categories": [
+     "Credit Cards",
+     "Rewards Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "NerdWallet",
+    "title": "Capital One Launches New VentureOne Balance Transfer Card",
+    "link": "https://www.nerdwallet.com/credit-cards/news/capital-one-launches-ventureone-balance-transfer-card",
+    "published": "2026-11-10T21:27:05.000Z",
+    "snippet": "Capital One’s newest balance transfer credit card is one of the rare cards of its kind that’s useful beyond the no-interest promotional window.",
+    "categories": [
+     "Balance Transfer Credit Cards",
+     "Credit Cards",
+     "Travel Credit Cards"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Car Insurance Soars for Drivers With Poor Credit; Here’s What to Do",
+    "link": "https://www.nerdwallet.com/insurance/auto/learn/credit-score-auto-insurance-rates",
+    "published": "2026-11-10T16:35:37.000Z",
+    "snippet": "Over the past three years, drivers with poor credit have seen auto insurance premiums go up nearly 38%, NerdWallet’s 2026 Auto Insurance Rates Report found.",
+    "categories": [
+     "Auto Insurance",
+     "Insurance"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "NerdWallet",
+    "title": "World of Hyatt Card Launches New ‘4 Free Nights’ Welcome Offer",
+    "link": "https://www.nerdwallet.com/credit-cards/news/hyatt-new-welcome-offer-november-2026",
+    "published": "2026-11-09T23:39:00.000Z",
+    "snippet": "The World of Hyatt Credit Card is updating its welcome offer. For a limited time, new cardholders are eligible for four free nights at after making eligible purchases.",
+    "categories": [
+     "Credit Cards",
+     "Hotel Credit Cards",
+     "Rewards Credit Cards",
+     "Travel Credit Cards"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 5
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 4
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

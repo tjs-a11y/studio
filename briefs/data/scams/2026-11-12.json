@@ -1,0 +1,151 @@
+{
+ "brief": {
+  "subject": "Fake debt collectors halted, plus pricing and privacy crackdowns",
+  "headline": "Court Freezes Phantom Debt Collectors; FTC Hits Retail and Rental Price Tricks",
+  "dek": "A court froze a debt operation accused of posing as lawyers, and regulators pursue shelf-price, rent and health-data cases.",
+  "lede": "At the FTC's request, a federal court froze a debt collection operation accused of pressuring people to pay debts they often didn't owe. Fake legal threats remain a classic intimidation scam.",
+  "sections": [
+   {
+    "heading": "Phantom Debt Collectors Frozen",
+    "bullets": [
+     "A federal court temporarily halted the operation and froze its assets after an FTC request.",
+     "Collectors allegedly posed as a law firm or claimed ties to attorneys, a tactic meant to scare people into paying.",
+     "They allegedly threatened to contact employers and family members, so treat such threats as a red flag.",
+     "Many targeted debts were frequently not owed, so verify any debt before paying a cent."
+    ],
+    "source_ids": [
+     "S3"
+    ]
+   },
+   {
+    "heading": "Health Data Shared With Advertisers?",
+    "bullets": [
+     "Five states joined the FTC's lawsuit against telehealth provider Hims and Hers through an amended complaint.",
+     "The suit alleges sensitive health information went to third-party ad platforms despite privacy promises.",
+     "It also alleges users were misled about billing and cancellation, so check telehealth subscription terms closely."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Register Price Higher Than Shelf Tag",
+    "bullets": [
+     "Family Dollar will pay $63 million to settle claims from the FTC and 17 states.",
+     "Shoppers were allegedly charged more at checkout than prices on shelves, tags and ads.",
+     "Comparing your receipt to the shelf price is a simple way to catch overcharges."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Hidden Costs in Rent and Car Ads",
+    "bullets": [
+     "Progress Residential and owner Pretium Partners will pay $49.75 million over alleged deceptive rental pricing.",
+     "The FTC calls it the largest enforcement matter it has taken against a landlord.",
+     "Separately, Long Island dealer Stream Auto Outlet settled claims its advertised prices were far below what buyers paid."
+    ],
+    "source_ids": [
+     "S5",
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "Court freezes fake debt collectors posing as lawyers; FTC settles Family Dollar and rental pricing cases; states join Hims and Hers privacy suit."
+ },
+ "harvest": {
+  "desk": "scams",
+  "generatedAt": "2026-11-12T18:56:24.136Z",
+  "date": "2026-11-12",
+  "items": [
+   {
+    "id": "S1",
+    "source": "FTC press releases",
+    "title": "FTC and 17 States Secure $63 Million Settlement with Family Dollar Stores in Price Transparency Win for Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-17-states-secure-63-million-settlement-family-dollar-stores-price-transparency-win-consumers",
+    "published": "2026-11-12T12:00:00.000Z",
+    "snippet": "Family Dollar will pay $63 million to settle Federal Trade Commission and state allegations that the company routinely charged customers more at the register than the prices displayed on shelves, price tags and advertisements, costing consumers millions of dollars. The proposed order prohibits Family Dollar from misrepresenting the price of its goods or services and requires the retailer to establ",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "Five States Join FTC Lawsuit Alleging Hims and Hers Engaged in Deceptive and Unlawful Privacy Practices",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/five-states-join-ftc-lawsuit-alleging-hims-hers-engaged-deceptive-unlawful-privacy-practices",
+    "published": "2026-11-10T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission filed an amended complaint adding five states as co-plaintiffs in its lawsuit alleging that telehealth provider Hims and Hers shared consumers’ sensitive health information with third-party advertising platforms, despite claiming its services maintain consumers’ privacy, and it deceived users about its billing and cancellation practices. The amended complaint filed by ",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "FTC press releases",
+    "title": "FTC Action Results in Court Issuing Temporary Restraining Order Halting Phantom Debt Collection Operation",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-action-results-court-issuing-temporary-restraining-order-halting-phantom-debt-collection",
+    "published": "2026-11-09T12:00:00.000Z",
+    "snippet": "At the Federal Trade Commission’s request, a federal court has temporarily halted and frozen the assets of a debt collection operation that allegedly used deceptive and unlawful tactics to pressure consumers into paying debts that they frequently did not owe. “Pretending to be a law firm or affiliated with attorneys and threatening to contact consumers’ employers and family members to induce consu",
+    "categories": []
+   },
+   {
+    "id": "S4",
+    "source": "FTC press releases",
+    "title": "FTC Secures Settlement with Stream Auto Outlet, Advancing Price Transparency for Auto-Buying Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-secures-settlement-stream-auto-outlet-advancing-price-transparency-auto-buying-consumers",
+    "published": "2026-11-09T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission announced an agreement today with Stream Auto Outlet, resolving claims that the Long Island, New York-based dealership group deceived consumers by advertising prices far lower than what consumers ultimately had to pay. “Buying a car is one of the largest purchases many consumers make, and they deserve clear, transparent information about what they will pay,” said Chris",
+    "categories": []
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "Progress Residential and Owner Pretium Partners to Pay $49.75 Million to Settle FTC and States’ Charges Over Deceptive Rental Pricing Practices and Other Unlawful Conduct",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/progress-residential-owner-pretium-partners-pay-4975-million-settle-ftc-states-charges-over",
+    "published": "2026-11-06T12:00:00.000Z",
+    "snippet": "The nation’s largest property manager of single-family rental homes, Progress Residential, and its owner, private equity firm Pretium Partners, will pay $49.75 million to settle charges brought by the Federal Trade Commission and four states that the companies misled consumers with deceptive rental pricing practices. This is the largest enforcement matter taken against a landlord in the Commission",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "CISA news",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "FBI IC3 alerts",
+    "fetched": 5,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 25,
+    "kept": 5
+   },
+   {
+    "source": "FTC Consumer Advice",
+    "fetched": 10,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "shield",
+   "product": "Quickwell Shield",
+   "url": "https://quickwell.app/shield/",
+   "ref": true,
+   "label": "Check a suspicious message",
+   "copy": "Paste any text, email, DM or link. Shield shows each scam warning sign in plain words, and the exact words that raised it.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}

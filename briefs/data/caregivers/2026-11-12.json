@@ -1,0 +1,121 @@
+{
+ "brief": {
+  "subject": "Dementia and gun safety; what the midterms mean for Medicare",
+  "headline": "Gun Safety When Dementia Appears, and Medicare After the Midterms",
+  "dek": "Experts push firearm safety for older gun owners showing cognitive decline, while a new Congress revives debate over Medicare for All.",
+  "lede": "Public health experts are working on ways to promote firearm safety among older gun owners, especially when there are early signs of dementia.",
+  "sections": [
+   {
+    "heading": "Dementia Raises Firearm Safety Questions",
+    "bullets": [
+     "Public health experts are developing ways to encourage safe gun practices among older adults who own firearms.",
+     "Their focus sharpens when a gun owner shows signs of cognitive decline, a concern many family caregivers face.",
+     "Families worried about a loved one's memory and gun access can raise the topic with that person's doctor."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "New Congress, Old Medicare Debate",
+    "bullets": [
+     "Democrats took control of Congress in the midterms, helped by voter frustration over healthcare costs, KFF Health News reports.",
+     "That shift has renewed talk of Medicare for All, but Democratic control does not guarantee it will pass.",
+     "For now, nothing in the report signals an immediate change to current Medicare benefits."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "Experts promote gun safety for older adults with early dementia signs, and the midterms reopen the Medicare for All debate."
+ },
+ "harvest": {
+  "desk": "caregivers",
+  "generatedAt": "2026-11-12T18:56:24.136Z",
+  "date": "2026-11-12",
+  "items": [
+   {
+    "id": "S1",
+    "source": "KFF Health News",
+    "title": "When a Gun Owner Shows Early Signs of Dementia",
+    "link": "https://kffhealthnews.org/aging/new-old-age-guns-firearms-safety-dementia-weapons-suicide/",
+    "published": "2026-11-10T10:00:00.000Z",
+    "snippet": "Public health experts are finding ways to encourage firearm safety practices for older adults who own guns, especially when there are indications of cognitive decline.",
+    "categories": [
+     "Aging",
+     "Mental Health",
+     "Public Health",
+     "Dementia",
+     "Guns"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "KFF Health News",
+    "title": "Midterm Wave Sets a Course for ‘Medicare for All’ Fight",
+    "link": "https://kffhealthnews.org/insurance/medicare-for-all-single-payer-insurance-el-sayed-midterms-democratic-congress-voter-appeal/",
+    "published": "2026-11-06T10:00:00.000Z",
+    "snippet": "Voter frustration with healthcare costs helped fuel the Democrats’ midterm takeover of Congress. But Democratic control doesn’t mean “Medicare for All” will follow, as some hoped.",
+    "categories": [
+     "Health Industry",
+     "Healthcare Costs",
+     "Insurance",
+     "Medicare",
+     "Affordable Care Act",
+     "Drug Costs",
+     "Midwest Bureau",
+     "Nurses",
+     "Southern Bureau"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CDC Newsroom",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "NIH News Releases",
+    "fetched": 10,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: ACL",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "Next Avenue",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "KFF Health News",
+    "fetched": 10,
+    "kept": 2
+   }
+  ],
+  "skipped": [],
+  "errors": [
+   {
+    "source": "Next Avenue",
+    "message": "Feed not recognized as RSS 1 or 2."
+   }
+  ]
+ },
+ "ctas": [
+  {
+   "id": "footsure",
+   "product": "Quickwell Footsure",
+   "url": "https://quickwell.app/footsure/",
+   "ref": true,
+   "label": "Run the fall-risk check",
+   "copy": "Run the CDC's three fall-risk tests with your phone and a helper. Results stay on the phone.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
