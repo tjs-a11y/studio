@@ -53,6 +53,30 @@ test('JSON-LD parses, and tool offers match the real prices', () => {
   assert.deepEqual(offers['brain-pass/index.html'], ['19.99', '2.99', '29.99']);
 });
 
+test('Fair Price FAQPage structured data matches visible FAQ copy', () => {
+  const html = read('fair-price/index.html');
+  const bodyStart = html.indexOf('<body>');
+  assert.ok(bodyStart >= 0, 'Fair Price has a body');
+  const body = html.slice(bodyStart);
+  const sectionStart = body.indexOf('<section class="card faq" aria-labelledby="fair-price-faq-title">');
+  assert.ok(sectionStart >= 0, 'Fair Price has a visible FAQ section');
+  const sectionEnd = body.indexOf('</section>', sectionStart);
+  assert.ok(sectionEnd > sectionStart, 'Fair Price FAQ section closes');
+  const visible = body.slice(sectionStart, sectionEnd);
+  const jsonStart = html.indexOf('<script type="application/ld+json">');
+  assert.ok(jsonStart >= 0, 'Fair Price has JSON-LD');
+  const jsonContentStart = jsonStart + '<script type="application/ld+json">'.length;
+  const jsonEnd = html.indexOf('</script>', jsonContentStart);
+  assert.ok(jsonEnd > jsonContentStart, 'Fair Price JSON-LD closes');
+  const graph = JSON.parse(html.slice(jsonContentStart, jsonEnd))['@graph'];
+  const faq = graph.find((node) => node['@type'] === 'FAQPage');
+  assert.ok(faq && faq.mainEntity.length === 2, 'Fair Price has two FAQ schema entries');
+  for (const question of faq.mainEntity) {
+    assert.ok(visible.includes(question.name), 'visible FAQ includes schema question: ' + question.name);
+    assert.ok(visible.includes(question.acceptedAnswer.text), 'visible FAQ includes schema answer: ' + question.name);
+  }
+});
+
 test('internal links on main pages resolve', () => {
   for (const f of pages) for (const m of read(f).matchAll(/href="(\/[^"/][^"]*|\/)"/g)) {
     if (m[1].startsWith('/api/') || m[1].includes('${') || m[1].includes('safeId')) continue; // skip API calls, template strings, and the catalog-generated href
@@ -84,24 +108,26 @@ test('sitemap and robots list only real pages on the configured origin', () => {
 });
 
 
-test('homepage sends its primary CTA to Shield and attributes the five priority consumer paths', () => {
+test('homepage features all five priority consumer tools before secondary categories', () => {
   const h = read('index.html');
   assert.ok(h.includes('<a class="btn btn-primary" href="/shield/?ref=home-hero">Check a suspicious message'), "primary CTA opens Shield directly");
-  const popular = h.indexOf('<section class="section" id="popular">');
-  const popularEnd = h.indexOf("</section>", popular);
-  const partnerOffers = h.indexOf('<section class="offer-launch" id="featured-offers"');
-  assert.ok(popular >= 0 && popularEnd > popular && partnerOffers > popularEnd, "priority consumer tools appear before partner offers");
-  const start = h.indexOf('<div class="featured-grid">');
-  const end = h.indexOf('</div>', start);
-  const grid = h.slice(start, end);
+  const heroStart = h.indexOf('<section class="hero">');
+  const leadStart = h.indexOf('<section class="section lead-section" id="popular"');
+  const leadEnd = h.indexOf('</section>', leadStart);
+  const truckersStart = h.indexOf('<section class="section trucker-section"');
+  const moreToolsStart = h.indexOf('<section class="finder more-tools-section" id="more-tools">');
+  assert.ok(heroStart >= 0 && leadStart > heroStart && leadEnd > leadStart && truckersStart > leadEnd && moreToolsStart > truckersStart, 'consumer lead section precedes secondary categories');
+  const hero = h.slice(heroStart, leadStart);
+  const lead = h.slice(leadStart, leadEnd);
+  assert.ok(hero.includes('Explore the five tools'), 'hero names all five priority tools');
+  assert.ok(lead.includes('Five tools for the things that matter most.'), 'lead heading reflects all five priority tools');
   const ids = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
-  const positions = ids.map((id) => grid.indexOf(`href="/${id}/?ref=home-featured-${id}"`));
+  const positions = ids.map((id) => lead.indexOf('href="/' + id + '/?ref=home-featured-' + id + '"'));
   assert.ok(positions.every((position) => position >= 0), 'all five featured paths carry source labels');
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'featured tools follow the CEO priority order');
-  for (const id of ids) assert.ok(h.includes(`href="/${id}/?ref=home-tools-${id}"`), `${id}: searchable tool link carries a source label`);
-  for (const id of ['saver', 'bill-radar', 'fair-price', 'dinner']) assert.ok(h.includes(`href="/${id}/?ref=home-hero-${id}"`), `${id}: direct hero shortcut carries a source label`);
+  for (const id of ['saver', 'bill-radar', 'fair-price', 'dinner']) assert.ok(hero.includes('href="/' + id + '/?ref=home-hero-' + id + '"'), id + ': direct hero shortcut carries a source label');
+  for (const id of ids) assert.ok(h.includes('href="/' + id + '/?ref=home-tools-' + id + '"'), id + ': searchable tool link carries a source label');
 });
-
 
 test('priority consumer tools count page opens and completed checks anonymously', () => {
   const shield = read('shield/js/app.mjs');

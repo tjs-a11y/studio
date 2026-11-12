@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
 <meta name="twitter:title" content="Fair Price: is this quote fair? Spot the padding">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Fair Price","url":"https://quickwell.app/fair-price/","applicationCategory":"FinanceApplication","description":"Checks a service estimate for padding and red flags, shows what a fair quote should include, and gives the questions to ask. Runs in the browser; nothing is uploaded. Information, not financial advice.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it tell me the real market price?","acceptedAnswer":{"@type":"Answer","text":"No, and it never invents one. It checks the quote's structure for padding and red flags, shows what a fair quote should include, and gives you the questions to ask. Always get a second quote for the real number."}},{"@type":"Question","name":"Is my quote uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The text you paste is checked in your browser and never leaves your device. This is information, not financial or legal advice."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Fair Price","url":"https://quickwell.app/fair-price/","applicationCategory":"FinanceApplication","description":"Reviews estimate wording for unclear charges and scope gaps, shows what a clear quote should include, and suggests questions to ask. Runs in the browser; nothing is uploaded. Information, not financial advice.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Fair Price tell me the local market price?","acceptedAnswer":{"@type":"Answer","text":"No. Fair Price does not look up local market prices or decide whether a quote is too high. It reviews estimate wording for issues to clarify, shows what a clear quote should include, and suggests questions to ask. Compare another written estimate for market context."}},{"@type":"Question","name":"Is my quote uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The text you paste is checked in your browser and never leaves your device. This is information, not financial or legal advice."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <style>
   :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#1d6f73; --chip:#e9f1f1; --on:#1d6f73; --red:#b23b2e; --redbg:#fbecea; --amb:#9a6700; --ambbg:#fbf3e0; --grn:#1f7a3d; --grnbg:#eaf6ee; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101414; --ink:#edf0f0; --muted:#9aa7a7; --card:#171c1c; --line:#283030; --accent:#5bb8bd; --chip:#19201f; --on:#5bb8bd; --red:#f08b7e; --redbg:#2a1715; --amb:#f2c14e; --ambbg:#2a2414; --grn:#7fc79a; --grnbg:#16241b; color-scheme:dark; } }
@@ -41,6 +41,7 @@
 .qw-also ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .qw-also a{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
 .qw-also b{color:var(--accent)} .qw-also span{display:block;color:var(--muted);font-size:.85rem}
+  .faq details+details{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)} .faq summary{font-weight:700;cursor:pointer} .faq p{margin:8px 0 0}
   footer { margin-top:30px; color:var(--muted); font-size:.9rem; } a { color:var(--accent); } [hidden]{display:none!important}
 </style>
 <script src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
@@ -94,6 +95,17 @@
 <p class="qw-limit">Fair Price does not know the actual market price for your location and service. It is an issue-spotting aid, not financial, legal or professional advice.</p>
 </section>
 <!-- QUICKWELL-BUYER-DECISION -->
+<section class="card faq" aria-labelledby="fair-price-faq-title">
+  <h2 id="fair-price-faq-title">Fair Price questions</h2>
+  <details>
+    <summary>Does Fair Price tell me the local market price?</summary>
+    <p>No. Fair Price does not look up local market prices or decide whether a quote is too high. It reviews estimate wording for issues to clarify, shows what a clear quote should include, and suggests questions to ask. Compare another written estimate for market context.</p>
+  </details>
+  <details>
+    <summary>Is my quote uploaded?</summary>
+    <p>No. The text you paste is checked in your browser and never leaves your device. This is information, not financial or legal advice.</p>
+  </details>
+</section>
 <footer>Your read happens on your device — nothing you paste is uploaded. Information, not advice. · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
 
 <section class="card" aria-labelledby="guide-fair-price-estimate-guide"><h2 id="guide-fair-price-estimate-guide">Related practical guide</h2><p><a href="/guides/review-repair-contractor-estimate/?ref=fair-price-estimate-guide">Review a repair or contractor estimate →</a></p><p class="small muted">Compare scope, parts, labor, fees and approval terms before agreeing to repair or home-improvement work.</p></section>
