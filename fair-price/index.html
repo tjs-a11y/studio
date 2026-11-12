@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fair Price: is this quote fair? Spot the padding</title>
-<meta name="description" content="Paste any estimate — repair, contractor, dental, vet, moving — and see the padding, what a fair quote includes, and what to ask. Nothing is uploaded.">
+<title>Review a Repair or Contractor Estimate | Fair Price</title>
+<meta name="description" content="Review a repair or contractor estimate for unclear charges, missing scope details and questions to ask. Nothing is uploaded.">
 <link rel="canonical" href="https://quickwell.app/fair-price/">
-<meta property="og:title" content="Fair Price: is this quote fair? Spot the padding">
-<meta property="og:description" content="Paste any estimate and see the red flags, what a fair quote includes, and the questions to ask before you say yes. Nothing is uploaded.">
+<meta property="og:title" content="Review a Repair or Contractor Estimate | Fair Price">
+<meta property="og:description" content="Review unclear charges, scope gaps and questions to ask before you agree. Fair Price does not compare local market rates.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quickwell.app/fair-price/">
 <meta property="og:image" content="https://quickwell.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
-<meta name="twitter:title" content="Fair Price: is this quote fair? Spot the padding">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Fair Price","url":"https://quickwell.app/fair-price/","applicationCategory":"FinanceApplication","description":"Reviews estimate wording for unclear charges and scope gaps, shows what a clear quote should include, and suggests questions to ask. Runs in the browser; nothing is uploaded. Information, not financial advice.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Fair Price tell me the local market price?","acceptedAnswer":{"@type":"Answer","text":"No. Fair Price does not look up local market prices or decide whether a quote is too high. It reviews estimate wording for issues to clarify, shows what a clear quote should include, and suggests questions to ask. Compare another written estimate for market context."}},{"@type":"Question","name":"Is my quote uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The text you paste is checked in your browser and never leaves your device. This is information, not financial or legal advice."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<meta name="twitter:title" content="Review a Repair or Contractor Estimate | Fair Price">
+<meta name="twitter:description" content="Review unclear charges, scope gaps and questions to ask. Fair Price does not compare local market rates.">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","publisher":{"@id":"https://quickwell.app/#org"},"name":"Fair Price","url":"https://quickwell.app/fair-price/","applicationCategory":"FinanceApplication","description":"Reviews estimate wording for unclear charges and scope gaps, shows what a clear estimate should include, and suggests questions to ask. It does not compare local market prices. Runs in the browser; nothing is uploaded. Information, not financial advice.","image":"https://quickwell.app/og.png","inLanguage":"en","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Fair Price tell me the local market price?","acceptedAnswer":{"@type":"Answer","text":"No. Fair Price does not look up local market prices or decide whether a quote is too high. It reviews estimate wording for issues to clarify, shows what a clear quote should include, and suggests questions to ask. Compare another written estimate for market context."}},{"@type":"Question","name":"Is my quote uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The text you paste is checked in your browser and never leaves your device. This is information, not financial or legal advice."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <style>
   :root { --bg:#f7f7f4; --ink:#15171a; --muted:#5d6470; --card:#fff; --line:#e3e3dd; --accent:#1d6f73; --chip:#e9f1f1; --on:#1d6f73; --red:#b23b2e; --redbg:#fbecea; --amb:#9a6700; --ambbg:#fbf3e0; --grn:#1f7a3d; --grnbg:#eaf6ee; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101414; --ink:#edf0f0; --muted:#9aa7a7; --card:#171c1c; --line:#283030; --accent:#5bb8bd; --chip:#19201f; --on:#5bb8bd; --red:#f08b7e; --redbg:#2a1715; --amb:#f2c14e; --ambbg:#2a2414; --grn:#7fc79a; --grnbg:#16241b; color-scheme:dark; } }
@@ -48,8 +49,8 @@
 </head>
 <body>
 <main>
-  <h1>Fair Price</h1>
-  <p class="lede">Got a quote and not sure if it's fair? Pick what it's for, paste it in, and get a plain-English read: <b>the padding to watch for, what a fair quote should include, and the questions to ask before you say yes.</b> It all happens on your phone — nothing is uploaded.</p>
+  <h1>Review a repair or contractor estimate</h1>
+  <p class="lede">Choose the type of estimate, paste the wording, and get a plain-English review of unclear charges, scope gaps and questions to ask before you agree. Fair Price does not look up local market prices or decide whether a quote is too high. Your text stays in your browser — nothing is uploaded.</p>
 
   <section class="card noprint">
     <div class="grp">What's the quote for?</div>
@@ -61,7 +62,7 @@
       <button class="ghost" id="sampleBtn">Try a sample quote</button>
       <button class="ghost" id="clear">Clear</button>
     </div>
-    <p class="small muted" style="margin-bottom:0">Information, not financial or legal advice. It never invents a market price — for the real number, get a second quote.</p>
+    <p class="small muted" style="margin-bottom:0">Information, not financial or legal advice. This checklist does not compare local market prices; a second estimate can provide context when the work and terms are comparable.</p>
   </section>
 
   <section id="out" hidden></section>
@@ -125,14 +126,15 @@
     var what = c.label.toLowerCase();
     if (found && found.length) {
       var titles = found.map(function (f) { return f.t; }).join(", ");
-      return "I ran my " + what + " quote through Fair Price — it flagged " + found.length +
-        (found.length === 1 ? " thing" : " things") + " to watch (" + titles + "). Check your own quote free, nothing uploaded:";
+      return "I checked my " + what + " estimate with Fair Price — " + found.length +
+        (found.length === 1 ? " checklist phrase matched" : " checklist phrases matched") +
+        " to clarify (" + titles + "). This is not a price verdict. Check your own estimate free, nothing uploaded:";
     }
-    return "I ran my " + what + " quote through Fair Price — no obvious red-flag phrases, and the checklist of what a fair quote should include. Check yours free, nothing uploaded:";
+    return "I checked my " + what + " estimate with Fair Price. No phrases from its limited wording checklist matched; that does not confirm the scope or price. Check yours free, nothing uploaded:";
   }
   var lastShare = "";
   function doShare(btn) {
-    var text = lastShare || "Check a quote for padding and red flags with Fair Price, free, nothing uploaded:";
+    var text = lastShare || "Review an estimate for unclear charges and scope questions with Fair Price. Free; nothing uploaded:";
     try {
       if (navigator.share) { navigator.share({ text: text, url: SHARE_URL }).catch(function () {}); return; }
     } catch (e) {}
@@ -144,47 +146,47 @@
     }
   }
 
-  // Each category: what a fair quote includes, the padding to watch for, and the questions to ask.
+  // Each category: what a clear estimate should include, items worth clarifying, and questions to ask.
   var CATS = {
     auto: { label: "Auto repair",
       good: ["Parts and labor listed separately, with the labor hours", "The specific parts (brand/grade) named", "Diagnosis fee stated, and credited if you do the work"],
-      watch: ["\"Shop supplies\" or \"disposal\" as a vague flat fee", "Extras added \"while we're in there\" (flushes, filters) you didn't ask about", "No old parts offered back; no cause named"],
+      watch: ["\"Shop supplies\" or \"disposal\" as a vague flat fee", "Extras added \"while we're in there\" (flushes, filters) you didn't ask about", "No explanation of the failed part or whether replaced parts can be shown"],
       ask: ["Can you itemize parts vs. labor, and the labor hours?", "Which of these are needed now vs. can wait?", "Can I see the worn part?"] },
     contractor: { label: "Home contractor",
       good: ["A written, itemized scope with materials and labor", "Payment tied to milestones, not a big lump up front", "License, insurance and a start/finish window"],
-      watch: ["A large deposit or \"pay in full\" before work starts", "Cash-only or no written contract", "\"Allowance\" lines with no detail; vague \"as needed\""],
+      watch: ["Advance payment requested without a written schedule or milestones", "No written scope, payment terms or receipt", "\"Allowance\" lines with no detail; vague \"as needed\""],
       ask: ["Can you break out materials vs. labor by phase?", "What's the deposit, and what does it cover?", "Are you licensed and insured — can I get the numbers?"] },
     dental: { label: "Dental / medical",
       good: ["Each procedure with its code and price", "What insurance is expected to cover vs. your share", "Which items are required vs. optional/cosmetic"],
-      watch: ["Bundled \"treatment plan\" with no per-item prices", "Pressure to decide or pay today", "Optional add-ons presented as required"],
+      watch: ["Bundled \"treatment plan\" with no per-item prices", "A short deadline that leaves no time to review the itemized plan", "Unclear whether add-ons are required or optional"],
       ask: ["Can I get an itemized estimate with procedure codes?", "Which of these are medically necessary now?", "What will my insurance be billed, and what's my share?"] },
     vet: { label: "Vet",
       good: ["Each test/treatment and medication priced", "What's necessary now vs. a recheck option", "Generic medication offered where possible"],
-      watch: ["A bundled \"package\" with no itemization", "Several tests at once with no clear reason", "Pressure during a stressful moment"],
+      watch: ["A bundled \"package\" with no itemization", "Tests listed without an explanation of what each one checks", "A recommendation presented without time to ask about alternatives or timing"],
       ask: ["Can you itemize this and mark what's urgent?", "Is there a generic for this medication?", "What happens if we wait and recheck?"] },
     moving: { label: "Movers",
       good: ["A binding or not-to-exceed estimate, in writing", "Based on an inventory (video or in-person)", "Clear rate: hourly or weight, plus any minimums"],
-      watch: ["A \"non-binding\" estimate that can balloon on the day", "Big deposit before moving day", "\"Packing materials\" and fees not itemized"],
+      watch: ["A non-binding estimate without the factors that can change the final charge", "Deposit amount, refund terms or payment timing not stated in writing", "\"Packing materials\" and fees not itemized"],
       ask: ["Can this be a binding / not-to-exceed estimate?", "What could make the final bill higher?", "Is the deposit refundable, and what are the extra fees?"] },
     appliance: { label: "Appliance / HVAC",
       good: ["Diagnosis fee stated and credited toward repair", "The part named, with its price", "Repair-vs-replace reasoning given"],
-      watch: ["\"Whole system\" replacement pushed for one failed part", "Trip/supply fees stacked on top", "No model-specific part named"],
+      watch: ["Replacement recommended without explaining why a repair is unsuitable", "Trip or supply fees without a description or calculation", "Replacement part not identified by model or specification"],
       ask: ["What exactly failed, and can it be repaired?", "Is the diagnosis fee credited if I do the repair?", "What's the part number and price?"] },
     other: { label: "Something else",
       good: ["An itemized breakdown you can read line by line", "Clear what's included vs. extra", "A written estimate you can keep"],
-      watch: ["Vague bundles and \"miscellaneous\" lines", "Pressure to decide today", "A big deposit before any work"],
+      watch: ["Bundles or miscellaneous lines without a breakdown", "A deadline that does not allow time to review scope and terms", "Advance payment requested without written terms or milestones"],
       ask: ["Can you itemize this for me?", "What's included, and what would cost extra?", "Can I get it in writing to compare?"] }
   };
 
-  // General red-flag phrases that apply to any quote text.
+  // Checklist phrases that may signal a question to ask; they are not a price or legality verdict.
   var RULES = [
-    { re: /(today only|act now|limited time|right now|expires|won'?t last|price goes up|sign today)/i, k: "red", t: "Urgency pressure", d: "A fair price is still fair tomorrow. Pressure to decide today is a classic tactic — take the time to get a second quote." },
-    { re: /(50%|half)\s*(deposit|down|up ?front)|pay(ment)? in full|100% (up ?front|deposit)|full amount before/i, k: "red", t: "Large up-front payment", d: "Big deposits before work starts put the risk on you. Deposits are normal, but tie payment to work done, not all at once." },
-    { re: /(cash only|cash discount|no (check|card|receipt)|off the books|no contract|no paperwork)/i, k: "red", t: "Cash-only / no paper trail", d: "No receipt or contract means no recourse if it goes wrong. Insist on a written, itemized estimate." },
-    { re: /(shop supplies|misc(ellaneous)?|disposal fee|supplies fee|sundries|handling)/i, k: "amb", t: "Vague flat fees", d: "\"Shop supplies\", \"miscellaneous\" and \"disposal\" are often padding. Ask what each one actually covers." },
-    { re: /(while (we|i)'?re in there|might as well|recommend(ed)? (also|while)|add(ed|ing)? on|upsell)/i, k: "amb", t: "\"While we're in there\" add-ons", d: "Extras bolted onto the job are where quotes balloon. Ask which are needed now and which can wait." },
-    { re: /(non-?binding|not to exceed|subject to change|estimate may (vary|change)|final (price|cost) (may|could))/i, k: "amb", t: "Estimate can change", d: "A number that can move on the day isn't a real quote. Ask for a binding or not-to-exceed price in writing." },
-    { re: /(as needed|tbd|to be determined|varies|call for|per job|allowance)/i, k: "amb", t: "Undefined amounts", d: "Open-ended lines can be filled in later at your expense. Ask for a specific number or a cap." }
+    { re: /(today only|act now|limited time|right now|expires|won'?t last|price goes up|sign today)/i, k: "amb", t: "Decision deadline", d: "A short deadline can have a legitimate reason, but it does not replace time to review the written scope, price and terms. Ask for the deadline and offer details in writing." },
+    { re: /(50%|half)\\s*(deposit|down|up ?front)|pay(ment)? in full|100% (up ?front|deposit)|full amount before/i, k: "amb", t: "Advance payment terms", d: "A deposit may be standard for some work. Confirm what it covers, when each payment is due, and what happens if the scope changes or work stops." },
+    { re: /(cash only|cash discount|no (check|card|receipt)|off the books|no contract|no paperwork)/i, k: "amb", t: "Payment and written records", d: "Payment methods vary. Ask for a dated written estimate, contract or work order, and receipt so you can compare the agreed scope and payment." },
+    { re: /(shop supplies|misc(ellaneous)?|disposal fee|supplies fee|sundries|handling)/i, k: "amb", t: "Unitemized fee", d: "A short label does not explain what the charge covers. Ask for the service, amount and calculation method; the fee may be valid under the agreement." },
+    { re: /(while (we|i)'?re in there|might as well|recommend(ed)? (also|while)|add(ed|ing)? on|upsell)/i, k: "amb", t: "Added work", d: "Ask whether each added item is required for the requested work, optional, or can wait. Get the revised scope and price in writing before approving." },
+    { re: /(non-?binding|not to exceed|subject to change|estimate may (vary|change)|final (price|cost) (may|could))/i, k: "amb", t: "Change terms", d: "Ask which conditions can change the amount, how changes are calculated, and whether you must approve them in writing." },
+    { re: /(as needed|tbd|to be determined|varies|call for|per job|allowance)/i, k: "amb", t: "Unspecified amount", d: "Ask for a specific amount, calculation method, or written cap before authorizing the work." }
   ];
 
   var cat = "other";
@@ -195,21 +197,21 @@
 
   function readHtml(text, c, isDemo) {
     var found = scan(text);
-    lastShare = isDemo ? "See how Fair Price checks a sample quote. Try your own estimate free, nothing uploaded:" : shareText(c, found);
+    lastShare = isDemo ? "See how Fair Price checks a sample estimate. Try your own estimate free, nothing uploaded:" : shareText(c, found);
     var html = "";
-    if (isDemo) html += '<p class="small muted" style="margin-top:4px"><b>Sample only.</b> This is a demonstration, not a review of your quote. Paste your own estimate above for a real check.</p>';
+    if (isDemo) html += '<p class="small muted" style="margin-top:4px"><b>Sample only.</b> This is a demonstration, not a review of your estimate. Paste your own wording above for a real check.</p>';
     if (found.length) {
-      html += '<div class="grp" style="margin-top:4px">In what you pasted</div>';
-      html += found.map(function (f) { return '<div class="flag ' + f.k + '"><h3>' + (f.k === "red" ? "🚩 " : "⚠️ ") + esc(f.t) + "</h3><p>" + esc(f.d) + "</p></div>"; }).join("");
+      html += '<div class="grp" style="margin-top:4px">Checklist phrases in what you pasted</div>';
+      html += found.map(function (f) { return '<div class="flag ' + f.k + '"><h3>⚠️ ' + esc(f.t) + "</h3><p>" + esc(f.d) + "</p></div>"; }).join("");
     } else if (text.trim().length > 12) {
-      html += '<div class="flag ok"><h3>✓ No obvious red-flag phrases</h3><p>Nothing jumped out in the wording — but still check it against what a fair ' + esc(c.label.toLowerCase()) + ' quote should include, below.</p></div>';
+      html += '<div class="flag ok"><h3>✓ No checklist phrases matched</h3><p>This limited wording check found no matches. That does not confirm the scope or price is complete; compare the written estimate with the checklist below.</p></div>';
     }
-    html += '<div class="grp">A fair ' + esc(c.label.toLowerCase()) + " quote includes</div><ul>" + c.good.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
-    html += '<div class="grp">Padding to watch for</div><ul>' + c.watch.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+    html += '<div class="grp">A clear ' + esc(c.label.toLowerCase()) + " estimate should include</div><ul>" + c.good.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+    html += '<div class="grp">Items to clarify</div><ul>' + c.watch.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
     html += '<div class="grp">Ask these before you say yes</div>' + c.ask.map(function (x) { return '<div class="ask">“' + esc(x) + '”</div>'; }).join("");
-    html += '<p class="small muted" style="margin-top:12px">This is a structure check, not a price check — it never invents a market rate. The surest test of a fair price is a second, independent quote.</p>';
+    html += '<p class="small muted" style="margin-top:12px">This is a wording and scope checklist, not a price check. It does not know local market rates. A second estimate can provide context when the work, materials and terms are comparable.</p>';
     html += '<div class="row noprint" style="margin-top:14px"><button type="button" class="ghost" id="shareBtn">Share this result</button></div>';
-    html += '<p class="small muted noprint" style="margin-top:4px">Shares only what it’s for and which flags came up — never the quote you pasted.</p>';
+    html += '<p class="small muted noprint" style="margin-top:4px">Shares only the estimate type and which checklist phrases matched — never the estimate you pasted.</p>';
     return html;
   }
 
@@ -250,11 +252,11 @@
   var PRO = false;
   function compare() {
     var a = lastText, b = $("text2").value, c = CATS[cat];
-    if (!a.trim() || !b.trim()) { $("premout").innerHTML = '<div class="card">Check your first quote above, then paste a second quote here.</div>'; return; }
+    if (!a.trim() || !b.trim()) { $("premout").innerHTML = '<div class="card">Check your first estimate above, then paste a second estimate here.</div>'; return; }
     var fa = scan(a), fb = scan(b);
-    var row = function (label, f) { return '<div class="flag ' + (f.length ? (f.some(function (x) { return x.k === "red"; }) ? "red" : "amb") : "ok") + '"><h3>' + esc(label) + "</h3><p>" + (f.length ? f.map(function (x) { return x.t; }).join(", ") : "no red-flag phrases") + "</p></div>"; };
-    $("premout").innerHTML = '<div class="grp">Side by side</div>' + row("Quote A", fa) + row("Quote B", fb)
-      + '<p class="small">' + (fa.length === fb.length ? "Both read similarly — compare them line by line against the \"fair quote includes\" list above." : (fa.length < fb.length ? "Quote A has fewer red-flag phrases." : "Quote B has fewer red-flag phrases.")) + " Fewer flags isn't automatically cheaper — it's a cleaner, clearer quote. Still get the real number from the totals.</p>";
+    var row = function (label, f) { return '<div class="flag ' + (f.length ? "amb" : "ok") + '"><h3>' + esc(label) + "</h3><p>" + (f.length ? f.map(function (x) { return x.t; }).join(", ") : "no checklist phrases matched") + "</p></div>"; };
+    $("premout").innerHTML = '<div class="grp">Side by side</div>' + row("Estimate A", fa) + row("Estimate B", fb)
+      + '<p class="small">' + (fa.length === fb.length ? "Both match the same number of checklist items — compare the written scope and terms line by line." : (fa.length < fb.length ? "Estimate A matches fewer items on this wording checklist." : "Estimate B matches fewer items on this wording checklist.")) + " Fewer matches do not establish lower cost, quality or suitability. Compare the same scope, parts, labor, fees, timing and written terms.</p>";
   }
   function script() {
     var c = CATS[cat];
