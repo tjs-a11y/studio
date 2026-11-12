@@ -53,6 +53,22 @@ test('JSON-LD parses, and tool offers match the real prices', () => {
   assert.deepEqual(offers['brain-pass/index.html'], ['19.99', '2.99', '29.99']);
 });
 
+test('Fair Price FAQPage structured data matches visible FAQ copy', () => {
+  const html = read('fair-price/index.html');
+  const body = html.slice(html.indexOf('<body>'));
+  const section = body.match(/<section class="card faq" aria-labelledby="fair-price-faq-title">([\\s\\S]*?)<\\/section>/);
+  assert.ok(section, 'Fair Price has a visible FAQ section');
+  const block = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)][0];
+  assert.ok(block, 'Fair Price has JSON-LD');
+  const graph = JSON.parse(block[1])['@graph'];
+  const faq = graph.find((node) => node['@type'] === 'FAQPage');
+  assert.ok(faq && faq.mainEntity.length === 2, 'Fair Price has two FAQ schema entries');
+  for (const question of faq.mainEntity) {
+    assert.ok(section[1].includes(question.name), 'visible FAQ includes schema question: ' + question.name);
+    assert.ok(section[1].includes(question.acceptedAnswer.text), 'visible FAQ includes schema answer: ' + question.name);
+  }
+});
+
 test('internal links on main pages resolve', () => {
   for (const f of pages) for (const m of read(f).matchAll(/href="(\/[^"/][^"]*|\/)"/g)) {
     if (m[1].startsWith('/api/') || m[1].includes('${') || m[1].includes('safeId')) continue; // skip API calls, template strings, and the catalog-generated href
