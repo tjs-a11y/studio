@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-12T18:33:19.655Z",
-  "date": "2026-11-12",
+  "fetched": "2026-11-13T17:59:45.037Z",
+  "date": "2026-11-13",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-12T18:33:19.596Z",
+  "generated": "2026-11-13T17:59:45.019Z",
   "visits": {
-    "total": 256,
-    "today": 12
+    "total": 268,
+    "today": 8
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -210,8 +210,8 @@
       "demos_today": 0
     },
     "rate-con-checker": {
-      "opens": 1,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -308,7 +308,7 @@
       "demos_today": 0
     },
     "spare-key": {
-      "opens": 2,
+      "opens": 3,
       "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
