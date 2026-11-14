@@ -171,7 +171,8 @@ test('ClickBank report sends privacy-filtered snapshots and orders to the MONAD 
     assert.equal(body.report.centralPersistenceSummary.batch_id, 'batch-test');
     assert.equal('p_secret' in captured, false);
     assert.equal(capturedRequest.endpoint, 'https://example.supabase.co/functions/v1/monad-clickbank-ingest');
-    assert.equal(capturedRequest.init.headers['x-monad-ingest-secret'], 'server-only-ingest-test-secret-123456789');
+    assert.equal(capturedRequest.init.headers.authorization, 'Bearer server-only-ingest-test-secret-123456789');
+    assert.equal('x-monad-ingest-secret' in capturedRequest.init.headers, false);
     assert.equal(captured.p_order_api_status, 'ok');
     assert.equal(captured.p_snapshots.find((s) => s.offer_slug === 'clickbank-genius-switch-original').tracking_id, 'qw_genius_switch_original');
     assert.equal(captured.p_orders[0].account_amount, 30);
