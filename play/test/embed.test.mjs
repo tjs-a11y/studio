@@ -26,9 +26,14 @@ test('framing: the widget path allows any site; every other page allows only our
     assert.match(h['Content-Security-Policy'], /frame-ancestors 'self'$/, p);
     assert.equal(h['X-Frame-Options'], 'SAMEORIGIN', p);
   }
-  // Same CSP otherwise, so the widget gets no extra powers.
-  const strip = (c) => c.replace(/; frame-ancestors .*$/, '');
-  assert.equal(strip(headersFor('/play/embed/linkr/')['Content-Security-Policy']), strip(headersFor('/play/')['Content-Security-Policy']));
+  // The embed keeps its stricter no-Supabase connect-src; all other directives match the site policy.
+  const strip = (c) => c
+    .replace(/ https:\/\/dejplqevodwfeaemrska\.supabase\.co/g, '')
+    .replace(/; frame-ancestors .*$/, '');
+  const embedCsp = headersFor('/play/embed/linkr/')['Content-Security-Policy'];
+  const siteCsp = headersFor('/play/')['Content-Security-Policy'];
+  assert.equal(strip(embedCsp), strip(siteCsp));
+  assert.doesNotMatch(embedCsp, /dejplqevodwfeaemrska\.supabase\.co/);
 });
 
 test('the widget plays today\'s daily with no storage, billing or network, and links back with ?ref=embed', () => {
