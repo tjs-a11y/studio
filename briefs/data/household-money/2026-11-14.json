@@ -1,0 +1,136 @@
+{
+ "brief": {
+  "subject": "FTC sues to stop $3.5 billion vet supply merger",
+  "headline": "FTC Moves to Block $3.5 Billion Vet Supply Deal Over Pet Care Costs",
+  "dek": "Regulators say merging the two largest veterinary distributors could push up prices for clinics and pet owners.",
+  "lede": "The FTC has sued to block Covetrus from buying rival MWI Veterinary Supply for $3.5 billion. The agency warns the deal could raise what pet owners pay.",
+  "sections": [
+   {
+    "heading": "FTC Targets Vet Supply Merger",
+    "bullets": [
+     "The FTC filed suit to stop Covetrus from acquiring MWI Veterinary Supply for $3.5 billion.",
+     "The two firms are the biggest distributors of veterinary products and services, according to the FTC.",
+     "Regulators allege the combination would raise costs for vet clinics, which could reach pet owners' bills.",
+     "Covetrus owners Clayton, Dubilier & Rice and TPG are also named in the suit."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Store Cards: Read the Fit",
+    "bullets": [
+     "The Albertsons forU American Express Card works at any store in the Albertsons family.",
+     "Each Albertsons-family store also offers its own dedicated card, so compare before applying.",
+     "The Ameriprise card's perks mainly benefit existing Ameriprise account holders, per NerdWallet's review.",
+     "Non-customers get little value from that card, so another card may suit them better."
+    ],
+    "source_ids": [
+     "S1",
+     "S4"
+    ]
+   }
+  ],
+  "seo_description": "FTC sues to block a $3.5 billion veterinary supply merger it says could raise pet care prices, plus what to know about store credit cards."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-14T17:08:54.082Z",
+  "date": "2026-11-14",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Albertsons Credit Cards",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/albertsons-credit-card",
+    "published": "2026-11-13T19:47:34.000Z",
+    "snippet": "The Albertsons forU American Express® Card can be used at any store in the Albertsons family. But each store also has its own dedicated card.",
+    "categories": [
+     "Credit Cards",
+     "Rewards Credit Cards",
+     "Store Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block Veterinary Supplies Distributor Covetrus’s $3.5 Billion Acquisition of Rival MWI",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-sues-block-veterinary-supplies-distributor-covetruss-35-billion-acquisition-rival-mwi",
+    "published": "2026-11-13T12:00:00.000Z",
+    "snippet": "FTC alleges that combining the two biggest distributors of veterinary products and services will drive up costs and lead to higher prices for veterinary clinics and pet owners The Federal Trade Commission sued today to block Covetrus Inc. and its owners, Clayton, Dubilier & Rice LLC and TPG Inc., from acquiring its closest competitor, MWI Veterinary Supply Inc., for $3.5 billion from MWI’s parent,",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Should You Pay Yourself or Your Bills First? Plus, More November Money Questions",
+    "link": "https://www.nerdwallet.com/finance/news/top-november-money-questions",
+    "published": "2026-11-12T22:26:32.000Z",
+    "snippet": "The Nerds explore ways to prioritize saving, stay healthy on a budget and spend less on groceries.",
+    "categories": [
+     "Personal Finance"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Ameriprise Credit Card",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/ameriprise-credit-card",
+    "published": "2026-11-12T20:42:29.000Z",
+    "snippet": "The card offers decent perks for Ameriprise account holders, but has little to offer anyone else.",
+    "categories": [
+     "Cash Back Credit Cards",
+     "Credit Cards",
+     "Rewards Credit Cards"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 3
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 5
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}

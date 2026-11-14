@@ -1,0 +1,205 @@
+{
+ "brief": {
+  "subject": "IRS fixes opportunity zone reporting draft; SBA trims bond rules",
+  "headline": "IRS Corrects Opportunity Zone Reporting Proposal as SBA Streamlines Surety Bond Rules",
+  "dek": "The IRS corrected its draft opportunity zone reporting rules, the SBA eased surety bond paperwork, and a tax credit hearing moves to phone-only.",
+  "lede": "The IRS issued corrections to its proposed rules requiring opportunity zone funds and businesses to file new information returns and investor statements.",
+  "sections": [
+   {
+    "heading": "Opportunity Zone Reporting Draft Corrected",
+    "bullets": [
+     "The IRS corrected proposed regulations REG-116506-25, first published September 11, 2026; check that you are reviewing the fixed text.",
+     "Qualified opportunity funds would file information returns and send statements to investors who dispose of their stakes.",
+     "Qualified opportunity zone businesses would furnish statements to the funds holding interests in them, adding a new reporting duty.",
+     "The proposal also updates how funds are certified and decertified, which matters for clients who plan to keep fund status."
+    ],
+    "source_ids": [
+     "S7"
+    ]
+   },
+   {
+    "heading": "SBA Eases Surety Bond Paperwork",
+    "bullets": [
+     "The SBA finalized changes to its Surety Bond Guarantee program, reducing what participating sureties must submit and retain.",
+     "This matters to small contractors that depend on SBA-backed bonds to bid for work.",
+     "The rule also fixes conflicting provisions and revises outdated Preferred Surety admissions requirements.",
+     "The Quarterly Contract Completion Report is also being revised under the final rule."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "Scholarship Credit Hearing Goes Phone-Only",
+    "bullets": [
+     "The December 15, 2026 hearing on the federal scholarship tax credit rules, REG-117199-25, is now telephonic-only.",
+     "The proposal covers a non-refundable credit for qualified contributions to scholarship granting organizations.",
+     "Owners and advisers planning to comment in person should prepare to participate by phone instead."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   }
+  ],
+  "seo_description": "IRS corrects opportunity zone reporting rules, SBA streamlines surety bond program, and the scholarship tax credit hearing moves to phone-only."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-14T17:08:54.082Z",
+  "date": "2026-11-14",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Federal Register: SBA",
+    "title": "Rule: Surety Bond Guarantee Program: Streamlining and Modernizing",
+    "link": "https://www.federalregister.gov/documents/2026/11/16/2026-23225/surety-bond-guarantee-program-streamlining-and-modernizing",
+    "published": "2026-11-16T12:00:00.000Z",
+    "snippet": "This final rule makes several changes to the U.S. Small Business Administration (SBA) Surety Bond Guarantee (SBG) program regulations. The rule reduces the burden on participating surety companies for submission and retention of documents. The rule also corrects conflicting provisions, as well as revising the obsolete Preferred Surety admissions requirements and the Quarterly Contract Completion Report.",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "Think About Your April 2027 Income Taxes Now – Get a Bigger Tax Refund in 2027, Or Lower Your Tax Bill",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/14/think-about-your-april-2027-income-taxes-now/193959/",
+    "published": "2026-11-14T06:05:59.000Z",
+    "snippet": "It’s never too early to think about tax season. The choices you make now can help you save money, or even earn a bigger refund.",
+    "categories": [
+     "2027 income tax brackets",
+     "2027 income tax filing season",
+     "2027 income tax refnds",
+     "2027 income tax refund",
+     "2027 income tax refunds",
+     "2027 tax brackets",
+     "2027 tax filing",
+     "2027 tax planning",
+     "2027 tax refund",
+     "2027 tax refunds",
+     "2027 tax returns",
+     "2027 tax season",
+     "bigger tax refund",
+     "irs direct deposit",
+     "irs income tax refund",
+     "irs income tax refund 2027",
+     "irs income taxes",
+     "tax refund tips 2027",
+     "when will i get my tax refund"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "Capstone Joins Forces with O2 CPA Consulting Group in New Mexico",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/13/capstone-joins-forces-with-o2-cpa-consulting-group-in-new-mexico/193904/",
+    "published": "2026-11-13T20:51:42.000Z",
+    "snippet": "Capstone Accounting & Tax has merged with O2 CPA Consulting Group, an Albuquerque, NM-based firm specializing in complex tax matters, forensic accounting, and business advisory services.",
+    "categories": [
+     "Accounting",
+     "accounting firms",
+     "Capstone Accounting and Tax",
+     "Firm Management",
+     "Mergers and Acquisitions"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "AI Ambition Outpaces Data Readiness in Tax and Finance Functions, EY Study Finds",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/13/ai-ambition-outpaces-data-readiness-in-tax-and-finance-functions-ey-study-finds/193869/",
+    "published": "2026-11-13T17:34:09.000Z",
+    "snippet": "Weak data foundations and legacy operating models remain key barriers to progress.",
+    "categories": [
+     "artificial intellgence and jobs",
+     "Artificial Intelligence",
+     "artificial intelligence and accounting",
+     "artificial intelligence and accounting firms",
+     "EY",
+     "finance",
+     "Firm Management",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Federal Scholarship Tax Credit; Hearing",
+    "link": "https://www.federalregister.gov/documents/2026/11/12/2026-23032/federal-scholarship-tax-credit-hearing",
+    "published": "2026-11-12T12:00:00.000Z",
+    "snippet": "This document announces that the public hearing scheduled for December 15, 2026, at 10 a.m. ET, for the notice of proposed rulemaking and notice of public hearing (REG-117199-25) published in the Federal Register on October 2, 2026, has been changed to a telephonic-only hearing. These proposed regulations would provide guidance regarding the non-refundable Federal tax credit for qualified contributions to scholarship granting organizations to fund qualified elementary and secondary school educat",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "Federal Register: IRS",
+    "title": "Notice: [Proposed Extension of Information Collection Request Submitted for Public Comment; Comment Request on Burden Related to the Qualified Intermediary (QI), Withholding Foreign Partnership (WP), and Withholding Foreign Trust (WT) Application and Account Management System",
+    "link": "https://www.federalregister.gov/documents/2026/11/10/2026-22892/proposed-extension-of-information-collection-request-submitted-for-public-comment-comment-request-on",
+    "published": "2026-11-10T12:00:00.000Z",
+    "snippet": "In accordance with the Paperwork Reduction Act of 1995, the IRS is inviting comments on the information collection request outlined in this notice.",
+    "categories": []
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Information Reporting Regarding Qualified Opportunity Zones and Updated Qualified Opportunity Fund Certification and Decertification Procedures; Correction",
+    "link": "https://www.federalregister.gov/documents/2026/11/10/2026-22859/information-reporting-regarding-qualified-opportunity-zones-and-updated-qualified-opportunity-fund",
+    "published": "2026-11-10T12:00:00.000Z",
+    "snippet": "This document contains corrections to the proposed regulations (REG-116506-25), published in the Federal Register on September 11, 2026. These proposed regulations would implement new statutory requirements for qualified opportunity funds to file information returns with the IRS and furnish statements to investors who dispose of investments in those entities and for qualified opportunity zone businesses to furnish statements to qualified opportunity funds that hold interests in them.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 3
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 1,
+    "kept": 1
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 3,
+    "kept": 3
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "anchor",
+   "signal": "match-vendor-check",
+   "evidence": [
+    "S7"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
