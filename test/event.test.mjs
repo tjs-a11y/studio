@@ -78,3 +78,21 @@ test('open/check storage failures are visible as 503 without leaking request dat
     setStoreForTests(null);
   }
 });
+
+
+test('Saver and Shield sample demos increment fixed counters without storing sample content', async () => {
+  const seen = [];
+  setStoreForTests(async (...cmds) => { seen.push(...cmds); return []; });
+  try {
+    for (const tool of ['saver', 'shield']) {
+      const response = await event(post({ tool, event: 'demo', text: 'sample content must not be stored' }));
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), { ok: true, stored: true });
+    }
+    assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:saver:demos'));
+    assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === 'count:shield:demos'));
+    assert.ok(seen.every((c) => typeof c[1] === 'string' && c[1].startsWith('count:')));
+  } finally {
+    setStoreForTests(null);
+  }
+});
