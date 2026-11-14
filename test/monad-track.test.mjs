@@ -53,7 +53,7 @@ const central = (calls) => calls
 test('page_view sends path-only campaign attribution and never forwards unrelated query or referrer data', () => {
   const h = harness({
     path: '/saver/',
-    search: '?ref=home-featured-saver&session_id=cs_private_123',
+    search: '?ref=home-featured-saver&utm_term=private-search&session_id=cs_private_123',
     referrer: 'https://www.google.com/search?q=private-search'
   });
   const [event] = central(h.calls);
@@ -67,6 +67,7 @@ test('page_view sends path-only campaign attribution and never forwards unrelate
   assert.equal(event.referrer_host, 'www.google.com');
   assert.match(event.idempotency_key, /^[a-zA-Z0-9_-]{12,100}$/);
   assert.equal('session_id' in event, false);
+  assert.equal('term' in event, false);
   assert.equal('destination_host' in event, false);
   assert.doesNotMatch(JSON.stringify(event), /cs_private_123|private-search/);
 });
@@ -152,4 +153,24 @@ test('the CSP permits only the configured Supabase project and privacy copy desc
   assert.match(privacy, /central acquisition log/);
   assert.match(privacy, /destination host/);
   assert.match(privacy, /We do not send full URLs, query strings/);
+});
+
+
+test('campaign UTM fields are preserved but search terms are not collected', () => {
+  const h = harness({
+    path: '/saver/',
+    search: '?utm_source=google&utm_medium=organic&utm_campaign=quickwell-november&utm_content=saver-guide&utm_term=private-search'
+  });
+  const [event] = central(h.calls);
+  assert.equal(event.source, 'google');
+  assert.equal(event.medium, 'organic');
+  assert.equal(event.campaign, 'quickwell-november');
+  assert.equal(event.content, 'saver-guide');
+  assert.equal('term' in event, false);
+  assert.doesNotMatch(JSON.stringify(event), /private-search/);
+});
+
+test('the Quickwell-to-NorthStar owned link carries campaign tags', () => {
+  const homepage = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(homepage, /https:\/\/northstardeliveryservice\.com\/\?utm_source=quickwell&amp;utm_medium=owned&amp;utm_campaign=portfolio_crosslink&amp;utm_content=homepage-for-truckers/);
 });
