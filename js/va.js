@@ -122,8 +122,8 @@ function qwSafeEntity(value) {
 }
 function qwCampaignTag(value, max) {
   if (typeof value !== 'string') return null;
-  var s = value.trim().toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
-  return s && s.length <= max ? s : null;
+  var s = value.trim().toLowerCase();
+  return s.length <= max && /^[a-z0-9][a-z0-9._-]*$/.test(s) ? s : null;
 }
 function qwReferrerHost() {
   try {
@@ -138,7 +138,6 @@ function qwMonadAttribution() {
   var medium = qwCampaignTag(params.get('utm_medium'), 80);
   var campaign = qwCampaignTag(params.get('utm_campaign'), 120);
   var content = qwCampaignTag(params.get('utm_content'), 120);
-  var term = qwCampaignTag(params.get('utm_term'), 120);
   if (!source && ref) {
     if (ref.indexOf('home-featured-') === 0) {
       source = 'quickwell';
@@ -161,7 +160,6 @@ function qwMonadAttribution() {
     medium: medium || 'none',
     campaign: campaign,
     content: content,
-    term: term,
     referrer_host: referrerHost
   };
 }
@@ -185,7 +183,6 @@ function qwMonadSend(eventType, extra) {
   };
   if (attribution.campaign) payload.campaign = attribution.campaign;
   if (attribution.content) payload.content = attribution.content;
-  if (attribution.term) payload.term = attribution.term;
   if (attribution.referrer_host) payload.referrer_host = attribution.referrer_host;
   if (extra.content) payload.content = qwCampaignTag(extra.content, 120) || payload.content;
   if (extra.destination_host && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(extra.destination_host)) {
