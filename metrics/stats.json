@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-13T17:59:45.037Z",
-  "date": "2026-11-13",
+  "fetched": "2026-11-14T16:42:40.557Z",
+  "date": "2026-11-14",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-13T17:59:45.019Z",
+  "generated": "2026-11-14T16:42:40.525Z",
   "visits": {
-    "total": 268,
-    "today": 8
+    "total": 279,
+    "today": 7
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -56,7 +56,7 @@
       "demos_today": 0
     },
     "fair-price": {
-      "opens": 10,
+      "opens": 11,
       "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
@@ -98,7 +98,7 @@
       "demos_today": 0
     },
     "double-dose": {
-      "opens": 1,
+      "opens": 2,
       "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
@@ -140,7 +140,7 @@
       "demos_today": 0
     },
     "bill-radar": {
-      "opens": 3,
+      "opens": 4,
       "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
@@ -211,7 +211,7 @@
     },
     "rate-con-checker": {
       "opens": 2,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -294,8 +294,8 @@
       "demos_today": 0
     },
     "vendor-check": {
-      "opens": 1,
-      "opens_today": 0,
+      "opens": 4,
+      "opens_today": 3,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -309,7 +309,7 @@
     },
     "spare-key": {
       "opens": 3,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -336,8 +336,8 @@
       "demos_today": 0
     },
     "footsure": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -364,8 +364,8 @@
       "demos_today": 0
     },
     "saver": {
-      "opens": 6,
-      "opens_today": 0,
+      "opens": 8,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -392,8 +392,8 @@
       "demos_today": 0
     },
     "shield": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
