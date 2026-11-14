@@ -98,53 +98,203 @@ document.addEventListener('click', function (event) {
 // Diagnostics contain only allowlisted tool/action names and HTTP status; never body, URL,
 // referrer, IP, entered text, or any other visitor-provided content.
 var qwOriginalFetch = window.fetch;
+var qwMonadEndpoint = 'https://dejplqevodwfeaemrska.supabase.co/functions/v1/monad-track';
+var qwMonadPublishableKey = 'sb_publishable_OAboSsVE0ln5yeHTZyhRjQ_KV1bphLG';
+var qwMonadHost = String(window.location && window.location.hostname || '').toLowerCase();
+var qwMonadPath = String(window.location && window.location.pathname || '/');
+var qwMonadEnabled = (qwMonadHost === 'quickwell.app' || qwMonadHost === 'www.quickwell.app') &&
+  !/^\/(?:play\/embed|footsure|pilot|utility-pipeline)(?:\/|$)/.test(qwMonadPath);
+
+function qwMonadEntity(path) {
+  var p = String(path || qwMonadPath || '/').replace(/\/+$/, '') || '/';
+  var map = {
+    '/shield': 'shield',
+    '/saver': 'saver',
+    '/bill-radar': 'bill-radar',
+    '/fair-price': 'fair-price',
+    '/dinner': 'dinner'
+  };
+  return map[p] || 'quickwell';
+}
+function qwSafeEntity(value) {
+  var s = String(value || '').toLowerCase();
+  return /^[a-z0-9][a-z0-9-]{1,100}$/.test(s) ? s : null;
+}
+function qwCampaignTag(value, max) {
+  if (typeof value !== 'string') return null;
+  var s = value.trim().toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
+  return s && s.length <= max ? s : null;
+}
+function qwReferrerHost() {
+  try {
+    var host = new URL(document.referrer).hostname.toLowerCase();
+    return host && host !== qwMonadHost ? host : null;
+  } catch (e) { return null; }
+}
+function qwMonadAttribution() {
+  var params = new URLSearchParams(window.location.search || '');
+  var ref = qwCampaignTag(params.get('ref'), 60);
+  var source = qwCampaignTag(params.get('utm_source'), 80);
+  var medium = qwCampaignTag(params.get('utm_medium'), 80);
+  var campaign = qwCampaignTag(params.get('utm_campaign'), 120);
+  var content = qwCampaignTag(params.get('utm_content'), 120);
+  var term = qwCampaignTag(params.get('utm_term'), 120);
+  if (!source && ref) {
+    if (ref.indexOf('home-featured-') === 0) {
+      source = 'quickwell';
+      medium = medium || 'owned';
+      campaign = campaign || 'homepage';
+      content = content || ref;
+    } else {
+      source = ref;
+      medium = medium || 'referral';
+      content = content || ref;
+    }
+  }
+  var referrerHost = qwReferrerHost();
+  if (!source && referrerHost) {
+    source = qwCampaignTag(referrerHost, 80);
+    medium = medium || 'referral';
+  }
+  return {
+    source: source || 'direct',
+    medium: medium || 'none',
+    campaign: campaign,
+    content: content,
+    term: term,
+    referrer_host: referrerHost
+  };
+}
+function qwMonadIdempotencyKey() {
+  try {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+  } catch (e) {}
+  return 'qw_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2);
+}
+function qwMonadSend(eventType, extra) {
+  if (!qwMonadEnabled || !['page_view', 'lead', 'outbound_click', 'checkout_start'].includes(eventType)) return;
+  extra = extra || {};
+  var attribution = qwMonadAttribution();
+  var payload = {
+    event_type: eventType,
+    entity_slug: qwSafeEntity(extra.entity_slug) || qwMonadEntity(),
+    landing_path: qwMonadPath,
+    idempotency_key: qwMonadIdempotencyKey(),
+    source: attribution.source,
+    medium: attribution.medium
+  };
+  if (attribution.campaign) payload.campaign = attribution.campaign;
+  if (attribution.content) payload.content = attribution.content;
+  if (attribution.term) payload.term = attribution.term;
+  if (attribution.referrer_host) payload.referrer_host = attribution.referrer_host;
+  if (extra.content) payload.content = qwCampaignTag(extra.content, 120) || payload.content;
+  if (extra.destination_host && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(extra.destination_host)) {
+    payload.destination_host = extra.destination_host.toLowerCase();
+  }
+  try {
+    var request = qwOriginalFetch(qwMonadEndpoint, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit',
+      keepalive: true,
+      headers: { apikey: qwMonadPublishableKey, 'content-type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (request && typeof request.catch === 'function') request.catch(function () {});
+  } catch (e) {}
+}
+function qwMonadDestinationHost(href) {
+  try {
+    var url = new URL(href, window.location.href);
+    if (!['http:', 'https:'].includes(url.protocol) || url.hostname.toLowerCase() === qwMonadHost) return null;
+    return url.hostname.toLowerCase();
+  } catch (e) { return null; }
+}
+
 window.fetch = function (input, init) {
   var url = '';
   var payload = null;
+  var leadTool = null;
+  var checkoutTool = null;
+  var checkoutRef = null;
   try {
     url = typeof input === 'string' ? input : input && input.url;
-    if (url && new URL(url, window.location.href).pathname === '/api/event' &&
-        (!init || !init.method || String(init.method).toUpperCase() === 'POST') &&
+    var parsedUrl = url ? new URL(url, window.location.href) : null;
+    var method = (init && init.method) || (input && input.method) || 'GET';
+    method = String(method).toUpperCase();
+    if (parsedUrl && parsedUrl.pathname === '/api/event' && method === 'POST' &&
         init && typeof init.body === 'string') {
       var parsed = JSON.parse(init.body);
       var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
       if (tools.includes(parsed.tool) && ['open', 'check'].includes(parsed.event)) {
         payload = { tool: parsed.tool, event: parsed.event };
         window.qwTrack(payload.tool, payload.event);
+      } else if (parsed.event === 'waitlist' && qwSafeEntity(parsed.tool)) {
+        // Only the fixed tool label is retained; the email and every other field are ignored.
+        leadTool = parsed.tool;
+      }
+    }
+    if (parsedUrl && parsedUrl.pathname === '/api/checkout' && method === 'POST') {
+      checkoutTool = qwSafeEntity(qwMonadEntity()) || 'quickwell';
+      if (init && typeof init.body === 'string') {
+        var checkoutBody = JSON.parse(init.body);
+        checkoutTool = qwSafeEntity(checkoutBody.tool) || checkoutTool;
+        checkoutRef = qwCampaignTag(checkoutBody.ref, 40);
       }
     }
   } catch (e) {}
 
   var request = qwOriginalFetch.apply(this, arguments);
-  if (!payload || !request || typeof request.then !== 'function') return request;
+  if ((!payload && !leadTool && !checkoutTool) || !request || typeof request.then !== 'function') return request;
   return request.then(function (response) {
-    if (!response || !response.ok) {
-      try {
-        console.warn('[Quickwell event tracking] request failed', {
-          tool: payload.tool, event: payload.event,
-          status: response ? response.status : 'no-response'
-        });
-      } catch (e) {}
-    } else {
-      // A 2xx with stored:false means the endpoint accepted the event but had no counter store.
-      try {
-        var clone = response.clone();
-        clone.json().then(function (result) {
-          if (result && result.stored === false) {
-            console.warn('[Quickwell event tracking] accepted but not persisted', {
-              tool: payload.tool, event: payload.event, status: response.status
-            });
-          }
-        }).catch(function () {});
-      } catch (e) {}
+    if (response && response.ok) {
+      if (leadTool) qwMonadSend('lead', { entity_slug: leadTool });
+      if (checkoutTool) qwMonadSend('checkout_start', { entity_slug: checkoutTool, content: checkoutRef });
     }
+    if (!payload || !response || !response.ok) {
+      if (payload && (!response || !response.ok)) {
+        try {
+          console.warn('[Quickwell event tracking] request failed', {
+            tool: payload.tool, event: payload.event,
+            status: response ? response.status : 'no-response'
+          });
+        } catch (e) {}
+      }
+      return response;
+    }
+    // A 2xx with stored:false means the endpoint accepted the event but had no counter store.
+    try {
+      var clone = response.clone();
+      clone.json().then(function (result) {
+        if (result && result.stored === false) {
+          console.warn('[Quickwell event tracking] accepted but not persisted', {
+            tool: payload.tool, event: payload.event, status: response.status
+          });
+        }
+      }).catch(function () {});
+    } catch (e) {}
     return response;
   }).catch(function (error) {
-    try {
-      console.warn('[Quickwell event tracking] network failure', {
-        tool: payload.tool, event: payload.event
-      });
-    } catch (e) {}
+    if (payload) {
+      try {
+        console.warn('[Quickwell event tracking] network failure', {
+          tool: payload.tool, event: payload.event
+        });
+      } catch (e) {}
+    }
     throw error;
   });
 };
+
+if (qwMonadEnabled) {
+  // Page paths and campaign labels only; no query string, visitor ID, or user-entered content.
+  qwMonadSend('page_view');
+  try {
+    window.addEventListener('click', function (event) {
+      var anchor = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+      if (!anchor) return;
+      var host = qwMonadDestinationHost(anchor.href || (anchor.getAttribute && anchor.getAttribute('href')));
+      if (host) qwMonadSend('outbound_click', { destination_host: host });
+    });
+  } catch (e) {}
+}
