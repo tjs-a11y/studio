@@ -112,7 +112,8 @@ $('#pasteBtn').addEventListener('click', () => {
 $('#sampleBtn').addEventListener('click', () => {
   if (state.files.some((f) => f.sample)) return;
   if (!canAdd()) return;
-  addText(SAMPLE_NAME, SAMPLE, { sample: true }); renderFiles(); run();
+  if (addText(SAMPLE_NAME, SAMPLE, { sample: true })) countEvent('demo');
+  renderFiles(); run();
   $('#results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 

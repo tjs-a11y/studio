@@ -77,7 +77,11 @@ function runCheck(text, { save = true } = {}) {
   $('#levelText').focus({ preventScroll: true });
 }
 $('#checkBtn').addEventListener('click', () => runCheck($('#msgBox').value));
-$('#sampleBtn').addEventListener('click', () => { $('#msgBox').value = SAMPLE[lang]; runCheck(SAMPLE[lang], { save: false }); });
+$('#sampleBtn').addEventListener('click', () => {
+  $('#msgBox').value = SAMPLE[lang];
+  runCheck(SAMPLE[lang], { save: false });
+  countEvent('demo');
+});
 $('#clearBtn').addEventListener('click', () => { $('#msgBox').value = ''; state.result = null; $('#results').classList.add('hidden'); $('#msgBox').focus(); });
 
 function stepsFor(r) {

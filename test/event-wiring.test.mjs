@@ -17,3 +17,14 @@ test('each priority tool has exactly one page-open event owner', () => {
   assert.match(bill, /tool:'bill-radar',event:'open'/, 'Bill Radar uses its standalone first-party open counter');
   assert.doesNotMatch(bill, /Studio\.init\(/, 'Bill Radar does not initialize the shared Pro client');
 });
+
+
+test('Saver and Shield sample runs are counted as demos, separately from user checks', () => {
+  const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
+  const saver = page('saver/js/app.mjs');
+  const shield = page('shield/js/app.mjs');
+  assert.match(saver, /\$\('#sampleBtn'\)\.addEventListener\('click', \(\) => \{[\s\S]*?countEvent\('demo'\)[\s\S]*?\}\);/);
+  assert.match(shield, /\$\('#sampleBtn'\)\.addEventListener\('click', \(\) => \{[\s\S]*?countEvent\('demo'\)[\s\S]*?\}\);/);
+  assert.match(saver, /if \(!f\.sample && !state\.sent\)[\s\S]*?event: 'check'/);
+  assert.match(shield, /if \(save\)[\s\S]*?event: 'check'/);
+});
