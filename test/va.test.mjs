@@ -176,5 +176,6 @@ test('demo events emit only fixed tool and referral labels, never sample inputs'
   const demo = analyticsEvents.find(([, payload]) => payload.name === 'tool_demo');
   assert.ok(demo, 'demo event emitted');
   assert.deepEqual({ ...demo[1].data }, { tool: 'bill-radar', source: 'home-featured-demo-bill-radar' });
-  assert.doesNotMatch(JSON.stringify(demo), /1000|14\\.5/);
+  assert.equal(JSON.stringify(demo).includes('1000'), false);
+  assert.equal(JSON.stringify(demo).includes('14.5'), false);
 });
