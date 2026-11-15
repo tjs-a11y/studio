@@ -54,6 +54,8 @@
   .assume summary{font-family:var(--display); font-weight:600; cursor:pointer; padding:12px 0 4px;}
   button.go{font:600 16px var(--display); background:var(--accent); color:#fff; border:0; border-radius:10px; padding:13px 22px; cursor:pointer; margin-top:18px;}
   button.go:hover{background:var(--accent-dark);}
+  button.sample{font:600 15px var(--display);background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:10px 16px;cursor:pointer;margin:18px 10px 0 0;}
+  button.sample:hover{background:#eaf8f0;}
   #out{margin-top:8px;}
   .headline{background:var(--surface); border:1px solid var(--line); border-left:5px solid var(--warn); border-radius:var(--radius); padding:18px 18px;}
   .headline .big{font-family:var(--display); font-size:clamp(26px,6vw,36px); font-weight:700; line-height:1.1; margin:4px 0;}
@@ -107,12 +109,14 @@
         <p class="muted" style="margin:12px 0 0">Both are rough defaults, not your utility's real numbers — change them to whatever you expect. A fixed plan that lapses usually rolls to a month-to-month or variable "default" rate, which is typically higher; that's what the second number estimates.</p>
       </details>
 
+      <button type="button" class="sample" id="sampleBtn">Try a sample forecast</button>
       <button class="go" id="run">Show my forecast</button>
+      <p class="muted" style="margin:8px 0 0">The sample uses illustrative values, not your utility&#39;s actual rate or a bill prediction.</p>
     </div>
 
     <div id="out" hidden>
       <div class="headline" style="margin-top:20px">
-        <span class="pill">Estimate</span>
+        <span class="pill" id="estimateLabel">Estimate</span>
         <div class="big" id="next12"></div>
         <div id="deltaLine"></div>
       </div>
@@ -175,6 +179,10 @@
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
+  function countEvent(event){
+    if(window.qwTrack) window.qwTrack('bill-radar',event);
+    try{fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event}),keepalive:true}).catch(function(){});}catch(e){}
+  }
 
   // Share text: headline only. Built from a single boolean (was a roll-off found) and NEVER from
   // the user's kWh, rate, dates or dollar amounts. Nothing personal leaves the device.
@@ -192,7 +200,7 @@
     catch(x){ if(btn){btn.textContent="Copy this link: "+SHARE_URL;} }
   }
   var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
-  function run(){
+  function run(isDemo){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
     if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
     var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
@@ -216,6 +224,7 @@
     }
     var currentYear=baseMonthly*12;
     var delta=next12-currentYear;
+    $('estimateLabel').textContent=isDemo?'Example estimate':'Estimate';
     $('next12').textContent='Next 12 months: about '+money(next12);
     var dl=$('deltaLine');
     if(Math.abs(delta)<1){ dl.innerHTML='About the same as the last 12 months at today’s rate ('+money(currentYear)+').'; }
@@ -230,13 +239,21 @@
     var sb=$('shareBtn'); if(sb) sb.onclick=function(){doShare(sb);};
     $('out').hidden=false;
     $('out').scrollIntoView({behavior:'smooth',block:'start'});
-    // Anonymous usage: one count after a completed forecast (invalid input returns earlier). No input values sent.
-    try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'check'}),keepalive:true}).catch(function(){}); }catch(e){}
+    // Only fixed tool and event labels are counted; kWh, rates and dates stay on this device.
+    countEvent(isDemo?'demo':'check');
   }
   // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
-  try{ fetch('/api/event',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool:'bill-radar',event:'open'}),keepalive:true}).catch(function(){}); }catch(e){}
+  countEvent('open');
 
-  $('run').addEventListener('click',run);
+  $('sampleBtn').addEventListener('click',function(){
+    var sampleEnd=new Date(); sampleEnd.setDate(1); sampleEnd.setMonth(sampleEnd.getMonth()+3);
+    $('kwh').value='1000'; $('rate').value='14.5';
+    $('end').value=sampleEnd.getFullYear()+'-'+('0'+(sampleEnd.getMonth()+1)).slice(-2);
+    $('chg').value='8'; $('bump').value='20';
+    run(true);
+  });
+  $('run').addEventListener('click',function(){run(false);});
+  if(new URLSearchParams(window.location.search).get('demo')==='1') $('sampleBtn').click();
 })();
 </script>
 </body>
