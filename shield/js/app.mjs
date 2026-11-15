@@ -263,3 +263,4 @@ if (window.Studio) window.Studio.init({ tool: TOOL, onChange: setPro });
 if ('serviceWorker' in navigator && window.isSecureContext) navigator.serviceWorker.register('sw.js').catch(() => {});
 takeShared();
 window.__shield = state; // for tests and debugging
+if (new URLSearchParams(location.search).get('demo') === '1') $('#sampleBtn').click();
