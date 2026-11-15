@@ -14,7 +14,8 @@ test('each priority tool has exactly one page-open event owner', () => {
     assert.doesNotMatch(source, /countEvent\(['"]open['"]\)/, path+' must not count a second page open');
   }
   const bill = page('bill-radar/index.html');
-  assert.match(bill, /tool:'bill-radar',event:'open'/, 'Bill Radar uses its standalone first-party open counter');
+  assert.match(bill, /function countEvent\(event\)[\s\S]*?JSON\.stringify\(\{tool:'bill-radar',event\}\)/, 'Bill Radar uses a fixed-label first-party event helper');
+  assert.match(bill, /countEvent\('open'\)/, 'Bill Radar counts its first-party page open');
   assert.doesNotMatch(bill, /Studio\.init\(/, 'Bill Radar does not initialize the shared Pro client');
 });
 
