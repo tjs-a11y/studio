@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-14T16:42:40.557Z",
-  "date": "2026-11-14",
+  "fetched": "2026-11-15T17:22:25.880Z",
+  "date": "2026-11-15",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-14T16:42:40.525Z",
+  "generated": "2026-11-15T17:22:25.854Z",
   "visits": {
-    "total": 279,
-    "today": 7
+    "total": 294,
+    "today": 11
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -295,7 +295,7 @@
     },
     "vendor-check": {
       "opens": 4,
-      "opens_today": 3,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -322,8 +322,8 @@
       "demos_today": 0
     },
     "brain-pass": {
-      "opens": 11,
-      "opens_today": 0,
+      "opens": 14,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -337,7 +337,7 @@
     },
     "footsure": {
       "opens": 2,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -365,7 +365,7 @@
     },
     "saver": {
       "opens": 8,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -393,7 +393,7 @@
     },
     "shield": {
       "opens": 2,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
