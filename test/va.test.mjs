@@ -162,3 +162,19 @@ test('each prelaunch page labels its two tier CTAs with fixed events only', () =
     assert.ok(html.includes(`data-qw-tool="${tool}" data-qw-event="click_manager"`), path + ' manager CTA');
   }
 });
+
+
+test('demo events emit only fixed tool and referral labels, never sample inputs', async () => {
+  const { window, analyticsEvents } = harness(async () => ({
+    ok: true, status: 200, clone: () => ({ json: async () => ({ ok: true, stored: true }) })
+  }), '/bill-radar/');
+  window.location.search = '?ref=home-featured-demo-bill-radar';
+  await window.fetch('/api/event', {
+    method: 'POST',
+    body: JSON.stringify({ tool: 'bill-radar', event: 'demo', kwh: 1000, rate: 14.5 })
+  });
+  const demo = analyticsEvents.find(([, payload]) => payload.name === 'tool_demo');
+  assert.ok(demo, 'demo event emitted');
+  assert.deepEqual({ ...demo[1].data }, { tool: 'bill-radar', source: 'home-featured-demo-bill-radar' });
+  assert.doesNotMatch(JSON.stringify(demo), /1000|14\\.5/);
+});
