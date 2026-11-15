@@ -59,8 +59,9 @@
       <button class="ghost" id="addbtn">Add</button>
     </div>
     <div class="row">
-      <button id="go">What can I make?</button>
-      <button class="ghost" id="clear">Clear</button>
+      <button class="ghost" id="sampleBtn" type="button">Add example ingredients</button>
+      <button id="go" type="button">What can I make?</button>
+      <button class="ghost" id="clear" type="button">Clear</button>
       <span class="small muted" id="count"></span>
     </div>
     <p class="small muted" style="margin-bottom:0">Assumes you've got the basics: oil, salt, pepper, common spices.</p>
@@ -241,11 +242,11 @@
     } catch (e) {}
   }
 
-  function run() {
+  function run(isDemo) {
     rebuild();
     if (Object.keys(picks).length < 2) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Tap at least a couple of things you have, then try again.</div>'; return; }
     var m = match();
-    var html = "";
+    var html = isDemo ? '<p class="small muted">Example only — chicken, rice, spinach, onion and tomato were added for this preview.</p>' : "";
     if (m.now.length) html += '<div class="grp" style="margin-top:4px">Make tonight</div>' + m.now.slice(0, 3).map(function (e) { return card(e, "now"); }).join("");
     if (m.now.length < 3 && m.one.length) html += '<div class="grp">One quick stop away</div>' + m.one.slice(0, Math.max(1, 4 - m.now.length)).map(function (e) { return card(e, "one"); }).join("");
     if (!html) html = '<div class="card">Nothing matched yet — add a carb (rice, pasta, bread, tortillas) or a protein and try again. Those unlock the most dinners.</div>';
@@ -255,7 +256,7 @@
       html += '<p class="small muted noprint" style="margin-top:4px">Shares only the dinner ideas — never what you tapped in.</p>';
     }
     $("out").innerHTML = html; $("out").hidden = false;
-    countEvent('check');
+    countEvent(isDemo ? 'demo' : 'check');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -275,7 +276,15 @@
     $("palette").appendChild(b);
   };
   $("add").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); $("addbtn").click(); } });
-  $("go").onclick = run;
+  $("sampleBtn").onclick = function () {
+    ["Chicken", "Rice", "Spinach", "Onion", "Tomato"].forEach(function (label) { picks[label] = true; });
+    rebuild();
+    [].forEach.call($("palette").querySelectorAll(".chip"), function (b) {
+      if (picks[b.dataset.label]) b.setAttribute("aria-pressed", "true");
+    });
+    run(true);
+  };
+  $("go").onclick = function () { run(false); };
   $("clear").onclick = function () { picks = {}; expiring = {}; rebuild(); palette(); $("out").hidden = true; if (PRO) renderExp(); };
 
   // ---- Quickwell Plus: the kitchen that thinks for you ----
@@ -322,6 +331,7 @@
   if ($("week")) $("week").onclick = week;
   if ($("grocery")) $("grocery").onclick = grocery;
   if (window.Studio) Studio.init({ tool: "dinner", onChange: function (s) { PRO = !!s.pro; $("premium").hidden = false; $("locked").hidden = PRO; $("unlocked").hidden = !PRO; if (PRO) renderExp(); } });
+  if (new URLSearchParams(window.location.search).get("demo") === "1") $("sampleBtn").click();
 })();
 </script>
 </body>

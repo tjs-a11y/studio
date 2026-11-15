@@ -413,3 +413,4 @@ applyLang();
 if (window.Studio) window.Studio.init({ tool: TOOL, onChange: setPro });
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 window.__saver = state; // for tests and debugging
+if (new URLSearchParams(location.search).get('demo') === '1') $('#sampleBtn').click();

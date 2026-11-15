@@ -273,6 +273,8 @@
 
   if (window.Studio) Studio.init({ tool: "fair-price", onChange: function (s) { PRO = !!s.pro; $("premium").hidden = false; $("locked").hidden = PRO; $("unlocked").hidden = !PRO; } });
 })();
+
+  if (new URLSearchParams(window.location.search).get('demo') === '1') $('sampleBtn').click();
 </script>
 </body>
 </html>
