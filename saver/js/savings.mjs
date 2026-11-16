@@ -43,7 +43,7 @@ export function addHistory(history, item, mark, at) {
 }
 
 // Shareable card text. Only an amount: never a merchant name, date or anything from the statement.
-export const SHARE_URL = 'https://quickwell.app/saver/?ref=share-saver';
+export const SHARE_URL = 'https://quickwell.app/saver/?utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=saver_result&ref=share-saver';
 export function shareText(kind, amountText, lang = 'en') {
   const es = lang === 'es';
   if (kind === 'saved') return es ? `Recorté ${amountText} al año en fugas de dinero con Quickwell Saver` : `I cut ${amountText}/yr in money leaks with Quickwell Saver`;

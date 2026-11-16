@@ -11,6 +11,7 @@ test('Fair Price offers a built-in share action', () => {
   assert.match(src, /navigator\.share/, 'Fair Price uses the Web Share API');
   assert.match(src, /navigator\.clipboard\.writeText/, 'Fair Price has a clipboard fallback when Web Share is unavailable');
   assert.match(src, /quickwell\.app\/fair-price\//, 'the share carries the tool URL so recipients can open it');
+  assert.match(src, /utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=fair_price_result&ref=share-fair-price/, 'the shared link carries fixed acquisition tags');
 });
 
 // Privacy: the shared text must be built only from the category label and the generic flag
@@ -33,6 +34,7 @@ test('Dinner offers a built-in share action', () => {
   assert.match(src, /navigator\.share/, 'Dinner uses the Web Share API');
   assert.match(src, /navigator\.clipboard\.writeText/, 'Dinner has a clipboard fallback');
   assert.match(src, /quickwell\.app\/dinner\//, 'the share carries the tool URL');
+  assert.match(src, /utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=dinner_result&ref=share-dinner/, 'the shared link carries fixed acquisition tags');
 });
 
 // Privacy: the shared text must be built only from the produced dinner ideas (recipe names) and
@@ -45,6 +47,19 @@ test('Dinner share text never includes the tapped ingredients', () => {
   assert.doesNotMatch(body, /\bpicks\b/, 'shareText must not read the tapped-ingredients object');
   assert.doesNotMatch(body, /\.value/, 'shareText must not read a form field value');
   assert.match(body, /names/, 'shareText uses only the produced recipe names');
+});
+
+test('Saver shares a privacy-safe result with a tagged destination', () => {
+  const pageSrc = page('saver/index.html');
+  const appSrc = page('saver/js/app.mjs');
+  const shareSrc = page('saver/js/savings.mjs');
+  assert.match(pageSrc, /id="shareBtn"/, 'Saver has a Share button');
+  assert.match(appSrc, /navigator\.share/, 'Saver uses the Web Share API');
+  assert.match(shareSrc, /utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=saver_result&ref=share-saver/, 'Saver share URL carries fixed acquisition tags');
+  const m = shareSrc.match(/export function shareText\(kind, amountText, lang = 'en'\) \{[\s\S]*?\n\}/);
+  assert.ok(m, 'Saver share text builder is present');
+  assert.match(m[0], /amountText/, 'Saver share uses only the rounded amount text');
+  assert.doesNotMatch(m[0], /merchant|statement|\.value|transaction|date/, 'Saver share text never includes merchant, statement or transaction details');
 });
 
 test('Copycat offers a built-in share action', () => {
@@ -73,6 +88,7 @@ test('Bill Radar offers a built-in share action', () => {
   assert.match(src, /navigator\.share/, 'Bill Radar uses the Web Share API');
   assert.match(src, /navigator\.clipboard\.writeText/, 'Bill Radar has a clipboard fallback');
   assert.match(src, /quickwell\.app\/bill-radar\//, 'the share carries the tool URL');
+  assert.match(src, /utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=bill_radar_result&ref=share-bill-radar/, 'the shared link carries fixed acquisition tags');
 });
 
 // Privacy: headline only — the share text must be built from a single boolean (roll-off found or

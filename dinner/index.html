@@ -114,7 +114,7 @@
 
   // Share text: built ONLY from the dinner ideas the tool produced (generic recipe names) and
   // their count — never from the ingredients the user tapped. Nothing personal leaves the device.
-  var SHARE_URL = "https://quickwell.app/dinner/";
+  var SHARE_URL = "https://quickwell.app/dinner/?utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=dinner_result&ref=share-dinner";
   function shareText(nowCount, names, oneCount) {
     if (nowCount) {
       return "I tapped what was in my fridge and Quickwell Dinner found " + nowCount + " dinner" + (nowCount === 1 ? "" : "s") +
