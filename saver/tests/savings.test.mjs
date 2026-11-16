@@ -34,7 +34,7 @@ test('share text has the amount only, in both languages, and the share link carr
   assert.equal(S.shareText('found', '$682'), 'I found $682/yr in money leaks with Quickwell Saver');
   assert.equal(S.shareText('saved', '$240'), 'I cut $240/yr in money leaks with Quickwell Saver');
   assert.equal(S.shareText('found', '682 €', 'es'), 'Encontré 682 € al año en fugas de dinero con Quickwell Saver');
-  assert.equal(S.SHARE_URL, 'https://quickwell.app/saver/?ref=share-saver');
+  assert.equal(S.SHARE_URL, 'https://quickwell.app/saver/?utm_source=quickwell&utm_medium=product_share&utm_campaign=quickwell_consumer_share_20261116&utm_content=saver_result&ref=share-saver');
 });
 test('storage round-trip, and blocked storage never throws', () => {
   const mem = new Map(); const st = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, v), removeItem: (k) => mem.delete(k) };
