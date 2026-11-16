@@ -6,6 +6,19 @@ Small web tools, each solving one problem well, with one shared billing server o
 - **Billing server** (`/api`): Vercel functions that create Stripe Checkout sessions, verify payments, unlock Pro and open Stripe's self-serve page for customers. Stripe is the source of truth: every access check re-reads the subscription, so a cancellation or failed payment takes effect right away.
 - **Catalog** (`catalog/tools.json`): the tools on sale and their plans.
 
+
+## Try Quickwell's consumer tools
+
+Start with a free browser-based tool for a common everyday task:
+
+- [Quickwell Shield — check a suspicious message](https://quickwell.app/shield/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_consumer_tools_20261116&utm_content=shield&ref=github-readme-shield) — review a text, email, direct message or link for common warning signs and safer next steps.
+- [Quickwell Saver — review recurring charges](https://quickwell.app/saver/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_consumer_tools_20261116&utm_content=saver&ref=github-readme-saver) — review a bank export for recurring charges, price changes, duplicate charges and fees.
+- [Bill Radar — understand an electricity bill](https://quickwell.app/bill-radar/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_consumer_tools_20261116&utm_content=bill-radar&ref=github-readme-bill-radar) — explore how an electricity rate and usage affect an estimated bill.
+- [Fair Price — review a repair or contractor estimate](https://quickwell.app/fair-price/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_consumer_tools_20261116&utm_content=fair-price&ref=github-readme-fair-price) — organize estimate line items and scope before deciding what to ask the provider.
+- [What's for Dinner? — find meals from ingredients at home](https://quickwell.app/dinner/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_consumer_tools_20261116&utm_content=dinner&ref=github-readme-dinner) — find dinner ideas from what you already have; sharing sends meal ideas, not your ingredient selections.
+
+Each tool has a free starting point; any paid options are shown inside the tool.
+
 ## Adding a tool
 1. Copy `_template/` to `/<tool-id>/` and build the tool.
 2. Add it to `catalog/tools.json`: `{ "id", "name", "tagline", "plans": [{ "id": "pro", "trialDays": 7 }] }`.
