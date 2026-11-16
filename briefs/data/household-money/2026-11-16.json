@@ -1,0 +1,154 @@
+{
+ "brief": {
+  "subject": "Family Dollar to pay $63 million over register overcharges",
+  "headline": "Family Dollar to Pay $63 Million Over Shelf-Price Overcharges; FTC Targets Vet Merger",
+  "dek": "Regulators settle a register-pricing case, sue to stop a vet-supply merger, and add states to a telehealth billing and privacy suit.",
+  "lede": "Family Dollar will pay $63 million to settle FTC and state claims that shoppers were charged more at checkout than the posted prices.",
+  "sections": [
+   {
+    "heading": "Family Dollar settles overcharge claims",
+    "bullets": [
+     "$63 million: Family Dollar's payment to settle claims from the FTC and 17 states.",
+     "Regulators allege registers routinely rang up higher than shelf tags, price stickers and ads showed.",
+     "Officials say the gap cost shoppers millions of dollars, so compare your receipt to the posted price."
+    ],
+    "source_ids": [
+     "S5"
+    ]
+   },
+   {
+    "heading": "FTC sues to block vet-supply merger",
+    "bullets": [
+     "$3.5 billion: Covetrus's planned purchase of rival MWI Veterinary Supply, which the FTC sued to stop.",
+     "The FTC says the two are the largest veterinary product distributors.",
+     "The agency warns a combination could raise costs for vet clinics and, in turn, pet owners."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "More states join Hims and Hers suit",
+    "bullets": [
+     "Five states joined as co-plaintiffs in an amended FTC complaint against telehealth firm Hims and Hers.",
+     "The FTC alleges the company misled users about billing and cancellation practices.",
+     "It also alleges sensitive health data went to ad platforms despite privacy promises."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   }
+  ],
+  "seo_description": "Family Dollar pays $63 million over checkout overcharges, FTC sues to block a $3.5 billion vet-supply deal, and states join a Hims and Hers suit."
+ },
+ "harvest": {
+  "desk": "household-money",
+  "generatedAt": "2026-11-16T21:02:08.649Z",
+  "date": "2026-11-16",
+  "items": [
+   {
+    "id": "S1",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Albertsons Credit Cards",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/albertsons-credit-card",
+    "published": "2026-11-13T19:47:34.000Z",
+    "snippet": "The Albertsons forU American Express® Card can be used at any store in the Albertsons family. But each store also has its own dedicated card.",
+    "categories": [
+     "Credit Cards",
+     "Rewards Credit Cards",
+     "Store Credit Cards"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "FTC press releases",
+    "title": "FTC Sues to Block Veterinary Supplies Distributor Covetrus’s $3.5 Billion Acquisition of Rival MWI",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-sues-block-veterinary-supplies-distributor-covetruss-35-billion-acquisition-rival-mwi",
+    "published": "2026-11-13T12:00:00.000Z",
+    "snippet": "FTC alleges that combining the two biggest distributors of veterinary products and services will drive up costs and lead to higher prices for veterinary clinics and pet owners The Federal Trade Commission sued today to block Covetrus Inc. and its owners, Clayton, Dubilier & Rice LLC and TPG Inc., from acquiring its closest competitor, MWI Veterinary Supply Inc., for $3.5 billion from MWI’s parent,",
+    "categories": []
+   },
+   {
+    "id": "S3",
+    "source": "NerdWallet",
+    "title": "Should You Pay Yourself or Your Bills First? Plus, More November Money Questions",
+    "link": "https://www.nerdwallet.com/finance/news/top-november-money-questions",
+    "published": "2026-11-12T22:26:32.000Z",
+    "snippet": "The Nerds explore ways to prioritize saving, stay healthy on a budget and spend less on groceries.",
+    "categories": [
+     "Personal Finance"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "NerdWallet",
+    "title": "5 Things to Know About the Ameriprise Credit Card",
+    "link": "https://www.nerdwallet.com/credit-cards/learn/ameriprise-credit-card",
+    "published": "2026-11-12T20:42:29.000Z",
+    "snippet": "The card offers decent perks for Ameriprise account holders, but has little to offer anyone else.",
+    "categories": [
+     "Cash Back Credit Cards",
+     "Credit Cards",
+     "Rewards Credit Cards"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "FTC press releases",
+    "title": "FTC and 17 States Secure $63 Million Settlement with Family Dollar Stores in Price Transparency Win for Consumers",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/ftc-17-states-secure-63-million-settlement-family-dollar-stores-price-transparency-win-consumers",
+    "published": "2026-11-12T12:00:00.000Z",
+    "snippet": "Family Dollar has generated millions of dollars by charging more at the register than the prices it advertises, the FTC and states allege Family Dollar will pay $63 million to settle Federal Trade Commission and state allegations that the company routinely charged customers more at the register than the prices displayed on shelves, price tags and advertisements, costing consumers millions of dolla",
+    "categories": []
+   },
+   {
+    "id": "S6",
+    "source": "FTC press releases",
+    "title": "Five States Join FTC Lawsuit Alleging Hims and Hers Engaged in Deceptive and Unlawful Privacy Practices",
+    "link": "https://www.ftc.gov/news-events/news/press-releases/2026/11/five-states-join-ftc-lawsuit-alleging-hims-hers-engaged-deceptive-unlawful-privacy-practices",
+    "published": "2026-11-10T12:00:00.000Z",
+    "snippet": "The Federal Trade Commission filed an amended complaint adding five states as co-plaintiffs in its lawsuit alleging that telehealth provider Hims and Hers shared consumers’ sensitive health information with third-party advertising platforms, despite claiming its services maintain consumers’ privacy, and it deceived users about its billing and cancellation practices. View Press Release",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: CFPB",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FTC press releases",
+    "fetched": 10,
+    "kept": 3
+   },
+   {
+    "source": "NerdWallet",
+    "fetched": 10,
+    "kept": 3
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "saver",
+   "product": "Quickwell Saver",
+   "url": "https://quickwell.app/saver/",
+   "ref": true,
+   "label": "Find the fees in your bank export",
+   "copy": "Saver finds every subscription, price hike, double charge and bank fee in your own bank export, then helps you cancel or push back.",
+   "placement": "anchor",
+   "signal": "match-saver",
+   "evidence": [
+    "S6"
+   ]
+  }
+ ]
+}
