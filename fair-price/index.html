@@ -199,7 +199,7 @@
     var found = scan(text);
     lastShare = isDemo ? "See how Fair Price checks a sample quote. Try your own quote free, nothing uploaded:" : shareText(c, found);
     var html = "";
-    if (isDemo) html += '<p class="small muted" style="margin-top:4px"><b>Sample only.</b> This is a demonstration, not a review of your quote. Paste your own wording above for a real check.</p>';
+    if (isDemo) html += '<p class="small muted" style="margin-top:4px"><b>Sample only.</b> This is a demonstration, not a review of your quote. Paste your own wording above for a real check.</p><div class="row noprint" style="margin-top:10px"><button type="button" class="ghost" id="demoToRealBtn">Check your own estimate →</button></div>';
     if (found.length) {
       html += '<div class="grp" style="margin-top:4px">Checklist phrases in what you pasted</div>';
       html += found.map(function (f) { return '<div class="flag ' + f.k + '"><h3>⚠️ ' + esc(f.t) + "</h3><p>" + esc(f.d) + "</p></div>"; }).join("");
@@ -236,6 +236,15 @@
     $("out").innerHTML = readHtml(text, c, demo); $("out").hidden = false;
     countEvent(demo ? 'demo' : 'check');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
+    var demoToRealBtn = $("demoToRealBtn");
+    if (demoToRealBtn) demoToRealBtn.onclick = function () {
+      sampleActive = false;
+      $("text").value = "";
+      $("out").hidden = true;
+      if (window.qwTrack) window.qwTrack('fair-price', 'demo_to_real');
+      $("text").scrollIntoView({ behavior: "smooth", block: "center" });
+      $("text").focus();
+    };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   $("go").onclick = function () { run(false); };
