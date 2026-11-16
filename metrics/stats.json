@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-15T17:22:25.880Z",
-  "date": "2026-11-15",
+  "fetched": "2026-11-16T20:38:59.964Z",
+  "date": "2026-11-16",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-15T17:22:25.854Z",
+  "generated": "2026-11-16T20:38:59.768Z",
   "visits": {
-    "total": 294,
-    "today": 11
+    "total": 302,
+    "today": 4
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -323,7 +323,7 @@
     },
     "brain-pass": {
       "opens": 14,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
