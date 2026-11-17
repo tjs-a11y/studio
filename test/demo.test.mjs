@@ -13,7 +13,7 @@ const { GET: stats, setStoreForTests: setStatsStore } = await import('../api/sta
 
 test('Fair Price sample quote is explicit and is not counted as a real check', () => {
   assert.match(page, /id="sampleBtn"/);
-  assert.match(page, /Try a sample quote/);
+  assert.match(page, /See a sample result first/);
   assert.match(page, /function run\(isDemo\)/);
   assert.match(page, /run\(true\)/);
   assert.match(page, /sampleActive = true/);
