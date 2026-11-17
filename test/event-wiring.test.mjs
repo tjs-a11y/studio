@@ -56,3 +56,12 @@ test('homepage See it in action links launch one-click local samples for all fiv
     assert.match(page(path), /get\(['"]demo['"]\)\s*===\s*['"]1['"]/ , path + ' auto-runs its sample');
   }
 });
+
+
+test('Fair Price first-use actions explain the real-review and sample paths', () => {
+  const fair = readFileSync(new URL('../fair-price/index.html', import.meta.url), 'utf8');
+  assert.match(fair, /id="go">Review my estimate/);
+  assert.match(fair, /id="sampleBtn">See a sample result first/);
+  assert.match(fair, /No estimate ready\? The sample uses example text only; replace it with your own estimate for a real review\./);
+  assert.match(fair, /id="demoToRealBtn">Check your own estimate/);
+});
