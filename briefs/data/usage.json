@@ -806,5 +806,21 @@
   "input_tokens": 2009,
   "output_tokens": 751,
   "usd": 0.0231
+ },
+ {
+  "date": "2026-11-17",
+  "desk": "small-business",
+  "model": "claude-opus-5-5",
+  "input_tokens": 2996,
+  "output_tokens": 1427,
+  "usd": 0.0405
+ },
+ {
+  "date": "2026-11-17",
+  "desk": "household-money",
+  "model": "claude-opus-5-5",
+  "input_tokens": 1729,
+  "output_tokens": 540,
+  "usd": 0.0177
  }
 ]
