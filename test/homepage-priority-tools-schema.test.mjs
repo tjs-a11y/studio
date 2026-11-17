@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const blocks = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)]
+const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
   .map((match) => JSON.parse(match[1]));
 const graph = blocks.flatMap((block) => block['@graph'] || [block]);
 
 test('homepage search snippet names concrete high-intent consumer tasks', () => {
-  assert.match(html, /<title>Free Scam Text Checker &amp; Subscription Finder \\| Quickwell<\\/title>/);
+  assert.match(html, /<title>Free Scam Text Checker &amp; Subscription Finder \| Quickwell<\/title>/);
   assert.match(html, /Check scam texts, find subscriptions, forecast electric bills, review repair estimates and plan dinner/);
   assert.match(html, /See each tool's data handling before you start/);
 });
