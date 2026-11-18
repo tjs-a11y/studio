@@ -1,0 +1,102 @@
+{
+ "brief": {
+  "subject": "No new EUDR moves today; coffee and cocoa supply in focus",
+  "headline": "Quiet day for EUDR news as coffee logistics and food-crop costs make headlines",
+  "dek": "No new EUDR guidance or enforcement surfaced today; Starbucks touts inventory gains and rice joins cocoa as a cost worry.",
+  "lede": "Today's sources contain no new EUDR deadlines, guidance or enforcement actions. Two supply-chain stories touch coffee and cocoa, two commodities the regulation covers.",
+  "sections": [
+   {
+    "heading": "Starbucks says shelves are fuller",
+    "bullets": [
+     "Starbucks' CEO says inventory availability is at an all-time high, helped by daily deliveries.",
+     "The chain is trialing a 24-hour operating model to make its supply chain faster and more dependable.",
+     "The report does not mention EUDR or deforestation checks on coffee sourcing."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   },
+   {
+    "heading": "After cocoa, rice costs bite",
+    "bullets": [
+     "Climate disruption and higher rice prices are pushing food makers to rework recipes and sourcing.",
+     "Cited examples include Kellogg's Rice Krispies and Japanese rice crackers.",
+     "The story frames rice as following cocoa into supply trouble; rice itself is not an EUDR commodity."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   }
+  ],
+  "seo_description": "EUDR brief: no new rules or enforcement today. Starbucks reports record inventory availability; rising rice costs follow cocoa's squeeze."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-11-18T19:24:10.591Z",
+  "date": "2026-11-18",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Supply Chain Dive",
+    "title": "Starbucks inventory availability at ‘all-time high’ with daily deliveries, CEO says",
+    "link": "https://www.supplychaindive.com/news/starbucks-inventory-availability-at-all-time-high-with-daily-deliveries/874923/",
+    "published": "2026-11-18T15:38:15.000Z",
+    "snippet": "The coffeehouse chain has been testing a 24-hour operating model to improve inventory availability and build an overall faster, more reliable supply chain.",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "FoodNavigator",
+    "title": "First cocoa, now rice: Is another food crisis brewing?",
+    "link": "https://www.bakeryandsnacks.com/Article/2026/11/18/rice-supply-crisis-why-kelloggs-is-reformulating-cereals/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS",
+    "published": "2026-11-18T09:14:42.000Z",
+    "snippet": "From Kellogg's Rice Krispies to Japan's rice crackers, climate disruption and rising rice costs are forcing food manufacturers to rethink recipes and sourcing.",
+    "categories": [
+     "Trends"
+    ]
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 1
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 1
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
