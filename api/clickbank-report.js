@@ -181,7 +181,7 @@ async function persistToMonad(requestFetch, report, orderRows, orderApiStatus) {
       method: 'POST',
       headers: {
         apikey: anonKey,
-        'x-monad-ingest-secret': ingestSecret,
+        authorization: `Bearer ${ingestSecret}`,
         'content-type': 'application/json'
       },
       body: JSON.stringify(payload)
