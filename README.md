@@ -19,6 +19,10 @@ Start with a free browser-based tool for a common everyday task:
 
 Each tool has a free starting point; any paid options are shown inside the tool.
 
+## Free printable guide
+
+- [Unexpected text? Use the five-step checklist before you click](https://quickwell.app/guides/check-suspicious-text-message/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_shield_checklist_20261118&utm_content=printable_checklist&ref=github-readme-shield-checklist) — verify an unexpected message through a trusted channel, protect sensitive information, and report suspected scams. Includes a print / save-as-PDF checklist and links to U.S. FTC guidance.
+
 ## Adding a tool
 1. Copy `_template/` to `/<tool-id>/` and build the tool.
 2. Add it to `catalog/tools.json`: `{ "id", "name", "tagline", "plans": [{ "id": "pro", "trialDays": 7 }] }`.
