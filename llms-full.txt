@@ -135,7 +135,7 @@
 - [Recurring business costs: auto-renewals, price increases and forgotten subscriptions](https://quickwell.app/learn/business-costs/): Small-business guides: find auto-renewal deadlines in contracts, push back on vendor price increases, and spot recurring and duplicate charges.
 - [Auto-renewal clauses: how to find your cancel-by date and not miss it](https://quickwell.app/learn/business-costs/auto-renewal-notice-window/): Find the auto-renewal clause in a business contract, work out the cancel-by date from the notice window, calendar it, and word a non-renewal letter.
 - [Vendor and SaaS price increases at renewal: how to spot them and negotiate](https://quickwell.app/learn/business-costs/vendor-price-increase-at-renewal/): Spot vendor and SaaS price creep in bank statements and contracts, then negotiate the renewal price, a cap or fewer seats before the contract renews.
-- [How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export](https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/): Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.
+- [How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export](https://quickwell.app/learn/business-costs/find-recurring-charges-bank-csv/): Export 13 months of bank, card or accounting transactions, then group merchants to find recurring charges, duplicate payments and rising prices.
 
 ## 1099 reporting
 
