@@ -1,0 +1,100 @@
+{
+ "brief": {
+  "subject": "PepsiCo lifts deforestation-free sourcing to 94%",
+  "headline": "PepsiCo reports 94% deforestation-free sourcing for key commodities in 2025",
+  "dek": "PepsiCo raises its share of forest-clearance-free ingredients like palm oil, while Starbucks reports record inventory availability.",
+  "lede": "PepsiCo says 94% of key ingredients, including palm oil, were sourced without forest clearance in 2025. That is up from 90% a year earlier.",
+  "sections": [
+   {
+    "heading": "PepsiCo raises deforestation-free share",
+    "bullets": [
+     "94% of key PepsiCo ingredients, such as palm oil and sugar cane, came from sources without forest clearance in 2025.",
+     "The prior year's figure was 90%, showing major buyers track deforestation-free sourcing year over year.",
+     "Palm oil is an EUDR commodity, so suppliers to big food brands face overlapping corporate and EU data demands."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "Starbucks touts record inventory availability",
+    "bullets": [
+     "Starbucks' CEO says store inventory availability is at an all-time high, supported by daily deliveries.",
+     "The chain is testing a 24-hour operating model aimed at a faster, more dependable supply chain.",
+     "The report covers logistics only and gives no detail on coffee sourcing or deforestation checks."
+    ],
+    "source_ids": [
+     "S1"
+    ]
+   }
+  ],
+  "seo_description": "PepsiCo reports 94% deforestation-free sourcing of palm oil and other key ingredients in 2025, up from 90%. Plus Starbucks supply chain news."
+ },
+ "harvest": {
+  "desk": "eudr",
+  "generatedAt": "2026-11-19T19:29:19.391Z",
+  "date": "2026-11-19",
+  "items": [
+   {
+    "id": "S1",
+    "source": "Supply Chain Dive",
+    "title": "Starbucks inventory availability at ‘all-time high’ with daily deliveries, CEO says",
+    "link": "https://www.supplychaindive.com/news/starbucks-inventory-availability-at-all-time-high-with-daily-deliveries/874923/",
+    "published": "2026-11-18T15:38:15.000Z",
+    "snippet": "The coffeehouse chain has been testing a 24-hour operating model to improve inventory availability and build a faster, more reliable supply chain.",
+    "categories": []
+   },
+   {
+    "id": "S2",
+    "source": "Supply Chain Dive",
+    "title": "PepsiCo improves deforestation-free sourcing for key commodities",
+    "link": "https://www.supplychaindive.com/news/pepsico-improves-deforestation-free-sourcing-for-key-commodities/874963/",
+    "published": "2026-11-18T12:59:00.000Z",
+    "snippet": "The Doritos maker sourced 94% of ingredients such as palm oil and sugar cane without forest clearance in 2025, up from 90% the year before.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "Supply Chain Dive",
+    "fetched": 10,
+    "kept": 2
+   },
+   {
+    "source": "Mongabay",
+    "fetched": 25,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: USTR/Commerce",
+    "fetched": 0,
+    "kept": 0
+   },
+   {
+    "source": "FoodNavigator",
+    "fetched": 20,
+    "kept": 0
+   },
+   {
+    "source": "European Commission: Environment newsroom",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "plot-file-checker",
+   "product": "EUDR Plot File Checker",
+   "url": "https://quickwell.app/plot-file-checker/",
+   "ref": true,
+   "label": "Check a plot file",
+   "copy": "Check and fix farm plot maps for the EU deforestation rule before you submit, in English, French or Spanish. Free.",
+   "placement": "top",
+   "signal": "default",
+   "evidence": []
+  }
+ ]
+}
