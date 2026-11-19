@@ -44,12 +44,14 @@ export const CSS = `
 const OG_LOCALE = { en: 'en_US', es: 'es_US', fr: 'fr_FR' };
 function og(page, abs) {
   const t = esc(page.title), d = esc(page.description), img = esc(abs(page.ogImage));
-  return `<meta property="og:type" content="article">
+  const type = page.schema === 'CollectionPage' ? 'website' : 'article';
+  return `<meta property="og:type" content="${type}">
 <meta property="og:site_name" content="Quickwell">
 <meta property="og:title" content="${t}">
 <meta property="og:description" content="${d}">
 <meta property="og:url" content="${esc(abs(page.path))}">
 <meta property="og:image" content="${img}">
+<meta property="og:image:alt" content="${esc(page.ogImageAlt || page.h1)}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:locale" content="${OG_LOCALE[page.lang] || 'en_US'}">
 <meta name="twitter:card" content="summary_large_image">
@@ -70,7 +72,7 @@ export function render(page, SITE) {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: abs(c.path) })),
   }];
-  const base = { headline: page.h1, description: page.description, inLanguage: page.lang, url: abs(page.path), dateModified: (page.checked && page.checked.iso) || CHECKED,
+  const base = { headline: page.h1, description: page.description, inLanguage: page.lang, url: abs(page.path), dateModified: page.modified || (page.checked && page.checked.iso) || CHECKED,
     publisher: { '@type': 'Organization', name: 'Quickwell' } };
   if (page.schema === 'DefinedTerm') {
     ld.push({ '@context': 'https://schema.org', '@type': 'DefinedTerm', name: page.term, description: page.description, url: abs(page.path),
@@ -102,7 +104,7 @@ export function render(page, SITE) {
 <meta name="description" content="${esc(page.description)}">
 <link rel="canonical" href="${esc(abs(page.path))}">
 <link rel="icon" href="data:,">
-${page.ogImage ? og(page, abs) : ''}${alt}<style>${CSS}</style>
+${og({ ...page, ogImage: page.ogImage || '/og.png' }, abs)}${alt}<style>${CSS}</style>
 ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('\n')}
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script><script defer src="/js/voiceflow.js"></script>
 </head>
