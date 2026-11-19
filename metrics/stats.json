@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-18T19:00:02.497Z",
-  "date": "2026-11-18",
+  "fetched": "2026-11-19T19:07:53.161Z",
+  "date": "2026-11-19",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-18T19:00:02.478Z",
+  "generated": "2026-11-19T19:07:53.130Z",
   "visits": {
-    "total": 331,
-    "today": 9
+    "total": 346,
+    "today": 11
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -308,8 +308,8 @@
       "demos_today": 0
     },
     "spare-key": {
-      "opens": 5,
-      "opens_today": 0,
+      "opens": 7,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -423,7 +423,7 @@
   "outbound": {
     "northstar:freightsidekick": {
       "clicks": 3,
-      "clicks_today": 1
+      "clicks_today": 0
     }
   }
 }
