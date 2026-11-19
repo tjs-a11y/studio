@@ -191,6 +191,12 @@ ${regE}
   description: 'Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.',
   lede: 'A transaction export and an ordinary spreadsheet are enough to list every subscription your business pays for, find the ones paid twice, and see which ones went up. This takes about an hour the first time.',
   related: ['vendor-price-increase-at-renewal', 'auto-renewal-notice-window'],
+  cta: {
+    title: 'Review recurring charges with Quickwell Saver',
+    text: '<p>Scan your own bank or card export for recurring-looking charges, amount changes and duplicate candidates. Saver processes transaction rows in your browser; anonymous usage events contain only the tool name and action.</p><p class="note">Runs entirely in your local browser — nothing you enter leaves your device.</p>',
+    href: '/saver/?ref=learn-recurring-csv',
+    label: 'Open Quickwell Saver →',
+  },
   sources: [REGE_10, REGE_2],
   body: `
 <h2>Step 1: Export at least 13 months</h2>
