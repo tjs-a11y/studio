@@ -43,8 +43,9 @@ export const CSS = `
 // Open Graph and Twitter tags, for pages that set ogImage (a 1200x630 image path on this site).
 const OG_LOCALE = { en: 'en_US', es: 'es_US', fr: 'fr_FR' };
 function og(page, abs) {
-  const t = esc(page.title), d = esc(page.description), img = esc(abs(page.ogImage));
-  return `<meta property="og:type" content="article">
+  const t = esc(page.title), d = esc(page.description), img = esc(abs(page.ogImage || '/og.png'));
+  const type = page.schema === 'CollectionPage' ? 'website' : 'article';
+  return `<meta property="og:type" content="${type}">
 <meta property="og:site_name" content="Quickwell">
 <meta property="og:title" content="${t}">
 <meta property="og:description" content="${d}">
@@ -102,7 +103,7 @@ export function render(page, SITE) {
 <meta name="description" content="${esc(page.description)}">
 <link rel="canonical" href="${esc(abs(page.path))}">
 <link rel="icon" href="data:,">
-${page.ogImage ? og(page, abs) : ''}${alt}<style>${CSS}</style>
+${og(page, abs)}${alt}<style>${CSS}</style>
 ${ld.map((o) => `<script type="application/ld+json">${json(o)}</script>`).join('\n')}
 <script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script><script defer src="/js/voiceflow.js"></script>
 </head>
