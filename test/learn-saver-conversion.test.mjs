@@ -46,3 +46,8 @@ test('production build regenerates Learn pages before the sitemap index', () => 
   assert.ok(learn >= 0, 'production build must regenerate source-backed Learn pages');
   assert.ok(sitemap > learn, 'sitemap index must be written after the Learn sitemap');
 });
+
+test('Vercel delegates production generation to the tested package build', () => {
+  const vercel = JSON.parse(read('vercel.json'));
+  assert.equal(vercel.buildCommand, 'npm run build');
+});
