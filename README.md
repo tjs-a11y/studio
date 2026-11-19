@@ -23,6 +23,10 @@ Each tool has a free starting point; any paid options are shown inside the tool.
 
 - [Unexpected text? Use the five-step checklist before you click](https://quickwell.app/guides/check-suspicious-text-message/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_shield_checklist_20261118&utm_content=printable_checklist&ref=github-readme-shield-checklist) — verify an unexpected message through a trusted channel, protect sensitive information, and report suspected scams. Includes a print / save-as-PDF checklist and links to U.S. FTC guidance.
 
+## Free practical guide
+
+- [Find recurring charges in a bank statement](https://quickwell.app/guides/find-recurring-bank-statement-charges/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_saver_recurring_guide_20261119&utm_content=bank_statement_guide&ref=github-saver-recurring-guide) — follow a source-backed review process for repeat payments and unfamiliar charges, then open Quickwell Saver if you want to scan your own bank or card export in your browser.
+
 ## Adding a tool
 1. Copy `_template/` to `/<tool-id>/` and build the tool.
 2. Add it to `catalog/tools.json`: `{ "id", "name", "tagline", "plans": [{ "id": "pro", "trialDays": 7 }] }`.
