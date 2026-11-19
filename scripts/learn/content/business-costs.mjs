@@ -187,9 +187,16 @@ ${regE}
   h1: 'How to find recurring charges and duplicate subscriptions in a bank or accounting CSV export',
   crumbName: 'Find recurring charges in a CSV',
   short: 'Export 13 months of transactions, group by merchant, and flag repeats, duplicates and rising amounts in a spreadsheet.',
-  title: 'Find Recurring Charges and Duplicate Subscriptions in a CSV',
-  description: 'Export 13 months of bank, card or accounting transactions to CSV, then use a spreadsheet to find recurring charges, duplicates and rising prices.',
+  title: 'Find Recurring Charges in a Bank Statement CSV',
+  description: 'Export 13 months of bank, card or accounting transactions, then group merchants to find recurring charges, duplicate payments and rising prices.',
   lede: 'A transaction export and an ordinary spreadsheet are enough to list every subscription your business pays for, find the ones paid twice, and see which ones went up. This takes about an hour the first time.',
+  modified: '2026-11-19',
+  cta: {
+    title: 'Scan your own statement with Quickwell Saver',
+    text: '<p>Want to review your own export without building a spreadsheet? Quickwell Saver flags likely subscriptions, amount changes, duplicate charges and bank fees. Review each result against the original statement and agreement before acting.</p><p class="note">Runs entirely in your local browser — nothing you enter leaves your device.</p>',
+    href: '/saver/?ref=learn-recurring-csv',
+    label: 'Open the free Saver scan',
+  },
   related: ['vendor-price-increase-at-renewal', 'auto-renewal-notice-window'],
   sources: [REGE_10, REGE_2],
   body: `
