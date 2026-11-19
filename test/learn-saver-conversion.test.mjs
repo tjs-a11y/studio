@@ -37,3 +37,12 @@ test('recurring-charge Learn page routes to Saver with a fixed anonymous source 
   assert.match(sitemap, /<loc>https:\/\/quickwell\.app\/learn\/business-costs\/find-recurring-charges-bank-csv\/<\/loc><lastmod>2026-11-19<\/lastmod>/);
   assert.ok(full.includes('duplicate payments and rising prices.'));
 });
+
+test('production build regenerates Learn pages before the sitemap index', () => {
+  const pkg = JSON.parse(read('package.json'));
+  const build = pkg.scripts.build;
+  const learn = build.indexOf('node scripts/learn/build.mjs');
+  const sitemap = build.indexOf('node scripts/sitemap.mjs');
+  assert.ok(learn >= 0, 'production build must regenerate source-backed Learn pages');
+  assert.ok(sitemap > learn, 'sitemap index must be written after the Learn sitemap');
+});
