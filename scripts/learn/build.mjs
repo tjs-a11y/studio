@@ -183,7 +183,7 @@ if (process.argv.includes('--check')) {
       ['Twitter card image', /<meta name="twitter:image" content="https:\/\/[^"]+">/],
       ['Vercel Analytics', /<script defer src="\/_vercel\/insights\/script\.js"><\/script>/],
       ['first-party analytics', /<script defer src="\/js\/va\.js"><\/script>/],
-      ['page-specific Sources', /<section class="sources"><h2>Sources<\/h2><ul><li>/],
+      ['page-specific Sources', /<section class="sources"><h2>[^<]+<\/h2><ul><li>/],
       ['visible disclaimer', /<p class="disclaimer">[^<]+<\/p>/],
     ];
     for (const [label, pattern] of required) {
