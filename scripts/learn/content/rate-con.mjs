@@ -112,11 +112,23 @@ export const TERMS = [
 { slug: 'layover', term: 'Layover', short: 'Pay when the truck is held overnight or into the next day.',
   title: 'Layover Pay in Trucking: What It Covers and How to Write It on a Rate Con',
   description: 'Layover pay compensates a carrier when a truck is held overnight or a load is pushed to the next day. How it differs from detention, how it interacts with hours of service, and what to ask for.',
-  lede: 'Layover is a daily payment for a truck that is held overnight, or whose pickup or delivery is pushed to another day, through no fault of the carrier.',
+  lede: 'Layover pay is an accessorial charge a carrier negotiates for a truck held overnight or pushed into another service day through no fault of the carrier. The rate confirmation should define exactly when it applies.',
+  modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
 <h2>When layover applies</h2>
 <p>Typical cases: the receiver can't unload today and gives a new appointment tomorrow; the shipper's freight isn't ready and the pickup moves a day; or a load is held for paperwork. The truck sits, the driver can't take another load, and the day's revenue is gone. Layover pays for that lost day. Detention, by contrast, pays by the hour for waiting within the same day.</p>
-<p>The difference matters because some rate cons pay detention but are silent on layover. A truck can sit through the night, start fresh the next morning, and the broker can argue that detention "reset". A separate layover line removes that argument.</p>
+<p>The difference matters because some rate cons pay detention but say nothing about an overnight hold. Do not assume unused detention automatically converts into layover pay: the written terms should say whether the charges are separate, when detention stops, and when a new layover day starts.</p>
+
+<h2>How much is layover pay?</h2>
+<p>There is no single federal dollar amount or universal industry rate that automatically applies to every brokered load. Treat the amount as a negotiated accessorial, not a guaranteed standard. FMCSA has discussed detention and other accessorial payments in its broker-transparency rulemaking, but that material does not establish a nationwide layover tariff. The number that matters for your load is the amount and trigger written into the signed broker-carrier agreement and rate confirmation.</p>
+<p>Before signing, put these points in writing:</p>
+<ul>
+<li><b>Trigger:</b> the event that qualifies, such as a receiver rescheduling delivery to the next calendar day after the truck arrived on time.</li>
+<li><b>Rate and unit:</b> a dollar amount per calendar day or per 24-hour period, and whether a partial day is prorated.</li>
+<li><b>Start and stop:</b> when the clock starts, whether weekends count, and when the charge ends.</li>
+<li><b>Proof:</b> appointment records, check-in/check-out timestamps and the written reschedule notice.</li>
+<li><b>Payment:</b> the documents required and when the accessorial is due.</li>
+</ul>
 
 <h2>How layover connects to hours of service</h2>
 <p>Under federal hours-of-service rules, a property-carrying driver needs 10 consecutive hours off duty before driving again, may not drive after the 14th hour on duty, and may not drive after 60 hours in 7 days or 70 hours in 8 days, depending on the carrier's schedule (${cfr('395.3')}). A day held at a receiver is often logged off duty, which can actually help the driver's hours, but it still costs the carrier a day of revenue. Layover pay is about money, not legality.</p>
@@ -138,7 +150,7 @@ export const TERMS = [
 
 <h2>Keep the paper trail</h2>
 <p>Save the original appointment, the message that moved it, your arrival time and the new appointment. If layover is paid "upon proof", that set of four timestamps is the proof.</p>`,
-  related: ['detention', 'tonu', 'fcfs-vs-appointment', 'accessorial'], sources: [ecfr('395.3', 'hours-of-service limits'), TOOL] },
+  related: ['detention', 'tonu', 'fcfs-vs-appointment', 'accessorial'], sources: [ecfr('395.3', 'hours-of-service limits'), { label: 'FMCSA, Transparency in Property Broker Transactions rulemaking docket (accessorial payment discussion)', url: 'https://www.fmcsa.dot.gov/regulations/docket-no-fmcsa-2023-0257-rin-2126-ac63-transparency-property-broker-transactions' }, TOOL] },
 
 // ---------------------------------------------------------------------------------------------
 { slug: 'lumper', term: 'Lumper fee', short: 'Unloading fees paid at the dock, and who pays them back.',
@@ -333,7 +345,8 @@ export const TERMS = [
 { slug: 'setoff', term: 'Setoff (offset) clause', short: 'Taking money from one load\'s pay to cover another.',
   title: 'Setoff and Offset Clauses in Broker Rate Cons: What They Allow',
   description: 'A setoff or offset clause lets a broker deduct money it claims you owe from pay on other loads, including disputed claims. Why it is risky, wording to watch for, and what to ask for instead.',
-  lede: 'A setoff (or offset) clause lets the broker take money it says you owe, for example a cargo claim or a fine, out of the pay for this load or any other load. The money can be taken before anyone has agreed the claim is valid.',
+  lede: 'A setoff (or offset) clause may let a broker deduct an amount it claims you owe from freight charges due on this load or another load. Its effect depends on the signed contract language and applicable law, so read the scope and dispute process before accepting it.',
+  modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
 <h2>What a setoff clause looks like</h2>
 <blockquote>Broker may offset any amounts owed to broker by carrier against freight charges due to carrier on this or any other shipment, including cargo claims.</blockquote>
@@ -348,10 +361,11 @@ export const TERMS = [
 </ul>
 
 <h2>How claims are supposed to work</h2>
-<p>Federal claims rules for carriers describe a written claim process: a claim must identify the shipment, assert liability and ask for a specific or determinable amount; notes on a delivery receipt or an inspection report alone don't count as a claim (${cfr('370.3')}). A carrier must acknowledge a claim within 30 days and pay, decline or make a firm settlement offer within 120 days (${cfr('370.5')}, ${cfr('370.9')}). A setoff clause lets money move before that process runs. See <a href="/learn/rate-con/cargo-claims/">cargo claims</a> for more.</p>
+<p>Federal cargo-claim rules describe how a covered cargo claim must be filed and handled: the claim must identify the shipment, assert liability and seek a specified or determinable amount; a notation on a delivery receipt or inspection report alone is not a claim (${cfr('370.3')}). A carrier generally must acknowledge a claim within 30 days and pay, decline or make a firm settlement offer within 120 days (${cfr('370.5')}, ${cfr('370.9')}). <b>Those claim-processing rules do not, by themselves, decide whether a separate broker-carrier contract permits a freight-payment setoff.</b> That question can depend on the contract, the type of deduction and applicable law. See <a href="/learn/rate-con/cargo-claims/">cargo claims</a> for the claim process.</p>
+<p>If a deduction is taken, request the amount, shipment reference, documents supporting the claim, the exact contract clause relied on and a written explanation of the calculation. Preserve the signed rate confirmation, broker-carrier agreement, POD/BOL, inspection records and settlement statement. Do not assume the broker's label makes a disputed deduction valid.</p>
 
 <h2>What the Rate Con Checker flags</h2>
-<p>Any "set-off", "setoff" or "offset" wording is a <b>red flag</b> (15 points off the score), whatever surrounds it. The checker is strict on purpose: setoff is one of the most common ways carriers lose pay they've already earned. A separate claims rule also flags claims deductible "from freight" even when the word "offset" isn't used.</p>
+<p>Any "set-off", "setoff" or "offset" wording is a <b>red flag</b> (15 points off the score) because it deserves a close contract review. The flag is a prompt to inspect scope and process—not a legal conclusion that every offset clause is invalid. A separate claims rule also flags claims deductible "from freight" even when the word "offset" isn't used.</p>
 
 <h2>What to ask for</h2>
 <blockquote>Please strike the setoff/offset language. Any claim should be handled separately, not taken from freight pay.</blockquote>
@@ -359,7 +373,7 @@ export const TERMS = [
 
 <h2>If a setoff already came out of your pay</h2>
 <p>The Rate Con Checker catches setoff wording <em>before</em> you sign. Once a setoff has already been deducted, the place to catch it is the settlement: rebuild what you agreed from the signed rate confirmation and approved accessorials, then compare it with what the broker actually paid. <a href="/haul-audit/">Haul Audit</a> does that math privately in your browser and keeps broker deductions separate from factoring fees, so a setoff shows up as a settlement variance instead of disappearing into the paperwork.</p>`,
-  related: ['cargo-claims', 'fines-deductions', 'factoring-noa', 'indemnity'], sources: [ecfr('370.3', 'filing of claims'), ecfr('370.5', 'acknowledgment of claims'), ecfr('370.9', 'disposition of claims'), TOOL] },
+  related: ['cargo-claims', 'fines-deductions', 'factoring-noa', 'indemnity'], sources: [ecfr('370.3', 'filing of claims'), ecfr('370.5', 'acknowledgment of claims'), ecfr('370.9', 'disposition of claims'), ecfr('371.3', 'broker transaction records and parties’ review rights'), { label: 'FMCSA, Transparency in Property Broker Transactions rulemaking docket', url: 'https://www.fmcsa.dot.gov/regulations/docket-no-fmcsa-2023-0257-rin-2126-ac63-transparency-property-broker-transactions' }, TOOL] },
 
 // ---------------------------------------------------------------------------------------------
 { slug: 'fines-deductions', term: 'Fines, deductions and chargebacks', short: 'Penalties taken out of your pay.',
