@@ -1,0 +1,278 @@
+{
+ "brief": {
+  "subject": "Retirement plan auto-enrollment rules final; fraud voids IRS time limit",
+  "headline": "IRS Finalizes Auto-Enrollment Rules as Court Says Fraud Removes Audit Time Limit",
+  "dek": "Final Section 414A retirement plan rules, no audit deadline when fraud occurs, mandatory R&D credit reporting and a W-9 check that heads off 1099 trouble.",
+  "lede": "The IRS has issued final regulations on automatic enrollment for certain retirement plans, putting SECURE 2.0 requirements into effect for employers that maintain them.",
+  "sections": [
+   {
+    "heading": "Auto-enrollment rules are final",
+    "bullets": [
+     "Final Section 414A regulations set automatic enrollment requirements for certain retirement plans; sponsoring employers should review their plan terms.",
+     "The rules carry out the SECURE 2.0 Act of 2022 mandate for eligible automatic contribution arrangements, so many salary-deferral plans must comply.",
+     "Employers maintaining these plans are directly affected, as are plan participants and beneficiaries."
+    ],
+    "source_ids": [
+     "S8"
+    ]
+   },
+   {
+    "heading": "Fraud erases the IRS clock",
+    "bullets": [
+     "The IRS usually gets three years to challenge a return, or six in certain instances, a window owners often rely on.",
+     "A new case says no time limit applies when fraud occurred, leaving those returns open to challenge indefinitely."
+    ],
+    "source_ids": [
+     "S2"
+    ]
+   },
+   {
+    "heading": "R&D credit reporting gets stricter",
+    "bullets": [
+     "Business-component reporting on Form 6765 is mandatory for 2026 tax-year returns, so credit claimants need more detailed records.",
+     "Year-end studies based on spreadsheets and staff interviews may not fit the new Section G demands, so firms should rework data collection."
+    ],
+    "source_ids": [
+     "S4"
+    ]
+   },
+   {
+    "heading": "Check W-9s before 1099 season",
+    "bullets": [
+     "A vendor W-9 can look complete and properly stored yet still hold a mismatched name and TIN that goes unnoticed.",
+     "That mismatch can land on a Form 1099 and later prompt an IRS notice, so verify vendor names and TINs now."
+    ],
+    "source_ids": [
+     "S6"
+    ]
+   }
+  ],
+  "seo_description": "Final IRS auto-enrollment rules, no audit time limit for fraud, mandatory Form 6765 reporting and a W-9 check that prevents 1099 errors."
+ },
+ "harvest": {
+  "desk": "small-business",
+  "generatedAt": "2026-11-20T19:06:22.180Z",
+  "date": "2026-11-20",
+  "items": [
+   {
+    "id": "S1",
+    "source": "CPA Practice Advisor",
+    "title": "Blue J and Deloitte Canada Expand Collaboration",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/20/blue-j-and-deloitte-canada-expand-collaboration/194422/",
+    "published": "2026-11-20T14:09:00.000Z",
+    "snippet": "Tax research and advisory platform Blue J announced a multi-year enterprise agreement to deliver advanced AI-powered tax research capabilities across Canada through a strategic collaboration with Deloitte Canada.",
+    "categories": [
+     "Artificial Intelligence",
+     "blue j",
+     "Deloitte",
+     "tax research",
+     "Taxes",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S2",
+    "source": "CPA Practice Advisor",
+    "title": "No Tax Protection Allowed if Fraud Is Committed",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/19/no-tax-protection-allowed-if-fraud-is-committed/194437/",
+    "published": "2026-11-20T03:34:13.000Z",
+    "snippet": "Generally, the IRS has three years to challenge tax returns or six in certain instances. New case says there is no time limit if fraud happened.",
+    "categories": [
+     "audits",
+     "Income Taxes",
+     "IRS",
+     "tax court",
+     "tax fraud",
+     "tax notices"
+    ]
+   },
+   {
+    "id": "S3",
+    "source": "CPA Practice Advisor",
+    "title": "In-House Server vs. Cloud for Tax Software",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/19/in-house-server-vs-cloud-for-tax-software/194411/",
+    "published": "2026-11-19T22:35:37.000Z",
+    "snippet": "Let’s compare an in-house server and cloud software on important parameters so you can decide which one is the right choice for this tax season.",
+    "categories": [
+     "cloud hosting",
+     "cloud server",
+     "Cloud Technology",
+     "cybersecurity",
+     "data security",
+     "Firm Management",
+     "Hardware",
+     "in-house server",
+     "Software",
+     "tax software",
+     "Technology"
+    ]
+   },
+   {
+    "id": "S4",
+    "source": "CPA Practice Advisor",
+    "title": "Section G Retires the Year-End R&D Credit Study. Here’s What CPA Firms Should Change Now",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/19/section-g-retires-the-year-end-rd-credit-study-heres-what-cpa-firms-should-change-now/194399/",
+    "published": "2026-11-19T20:56:48.000Z",
+    "snippet": "Business-component reporting on Form 6765 becomes mandatory for 2026 tax-year returns, and the spreadsheet-and-interview workflow most firms rely on wasn't built for it.",
+    "categories": [
+     "Form 6765",
+     "IRS",
+     "R&D tax credit",
+     "research and development",
+     "Section G of Form 6765",
+     "tax credit",
+     "tax credits",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S5",
+    "source": "CPA Practice Advisor",
+    "title": "Your Client’s Tax Return is Not Their Bankruptcy Income",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/19/your-clients-tax-return-is-not-their-bankruptcy-income/194385/",
+    "published": "2026-11-19T19:42:52.000Z",
+    "snippet": "The Chapter 7 income form asks for six months of income, taxable or not. Here's how the return lines you know map to it, and which records to pull.",
+    "categories": [
+     "bankruptcy",
+     "Chapter 7",
+     "Chapter 7 bankruptcy",
+     "clients",
+     "debt",
+     "Form 1040",
+     "income",
+     "income tax",
+     "tax returns",
+     "Taxes"
+    ]
+   },
+   {
+    "id": "S6",
+    "source": "CPA Practice Advisor",
+    "title": "The W-9 Problem Your Busy Season Workflow Audit Can Miss",
+    "link": "https://www.cpapracticeadvisor.com/2026/11/19/the-w-9-problem-your-busy-season-workflow-audit-can-miss/194379/",
+    "published": "2026-11-19T18:46:14.000Z",
+    "snippet": "A vendor's Form W-9 can be collected on time, filed correctly, and still create work months later. If nobody checks the name and TIN, an incorrect combination can flow into a Form 1099 and eventually trigger an IRS notice.",
+    "categories": [
+     "busy season",
+     "CP2100 notice",
+     "CP2100A notice",
+     "IRS",
+     "IRS B-Notice",
+     "Taxes",
+     "taxpayer identification number",
+     "TIN",
+     "Vendors",
+     "W-9"
+    ]
+   },
+   {
+    "id": "S7",
+    "source": "Federal Register: IRS",
+    "title": "Proposed Rule: Racial Nondiscrimination in Private Schools; Hearing",
+    "link": "https://www.federalregister.gov/documents/2026/11/18/2026-23533/racial-nondiscrimination-in-private-schools-hearing",
+    "published": "2026-11-18T12:00:00.000Z",
+    "snippet": "This document provides a notice of an additional date for the public hearing on the notice of proposed rulemaking (REG-119986-25) published in the Federal Register on Friday, September 4, 2026. The proposed regulations would provide that a private school is not described as an organization exempt from Federal income tax if it discriminates on the basis of race, color, or national or ethnic origin in administration of its educational, admissions, scholarship, athletic, or other policies, based on",
+    "categories": []
+   },
+   {
+    "id": "S8",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Automatic Enrollment Requirements Under Section 414A",
+    "link": "https://www.federalregister.gov/documents/2026/11/18/2026-23530/automatic-enrollment-requirements-under-section-414a",
+    "published": "2026-11-18T12:00:00.000Z",
+    "snippet": "This document sets forth final regulations that provide guidance with respect to the automatic enrollment requirements that apply to certain retirement plans. The regulations reflect statutory changes made by the SECURE 2.0 Act of 2022 requiring that certain cash or deferred arrangements and salary reduction agreements be eligible automatic contribution arrangements that satisfy additional specified requirements. The regulations affect participants in, beneficiaries of, employers maintaining, an",
+    "categories": []
+   },
+   {
+    "id": "S9",
+    "source": "Federal Register: IRS",
+    "title": "Rule: Income Taxes",
+    "link": "https://www.federalregister.gov/documents/2026/11/18/2026-23514/income-taxes",
+    "published": "2026-11-18T12:00:00.000Z",
+    "snippet": "",
+    "categories": []
+   },
+   {
+    "id": "S10",
+    "source": "Federal Register: IRS",
+    "title": "Notice: Publication of the Tier 2 Tax Rates",
+    "link": "https://www.federalregister.gov/documents/2026/11/17/2026-23384/publication-of-the-tier-2-tax-rates",
+    "published": "2026-11-17T12:00:00.000Z",
+    "snippet": "Publication of the tier 2 tax rates for calendar year 2027 as required by section 3241(d) of the Internal Revenue Code. Tier 2 taxes on railroad employees, employers, and employee representatives are one source of funding for benefits under the Railroad Retirement Act.",
+    "categories": []
+   },
+   {
+    "id": "S11",
+    "source": "Federal Register: SBA",
+    "title": "Rule: Small Business Investment Company (SBIC) Leverage Availability",
+    "link": "https://www.federalregister.gov/documents/2026/11/17/2026-23358/small-business-investment-company-sbic-leverage-availability",
+    "published": "2026-11-17T12:00:00.000Z",
+    "snippet": "The U.S. Small Business Administration (\"SBA\" or \"Agency\") is publishing this interim final rule (\"IFR\") amending the U.S. Small Business Administration's loan guarantee regulations applicable to the Small Business Investment Company (\"SBIC\") program to implement the provisions of the Investing in All of America Act of 2025 (\"the Investing Act\"). These provisions increase the maximum amount of leverage available to SBICs issuing standard debentures in ratios of up to two-to-one against private c",
+    "categories": []
+   },
+   {
+    "id": "S12",
+    "source": "Federal Register: SBA",
+    "title": "Rule: Surety Bond Guarantee Program: Streamlining and Modernizing",
+    "link": "https://www.federalregister.gov/documents/2026/11/16/2026-23225/surety-bond-guarantee-program-streamlining-and-modernizing",
+    "published": "2026-11-16T12:00:00.000Z",
+    "snippet": "This final rule makes several changes to the U.S. Small Business Administration (SBA) Surety Bond Guarantee (SBG) program regulations. The rule reduces the burden on participating surety companies for submission and retention of documents. The rule also corrects conflicting provisions, as well as revising the obsolete Preferred Surety admissions requirements and the Quarterly Contract Completion Report.",
+    "categories": []
+   }
+  ],
+  "perSource": [
+   {
+    "source": "CPA Practice Advisor",
+    "fetched": 16,
+    "kept": 6
+   },
+   {
+    "source": "Federal Register: IRS",
+    "fetched": 4,
+    "kept": 4
+   },
+   {
+    "source": "CFPB Newsroom",
+    "fetched": 23,
+    "kept": 0
+   },
+   {
+    "source": "Federal Register: SBA",
+    "fetched": 2,
+    "kept": 2
+   },
+   {
+    "source": "The CPA Journal",
+    "fetched": 25,
+    "kept": 0
+   }
+  ],
+  "skipped": [],
+  "errors": []
+ },
+ "ctas": [
+  {
+   "id": "vendor-check",
+   "product": "Quickwell Vendor Check",
+   "url": "https://quickwell.app/vendor-check/",
+   "ref": true,
+   "label": "See who needs a 1099",
+   "copy": "Year-End Vendor Check reads your bank or QuickBooks export and flags who likely needs a 1099 under the $2,000 rule, plus every renewal and price increase. Nothing is uploaded.",
+   "placement": "anchor",
+   "signal": "match-vendor-check",
+   "evidence": [
+    "S6"
+   ]
+  },
+  {
+   "id": "riddlebound",
+   "product": "Riddlebound",
+   "url": "https://riddlebound.app/",
+   "label": "Unwind over the weekend with interactive thrillers",
+   "copy": "Off the clock this weekend? Riddlebound novels hide codes and clues inside the story. Crack them to unlock what happens next. The first books are coming soon; start now with the free SIGNAL 309 audio drama.",
+   "placement": "end",
+   "signal": "weekend",
+   "evidence": []
+  }
+ ]
+}
