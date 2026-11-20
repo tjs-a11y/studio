@@ -344,7 +344,7 @@ export const TERMS = [
 // ---------------------------------------------------------------------------------------------
 { slug: 'setoff', term: 'Setoff (offset) clause', short: 'Taking money from one load\'s pay to cover another.',
   title: 'Setoff and Offset Clauses in Broker Rate Cons: What They Allow',
-  description: 'A setoff or offset clause lets a broker deduct money it claims you owe from pay on other loads, including disputed claims. Why it is risky, wording to watch for, and what to ask for instead.',
+  description: 'A setoff or offset clause may let a broker deduct an amount it claims you owe from freight charges due on this or another load. Learn how scope, contract terms and applicable law affect the risk, and what to ask before signing.',
   lede: 'A setoff (or offset) clause may let a broker deduct an amount it claims you owe from freight charges due on this load or another load. Its effect depends on the signed contract language and applicable law, so read the scope and dispute process before accepting it.',
   modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
