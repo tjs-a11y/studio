@@ -301,7 +301,7 @@ p({ slug: 'insurance-property-carriers', row: 9, h1: 'Row 9: Operating without r
 <p>Under ${cfr('387.7')} (a), no motor carrier may operate a motor vehicle until it has obtained, and has in effect, the minimum levels of financial responsibility in ${cfr('387.9')}. "In effect" is the important part: insurance that lapsed for a week, or a policy that didn't start until after the first load, is a violation for those days.</p>
 <h2>The minimum levels</h2>
 <div class="tbl"><table>
-<tr><th>Type of carriage (vehicles of 10,001 lbs GVWR or more unless noted)</th><th>Minimum</th></tr>
+<tr><th>Type of carriage / vehicle class</th><th>Minimum</th></tr>
 <tr><td>For-hire, interstate or foreign: property (non-hazardous), GVWR under 10,001 lbs</td><td>$300,000</td></tr>
 <tr><td>For-hire, interstate or foreign: property (non-hazardous), GVWR 10,001 lbs or more</td><td>$750,000</td></tr>
 <tr><td>Oil, hazardous waste, hazardous materials or substances listed in 172.101, not in the higher tier</td><td>$1,000,000</td></tr>
