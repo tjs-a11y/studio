@@ -176,6 +176,22 @@ if (process.argv.includes('--check')) {
     const w = wordCount(o.page);
     if (w < o.minWords) { console.error(`THIN ${o.path}: ${w} words`); bad++; }
     for (const [m, k] of [[titles, o.page.title], [descs, o.page.description]]) { if (m.has(k)) { console.error(`DUPLICATE title/description ${o.path} and ${m.get(k)}`); bad++; } m.set(k, o.path); }
+    // Fail closed: every generated Learn page must ship the complete house template.
+    const required = [
+      ['canonical URL', /<link rel="canonical" href="[^"]+">/],
+      ['Open Graph image', /<meta property="og:image" content="https:\/\/[^"]+">/],
+      ['Twitter card image', /<meta name="twitter:image" content="https:\/\/[^"]+">/],
+      ['Vercel Analytics', /<script defer src="\/_vercel\/insights\/script\.js"><\/script>/],
+      ['first-party analytics', /<script defer src="\/js\/va\.js"><\/script>/],
+      ['page-specific Sources', /<section class="sources"><h2>Sources<\/h2><ul><li>/],
+      ['visible disclaimer', /<p class="disclaimer">[^<]+<\/p>/],
+    ];
+    for (const [label, pattern] of required) {
+      if (!pattern.test(o.html)) { console.error(`MISSING Learn house metadata (${label}): ${o.path}`); bad++; }
+    }
+    if (!Array.isArray(o.page.sources) || o.page.sources.length === 0) {
+      console.error(`MISSING page-specific sources: ${o.path}`); bad++;
+    }
     for (const [, href] of o.html.matchAll(/href="(\/[^"#?]*)/g)) {
       const f = href.endsWith('/') ? join(root, href, 'index.html') : join(root, href);
       if (!existsSync(f)) { console.error(`BROKEN ${o.path} -> ${href}`); bad++; }

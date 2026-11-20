@@ -51,3 +51,16 @@ test('Vercel delegates production generation to the tested package build', () =>
   const vercel = JSON.parse(read('vercel.json'));
   assert.equal(vercel.buildCommand, 'npm run build');
 });
+
+test('Learn generator has a fail-closed house-template gate for every generated page', () => {
+  const build = read('scripts/learn/build.mjs');
+  for (const requirement of [
+    'canonical URL',
+    'Open Graph image',
+    'Twitter card image',
+    'Vercel Analytics',
+    'first-party analytics',
+    'page-specific Sources',
+    'visible disclaimer',
+  ]) assert.ok(build.includes(requirement), `missing Learn house-template gate: ${requirement}`);
+});
