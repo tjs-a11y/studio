@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-19T19:07:53.161Z",
-  "date": "2026-11-19",
+  "fetched": "2026-11-20T18:45:41.472Z",
+  "date": "2026-11-20",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-19T19:07:53.130Z",
+  "generated": "2026-11-20T18:45:41.445Z",
   "visits": {
-    "total": 346,
-    "today": 11
+    "total": 354,
+    "today": 3
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -309,7 +309,7 @@
     },
     "spare-key": {
       "opens": 7,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
