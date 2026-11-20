@@ -294,18 +294,20 @@ ${after}`,
 p({ slug: 'insurance-property-carriers', row: 9, h1: 'Row 9: Operating without required minimum insurance (49 CFR 387.7(a))', short: 'Row 9 · §387.7(a) · single occurrence',
   title: 'New Entrant Audit: Operating Without Minimum Financial Responsibility (387.7(a))',
   description: 'Automatic-fail row 9 of the FMCSA new entrant audit: operating a motor vehicle without the required minimum levels of financial responsibility (49 CFR 387.7, limits in 387.9). Limits, MCS-90 and lapses.',
-  lede: 'Row 9 fails a new carrier that operates a motor vehicle without having the required minimum levels of financial responsibility (liability insurance or a surety bond) in effect.',
+  lede: 'Row 9 fails a new carrier that operates a motor vehicle without the required financial-responsibility coverage in effect. The minimum is not one flat amount: it depends on vehicle GVWR and the type of carriage.',
+  modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
 <h2>What the rule says</h2>
 <p>Under ${cfr('387.7')} (a), no motor carrier may operate a motor vehicle until it has obtained, and has in effect, the minimum levels of financial responsibility in ${cfr('387.9')}. "In effect" is the important part: insurance that lapsed for a week, or a policy that didn't start until after the first load, is a violation for those days.</p>
 <h2>The minimum levels</h2>
 <div class="tbl"><table>
 <tr><th>Type of carriage (vehicles of 10,001 lbs GVWR or more unless noted)</th><th>Minimum</th></tr>
-<tr><td>For-hire, interstate or foreign: property (non-hazardous)</td><td>$750,000</td></tr>
+<tr><td>For-hire, interstate or foreign: property (non-hazardous), GVWR under 10,001 lbs</td><td>$300,000</td></tr>
+<tr><td>For-hire, interstate or foreign: property (non-hazardous), GVWR 10,001 lbs or more</td><td>$750,000</td></tr>
 <tr><td>Oil, hazardous waste, hazardous materials or substances listed in 172.101, not in the higher tier</td><td>$1,000,000</td></tr>
 <tr><td>Certain bulk hazardous substances, bulk Division 1.1–1.3 explosives, bulk Division 2.3 Hazard Zone A, highway-route-controlled Class 7 and similar (also under 10,001 lbs for some)</td><td>$5,000,000</td></tr>
 </table></div>
-<p>This is a summary of the table in 387.9; check the exact wording for hazmat loads.</p>
+<p>These are federal public-liability minimums for the listed for-hire property-carrier categories. The applicable limit depends on vehicle GVWR and the type of carriage; hazmat and other special categories have different thresholds. Check the full table in <a href="https://www.ecfr.gov/current/title-49/section-387.9" rel="noopener">49 CFR 387.9</a> before operating. FMCSA's <a href="https://www.fmcsa.dot.gov/registration/insurance-filing-requirements" rel="noopener">insurance filing chart</a> also identifies the required filing forms. Cargo insurance is separate and may be required by a broker or shipper, but it is not the same as the Part 387 public-liability filing.</p>
 <h2>Proof and continuity</h2>
 <ul>
 <li>Proof must be kept at your <b>principal place of business</b>: the MCS-90 endorsement issued by your insurer, an MCS-82 surety bond, or an FMCSA self-insurance authorization (${cfr('387.7')}).</li>
@@ -324,7 +326,7 @@ p({ slug: 'insurance-property-carriers', row: 9, h1: 'Row 9: Operating without r
 </ol>
 <p>Liability insurance is separate from cargo insurance, which brokers and shippers may require but which isn't part of this row.</p>
 ${after}`,
-  sources: [ecfr('387.7', 'financial responsibility required'), ecfr('387.9', 'minimum levels')],
+  sources: [ecfr('387.7', 'financial responsibility required'), ecfr('387.9', 'minimum levels'), { label: 'FMCSA, Insurance Filing Requirements and minimum coverage chart (updated March 26, 2026)', url: 'https://www.fmcsa.dot.gov/registration/insurance-filing-requirements' }],
   related: ['insurance-passenger-carriers', 'annual-inspection', 'hours-of-service-records', 'out-of-service-vehicle'] }),
 
 p({ slug: 'insurance-passenger-carriers', row: 10, h1: 'Row 10: Operating a passenger vehicle without required minimum insurance (49 CFR 387.31(a))', short: 'Row 10 · §387.31(a) · single occurrence',
@@ -455,10 +457,12 @@ ${after}`,
 p({ slug: 'out-of-service-vehicle', row: 14, h1: 'Row 14: Operating a vehicle declared out of service before repairs (49 CFR 396.9(c)(2))', short: 'Row 14 · §396.9(c)(2) · single occurrence',
   title: 'New Entrant Audit: Operating an Out-of-Service Vehicle Before Repairs (396.9(c)(2))',
   description: 'Automatic-fail row 14 of the FMCSA new entrant audit: requiring or permitting operation of a CMV declared out of service before the repairs are made (49 CFR 396.9(c)(2)). Towing, certification and records.',
-  lede: 'Row 14 fails a new carrier that requires or permits a commercial motor vehicle declared "out of service" at an inspection to be operated before the required repairs are made. One occurrence fails the audit.',
+  lede: 'Row 14 fails a carrier that requires or permits a commercial motor vehicle formally placed out of service to be operated before the required repairs are completed. One occurrence can trigger the automatic-fail rule.',
+  modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
 <h2>What the rule says</h2>
-<p>Authorized inspectors declare and mark "out of service" any vehicle that, because of its mechanical condition or loading, would likely cause an accident or breakdown, using an "Out-of-Service Vehicle" sticker. Under ${cfr('396.9')} (c)(2), no motor carrier may require or permit anyone to operate that vehicle, and no one may operate it, until all repairs required by the out-of-service notice are satisfactorily completed. No one may remove the sticker before then.</p>
+<p>Authorized inspectors may place a vehicle out of service when its condition or loading meets the applicable criteria. Under ${cfr('396.9')} (c)(2), a motor carrier may not require or permit anyone to operate it until all repairs required by the out-of-service notice are satisfactorily completed. Do not treat a routine inspection defect as an out-of-service order: follow the actual notice and applicable rules.</p>
+<p>The Commercial Vehicle Safety Alliance (CVSA) publishes the North American Standard Out-of-Service Criteria used by certified enforcement personnel. The <a href="https://cvsa.org/news/2026-oosc" rel="noopener">2026 criteria took effect April 1, 2026</a> and superseded the prior edition. The detailed handbook is updated annually; check the current edition rather than relying on an old checklist.</p>
 <h2>"Operate" includes towing, with one exception</h2>
 <p>The rule says operating includes towing the vehicle, except that an out-of-service vehicle may be towed away by a vehicle using a crane or hoist. In practice: either repair it where it sits (mobile repair), or move it with a wrecker that lifts it. Driving it "just to the next exit" or hooking a tractor to an out-of-service trailer and pulling it to the shop is a violation.</p>
 <h2>After the roadside inspection</h2>
@@ -478,7 +482,7 @@ p({ slug: 'out-of-service-vehicle', row: 14, h1: 'Row 14: Operating a vehicle de
 </ol>
 <p>This matters before the audit too: a new entrant found operating a vehicle placed out of service without taking the necessary corrective action, through a roadside inspection or any other means, may be subjected to an expedited safety audit or compliance review (${cfr('385.308')}).</p>
 ${after}`,
-  sources: [ecfr('396.9', 'inspection, out-of-service vehicles'), ecfr('396.11', 'corrective action'), ecfr('385.308', 'expedited audits')],
+  sources: [ecfr('396.9', 'inspection, out-of-service vehicles'), ecfr('396.11', 'corrective action'), ecfr('385.308', 'expedited audits'), { label: 'CVSA, 2026 Out-of-Service Criteria now in effect (April 1, 2026)', url: 'https://cvsa.org/news/2026-oosc' }, { label: 'CVSA, Out-of-Service Criteria overview and annual update schedule', url: 'https://cvsa.org/inspections/out-of-service-criteria' }],
   related: ['dvir-defects', 'annual-inspection', 'hours-of-service-records', 'insurance-property-carriers'] }),
 
 p({ slug: 'dvir-defects', row: 15, h1: 'Row 15: Not fixing out-of-service defects on a driver vehicle inspection report (49 CFR 396.11(a)(3))', short: 'Row 15 · §396.11(a)(3) · single occurrence',
@@ -514,7 +518,8 @@ ${after}`,
 p({ slug: 'annual-inspection', row: 16, h1: 'Row 16: Using a CMV not periodically inspected (49 CFR 396.17(a))', short: 'Row 16 · §396.17(a) · 51% or more of records',
   title: 'New Entrant Audit: Annual (Periodic) Inspection Missing (396.17(a)) and the 51% Rule',
   description: 'Automatic-fail row 16 of the FMCSA new entrant audit: using CMVs not periodically inspected, with a 51% threshold (49 CFR 396.17(a)). Every unit in a combination, qualified inspectors, proof on the vehicle, 14-month records.',
-  lede: 'Row 16 fails a new carrier that uses commercial motor vehicles that have not had their periodic (annual) inspection. Like row 13, it needs a pattern: violations in 51% or more of the records examined.',
+  lede: 'Row 16 concerns operating CMVs without a current periodic inspection. For the new-entrant automatic-fail table, the threshold is 51% or more of the examined records—not a single missing inspection.',
+  modified: '2026-11-20', checked: { iso: '2026-11-20', en: 'November 20, 2026' },
   body: `
 <h2>What the rule says</h2>
 <p>Every CMV must be inspected as ${cfr('396.17')} requires, covering at least the parts and accessories in Appendix A to Part 396. "CMV" includes <b>each vehicle in a combination</b>: for a tractor, semitrailer and full trailer, the tractor, the semitrailer and the full trailer (and converter dolly) must each be inspected. A carrier may not use a CMV unless each component has passed an inspection at least once in the preceding <b>12 months</b> and documentation of it is <b>on the vehicle</b>.</p>
@@ -525,7 +530,8 @@ p({ slug: 'annual-inspection', row: 16, h1: 'Row 16: Using a CMV not periodicall
 <h2>Who may inspect</h2>
 <p>A carrier may do the inspection itself or use a commercial garage, leasing company, truck stop or similar business as its agent, but the inspector must be qualified: understand the Part 393 and Appendix A criteria and have passed a federal or State training program or certificate, or have at least 1 year of qualifying training or experience. The carrier keeps evidence of the inspector's qualifications while the person does inspections and for 1 year after, except for State program inspections (${cfr('396.19')}).</p>
 <h2>Records</h2>
-<p>The inspector prepares a report identifying the inspector, carrier, date, vehicle, components inspected and results, with a certification. The original or a copy must be kept for <b>14 months</b> where the vehicle is housed or maintained and produced on demand (${cfr('396.21')}). For a leased trailer you didn't inspect, you're responsible for obtaining the last report on demand.</p>
+<p>The inspector prepares a report identifying the inspector, carrier, date, vehicle, components inspected and results, with a certification. The original or a copy must be kept for <b>14 months</b> where the vehicle is housed or maintained and produced on demand (${cfr('396.21')}). For a leased or interchanged trailer you didn't inspect, make sure you can obtain the current report before dispatch.</p>
+<p>On the vehicle, the proof can be the inspection report or a qualifying sticker/decal based on the report. A decal is not just a date: it must include the date, the name and address of the entity keeping the report, vehicle identification if not otherwise clear, and certification that the vehicle passed the required inspection. A qualifying state inspection can count if it meets Appendix A's minimum standards.</p>
 <h2>How to fix it</h2>
 <ol>
 <li>List every power unit and trailer you use, including interchanged or leased trailers.</li>
