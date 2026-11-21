@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-20T18:45:41.472Z",
-  "date": "2026-11-20",
+  "fetched": "2026-11-21T17:44:44.305Z",
+  "date": "2026-11-21",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-20T18:45:41.445Z",
+  "generated": "2026-11-21T17:44:44.270Z",
   "visits": {
-    "total": 354,
-    "today": 3
+    "total": 360,
+    "today": 2
   },
   "total_checks": 0,
   "total_trials": 0,
