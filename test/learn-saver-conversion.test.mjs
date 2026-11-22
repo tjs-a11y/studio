@@ -23,15 +23,17 @@ test('Learn layout emits Open Graph and Twitter metadata with the sitewide image
   assert.match(html, /property="og:type" content="article"/);
 });
 
-test('recurring-charge Learn page routes to Saver with a fixed anonymous source and accurate update dates', () => {
+test('recurring-charge Learn page opens Saver demo with a fixed anonymous source and accurate update dates', () => {
   const source = read('scripts/learn/content/business-costs.mjs');
   const page = read('learn/business-costs/find-recurring-charges-bank-csv/index.html');
   const sitemap = read('sitemap-learn.xml');
   const full = read('llms-full.txt');
   assert.match(source, /slug: 'find-recurring-charges-bank-csv'/);
   assert.match(source, /modified: '2026-11-19'/);
-  assert.match(source, /href: '\/saver\/\?ref=learn-recurring-csv'/);
-  assert.match(page, /href="\/saver\/\?ref=learn-recurring-csv"/);
+  assert.match(source, /href: '\/saver\/\?ref=learn-recurring-csv&demo=1#sampleBtn'/);
+  assert.match(source, /label: 'See a sample scan first'/);
+  assert.match(page, /href="\/saver\/\?ref=learn-recurring-csv&demo=1#sampleBtn"/);
+  assert.match(page, /See a sample scan first/);
   assert.match(page, /Runs entirely in your local browser — nothing you enter leaves your device\./);
   assert.match(page, /"dateModified":"2026-11-19"/);
   assert.match(sitemap, /<loc>https:\/\/quickwell\.app\/learn\/business-costs\/find-recurring-charges-bank-csv\/<\/loc><lastmod>2026-11-19<\/lastmod>/);
