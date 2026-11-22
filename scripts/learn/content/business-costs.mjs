@@ -194,8 +194,8 @@ ${regE}
   cta: {
     title: 'Scan your own statement with Quickwell Saver',
     text: '<p>Want to review your own export without building a spreadsheet? Quickwell Saver flags likely subscriptions, amount changes, duplicate charges and bank fees. Review each result against the original statement and agreement before acting.</p><p class="note">Runs entirely in your local browser — nothing you enter leaves your device.</p>',
-    href: '/saver/?ref=learn-recurring-csv',
-    label: 'Open the free Saver scan',
+    href: '/saver/?ref=learn-recurring-csv&demo=1#sampleBtn',
+    label: 'See a sample scan first',
   },
   related: ['vendor-price-increase-at-renewal', 'auto-renewal-notice-window'],
   sources: [REGE_10, REGE_2],
