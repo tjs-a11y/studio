@@ -1,12 +1,12 @@
 {
-  "fetched": "2026-11-22T17:59:46.284Z",
-  "date": "2026-11-22",
+  "fetched": "2026-11-23T22:11:40.829Z",
+  "date": "2026-11-23",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-22T17:59:46.257Z",
+  "generated": "2026-11-23T22:11:40.776Z",
   "visits": {
-    "total": 365,
-    "today": 1
+    "total": 374,
+    "today": 7
   },
   "total_checks": 0,
   "total_trials": 0,
@@ -57,7 +57,7 @@
     },
     "fair-price": {
       "opens": 12,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -140,8 +140,8 @@
       "demos_today": 0
     },
     "bill-radar": {
-      "opens": 4,
-      "opens_today": 0,
+      "opens": 7,
+      "opens_today": 3,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
