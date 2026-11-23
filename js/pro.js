@@ -29,8 +29,8 @@
     } catch (e) { try { alert(msg); } catch (e2) {} }
   }
   try { window.addEventListener('error', function (e) { banner('This page hit an error: ' + ((e && e.message) || 'script error') + '. Tell support.', { error: true }); }); } catch (e) {}
-  // Where did this visitor come from? Links we share carry ?ref=<channel>; it rides along to checkout so
-  // we learn which channels bring buyers. A short label only: no cookies, no tracking across sites.
+  // Keep the first valid ?ref=<channel> for this tab's session so internal links do not overwrite
+  // the acquisition source used at checkout. Per-page analytics still records each page's current ref.
   const REF = 'studio-ref';
   const ref = () => { if (!telemetry) return ''; try { return sessionStorage.getItem(REF) || ''; } catch (e) { return ''; } };
   const set = (s) => { state = s; onChange(state); };
@@ -120,7 +120,7 @@
       if (telemetry) {
         try {
           const r = new URL(location.href).searchParams.get('ref');
-          if (r && /^[a-z0-9_-]{1,40}$/i.test(r)) sessionStorage.setItem(REF, r.toLowerCase());
+          if (r && /^[a-z0-9_-]{1,40}$/i.test(r) && !sessionStorage.getItem(REF)) sessionStorage.setItem(REF, r.toLowerCase());
         } catch (e) { /* storage blocked: no attribution */ }
         // Aggregate tool-open count only; never send page URLs or user content.
         try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: tool, event: 'open' }), keepalive: true }).catch(function () {}); } catch (e) {}
