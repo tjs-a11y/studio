@@ -56,8 +56,6 @@ export async function POST(request) {
   }
 
   const tool = String(body.tool || ''); const event = String(body.event || '');
-  // Ignore legacy check/demo pings for these tools to prevent double counting.
-  if (FREE_COMPLETION_TOOLS.has(tool) && ['check', 'demo'].includes(event)) return json({ ok: true, stored: false, deprecated: true });
  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   const run = override || store();
   if (event === 'visit') {
