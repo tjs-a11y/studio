@@ -1,0 +1,61 @@
+name: Generate Quickwell RSS feed
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quickwell-rss-feed
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate RSS 2.0 feed
+        run: node scripts/generate-feed.js
+
+      - name: Run feed regression tests
+        run: node --test test/feed.test.mjs
+
+      - name: Validate RSS XML
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse("feed.xml").getroot()
+          assert root.tag == "rss" and root.attrib.get("version") == "2.0"
+          channel = root.find("channel")
+          assert channel is not None
+          for item in channel.findall("item"):
+              assert item.findtext("title")
+              assert item.findtext("link")
+              assert item.findtext("guid")
+              assert item.findtext("pubDate")
+              assert item.findtext("description") is not None
+          print(f"Validated RSS 2.0: {len(channel.findall('item'))} items")
+          PY
+
+      - name: Commit regenerated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          if git diff --cached --quiet; then
+            echo "feed.xml is already current."
+            exit 0
+          fi
+          git commit -m "chore: regenerate Quickwell RSS feed"
+          git push origin HEAD:main
