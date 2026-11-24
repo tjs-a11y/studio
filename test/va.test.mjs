@@ -102,6 +102,21 @@ test('first-party open request does not duplicate the page-load open event', asy
   assert.equal(analyticsEvents.filter(([, payload]) => payload.name === 'tool_open').length, 1);
 });
 
+test('tool_completed emits the exact named Vercel conversion event with only tool and source labels', async () => {
+  const { window, analyticsEvents } = harness(async () => ({
+    ok: true, status: 200, clone: () => ({ json: async () => ({ ok: true, stored: true }) })
+  }), '/rate-con-checker/');
+  window.location.search = '?ref=embed-partner';
+  await window.fetch('/api/event', {
+    method: 'POST',
+    body: JSON.stringify({ tool: 'rate-con-checker', event: 'tool_completed', pastedText: 'private broker terms' })
+  });
+  const completion = analyticsEvents.find(([, payload]) => payload.name === 'tool_completed');
+  assert.ok(completion);
+  assert.deepEqual({ ...completion[1].data }, { tool: 'rate-con-checker', source: 'embed-partner' });
+  assert.doesNotMatch(JSON.stringify(completion), /private broker terms/);
+});
+
 test('Shield remains excluded from Vercel Web Analytics events', () => {
   const { analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/shield/');
   assert.equal(analyticsEvents.length, 0);
