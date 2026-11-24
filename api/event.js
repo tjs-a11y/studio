@@ -29,13 +29,36 @@ export const setStoreForTests = (fn) => { override = fn; };
 
 // Free tests aren't billed, so they may not be in the catalog; allow those listed in FREE_TESTS too.
 const FREE_TESTS = new Set(['plot-file-checker']);
-const known = (id) => !!toolById(id) || FREE_TESTS.has(id);
+const known = (id) => !!toolById(id) || FREE_TESTS.has(id);\nconst FREE_COMPLETION_TOOLS = new Set(["bill-radar","fair-price","dinner","rate-con-checker","saver","shield","pilot","kitchen","copycat","fuelgauge","haul-audit","audit-kit","commodities"]);
 
 export async function POST(request) {
   if (Number(request.headers.get('content-length') || 0) > 2048) return fail(413, 'Too large.');
   let body; try { body = await request.json(); } catch { return fail(400, 'Bad request.'); }
+  // Privacy-minimal browser completion event: accept only the three approved fields.
+  if (Object.prototype.hasOwnProperty.call(body, 'tool_slug') || Object.prototype.hasOwnProperty.call(body, 'is_sample')) {
+    const keys = Object.keys(body);
+    if (keys.length !== 3 || !keys.every((key) => ['tool_slug', 'is_sample', 'timestamp'].includes(key))) return fail(400, 'Invalid completion payload.');
+    const slug = String(body.tool_slug || '');
+    if (!FREE_COMPLETION_TOOLS.has(slug) || typeof body.is_sample !== 'boolean' || typeof body.timestamp !== 'string' || !Number.isFinite(Date.parse(body.timestamp))) return fail(400, 'Unknown completion.');
+    const run = override || store();
+    const event = body.is_sample ? 'demo' : 'check';
+    if (!run) {
+      console.log(JSON.stringify({ tag: 'qw_event_not_persisted', tool: slug, event }));
+      return json({ ok: true, stored: false });
+    }
+    try {
+      await run(['INCR', `count:${slug}:${event}`], ['INCR', `count:${slug}:${event}:${day()}`]);
+      return json({ ok: true, stored: true });
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool: slug, event }));
+      return fail(503, 'Event could not be recorded.');
+    }
+  }
+
   const tool = String(body.tool || ''); const event = String(body.event || '');
-  if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
+  // Ignore legacy check/demo pings for these tools to prevent double counting.
+  if (FREE_COMPLETION_TOOLS.has(tool) && ['check', 'demo'].includes(event)) return json({ ok: true, stored: false, deprecated: true });
+ if ((!known(tool) && !SITES.has(tool)) || !EVENTS.has(event)) return fail(400, 'Unknown event.');
   const run = override || store();
   if (event === 'visit') {
     // One aggregate homepage visit counter; no URL, referrer, IP, or visitor identifier is sent.
