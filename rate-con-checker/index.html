@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- seo -->
-<title>Rate Con Checker: spot broker red flags before you sign</title>
+<title>Free Freight Rate Confirmation Checker | Rate Con Checker</title>
 <meta name="description" content="Paste a broker rate confirmation, get a grade and every red flag: missing detention or TONU, fines, setoff, net-45. 3 free checks a day, in your browser.">
 <link rel="canonical" href="https://quickwell.app/rate-con-checker/">
 <meta property="og:type" content="website">
@@ -53,7 +53,7 @@
 </head>
 <body>
 <main>
-  <h1>Rate Con Checker</h1>
+  <h1>Free Freight Rate Confirmation Checker</h1>
   <p class="lede">Paste a broker's rate confirmation before you sign. Get a grade, every costly clause flagged (fines, missing detention or TONU, lumper, setoff, net-45), and a ready-to-send fix request. <b>Runs in your browser: nothing you paste is uploaded.</b></p>
 
   <section class="card noprint">
@@ -97,11 +97,11 @@
     </div>
   </section>
 
-  <section class="card pro noprint" id="upsell">
+  <section class="card pro noprint" id="upsell" hidden>
     <b>Pro: $9/month</b> or $79/year. One avoided $250 fine pays for more than two years.
     <ul class="note" style="margin:8px 0 12px; padding-left:18px">
-      <li>Unlimited checks, and drop the PDF instead of pasting</li><li>Every flag explained, with the exact wording to ask for</li>
-      <li>One-tap fix-request message to send the broker</li><li>Your own minimums: $/mile, detention, free time, pay terms, max fine</li><li>Saved history on this device, CSV export and a printable report</li></ul>
+      <li>PDF import instead of pasting</li><li>Custom minimums for $/mile, detention, free time, pay terms and fines</li><li>Saved history on this device, CSV export and a printable report</li></ul>
+    <p class="note">Your full first result and broker correction text are free. Pro adds optional PDF import, saved history and exports.</p>
     <div class="row"><button id="buyM">Get Pro monthly</button> <button class="ghost" id="buyY">Yearly: $79</button> <span class="note" id="buyNote"></span></div>
   </section>
   <section class="card noprint" id="proOn" hidden>Pro is on. <button class="small ghost" id="manage">Manage subscription</button> <button class="small ghost" id="exportCsv">Export history (CSV)</button>
@@ -252,14 +252,15 @@
     $('broker').innerHTML = r.ctx.mc || r.ctx.dot ? `Check the broker: ${r.ctx.mc ? `<a target="_blank" rel="noopener" href="${safer('MC_MX', r.ctx.mc)}">MC ${esc(r.ctx.mc)} on FMCSA</a>` : ''} ${r.ctx.dot ? `<a target="_blank" rel="noopener" href="${safer('USDOT', r.ctx.dot)}">DOT ${esc(r.ctx.dot)} on FMCSA</a>` : ''}` : '';
     let shownDetail = 0;
     $('items').innerHTML = items.map((i) => {
-      const detailed = PRO || ((i.status === 'red' || i.status === 'flag') && shownDetail++ < 3) || i.status === 'pass' || i.status === 'info';
+      const detailed = true;
       return `<li><span class="tag t-${i.status}">${LABEL[i.status]}</span><b>${esc(i.title)}</b>
         <div class="${detailed ? '' : 'locked'}"><div>${esc(i.detail)}</div>${(i.status !== 'pass' && i.status !== 'info') ? `<p class="why">${esc(i.why)}</p>` : ''}${i.snip ? `<span class="snip">${esc(i.snip)}</span>` : ''}</div></li>`;
     }).join('');
-    $('moreLocked').hidden = PRO || bad.length <= 3;
+    $('moreLocked').hidden = true;
     const L = r.L, asks = bad.filter((i) => i.ask).map((i) => '• ' + i.ask.replace('LIMIT_DET', L.minDet).replace('LIMIT_FREE', L.maxFree).replace('LIMIT_DAYS', L.maxDays).replace('AGREED', money(r.ctx.agreed || 0)));
     $('msg').textContent = asks.length ? `Hi, thanks for the load. Before I sign, can you update the rate con:\n\n${asks.join('\n')}\n\nSend the revised copy and I'll sign right away. Thank you!` : 'Nothing to fix: this rate con looks clean.';
-    $('msgWrap').className = PRO ? '' : 'locked'; $('copy').disabled = !PRO; $('print').disabled = !PRO;
+    $('msgWrap').className = ''; $('copy').disabled = false; $('print').disabled = !PRO;
+    $('upsell').hidden = false;
     $('result').hidden = false;
     if (PRO) { const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), grade: r.grade, total: total || '', reds: c('red'), flags: c('flag') + c('missing'), mc: r.ctx.mc || '' }); ls.set('history', h.slice(0, 100)); showHistory(); }
   }
@@ -272,17 +273,18 @@
   function run(isSample = false) {
     const text = $('text').value.trim();
     if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
-    if (!PRO) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Get Pro for unlimited.'; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
+    if (!PRO && !isSample) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Your earlier full results remain available; Pro adds saved history and exports.'; $('upsell').hidden = false; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
     const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
     render(analyze(text, extra)); showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
     // Count a completed, user-submitted check only. Never send rate-con text, broker details, or results.
     // Analytics is best-effort and must not block the checker if the endpoint is unavailable.
     if (!isSample) {
       try {
+        if (window.qwTrack) window.qwTrack(TOOL, 'tool_completed');
         fetch('/api/event', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ tool: TOOL, event: 'check' }),
+          body: JSON.stringify({ tool: TOOL, event: 'tool_completed' }),
           keepalive: true
         }).catch(() => {});
       } catch (e) { /* usage analytics must never break a completed check */ }
