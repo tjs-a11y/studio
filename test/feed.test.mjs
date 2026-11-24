@@ -15,7 +15,7 @@ function itemsFromFeed() {
   return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((match) => match[1]);
 }
 function tag(item, name) {
-  return (new RegExp('<' + name + '>([\\s\\S]*?)<\\/' + name + '>').exec(item)?.[1] ?? '')
+  return (new RegExp('<' + name + '(?:\\s+[^>]*)?>([\\s\\S]*?)<\\/' + name + '>').exec(item)?.[1] ?? '')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&apos;/g, "'");
 }
