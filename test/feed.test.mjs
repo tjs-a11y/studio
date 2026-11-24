@@ -36,7 +36,7 @@ test('feed items are valid, categorized, escaped and have unique GUIDs', () => {
   for (const item of items) {
     const link = tag(item, 'link');
     const category = tag(item, 'category');
-    const guid = item.match(/<guid isPermaLink="true">([\s\S]*?)<\/guid>/)?.[1] || '';
+    const guid = tag(item, 'guid');
     assert.ok(['Tool', 'Guide', 'Book'].includes(category), 'invalid category: ' + category);
     assert.ok(tag(item, 'title'));
     assert.ok(tag(item, 'description'));
