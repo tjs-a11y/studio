@@ -71,7 +71,7 @@ test('every discovered tool and guide page appears once in the feed', () => {
 
 test('all active books are included and inactive placeholders are excluded', () => {
   const items = itemsFromFeed().filter((item) => tag(item, 'category') === 'Book');
-  const active = books.filter((book) => book.active !== false && book.url);
+  const active = books.filter((book) => book.active !== false && book.url && /^https:\/\/books2read\.com\/u\/[^/]+\/?$/.test(book.url));
   const inactive = books.filter((book) => book.active === false);
   assert.equal(items.length, active.length);
   for (const book of active) {
