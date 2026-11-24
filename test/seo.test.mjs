@@ -150,21 +150,21 @@ test('priority consumer tools count page opens and completed checks anonymously'
 
   assert.match(billRadar, /function countEvent\(event\)[\s\S]*?JSON\.stringify\(\{tool:'bill-radar',event\}\)/);
   assert.match(billRadar, /countEvent\('open'\)/);
-  assert.match(billRadar, /countEvent\(isDemo\?'demo':'check'\)/);
+  assert.match(billRadar, /countEvent\(isDemo\?'demo':'tool_completed'\)/);
 
   assert.match(fairPrice, /JSON\.stringify\(\{\s*tool:\s*'fair-price',\s*event\s*\}\)/);
   assert.match(fairPrice, /Studio\.init\(/);
   assert.doesNotMatch(fairPrice, /countEvent\('open'\)/);
-  assert.match(fairPrice, /countEvent\(demo \? 'demo' : 'check'\)/);
-  assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent(demo ? 'demo' : 'check')"), 'Fair Price counts demos separately and real checks only after its minimum-input check');
+  assert.match(fairPrice, /countEvent\(demo \? 'demo' : 'tool_completed'\)/);
+  assert.ok(fairPrice.indexOf('if (text.trim().length < 3)') < fairPrice.indexOf("countEvent(demo ? 'demo' : 'tool_completed')"), 'Fair Price counts demos separately and real checks only after its minimum-input check');
   assert.match(eventApi, /if \(event === 'demo'\)/);
   assert.match(statsApi, /demos:/);
 
   assert.match(dinner, /JSON\.stringify\(\{\s*tool:\s*'dinner',\s*event\s*\}\)/);
   assert.match(dinner, /Studio\.init\(/);
   assert.doesNotMatch(dinner, /countEvent\('open'\)/);
-  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'check'\)/);
-  assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent(isDemo ? 'demo' : 'check')"), 'Dinner counts only after its minimum-ingredient check');
+  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'tool_completed'\)/);
+  assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent(isDemo ? 'demo' : 'tool_completed')"), 'Dinner counts only after its minimum-ingredient check');
 
   assert.match(eventApi, /if \(event === 'open'\)/);
   assert.match(eventApi, /if \(event === 'check'\)/);
