@@ -29,7 +29,8 @@ export const setStoreForTests = (fn) => { override = fn; };
 
 // Free tests aren't billed, so they may not be in the catalog; allow those listed in FREE_TESTS too.
 const FREE_TESTS = new Set(['plot-file-checker']);
-const known = (id) => !!toolById(id) || FREE_TESTS.has(id);\nconst FREE_COMPLETION_TOOLS = new Set(["bill-radar","fair-price","dinner","rate-con-checker","saver","shield","pilot","kitchen","copycat","fuelgauge","haul-audit","audit-kit","commodities"]);
+const known = (id) => !!toolById(id) || FREE_TESTS.has(id);
+const FREE_COMPLETION_TOOLS = new Set(["bill-radar","fair-price","dinner","rate-con-checker","saver","shield","pilot","kitchen","copycat","fuelgauge","haul-audit","audit-kit","commodities"]);
 
 export async function POST(request) {
   if (Number(request.headers.get('content-length') || 0) > 2048) return fail(413, 'Too large.');
