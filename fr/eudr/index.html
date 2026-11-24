@@ -834,7 +834,9 @@
   var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var store = { get: function (k) { try { return localStorage.getItem('pfc.' + k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem('pfc.' + k, v); } catch (e) { /* private mode */ } } };
   var LANGS = ['en', 'fr', 'es'];
-  var qLang = (/[?&]lang=([a-z]{2})\b/.exec(location.search) || [])[1], navLang = (navigator.language || 'en').toLowerCase().slice(0, 2);
+  var routeLang = location.pathname.split('/')[1];
+  var qLang = (routeLang === 'es' || routeLang === 'fr') ? routeLang : ((/[?&]lang=([a-z]{2})\b/.exec(location.search) || [])[1]);
+  var navLang = (navigator.language || 'en').toLowerCase().slice(0, 2);
   var LANG = (LANGS.indexOf(qLang) >= 0 && qLang) || store.get('lang') || (LANGS.indexOf(navLang) >= 0 ? navLang : 'en');
   if (LANGS.indexOf(LANG) < 0) LANG = 'en';
   var LOCALE = { en: 'en-US', fr: 'fr-FR', es: 'es-ES' };
