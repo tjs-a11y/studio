@@ -132,7 +132,9 @@ fr:{
 };
 function localDescription(value){return descriptions[lang]&&descriptions[lang][value]||value;}
 function href(path){
- var targetPath=path;\n if(lang!=='en'){if(path==='/haul-audit/')targetPath='/'+lang+'/haul-audit/';else if(path==='/commodities/')targetPath='/'+lang+'/commodities/';else if(path==='/plot-file-checker/'||path==='/eudr/')targetPath='/'+lang+'/eudr/';}\n var u=new URL(targetPath,'https://quickwell.app');
+ var targetPath=path;
+ if(lang!=='en'){if(path==='/haul-audit/')targetPath='/'+lang+'/haul-audit/';else if(path==='/commodities/')targetPath='/'+lang+'/commodities/';else if(path==='/plot-file-checker/'||path==='/eudr/')targetPath='/'+lang+'/eudr/';}
+ var u=new URL(targetPath,'https://quickwell.app');
  u.searchParams.set('utm_source','quickwell');
  u.searchParams.set('utm_medium','tool_result');
  u.searchParams.set('utm_campaign',slug);
