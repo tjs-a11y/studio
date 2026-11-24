@@ -45,61 +45,61 @@
 <body>
 <nav class="qw-language-switch" aria-label="Language" style="max-width:1100px;margin:12px auto;padding:10px 16px;border:1px solid #d8e2df;border-radius:10px;display:flex;gap:14px;justify-content:flex-end;font:600 14px system-ui"><a href="/haul-audit/">English</a><a href="/es/haul-audit/">Español</a><a href="/fr/haul-audit/">Français</a></nav>
 <main>
-  <h1>Audit de Règlement de Transport : Comparez le paiement final au tarif convenu</h1>
-  <p class="lede">Enter what you agreed and what you were paid, and see any gap — on the broker settlement <b>and</b> the factoring deposit. <b>Runs in your browser: nothing you enter is uploaded.</b></p>
+  <h1>Vérifier de Règlement de Transport : Comparez le paiement final au tarif convenu</h1>
+  <p class="lede">Saisissez les montants convenus et reçus pour repérer tout écart sur le décompte du courtier et le versement d’affacturage. <b>Exécuté dans votre navigateur : aucune donnée saisie n’est envoyée.</b></p>
 
   <section class="card">
-    <h2>Broker settlement</h2>
+    <h2>Décompte du courtier</h2>
     <div class="row">
-      <div><label>Linehaul ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
-      <div><label>Fuel surcharge ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
+      <div><label>Transport principal ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
+      <div><label>Supplément carburant ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
     </div>
     <div class="row">
-      <div><label>Approved accessorials ($, comma-separated)</label><input type="text" id="acc" placeholder="100, 50"></div>
-      <div><label>Reported settlement gross ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
+      <div><label>Frais accessoires approuvés ($, séparés par des virgules)</label><input type="text" id="acc" placeholder="100, 50"></div>
+      <div><label>Montant brut indiqué sur le décompte ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
     </div>
   </section>
 
   <section class="card">
-    <h2>Factoring deposit <span style="font-weight:400;color:var(--dim);font-size:.85rem">(optional)</span></h2>
+    <h2>Versement d’affacturage <span style="font-weight:400;color:var(--dim);font-size:.85rem">(facultatif)</span></h2>
     <div class="row">
-      <div><label>Funded invoice amount ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
-      <div><label>Factor fees ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
+      <div><label>Montant de la facture financé ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
+      <div><label>Frais d’affacturage ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
     </div>
     <div class="row">
-      <div><label>Factor adjustments ($, comma-separated)</label><input type="text" id="adj" placeholder="25"></div>
-      <div><label>Reported deposit ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
+      <div><label>Ajustements du factor ($, séparés par des virgules)</label><input type="text" id="adj" placeholder="25"></div>
+      <div><label>Versement indiqué ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
     </div>
-    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">A factoring fee is a factor's charge, not a broker shortfall — it's kept out of the broker variance below.</p>
+    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">Les frais d’affacturage sont facturés par le factor et ne constituent pas un manque à payer du courtier ; ils sont donc exclus de l’écart du décompte ci-dessous.</p>
   </section>
 
-  <div><button id="run">Audit</button> <button class="ghost" id="sample">Try a sample</button></div>
+  <div><button id="run">Audit</button> <button class="ghost" id="sample">Essayer un exemple</button></div>
   <p class="num" id="quota" style="color:var(--dim);font-size:.85rem;margin-top:10px"></p>
 
   <section id="out" class="card" hidden aria-live="polite">
-    <h2>Result</h2>
+    <h2>Résultat</h2>
     <div id="settle"></div>
     <div id="factor" style="margin-top:14px"></div>
-    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Your result is always free and always visible — it's computed on your device.</p>
+    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Votre résultat est toujours gratuit et visible ; le calcul est effectué sur votre appareil.</p>
   </section>
 
   <section class="card" aria-labelledby="how-title">
-    <h2 id="how-title">How to audit a trucking settlement</h2>
-    <p>Start with the signed rate confirmation and written amendments. Add linehaul, fuel surcharge and approved accessorials to calculate the expected broker gross. Compare that total with the settlement statement before reviewing the factoring statement.</p>
-    <p>Keep broker deductions separate from factoring fees, reserves, advances and other factor adjustments. A difference is a reason to inspect the source documents; it is not, by itself, proof of a short-pay.</p>
-    <h2>What Haul Audit checks</h2>
-    <ul><li>Rate confirmation amounts against broker settlement gross</li><li>Linehaul, fuel surcharge and approved accessorials</li><li>Factoring fees and adjustments against the expected deposit</li><li>Settlement and deposit variances, shown immediately and privately</li></ul>
-    <p><a href="/guides/carrier-settlement-audit-checklist/">Read the freight settlement audit checklist</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Understand factoring fees vs. broker short-pays</a></p>
-    <h2>Frequently asked questions</h2>
-    <h3>How do I check if a freight broker short-paid a load?</h3><p>Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance.</p>
-    <h3>Are factoring fees the same as broker deductions?</h3><p>No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance.</p>
-    <h3>Does Haul Audit upload my rate confirmation or settlement?</h3><p>No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator.</p>
+    <h2 id="how-title">Comment vérifier un décompte de transport</h2>
+    <p>Commencez par la confirmation de tarif signée et ses avenants écrits. Additionnez le transport principal, le supplément carburant et les frais accessoires approuvés pour calculer le montant brut attendu. Comparez ce total au décompte du courtier avant d’examiner le relevé d’affacturage.</p>
+    <p>Distinguez les retenues du courtier des frais d’affacturage, réserves, avances et autres ajustements du factor. Un écart justifie de vérifier les documents sources, mais ne prouve pas à lui seul un paiement insuffisant.</p>
+    <h2>Ce que vérifie Haul Audit</h2>
+    <ul><li>Montants de la confirmation de tarif comparés au brut du décompte du courtier</li><li>Transport principal, supplément carburant et frais accessoires approuvés</li><li>Frais et ajustements d’affacturage comparés au versement attendu</li><li>Écarts du décompte et du versement, calculés immédiatement et en privé</li></ul>
+    <p><a href="/guides/carrier-settlement-audit-checklist/">Lire la liste de contrôle pour vérifier un décompte de transport</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Comprendre les frais d’affacturage et les paiements insuffisants du courtier</a></p>
+    <h2>Questions fréquentes</h2>
+    <h3>Comment vérifier si un courtier a sous-payé un transport ?</h3><p>Reconstituez le montant brut convenu à partir de la confirmation de tarif signée et des frais accessoires approuvés, puis comparez-le au montant brut du décompte du courtier. Haul Audit calcule cet écart.</p>
+    <h3>Les frais d’affacturage sont-ils identiques aux retenues du courtier ?</h3><p>Non. Les frais d’affacturage, réserves et avances relèvent du rapprochement avec le factor. Ils ne doivent pas être mélangés à l’écart du décompte du courtier.</p>
+    <h3>Haul Audit envoie-t-il ma confirmation de tarif ou mon décompte ?</h3><p>Non. Les calculs sont effectués dans votre navigateur. Ne saisissez pas d’informations personnelles ou bancaires sensibles dans l’outil.</p>
   </section>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check if a freight broker short-paid a load?","acceptedAnswer":{"@type":"Answer","text":"Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance."}},{"@type":"Question","name":"Are factoring fees the same as broker deductions?","acceptedAnswer":{"@type":"Answer","text":"No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance."}},{"@type":"Question","name":"Does Haul Audit upload my rate confirmation or settlement?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator."}}]}</script>
   <section class="card" id="pro"></section>
 
   <footer>
-    A checklist, not legal, financial or accounting advice: check the full settlement and your factoring agreement, and raise any gap with the broker or factor. Nothing you enter leaves your browser. · <a href="/rate-con-checker/">Rate Con Checker</a> · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+    Cette liste de contrôle ne constitue pas un conseil juridique, financier ou comptable. Vérifiez le décompte complet et votre contrat d’affacturage, puis signalez tout écart au courtier ou au factor. Aucune donnée saisie ne quitte votre navigateur. · <a href="/rate-con-checker/">Rate Con Checker</a> · <a href="/">Plus d’outils Quickwell</a> · <a href="/privacy.html">Confidentialité</a> · <a href="/terms.html">Conditions</a>
   </footer>
 </main>
 <script src="/js/pro.js"></script>
