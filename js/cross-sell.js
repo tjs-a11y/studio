@@ -64,8 +64,12 @@ if(freight.indexOf(slug)>=0){
  L('Quickwell Plus','/plus/','Unlock eligible everyday tools.'),
  L('Gatherloom','https://gatherloom.app/','Coordinate group gifts, events and shared budgets.')
  ]);
- card('More to explore',crypto.concat([
- L('Quickwell partner offers','/offers/','Energy, home, DIY and curated buyer guides.')
+ card('Books and curated offers',crypto.concat([
+ L('Energy Revolution System','/offers/','Read the buyer guide and review seller terms.'),
+ L('Water Freedom System','/offers/','Read the buyer guide and review seller terms.'),
+ L('Ted Plans DIY','/offers/','Review the DIY buyer guide and project considerations.'),
+ L('Shifting Vibrations Manifest','/offers/','Read the buyer guide before visiting the seller.'),
+ L('Genius Switch Original','/offers/','Review the focus and planning buyer guide.')
  ]));
 }else if(kitchen.indexOf(slug)>=0){
  card(ui.books,[
@@ -76,7 +80,12 @@ if(freight.indexOf(slug)>=0){
 }else if(everyday.indexOf(slug)>=0){
  card(ui.tools,rotate(dailyTools,everyday.indexOf(slug),4),'Helpful tools for everyday routines and planning.');
  card(ui.books,[L('Mindset Mastery','https://books2read.com/u/mY9QMW','Practical frameworks for focus and decision-making.')]);
- card('Health and focus buyer guides',[L('Quickwell offers: ProDentim, AudiSoothe, PhytoMem One and Genius Switch','/offers/','Review current details, seller terms and buyer guides.')]);
+ card('Health and focus buyer guides',[
+ L('ProDentim','/offers/','Read the buyer guide and check current seller details.'),
+ L('AudiSoothe','/offers/','Read the buyer guide and check current seller details.'),
+ L('PhytoMem One','/offers/','Read the buyer guide and check current seller details.'),
+ L('Genius Switch Original','/offers/','Review the focus buyer guide and seller terms.')
+ ]);
 }else{return;}
 function href(path){
  var u=new URL(path,'https://quickwell.app');
