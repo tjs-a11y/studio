@@ -5,7 +5,7 @@
 // Without it, counts go to the server log and the waitlist says it's not open, so no email is ever silently dropped.
 import { json, fail, toolById } from './_lib/core.js';
 
-const EVENTS = new Set(['check', 'waitlist', 'outbound', 'upgrade', 'open', 'visit', 'demo']);
+const EVENTS = new Set(['check', 'tool_completed', 'waitlist', 'outbound', 'upgrade', 'open', 'visit', 'demo']);
 // Sites (not billable tools) that may record anonymous outbound-link clicks or homepage visits.
 const SITES = new Set(['northstar', 'quickwell']);
 const OUT_TARGETS = new Set(['freightsidekick']);
@@ -82,6 +82,26 @@ export async function POST(request) {
     }
     try {
       await run(['INCR', `count:${tool}:demos`], ['INCR', `count:${tool}:demos:${day()}`]);
+      return json({ ok: true, stored: true });
+    } catch {
+      console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool, event }));
+      return fail(503, 'Event could not be recorded.');
+    }
+  }
+  if (event === 'tool_completed') {
+    // A successful, user-submitted result. Only fixed tool labels and aggregate counters are stored.
+    // Preserve the legacy checks counters while exposing a distinct completion metric.
+    if (!run) {
+      console.log(JSON.stringify({ tag: 'qw_event_not_persisted', tool, event }));
+      return json({ ok: true, stored: false });
+    }
+    try {
+      await run(
+        ['INCR', `count:${tool}:completed`],
+        ['INCR', `count:${tool}:completed:${day()}`],
+        ['INCR', `count:${tool}:checks`],
+        ['INCR', `count:${tool}:checks:${day()}`]
+      );
       return json({ ok: true, stored: true });
     } catch {
       console.error(JSON.stringify({ tag: 'qw_event_write_failed', tool, event }));
