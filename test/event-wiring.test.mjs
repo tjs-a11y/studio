@@ -38,11 +38,25 @@ test('Bill Radar and Dinner sample runs are demos, separate from completed check
   const fair = page('fair-price/index.html');
   assert.match(bill, /id="sampleBtn"/);
   assert.match(bill, /function run\(isDemo\)/);
-  assert.match(bill, /countEvent\(isDemo\?'demo':'check'\)/);
+  assert.match(bill, /countEvent\(isDemo\?'demo':'tool_completed'\)/);
   assert.match(dinner, /id="sampleBtn"/);
   assert.match(dinner, /function run\(isDemo\)/);
-  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'check'\)/);
-  assert.match(fair, /countEvent\(demo \? 'demo' : 'check'\)/);
+  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'tool_completed'\)/);
+  assert.match(fair, /countEvent\(demo \? 'demo' : 'tool_completed'\)/);
+});
+
+test('the four acquisition entry points emit tool_completed after successful result rendering', () => {
+  const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
+  for (const [path, marker] of [
+    ['bill-radar/index.html', "countEvent(isDemo?'demo':'tool_completed')"],
+    ['fair-price/index.html', "countEvent(demo ? 'demo' : 'tool_completed')"],
+    ['dinner/index.html', "countEvent(isDemo ? 'demo' : 'tool_completed')"],
+    ['rate-con-checker/index.html', "event: 'tool_completed'"],
+  ]) assert.ok(page(path).includes(marker), path + ' completion event');
+  const rate = page('rate-con-checker/index.html');
+  assert.match(rate, /const detailed = true;/, 'all initial explanations are visible');
+  assert.match(rate, /\$\('copy'\)\.disabled = false/, 'broker correction text is copyable free');
+  assert.match(rate, /if \(!PRO && !isSample\)/, 'sample does not consume daily free quota');
 });
 
 test('homepage See it in action links launch one-click local samples for all five priority tools', () => {
