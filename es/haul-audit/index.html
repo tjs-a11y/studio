@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de Liquidaciones de Transporte | Quickwell</title>
+<meta name="description" content="Compara confirmaciones de tarifa, liquidaciones y depósitos de factoring para detectar diferencias y deducciones.">
+<link rel="canonical" href="https://quickwell.app/es/haul-audit/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quickwell.app/es/haul-audit/">
+<meta property="og:title" content="Auditoría de Liquidaciones de Transporte | Quickwell">
+<meta property="og:description" content="Compara confirmaciones de tarifa, liquidaciones y depósitos de factoring para detectar diferencias y deducciones.">
+<meta property="og:image" content="https://quickwell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Auditoría de Liquidaciones de Transporte | Quickwell">
+<meta name="twitter:image" content="https://quickwell.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Haul Audit","url":"https://quickwell.app/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Check a trucking broker settlement and factoring deposit against agreed amounts. Calculations run on your device; values you enter are not uploaded. A review checklist, not legal, financial or accounting advice.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"},"inLanguage":"es"},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--chip:#f0f2f6;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d;--chip:#20242c}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0}
+  h2{font-size:1.1rem;margin:0 0 10px}
+  label{display:block;font-size:.85rem;color:var(--dim);margin:10px 0 4px}
+  input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+  button.ghost{background:transparent;color:var(--accent)}button.small{padding:6px 10px;font-size:.9rem;margin-top:0}
+  .big{font-size:2rem;font-weight:800}.ok{color:var(--green)}.bad{color:var(--red)}
+  .num{font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}td,th{text-align:left;padding:6px;border-top:1px solid var(--line)}
+  .pro-lock{border:1px dashed var(--accent)}
+  footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+
+<script defer src="/js/telemetry.js"></script>
+<script defer src="/js/cross-sell.js"></script>
+<script defer src="/js/embed.js"></script>
+<link rel="alternate" hreflang="en" href="https://quickwell.app/haul-audit/"><link rel="alternate" hreflang="es" href="https://quickwell.app/es/haul-audit/"><link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/haul-audit/"><link rel="alternate" hreflang="x-default" href="https://quickwell.app/haul-audit/">
+</head>
+<body>
+<nav class="qw-language-switch" aria-label="Language" style="max-width:1100px;margin:12px auto;padding:10px 16px;border:1px solid #d8e2df;border-radius:10px;display:flex;gap:14px;justify-content:flex-end;font:600 14px system-ui"><a href="/haul-audit/">English</a><a href="/es/haul-audit/">Español</a><a href="/fr/haul-audit/">Français</a></nav>
+<main>
+  <h1>Auditoría de Liquidaciones de Transporte</h1>
+  <p class="lede">Enter what you agreed and what you were paid, and see any gap — on the broker settlement <b>and</b> the factoring deposit. <b>Runs in your browser: nothing you enter is uploaded.</b></p>
+
+  <section class="card">
+    <h2>Broker settlement</h2>
+    <div class="row">
+      <div><label>Linehaul ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
+      <div><label>Fuel surcharge ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
+    </div>
+    <div class="row">
+      <div><label>Approved accessorials ($, comma-separated)</label><input type="text" id="acc" placeholder="100, 50"></div>
+      <div><label>Reported settlement gross ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Factoring deposit <span style="font-weight:400;color:var(--dim);font-size:.85rem">(optional)</span></h2>
+    <div class="row">
+      <div><label>Funded invoice amount ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
+      <div><label>Factor fees ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
+    </div>
+    <div class="row">
+      <div><label>Factor adjustments ($, comma-separated)</label><input type="text" id="adj" placeholder="25"></div>
+      <div><label>Reported deposit ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">A factoring fee is a factor's charge, not a broker shortfall — it's kept out of the broker variance below.</p>
+  </section>
+
+  <div><button id="run">Audit</button> <button class="ghost" id="sample">Try a sample</button></div>
+  <p class="num" id="quota" style="color:var(--dim);font-size:.85rem;margin-top:10px"></p>
+
+  <section id="out" class="card" hidden aria-live="polite">
+    <h2>Result</h2>
+    <div id="settle"></div>
+    <div id="factor" style="margin-top:14px"></div>
+    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Your result is always free and always visible — it's computed on your device.</p>
+  </section>
+
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">How to audit a trucking settlement</h2>
+    <p>Start with the signed rate confirmation and written amendments. Add linehaul, fuel surcharge and approved accessorials to calculate the expected broker gross. Compare that total with the settlement statement before reviewing the factoring statement.</p>
+    <p>Keep broker deductions separate from factoring fees, reserves, advances and other factor adjustments. A difference is a reason to inspect the source documents; it is not, by itself, proof of a short-pay.</p>
+    <h2>What Haul Audit checks</h2>
+    <ul><li>Rate confirmation amounts against broker settlement gross</li><li>Linehaul, fuel surcharge and approved accessorials</li><li>Factoring fees and adjustments against the expected deposit</li><li>Settlement and deposit variances, shown immediately and privately</li></ul>
+    <p><a href="/guides/carrier-settlement-audit-checklist/">Read the freight settlement audit checklist</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Understand factoring fees vs. broker short-pays</a></p>
+    <h2>Frequently asked questions</h2>
+    <h3>How do I check if a freight broker short-paid a load?</h3><p>Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance.</p>
+    <h3>Are factoring fees the same as broker deductions?</h3><p>No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance.</p>
+    <h3>Does Haul Audit upload my rate confirmation or settlement?</h3><p>No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator.</p>
+  </section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check if a freight broker short-paid a load?","acceptedAnswer":{"@type":"Answer","text":"Rebuild the agreed gross from the signed rate confirmation and approved accessorials, then compare it with the broker's settlement gross. Haul Audit calculates that variance."}},{"@type":"Question","name":"Are factoring fees the same as broker deductions?","acceptedAnswer":{"@type":"Answer","text":"No. Factoring fees, reserves and advances belong to the factoring reconciliation. They should not be mixed into the broker settlement variance."}},{"@type":"Question","name":"Does Haul Audit upload my rate confirmation or settlement?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations run in your browser. Do not enter sensitive personal or account information into the calculator."}}]}</script>
+  <section class="card" id="pro"></section>
+
+  <footer>
+    A checklist, not legal, financial or accounting advice: check the full settlement and your factoring agreement, and raise any gap with the broker or factor. Nothing you enter leaves your browser. · <a href="/rate-con-checker/">Rate Con Checker</a> · <a href="/">More Quickwell tools</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </footer>
+</main>
+<script src="/js/pro.js"></script>
+<script type="module">
+import { audit } from './js/engine.mjs';
+const $ = (id) => document.getElementById(id);
+const TOOL = 'haul-audit';
+const FREE_PER_DAY = 3;
+let PRO = false;
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(TOOL + ':' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(TOOL + ':' + k, JSON.stringify(v)); } catch (e) {} },
+};
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const list = (s) => String(s || '').split(',').map((x) => parseFloat(x.trim())).filter((n) => !Number.isNaN(n));
+const money = (n) => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+function quotaState() { const q = ls.get('quota', { d: today(), n: 0 }); return q.d === today() ? q : { d: today(), n: 0 }; }
+function showQuota() {
+  if (PRO) { $('quota').textContent = 'Pro: saved on-device history and CSV export. Calculations remain free.'; return; }
+  const left = Math.max(0, FREE_PER_DAY - quotaState().n);
+  $('quota').textContent = left > 0
+    ? `${left} of ${FREE_PER_DAY} free private checks remaining today.`
+    : `You've reached the ${FREE_PER_DAY}-check daily counter on this device. Your results stay free and visible; Pro adds saved history and CSV export.`;
+}
+function vline(label, v) {
+  const cls = v < 0 ? 'bad' : (v > 0 ? 'ok' : '');
+  const word = v < 0 ? 'short' : (v > 0 ? 'over' : 'exact');
+  return `<p>${label}: <span class="big num ${cls}">${money(v)}</span> <span style="color:var(--dim)">(${word})</span></p>`;
+}
+function run(isSample) {
+  const input = {
+    linehaul: parseFloat($('linehaul').value) || 0, fuelSurcharge: parseFloat($('fuel').value) || 0,
+    approvedAccessorials: list($('acc').value), reportedSettlementGross: parseFloat($('reported').value) || 0,
+    fundedInvoiceAmount: parseFloat($('funded').value) || 0, factorFees: parseFloat($('fees').value) || 0,
+    factorAdjustments: list($('adj').value), reportedFactorDeposit: parseFloat($('deposit').value) || 0,
+  };
+  const r = audit(input);
+  // Core result: always computed, always shown — free, on-device. Never veiled.
+  $('settle').innerHTML = `<b>Broker settlement</b><p class="num">Expected gross: ${money(r.settlement.expectedGross)} · Reported: ${money(r.settlement.reportedSettlementGross)}</p>${vline('Gross variance', r.settlement.grossVariance)}`;
+  $('factor').innerHTML = (input.fundedInvoiceAmount || input.reportedFactorDeposit)
+    ? `<b>Factoring deposit</b><p class="num">Expected deposit: ${money(f0(r))} · Reported: ${money(r.factoring.reportedFactorDeposit)}</p>${vline('Deposit variance', r.factoring.depositVariance)}` : '';
+  $('out').hidden = false;
+  $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!isSample) {
+    const q = quotaState(); const priorCount = q.n; q.n++; ls.set('quota', q); showQuota();
+    if (PRO) { const h = ls.get('history', []); h.unshift({ at: new Date().toISOString(), gross: r.settlement.grossVariance, deposit: r.factoring.depositVariance }); ls.set('history', h.slice(0, 200)); }
+    renderPro();
+    if (!PRO && priorCount < FREE_PER_DAY && q.n >= FREE_PER_DAY && window.Studio && window.Studio.showUpgradeModal) {
+      window.Studio.showUpgradeModal({
+        header: 'Upgrade to Haul Audit Pro',
+        body: 'You have reached the 3-check daily prompt on this device. Pro is $15/month and adds saved on-device audit history and CSV export. Your current result remains visible; calculations stay on your device.'
+      });
+    }
+    try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {}
+  }
+}
+function f0(r) { return r.factoring.expectedFactorDeposit; }
+$('run').addEventListener('click', () => run(false));
+$('sample').addEventListener('click', () => {
+  $('linehaul').value = 2000; $('fuel').value = 300; $('acc').value = '100, 50'; $('reported').value = 2300;
+  $('funded').value = 2450; $('fees').value = 73.50; $('adj').value = '25'; $('deposit').value = 2300; run(true);
+});
+
+// ---- Pro: saved history + CSV export (the upgrade value). Core audit stays free. ----
+function renderPro() {
+  const h = ls.get('history', []);
+  if (PRO) {
+    const rows = h.slice(0, 20).map((x) => `<tr><td>${x.at.slice(0, 16).replace('T', ' ')}</td><td class="num">${money(x.gross)}</td><td class="num">${money(x.deposit)}</td></tr>`).join('');
+    $('pro').className = 'card'; $('pro').innerHTML = `<h2>Saved history (Pro)</h2>
+      ${h.length ? `<table><tr><th>When</th><th>Gross variance</th><th>Deposit variance</th></tr>${rows}</table>
+      <button class="small" id="csv">Download CSV</button>` : '<p class="num" style="color:var(--dim)">Your audits will be saved here, on this device.</p>'}
+      <button class="small ghost" id="manage">Manage subscription</button>`;
+    const csv = $('csv'); if (csv) csv.onclick = () => {
+      const body = 'when,gross_variance,deposit_variance\n' + h.map((x) => [x.at, x.gross, x.deposit].join(',')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([body], { type: 'text/csv' })); a.download = 'haul-audit-history.csv'; a.click();
+    };
+    $('manage').onclick = () => window.Studio && window.Studio.manage().catch((e) => alert(e.message));
+  } else {
+    $('pro').className = 'card pro-lock'; $('pro').innerHTML = `<h2>Pro — saved history &amp; CSV export</h2>
+      <p style="color:var(--dim);margin:.2em 0 0">Every audit stays free and fully visible. Pro adds a saved on-device history of your audits and a one-click CSV export — handy for a dispute file or your bookkeeper.</p>
+      <div><button class="small" id="buyM">Get Pro monthly</button> <span class="num" id="buyNote" style="color:var(--dim);font-size:.85rem"></span></div>`;
+    const buy = (interval) => { $('buyNote').textContent = 'Opening secure checkout…'; (window.Studio ? window.Studio.upgrade('pro', interval) : Promise.reject(new Error('not on sale'))).catch((e) => { $('buyNote').textContent = /not switched on|not on sale|404|409/i.test(e.message) ? 'Pro opens soon — check back shortly.' : e.message; }); };
+    $('buyM').onclick = () => buy('month');
+  }
+}
+if (window.Studio) window.Studio.init({ tool: TOOL, onChange: (s) => { PRO = !!s.pro; showQuota(); renderPro(); } });
+showQuota(); renderPro();
+</script>
+<script>(function(){var dict={"Rate Con Checker":"Revisor de confirmación de tarifa","Paste a broker's rate confirmation before you sign. Get a grade, every costly clause flagged (fines, missing detention or TONU, lumper, setoff, net-45), and a ready-to-send fix request.":"Pega la confirmación de tarifa del corredor antes de firmar. Obtén una evaluación, alertas de cláusulas costosas y una solicitud de cambios lista para enviar.","Runs in your browser: nothing you paste is uploaded.":"Se ejecuta en tu navegador: nada se sube.","Paste the rate confirmation text here (open the PDF, select all, copy, paste)…":"Pega aquí el texto de la confirmación de tarifa (abre el PDF, selecciona todo, copia y pega)…","Loaded miles":"Millas cargadas","Deadhead miles":"Millas en vacío","Rate agreed on the phone ($)":"Tarifa acordada por teléfono ($)","Check this rate con":"Revisar esta confirmación","Try a sample":"Probar un ejemplo","Your minimums (Pro)":"Tus mínimos (Pro)","Saved on this device only.":"Guardados solo en este dispositivo.","Min $/mile":"Mínimo $/milla","Min detention $/hr":"Mínimo por demora $/h","Max free hours":"Máximo de horas libres","Max pay terms (days)":"Plazo máximo de pago (días)","Max fine you accept ($)":"Penalización máxima aceptada ($)","What we found":"Lo que encontramos","Fix request for the broker":"Solicitud de corrección para el corredor","Copy":"Copiar","Print report":"Imprimir informe","Pro: $9/month":"Pro: 9 $/mes","Get Pro monthly":"Obtener Pro mensual","Yearly: $79":"Anual: 79 $","Rate con red flags, in plain English":"Alertas de la confirmación de tarifa, explicadas","Detention":"Demora / tiempo de espera","TONU (truck ordered, not used)":"TONU (camión solicitado y no utilizado)","Lumper fees":"Tarifas de descarga","Fines, deductions and chargebacks":"Penalizaciones, deducciones y contracargos","Setoff (offset) clauses":"Cláusulas de compensación","Payment terms":"Condiciones de pago","Broker identity and fraud":"Identidad del corredor y fraude","Questions":"Preguntas frecuentes","Is my rate confirmation uploaded anywhere?":"¿Se sube mi confirmación de tarifa a algún sitio?","No. The checker reads the text in your browser, and nothing you paste leaves your device.":"No. El verificador lee el texto en tu navegador y nada de lo que pegas sale de tu dispositivo.","How many free checks do I get?":"¿Cuántas revisiones gratuitas tengo?","How do I cancel Pro?":"¿Cómo cancelo Pro?","Does a good grade mean the rate con is safe to sign?":"¿Una buena evaluación significa que puedo firmar con seguridad?","Before You Sign":"Antes de Firmar","Paste any contract":"Pega cualquier contrato","Check it":"Revisar","What it looks for, in plain English":"Qué busca, explicado claramente","Auto-renewal (evergreen) clauses":"Cláusulas de renovación automática","Mandatory arbitration & class-action waivers":"Arbitraje obligatorio y renuncia a demandas colectivas","Early-termination & cancellation fees":"Cargos por cancelación anticipada","Price-change clauses":"Cláusulas de cambio de precio","Personal guarantees, liens & confession of judgment":"Garantías personales, gravámenes y reconocimiento de deuda","A checklist of common surprises, not legal advice.":"Una lista de riesgos habituales; no constituye asesoramiento jurídico.","Fuelgauge":"Fuelgauge","Where is every cent of fuel margin going?":"¿Adónde va cada centavo del margen de combustible?","Drop your deliveries and sales":"Carga tus entregas y ventas","A back-office analytics tool, not a trading or accounting system.":"Herramienta de análisis administrativo, no un sistema de trading ni de contabilidad.","Everything stays on this device — nothing is uploaded.":"Todo permanece en este dispositivo: nada se sube.","Showing an example operator (2 sites, a month of fuel) so you can see how it works.":"Se muestra un operador de ejemplo (2 ubicaciones y un mes de combustible).","Clear it and start fresh →":"Borrar y empezar de nuevo →","Drop your fuel CSV here":"Suelta aquí tu archivo CSV de combustible","Choose CSV file":"Elegir archivo CSV","Try a sample CSV":"Probar un CSV de ejemplo","Add a line":"Añadir una línea","Site":"Ubicación","Product":"Producto","Month / date":"Mes / fecha","Gallons":"Galones","Cost $/gal (rack+freight)":"Costo $/galón (terminal + transporte)","Sell $/gal":"Venta $/galón","Add line":"Añadir línea","Lines":"Registros","By product":"Por producto","By site":"Por ubicación","Gross margin":"Margen bruto","Margin ¢/gal":"Margen ¢/galón","Return on cost":"Rendimiento sobre costo","Products":"Productos","Sites":"Ubicaciones","More free tools at Quickwell →":"Más herramientas gratuitas en Quickwell →","Before You Sign: spot the traps in any contract":"Antes de Firmar: detecta riesgos en cualquier contrato","Plain-English checklist, not legal advice.":"Lista de verificación, no asesoramiento jurídico."};function tr(s){var out=s;Object.keys(dict).sort(function(a,b){return b.length-a.length}).forEach(function(k){out=out.split(k).join(dict[k]);});return out;}function scan(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);var n;while(n=w.nextNode()){if(n.nodeValue.trim())n.nodeValue=tr(n.nodeValue);}root.querySelectorAll('input,textarea,button,[aria-label],option').forEach(function(e){['placeholder','aria-label','title'].forEach(function(a){if(e.hasAttribute(a))e.setAttribute(a,tr(e.getAttribute(a)));});if(e.tagName==='INPUT'&&e.type==='submit')e.value=tr(e.value);});}function run(){scan(document.body);new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='characterData'&&m.target.nodeValue.trim())m.target.nodeValue=tr(m.target.nodeValue);m.addedNodes&&m.addedNodes.forEach(function(n){if(n.nodeType===1)scan(n);else if(n.nodeType===3)n.nodeValue=tr(n.nodeValue);});});}).observe(document.body,{subtree:true,childList:true,characterData:true});}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();})();</script>
+</body>
+</html>

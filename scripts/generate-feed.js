@@ -34,6 +34,10 @@ export function discoverPages() {
     const directory = path.join(ROOT, id);
     if (!fs.existsSync(path.join(directory, 'index.html'))) continue;
     tools.push(...walk(directory, (name) => name.toLowerCase() === 'index.html'));
+    for (const locale of ['es', 'fr']) {
+      const localized = path.join(ROOT, locale, id);
+      if (fs.existsSync(path.join(localized, 'index.html'))) tools.push(...walk(localized, (name) => name.toLowerCase() === 'index.html'));
+    }
   }
   const guides = walk(path.join(ROOT, 'guides'), (name) =>
     /\.html?$/i.test(name) && !EXCLUDED_GUIDE_FILES.has(name.toLowerCase()));

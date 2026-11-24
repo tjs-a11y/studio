@@ -1,7 +1,7 @@
 /* Quickwell worldwide contextual cross-sell; no dependencies. */
 (function(){
 'use strict';
-var slug=location.pathname.split('/').filter(Boolean)[0]||'';
+var pathParts=location.pathname.split('/').filter(Boolean);if(pathParts[0]==='es'||pathParts[0]==='fr')pathParts.shift();var slug=pathParts[0]||'';
 var raw=(document.documentElement.lang||navigator.language||'en').toLowerCase();
 var lang=raw.indexOf('es')===0?'es':raw.indexOf('fr')===0?'fr':'en';
 var ui={
