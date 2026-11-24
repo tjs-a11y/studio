@@ -31,8 +31,8 @@ export async function GET() {
   const today = day();
   // Anonymous outbound-click counters from our other sites (counts only, no identity).
   const OUTBOUND = [['northstar', 'freightsidekick']];
-  // Per tool: opens, checks, upgrade intent, trial starts, and completed paid/one-time purchases.
-  const PER = 12;
+  // Per tool: opens, checks, upgrade intent, trials, subscriptions, demos and completed tool results.
+  const PER = 14;
   const cmds = [
     ['GET', 'count:quickwell:visits'], ['GET', `count:quickwell:visits:${today}`],
     ...ids.flatMap((id) => [
@@ -42,6 +42,7 @@ export async function GET() {
       ['GET', `count:${id}:trials`], ['GET', `count:${id}:trials:${today}`],
       ['GET', `count:${id}:subs`], ['GET', `count:${id}:subs:${today}`],
       ['GET', `count:${id}:demos`], ['GET', `count:${id}:demos:${today}`],
+      ['GET', `count:${id}:completed`], ['GET', `count:${id}:completed:${today}`],
     ]),
     ...OUTBOUND.flatMap(([site, target]) => [['GET', `count:${site}:${target}:clicks`], ['GET', `count:${site}:${target}:clicks:${today}`]]),
   ];
@@ -59,17 +60,19 @@ export async function GET() {
       trials: num(res[b + 6]), trials_today: num(res[b + 7]),
       subs: num(res[b + 8]), subs_today: num(res[b + 9]),
       demos: num(res[b + 10]), demos_today: num(res[b + 11]),
+      completed: num(res[b + 12]), completed_today: num(res[b + 13]),
     };
   });
   const total = Object.values(out).reduce((a, t) => a + t.checks, 0);
   const total_trials = Object.values(out).reduce((a, t) => a + t.trials, 0);
   const total_subs = Object.values(out).reduce((a, t) => a + t.subs, 0);
   const total_demos = Object.values(out).reduce((a, t) => a + t.demos, 0);
+  const total_completed = Object.values(out).reduce((a, t) => a + t.completed, 0);
   const outbound = {};
   OUTBOUND.forEach(([site, target], i) => {
     const b = 2 + ids.length * PER + i * 2;
     outbound[`${site}:${target}`] = { clicks: num(res[b]), clicks_today: num(res[b + 1]) };
   });
-  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_trials, total_subs, total_demos, tools: out, outbound },
+  return json({ enabled: true, generated: new Date().toISOString(), visits, total_checks: total, total_completed, total_trials, total_subs, total_demos, tools: out, outbound },
     200, { 'cache-control': 'public, max-age=300' });
 }
