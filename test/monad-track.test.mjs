@@ -170,9 +170,12 @@ test('campaign UTM fields are preserved but search terms are not collected', () 
   assert.doesNotMatch(JSON.stringify(event), /private-search/);
 });
 
-test('the Quickwell-to-NorthStar owned link carries campaign tags', () => {
+test('the Quickwell homepage routes freight users to self-serve tools without a NorthStar service link', () => {
   const homepage = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-  assert.match(homepage, /https:\/\/northstardeliveryservice\.com\/\?utm_source=quickwell&amp;utm_medium=owned&amp;utm_campaign=portfolio_crosslink&amp;utm_content=homepage-for-truckers/);
+  assert.doesNotMatch(homepage, /northstardeliveryservice\.com/i);
+  for (const path of ['/rate-con-checker/', '/haul-audit/', '/fuelgauge/', '/audit-kit/']) {
+    assert.ok(homepage.includes('href="' + path + '"'), 'self-serve freight tool link: ' + path);
+  }
 });
 
 
