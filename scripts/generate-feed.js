@@ -124,6 +124,9 @@ function bookEntries() {
       parsed.searchParams.set('utm_source', 'rss');
       parsed.searchParams.set('utm_medium', 'feed');
       parsed.searchParams.set('utm_campaign', 'books');
+      // Distinguish feed entries even when a supplied Books2Read URL is a generic landing page.
+      const slug = String(book.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      parsed.searchParams.set('utm_content', slug);
       const date = book.pubDate ? new Date(book.pubDate) : catalogMtime;
       if (Number.isNaN(date.getTime())) throw new Error('Invalid pubDate for book: ' + book.title);
       return {
