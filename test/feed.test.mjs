@@ -40,7 +40,7 @@ test('feed items are valid, categorized, escaped and have unique GUIDs', () => {
     assert.ok(['Tool', 'Guide', 'Book'].includes(category), 'invalid category: ' + category);
     assert.ok(tag(item, 'title'));
     assert.ok(tag(item, 'description'));
-    const enclosure = /<enclosure\\s+url=\"([^\"]+)\"\\s+type=\"image\\/png\"\\s+length=\"0\"\\s*\/>/.exec(item);
+    const enclosure = /<enclosure\s+url="([^"]+)"\s+type="image\/png"\s+length="0"\s*\/>/.exec(item);
     assert.ok(enclosure, 'RSS item is missing its social image enclosure');
     assert.ok(enclosure[1].startsWith(origin + '/'), 'enclosure must use a Quickwell image URL');
     assert.ok(guid && guid === link, 'GUID must be the canonical item URL: ' + link);
