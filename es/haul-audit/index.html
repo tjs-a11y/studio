@@ -14,7 +14,88 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Auditoría de Liquidación de Carga | Haul Audit">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"es","mainEntity":[{"@type":"Question","name":"¿Cómo compruebo si un corredor pagó menos de lo acordado por una carga?","acceptedAnswer":{"@type":"Answer","text":"Vuelve a calcular el importe bruto acordado a partir de la confirmación de tarifa firmada y los cargos adicionales aprobados. Después compáralo con el bruto de la liquidación del corredor. Haul Audit calcula la diferencia."}},{"@type":"Question","name":"¿Las comisiones de factoring son lo mismo que las deducciones del corredor?","acceptedAnswer":{"@type":"Answer","text":"No. Las comisiones, reservas y anticipos corresponden a la conciliación del factoring. No deben mezclarse con la diferencia de la liquidación del corredor."}},{"@type":"Question","name":"¿Haul Audit carga mi confirmación de tarifa o liquidación?","acceptedAnswer":{"@type":"Answer","text":"No. Los cálculos se realizan en tu navegador. No introduzcas información personal o bancaria confidencial en la herramienta."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Haul Audit","url":"https://quickwell.app/es/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Compara la liquidación de un corredor y el depósito de factoring con los importes acordados. Los cálculos se realizan en tu dispositivo; los datos no se cargan. Lista de verificación, no asesoramiento jurídico, financiero ni contable.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"},"inLanguage":"es"},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--chip:#f0f2f6;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d;--chip:#20242c}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0}
+  h2{font-size:1.1rem;margin:0 0 10px}
+  label{display:block;font-size:.85rem;color:var(--dim);margin:10px 0 4px}
+  input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+  button.ghost{background:transparent;color:var(--accent)}button.small{padding:6px 10px;font-size:.9rem;margin-top:0}
+  .big{font-size:2rem;font-weight:800}.ok{color:var(--green)}.bad{color:var(--red)}
+  .num{font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}td,th{text-align:left;padding:6px;border-top:1px solid var(--line)}
+  .pro-lock{border:1px dashed var(--accent)}
+  footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+
+<script defer src="/js/telemetry.js"></script>
+<script defer src="/js/cross-sell.js"></script>
+<script defer src="/js/embed.js"></script>
+<link rel="alternate" hreflang="en" href="https://quickwell.app/haul-audit/"><link rel="alternate" hreflang="es" href="https://quickwell.app/es/haul-audit/"><link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/haul-audit/"><link rel="alternate" hreflang="x-default" href="https://quickwell.app/haul-audit/">
+</head>
+<body>
+<nav class="qw-language-switch" aria-label="Language" style="max-width:1100px;margin:12px auto;padding:10px 16px;border:1px solid #d8e2df;border-radius:10px;display:flex;gap:14px;justify-content:flex-end;font:600 14px system-ui"><a href="/haul-audit/">English</a><a href="/es/haul-audit/">Español</a><a href="/fr/haul-audit/">Français</a></nav>
+<main>
+  <h1>Auditoría de Liquidación de Carga: Compara tu pago final contra la tarifa acordada</h1>
+  <p class="lede">Introduce lo acordado y lo que te pagaron para detectar diferencias en la liquidación del corredor y en el depósito de factoring. <b>Se ejecuta en tu navegador: no se carga ningún dato.</b></p>
+
+  <section class="card">
+    <h2>Liquidación del corredor</h2>
+    <div class="row">
+      <div><label>Transporte principal ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
+      <div><label>Recargo por combustible ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
+    </div>
+    <div class="row">
+      <div><label>Cargos adicionales aprobados ($, separados por comas)</label><input type="text" id="acc" placeholder="100, 50"></div>
+      <div><label>Importe bruto indicado en la liquidación ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Depósito de factoring <span style="font-weight:400;color:var(--dim);font-size:.85rem">(opcional)</span></h2>
+    <div class="row">
+      <div><label>Importe financiado de la factura ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
+      <div><label>Comisiones de factoring ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
+    </div>
+    <div class="row">
+      <div><label>Ajustes del factor ($, separados por comas)</label><input type="text" id="adj" placeholder="25"></div>
+      <div><label>Depósito indicado ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">La comisión de factoring la cobra el factor, no es un pago insuficiente del corredor; por eso no se incluye en la diferencia de la liquidación.</p>
+  </section>
+
+  <div><button id="run">Auditar</button> <button class="ghost" id="sample">Probar un ejemplo</button></div>
+  <p class="num" id="quota" style="color:var(--dim);font-size:.85rem;margin-top:10px"></p>
+
+  <section id="out" class="card" hidden aria-live="polite">
+    <h2>Resultado</h2>
+    <div id="settle"></div>
+    <div id="factor" style="margin-top:14px"></div>
+    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">El resultado siempre es gratuito y visible; se calcula en tu dispositivo.</p>
+  </section>
+
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">Cómo auditar una liquidación de transporte</h2>
+    <p>Empieza con la confirmación de tarifa firmada y sus modificaciones por escrito. Suma el transporte principal, el recargo por combustible y los cargos adicionales aprobados para calcular el importe bruto esperado. Compara el total con la liquidación del corredor antes de revisar el estado de cuenta del factor.</p>
+    <p>Separa las deducciones del corredor de las comisiones, reservas, anticipos y otros ajustes del factor. Una diferencia justifica revisar los documentos originales, pero por sí sola no demuestra un pago insuficiente.</p>
+    <h2>Qué comprueba Haul Audit</h2>
+    <ul><li>Importes de la confirmación de tarifa frente al bruto de la liquidación</li><li>Transporte principal, recargo por combustible y cargos adicionales aprobados</li><li>Comisiones y ajustes de factoring frente al depósito esperado</li><li>Diferencias en la liquidación y el depósito, calculadas al instante y de forma privada</li></ul>
+    <p><a href="/guides/carrier-settlement-audit-checklist/">Leer la lista de verificación para auditar liquidaciones de transporte</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Entender las comisiones de factoring y los pagos incompletos del corredor</a></p>
+    <h2>Preguntas frecuentes</h2>
+    <h3>¿Cómo compruebo si un corredor pagó menos de lo acordado por una carga?</h3><p>Vuelve a calcular el importe bruto acordado a partir de la confirmación de tarifa firmada y los cargos adicionales aprobados. Después compáralo con el bruto de la liquidación del corredor. Haul Audit calcula la diferencia.</p>
+    <h3>¿Las comisiones de factoring son lo mismo que las deducciones del corredor?</h3><p>No. Las comisiones, reservas y anticipos corresponden a la conciliación del factoring. No deben mezclarse con la diferencia de la liquidación del corredor.</p>
+    <h3>¿Haul Audit carga mi confirmación de tarifa o liquidación?</h3><p>No. Los cálculos se realizan en tu navegador. No introduzcas información personal o bancaria confidencial en la herramienta.</p>
+  </section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"es","mainEntity":[{"@type":"Question","name":"¿Cómo compruebo si un corredor pagó menos de lo acordado por una carga?","acceptedAnswer":{"@type":"Answer","text":"Vuelve a calcular el importe bruto acordado a partir de la confirmación de tarifa firmada y los cargos adicionales aprobados. Después compáralo con el bruto de la liquidación del corredor. Haul Audit calcula la diferencia."}},{"@type":"Question","name":"¿Las comisiones de factoring son lo mismo que las deducciones del corredor?","acceptedAnswer":{"@type":"Answer","text":"No. Las comisiones, reservas y anticipos corresponden a la conciliación del factoring. No deben mezclarse con la diferencia de la liquidación del corredor."}},{"@type":"Question","name":"¿Haul Audit carga mi confirmación de tarifa o liquidación?","acceptedAnswer":{"@type":"Answer","text":"No. Los cálculos se realizan en tu navegador. No introduzcas información personal o bancaria confidencial en la herramienta."}}]}</script>
   <section class="card" id="pro"></section>
 
   <footer>
