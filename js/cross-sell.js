@@ -87,6 +87,15 @@ if(freight.indexOf(slug)>=0){
  L('Genius Switch Original','/offers/','Review the focus buyer guide and seller terms.')
  ]);
 }else{return;}
+var labels={
+es:{
+'Rate Con Checker':'Revisor de confirmación de tarifa','Haul Audit':'Auditoría de liquidaciones','Fuelgauge':'Fuelgauge','New Authority Audit Kit':'Kit de auditoría para nuevas autoridades','Before You Sign':'Antes de Firmar','Mindset Mastery':'Mindset Mastery','Quickwell Plus':'Quickwell Plus','WorldSource Commodity Desk':'Mesa de materias primas WorldSource','EUDR Plot File Checker':'Verificador de parcelas EUDR','Tradepath':'Tradepath','Fair Price':'Precio Justo','Proof':'Prueba documental','Bill Radar':'Radar de facturas','Saver':'Ahorro','Pilot':'Pilot','Gatherloom':'Gatherloom','Mediterranean Diet Recipes Book':'Libro de recetas de dieta mediterránea','Plant Based Diet Recipes Book':'Libro de recetas vegetales','Double Dose':'Doble Dosis','Footsure':'Footsure','Spare Key':'Llave de repuesto','Quickwell Play':'Quickwell Play','ProDentim':'ProDentim','AudiSoothe':'AudiSoothe','PhytoMem One':'PhytoMem One','Genius Switch Original':'Genius Switch Original','Energy Revolution System':'Sistema Energy Revolution','Water Freedom System':'Sistema Water Freedom','Ted Plans DIY':'Planes DIY de Ted'
+},
+fr:{
+'Rate Con Checker':"Vérificateur de confirmation d'affrètement",'Haul Audit':'Audit des décomptes de transport','Fuelgauge':'Fuelgauge','New Authority Audit Kit':"Kit d'audit pour nouvelle autorité",'Before You Sign':'Avant de Signer','Mindset Mastery':'Mindset Mastery','Quickwell Plus':'Quickwell Plus','WorldSource Commodity Desk':'Bureau des matières premières WorldSource','EUDR Plot File Checker':'Vérificateur de parcelles EUDR','Tradepath':'Tradepath','Fair Price':'Prix Juste','Proof':'Preuve','Bill Radar':'Radar de factures','Saver':'Économies','Pilot':'Pilot','Gatherloom':'Gatherloom','Mediterranean Diet Recipes Book':'Livre de recettes méditerranéennes','Plant Based Diet Recipes Book':'Livre de recettes végétales','Double Dose':'Double Dose','Footsure':'Footsure','Spare Key':'Clé de secours','Quickwell Play':'Quickwell Play','ProDentim':'ProDentim','AudiSoothe':'AudiSoothe','PhytoMem One':'PhytoMem One','Genius Switch Original':'Genius Switch Original','Energy Revolution System':'Système Energy Revolution','Water Freedom System':'Système Water Freedom','Ted Plans DIY':'Plans DIY de Ted'
+}
+};
+function localLabel(value){return labels[lang]&&labels[lang][value]||value;}
 function href(path){
  var u=new URL(path,'https://quickwell.app');
  u.searchParams.set('utm_source','quickwell');
@@ -120,7 +129,7 @@ function render(){
   if(c.desc){var d=document.createElement('p');d.textContent=c.desc;box.appendChild(d);}
   c.links.forEach(function(item){
    var li=document.createElement('li'),a=document.createElement('a');
-   a.href=href(item.path);a.textContent=item.label+' · '+ui.offers;a.rel='noopener';li.appendChild(a);
+   a.href=href(item.path);a.textContent=localLabel(item.label)+' · '+ui.offers;a.rel='noopener';li.appendChild(a);
    if(item.desc){var p=document.createElement('p');p.textContent=item.desc;li.appendChild(p);}
    ul.appendChild(li);
   });
