@@ -1,0 +1,27 @@
+(function(){'use strict';
+var origin='https://quickwell.app',offers={
+'rate-con-checker':[['Haul Audit','/haul-audit/','Compare this rate con against your final broker settlement.'],['Fuelgauge','/fuelgauge/','Review fuel margin by product and location.'],['New Authority Audit Kit','/audit-kit/','Build a new-carrier safety audit binder.']],
+'haul-audit':[['Rate Con Checker','/rate-con-checker/','Catch costly broker terms before signing.'],['Fuelgauge','/fuelgauge/','Find fuel margin leaks by product and site.'],['New Authority Audit Kit','/audit-kit/','Organize new-carrier safety audit records.']],
+'fuelgauge':[['Haul Audit','/haul-audit/','Compare broker settlement with expected revenue.'],['Rate Con Checker','/rate-con-checker/','Review broker terms before accepting a load.'],['New Authority Audit Kit','/audit-kit/','Organize new-carrier safety records.']],
+'audit-kit':[['Rate Con Checker','/rate-con-checker/','Review broker terms before accepting a load.'],['Haul Audit','/haul-audit/','Check settlement math and deductions.'],['Fuelgauge','/fuelgauge/','Inspect fuel margin by site and product.']],
+'bill-radar':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.'],['Gatherloom','https://gatherloom.app/','Plan gifts and a spending limit in Gatherloom.']],
+'saver':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.'],['Gatherloom','https://gatherloom.app/','Plan gifts and a spending limit in Gatherloom.']],
+'fair-price':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.']],
+'pilot':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.']],
+'shield':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.']],
+'commodities':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.']],
+'dinner':[['Mediterranean Diet Recipes Book','https://books2read.com/u/4jo1Xo','Explore Mediterranean recipes.'],['Plant Based Diet Recipes Book','https://books2read.com/u/m0BxMV','Explore plant-based recipes.'],['Quickwell Plus · $4.99/mo','/plus/','Unlock Use It Up and Weekly Grocery Lists.']],
+'kitchen':[['Mediterranean Diet Recipes Book','https://books2read.com/u/4jo1Xo','Explore Mediterranean recipes.'],['Plant Based Diet Recipes Book','https://books2read.com/u/m0BxMV','Explore plant-based recipes.'],['Quickwell Plus · $4.99/mo','/plus/','Unlock Use It Up and Weekly Grocery Lists.']],
+'copycat':[['Mediterranean Diet Recipes Book','https://books2read.com/u/4jo1Xo','Explore Mediterranean recipes.'],['Plant Based Diet Recipes Book','https://books2read.com/u/m0BxMV','Explore plant-based recipes.'],['Quickwell Plus · $4.99/mo','/plus/','Unlock more kitchen tools.']]
+};
+var selectors={'bill-radar':'#out','fair-price':'#out','dinner':'#out','rate-con-checker':'#result','saver':'#results','shield':'#results','pilot':'#results','kitchen':'#out','copycat':'#out','fuelgauge':'#hero','haul-audit':'#out','audit-kit':'#result','commodities':'#board'};
+var slug=location.pathname.split('/').filter(Boolean).join('/'),items=offers[slug];if(!items)return;
+function tracked(path){var u=new URL(path,origin);u.searchParams.set('utm_source','quickwell');u.searchParams.set('utm_medium','tool_result');u.searchParams.set('utm_campaign',slug);return u.href;}
+function visible(el){return el&&!el.hidden&&!el.classList.contains('hidden')&&getComputedStyle(el).display!=='none'&&getComputedStyle(el).visibility!=='hidden'&&el.textContent.trim().length>8;}
+function inject(el){if(!visible(el)||el.querySelector('.qw-contextual-offers'))return;var box=document.createElement('section');box.className='qw-contextual-offers';box.setAttribute('aria-label','Related tools and resources');
+var st=document.createElement('style');st.textContent='.qw-contextual-offers{margin:20px 0;padding:16px;border:1px solid var(--line,#ddd);border-radius:12px;background:var(--card,#fff);color:var(--ink,inherit)}.qw-contextual-offers h3{margin:0 0 12px;font-size:1.05rem}.qw-contextual-offers ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}.qw-contextual-offers li{display:grid;gap:3px}.qw-contextual-offers a{font-weight:700}.qw-contextual-offers span{color:var(--muted,#666);font-size:.9rem}';box.appendChild(st);
+var h=document.createElement('h3');h.textContent='Your next useful step';box.appendChild(h);var ul=document.createElement('ul');
+items.forEach(function(item){var li=document.createElement('li'),a=document.createElement('a'),p=document.createElement('span');a.href=tracked(item[1]);a.textContent=item[0];a.rel='noopener';p.textContent=item[2];li.append(a,p);ul.appendChild(li);});box.appendChild(ul);el.appendChild(box);}
+function init(){var el=document.querySelector(selectors[slug]);if(!el)return;inject(el);new MutationObserver(function(){inject(el);}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class','style']});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
