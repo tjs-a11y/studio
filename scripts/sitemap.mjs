@@ -13,7 +13,7 @@ const today = process.env.SITEMAP_DATE || new Date().toISOString().slice(0, 10);
 // Each tool page, plus any sub-page a tool folder holds (e.g. audit-kit/16-rules-printable/).
 const subPages = (id) => readdirSync(join(root, id), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, id, d.name, 'index.html'))).map((d) => `${id}/${d.name}/index.html`).sort();
 const tools = JSON.parse(readFileSync(join(root, 'catalog', 'tools.json'), 'utf8')).tools.flatMap((t) => [`${t.id}/index.html`, ...subPages(t.id)]);
-const localizedTools = ['es', 'fr'].flatMap((locale) => tools.map((f) => `${locale}/${f}`).filter((f) => existsSync(join(root, f)) && !['es/plot-file-checker/index.html', 'fr/plot-file-checker/index.html'].includes(f));
+const localizedTools = ['es', 'fr'].flatMap((locale) => tools.map((f) => `${locale}/${f}`).filter((f) => existsSync(join(root, f)) && !['es/plot-file-checker/index.html', 'fr/plot-file-checker/index.html'].includes(f)));
 const localizedAliases = ['es/eudr/index.html', 'fr/eudr/index.html'].filter((f) => existsSync(join(root, f)));
 const guides = existsSync(join(root, 'guides'))
   ? ['guides/index.html', ...readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, 'guides', d.name, 'index.html'))).map((d) => `guides/${d.name}/index.html`).sort()]
