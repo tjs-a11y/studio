@@ -24,7 +24,7 @@ L('Before You Sign','/before-you-sign/','Review important terms before committin
 ];
 var ttools=[
 L('WorldSource Commodity Desk','/commodities/','Track commodities, currencies and yields.'),
-L('EUDR Plot File Checker','/eudr/','Review plot-file information for EUDR workflows.'),
+L('EUDR Plot File Checker','/plot-file-checker/','Review plot-file information for EUDR workflows.'),
 L('Tradepath','/tradepath/','Organize international trade checks.'),
 L('Before You Sign','/before-you-sign/','Review terms before committing.')
 ];
@@ -96,8 +96,43 @@ fr:{
 }
 };
 function localLabel(value){return labels[lang]&&labels[lang][value]||value;}
+var descriptions={
+es:{
+'Carrier and freight workflows—no driver recruitment or dispatch links.':'Flujos de transporte y carga; sin enlaces de contratación de conductores ni despacho.',
+'Review broker rate terms before signing.':'Revisa las condiciones de la tarifa del corredor antes de firmar.',
+'Compare agreed amounts with settlements.':'Compara los importes acordados con las liquidaciones.',
+'Review fuel costs and margins.':'Revisa los costes y márgenes del combustible.',
+'Organize new-carrier audit records.':'Organiza los registros de auditoría de nuevos transportistas.',
+'Review important terms before committing.':'Revisa las condiciones importantes antes de comprometerte.',
+'Commodity, trade, documentation and contract review utilities.':'Herramientas para materias primas, comercio, documentación y revisión de contratos.',
+'Track commodities, currencies and yields.':'Sigue las materias primas, las divisas y los rendimientos.',
+'Review plot-file information for EUDR workflows.':'Revisa la información de parcelas para los procesos EUDR.',
+'Organize international trade checks.':'Organiza verificaciones de comercio internacional.',
+'Verified direct book links only.':'Solo enlaces directos verificados a libros.',
+'Discipline, emotional control and decision-making.':'Disciplina, control emocional y toma de decisiones.',
+'Discipline and decision-making.':'Disciplina y toma de decisiones.',
+'Unlock eligible everyday Quickwell tools.':'Desbloquea las herramientas cotidianas de Quickwell que cumplan los requisitos.'
+},
+fr:{
+'Carrier and freight workflows—no driver recruitment or dispatch links.':'Outils pour le transport et le fret ; aucun lien de recrutement de chauffeurs ni d’affrètement.',
+'Review broker rate terms before signing.':'Vérifiez les conditions tarifaires du courtier avant de signer.',
+'Compare agreed amounts with settlements.':'Comparez les montants convenus aux décomptes reçus.',
+'Review fuel costs and margins.':'Examinez les coûts et les marges de carburant.',
+'Organize new-carrier audit records.':'Organisez les dossiers d’audit des nouveaux transporteurs.',
+'Review important terms before committing.':'Vérifiez les clauses importantes avant de vous engager.',
+'Commodity, trade, documentation and contract review utilities.':'Outils pour les matières premières, le commerce, les documents et l’examen des contrats.',
+'Track commodities, currencies and yields.':'Suivez les matières premières, les devises et les rendements.',
+'Review plot-file information for EUDR workflows.':'Vérifiez les informations des parcelles pour les démarches EUDR.',
+'Organize international trade checks.':'Organisez les contrôles du commerce international.',
+'Verified direct book links only.':'Liens directs vers des livres vérifiés uniquement.',
+'Discipline, emotional control and decision-making.':'Discipline, maîtrise émotionnelle et prise de décision.',
+'Discipline and decision-making.':'Discipline et prise de décision.',
+'Unlock eligible everyday Quickwell tools.':'Débloquez les outils Quickwell du quotidien éligibles.'
+}
+};
+function localDescription(value){return descriptions[lang]&&descriptions[lang][value]||value;}
 function href(path){
- var u=new URL(path,'https://quickwell.app');
+ var targetPath=path;\n if(lang!=='en'){if(path==='/haul-audit/')targetPath='/'+lang+'/haul-audit/';else if(path==='/commodities/')targetPath='/'+lang+'/commodities/';else if(path==='/plot-file-checker/'||path==='/eudr/')targetPath='/'+lang+'/eudr/';}\n var u=new URL(targetPath,'https://quickwell.app');
  u.searchParams.set('utm_source','quickwell');
  u.searchParams.set('utm_medium','tool_result');
  u.searchParams.set('utm_campaign',slug);
@@ -126,11 +161,11 @@ function render(){
  cards.forEach(function(c){
   var box=document.createElement('article'),title=document.createElement('h3'),ul=document.createElement('ul');
   title.textContent=c.title;box.appendChild(title);
-  if(c.desc){var d=document.createElement('p');d.textContent=c.desc;box.appendChild(d);}
+  if(c.desc){var d=document.createElement('p');d.textContent=localDescription(c.desc);box.appendChild(d);}
   c.links.forEach(function(item){
    var li=document.createElement('li'),a=document.createElement('a');
    a.href=href(item.path);a.textContent=localLabel(item.label)+' · '+ui.offers;a.rel='noopener';li.appendChild(a);
-   if(item.desc){var p=document.createElement('p');p.textContent=item.desc;li.appendChild(p);}
+   if(item.desc){var p=document.createElement('p');p.textContent=localDescription(item.desc);li.appendChild(p);}
    ul.appendChild(li);
   });
   box.appendChild(ul);grid.appendChild(box);
