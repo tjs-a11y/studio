@@ -50,7 +50,7 @@ function card(title,links,desc){cards.push({title:title,links:links,desc:desc||'
 function rotate(list,start,n){var a=[];for(var i=0;i<n;i++)a.push(list[(start+i)%list.length]);return a;}
 if(freight.indexOf(slug)>=0){
  var related=ftools.filter(x=>x.path!=='/'+slug+'/');
- card(ui.tools,rotate(related,freight.indexOf(slug),3),'Carrier and freight workflows—no driver recruitment or dispatch links.');
+ card(ui.tools,rotate(related,freight.indexOf(slug),4),'Carrier and freight workflows—no driver recruitment or dispatch links.');
  card(ui.books,[L('Mindset Mastery','https://books2read.com/u/mY9QMW','Discipline, emotional control and decision-making.')]);
  card(ui.more,[L('Quickwell Plus','/plus/','Unlock eligible everyday Quickwell tools.')]);
 }else if(trade.indexOf(slug)>=0){
@@ -59,7 +59,7 @@ if(freight.indexOf(slug)>=0){
  L('Mindset Mastery','https://books2read.com/u/mY9QMW','Discipline and decision-making.')
  ]),'Verified direct book links only.');
 }else if(home.indexOf(slug)>=0){
- card(ui.tools,rotate(homeTools,home.indexOf(slug),4),'Compare, review and track household and money decisions.');
+ card(ui.tools,rotate(homeTools,home.indexOf(slug),6),'Compare, review and track household and money decisions.');
  card(ui.more,[
  L('Quickwell Plus','/plus/','Unlock eligible everyday tools.'),
  L('Gatherloom','https://gatherloom.app/','Coordinate group gifts, events and shared budgets.')
