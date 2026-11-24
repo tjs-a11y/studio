@@ -118,8 +118,8 @@ function bookEntries() {
   return catalog.filter((book) => book && book.active !== false && book.url)
     .map((book) => {
       const parsed = new URL(book.url);
-      if (parsed.protocol !== 'https:' || parsed.hostname !== 'books2read.com') {
-        throw new Error('Unverified/non-Books2Read book URL: ' + book.url);
+      if (parsed.protocol !== 'https:' || parsed.hostname !== 'books2read.com' || !/^\/u\/[^/]+\/?$/.test(parsed.pathname)) {
+        throw new Error('Unverified/non-direct Books2Read universal book URL: ' + book.url);
       }
       parsed.searchParams.set('utm_source', 'rss');
       parsed.searchParams.set('utm_medium', 'feed');
