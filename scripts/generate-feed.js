@@ -74,6 +74,9 @@ function decodeEntities(value) {
 }
 
 function canonicalFallback(file) {
+  const imageTag = [...html.matchAll(/<meta\\b[^>]*>/gi)]
+    .map((match) => parseAttributes(match[0]))
+    .find((attr) => (attr.property || '').toLowerCase() === 'og:image' && attr.content);
   const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
   if (relativeFile === 'guides/index.html') return SITE + '/guides/';
   if (relativeFile.startsWith('guides/')) {
@@ -109,6 +112,7 @@ export function readPageMetadata(file) {
     title,
     description,
     url: canonical,
+    image: imageTag ? decodeEntities(imageTag.content.trim()) : SITE + '/og.png',
     category: relativeFile.startsWith('guides/') ? 'Guide' : 'Tool',
     pubDate: fs.statSync(file).mtime
   };
@@ -138,6 +142,7 @@ function bookEntries() {
         title: String(book.title || '').trim(),
         description: String(book.description || '').trim(),
         url: parsed.toString(),
+        image: SITE + '/og.png',
         category: 'Book',
         pubDate: date
       };
@@ -169,6 +174,7 @@ export function buildFeed(now = new Date()) {
     '    <guid isPermaLink="true">' + xmlEscape(entry.url) + '</guid>',
     '    <pubDate>' + entry.pubDate.toUTCString() + '</pubDate>',
     '    <description>' + xmlEscape(entry.description) + '</description>',
+    '    <enclosure url=\"' + xmlEscape(entry.image || (SITE + '/og.png')) + '\" type=\"image/png\" length=\"0\" />',
     '    <category>' + entry.category + '</category>',
     '  </item>'
   ].join('\n')).join('\n');
