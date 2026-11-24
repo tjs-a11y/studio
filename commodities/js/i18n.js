@@ -50,7 +50,7 @@ const en = {
 
 const es = {
   'buy.english': 'Esta guía está en inglés.',
-  'h1.board': 'Precios de materias primas, divisas y rendimientos',
+  'h1.board': 'Precios Oficiales de Materias Primas y Commodities Globales',
   'brand.by': 'de Quickwell',
   'nav.board': 'Precios', 'nav.brief': 'Resumen diario', 'nav.tracker': 'Mis activos', 'nav.buy': 'Dónde comprar',
   'ctl.lang': 'Idioma', 'ctl.ccy': 'Moneda',
