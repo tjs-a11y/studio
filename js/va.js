@@ -283,6 +283,25 @@ window.fetch = function (input, init) {
   });
 };
 
+function qwMonadPreserveCampaignParams(anchor) {
+  try {
+    if (!anchor || !anchor.href) return;
+    var current = new URL(window.location.href);
+    var destination = new URL(anchor.href, current.href);
+    if (destination.origin !== current.origin) return;
+    // A same-page fragment already inherits the current query; do not rewrite it.
+    if (destination.pathname === current.pathname &&
+        destination.search === current.search && destination.hash) return;
+    // Carry only approved attribution labels, never arbitrary query strings.
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'ref'].forEach(function (key) {
+      var value = qwCampaignTag(current.searchParams.get(key), key === 'ref' ? 60 : 120);
+      if (!value || destination.searchParams.get(key)) return;
+      destination.searchParams.set(key, value);
+    });
+    anchor.href = destination.toString();
+  } catch (e) {}
+}
+
 if (qwMonadEnabled) {
   // Page paths and campaign labels only; no query string, visitor ID, or user-entered content.
   qwMonadSend('page_view');
@@ -290,6 +309,7 @@ if (qwMonadEnabled) {
     window.addEventListener('click', function (event) {
       var anchor = event.target && event.target.closest ? event.target.closest('a[href]') : null;
       if (!anchor) return;
+      qwMonadPreserveCampaignParams(anchor);
       var host = qwMonadDestinationHost(anchor.href || (anchor.getAttribute && anchor.getAttribute('href')));
       if (host) qwMonadSend('outbound_click', { destination_host: host });
     });
