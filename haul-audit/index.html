@@ -152,7 +152,7 @@ function run(isSample) {
         body: 'You have reached the 3-check daily prompt on this device. Pro is $15/month and adds saved on-device audit history and CSV export. Your current result remains visible; calculations stay on your device.'
       });
     }
-    try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {} }
+    try { fetch('/api/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: TOOL, event: 'check' }), keepalive: true }).catch(() => {}); } catch (e) {}
   }
 }
 function f0(r) { return r.factoring.expectedFactorDeposit; }
