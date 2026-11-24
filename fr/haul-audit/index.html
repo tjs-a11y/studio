@@ -14,7 +14,88 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Audit de Règlement de Transport | Haul Audit">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"fr","mainEntity":[{"@type":"Question","name":"Comment vérifier si un courtier a sous-payé un transport ?","acceptedAnswer":{"@type":"Answer","text":"Reconstituez le montant brut convenu à partir de la confirmation de tarif signée et des frais accessoires approuvés, puis comparez-le au montant brut du décompte du courtier. Haul Audit calcule cet écart."}},{"@type":"Question","name":"Les frais d’affacturage sont-ils identiques aux retenues du courtier ?","acceptedAnswer":{"@type":"Answer","text":"Non. Les frais d’affacturage, réserves et avances relèvent du rapprochement avec le factor. Ils ne doivent pas être mélangés à l’écart du décompte du courtier."}},{"@type":"Question","name":"Haul Audit envoie-t-il ma confirmation de tarif ou mon décompte ?","acceptedAnswer":{"@type":"Answer","text":"Non. Les calculs sont effectués dans votre navigateur. Ne saisissez pas d’informations personnelles ou bancaires sensibles dans l’outil."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Haul Audit","url":"https://quickwell.app/fr/haul-audit/","applicationCategory":"BusinessApplication","operatingSystem":"All","browserRequirements":"Requires JavaScript in a modern web browser","description":"Comparez le décompte d’un courtier et le versement d’affacturage aux montants convenus. Les calculs sont effectués sur votre appareil ; vos données ne sont pas envoyées. Une liste de contrôle, pas un conseil juridique, financier ou comptable.","offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD"},"publisher":{"@id":"https://quickwell.app/#org"},"inLanguage":"fr"},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
+<script defer src="/js/va.js"></script><script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{--bg:#f6f6f2;--ink:#16181c;--dim:#5b6270;--card:#fff;--line:#e2e2dc;--accent:#1f5ed8;--red:#c2341f;--green:#1d7a46;--chip:#f0f2f6;--radius:12px}
+  @media (prefers-color-scheme:dark){:root{--bg:#101215;--ink:#eef0f3;--dim:#9aa3b2;--card:#181b21;--line:#2a2f38;--accent:#79a3ff;--red:#ff7b66;--green:#5fd38d;--chip:#20242c}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:clamp(1.5rem,4.5vw,2.1rem);margin:0 0 6px;letter-spacing:-.02em}.lede{color:var(--dim);margin:0 0 20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:14px 0}
+  h2{font-size:1.1rem;margin:0 0 10px}
+  label{display:block;font-size:.85rem;color:var(--dim);margin:10px 0 4px}
+  input{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  button{font:inherit;padding:10px 16px;border-radius:9px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;margin-top:14px}
+  button.ghost{background:transparent;color:var(--accent)}button.small{padding:6px 10px;font-size:.9rem;margin-top:0}
+  .big{font-size:2rem;font-weight:800}.ok{color:var(--green)}.bad{color:var(--red)}
+  .num{font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}td,th{text-align:left;padding:6px;border-top:1px solid var(--line)}
+  .pro-lock{border:1px dashed var(--accent)}
+  footer{margin-top:30px;color:var(--dim);font-size:.85rem}footer a,a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+
+<script defer src="/js/telemetry.js"></script>
+<script defer src="/js/cross-sell.js"></script>
+<script defer src="/js/embed.js"></script>
+<link rel="alternate" hreflang="en" href="https://quickwell.app/haul-audit/"><link rel="alternate" hreflang="es" href="https://quickwell.app/es/haul-audit/"><link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/haul-audit/"><link rel="alternate" hreflang="x-default" href="https://quickwell.app/haul-audit/">
+</head>
+<body>
+<nav class="qw-language-switch" aria-label="Language" style="max-width:1100px;margin:12px auto;padding:10px 16px;border:1px solid #d8e2df;border-radius:10px;display:flex;gap:14px;justify-content:flex-end;font:600 14px system-ui"><a href="/haul-audit/">English</a><a href="/es/haul-audit/">Español</a><a href="/fr/haul-audit/">Français</a></nav>
+<main>
+  <h1>Audit de Règlement de Transport : Comparez le paiement final au tarif convenu</h1>
+  <p class="lede">Saisissez les montants convenus et reçus pour repérer tout écart sur le décompte du courtier et le versement d’affacturage. <b>Exécuté dans votre navigateur : aucune donnée saisie n’est envoyée.</b></p>
+
+  <section class="card">
+    <h2>Décompte du courtier</h2>
+    <div class="row">
+      <div><label>Transport principal ($)</label><input type="number" id="linehaul" inputmode="decimal" placeholder="2000"></div>
+      <div><label>Supplément carburant ($)</label><input type="number" id="fuel" inputmode="decimal" placeholder="300"></div>
+    </div>
+    <div class="row">
+      <div><label>Frais accessoires approuvés ($, séparés par des virgules)</label><input type="text" id="acc" placeholder="100, 50"></div>
+      <div><label>Montant brut indiqué sur le décompte ($)</label><input type="number" id="reported" inputmode="decimal" placeholder="2350"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Versement d’affacturage <span style="font-weight:400;color:var(--dim);font-size:.85rem">(facultatif)</span></h2>
+    <div class="row">
+      <div><label>Montant de la facture financé ($)</label><input type="number" id="funded" inputmode="decimal" placeholder="2450"></div>
+      <div><label>Frais d’affacturage ($)</label><input type="number" id="fees" inputmode="decimal" placeholder="73.50"></div>
+    </div>
+    <div class="row">
+      <div><label>Ajustements du factor ($, séparés par des virgules)</label><input type="text" id="adj" placeholder="25"></div>
+      <div><label>Versement indiqué ($)</label><input type="number" id="deposit" inputmode="decimal" placeholder="2351.50"></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--dim);margin:10px 0 0">Les frais d’affacturage sont facturés par le factor et ne constituent pas un manque à payer du courtier ; ils sont donc exclus de l’écart du décompte ci-dessous.</p>
+  </section>
+
+  <div><button id="run">Vérifier</button> <button class="ghost" id="sample">Essayer un exemple</button></div>
+  <p class="num" id="quota" style="color:var(--dim);font-size:.85rem;margin-top:10px"></p>
+
+  <section id="out" class="card" hidden aria-live="polite">
+    <h2>Résultat</h2>
+    <div id="settle"></div>
+    <div id="factor" style="margin-top:14px"></div>
+    <p style="font-size:.8rem;color:var(--dim);margin:12px 0 0">Votre résultat est toujours gratuit et visible ; le calcul est effectué sur votre appareil.</p>
+  </section>
+
+  <section class="card" aria-labelledby="how-title">
+    <h2 id="how-title">Comment vérifier un décompte de transport</h2>
+    <p>Commencez par la confirmation de tarif signée et ses avenants écrits. Additionnez le transport principal, le supplément carburant et les frais accessoires approuvés pour calculer le montant brut attendu. Comparez ce total au décompte du courtier avant d’examiner le relevé d’affacturage.</p>
+    <p>Distinguez les retenues du courtier des frais d’affacturage, réserves, avances et autres ajustements du factor. Un écart justifie de vérifier les documents sources, mais ne prouve pas à lui seul un paiement insuffisant.</p>
+    <h2>Ce que vérifie Haul Audit</h2>
+    <ul><li>Montants de la confirmation de tarif comparés au brut du décompte du courtier</li><li>Transport principal, supplément carburant et frais accessoires approuvés</li><li>Frais et ajustements d’affacturage comparés au versement attendu</li><li>Écarts du décompte et du versement, calculés immédiatement et en privé</li></ul>
+    <p><a href="/guides/carrier-settlement-audit-checklist/">Lire la liste de contrôle pour vérifier un décompte de transport</a> · <a href="/guides/factoring-fee-vs-broker-short-pay/">Comprendre les frais d’affacturage et les paiements insuffisants du courtier</a></p>
+    <h2>Questions fréquentes</h2>
+    <h3>Comment vérifier si un courtier a sous-payé un transport ?</h3><p>Reconstituez le montant brut convenu à partir de la confirmation de tarif signée et des frais accessoires approuvés, puis comparez-le au montant brut du décompte du courtier. Haul Audit calcule cet écart.</p>
+    <h3>Les frais d’affacturage sont-ils identiques aux retenues du courtier ?</h3><p>Non. Les frais d’affacturage, réserves et avances relèvent du rapprochement avec le factor. Ils ne doivent pas être mélangés à l’écart du décompte du courtier.</p>
+    <h3>Haul Audit envoie-t-il ma confirmation de tarif ou mon décompte ?</h3><p>Non. Les calculs sont effectués dans votre navigateur. Ne saisissez pas d’informations personnelles ou bancaires sensibles dans l’outil.</p>
+  </section>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"fr","mainEntity":[{"@type":"Question","name":"Comment vérifier si un courtier a sous-payé un transport ?","acceptedAnswer":{"@type":"Answer","text":"Reconstituez le montant brut convenu à partir de la confirmation de tarif signée et des frais accessoires approuvés, puis comparez-le au montant brut du décompte du courtier. Haul Audit calcule cet écart."}},{"@type":"Question","name":"Les frais d’affacturage sont-ils identiques aux retenues du courtier ?","acceptedAnswer":{"@type":"Answer","text":"Non. Les frais d’affacturage, réserves et avances relèvent du rapprochement avec le factor. Ils ne doivent pas être mélangés à l’écart du décompte du courtier."}},{"@type":"Question","name":"Haul Audit envoie-t-il ma confirmation de tarif ou mon décompte ?","acceptedAnswer":{"@type":"Answer","text":"Non. Les calculs sont effectués dans votre navigateur. Ne saisissez pas d’informations personnelles ou bancaires sensibles dans l’outil."}}]}</script>
   <section class="card" id="pro"></section>
 
   <footer>
