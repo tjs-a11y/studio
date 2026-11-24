@@ -1,21 +1,21 @@
 {
-  "fetched": "2026-11-23T22:11:40.829Z",
-  "date": "2026-11-23",
+  "fetched": "2026-11-24T20:50:05.036Z",
+  "date": "2026-11-24",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-23T22:11:40.776Z",
+  "generated": "2026-11-24T20:50:04.997Z",
   "visits": {
-    "total": 374,
-    "today": 7
+    "total": 550,
+    "today": 174
   },
   "total_checks": 0,
   "total_trials": 0,
   "total_subs": 0,
-  "total_demos": 0,
+  "total_demos": 1,
   "tools": {
     "dinner": {
-      "opens": 8,
-      "opens_today": 0,
+      "opens": 9,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -28,8 +28,8 @@
       "demos_today": 0
     },
     "copycat": {
-      "opens": 3,
-      "opens_today": 0,
+      "opens": 4,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -42,8 +42,8 @@
       "demos_today": 0
     },
     "kitchen": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -70,8 +70,8 @@
       "demos_today": 0
     },
     "proof": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -84,8 +84,8 @@
       "demos_today": 0
     },
     "keep-the-receipt": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 1,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -140,8 +140,8 @@
       "demos_today": 0
     },
     "bill-radar": {
-      "opens": 7,
-      "opens_today": 3,
+      "opens": 28,
+      "opens_today": 21,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -150,8 +150,8 @@
       "trials_today": 0,
       "subs": 0,
       "subs_today": 0,
-      "demos": 0,
-      "demos_today": 0
+      "demos": 1,
+      "demos_today": 1
     },
     "vigless": {
       "opens": 0,
@@ -182,8 +182,8 @@
       "demos_today": 0
     },
     "fuelgauge": {
-      "opens": 1,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -210,8 +210,8 @@
       "demos_today": 0
     },
     "rate-con-checker": {
-      "opens": 2,
-      "opens_today": 0,
+      "opens": 3,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -224,8 +224,8 @@
       "demos_today": 0
     },
     "haul-audit": {
-      "opens": 0,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 1,
@@ -350,8 +350,8 @@
       "demos_today": 0
     },
     "commodities": {
-      "opens": 2,
-      "opens_today": 0,
+      "opens": 9,
+      "opens_today": 7,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -392,8 +392,8 @@
       "demos_today": 0
     },
     "shield": {
-      "opens": 2,
-      "opens_today": 0,
+      "opens": 6,
+      "opens_today": 4,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
