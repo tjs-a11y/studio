@@ -78,9 +78,6 @@ function decodeEntities(value) {
 }
 
 function canonicalFallback(file) {
-  const imageTag = [...html.matchAll(/<meta\\b[^>]*>/gi)]
-    .map((match) => parseAttributes(match[0]))
-    .find((attr) => (attr.property || '').toLowerCase() === 'og:image' && attr.content);
   const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
   if (relativeFile === 'guides/index.html') return SITE + '/guides/';
   if (relativeFile.startsWith('guides/')) {
@@ -100,6 +97,9 @@ export function readPageMetadata(file) {
   const canonicalTag = [...html.matchAll(/<link\b[^>]*>/gi)]
     .map((match) => parseAttributes(match[0]))
     .find((attr) => (attr.rel || '').toLowerCase().split(/\s+/).includes('canonical') && attr.href);
+  const imageTag = [...html.matchAll(/<meta\\b[^>]*>/gi)]
+    .map((match) => parseAttributes(match[0]))
+    .find((attr) => (attr.property || '').toLowerCase() === 'og:image' && attr.content);
   const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
   const title = titleMatch && decodeEntities(titleMatch[1].replace(/<[^>]*>/g, '').trim());
   const description = descriptionMatch && decodeEntities(descriptionMatch.content.trim());
