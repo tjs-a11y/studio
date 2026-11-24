@@ -5,9 +5,9 @@ var slug=location.pathname.split('/').filter(Boolean)[0]||'';
 var raw=(document.documentElement.lang||navigator.language||'en').toLowerCase();
 var lang=raw.indexOf('es')===0?'es':raw.indexOf('fr')===0?'fr':'en';
 var ui={
-en:{head:'Recommended next steps',tools:'Related tools and workflows',books:'Books and learning',more:'More from Quickwell',offers:'Explore',note:'Useful tools, books and resources from across Quickwell.'},
-es:{head:'Siguiente paso recomendado',tools:'Herramientas y flujos relacionados',books:'Libros y aprendizaje',more:'Más de Quickwell',offers:'Explorar',note:'Herramientas, libros y recursos útiles de Quickwell.'},
-fr:{head:'Prochaine étape recommandée',tools:'Outils et processus associés',books:'Livres et apprentissage',more:'Plus de Quickwell',offers:'Découvrir',note:'Outils, livres et ressources utiles de Quickwell.'}
+en:{head:'Recommended next steps',tools:'Related tools and workflows',books:'Books and learning',more:'More from Quickwell',health:'Health and focus buyer guides',offers:'Explore',note:'Built for a global audience: use miles or kilometres and local currencies where supported.'},
+es:{head:'Siguiente paso recomendado',tools:'Herramientas y flujos relacionados',books:'Libros y aprendizaje',more:'Más de Quickwell',health:'Guías de salud y concentración',offers:'Explorar',note:'Para una audiencia global: usa millas o kilómetros y monedas locales cuando estén disponibles.'},
+fr:{head:'Prochaine étape recommandée',tools:'Outils et processus associés',books:'Livres et apprentissage',more:'Plus de Quickwell',health:'Guides santé et concentration',offers:'Découvrir',note:'Pour un public international : utilisez les miles ou les kilomètres et les devises locales lorsqu’elles sont prises en charge.'}
 }[lang];
 var L=function(label,path,desc){return {label:label,path:path,desc:desc||''};};
 var freight=['rate-con-checker','haul-audit','fuelgauge','audit-kit'];
@@ -64,7 +64,7 @@ if(freight.indexOf(slug)>=0){
  L('Quickwell Plus','/plus/','Unlock eligible everyday tools.'),
  L('Gatherloom','https://gatherloom.app/','Coordinate group gifts, events and shared budgets.')
  ]);
- card('Books and curated offers',crypto.concat([
+ card(ui.books,crypto.concat([
  L('Energy Revolution System','/offers/','Read the buyer guide and review seller terms.'),
  L('Water Freedom System','/offers/','Read the buyer guide and review seller terms.'),
  L('Ted Plans DIY','/offers/','Review the DIY buyer guide and project considerations.'),
@@ -80,7 +80,7 @@ if(freight.indexOf(slug)>=0){
 }else if(everyday.indexOf(slug)>=0){
  card(ui.tools,rotate(dailyTools,everyday.indexOf(slug),4),'Helpful tools for everyday routines and planning.');
  card(ui.books,[L('Mindset Mastery','https://books2read.com/u/mY9QMW','Practical frameworks for focus and decision-making.')]);
- card('Health and focus buyer guides',[
+ card(ui.health,[
  L('ProDentim','/offers/','Read the buyer guide and check current seller details.'),
  L('AudiSoothe','/offers/','Read the buyer guide and check current seller details.'),
  L('PhytoMem One','/offers/','Read the buyer guide and check current seller details.'),
