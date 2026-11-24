@@ -1,5 +1,6 @@
 // Zero-dependency Quickwell RSS 2.0 generator.
 // Run from the repository root: node scripts/generate-feed.js
+// Localized tool directories under /es and /fr are included in the tool feed.
 import fs from 'node:fs';
 import path from 'node:path';
 
