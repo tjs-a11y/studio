@@ -11,7 +11,7 @@ fr:{head:'Prochaine étape recommandée',tools:'Outils et processus associés',b
 }[lang];
 var L=function(label,path,desc){return {label:label,path:path,desc:desc||''};};
 var freight=['rate-con-checker','haul-audit','fuelgauge','audit-kit'];
-var trade=['commodities','plot-file-checker','tradepath','permit-watch','royalty-check','vendor-check','vigless'];
+var trade=['commodities','plot-file-checker','eudr','tradepath','permit-watch','royalty-check','vendor-check','vigless'];
 var home=['bill-radar','fair-price','saver','pilot','shield','before-you-sign','proof','keep-the-receipt','lotwise'];
 var kitchen=['dinner','kitchen','copycat'];
 var everyday=['double-dose','roadside-sos','footsure','spare-key','play'];
@@ -24,7 +24,7 @@ L('Before You Sign','/before-you-sign/','Review important terms before committin
 ];
 var ttools=[
 L('WorldSource Commodity Desk','/commodities/','Track commodities, currencies and yields.'),
-L('EUDR Plot File Checker','/plot-file-checker/','Review plot-file information for EUDR workflows.'),
+L('EUDR Plot File Checker','/eudr/','Review plot-file information for EUDR workflows.'),
 L('Tradepath','/tradepath/','Organize international trade checks.'),
 L('Before You Sign','/before-you-sign/','Review terms before committing.')
 ];
@@ -89,7 +89,7 @@ if(freight.indexOf(slug)>=0){
 }else{return;}
 var labels={
 es:{
-'Rate Con Checker':'Revisor de confirmación de tarifa','Haul Audit':'Auditoría de liquidaciones','Fuelgauge':'Fuelgauge','New Authority Audit Kit':'Kit de auditoría para nuevas autoridades','Before You Sign':'Antes de Firmar','Mindset Mastery':'Mindset Mastery','Quickwell Plus':'Quickwell Plus','WorldSource Commodity Desk':'Mesa de materias primas WorldSource','EUDR Plot File Checker':'Verificador de parcelas EUDR','Tradepath':'Tradepath','Fair Price':'Precio Justo','Proof':'Prueba documental','Bill Radar':'Radar de facturas','Saver':'Ahorro','Pilot':'Pilot','Gatherloom':'Gatherloom','Mediterranean Diet Recipes Book':'Libro de recetas de dieta mediterránea','Plant Based Diet Recipes Book':'Libro de recetas vegetales','Double Dose':'Doble Dosis','Footsure':'Footsure','Spare Key':'Llave de repuesto','Quickwell Play':'Quickwell Play','ProDentim':'ProDentim','AudiSoothe':'AudiSoothe','PhytoMem One':'PhytoMem One','Genius Switch Original':'Genius Switch Original','Energy Revolution System':'Sistema Energy Revolution','Water Freedom System':'Sistema Water Freedom','Ted Plans DIY':'Planes DIY de Ted'
+'Rate Con Checker':'Revisor de confirmación de tarifa','Haul Audit':'Auditoría de liquidaciones','Fuelgauge':'Fuelgauge','New Authority Audit Kit':'Kit de auditoría para nuevas autoridades','Before You Sign':'Antes de Firmar','Mindset Mastery':'Mindset Mastery','Quickwell Plus':'Quickwell Plus','WorldSource Commodity Desk':'Mesa de materias primas WorldSource','EUDR Plot File Checker':'Verificador de parcelas EUDR','EUDR Plot File Checker':'Validador de archivos de parcelas EUDR','Tradepath':'Tradepath','Fair Price':'Precio Justo','Proof':'Prueba documental','Bill Radar':'Radar de facturas','Saver':'Ahorro','Pilot':'Pilot','Gatherloom':'Gatherloom','Mediterranean Diet Recipes Book':'Libro de recetas de dieta mediterránea','Plant Based Diet Recipes Book':'Libro de recetas vegetales','Double Dose':'Doble Dosis','Footsure':'Footsure','Spare Key':'Llave de repuesto','Quickwell Play':'Quickwell Play','ProDentim':'ProDentim','AudiSoothe':'AudiSoothe','PhytoMem One':'PhytoMem One','Genius Switch Original':'Genius Switch Original','Energy Revolution System':'Sistema Energy Revolution','Water Freedom System':'Sistema Water Freedom','Ted Plans DIY':'Planes DIY de Ted'
 },
 fr:{
 'Rate Con Checker':"Vérificateur de confirmation d'affrètement",'Haul Audit':'Audit des décomptes de transport','Fuelgauge':'Fuelgauge','New Authority Audit Kit':"Kit d'audit pour nouvelle autorité",'Before You Sign':'Avant de Signer','Mindset Mastery':'Mindset Mastery','Quickwell Plus':'Quickwell Plus','WorldSource Commodity Desk':'Bureau des matières premières WorldSource','EUDR Plot File Checker':'Vérificateur de parcelles EUDR','Tradepath':'Tradepath','Fair Price':'Prix Juste','Proof':'Preuve','Bill Radar':'Radar de factures','Saver':'Économies','Pilot':'Pilot','Gatherloom':'Gatherloom','Mediterranean Diet Recipes Book':'Livre de recettes méditerranéennes','Plant Based Diet Recipes Book':'Livre de recettes végétales','Double Dose':'Double Dose','Footsure':'Footsure','Spare Key':'Clé de secours','Quickwell Play':'Quickwell Play','ProDentim':'ProDentim','AudiSoothe':'AudiSoothe','PhytoMem One':'PhytoMem One','Genius Switch Original':'Genius Switch Original','Energy Revolution System':'Système Energy Revolution','Water Freedom System':'Système Water Freedom','Ted Plans DIY':'Plans DIY de Ted'
