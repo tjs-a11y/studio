@@ -1,105 +1,159 @@
-// Regenerate /feed.xml from every catalogued tool page and every HTML page under /guides/.
-// Run: node scripts/generate-feed.js
-import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from 'node:fs';
-import { join, dirname, relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { execFileSync } from 'node:child_process';
+// Zero-dependency Quickwell RSS 2.0 generator.
+// Run from the repository root: node scripts/generate-feed.js
+import fs from 'node:fs';
+import path from 'node:path';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8')).origin.replace(/\/$/, '');
-const OUTPUT = join(ROOT, 'feed.xml');
+const ROOT = process.cwd();
+const SITE = 'https://quickwell.app';
+const OUTPUT = path.join(ROOT, 'feed.xml');
+const EXCLUDED_DIRS = new Set(['embed', 'api', 'js', 'css', 'node_modules', '.git', '404']);
+const EXCLUDED_GUIDE_FILES = new Set(['404.html', 'privacy.html', 'terms.html', 'robots.html']);
 
-function walkHtml(directory) {
-  if (!existsSync(directory)) return [];
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const full = join(directory, entry.name);
-    if (entry.isDirectory()) return walkHtml(full);
-    return entry.isFile() && /\.html?$/i.test(entry.name) ? [full] : [];
-  });
+function walk(directory, acceptFile) {
+  if (!fs.existsSync(directory)) return [];
+  const found = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      if (!EXCLUDED_DIRS.has(entry.name.toLowerCase())) {
+        found.push(...walk(path.join(directory, entry.name), acceptFile));
+      }
+    } else if (entry.isFile() && acceptFile(entry.name)) {
+      found.push(path.join(directory, entry.name));
+    }
+  }
+  return found;
 }
 
 export function discoverPages() {
-  const catalog = JSON.parse(readFileSync(join(ROOT, 'catalog/tools.json'), 'utf8'));
-  const toolFiles = [...new Set(catalog.tools
-    .map((tool) => tool.id)
-    .filter((id) => /^[a-z0-9-]+$/.test(id))
-    .filter((id) => existsSync(join(ROOT, id, 'index.html')))
-    .flatMap((id) => walkHtml(join(ROOT, id))))];
-  const guideFiles = walkHtml(join(ROOT, 'guides'));
-  return [...new Set([...toolFiles, ...guideFiles])]
-    .sort((a, b) => relative(ROOT, a).localeCompare(relative(ROOT, b)));
+  const catalogPath = path.join(ROOT, 'catalog', 'tools.json');
+  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+  const tools = [];
+  for (const tool of catalog.tools || []) {
+    const id = String(tool.id || '');
+    if (!/^[a-z0-9-]+$/.test(id) || EXCLUDED_DIRS.has(id)) continue;
+    const directory = path.join(ROOT, id);
+    if (!fs.existsSync(path.join(directory, 'index.html'))) continue;
+    tools.push(...walk(directory, (name) => name.toLowerCase() === 'index.html'));
+  }
+  const guides = walk(path.join(ROOT, 'guides'), (name) =>
+    /\.html?$/i.test(name) && !EXCLUDED_GUIDE_FILES.has(name.toLowerCase()));
+  return [...new Set([...tools, ...guides])]
+    .filter((file) => !file.split(path.sep).some((part) => EXCLUDED_DIRS.has(part.toLowerCase())))
+    .sort((a, b) => path.relative(ROOT, a).localeCompare(path.relative(ROOT, b)));
 }
 
-function attributes(tag) {
-  return Object.fromEntries([...tag.matchAll(/([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)]
-    .map((match) => [match[1].toLowerCase(), match[2] ?? match[3] ?? match[4] ?? '']));
+function parseAttributes(tag) {
+  const attributes = {};
+  for (const match of tag.matchAll(/([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)) {
+    attributes[match[1].toLowerCase()] = match[2] ?? match[3] ?? match[4] ?? '';
+  }
+  return attributes;
 }
 
 function decodeEntities(value) {
-  const named = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', mdash: '—', ndash: '–', lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”', hellip: '…', copy: '©', reg: '®', trade: '™', bull: '•', euro: '€', pound: '£', yen: '¥', deg: '°', times: '×' };
-  return String(value)
-    .replace(/&(#x[\da-f]+|#\d+|[a-z]+);/gi, (whole, entity) => {
-      if (entity[0] === '#') {
-        const hex = entity[1].toLowerCase() === 'x';
-        const number = Number.parseInt(entity.slice(hex ? 2 : 1), hex ? 16 : 10);
-        return Number.isFinite(number) ? String.fromCodePoint(number) : whole;
-      }
-      return named[entity.toLowerCase()] ?? whole;
-    })
-    .replace(/<[^>]*>/g, '')
-    .trim();
+  const named = {
+    amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ',
+    mdash: '—', ndash: '–', lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”',
+    hellip: '…', copy: '©', reg: '®', trade: '™', bull: '•',
+    euro: '€', pound: '£', yen: '¥', deg: '°', times: '×'
+  };
+  return String(value).replace(/&(#x[\da-f]+|#\d+|[a-z]+);/gi, (whole, entity) => {
+    if (entity[0] === '#') {
+      const hex = entity[1].toLowerCase() === 'x';
+      const number = Number.parseInt(entity.slice(hex ? 2 : 1), hex ? 16 : 10);
+      try { return Number.isFinite(number) ? String.fromCodePoint(number) : whole; }
+      catch { return whole; }
+    }
+    return named[entity.toLowerCase()] ?? whole;
+  });
+}
+
+function canonicalFallback(file) {
+  const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
+  if (relativeFile === 'guides/index.html') return SITE + '/guides/';
+  if (relativeFile.startsWith('guides/')) {
+    const slug = relativeFile.slice('guides/'.length).replace(/\.html?$/i, '');
+    return SITE + '/guides/' + slug.replace(/\/index$/i, '') + '/';
+  }
+  const directory = path.dirname(relativeFile);
+  return SITE + '/' + (directory === '.' ? '' : directory + '/');
 }
 
 export function readPageMetadata(file) {
-  const html = readFileSync(file, 'utf8');
+  const html = fs.readFileSync(file, 'utf8');
   const titleMatch = /<title\b[^>]*>([\s\S]*?)<\/title\s*>/i.exec(html);
-  const metaDescription = [...html.matchAll(/<meta\b[^>]*>/gi)]
-    .map((match) => attributes(match[0]))
+  const descriptionMatch = [...html.matchAll(/<meta\b[^>]*>/gi)]
+    .map((match) => parseAttributes(match[0]))
     .find((attr) => (attr.name || '').toLowerCase() === 'description' && attr.content);
-  const canonical = [...html.matchAll(/<link\b[^>]*>/gi)]
-    .map((match) => attributes(match[0]))
+  const canonicalTag = [...html.matchAll(/<link\b[^>]*>/gi)]
+    .map((match) => parseAttributes(match[0]))
     .find((attr) => (attr.rel || '').toLowerCase().split(/\s+/).includes('canonical') && attr.href);
-  const path = relative(ROOT, file).split('\\').join('/');
-  if (!titleMatch || !metaDescription || !canonical) {
-    throw new Error('Missing <title>, meta description, or canonical URL in ' + path);
+  const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
+  const title = titleMatch && decodeEntities(titleMatch[1].replace(/<[^>]*>/g, '').trim());
+  const description = descriptionMatch && decodeEntities(descriptionMatch.content.trim());
+  if (!title || !description) {
+    throw new Error('Missing <title> or meta description in ' + relativeFile);
   }
-  const url = decodeEntities(canonical.href);
-  const parsed = new URL(url);
-  if (parsed.origin !== SITE) throw new Error('Canonical URL is outside ' + SITE + ': ' + url + ' (' + path + ')');
+  const canonical = canonicalTag ? decodeEntities(canonicalTag.href.trim()) : canonicalFallback(file);
+  const parsed = new URL(canonical);
+  if (parsed.protocol !== 'https:' || parsed.origin !== SITE) {
+    throw new Error('Invalid Quickwell canonical URL in ' + relativeFile + ': ' + canonical);
+  }
   return {
-    path,
-    title: decodeEntities(titleMatch[1]),
-    description: decodeEntities(metaDescription.content),
-    url,
+    path: relativeFile,
+    title,
+    description,
+    url: canonical,
+    category: relativeFile.startsWith('guides/') ? 'Guide' : 'Tool',
+    pubDate: fs.statSync(file).mtime
   };
 }
 
-function publicationDate(file) {
-  try {
-    const iso = execFileSync('git', ['log', '-1', '--format=%cI', '--', relative(ROOT, file)], {
-      cwd: ROOT,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim();
-    if (iso && !Number.isNaN(Date.parse(iso))) return new Date(iso);
-  } catch { /* Fall back for source archives without git history. */ }
-  return statSync(file).mtime;
+function bookEntries() {
+  const file = path.join(ROOT, 'data', 'books.json');
+  if (!fs.existsSync(file)) return [];
+  const catalog = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!Array.isArray(catalog)) throw new Error('data/books.json must contain an array');
+  const catalogMtime = fs.statSync(file).mtime;
+  return catalog.filter((book) => book && book.active !== false && book.url)
+    .map((book) => {
+      const parsed = new URL(book.url);
+      if (parsed.protocol !== 'https:' || parsed.hostname !== 'books2read.com') {
+        throw new Error('Unverified/non-Books2Read book URL: ' + book.url);
+      }
+      parsed.searchParams.set('utm_source', 'rss');
+      parsed.searchParams.set('utm_medium', 'feed');
+      parsed.searchParams.set('utm_campaign', 'books');
+      const date = book.pubDate ? new Date(book.pubDate) : catalogMtime;
+      if (Number.isNaN(date.getTime())) throw new Error('Invalid pubDate for book: ' + book.title);
+      return {
+        title: String(book.title || '').trim(),
+        description: String(book.description || '').trim(),
+        url: parsed.toString(),
+        category: 'Book',
+        pubDate: date
+      };
+    })
+    .filter((book) => {
+      if (!book.title || !book.description) throw new Error('Active books require title and description');
+      return true;
+    });
 }
 
 const xmlEscape = (value) => String(value)
   .replace(/&/g, '&amp;')
   .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;');
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&apos;');
 
-export function buildFeed(files = discoverPages(), now = new Date()) {
-  const seen = new Set();
-  const entries = files.map((file) => {
-    const metadata = readPageMetadata(file);
-    if (seen.has(metadata.url)) return null;
-    seen.add(metadata.url);
-    return { ...metadata, pubDate: publicationDate(file) };
-  }).filter(Boolean).sort((a, b) => b.pubDate - a.pubDate || a.url.localeCompare(b.url));
-
+export function buildFeed(now = new Date()) {
+  const unique = new Map();
+  for (const entry of [...discoverPages().map(readPageMetadata), ...bookEntries()]) {
+    if (!unique.has(entry.url)) unique.set(entry.url, entry);
+  }
+  const entries = [...unique.values()]
+    .sort((a, b) => b.pubDate - a.pubDate || a.url.localeCompare(b.url));
   const items = entries.map((entry) => [
     '  <item>',
     '    <title>' + xmlEscape(entry.title) + '</title>',
@@ -107,30 +161,29 @@ export function buildFeed(files = discoverPages(), now = new Date()) {
     '    <guid isPermaLink="true">' + xmlEscape(entry.url) + '</guid>',
     '    <pubDate>' + entry.pubDate.toUTCString() + '</pubDate>',
     '    <description>' + xmlEscape(entry.description) + '</description>',
-    '  </item>',
+    '    <category>' + entry.category + '</category>',
+    '  </item>'
   ].join('\n')).join('\n');
-
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0">',
     '<channel>',
-    '  <title>Quickwell: tools and guides</title>',
-    '  <link>' + xmlEscape(SITE) + '/</link>',
-    '  <description>New and updated Quickwell tools and practical guides.</description>',
-    '  <language>en</language>',
+    '  <title>Quickwell: tools, guides &amp; books</title>',
+    '  <link>' + SITE + '</link>',
+    '  <description>New Quickwell tools, practical guides and published books.</description>',
+    '  <language>en-us</language>',
     '  <lastBuildDate>' + now.toUTCString() + '</lastBuildDate>',
     '  <generator>Quickwell RSS generator</generator>',
     items,
     '</channel>',
     '</rss>',
-    '',
+    ''
   ].join('\n');
 }
 
-const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
-if (isMain) {
-  const pages = discoverPages();
-  const feed = buildFeed(pages);
-  writeFileSync(OUTPUT, feed);
-  console.log('feed.xml: generated ' + (feed.match(/<item>/g) || []).length + ' items from ' + pages.length + ' HTML files');
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve('scripts/generate-feed.js')) {
+  const xml = buildFeed();
+  fs.writeFileSync(OUTPUT, xml);
+  const count = (xml.match(/<item>/g) || []).length;
+  console.log('feed.xml: generated ' + count + ' unique Tool, Guide and Book items');
 }

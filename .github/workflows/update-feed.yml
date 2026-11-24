@@ -1,0 +1,77 @@
+name: Update Quickwell RSS feed
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - '**/*.html'
+      - 'catalog/tools.json'
+      - 'data/books.json'
+      - 'scripts/generate-feed.js'
+      - '.github/workflows/update-feed.yml'
+      - 'site.config.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quickwell-update-feed
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install existing test dependencies
+        run: npm ci
+
+      - name: Generate RSS 2.0 feed
+        run: node scripts/generate-feed.js
+
+      - name: Run complete repository test suite
+        run: npm test
+
+      - name: Validate RSS 2.0 XML
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse("feed.xml").getroot()
+          assert root.tag == "rss" and root.attrib.get("version") == "2.0"
+          channel = root.find("channel")
+          assert channel is not None
+          seen = set()
+          for item in channel.findall("item"):
+              for field in ("title", "link", "guid", "pubDate", "description", "category"):
+                  assert item.findtext(field), f"Missing {field} in RSS item"
+              assert item.findtext("category") in {"Tool", "Guide", "Book"}
+              guid = item.findtext("guid")
+              assert guid not in seen, f"Duplicate RSS GUID: {guid}"
+              seen.add(guid)
+              assert item.find("guid").attrib.get("isPermaLink") == "true"
+          print(f"Validated RSS 2.0: {len(seen)} unique items")
+          PY
+
+      - name: Commit and push updated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          if git diff --cached --quiet; then
+            echo "feed.xml is already current."
+            exit 0
+          fi
+          git commit -m "chore: regenerate Quickwell RSS feed [skip ci]"
+          git push origin HEAD:main
