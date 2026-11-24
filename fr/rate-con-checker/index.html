@@ -156,7 +156,7 @@
   function near(t, re, re2, span = 140) { const g = new RegExp(re.source, 'gi'); let m; while ((m = g.exec(t))) { const w = t.slice(Math.max(0, m.index - span), m.index + span); if (re2.test(w)) return m; } return null; }
   const RULES = [
     { id: 'detention', title: 'Detention pay', why: 'Without a written detention rate you can wait hours for free.', ask: 'Please add detention of $LIMIT_DET/hr after LIMIT_FREE hours free, starting at check-in, paid in 15-minute increments.',
-      run(t, L) { const m = /detention/i.exec(t); if (!m) return { status: 'red', detail: 'No detention terms found.' };
+      run(t, L) { const m = /detention|demora|surestaries/i.exec(t); if (!m) return { status: 'red', detail: 'No detention terms found.' };
         const rate = /detention[^.\n]{0,90}?\$\s?(\d+(?:\.\d{1,2})?)\s*(?:\/|per)\s*(?:hr|hour)/i.exec(t) || /\$\s?(\d+(?:\.\d{1,2})?)\s*(?:\/|per)\s*(?:hr|hour)[^.\n]{0,60}?detention/i.exec(t);
         const free = /(\d+(?:\.\d)?)\s*(?:hrs?|hours?)\s*(?:of\s*)?free/i.exec(t) || /free\s*time[^.\n]{0,40}?(\d+(?:\.\d)?)\s*(?:hrs?|hours?)/i.exec(t);
         const snip = snipAt(t, m.index);
@@ -170,7 +170,7 @@
         const snip = snipAt(t, m.index); if (near(t, /\btonu\b|truck ordered/, /discretion|may be paid|if approved/i)) return { status: 'flag', detail: 'TONU is at the broker\'s discretion, so it may never be paid.', snip };
         const amt = /(?:tonu|truck ordered,? not used)[^.\n]{0,60}?\$\s?([\d,]+)/i.exec(t); return { status: 'pass', detail: amt ? `TONU ${money(num(amt[1]))}.` : 'TONU is mentioned.', snip }; } },
     { id: 'layover', title: 'Layover pay', why: 'If you\'re held overnight, layover pays for the lost day.', ask: 'Please add layover of $250/day if the truck is held overnight.',
-      run(t) { const m = /layover/i.exec(t); return m ? { status: 'pass', detail: 'Layover is addressed.', snip: snipAt(t, m.index) } : { status: 'missing', detail: 'No layover terms found.' }; } },
+      run(t) { const m = /layover|demora|surestaries/i.exec(t); return m ? { status: 'pass', detail: 'Layover is addressed.', snip: snipAt(t, m.index) } : { status: 'missing', detail: 'No layover terms found.' }; } },
     { id: 'lumper', title: 'Lumper reimbursement', why: 'Unloading fees can run $100–$400. Make sure the broker pays them back.', ask: 'Please confirm lumper fees are reimbursed in full within 24 hours of receiving the receipt.',
       run(t) { const m = /lumper/i.exec(t); if (!m) return { status: 'info', detail: 'Lumper isn\'t mentioned. Ask before you go if the receiver uses lumpers.' };
         const snip = snipAt(t, m.index);
