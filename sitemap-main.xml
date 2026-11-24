@@ -16,11 +16,29 @@
   <url><loc>https://quickwell.app/fuelgauge/</loc></url>
   <url><loc>https://quickwell.app/lotwise/</loc></url>
   <url><loc>https://quickwell.app/rate-con-checker/</loc></url>
-  <url><loc>https://quickwell.app/haul-audit/</loc></url>
+  <url><loc>https://quickwell.app/haul-audit/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/haul-audit/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/haul-audit/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/haul-audit/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/haul-audit/"/></url>
   <url><loc>https://quickwell.app/royalty-check/</loc></url>
   <url><loc>https://quickwell.app/audit-kit/</loc></url>
   <url><loc>https://quickwell.app/audit-kit/16-rules-printable/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://quickwell.app/plot-file-checker/</loc></url>
+  <url><loc>https://quickwell.app/plot-file-checker/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/plot-file-checker/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/plot-file-checker/"/></url>
+  <url><loc>https://quickwell.app/es/eudr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/plot-file-checker/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/plot-file-checker/"/></url>
+  <url><loc>https://quickwell.app/fr/eudr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/plot-file-checker/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/eudr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/plot-file-checker/"/></url>
   <url><loc>https://quickwell.app/permit-watch/</loc></url>
   <url><loc>https://quickwell.app/vendor-check/</loc></url>
   <url><loc>https://quickwell.app/spare-key/</loc></url>
@@ -28,7 +46,21 @@
   <url><loc>https://quickwell.app/footsure/</loc></url>
   <url><loc>https://quickwell.app/footsure/flyer/</loc></url>
   <url><loc>https://quickwell.app/plus/</loc></url>
-  <url><loc>https://quickwell.app/commodities/</loc></url>
+  <url><loc>https://quickwell.app/commodities/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/commodities/"/></url>
+  <url><loc>https://quickwell.app/es/commodities/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/commodities/"/></url>
+  <url><loc>https://quickwell.app/fr/commodities/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://quickwell.app/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://quickwell.app/es/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://quickwell.app/fr/commodities/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://quickwell.app/commodities/"/></url>
   <url><loc>https://quickwell.app/commodities/brief/</loc></url>
   <url><loc>https://quickwell.app/commodities/where-to-buy/</loc></url>
   <url><loc>https://quickwell.app/saver/</loc></url>
