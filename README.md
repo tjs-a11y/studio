@@ -27,6 +27,7 @@ Each tool has a free starting point; any paid options are shown inside the tool.
 
 - [Find recurring charges in a bank statement](https://quickwell.app/guides/find-recurring-bank-statement-charges/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_saver_recurring_guide_20261119&utm_content=bank_statement_guide&ref=github-saver-recurring-guide) — follow a source-backed review process for repeat payments and unfamiliar charges, then open Quickwell Saver if you want to scan your own bank or card export in your browser.
 - [When your fixed electricity rate ends: the roll-off](https://quickwell.app/learn/power-bills/when-a-fixed-rate-plan-ends/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_bill_radar_rolloff_guide_20261123&utm_content=fixed_rate_rolloff&ref=github-bill-radar-rolloff) — understand the month-to-month transition in deregulated markets, then use Bill Radar to map your own plan end date and estimate the next 12 months.
+- [Truck repair estimate checklist](https://quickwell.app/guides/truck-repair-estimate-fair-price-checklist/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_fair_price_truck_repair_guide_20261124&utm_content=truck_repair_estimate_checklist&ref=github-readme-fair-price-guide) — review the written scope, labor, parts and diagnostic charges before authorizing truck or trailer work, then use Fair Price to organize the estimate and follow-up questions.
 
 ## Adding a tool
 1. Copy `_template/` to `/<tool-id>/` and build the tool.
