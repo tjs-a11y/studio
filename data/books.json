@@ -5,7 +5,7 @@
     "description": "A practical blueprint covering market structure, order types, technical indicators, and risk management for trading digital currencies.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -14,7 +14,7 @@
     "description": "Actionable frameworks for building discipline, emotional control, and high-performance decision-making.",
     "category": "Book",
     "niche": "mindset",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -41,7 +41,7 @@
     "description": "Techniques and market-cycle strategies for navigating cryptocurrency volatility.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -50,7 +50,7 @@
     "description": "Understanding Bitcoin supply cycles, miner economics, and halving market dynamics.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -59,7 +59,7 @@
     "description": "Strategies for evaluating digital assets and building long-term crypto wealth.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -68,7 +68,7 @@
     "description": "Position sizing, entry timing, and profit-taking playbooks for crypto traders.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -77,7 +77,7 @@
     "description": "How DAOs govern protocols, manage treasuries, and coordinate decentralized communities.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   },
   {
@@ -86,7 +86,7 @@
     "description": "An overview of decentralized finance, digital rails, and modern financial infrastructure.",
     "category": "Book",
     "niche": "crypto",
-    "active": true,
+    "active": false,
     "pubDate": "2026-11-24T12:00:00Z"
   }
 ]
