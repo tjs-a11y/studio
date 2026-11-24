@@ -40,6 +40,10 @@ export function discoverPages() {
       if (fs.existsSync(path.join(localized, 'index.html'))) tools.push(...walk(localized, (name) => name.toLowerCase() === 'index.html'));
     }
   }
+  for (const locale of ['es', 'fr']) {
+    const alias = path.join(ROOT, locale, 'eudr', 'index.html');
+    if (fs.existsSync(alias)) tools.push(alias);
+  }
   const guides = walk(path.join(ROOT, 'guides'), (name) =>
     /\.html?$/i.test(name) && !EXCLUDED_GUIDE_FILES.has(name.toLowerCase()));
   return [...new Set([...tools, ...guides])]
