@@ -222,7 +222,7 @@ window.fetch = function (input, init) {
     if (parsedUrl && parsedUrl.pathname === '/api/event' && method === 'POST' &&
         init && typeof init.body === 'string') {
       var parsed = JSON.parse(init.body);
-      var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
+      var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner', 'rate-con-checker'];
       if (tools.includes(parsed.tool) && ['open', 'check', 'demo', 'tool_completed'].includes(parsed.event)) {
         payload = { tool: parsed.tool, event: parsed.event };
         window.qwTrack(payload.tool, payload.event);
