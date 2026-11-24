@@ -96,7 +96,7 @@ const es = {
 
 const fr = {
   'buy.english': 'Ce guide est en anglais.',
-  'h1.board': 'Prix des matières premières, devises et rendements',
+  'h1.board': 'Cours Officiels des Matières Premières et Commodités Mondiales',
   'brand.by': 'par Quickwell',
   'nav.board': 'Prix', 'nav.brief': 'Point quotidien', 'nav.tracker': 'Mes avoirs', 'nav.buy': 'Où acheter',
   'ctl.lang': 'Langue', 'ctl.ccy': 'Devise d\'affichage',
