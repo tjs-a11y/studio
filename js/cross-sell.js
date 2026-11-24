@@ -1,9 +1,9 @@
 (function(){'use strict';
 var origin='https://quickwell.app',offers={
-'rate-con-checker':[['Haul Audit','/haul-audit/','Compare this rate con against your final broker settlement.'],['Fuelgauge','/fuelgauge/','Review fuel margin by product and location.'],['New Authority Audit Kit','/audit-kit/','Build a new-carrier safety audit binder.']],
-'haul-audit':[['Rate Con Checker','/rate-con-checker/','Catch costly broker terms before signing.'],['Fuelgauge','/fuelgauge/','Find fuel margin leaks by product and site.'],['New Authority Audit Kit','/audit-kit/','Organize new-carrier safety audit records.']],
-'fuelgauge':[['Haul Audit','/haul-audit/','Compare broker settlement with expected revenue.'],['Rate Con Checker','/rate-con-checker/','Review broker terms before accepting a load.'],['New Authority Audit Kit','/audit-kit/','Organize new-carrier safety records.']],
-'audit-kit':[['Rate Con Checker','/rate-con-checker/','Review broker terms before accepting a load.'],['Haul Audit','/haul-audit/','Check settlement math and deductions.'],['Fuelgauge','/fuelgauge/','Inspect fuel margin by site and product.']],
+'rate-con-checker':[['Haul Audit','/haul-audit/','Compare this rate con against your final broker settlement'],['Fuelgauge','/fuelgauge/','Calculate your true fuel cost per mile'],['New Authority Audit Kit','/audit-kit/','Prepare for your FMCSA new entrant safety audit']],
+'haul-audit':[['Rate Con Checker','/rate-con-checker/','Check your next broker rate confirmation before signing'],['Fuelgauge','/fuelgauge/','Track fuel cost per mile across loads']],
+'fuelgauge':[['Rate Con Checker','/rate-con-checker/','Check your next broker rate confirmation before signing'],['Haul Audit','/haul-audit/','Compare this rate con against your final broker settlement']],
+'audit-kit':[['Rate Con Checker','/rate-con-checker/','Check your next broker rate confirmation before signing'],['Haul Audit','/haul-audit/','Compare this rate con against your final broker settlement']],
 'bill-radar':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.'],['Gatherloom','https://gatherloom.app/','Plan gifts and a spending limit in Gatherloom.']],
 'saver':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.'],['Gatherloom','https://gatherloom.app/','Plan gifts and a spending limit in Gatherloom.']],
 'fair-price':[['Quickwell Plus · $4.99/mo','/plus/','Unlock more everyday tools.'],['Quickwell Offers','/offers/','Browse curated financial, energy and DIY offers.']],
