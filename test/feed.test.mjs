@@ -79,6 +79,7 @@ test('all active books are included and inactive placeholders are excluded', () 
     url.searchParams.set('utm_source', 'rss');
     url.searchParams.set('utm_medium', 'feed');
     url.searchParams.set('utm_campaign', 'books');
+    url.searchParams.set('utm_content', book.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
     assert.ok(items.some((item) => tag(item, 'link') === url.toString()), 'missing book: ' + book.title);
   }
   for (const book of inactive) {
