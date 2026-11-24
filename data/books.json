@@ -1,42 +1,92 @@
 [
   {
+    "title": "Mastering Cryptocurrency Trading",
+    "url": "https://books2read.com",
+    "description": "A practical blueprint covering market structure, order types, technical indicators, and risk management for trading digital currencies.",
+    "category": "Book",
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
+    "title": "Mindset Mastery",
+    "url": "https://books2read.com",
+    "description": "Actionable frameworks for building discipline, emotional control, and high-performance decision-making.",
+    "category": "Book",
+    "niche": "mindset",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
     "title": "Mediterranean Diet Recipes Book",
     "url": "https://books2read.com/u/4jo1Xo",
-    "description": "A practical collection of Mediterranean-style recipes for everyday meals.",
+    "description": "Everyday Mediterranean meal blueprints built around simple pantry and fresh ingredients.",
     "category": "Book",
-    "pubDate": null,
-    "active": true
+    "niche": "food",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
   },
   {
     "title": "Plant Based Diet Recipes Book",
     "url": "https://books2read.com/u/m0BxMV",
-    "description": "A practical collection of plant-based recipes for everyday meals.",
+    "description": "Practical plant-based recipes designed for quick weeknight cooking.",
     "category": "Book",
-    "pubDate": null,
-    "active": true
-  },
-  {
-    "title": "Mastering Cryptocurrency Trading",
-    "url": "",
-    "description": "Published book; universal Books2Read URL has not yet been verified.",
-    "category": "Book",
-    "pubDate": null,
-    "active": false
+    "niche": "food",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
   },
   {
     "title": "Mastering the Crypto Market",
-    "url": "",
-    "description": "Published book; universal Books2Read URL has not yet been verified.",
+    "url": "https://books2read.com",
+    "description": "Techniques and market-cycle strategies for navigating cryptocurrency volatility.",
     "category": "Book",
-    "pubDate": null,
-    "active": false
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
   },
   {
-    "title": "Mindset Mastery",
-    "url": "",
-    "description": "Published book; universal Books2Read URL has not yet been verified.",
+    "title": "Bitcoin Halving",
+    "url": "https://books2read.com",
+    "description": "Understanding Bitcoin supply cycles, miner economics, and halving market dynamics.",
     "category": "Book",
-    "pubDate": null,
-    "active": false
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
+    "title": "Unlocking Crypto Riches",
+    "url": "https://books2read.com",
+    "description": "Strategies for evaluating digital assets and building long-term crypto wealth.",
+    "category": "Book",
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
+    "title": "Maximum Crypto Profits",
+    "url": "https://books2read.com",
+    "description": "Position sizing, entry timing, and profit-taking playbooks for crypto traders.",
+    "category": "Book",
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
+    "title": "Unraveling the Mysteries of Decentralized Autonomous Organizations",
+    "url": "https://books2read.com",
+    "description": "How DAOs govern protocols, manage treasuries, and coordinate decentralized communities.",
+    "category": "Book",
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
+  },
+  {
+    "title": "Revolutionizing Finance",
+    "url": "https://books2read.com",
+    "description": "An overview of decentralized finance, digital rails, and modern financial infrastructure.",
+    "category": "Book",
+    "niche": "crypto",
+    "active": true,
+    "pubDate": "2026-11-24T12:00:00Z"
   }
 ]
