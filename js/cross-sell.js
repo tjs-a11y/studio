@@ -97,7 +97,12 @@ function href(path){
 }
 var targets=['#result','#out','#results','#board','#hero','#card-out','#sos-out','#stoppedResults','#s-result','#premout','#copyOut'];
 function target(){
- for(var i=0;i<targets.length;i++){var n=document.querySelector(targets[i]);if(n&&getComputedStyle(n).display!=='none')return n;}
+ var found=false;
+ for(var i=0;i<targets.length;i++){
+  var n=document.querySelector(targets[i]);
+  if(n){found=true;var cs=getComputedStyle(n);if(!n.hidden&&cs.display!=='none'&&cs.visibility!=='hidden')return n;}
+ }
+ if(found)return null;
  return document.querySelector('main')||document.querySelector('[role="main"]')||document.body;
 }
 function render(){
