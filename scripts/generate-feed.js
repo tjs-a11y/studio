@@ -97,7 +97,7 @@ export function readPageMetadata(file) {
   const canonicalTag = [...html.matchAll(/<link\b[^>]*>/gi)]
     .map((match) => parseAttributes(match[0]))
     .find((attr) => (attr.rel || '').toLowerCase().split(/\s+/).includes('canonical') && attr.href);
-  const imageTag = [...html.matchAll(/<meta\\b[^>]*>/gi)]
+  const imageTag = [...html.matchAll(/<meta\b[^>]*>/gi)]
     .map((match) => parseAttributes(match[0]))
     .find((attr) => (attr.property || '').toLowerCase() === 'og:image' && attr.content);
   const relativeFile = path.relative(ROOT, file).split(path.sep).join('/');
