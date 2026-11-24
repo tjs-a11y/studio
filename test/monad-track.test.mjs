@@ -174,3 +174,36 @@ test('the Quickwell-to-NorthStar owned link carries campaign tags', () => {
   const homepage = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   assert.match(homepage, /https:\/\/northstardeliveryservice\.com\/\?utm_source=quickwell&amp;utm_medium=owned&amp;utm_campaign=portfolio_crosslink&amp;utm_content=homepage-for-truckers/);
 });
+
+
+test('same-origin navigation preserves only allowlisted campaign attribution', () => {
+  const h = harness({
+    path: '/guides/truck-repair-estimate-fair-price-checklist/',
+    search: '?utm_source=github&utm_medium=referral&utm_campaign=quickwell_fair_price_truck_repair_guide_20261124&utm_content=truck_repair_estimate_checklist&ref=github-readme-fair-price-guide&utm_term=private-search&session_id=private_123'
+  });
+  const anchor = { href: 'https://quickwell.app/fair-price/?demo=1' };
+  const event = { target: { closest: (selector) => selector === 'a[href]' ? anchor : null } };
+  for (const handler of h.windowListeners.click || []) handler(event);
+  const destination = new URL(anchor.href);
+  assert.equal(destination.pathname, '/fair-price/');
+  assert.equal(destination.searchParams.get('demo'), '1');
+  assert.equal(destination.searchParams.get('utm_source'), 'github');
+  assert.equal(destination.searchParams.get('utm_medium'), 'referral');
+  assert.equal(destination.searchParams.get('utm_campaign'), 'quickwell_fair_price_truck_repair_guide_20261124');
+  assert.equal(destination.searchParams.get('utm_content'), 'truck_repair_estimate_checklist');
+  assert.equal(destination.searchParams.get('ref'), 'github-readme-fair-price-guide');
+  assert.equal(destination.searchParams.has('utm_term'), false);
+  assert.equal(destination.searchParams.has('session_id'), false);
+  assert.equal(central(h.calls).some((item) => item.event_type === 'outbound_click'), false);
+});
+
+test('same-page fragment links are not rewritten with campaign parameters', () => {
+  const h = harness({
+    path: '/guides/truck-repair-estimate-fair-price-checklist/',
+    search: '?utm_source=github&utm_medium=referral&utm_campaign=guide'
+  });
+  const anchor = { href: '#scope' };
+  const event = { target: { closest: (selector) => selector === 'a[href]' ? anchor : null } };
+  for (const handler of h.windowListeners.click || []) handler(event);
+  assert.equal(anchor.href, '#scope');
+});
