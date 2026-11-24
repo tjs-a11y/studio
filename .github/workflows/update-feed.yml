@@ -9,6 +9,7 @@ on:
       - 'catalog/tools.json'
       - 'data/books.json'
       - 'scripts/generate-feed.js'
+      - 'test/feed.test.mjs'
       - '.github/workflows/update-feed.yml'
       - 'site.config.json'
   workflow_dispatch:
@@ -32,7 +33,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
           cache: npm
 
       - name: Install existing test dependencies
