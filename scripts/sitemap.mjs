@@ -13,6 +13,7 @@ const today = process.env.SITEMAP_DATE || new Date().toISOString().slice(0, 10);
 // Each tool page, plus any sub-page a tool folder holds (e.g. audit-kit/16-rules-printable/).
 const subPages = (id) => readdirSync(join(root, id), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, id, d.name, 'index.html'))).map((d) => `${id}/${d.name}/index.html`).sort();
 const tools = JSON.parse(readFileSync(join(root, 'catalog', 'tools.json'), 'utf8')).tools.flatMap((t) => [`${t.id}/index.html`, ...subPages(t.id)]);
+const localizedTools = ['es', 'fr'].flatMap((locale) => tools.map((t) => `${locale}/${t.id}/index.html`).filter((f) => existsSync(join(root, f)));
 const guides = existsSync(join(root, 'guides'))
   ? ['guides/index.html', ...readdirSync(join(root, 'guides'), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(root, 'guides', d.name, 'index.html'))).map((d) => `guides/${d.name}/index.html`).sort()]
   : [];
@@ -22,7 +23,7 @@ const SECTIONS = ['play'];
 const STANDALONE = ['weekend/index.html', 'brain-pass/index.html', 'guides/trucking-settlement-disputes.html', 'guides/understanding-mineral-royalty-deductions.html', 'port-watcher/index.html', 'hydro-flow/index.html', 'scale-audit/index.html', 'discover/index.html', 'offers/index.html', ...['shifting-vibrations-manifest','energy-revolution-system','phytomem-one','water-freedom-system','genius-switch-original','prodentim','ted-plans-diy','audisoothe'].map((id) => `offers/${id}/index.html`), 'offers/audisoothe/hearing-supplement-buyer-checklist/index.html', 'offers/energy-revolution-system/home-energy-diy-claims-checklist/index.html', 'offers/genius-switch-original/audio-program-buyer-checklist/index.html', 'offers/phytomem-one/supplement-label-and-interaction-checklist/index.html', 'offers/prodentim/oral-probiotic-buyer-questions/index.html', 'offers/shifting-vibrations-manifest/digital-audio-program-what-to-verify/index.html', 'offers/ted-plans-diy/downloadable-diy-plans-vetting-checklist/index.html', 'offers/water-freedom-system/diy-water-system-safety-checklist/index.html'];
 const sections = SECTIONS.filter((s) => existsSync(join(root, s, 'index.html'))).flatMap((s) => [`${s}/index.html`, ...subPages(s)]);
 const standalone = STANDALONE.filter((f) => existsSync(join(root, f)));
-export const MAIN_PAGES = [...new Set(['index.html', ...tools, ...sections, ...standalone, ...guides, 'privacy.html', 'terms.html'])];
+export const MAIN_PAGES = [...new Set(['index.html', ...tools, ...localizedTools, ...sections, ...standalone, ...guides, 'privacy.html', 'terms.html'])];
 
 const xml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const entries = MAIN_PAGES.map((f) => {
