@@ -1,21 +1,22 @@
 {
-  "fetched": "2026-11-24T20:50:05.036Z",
-  "date": "2026-11-24",
+  "fetched": "2026-11-25T20:07:01.483Z",
+  "date": "2026-11-25",
   "source": "https://quickwell.app/api/stats",
   "enabled": true,
-  "generated": "2026-11-24T20:50:04.997Z",
+  "generated": "2026-11-25T20:07:01.429Z",
   "visits": {
-    "total": 550,
-    "today": 174
+    "total": 563,
+    "today": 11
   },
   "total_checks": 0,
+  "total_completed": 0,
   "total_trials": 0,
   "total_subs": 0,
   "total_demos": 1,
   "tools": {
     "dinner": {
       "opens": 9,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -25,11 +26,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "copycat": {
       "opens": 4,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -39,11 +42,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "kitchen": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -53,7 +58,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "fair-price": {
       "opens": 12,
@@ -67,11 +74,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "proof": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -81,11 +90,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "keep-the-receipt": {
       "opens": 1,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -95,7 +106,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "double-dose": {
       "opens": 2,
@@ -109,7 +122,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "before-you-sign": {
       "opens": 0,
@@ -123,7 +138,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "roadside-sos": {
       "opens": 0,
@@ -137,11 +154,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "bill-radar": {
       "opens": 28,
-      "opens_today": 21,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -151,7 +170,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 1,
-      "demos_today": 1
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "vigless": {
       "opens": 0,
@@ -165,7 +186,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "tradepath": {
       "opens": 0,
@@ -179,11 +202,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "fuelgauge": {
       "opens": 2,
-      "opens_today": 1,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -193,7 +218,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "lotwise": {
       "opens": 0,
@@ -207,11 +234,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "rate-con-checker": {
-      "opens": 3,
-      "opens_today": 1,
+      "opens": 6,
+      "opens_today": 2,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -221,11 +250,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "haul-audit": {
       "opens": 2,
-      "opens_today": 2,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 1,
@@ -235,7 +266,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "royalty-check": {
       "opens": 0,
@@ -249,11 +282,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "audit-kit": {
-      "opens": 1,
-      "opens_today": 0,
+      "opens": 2,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -263,7 +298,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "plot-file-checker": {
       "opens": 0,
@@ -277,7 +314,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "permit-watch": {
       "opens": 0,
@@ -291,7 +330,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "vendor-check": {
       "opens": 4,
@@ -305,7 +346,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "spare-key": {
       "opens": 7,
@@ -319,11 +362,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "brain-pass": {
-      "opens": 15,
-      "opens_today": 0,
+      "opens": 16,
+      "opens_today": 1,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -333,7 +378,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "footsure": {
       "opens": 2,
@@ -347,11 +394,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "commodities": {
       "opens": 9,
-      "opens_today": 7,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -361,7 +410,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "saver": {
       "opens": 8,
@@ -375,7 +426,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "pilot": {
       "opens": 0,
@@ -389,11 +442,13 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "shield": {
       "opens": 6,
-      "opens_today": 4,
+      "opens_today": 0,
       "checks": 0,
       "checks_today": 0,
       "upgrade_clicks": 0,
@@ -403,7 +458,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     },
     "utility-pipeline": {
       "opens": 0,
@@ -417,7 +474,9 @@
       "subs": 0,
       "subs_today": 0,
       "demos": 0,
-      "demos_today": 0
+      "demos_today": 0,
+      "completed": 0,
+      "completed_today": 0
     }
   },
   "outbound": {
