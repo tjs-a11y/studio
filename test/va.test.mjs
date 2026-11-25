@@ -117,6 +117,16 @@ test('tool_completed emits the exact named Vercel conversion event with only too
   assert.doesNotMatch(JSON.stringify(completion), /private broker terms/);
 });
 
+test('Rate Con Haul Audit cross-sell emits only fixed tool and source labels', () => {
+  const { window, analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/rate-con-checker/');
+  window.location.search = '?ref=rate-con-checker';
+  window.qwTrack('rate-con-checker', 'cross_sell_haul_audit_click');
+  const click = analyticsEvents.find(([, payload]) => payload.name === 'tool_cross_sell_haul_audit_click');
+  assert.ok(click);
+  assert.deepEqual({ ...click[1].data }, { tool: 'rate-con-checker', source: 'rate-con-checker' });
+  assert.doesNotMatch(JSON.stringify(click), /broker|rate confirmation|load details/i);
+});
+
 test('Shield remains excluded from Vercel Web Analytics events', () => {
   const { analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/shield/');
   assert.equal(analyticsEvents.length, 0);
