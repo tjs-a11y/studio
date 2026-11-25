@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Electric Bill Calculator &amp; Rate Roll-Off | Bill Radar</title>
-<meta name="description" content="Estimate your electricity energy charges, model a rate change and see when a fixed plan rolls off. Adjust every assumption privately in your browser.">
+<title>Estimate Electric Bill Rate Increases | Bill Radar</title>
+<meta name="description" content="Estimate an electricity rate increase and fixed-plan roll-off using your own kWh and rate. Your assumptions stay in your browser.">
 <link rel="canonical" href="https://quickwell.app/bill-radar/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quickwell.app/bill-radar/">
-<meta property="og:title" content="Electric Bill Calculator &amp; Rate Roll-Off | Bill Radar">
-<meta property="og:description" content="Estimate electricity energy charges, model a rate change and see when a fixed plan rolls off. Runs in your browser; nothing is uploaded.">
+<meta property="og:title" content="Estimate Electric Bill Rate Increases | Bill Radar">
+<meta property="og:description" content="Estimate an electricity rate increase and fixed-plan roll-off using your own kWh and rate. Your assumptions stay in your browser.">
 <meta property="og:image" content="https://quickwell.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Electric Bill Calculator &amp; Rate Roll-Off | Bill Radar">
-<meta name="twitter:description" content="Estimate electricity charges, forecast a rate change and see when your fixed plan rolls off. Adjust every assumption privately in your browser.">
+<meta name="twitter:title" content="Estimate Electric Bill Rate Increases | Bill Radar">
+<meta name="twitter:description" content="Estimate an electricity rate increase and fixed-plan roll-off using your own kWh and rate. Your assumptions stay in your browser.">
 <meta name="twitter:image" content="https://quickwell.app/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bill Radar","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimate electricity energy charges from monthly kWh and rate, model rate changes and a fixed-plan roll-off date. This is not a full utility-bill calculator; delivery charges, taxes and other fees are not separately calculated."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Bill Radar","url":"https://quickwell.app/bill-radar/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimate electricity energy charges from monthly kWh and rate, model rate changes and a fixed-plan roll-off date. This is not a full utility-bill calculator; delivery charges, taxes and other fees are not separately calculated."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Bill Radar calculate my complete utility bill?","acceptedAnswer":{"@type":"Answer","text":"No. It estimates the energy-charge portion from monthly kWh and cents-per-kWh rate. It does not separately calculate delivery charges, taxes, utility riders, fixed fees or credits."}},{"@type":"Question","name":"Does Bill Radar upload my usage or rate?","acceptedAnswer":{"@type":"Answer","text":"No. The forecast runs in your browser. Anonymous analytics record only fixed tool and action labels, not your kWh, rate, contract date or estimated bill."}},{"@type":"Question","name":"Can I model a fixed-rate plan ending?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the month your fixed-rate contract ends and adjust the assumed rate increase. The result is an estimate, not your utility's actual future rate."}}]},{"@type":"Organization","@id":"https://quickwell.app/#org","name":"Quickwell","url":"https://quickwell.app/"}]}</script>
 <style>
   :root{
     --bg:#f3f5f7; --surface:#ffffff; --ink:#152130; --ink-dim:#5a6775; --line:#dfe5ea;
@@ -84,7 +84,7 @@
 <div class="wrap">
   <header class="top">
     <div class="eyebrow">Power bills</div>
-    <h1>Estimate your electric bill before your rate changes</h1>
+    <h1>Estimate an Electric Bill Increase After a Rate Change</h1>
     <p class="lede">Use your monthly electricity usage and energy rate to model the energy-charge portion of your bill, test a rate increase and see when a fixed-rate plan rolls off. Adjust the assumptions yourself — your entries stay in your browser.</p>
   </header>
 
@@ -131,6 +131,13 @@
       <p class="muted" style="margin-top:4px">Shares only that you checked — never your usage, rate, or bill.</p>
       <p style="margin-top:12px"><a href="/go/gatherloom/?from=bill-radar">Budgeting for the holidays too? Plan gifts and a spending limit in Gatherloom, our gift-list app →</a></p>
     </div>
+  </section>
+
+  <section class="faq" aria-labelledby="bill-radar-faq">
+    <h2 id="bill-radar-faq" style="font-size:20px">Bill Radar questions</h2>
+    <details><summary>Does this calculate my complete electricity bill?</summary><p>No. It estimates the energy-charge portion using your monthly kWh and cents-per-kWh rate. Delivery charges, taxes, utility riders, fixed fees and credits are not separately calculated.</p></details>
+    <details><summary>Is my usage or rate uploaded?</summary><p>No. Your entries stay in your browser. Anonymous event tracking records only the tool name and action, not your usage, rate, contract date or bill amount.</p></details>
+    <details><summary>Can I model when my fixed-rate plan ends?</summary><p>Yes. Enter the contract end month and adjust the assumed rate increase. The forecast is illustrative and does not retrieve your utility's actual future rate.</p></details>
   </section>
 
   <section>
@@ -244,7 +251,7 @@
     $('out').hidden=false;
     $('out').scrollIntoView({behavior:'smooth',block:'start'});
     // Only fixed tool and event labels are counted; kWh, rates and dates stay on this device.
-    countEvent(isDemo?'demo':'check');
+    countEvent(isDemo?'demo':'tool_completed');
   }
   // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
   countEvent('open');

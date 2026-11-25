@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What Can I Make With What I Have? | Quickwell Dinner</title>
+<title>What Can I Cook With Ingredients I Have? | Quickwell Dinner</title>
 <meta name="description" content="Tap ingredients you have to get three dinner ideas for tonight, plus one thing to buy if needed. Works in your browser; nothing is uploaded.">
 <link rel="canonical" href="https://quickwell.app/dinner/">
 <meta property="og:title" content="What Can I Make With What I Have? | Quickwell Dinner">
@@ -53,7 +53,7 @@
 </head>
 <body>
 <main>
-  <h1>What's for Dinner?</h1>
+  <h1>What Can I Cook With Ingredients I Have?</h1>
   <p class="lede">Open the fridge, tap what you see, and get three dinners you can make <b>tonight</b> — plus the one thing to grab if you want a fourth. No recipe hunting. <b>Nothing you tap is uploaded.</b></p>
 
   <section class="card noprint">
@@ -260,7 +260,7 @@
       html += '<p class="small muted noprint" style="margin-top:4px">Shares only the dinner ideas — never what you tapped in.</p>';
     }
     $("out").innerHTML = html; $("out").hidden = false;
-    countEvent(isDemo ? 'demo' : 'check');
+    countEvent(isDemo ? 'demo' : 'tool_completed');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     $("out").scrollIntoView({ behavior: "smooth", block: "start" });
   }

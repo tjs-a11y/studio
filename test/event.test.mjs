@@ -36,6 +36,20 @@ test('outbound clicks: a known site+target is counted, junk is refused, no PII i
   setStoreForTests(null);
 });
 
+test('tool_completed increments both the legacy check counter and the distinct completion counter', async () => {
+  const seen = [];
+  setStoreForTests(async (...cmds) => { seen.push(...cmds); return []; });
+  try {
+    const response = await event(post({ tool: 'rate-con-checker', event: 'tool_completed', text: 'private rate confirmation' }));
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { ok: true, stored: true });
+    for (const key of ['count:rate-con-checker:completed', 'count:rate-con-checker:completed:' + new Date().toISOString().slice(0,10), 'count:rate-con-checker:checks', 'count:rate-con-checker:checks:' + new Date().toISOString().slice(0,10)]) {
+      assert.ok(seen.some((c) => c[0] === 'INCR' && c[1] === key), key);
+    }
+    assert.ok(seen.every((c) => typeof c[1] === 'string' && c[1].startsWith('count:')));
+  } finally { setStoreForTests(null); }
+});
+
 test('junk is refused', async () => {
   assert.equal((await event(post({ tool: 'nope', event: 'check' }))).status, 400);
   assert.equal((await event(post({ tool: 'plot-file-checker', event: 'drop-table' }))).status, 400);

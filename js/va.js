@@ -5,7 +5,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 var qwLastEvent = Object.create(null);
 window.qwTrack = function (tool, event) {
   var allowedTools = ['dinner', 'copycat', 'kitchen', 'fair-price', 'proof', 'keep-the-receipt', 'double-dose', 'before-you-sign', 'roadside-sos', 'bill-radar', 'vigless', 'tradepath', 'fuelgauge', 'lotwise', 'rate-con-checker', 'haul-audit', 'royalty-check', 'audit-kit', 'plot-file-checker', 'permit-watch', 'vendor-check', 'spare-key', 'brain-pass', 'footsure', 'plus', 'commodities', 'saver', 'pilot', 'shield', 'utility-pipeline'];
-  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real'];
+  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real', 'tool_completed'];
   if (!allowedTools.includes(tool) || !allowedEvents.includes(event)) return;
   var key = tool + ':' + event;
   var now = Date.now();
@@ -21,7 +21,7 @@ window.qwTrack = function (tool, event) {
     else if (ref) source = 'other';
   } catch (e) {}
   try {
-    window.va('event', { name: 'tool_' + event, data: { tool: tool, source: source } });
+    window.va('event', { name: event === 'tool_completed' ? 'tool_completed' : 'tool_' + event, data: { tool: tool, source: source } });
   } catch (e) {}
 };
 
@@ -222,8 +222,8 @@ window.fetch = function (input, init) {
     if (parsedUrl && parsedUrl.pathname === '/api/event' && method === 'POST' &&
         init && typeof init.body === 'string') {
       var parsed = JSON.parse(init.body);
-      var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner'];
-      if (tools.includes(parsed.tool) && ['open', 'check', 'demo'].includes(parsed.event)) {
+      var tools = ['shield', 'saver', 'bill-radar', 'fair-price', 'dinner', 'rate-con-checker'];
+      if (tools.includes(parsed.tool) && ['open', 'check', 'demo', 'tool_completed'].includes(parsed.event)) {
         payload = { tool: parsed.tool, event: parsed.event };
         window.qwTrack(payload.tool, payload.event);
       } else if (parsed.event === 'waitlist' && qwSafeEntity(parsed.tool)) {

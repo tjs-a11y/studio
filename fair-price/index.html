@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Review a Repair or Contractor Estimate | Fair Price</title>
+<title>Contractor Quote Review for Scope Gaps | Fair Price</title>
 <meta name="description" content="Review a repair or contractor estimate for unclear charges, missing scope details and questions to ask. Nothing is uploaded.">
 <link rel="canonical" href="https://quickwell.app/fair-price/">
 <meta property="og:title" content="Review a Repair or Contractor Estimate | Fair Price">
@@ -53,7 +53,7 @@
 </head>
 <body>
 <main>
-  <h1>Review a repair or contractor estimate</h1>
+  <h1>Review a Contractor Quote for Missing Charges and Scope Gaps</h1>
   <p class="lede">Choose the type of estimate, paste the wording, and get a plain-English review of unclear charges, scope gaps and questions to ask before you agree. Fair Price does not look up local market prices or decide whether a quote is too high. Your text stays in your browser — nothing is uploaded.</p>
 
   <section class="card noprint">
@@ -239,7 +239,7 @@
     if (text.trim().length < 3) { $("out").hidden = false; $("out").innerHTML = '<div class="card">Paste or describe the quote first, then check it.</div>'; $("out").scrollIntoView({ behavior: "smooth" }); return; }
     lastText = demo ? "" : text;
     $("out").innerHTML = readHtml(text, c, demo); $("out").hidden = false;
-    countEvent(demo ? 'demo' : 'check');
+    countEvent(demo ? 'demo' : 'tool_completed');
     var sb = $("shareBtn"); if (sb) sb.onclick = function () { doShare(sb); };
     var demoToRealBtn = $("demoToRealBtn");
     if (demoToRealBtn) demoToRealBtn.onclick = function () {
