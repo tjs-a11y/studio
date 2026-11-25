@@ -103,6 +103,13 @@
     </div>
   </section>
 
+  <section class="card noprint" id="freight-next-step" hidden aria-labelledby="freight-next-step-title">
+    <h2 id="freight-next-step-title" style="margin-top:0;font-size:1.15rem">After the load: reconcile the settlement</h2>
+    <p>Haul Audit compares the agreed rate confirmation with the broker settlement and factoring deposit, including linehaul, fuel and approved accessorials. It keeps factoring fees separate from broker variance. Calculations run on your device; values you enter are not uploaded.</p>
+    <p><a id="haulAuditLink" href="/haul-audit/?ref=rate-con-checker">Open Haul Audit →</a></p>
+    <button type="button" class="small ghost" id="dismissFreightNext">Dismiss</button>
+  </section>
+
   <section class="card pro noprint" id="upsell" hidden>
     <b>Pro: $9/month</b> or $79/year. Optional tools for repeat workflows.
     <ul class="note" style="margin:8px 0 12px; padding-left:18px">
@@ -142,6 +149,11 @@
   const $ = (id) => document.getElementById(id);
   const TOOL = 'rate-con-checker';
   let PRO = false;
+  const freightNext = $('freight-next-step');
+  $('haulAuditLink').addEventListener('click', () => {
+    if (window.qwTrack) window.qwTrack(TOOL, 'cross_sell_haul_audit_click');
+  });
+  $('dismissFreightNext').addEventListener('click', () => { freightNext.hidden = true; });
   const ls = { get(k, d) { try { const v = localStorage.getItem('rcc:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
                set(k, v) { try { localStorage.setItem('rcc:' + k, JSON.stringify(v)); } catch (e) { /* private mode */ } } };
   const DEF = { minRpm: 0, minDet: 50, maxFree: 2, maxDays: 30, maxFine: 500 };
@@ -281,7 +293,7 @@
     if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
     if (!PRO && !isSample) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Your earlier full results remain available; Pro adds saved history and exports.'; $('upsell').hidden = false; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
     const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
-    render(analyze(text, extra)); showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    render(analyze(text, extra)); $('freight-next-step').hidden = isSample; showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
     // Count a completed, user-submitted check only. Never send rate-con text, broker details, or results.
     // Analytics is best-effort and must not block the checker if the endpoint is unavailable.
     if (!isSample) {

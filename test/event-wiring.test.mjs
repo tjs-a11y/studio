@@ -59,6 +59,26 @@ test('the four acquisition entry points emit tool_completed after successful res
   assert.match(rate, /if \(!PRO && !isSample\)/, 'sample does not consume daily free quota');
 });
 
+test('Rate Con routes to Haul Audit only after a real result and allows dismissal', () => {
+  const rate = readFileSync(new URL('../rate-con-checker/index.html', import.meta.url), 'utf8');
+  const resultAt = rate.indexOf('<section id="result"');
+  const nextAt = rate.indexOf('<section class="card noprint" id="freight-next-step" hidden');
+  const upsellAt = rate.indexOf('<section class="card pro noprint" id="upsell"');
+  assert.ok(resultAt >= 0 && nextAt > resultAt && upsellAt > nextAt, 'cross-sell follows the result');
+  assert.match(rate, /\$\('freight-next-step'\)\.hidden = isSample/, 'sample runs do not show the cross-sell');
+  assert.match(rate, /dismissFreightNext'\)\.addEventListener\('click'[\s\S]*?freightNext\.hidden = true/, 'cross-sell is dismissible');
+  assert.match(rate, /href="\/haul-audit\/\?ref=rate-con-checker"/, 'internal destination has a short anonymous source label');
+  assert.match(rate, /window\.qwTrack\(TOOL, 'cross_sell_haul_audit_click'\)/, 'click uses a fixed event');
+});
+
+test('unrelated or unverified book and gifting promotions are absent from the consumer tools', () => {
+  const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
+  assert.doesNotMatch(page('bill-radar/index.html'), /gatherloom/i);
+  const dinner = page('dinner/index.html');
+  assert.doesNotMatch(dinner, /books2read\.com\/u\/(?:m0BxMV|4jo1Xo)/i);
+  assert.doesNotMatch(dinner, /Plant Based Diet Recipes Book|Mediterranean Diet Recipes Book/);
+});
+
 test('homepage See it in action links launch one-click local samples for all five priority tools', () => {
   const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
   const home = page('index.html');

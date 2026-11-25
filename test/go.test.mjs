@@ -17,8 +17,8 @@ test('no page or script exposes the Gatherloom hosting address', () => {
   for (const f of files) assert.ok(!/gatherloom[a-z0-9-]*\.vercel\.app/i.test(readFileSync(f, 'utf8')), f);
 });
 
-test('Saver and Bill Radar results link to Gatherloom through the redirect', () => {
+test('Saver links to Gatherloom; Bill Radar keeps its result focused on utility costs', () => {
   assert.match(read('saver/index.html'), /href="\/go\/gatherloom\/\?from=saver"/);
-  assert.match(read('bill-radar/index.html'), /href="\/go\/gatherloom\/\?from=bill-radar"/);
+  assert.doesNotMatch(read('bill-radar/index.html'), /gatherloom|\/go\/gatherloom/i);
   assert.match(read('saver/js/i18n.mjs'), /giftLink:[^\n]*Gatherloom[\s\S]*giftLink:[^\n]*Gatherloom/);
 });
