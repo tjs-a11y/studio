@@ -64,7 +64,7 @@ test('embed shell validates the nested frame and forwards height only', () => {
   assert.ok(shell.includes('window.parent.postMessage'));
   assert.ok(shell.includes("window.qwTrack(tool,'embed_open')"));
   assert.ok(shell.includes("link.target='_blank'"));
-  assert.ok(shell.includes('if(frame.src!==toolUrl.href)'));
+  assert.ok(shell.includes('if(frame.src!==toolUrl.href)'));\n  assert.ok(shell.includes('quickwell:embed:measure'));
   assert.equal(shell.includes('textContent'), false);
   assert.equal(shell.includes('innerText'), false);
 });
