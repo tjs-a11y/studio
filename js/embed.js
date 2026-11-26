@@ -1,6 +1,6 @@
 (function(){'use strict';
 var origin='https://quickwell.app';
-var selectors={'bill-radar':'#out','fair-price':'#out','dinner':'#out','rate-con-checker':'#result','saver':'#results','shield':'#results','pilot':'#results','kitchen':'#out','copycat':'#out','fuelgauge':'#hero','haul-audit':'#out','audit-kit':'#result','commodities':'#board'};
+var selectors={'bill-radar':'#out','fair-price':'#out','dinner':'#out','rate-con-checker':'#result'};
 var labels={'bill-radar':'Bill Radar — estimate an electricity bill rate change','fair-price':'Fair Price — review a repair or contractor estimate','dinner':'What’s for Dinner — find meals from ingredients at home','rate-con-checker':'Rate Con Checker — review a broker rate confirmation'};
 var heights={'bill-radar':1080,'fair-price':1040,'dinner':980,'rate-con-checker':1240};
 var pathParts=location.pathname.split('/').filter(Boolean);
@@ -78,7 +78,7 @@ function snippet(){
  url.searchParams.set('utm_medium','referral');
  url.searchParams.set('utm_campaign','quickwell_embeds');
  url.searchParams.set('utm_content',slug);
- var id='quickwell-embed-'+slug;
+ var id='quickwell-embed-'+slug+'-'+Date.now();
  var height=heights[slug]||980;
  var src=url.href.replace(/&/g,'&amp;');
  var link=new URL('/'+slug+'/',origin);
