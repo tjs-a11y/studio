@@ -22,7 +22,18 @@ toolUrl.searchParams.set('utm_medium','referral');
 toolUrl.searchParams.set('utm_campaign','quickwell_embeds');
 toolUrl.searchParams.set('utm_content',tool);
 frame.title='Quickwell '+names[tool]+' tool';
-frame.src=toolUrl.href;
+if(frame.src!==toolUrl.href)frame.src=toolUrl.href;
+document.addEventListener('click',function(event){
+ var link=event.target&&event.target.closest?event.target.closest('a[href]'):null;
+ if(!link)return;
+ var url;
+ try{url=new URL(link.href,location.href);}catch(e){return;}
+ var currentPath=('/embed/'+tool+'/').replace(/\\/+$/,'')||'/';
+ var targetPath=(url.pathname||'/').replace(/\\/+$/,'')||'/';
+ if(url.origin===location.origin&&targetPath===currentPath)return;
+ link.target='_blank';
+ link.rel='noopener noreferrer';
+},true);
 var back=document.getElementById('qw-embed-linkback');
 if(back){
  var backUrl=new URL('/'+tool+'/',location.origin);
