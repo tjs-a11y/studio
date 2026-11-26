@@ -60,7 +60,7 @@ window.addEventListener('message',function(event){
  frame.style.height=height+'px';
  requestAnimationFrame(reportToParent);
 });
-frame.addEventListener('load',function(){requestAnimationFrame(reportToParent);});
+frame.addEventListener('load',function(){try{frame.contentWindow.postMessage({type:'quickwell:embed:measure',tool:tool},location.origin);}catch(e){}requestAnimationFrame(reportToParent);});
 window.addEventListener('resize',reportToParent);
 if('ResizeObserver' in window)new ResizeObserver(reportToParent).observe(document.body);
 if(window.qwTrack)window.qwTrack(tool,'embed_open');
