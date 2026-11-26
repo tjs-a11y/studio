@@ -35,7 +35,7 @@ test('each dedicated embed page is noindex, responsive and canonical to its tool
     assert.ok(html.includes('<link rel="canonical" href="' + tool.canonical + '">'));
     assert.ok(html.includes('data-qw-embed-tool="' + tool.slug + '"'));
     assert.ok(html.includes('<iframe id="qw-embedded-tool"'));
-    assert.ok(html.includes('title="Quickwell ' + tool.slug.replace(/-/g, ' ') .replace(/\b\w/g, (c) => c.toUpperCase()) + ' tool"') || html.includes('title="Quickwell '));
+    assert.ok(html.includes('title="Quickwell '));
     assert.ok(html.includes('referrerpolicy="strict-origin-when-cross-origin"'));
     assert.ok(html.includes('allow="clipboard-write"'));
     assert.ok(html.includes('/js/embed-shell.js'));
@@ -53,6 +53,7 @@ test('tool pages expose snippets only for the four supported tools and keep chec
   assert.ok(script.includes("window.Studio.manage=function()"));
   assert.ok(script.includes("link.target='_blank'"));
   assert.ok(script.includes('quickwell:tool:resize'));
+  assert.ok(script.includes("data.type!=='quickwell:embed:measure'"));
   assert.ok(script.includes("window.qwTrack(slug,'embed_code_copy')"));
 });
 
@@ -64,7 +65,8 @@ test('embed shell validates the nested frame and forwards height only', () => {
   assert.ok(shell.includes('window.parent.postMessage'));
   assert.ok(shell.includes("window.qwTrack(tool,'embed_open')"));
   assert.ok(shell.includes("link.target='_blank'"));
-  assert.ok(shell.includes('if(frame.src!==toolUrl.href)'));\n  assert.ok(shell.includes('quickwell:embed:measure'));
+  assert.ok(shell.includes("if(frame.src!==toolUrl.href)"));
+  assert.ok(shell.includes('quickwell:embed:measure'));
   assert.equal(shell.includes('textContent'), false);
   assert.equal(shell.includes('innerText'), false);
 });
