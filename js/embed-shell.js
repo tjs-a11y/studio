@@ -28,8 +28,9 @@ document.addEventListener('click',function(event){
  if(!link)return;
  var url;
  try{url=new URL(link.href,location.href);}catch(e){return;}
- var currentPath=('/embed/'+tool+'/').replace(/\\/+$/,'')||'/';
- var targetPath=(url.pathname||'/').replace(/\\/+$/,'')||'/';
+ var currentPath='/embed/'+tool;
+ var targetPath=url.pathname||'/';
+ while(targetPath.length>1&&targetPath.endsWith('/'))targetPath=targetPath.slice(0,-1);
  if(url.origin===location.origin&&targetPath===currentPath)return;
  link.target='_blank';
  link.rel='noopener noreferrer';
