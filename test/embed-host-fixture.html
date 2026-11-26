@@ -35,6 +35,12 @@ iframe{display:block;width:100%;height:900px;border:1px solid #999}
   status.textContent='FAIL: src must be one of the four dedicated embed routes.';
   return;
  }
+ var received=false;
+ var timeout=window.setTimeout(function(){
+  if(received)return;
+  status.textContent='FAIL: no verified resize handshake; the frame may be blocked by CSP/X-Frame-Options or the embed route did not initialize.';
+ },15000);
+ frame.addEventListener('load',function(){if(!received)status.textContent='Frame loaded; waiting for the resize handshake…';});
  frame.src=target.href;
  window.addEventListener('message',function(event){
   if(event.origin!==target.origin||event.source!==frame.contentWindow)return;
@@ -42,6 +48,8 @@ iframe{display:block;width:100%;height:900px;border:1px solid #999}
   if(!data||data.type!=='quickwell:embed:resize'||data.tool!==tool)return;
   var height=Number(data.height);
   if(!Number.isFinite(height))return;
+  received=true;
+  window.clearTimeout(timeout);
   frame.style.height=Math.max(520,Math.min(3000,Math.ceil(height)))+'px';
   status.textContent='PASS: external-origin embed sent a verified resize message for '+tool+' ('+frame.style.height+').';
  });

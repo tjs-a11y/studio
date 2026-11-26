@@ -86,6 +86,9 @@ test('external-origin fixture verifies origin, frame source and resize payload',
   assert.ok(fixture.includes('event.origin!==target.origin'));
   assert.ok(fixture.includes('event.source!==frame.contentWindow'));
   assert.ok(fixture.includes('quickwell:embed:resize'));
+  assert.ok(fixture.includes('window.setTimeout'));
+  assert.ok(fixture.includes('window.clearTimeout(timeout)'));
+  assert.ok(fixture.includes('no verified resize handshake'));
 });
 
 test('copy-paste documentation contains all four routes and responsive resize snippets', () => {
