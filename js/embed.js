@@ -57,7 +57,13 @@ function watchHeight(){
   if(document.body)ro.observe(document.body);
  }
  if(document.body)new MutationObserver(reportHeight).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class','style']});
- if(document.fonts&&document.fonts.ready)document.fonts.ready.then(reportHeight).catch(function(){});\n window.addEventListener('message',function(event){\n  if(event.origin!==location.origin||event.source!==window.parent)return;\n  var data=event.data;\n  if(!data||data.type!=='quickwell:embed:measure'||data.tool!==slug)return;\n  reportHeight();\n });
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(reportHeight).catch(function(){});
+ window.addEventListener('message',function(event){
+  if(event.origin!==location.origin||event.source!==window.parent)return;
+  var data=event.data;
+  if(!data||data.type!=='quickwell:embed:measure'||data.tool!==slug)return;
+  reportHeight();
+ });
 }
 function chrome(){
  if(params.get('embed')!=='1')return false;
