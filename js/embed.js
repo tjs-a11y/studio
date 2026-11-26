@@ -1,12 +1,7 @@
 (function(){'use strict';
 var origin='https://quickwell.app';
 var selectors={'bill-radar':'#out','fair-price':'#out','dinner':'#out','rate-con-checker':'#result','saver':'#results','shield':'#results','pilot':'#results','kitchen':'#out','copycat':'#out','fuelgauge':'#hero','haul-audit':'#out','audit-kit':'#result','commodities':'#board'};
-var labels={
-'bill-radar':'Bill Radar — estimate an electricity bill rate change',
-'fair-price':'Fair Price — review a repair or contractor estimate',
-'dinner':'What’s for Dinner — find meals from ingredients at home',
-'rate-con-checker':'Rate Con Checker — review a broker rate confirmation'
-};
+var labels={'bill-radar':'Bill Radar — estimate an electricity bill rate change','fair-price':'Fair Price — review a repair or contractor estimate','dinner':'What’s for Dinner — find meals from ingredients at home','rate-con-checker':'Rate Con Checker — review a broker rate confirmation'};
 var heights={'bill-radar':1080,'fair-price':1040,'dinner':980,'rate-con-checker':1240};
 var pathParts=location.pathname.split('/').filter(Boolean);
 if(pathParts[0]==='es'||pathParts[0]==='fr')pathParts.shift();
@@ -42,12 +37,10 @@ function protectEmbeddedNavigation(){
   link.target='_blank';
   link.rel='noopener noreferrer';
  },true);
- function guardBilling(){
-  if(!window.Studio){setTimeout(guardBilling,0);return;}
+ if(window.Studio){
   if(typeof window.Studio.upgrade==='function')window.Studio.upgrade=function(){openFullTool();return Promise.resolve(null);};
   if(typeof window.Studio.manage==='function')window.Studio.manage=function(){openFullTool();return Promise.resolve(null);};
  }
- guardBilling();
 }
 function reportHeight(){
  if(params.get('embed')!=='1'||window.parent===window)return;
