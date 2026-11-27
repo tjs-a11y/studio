@@ -99,3 +99,28 @@ test('Fair Price first-use actions explain the real-review and sample paths', ()
   assert.match(fair, /No estimate ready\? The sample uses example text only; replace it with your own estimate for a real review\./);
   assert.match(fair, /id="demoToRealBtn">Check your own estimate/);
 });
+
+
+test('the four primary tools have one first-party completion-event owner', () => {
+  const telemetry = page('js/telemetry.js');
+  const cfgStart = telemetry.indexOf('var cfg={');
+  const cfgEnd = telemetry.indexOf('};', cfgStart);
+  assert.ok(cfgStart >= 0 && cfgEnd > cfgStart, 'completion observer config exists');
+  const observerConfig = telemetry.slice(cfgStart, cfgEnd);
+  for (const slug of ['bill-radar', 'fair-price', 'dinner', 'rate-con-checker']) {
+    assert.equal(observerConfig.includes("'" + slug + "':"), false, slug + ' must not be counted by both the generic observer and its page-owned event');
+  }
+
+  for (const [path, slug, marker] of [
+    ['bill-radar/index.html', 'bill-radar', "countEvent(isDemo?'demo':'tool_completed')"],
+    ['fair-price/index.html', 'fair-price', "countEvent(demo ? 'demo' : 'tool_completed')"],
+    ['dinner/index.html', 'dinner', "countEvent(isDemo ? 'demo' : 'tool_completed')"],
+  ]) {
+    const source = page(path);
+    assert.ok(source.includes(marker), path + ' owns the completion event');
+    assert.ok(source.includes("body: JSON.stringify({ tool: '" + slug + "', event })"), path + ' sends one fixed-label first-party event');
+  }
+
+  const rate = page('rate-con-checker/index.html');
+  assert.ok(rate.includes("body: JSON.stringify({ tool: TOOL, event: 'tool_completed' })"), 'Rate Con owns its fixed-label completion event');
+});
