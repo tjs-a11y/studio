@@ -119,7 +119,7 @@ test('the four primary tools have one first-party completion-event owner', () =>
   ]) {
     const source = page(path);
     assert.ok(source.includes(marker), path + ' owns the completion event');
-    assert.ok(source.includes("body: JSON.stringify({ tool: '" + slug + "', event })"), path + ' sends one fixed-label first-party event');
+    assert.match(source, new RegExp("JSON\\.stringify\\(\\{\\s*tool:\\s*['\"]" + slug + "['\"],\\s*event\\s*\\}\\)"), path + ' sends one fixed-label first-party event');
   }
 
   const rate = page('rate-con-checker/index.html');
