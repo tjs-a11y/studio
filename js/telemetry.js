@@ -1,8 +1,9 @@
 (function(){'use strict';
 var allowed=new Set(["bill-radar","fair-price","dinner","rate-con-checker","saver","shield","pilot","kitchen","copycat","fuelgauge","haul-audit","audit-kit","commodities","before-you-sign","plot-file-checker","eudr"]),last=Object.create(null),pending=null;
 var cfg={
-'bill-radar':{p:['run'],s:['sampleBtn'],r:['#out']},'fair-price':{p:['go'],s:['sampleBtn'],r:['#out']},'dinner':{p:['go'],s:['sampleBtn'],r:['#out']},
-'rate-con-checker':{p:['check'],s:['sample'],r:['#result']},'saver':{p:['pasteBtn'],s:['sampleBtn'],r:['#results'],f:['#fileInput']},
+// These four pages emit explicit completion events themselves; do not auto-observe them here.
+
+'saver':{p:['pasteBtn'],s:['sampleBtn'],r:['#results'],f:['#fileInput']},
 'shield':{p:['checkBtn'],s:['sampleBtn'],r:['#results']},'pilot':{p:['readBtn'],s:['sampleBtn'],r:['#results'],f:['#fileInput']},
 'kitchen':{p:['tonight'],r:['#out']},'copycat':{p:['go'],r:['#out']},'fuelgauge':{s:['sample'],r:['#hero'],f:['#file'],forms:['#row-form']},
 'haul-audit':{p:['run'],s:['sample'],r:['#out']},'audit-kit':{p:['score','build'],s:['sampleBtn'],r:['#result']},'commodities':{p:[],r:['#holdings'],forms:['#addForm']},'before-you-sign':{p:['go'],s:['sample'],r:['#out']},'plot-file-checker':{p:[],s:['sampleMessy','sampleClean'],r:['#result'],f:['#file'],forms:['#wlForm']},'eudr':{p:[],s:['sampleMessy','sampleClean'],r:['#result'],f:['#file'],forms:['#wlForm']}
