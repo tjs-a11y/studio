@@ -102,6 +102,7 @@ test('Fair Price first-use actions explain the real-review and sample paths', ()
 
 
 test('the four primary tools have one first-party completion-event owner', () => {
+  const page = (path) => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
   const telemetry = page('js/telemetry.js');
   const cfgStart = telemetry.indexOf('var cfg={');
   const cfgEnd = telemetry.indexOf('};', cfgStart);
