@@ -41,7 +41,7 @@ test('Bill Radar and Fair Price keep crypto reading optional and unrelated to th
   const branch = crossSell.slice(start, end);
   assert.ok(start >= 0 && end > start);
   assert.ok(branch.includes('Mastering Cryptocurrency Trading'));
-  assert.ok(branch.includes('unrelated to your bill or repair estimate; not investment advice'));
+  assert.match(branch, /unrelated to your bill or repair estimate; not investment advice/i);
   assert.ok(!branch.includes('Gatherloom'));
   assert.ok(!branch.includes('Energy Revolution System'));
 });
@@ -51,7 +51,8 @@ test('Rate Con Checker cross-sells only freight software and removes unrelated b
   const end = crossSell.indexOf('}else if(trade.indexOf(slug)>=0){', start);
   const branch = crossSell.slice(start, end);
   assert.ok(start >= 0 && end > start);
-  assert.ok(branch.includes('Haul Audit'));
+  assert.ok(branch.includes('ftools'));
+  assert.ok(crossSell.includes("L('Haul Audit','/haul-audit/'"));
   assert.ok(branch.includes('no driver recruitment or dispatch links'));
   assert.ok(!branch.includes('Mindset Mastery'));
 });
