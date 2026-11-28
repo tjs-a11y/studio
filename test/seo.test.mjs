@@ -150,7 +150,7 @@ test('priority consumer tools count page opens and completed checks anonymously'
 
   assert.match(billRadar, /function countEvent\(event\)[\s\S]*?JSON\.stringify\(\{tool:'bill-radar',event\}\)/);
   assert.match(billRadar, /countEvent\('open'\)/);
-  assert.match(billRadar, /countEvent\(isDemo\?'demo':'tool_completed'\)/);
+  assert.match(billRadar, /countEvent\(demo\?'demo':'tool_completed'\)/);
 
   assert.match(fairPrice, /JSON\.stringify\(\{\s*tool:\s*'fair-price',\s*event\s*\}\)/);
   assert.match(fairPrice, /Studio\.init\(/);
@@ -163,8 +163,8 @@ test('priority consumer tools count page opens and completed checks anonymously'
   assert.match(dinner, /JSON\.stringify\(\{\s*tool:\s*'dinner',\s*event\s*\}\)/);
   assert.match(dinner, /Studio\.init\(/);
   assert.doesNotMatch(dinner, /countEvent\('open'\)/);
-  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'tool_completed'\)/);
-  assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent(isDemo ? 'demo' : 'tool_completed')"), 'Dinner counts only after its minimum-ingredient check');
+  assert.match(dinner, /countEvent\(demo \? 'demo' : 'tool_completed'\)/);
+  assert.ok(dinner.indexOf('if (Object.keys(picks).length < 2)') < dinner.indexOf("countEvent(demo ? 'demo' : 'tool_completed')"), 'Dinner counts only after its minimum-ingredient check');
 
   assert.match(eventApi, /if \(event === 'open'\)/);
   assert.match(eventApi, /if \(event === 'check'\)/);

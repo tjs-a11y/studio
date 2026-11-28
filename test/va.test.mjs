@@ -7,6 +7,7 @@ function harness(fetchImpl, path = '/shield/') {
   const warnings = [];
   const analyticsEvents = [];
   const listeners = {};
+  const dispatched = [];
   const document = {
     addEventListener(type, handler) { listeners[type] = handler; },
   };
@@ -14,12 +15,13 @@ function harness(fetchImpl, path = '/shield/') {
     location: { search: '', pathname: path, href: 'https://quickwell.app' + path },
     fetch: fetchImpl,
     va: (...args) => analyticsEvents.push(args),
+    dispatchEvent: (event) => dispatched.push(event.type),
   };
   vm.runInNewContext(readFileSync(new URL('../js/va.js', import.meta.url), 'utf8'), {
-    window, document, URL, URLSearchParams, Date,
+    window, document, URL, URLSearchParams, Date, Event,
     console: { warn: (...args) => warnings.push(args) },
   });
-  return { window, warnings, analyticsEvents, listeners };
+  return { window, warnings, analyticsEvents, listeners, dispatched };
 }
 
 test('event diagnostics report only safe metadata on HTTP failure', async () => {
@@ -203,4 +205,22 @@ test('demo events emit only fixed tool and referral labels, never sample inputs'
   assert.deepEqual({ ...demo[1].data }, { tool: 'bill-radar', source: 'home-featured-demo-bill-radar' });
   assert.equal(JSON.stringify(demo).includes('1000'), false);
   assert.equal(JSON.stringify(demo).includes('14.5'), false);
+});
+
+
+test('only a real completed result dispatches the local cross-sell-ready signal', () => {
+  const { window, dispatched } = harness(async () => ({ ok: true, status: 200 }), '/dinner/');
+  window.qwTrack('dinner', 'demo');
+  assert.deepEqual(dispatched, []);
+  window.qwTrack('dinner', 'tool_completed');
+  assert.deepEqual(dispatched, ['qw:tool-completed']);
+});
+
+test('cross-sell clicks emit only fixed tool and source labels', () => {
+  const { window, analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/dinner/');
+  window.qwTrack('dinner', 'cross_sell_click');
+  const clicks = analyticsEvents.filter(([, payload]) => payload.name === 'tool_cross_sell_click');
+  assert.equal(clicks.length, 1);
+  assert.deepEqual({ ...clicks[0][1].data }, { tool: 'dinner', source: 'direct' });
+  assert.doesNotMatch(JSON.stringify(clicks[0]), /bill|quote|ingredient|recipe|broker/i);
 });

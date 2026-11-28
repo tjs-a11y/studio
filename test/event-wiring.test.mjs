@@ -31,32 +31,47 @@ test('Saver and Shield sample runs are counted as demos, separately from user ch
 });
 
 
-test('Bill Radar and Dinner sample runs are demos, separate from completed checks', () => {
+test('Bill Radar and Dinner keep unchanged sample data classified as demos until edited', () => {
   const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
   const bill = page('bill-radar/index.html');
   const dinner = page('dinner/index.html');
   const fair = page('fair-price/index.html');
-  assert.match(bill, /id="sampleBtn"/);
-  assert.match(bill, /function run\(isDemo\)/);
-  assert.match(bill, /countEvent\(isDemo\?'demo':'tool_completed'\)/);
-  assert.match(dinner, /id="sampleBtn"/);
-  assert.match(dinner, /function run\(isDemo\)/);
-  assert.match(dinner, /countEvent\(isDemo \? 'demo' : 'tool_completed'\)/);
+  assert.match(bill, /var sampleActive=false;/);
+  assert.match(bill, /var demo=!!isDemo\|\|sampleActive;/);
+  assert.match(bill, /addEventListener\('input',function\(\)\{sampleActive=false;\}\)/);
+  assert.match(bill, /sampleActive=true;[\s\S]*?run\(true\)/);
+  assert.match(bill, /countEvent\(demo\?'demo':'tool_completed'\)/);
+  assert.match(dinner, /var sampleActive = false;/);
+  assert.match(dinner, /var demo = !!isDemo \|\| sampleActive;/);
+  assert.match(dinner, /function toggle\(label, on\) \{\s*sampleActive = false;/);
+  assert.match(dinner, /sampleActive = false;[\s\S]*?picks\[v\] = true/);
+  assert.match(dinner, /sampleActive = true;[\s\S]*?run\(true\)/);
+  assert.match(dinner, /countEvent\(demo \? 'demo' : 'tool_completed'\)/);
   assert.match(fair, /countEvent\(demo \? 'demo' : 'tool_completed'\)/);
 });
 
+test('Rate Con sample remains a demo until visitor edits its text or calculation inputs', () => {
+  const rate = readFileSync(new URL('../rate-con-checker/index.html', import.meta.url), 'utf8');
+  assert.match(rate, /let sampleActive = false;/);
+  assert.match(rate, /const sample = !!isSample \|\| sampleActive;/);
+  assert.match(rate, /if \(!PRO && !sample\)/, 'sample does not consume daily free quota');
+  assert.match(rate, /sampleActive = true; \$\('text'\)\.value = SAMPLE;[\s\S]*?run\(true\)/);
+  assert.match(rate, /addEventListener\(eventName, \(\) => \{ sampleActive = false; \}\)/);
+  assert.match(rate, /countEvent\(sample \? 'demo' : 'tool_completed'\)/);
+  assert.match(rate, /JSON\.stringify\(\{ tool: TOOL, event \}\)/, 'only fixed event labels are sent');
+});
 test('the four acquisition entry points emit tool_completed after successful result rendering', () => {
   const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
   for (const [path, marker] of [
-    ['bill-radar/index.html', "countEvent(isDemo?'demo':'tool_completed')"],
+    ['bill-radar/index.html', "countEvent(demo?'demo':'tool_completed')"],
     ['fair-price/index.html', "countEvent(demo ? 'demo' : 'tool_completed')"],
-    ['dinner/index.html', "countEvent(isDemo ? 'demo' : 'tool_completed')"],
-    ['rate-con-checker/index.html', "event: 'tool_completed'"],
+    ['dinner/index.html', "countEvent(demo ? 'demo' : 'tool_completed')"],
+    ['rate-con-checker/index.html', "countEvent(sample ? 'demo' : 'tool_completed')"],
   ]) assert.ok(page(path).includes(marker), path + ' completion event');
   const rate = page('rate-con-checker/index.html');
   assert.match(rate, /const detailed = true;/, 'all initial explanations are visible');
   assert.match(rate, /\$\('copy'\)\.disabled = false/, 'broker correction text is copyable free');
-  assert.match(rate, /if \(!PRO && !isSample\)/, 'sample does not consume daily free quota');
+  assert.match(rate, /if \(!PRO && !sample\)/, 'sample does not consume daily free quota');
 });
 
 test('Rate Con routes to Haul Audit only after a real result and allows dismissal', () => {
@@ -65,7 +80,7 @@ test('Rate Con routes to Haul Audit only after a real result and allows dismissa
   const nextAt = rate.indexOf('<section class="card noprint" id="freight-next-step" hidden');
   const upsellAt = rate.indexOf('<section class="card pro noprint" id="upsell"');
   assert.ok(resultAt >= 0 && nextAt > resultAt && upsellAt > nextAt, 'cross-sell follows the result');
-  assert.match(rate, /\$\('freight-next-step'\)\.hidden = isSample/, 'sample runs do not show the cross-sell');
+  assert.match(rate, /\$\('freight-next-step'\)\.hidden = sample/, 'sample runs do not show the cross-sell');
   assert.match(rate, /dismissFreightNext'\)\.addEventListener\('click'[\s\S]*?freightNext\.hidden = true/, 'cross-sell is dismissible');
   assert.match(rate, /href="\/haul-audit\/\?ref=rate-con-checker"/, 'internal destination has a short anonymous source label');
   assert.match(rate, /window\.qwTrack\(TOOL, 'cross_sell_haul_audit_click'\)/, 'click uses a fixed event');
@@ -98,4 +113,31 @@ test('Fair Price first-use actions explain the real-review and sample paths', ()
   assert.match(fair, /id="sampleBtn">See a sample result first/);
   assert.match(fair, /No estimate ready\? The sample uses example text only; replace it with your own estimate for a real review\./);
   assert.match(fair, /id="demoToRealBtn">Check your own estimate/);
+});
+
+
+test('the four primary tools have one first-party completion-event owner', () => {
+  const page = (path) => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
+  const telemetry = page('js/telemetry.js');
+  const cfgStart = telemetry.indexOf('var cfg={');
+  const cfgEnd = telemetry.indexOf('};', cfgStart);
+  assert.ok(cfgStart >= 0 && cfgEnd > cfgStart, 'completion observer config exists');
+  const observerConfig = telemetry.slice(cfgStart, cfgEnd);
+  for (const slug of ['bill-radar', 'fair-price', 'dinner', 'rate-con-checker']) {
+    assert.equal(observerConfig.includes("'" + slug + "':"), false, slug + ' must not be counted by both the generic observer and its page-owned event');
+  }
+
+  for (const [path, slug, marker] of [
+    ['bill-radar/index.html', 'bill-radar', "countEvent(demo?'demo':'tool_completed')"],
+    ['fair-price/index.html', 'fair-price', "countEvent(demo ? 'demo' : 'tool_completed')"],
+    ['dinner/index.html', 'dinner', "countEvent(demo ? 'demo' : 'tool_completed')"],
+  ]) {
+    const source = page(path);
+    assert.ok(source.includes(marker), path + ' owns the completion event');
+    assert.match(source, new RegExp("JSON\\.stringify\\(\\{\\s*tool:\\s*['\"]" + slug + "['\"],\\s*event\\s*\\}\\)"), path + ' sends one fixed-label first-party event');
+  }
+
+  const rate = page('rate-con-checker/index.html');
+  assert.ok(rate.includes("countEvent(sample ? 'demo' : 'tool_completed')"), 'Rate Con owns demo and completion events');
+  assert.ok(rate.includes("JSON.stringify({ tool: TOOL, event })"), 'Rate Con sends only fixed labels');
 });

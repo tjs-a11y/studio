@@ -111,6 +111,10 @@ test('checkout_start fires only after a successful checkout-session response and
   assert.equal(record.content, 'home-featured-saver');
   assert.equal('plan' in record, false);
   assert.equal('interval' in record, false);
+  const vercel = h.analyticsEvents.find(([, payload]) => payload.name === 'checkout_start');
+  assert.ok(vercel, 'Vercel receives a distinct checkout_start event after session creation');
+  assert.deepEqual({ ...vercel[1].data }, { tool: 'saver', source: 'home-featured-saver' });
+  assert.doesNotMatch(JSON.stringify(vercel), /plan|interval/);
 });
 
 test('lead fires after a successful waitlist response and excludes the submitted email', async () => {
