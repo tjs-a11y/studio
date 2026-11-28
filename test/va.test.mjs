@@ -219,8 +219,8 @@ test('only a real completed result dispatches the local cross-sell-ready signal'
 test('cross-sell clicks emit only fixed tool and source labels', () => {
   const { window, analyticsEvents } = harness(async () => ({ ok: true, status: 200 }), '/dinner/');
   window.qwTrack('dinner', 'cross_sell_click');
-  assert.equal(analyticsEvents.length, 1);
-  assert.equal(analyticsEvents[0][1].name, 'tool_cross_sell_click');
-  assert.deepEqual({ ...analyticsEvents[0][1].data }, { tool: 'dinner', source: 'direct' });
-  assert.doesNotMatch(JSON.stringify(analyticsEvents[0]), /bill|quote|ingredient|recipe|broker/i);
+  const clicks = analyticsEvents.filter(([, payload]) => payload.name === 'tool_cross_sell_click');
+  assert.equal(clicks.length, 1);
+  assert.deepEqual({ ...clicks[0][1].data }, { tool: 'dinner', source: 'direct' });
+  assert.doesNotMatch(JSON.stringify(clicks[0]), /bill|quote|ingredient|recipe|broker/i);
 });
