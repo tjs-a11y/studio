@@ -149,6 +149,7 @@
   const $ = (id) => document.getElementById(id);
   const TOOL = 'rate-con-checker';
   let PRO = false;
+  let sampleActive = false;
   const freightNext = $('freight-next-step');
   $('haulAuditLink').addEventListener('click', () => {
     if (window.qwTrack) window.qwTrack(TOOL, 'cross_sell_haul_audit_click');
@@ -160,6 +161,18 @@
   const limits = () => Object.assign({}, DEF, PRO ? ls.get('limits', {}) : {});
   const money = (x) => '$' + Number(x).toLocaleString('en-US', { maximumFractionDigits: 2 });
   const num = (s) => Number(String(s).replace(/[,$\s]/g, ''));
+  function countEvent(event) {
+    // Fixed labels only; never send rate-con text, broker details, or computed results.
+    try {
+      if (window.qwTrack) window.qwTrack(TOOL, event);
+      fetch('/api/event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ tool: TOOL, event }),
+        keepalive: true
+      }).catch(() => {});
+    } catch (e) { /* analytics must never block a completed check */ }
+  }
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // ---------- the rule engine ----------
@@ -289,27 +302,22 @@
   function showQuota() { $('quota').textContent = PRO ? 'Pro: unlimited checks' : `${Math.max(0, 3 - quota().n)} free checks left today`; }
 
   function run(isSample = false) {
+    const sample = !!isSample || sampleActive;
     const text = $('text').value.trim();
     if (text.length < 40) { $('text').focus(); $('quota').textContent = 'Paste the rate con text first.'; return; }
-    if (!PRO && !isSample) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Your earlier full results remain available; Pro adds saved history and exports.'; $('upsell').hidden = false; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
+    if (!PRO && !sample) { const q = quota(); if (q.n >= 3) { $('quota').textContent = 'You\'ve used today\'s 3 free checks. Your earlier full results remain available; Pro adds saved history and exports.'; $('upsell').hidden = false; $('upsell').scrollIntoView({ behavior: 'smooth' }); return; } q.n++; ls.set('quota', q); }
     const extra = { loaded: num($('loaded').value) || 0, deadhead: num($('deadhead').value) || 0, agreed: num($('agreed').value) || 0 };
-    render(analyze(text, extra)); $('freight-next-step').hidden = isSample; showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Count a completed, user-submitted check only. Never send rate-con text, broker details, or results.
-    // Analytics is best-effort and must not block the checker if the endpoint is unavailable.
-    if (!isSample) {
-      try {
-        if (window.qwTrack) window.qwTrack(TOOL, 'tool_completed');
-        fetch('/api/event', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ tool: TOOL, event: 'tool_completed' }),
-          keepalive: true
-        }).catch(() => {});
-      } catch (e) { /* usage analytics must never break a completed check */ }
-    }
+    render(analyze(text, extra)); $('freight-next-step').hidden = sample; showQuota(); $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Count only a fixed demo/completion label; user-entered text and results stay local.
+    countEvent(sample ? 'demo' : 'tool_completed');
   }
+  ['text', 'loaded', 'deadhead', 'agreed'].forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    ['input', 'change'].forEach((eventName) => el.addEventListener(eventName, () => { sampleActive = false; }));
+  });
   $('check').onclick = () => run(false);
-  $('sample').onclick = () => { $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(true); };
+  $('sample').onclick = () => { sampleActive = true; $('text').value = SAMPLE; $('loaded').value = 812; $('deadhead').value = 64; $('agreed').value = 2400; run(true); };
   $('copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('msg').textContent).then(() => { $('copy').textContent = 'Copied'; setTimeout(() => { $('copy').textContent = 'Copy'; }, 1500); }); };
   $('print').onclick = () => window.print();
 
@@ -320,7 +328,7 @@
   drop.addEventListener('drop', async (ev) => {
     if (!PRO) { drop.textContent = 'PDF drop is a Pro feature. Paste the text for free.'; return; }
     const f = ev.dataTransfer.files[0]; if (!f) return; drop.textContent = 'Reading PDF…';
-    try { const text = await pdfText(f); if (text.trim().length < 40) drop.textContent = 'This looks like a scanned PDF with no text. Please paste the text instead.'; else { $('text').value = text; drop.textContent = `Loaded ${f.name}`; run(); } }
+    try { const text = await pdfText(f); if (text.trim().length < 40) drop.textContent = 'This looks like a scanned PDF with no text. Please paste the text instead.'; else { sampleActive = false; $('text').value = text; drop.textContent = `Loaded ${f.name}`; run(); } }
     catch (e) { drop.textContent = 'Couldn\'t read that PDF. Please paste the text instead.'; }
   });
   function loadScript(src) { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
