@@ -29,6 +29,10 @@ Each tool has a free starting point; any paid options are shown inside the tool.
 - [When your fixed electricity rate ends: the roll-off](https://quickwell.app/learn/power-bills/when-a-fixed-rate-plan-ends/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_bill_radar_rolloff_guide_20261123&utm_content=fixed_rate_rolloff&ref=github-bill-radar-rolloff) — understand the month-to-month transition in deregulated markets, then use Bill Radar to map your own plan end date and estimate the next 12 months.
 - [Truck repair estimate checklist](https://quickwell.app/guides/truck-repair-estimate-fair-price-checklist/?utm_source=github&utm_medium=referral&utm_campaign=quickwell_fair_price_truck_repair_guide_20261124&utm_content=truck_repair_estimate_checklist&ref=github-readme-fair-price-guide) — review the written scope, labor, parts and diagnostic charges before authorizing truck or trailer work, then use Fair Price to organize the estimate and follow-up questions.
 
+## Embed Quickwell tools
+
+Copy-paste responsive HTML for Bill Radar, Fair Price, What’s for Dinner and Rate Con Checker is available in [embed-snippets.md](./embed-snippets.md). Each snippet uses a dedicated `/embed/<tool>/` route, includes a Quickwell link-back and anonymous `ref` attribution, and supports automatic height updates with a fixed-height fallback. External framing is enabled only for those dedicated routes (plus the existing Play embed); other tool, account and checkout routes retain their frame protections.
+
 ## Adding a tool
 1. Copy `_template/` to `/<tool-id>/` and build the tool.
 2. Add it to `catalog/tools.json`: `{ "id", "name", "tagline", "plans": [{ "id": "pro", "trialDays": 7 }] }`.
