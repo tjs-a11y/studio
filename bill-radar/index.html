@@ -93,11 +93,11 @@
       <div class="row">
         <div>
           <label for="kwh">Average monthly use <span class="hint">(kWh — it's on your bill)</span></label>
-          <input id="kwh" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 1000">
+          <input id="kwh" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 1000" aria-describedby="inputError">
         </div>
         <div>
           <label for="rate">Your rate <span class="hint">(¢ per kWh)</span></label>
-          <input id="rate" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 14.5">
+          <input id="rate" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 14.5" aria-describedby="inputError">
         </div>
       </div>
       <p class="muted" style="margin:10px 0 0">Not sure of the rate? Divide last month's total $ by the kWh used (both on the bill), then move the decimal: $150 ÷ 1000 kWh = $0.15 = <b>15¢</b>.</p>
@@ -115,13 +115,14 @@
 
       <button type="button" class="sample" id="sampleBtn">Try a sample forecast</button>
       <button class="go" id="run">Show my forecast</button>
+      <p id="inputError" class="muted" role="alert" aria-live="assertive" hidden></p>
       <p class="muted" style="margin:8px 0 0">The sample uses illustrative values, not your utility&#39;s actual rate or a bill prediction.</p>
     </div>
 
     <div id="out" hidden>
       <div class="headline" style="margin-top:20px">
         <span class="pill" id="estimateLabel">Estimate</span>
-        <div class="big" id="next12"></div>
+        <div class="big" id="next12" aria-live="polite" aria-atomic="true"></div>
         <div id="deltaLine"></div>
       </div>
       <div class="rolloff" id="rolloff" hidden></div>
@@ -209,10 +210,93 @@
     try{ navigator.clipboard.writeText(text+" "+SHARE_URL); if(btn){btn.textContent="Copied — paste anywhere ✓";} }
     catch(x){ if(btn){btn.textContent="Copy this link: "+SHARE_URL;} }
   }
-  var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var money=function(n){return '
+    var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
+    var endVal=$('end').value; // YYYY-MM or ''
+    var now=new Date(); now.setDate(1);
+    var endIdx=-1;
+    if(endVal){ var p=endVal.split('-'); var ed=new Date(+p[0],(+p[1])-1,1);
+      endIdx=(ed.getFullYear()-now.getFullYear())*12+(ed.getMonth()-now.getMonth()); }
+    var baseMonthly=kwh*rate/100;
+    var monthsName=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var tb=$('tbl').querySelector('tbody'); tb.innerHTML='';
+    var next12=0, rolledAt=null;
+    for(var i=0;i<12;i++){
+      var r=rate*Math.pow(1+chg,i/12);
+      if(endIdx>=0 && i>=endIdx){ r=r*(1+bump); if(rolledAt===null) rolledAt=i; }
+      var bill=kwh*r/100; next12+=bill;
+      var d=new Date(now.getFullYear(),now.getMonth()+i,1);
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+monthsName[d.getMonth()]+' '+d.getFullYear()+(i===rolledAt?' ⚠︎':'')+'</td><td>'+r.toFixed(1)+'</td><td>'+money(bill)+'</td>';
+      tb.appendChild(tr);
+    }
+    var currentYear=baseMonthly*12;
+    var delta=next12-currentYear;
+    $('estimateLabel').textContent=isDemo?'Example estimate':'Estimate';
+    $('next12').textContent='Next 12 months: about '+money(next12);
+    var dl=$('deltaLine');
+    if(Math.abs(delta)<1){ dl.innerHTML='About the same as the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    else { var up=delta>0; dl.innerHTML='<span class="delta '+(up?'up':'down')+'">'+(up?'▲ '+money(delta)+' more':'▼ '+money(-delta)+' less')+'</span> than the last 12 months at today’s rate ('+money(currentYear)+').'; }
+    var ro=$('rolloff');
+    if(rolledAt!==null){
+      var rd=new Date(now.getFullYear(),now.getMonth()+rolledAt,1);
+      ro.hidden=false;
+      ro.innerHTML='<b>⚠︎ Your fixed rate rolls off around '+monthsName[rd.getMonth()]+' '+rd.getFullYear()+'.</b> After that, this forecast assumes your rate runs about '+Math.round(bump*100)+'% higher (a typical month-to-month/variable "default" rate — an estimate). Shop a new fixed plan 2–4 weeks before that month.';
+    } else { ro.hidden=true; }
+    lastShare=shareText(rolledAt!==null);
+    var sb=$('shareBtn'); if(sb) sb.onclick=function(){doShare(sb);};
+    $('out').hidden=false;
+    $('out').scrollIntoView({behavior:'smooth',block:'start'});
+    // Only fixed tool and event labels are counted; kWh, rates and dates stay on this device.
+    countEvent(isDemo?'demo':'tool_completed');
+  }
+  // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
+  countEvent('open');
+
+  $('sampleBtn').addEventListener('click',function(){
+    var sampleEnd=new Date(); sampleEnd.setDate(1); sampleEnd.setMonth(sampleEnd.getMonth()+3);
+    $('kwh').value='1000'; $('rate').value='14.5';
+    $('end').value=sampleEnd.getFullYear()+'-'+('0'+(sampleEnd.getMonth()+1)).slice(-2);
+    $('chg').value='8'; $('bump').value='20';
+    run(true);
+  });
+  $('run').addEventListener('click',function(){run(false);});
+  if(new URLSearchParams(window.location.search).get('demo')==='1') $('sampleBtn').click();
+})();
+</script>
+</body>
+</html>
++Math.round(n).toLocaleString('en-US');};
+  var requiredInputs=[$('kwh'),$('rate')], inputError=$('inputError');
+  function validateRequiredInputs(show){
+    var invalid=requiredInputs.filter(function(input){return !(parseFloat(input.value)>0);});
+    if(!invalid.length){
+      inputError.hidden=true; inputError.textContent='';
+      requiredInputs.forEach(function(input){input.removeAttribute('aria-invalid');});
+      return true;
+    }
+    if(show || !inputError.hidden){
+      inputError.hidden=false;
+      inputError.textContent=invalid.length===2
+        ? 'Enter a positive monthly kWh amount and a positive rate in cents per kWh.'
+        : invalid[0].id==='kwh'
+          ? 'Enter a positive monthly kWh amount.'
+          : 'Enter a positive rate in cents per kWh.';
+      requiredInputs.forEach(function(input){
+        if(invalid.indexOf(input)>=0) input.setAttribute('aria-invalid','true');
+        else input.removeAttribute('aria-invalid');
+      });
+    }
+    return false;
+  }
+  requiredInputs.forEach(function(input){input.addEventListener('input',function(){validateRequiredInputs(false);});});
   function run(isDemo){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
-    if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
+    if(!validateRequiredInputs(true)){
+      var firstInvalid=requiredInputs.filter(function(input){return !(parseFloat(input.value)>0);})[0];
+      if(firstInvalid) firstInvalid.focus();
+      return;
+    }
     var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
     var endVal=$('end').value; // YYYY-MM or ''
     var now=new Date(); now.setDate(1);
