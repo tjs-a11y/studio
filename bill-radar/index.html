@@ -210,7 +210,9 @@
     catch(x){ if(btn){btn.textContent="Copy this link: "+SHARE_URL;} }
   }
   var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var sampleActive=false;
   function run(isDemo){
+    var demo=!!isDemo||sampleActive;
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
     if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
     var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
@@ -250,12 +252,20 @@
     $('out').hidden=false;
     $('out').scrollIntoView({behavior:'smooth',block:'start'});
     // Only fixed tool and event labels are counted; kWh, rates and dates stay on this device.
-    countEvent(isDemo?'demo':'tool_completed');
+    countEvent(demo?'demo':'tool_completed');
   }
   // Anonymous tool-open counter; no page URL, visitor identifier or input data is sent.
   countEvent('open');
 
+  ['kwh','rate','end','chg','bump'].forEach(function(id){
+    var el=$(id);
+    if(el){
+      el.addEventListener('input',function(){sampleActive=false;});
+      el.addEventListener('change',function(){sampleActive=false;});
+    }
+  });
   $('sampleBtn').addEventListener('click',function(){
+    sampleActive=true;
     var sampleEnd=new Date(); sampleEnd.setDate(1); sampleEnd.setMonth(sampleEnd.getMonth()+3);
     $('kwh').value='1000'; $('rate').value='14.5';
     $('end').value=sampleEnd.getFullYear()+'-'+('0'+(sampleEnd.getMonth()+1)).slice(-2);
