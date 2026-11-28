@@ -93,11 +93,11 @@
       <div class="row">
         <div>
           <label for="kwh">Average monthly use <span class="hint">(kWh — it's on your bill)</span></label>
-          <input id="kwh" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 1000">
+          <input id="kwh" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 1000" aria-describedby="inputError">
         </div>
         <div>
           <label for="rate">Your rate <span class="hint">(¢ per kWh)</span></label>
-          <input id="rate" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 14.5">
+          <input id="rate" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 14.5" aria-describedby="inputError">
         </div>
       </div>
       <p class="muted" style="margin:10px 0 0">Not sure of the rate? Divide last month's total $ by the kWh used (both on the bill), then move the decimal: $150 ÷ 1000 kWh = $0.15 = <b>15¢</b>.</p>
@@ -115,13 +115,14 @@
 
       <button type="button" class="sample" id="sampleBtn">Try a sample forecast</button>
       <button class="go" id="run">Show my forecast</button>
+      <p id="inputError" class="muted" role="alert" aria-live="assertive" hidden></p>
       <p class="muted" style="margin:8px 0 0">The sample uses illustrative values, not your utility&#39;s actual rate or a bill prediction.</p>
     </div>
 
     <div id="out" hidden>
       <div class="headline" style="margin-top:20px">
         <span class="pill" id="estimateLabel">Estimate</span>
-        <div class="big" id="next12"></div>
+        <div class="big" id="next12" aria-live="polite" aria-atomic="true"></div>
         <div id="deltaLine"></div>
       </div>
       <div class="rolloff" id="rolloff" hidden></div>
@@ -210,9 +211,36 @@
     catch(x){ if(btn){btn.textContent="Copy this link: "+SHARE_URL;} }
   }
   var money=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+  var requiredInputs=[$('kwh'),$('rate')], inputError=$('inputError');
+  function validateRequiredInputs(show){
+    var invalid=requiredInputs.filter(function(input){return !(parseFloat(input.value)>0);});
+    if(!invalid.length){
+      inputError.hidden=true; inputError.textContent='';
+      requiredInputs.forEach(function(input){input.removeAttribute('aria-invalid');});
+      return true;
+    }
+    if(show || !inputError.hidden){
+      inputError.hidden=false;
+      inputError.textContent=invalid.length===2
+        ? 'Enter a positive monthly kWh amount and a positive rate in cents per kWh.'
+        : invalid[0].id==='kwh'
+          ? 'Enter a positive monthly kWh amount.'
+          : 'Enter a positive rate in cents per kWh.';
+      requiredInputs.forEach(function(input){
+        if(invalid.indexOf(input)>=0) input.setAttribute('aria-invalid','true');
+        else input.removeAttribute('aria-invalid');
+      });
+    }
+    return false;
+  }
+  requiredInputs.forEach(function(input){input.addEventListener('input',function(){validateRequiredInputs(false);});});
   function run(isDemo){
     var kwh=parseFloat($('kwh').value), rate=parseFloat($('rate').value);
-    if(!(kwh>0)||!(rate>0)){ alert('Enter your monthly kWh and your rate in ¢ per kWh.'); return; }
+    if(!validateRequiredInputs(true)){
+      var firstInvalid=requiredInputs.filter(function(input){return !(parseFloat(input.value)>0);})[0];
+      if(firstInvalid) firstInvalid.focus();
+      return;
+    }
     var chg=(parseFloat($('chg').value)||0)/100, bump=(parseFloat($('bump').value)||0)/100;
     var endVal=$('end').value; // YYYY-MM or ''
     var now=new Date(); now.setDate(1);
