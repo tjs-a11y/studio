@@ -63,9 +63,9 @@ test('Rate Con sample remains a demo until visitor edits its text or calculation
 test('the four acquisition entry points emit tool_completed after successful result rendering', () => {
   const page = (path) => readFileSync(new URL('../'+path, import.meta.url), 'utf8');
   for (const [path, marker] of [
-    ['bill-radar/index.html', "countEvent(isDemo?'demo':'tool_completed')"],
+    ['bill-radar/index.html', "countEvent(demo?'demo':'tool_completed')"],
     ['fair-price/index.html', "countEvent(demo ? 'demo' : 'tool_completed')"],
-    ['dinner/index.html', "countEvent(isDemo ? 'demo' : 'tool_completed')"],
+    ['dinner/index.html', "countEvent(demo ? 'demo' : 'tool_completed')"],
     ['rate-con-checker/index.html', "countEvent(sample ? 'demo' : 'tool_completed')"],
   ]) assert.ok(page(path).includes(marker), path + ' completion event');
   const rate = page('rate-con-checker/index.html');
@@ -128,9 +128,9 @@ test('the four primary tools have one first-party completion-event owner', () =>
   }
 
   for (const [path, slug, marker] of [
-    ['bill-radar/index.html', 'bill-radar', "countEvent(isDemo?'demo':'tool_completed')"],
+    ['bill-radar/index.html', 'bill-radar', "countEvent(demo?'demo':'tool_completed')"],
     ['fair-price/index.html', 'fair-price', "countEvent(demo ? 'demo' : 'tool_completed')"],
-    ['dinner/index.html', 'dinner', "countEvent(isDemo ? 'demo' : 'tool_completed')"],
+    ['dinner/index.html', 'dinner', "countEvent(demo ? 'demo' : 'tool_completed')"],
   ]) {
     const source = page(path);
     assert.ok(source.includes(marker), path + ' owns the completion event');
@@ -138,5 +138,6 @@ test('the four primary tools have one first-party completion-event owner', () =>
   }
 
   const rate = page('rate-con-checker/index.html');
-  assert.ok(rate.includes("body: JSON.stringify({ tool: TOOL, event: 'tool_completed' })"), 'Rate Con owns its fixed-label completion event');
+  assert.ok(rate.includes("countEvent(sample ? 'demo' : 'tool_completed')"), 'Rate Con owns demo and completion events');
+  assert.ok(rate.includes("JSON.stringify({ tool: TOOL, event })"), 'Rate Con sends only fixed labels');
 });
