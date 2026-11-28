@@ -5,7 +5,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 var qwLastEvent = Object.create(null);
 window.qwTrack = function (tool, event) {
   var allowedTools = ['dinner', 'copycat', 'kitchen', 'fair-price', 'proof', 'keep-the-receipt', 'double-dose', 'before-you-sign', 'roadside-sos', 'bill-radar', 'vigless', 'tradepath', 'fuelgauge', 'lotwise', 'rate-con-checker', 'haul-audit', 'royalty-check', 'audit-kit', 'plot-file-checker', 'permit-watch', 'vendor-check', 'spare-key', 'brain-pass', 'footsure', 'plus', 'commodities', 'saver', 'pilot', 'shield', 'utility-pipeline'];
-  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real', 'tool_completed', 'cross_sell_haul_audit_click', 'checkout_start'];
+  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real', 'tool_completed', 'cross_sell_haul_audit_click', 'cross_sell_click', 'checkout_start'];
   if (!allowedTools.includes(tool) || !allowedEvents.includes(event)) return;
   var key = tool + ':' + event;
   var now = Date.now();
@@ -23,6 +23,9 @@ window.qwTrack = function (tool, event) {
   try {
     window.va('event', { name: event === 'tool_completed' ? 'tool_completed' : event === 'cross_sell_haul_audit_click' ? 'tool_cross_sell_haul_audit_click' : event === 'checkout_start' ? 'checkout_start' : 'tool_' + event, data: { tool: tool, source: source } });
   } catch (e) {}
+  if (event === 'tool_completed') {
+    try { window.dispatchEvent(new Event('qw:tool-completed')); } catch (e) {}
+  }
 };
 
 // Record one privacy-safe page-open event for every catalog tool.
