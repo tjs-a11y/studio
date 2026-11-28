@@ -5,7 +5,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 var qwLastEvent = Object.create(null);
 window.qwTrack = function (tool, event) {
   var allowedTools = ['dinner', 'copycat', 'kitchen', 'fair-price', 'proof', 'keep-the-receipt', 'double-dose', 'before-you-sign', 'roadside-sos', 'bill-radar', 'vigless', 'tradepath', 'fuelgauge', 'lotwise', 'rate-con-checker', 'haul-audit', 'royalty-check', 'audit-kit', 'plot-file-checker', 'permit-watch', 'vendor-check', 'spare-key', 'brain-pass', 'footsure', 'plus', 'commodities', 'saver', 'pilot', 'shield', 'utility-pipeline'];
-  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real', 'tool_completed', 'cross_sell_haul_audit_click'];
+  var allowedEvents = ['open', 'check', 'demo', 'demo_to_real', 'tool_completed', 'cross_sell_haul_audit_click', 'checkout_start'];
   if (!allowedTools.includes(tool) || !allowedEvents.includes(event)) return;
   var key = tool + ':' + event;
   var now = Date.now();
@@ -21,7 +21,7 @@ window.qwTrack = function (tool, event) {
     else if (ref) source = 'other';
   } catch (e) {}
   try {
-    window.va('event', { name: event === 'tool_completed' ? 'tool_completed' : event === 'cross_sell_haul_audit_click' ? 'tool_cross_sell_haul_audit_click' : 'tool_' + event, data: { tool: tool, source: source } });
+    window.va('event', { name: event === 'tool_completed' ? 'tool_completed' : event === 'cross_sell_haul_audit_click' ? 'tool_cross_sell_haul_audit_click' : event === 'checkout_start' ? 'checkout_start' : 'tool_' + event, data: { tool: tool, source: source } });
   } catch (e) {}
 };
 
@@ -246,7 +246,11 @@ window.fetch = function (input, init) {
   return request.then(function (response) {
     if (response && response.ok) {
       if (leadTool) qwMonadSend('lead', { entity_slug: leadTool });
-      if (checkoutTool) qwMonadSend('checkout_start', { entity_slug: checkoutTool, content: checkoutRef });
+      if (checkoutTool) {
+        // The Vercel event is separate from the MONAD attribution event and carries only tool/source labels.
+        if (window.qwTrack) window.qwTrack(checkoutTool, 'checkout_start');
+        qwMonadSend('checkout_start', { entity_slug: checkoutTool, content: checkoutRef });
+      }
     }
     if (!payload || !response || !response.ok) {
       if (payload && (!response || !response.ok)) {
