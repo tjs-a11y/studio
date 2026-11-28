@@ -5,15 +5,18 @@ var pathParts=location.pathname.split('/').filter(Boolean);if(pathParts[0]==='es
 var raw=(document.documentElement.lang||navigator.language||'en').toLowerCase();
 var lang=raw.indexOf('es')===0?'es':raw.indexOf('fr')===0?'fr':'en';
 var ui={
-en:{head:'Recommended next steps',tools:'Related tools and workflows',books:'Books and learning',more:'More from Quickwell',health:'Health and focus buyer guides',offers:'Explore',note:'Built for a global audience: use miles or kilometres and local currencies where supported.'},
-es:{head:'Siguiente paso recomendado',tools:'Herramientas y flujos relacionados',books:'Libros y aprendizaje',more:'Más de Quickwell',health:'Guías de salud y concentración',offers:'Explorar',note:'Para una audiencia global: usa millas o kilómetros y monedas locales cuando estén disponibles.'},
-fr:{head:'Prochaine étape recommandée',tools:'Outils et processus associés',books:'Livres et apprentissage',more:'Plus de Quickwell',health:'Guides santé et concentration',offers:'Découvrir',note:'Pour un public international : utilisez les miles ou les kilomètres et les devises locales lorsqu’elles sont prises en charge.'}
+en:{head:'Optional resources',tools:'Related tools and workflows',books:'Books and learning',more:'More from Quickwell',health:'Health and focus buyer guides',offers:'Explore',note:'Optional resources. Your result above remains available; dismiss this section whenever you like.',dismiss:'Dismiss',dismissLabel:'Dismiss optional resources',bookAction:'View on Books2Read'},
+es:{head:'Recursos opcionales',tools:'Herramientas y flujos relacionados',books:'Libros y aprendizaje',more:'Más de Quickwell',health:'Guías de salud y concentración',offers:'Explorar',note:'Recursos opcionales. Tu resultado sigue disponible; puedes cerrar esta sección cuando quieras.',dismiss:'Cerrar',dismissLabel:'Cerrar los recursos opcionales',bookAction:'Ver en Books2Read'},
+fr:{head:'Ressources facultatives',tools:'Outils et processus associés',books:'Livres et apprentissage',more:'Plus de Quickwell',health:'Guides santé et concentration',offers:'Découvrir',note:'Ressources facultatives. Votre résultat reste disponible ; vous pouvez fermer cette section à tout moment.',dismiss:'Fermer',dismissLabel:'Fermer les ressources facultatives',bookAction:'Voir sur Books2Read'}
 }[lang];
-var L=function(label,path,desc){return {label:label,path:path,desc:desc||''};};
+var L=function(label,path,desc,action){return {label:label,path:path,desc:desc||'',action:action||''};};
 var freight=['rate-con-checker','haul-audit','fuelgauge','audit-kit'];
 var trade=['commodities','plot-file-checker','eudr','tradepath','permit-watch','royalty-check','vendor-check','vigless'];
 var home=['bill-radar','fair-price','saver','pilot','shield','before-you-sign','proof','keep-the-receipt','lotwise'];
 var kitchen=['dinner','kitchen','copycat'];
+var resultGated=['bill-radar','fair-price','dinner','rate-con-checker'].indexOf(slug)>=0;
+var completionReady=!resultGated;
+var dismissed=false;
 var everyday=['double-dose','roadside-sos','footsure','spare-key','play'];
 var ftools=[
 L('Rate Con Checker','/rate-con-checker/','Review broker rate terms before signing.'),
@@ -51,19 +54,20 @@ function rotate(list,start,n){var a=[];for(var i=0;i<n;i++)a.push(list[(start+i)
 if(freight.indexOf(slug)>=0){
  var related=ftools.filter(x=>x.path!=='/'+slug+'/');
  card(ui.tools,rotate(related,freight.indexOf(slug),4),'Carrier and freight workflows—no driver recruitment or dispatch links.');
- card(ui.books,[L('Mindset Mastery','https://books2read.com/u/mY9QMW','Discipline, emotional control and decision-making.')]);
  card(ui.more,[L('Quickwell Plus','/plus/','Unlock eligible everyday Quickwell tools.')]);
 }else if(trade.indexOf(slug)>=0){
  card(ui.tools,rotate(ttools,trade.indexOf(slug),4),'Commodity, trade, documentation and contract review utilities.');
  card(ui.books,crypto.concat([
  L('Mindset Mastery','https://books2read.com/u/mY9QMW','Discipline and decision-making.')
  ]),'Verified direct book links only.');
+}else if(slug==='bill-radar'||slug==='fair-price'){
+ var related=homeTools.filter(function(x){return x.path!=='/'+slug+'/';});
+ card(ui.tools,related,'Optional tools for reviewing household costs and estimates.');
+ card(ui.books,[L('Mastering Cryptocurrency Trading','https://books2read.com/u/m26Ngr','Optional educational reading about crypto markets. Unrelated to your bill or repair estimate; not investment advice.')],'Optional educational reading only—not a response to a utility bill or repair quote.');
+ card(ui.more,[L('Quickwell Plus','/plus/','Unlock eligible everyday Quickwell tools.')]);
 }else if(home.indexOf(slug)>=0){
  card(ui.tools,rotate(homeTools,home.indexOf(slug),6),'Compare, review and track household and money decisions.');
- card(ui.more,[
- L('Quickwell Plus','/plus/','Unlock eligible everyday tools.'),
- L('Gatherloom','https://gatherloom.app/','Coordinate group gifts, events and shared budgets.')
- ]);
+ card(ui.more,[L('Quickwell Plus','/plus/','Unlock eligible everyday tools.')]);
  card(ui.books,crypto.concat([
  L('Energy Revolution System','/offers/','Read the buyer guide and review seller terms.'),
  L('Water Freedom System','/offers/','Read the buyer guide and review seller terms.'),
@@ -72,10 +76,9 @@ if(freight.indexOf(slug)>=0){
  L('Genius Switch Original','/offers/','Review the focus and planning buyer guide.')
  ]));
 }else if(kitchen.indexOf(slug)>=0){
- card(ui.books,[
- L('Mediterranean Diet Recipes Book','https://books2read.com/u/4jo1Xo','Everyday Mediterranean meal ideas.'),
- L('Plant Based Diet Recipes Book','https://books2read.com/u/m0BxMV','Practical plant-based weeknight recipes.')
- ]);
+ if(slug==='dinner'){
+  card(ui.books,[L('Plant Based Diet Recipes Book','https://books2read.com/u/m0BxMV','Optional plant-based recipe inspiration by Mary Elizabeth. General recipes, not dietary or medical advice.',ui.bookAction)],'Optional cookbook link; general recipe content, not dietary or medical advice.');
+ }
  card(ui.more,[L('Quickwell Plus','/plus/','Unlock eligible everyday tools and kitchen features.')]);
 }else if(everyday.indexOf(slug)>=0){
  card(ui.tools,rotate(dailyTools,everyday.indexOf(slug),4),'Helpful tools for everyday routines and planning.');
@@ -152,11 +155,16 @@ function target(){
  return document.querySelector('main')||document.querySelector('[role="main"]')||document.body;
 }
 function render(){
+ if(dismissed||!completionReady)return;
  var root=target();if(!root||root.querySelector(':scope > .qw-cross-sell'))return;
  var section=document.createElement('section');section.className='qw-cross-sell';section.setAttribute('aria-label',ui.head);
  var style=document.createElement('style');
- style.textContent='.qw-cross-sell{box-sizing:border-box;margin:22px 0;padding:16px;border:1px solid var(--line,#d8e2df);border-radius:14px;background:var(--card,#fff);color:var(--ink,#18312e);font:inherit}.qw-cross-sell *{box-sizing:border-box}.qw-cross-sell h2{font-size:1.08rem;margin:0 0 6px}.qw-cross-sell .qw-note{margin:0 0 14px;color:var(--muted,#63736f);font-size:.92rem}.qw-cross-sell .qw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}.qw-cross-sell article{padding:13px;border:1px solid var(--line,#d8e2df);border-radius:10px;background:var(--surface,#f8faf9)}.qw-cross-sell h3{font-size:.98rem;margin:0 0 8px}.qw-cross-sell ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}.qw-cross-sell a{font-weight:700;text-decoration:underline;text-underline-offset:2px;color:var(--link,#087b65)}.qw-cross-sell p{margin:3px 0 0;color:var(--muted,#63736f);font-size:.87rem}';
+ style.textContent='.qw-cross-sell{box-sizing:border-box;margin:22px 0;padding:52px 16px 16px;border:1px solid var(--line,#d8e2df);border-radius:14px;background:var(--card,#fff);color:var(--ink,#18312e);font:inherit;position:relative}.qw-cross-sell *{box-sizing:border-box}.qw-cross-sell h2{font-size:1.08rem;margin:0 0 6px}.qw-cross-sell .qw-note{margin:0 0 14px;color:var(--muted,#63736f);font-size:.92rem}.qw-cross-sell .qw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}.qw-cross-sell article{padding:13px;border:1px solid var(--line,#d8e2df);border-radius:10px;background:var(--surface,#f8faf9)}.qw-cross-sell h3{font-size:.98rem;margin:0 0 8px}.qw-cross-sell ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}.qw-cross-sell a{font-weight:700;text-decoration:underline;text-underline-offset:2px;color:var(--link,#087b65)}.qw-cross-sell p{margin:3px 0 0;color:var(--muted,#63736f);font-size:.87rem}.qw-cross-sell-dismiss{position:absolute;top:10px;right:10px;min-height:36px;padding:6px 10px;border:1px solid var(--line,#d8e2df);border-radius:8px;background:transparent;color:inherit;font:inherit;font-size:.85rem;cursor:pointer}.qw-cross-sell-dismiss:focus-visible{outline:2px solid currentColor;outline-offset:2px}';
  section.appendChild(style);
+ var dismissButton=document.createElement('button');
+ dismissButton.type='button';dismissButton.className='qw-cross-sell-dismiss';dismissButton.textContent=ui.dismiss;dismissButton.setAttribute('aria-label',ui.dismissLabel);
+ dismissButton.addEventListener('click',function(){dismissed=true;section.remove();});
+ section.appendChild(dismissButton);
  var h=document.createElement('h2');h.textContent=ui.head;section.appendChild(h);
  var note=document.createElement('p');note.className='qw-note';note.textContent=ui.note;section.appendChild(note);
  var grid=document.createElement('div');grid.className='qw-grid';
@@ -166,7 +174,10 @@ function render(){
   if(c.desc){var d=document.createElement('p');d.textContent=localDescription(c.desc);box.appendChild(d);}
   c.links.forEach(function(item){
    var li=document.createElement('li'),a=document.createElement('a');
-   a.href=href(item.path);a.textContent=localLabel(item.label)+' · '+ui.offers;a.rel='noopener';li.appendChild(a);
+   a.href=href(item.path);a.textContent=item.action||localLabel(item.label)+' · '+ui.offers;
+   if(item.path.indexOf('https://')===0||item.path.indexOf('http://')===0){a.target='_blank';a.rel='noopener noreferrer';}else{a.rel='noopener';}
+   a.addEventListener('click',function(){if(window.qwTrack)window.qwTrack(slug,'cross_sell_click');});
+   li.appendChild(a);
    if(item.desc){var p=document.createElement('p');p.textContent=localDescription(item.desc);li.appendChild(p);}
    ul.appendChild(li);
   });
@@ -174,6 +185,6 @@ function render(){
  });
  section.appendChild(grid);root.appendChild(section);
 }
-function init(){render();new MutationObserver(render).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class','style']});}
+function init(){if(resultGated)window.addEventListener('qw:tool-completed',function(){completionReady=true;render();});render();new MutationObserver(render).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class','style']});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
